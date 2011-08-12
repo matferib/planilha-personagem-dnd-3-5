@@ -1,0 +1,83 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Planilha de Personagens, 3.5 ed.</title>
+<link rel="stylesheet" type="text/css" href="planilha.css" />
+<!-- versao normal -->
+<script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
+<script type="text/javascript" src="planilha.js"></script>
+<!-- versao compilada -->
+<!--script type="text/javascript" src="planilha_compilado.js"></script-->
+</head>
+<body>
+
+<div id="div-geral">
+Nome: <input type="text" name="nome" /><br>
+Classe: 
+<select name="nome">
+	<option value="barbaro">Bárbaro</option>
+	<option value="bardo">Bardo</option>
+	<option value="clerigo">Clérigo</option>
+	<option value="guerreiro">Guerreiro</option>
+	<option value="feiticeiro">Feiticeiro</option>
+	<option value="ladino">Ladino</option>
+	<option value="mago">Mago</option>
+	<option value="paladino">Paladino</option>
+	<option value="ranger">Ranger</option>
+</select>
+Nível: <input type="text" name="nivel" maxlength="2" size="2" value="1" />
+<br>
+Alinhamento: 
+<select name="alinhamento">
+	<option value="lb">LB</option>
+	<option value="ln">LN</option>
+	<option value="lm">LM</option>
+	<option value="nb">NB</option>
+	<option value="n">N</option>
+	<option value="nm">NM</option>
+	<option value="cb">CB</option>
+	<option value="cn">CN</option>
+	<option value="cm">CM</option>
+</select>
+<br>
+</div> <!-- div-geral-->
+
+<div id="div-stats">
+Força: 
+<span id="for-mod">0</span>, base
+<input type="text" maxlength="2" size="2" name="for" id="for" value="10" onchange="AtualizaGeral()" />
+<br>
+
+Destreza: 
+<span id="des-mod">0</span>, base
+<input type="text" maxlength="2" size="2" name="des" id="des" value="10" onchange="js:AtualizaGeral()" />
+<br>
+
+Constituição: 
+<span id="con-mod">0</span>, base
+<input type="text" maxlength="2" size="2" name="con" id="con" value="10" onchange="js:AtualizaGeral()" />
+<br>
+
+Inteligência:
+<span id="int-mod">0</span>, base
+<input type="text" maxlength="2" size="2" name="int" id="int" value="10" onchange="js:AtualizaGeral()" />
+<br>
+
+Sabedoria: 
+<span id="sab-mod">0</span>, base
+<input type="text" maxlength="2" size="2" name="sab" id="sab" value="10" onchange="js:AtualizaGeral()" />
+<br>
+
+Carisma:
+<span id="car-mod">0</span>, base
+<input type="text" maxlength="2" size="2" name="car" id="car" value="10" onchange="js:AtualizaGeral()" />
+<br>
+</div/> <!-- div-stats -->
+
+<div id="div-salvacoes">
+Fortitude: <span>0</span> = base <span>0</span> + con <span>0</span> <br>
+Reflexo: <span>0</span> = base <span>0</span> + des <span>0</span> <br>
+Vontade: <span>0</span> = base <span>0</span> + sab <span>0</span> <br>
+</div> <!-- div-salvacoes -->
+</body>
+</html>

@@ -1,0 +1,12 @@
+/* CSS da planilha. */
+div#div-geral {
+background-color: #ff0000;
+}
+
+div#div-stats {
+background-color: #00ff00;
+}
+
+div#div-salvacoes {
+background-color: #0000ff;
+}
