@@ -14,17 +14,18 @@
 <div id="div-geral">
 Nome: <input type="text" name="nome" /><br>
 Raça: 
-<select name="raca">
+<select name="raca" id="raca" onchange="AtualizaGeral()">
 	<option value="anao">Anão</option>
 	<option value="halfling">Halfling</option>
 	<option value="humano">Humano</option>
 	<option value="elfo">Elfo</option>
 	<option value="gnomo">Gnomo</option>
 	<option value="meioelfo">Meio-Elfo</option>
+	<option value="meioorc">Meio-Orc</option>
 </select>
 <br>
 Classe: 
-<select name="nome">
+<select name="classe" id="classe">
 	<option value="barbaro">Bárbaro</option>
 	<option value="bardo">Bardo</option>
 	<option value="clerigo">Clérigo</option>
@@ -54,40 +55,67 @@ Alinhamento:
 
 <div id="div-stats">
 Força: 
-<span id="for-mod">0</span>, base
 <input type="text" maxlength="2" size="2" name="for" id="for" value="10" onchange="AtualizaGeral()" />
+mod&nbsp;
+<span id="for-mod">0</span> =
+<span id="for-mod-base">0</span>
+<span id="for-mod-racial"></span>
 <br>
 
 Destreza: 
-<span id="des-mod">0</span>, base
 <input type="text" maxlength="2" size="2" name="des" id="des" value="10" onchange="js:AtualizaGeral()" />
+mod&nbsp; 
+<span id="des-mod">0</span> =
+<span id="des-mod-base">0</span>
+<span id="des-mod-racial"></span>
 <br>
 
 Constituição: 
-<span id="con-mod">0</span>, base
 <input type="text" maxlength="2" size="2" name="con" id="con" value="10" onchange="js:AtualizaGeral()" />
+mod&nbsp;
+<span id="con-mod">0</span> =
+<span id="con-mod-base">0</span>
+<span id="con-mod-racial"></span>
 <br>
 
 Inteligência:
-<span id="int-mod">0</span>, base
 <input type="text" maxlength="2" size="2" name="int" id="int" value="10" onchange="js:AtualizaGeral()" />
+mod&nbsp;
+<span id="int-mod">0</span> =
+<span id="int-mod-base">0</span>
+<span id="int-mod-racial"></span>
 <br>
 
 Sabedoria: 
-<span id="sab-mod">0</span>, base
 <input type="text" maxlength="2" size="2" name="sab" id="sab" value="10" onchange="js:AtualizaGeral()" />
+mod&nbsp;
+<span id="sab-mod">0</span> =
+<span id="sab-mod-base">0</span>
+<span id="sab-mod-racial"></span>
 <br>
 
 Carisma:
-<span id="car-mod">0</span>, base
 <input type="text" maxlength="2" size="2" name="car" id="car" value="10" onchange="js:AtualizaGeral()" />
+mod&nbsp;
+<span id="car-mod">0</span> =
+<span id="car-mod-base">0</span>
+<span id="car-mod-racial"></span>
 <br>
 </div/> <!-- div-stats -->
 
 <div id="div-salvacoes">
-Fortitude: <span>0</span> = base <span>0</span> + con <span>0</span> <br>
-Reflexo: <span>0</span> = base <span>0</span> + des <span>0</span> <br>
-Vontade: <span>0</span> = base <span>0</span> + sab <span>0</span> <br>
+Fortitude: <span>0</span> = 
+	<span id="fortitude-base"></span>
+ 	<span id="fortitude-mod-con"></span>
+ 	<span></span><br>
+Reflexo: <span>0</span> = 
+	<span id="reflexo-base"></span>
+	<span id="reflexo-mod-des"></span>
+	<span></span> <br>
+Vontade: <span>0</span> = 
+	<span id="vontade-base"></span> 
+	<span id="vontade-mod-sab"></span> 
+	<span></span> <br>
 </div> <!-- div-salvacoes -->
 </body>
 </html>
