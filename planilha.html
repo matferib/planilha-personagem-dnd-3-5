@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="planilha.css" />
 <!-- versao normal -->
 <script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
+<script type="text/javascript" src="util.js"></script>
+<script type="text/javascript" src="tabelas.js"></script>
 <script type="text/javascript" src="planilha.js"></script>
 <!-- versao compilada -->
 <!--script type="text/javascript" src="planilha_compilado.js"></script-->
@@ -25,7 +27,7 @@ Raça:
 </select>
 <br>
 Classe: 
-<select name="classe" id="classe">
+<select name="classe" id="classe" onchange="AtualizaGeral()">
 	<option value="barbaro">Bárbaro</option>
 	<option value="bardo">Bardo</option>
 	<option value="clerigo">Clérigo</option>
@@ -36,7 +38,7 @@ Classe:
 	<option value="paladino">Paladino</option>
 	<option value="ranger">Ranger</option>
 </select>
-Nível: <input type="text" name="nivel" maxlength="2" size="2" value="1" />
+Nível: <input type="text" name="nivel" id="nivel" maxlength="2" size="2" value="1" onchange="AtualizaGeral()"/>
 <br>
 Alinhamento: 
 <select name="alinhamento">
@@ -60,61 +62,62 @@ Força:
 &nbsp;<span id="forca-mod-racial"></span> = <span id="forca-valor-total">10</span>, modificador: 
 <span id="forca-mod-total">0</span>
 <br>
-<!--
+
 Destreza: 
-<input type="text" maxlength="2" size="2" name="des" id="des" value="10" onchange="js:AtualizaGeral()" />
-mod&nbsp; 
-<span id="destreza-mod-total">0</span> =
-<span id="destreza-mod-base">0</span>
-<span id="destreza-mod-racial"></span>
+<input type="text" maxlength="2" size="2" name="for" id="destreza-valor-base" value="10" 
+  	   onchange="AtualizaGeral()" />
+&nbsp;<span id="destreza-mod-racial"></span> = <span id="destreza-valor-total">10</span>, modificador: 
+<span id="destreza-mod-total">0</span>
 <br>
 
 Constituição: 
-<input type="text" maxlength="2" size="2" name="con" id="con" value="10" onchange="js:AtualizaGeral()" />
-mod&nbsp;
-<span id="constituicao-mod-total">0</span> =
-<span id="constituicao-mod-base">0</span>
-<span id="constituicao-mod-racial"></span>
+<input type="text" maxlength="2" size="2" name="for" id="constituicao-valor-base" value="10" 
+  	   onchange="AtualizaGeral()" />
+&nbsp;<span id="constituicao-mod-racial"></span> = <span id="constituicao-valor-total">10</span>, modificador: 
+<span id="constituicao-mod-total">0</span>
 <br>
 
-Inteligência:
-<input type="text" maxlength="2" size="2" name="int" id="int" value="10" onchange="js:AtualizaGeral()" />
-mod&nbsp;
-<span id="inteligencia-mod-total">0</span> =
-<span id="inteligencia-mod-base">0</span>
-<span id="inteligencia-mod-racial"></span>
+Inteligência: 
+<input type="text" maxlength="2" size="2" name="for" id="inteligencia-valor-base" value="10" 
+  	   onchange="AtualizaGeral()" />
+&nbsp;<span id="inteligencia-mod-racial"></span> = <span id="inteligencia-valor-total">10</span>, modificador: 
+<span id="inteligencia-mod-total">0</span>
 <br>
 
 Sabedoria: 
-<input type="text" maxlength="2" size="2" name="sab" id="sab" value="10" onchange="js:AtualizaGeral()" />
-mod&nbsp;
-<span id="sabedoria-mod-total">0</span> =
-<span id="sabedoria-mod-base">0</span>
-<span id="sabedoria-mod-racial"></span>
+<input type="text" maxlength="2" size="2" name="for" id="sabedoria-valor-base" value="10" 
+  	   onchange="AtualizaGeral()" />
+&nbsp;<span id="sabedoria-mod-racial"></span> = <span id="sabedoria-valor-total">10</span>, modificador: 
+<span id="sabedoria-mod-total">0</span>
 <br>
 
-Carisma:
-<input type="text" maxlength="2" size="2" name="car" id="car" value="10" onchange="js:AtualizaGeral()" />
-mod&nbsp;
-<span id="carisma-mod-total">0</span> =
-<span id="carisma-mod-base">0</span>
-<span id="carisma-mod-racial"></span>
+Carisma: 
+<input type="text" maxlength="2" size="2" name="for" id="carisma-valor-base" value="10" 
+  	   onchange="AtualizaGeral()" />
+&nbsp;<span id="carisma-mod-racial"></span> = <span id="carisma-valor-total">10</span>, modificador: 
+<span id="carisma-mod-total">0</span>
 <br>
-</div/--> <!-- div-stats -->
+
+</div> <!-- div-stats -->
 
 <div id="div-salvacoes">
-Fortitude: <span>0</span> = 
-	<span id="fortitude-base"></span>
- 	<span id="fortitude-mod-con"></span>
- 	<span></span><br>
-Reflexo: <span>0</span> = 
-	<span id="reflexo-base"></span>
-	<span id="reflexo-mod-des"></span>
-	<span></span> <br>
-Vontade: <span>0</span> = 
-	<span id="vontade-base"></span> 
-	<span id="vontade-mod-sab"></span> 
-	<span></span> <br>
+Fortitude:
+	<span id="fortitude-valor-base">0</span>
+ 	<span id="fortitude-mod-constituicao"></span>
+  = <span id="fortitude-mod-total">0</span>
+ 	<br>
+
+Reflexo:
+	<span id="reflexo-valor-base">0</span>
+ 	<span id="reflexo-mod-destreza"></span>
+  = <span id="reflexo-mod-total">0</span>
+ 	<br>
+
+Vontade:
+	<span id="vontade-valor-base">0</span>
+ 	<span id="vontade-mod-sabedoria"></span>
+  = <span id="vontade-mod-total">0</span>
+ 	<br>
 </div> <!-- div-salvacoes -->
 </body>
 </html>
