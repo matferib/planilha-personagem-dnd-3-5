@@ -11,7 +11,19 @@ var MOD_RACIAL = "-mod-racial";
 // Valores do personagem.
 var personagem = {
 	raca: "humano",
-	classes: ["guerreiro"],
+	classes: {
+		barbaro: 0, 
+		bardo: 0,
+		clerigo: 0,
+		druida: 0,
+		feiticeiro: 0,
+		guerreiro: 0,
+		ladino: 0,
+		mago: 0,
+		monge: 0,
+		paladino: 0,
+		ranger: 0,
+	},
 	alinhamento: "LB",
 	atributos: {
 		forca: { 
@@ -39,6 +51,7 @@ var personagem = {
 			modificador: 0
 		}
 	},
+	bba: 0,
 	salvacoes : {
 		fortitude: 0,
 		reflexo: 0,
@@ -49,45 +62,54 @@ var personagem = {
 // Sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
 // os dados da planilha.
 function AtualizaGeral() {
+	LeDados();
 	AtualizaModificadoresAtributos();
+	AtualizaAtaque();
 	AtualizaSalvacoes();
 }
 
-// Atualiza os modificadores raciais.
-function AtualizaRaca() {
-	// Zera todos os modificadores raciais.
-	for (var habilidade in personagem.atributos) {
-		personagem.atributos[habilidade].valor.racial = 0;
+// Le todos os inputs da planilha e armazena no personagem para calculos posteriores.
+function LeDados() {
+	// raca
+	var select_raca = goog.dom.getElement("raca");
+	personagem.raca = select_raca.options[select_raca.selectedIndex].value;
+	// classes, zera e depois soma os selects e niveis de classe.
+	for (var classe in personagem.classes) {
+		personagem.classes[classe] = 0;
 	}
-	// Aplica os modificadores raciais.
-	var opcoes_raca = goog.dom.getElement("raca").options;
-	var modificadores_raca =
-		modificadores_raciais[opcoes_raca[opcoes_raca.selectedIndex].value];
-	for (var habilidade in modificadores_raca) {
-		personagem.atributos[habilidade].valor.racial = 
-			modificadores_raca[habilidade];
+	var array_classes = goog.dom.getElementsByClass("classe");  // cada elemento eh um div.
+	for (var i = 0; i < array_classes.length; ++i) {
+		var div_classe = array_classes[i];
+		var classe;
+		var nivel;
+		for (var j = 0; j < div_classe.childNodes.length; ++j) {
+			var elemento = div_classe.childNodes[j];
+			if (elemento.name == null) continue;
+			if (elemento.name == "classe") {
+				// elemento eh um select
+				classe = elemento.options[elemento.selectedIndex].value;
+			} 
+			else if (elemento.name = "nivel") {
+				// elemento eh um input.
+				nivel = parseInt(elemento.value);
+			}
+		}
+		personagem.classes[classe] += nivel;
 	}
-	// Escreve todos os modificadores raciais.
 	for (var habilidade in personagem.atributos) {
-		ImprimeSinalizado(
-				personagem.atributos[habilidade].valor.racial,  
-				goog.dom.getElement(habilidade + MOD_RACIAL));
+		// valor total do atributo na planilha.
+		personagem.atributos[habilidade].valor = 
+			parseInt(goog.dom.getElement(habilidade + VALOR_BASE).value);
 	}
 }
 
 // Atualiza todos os modificadores dos atributos bases (for, des, con, int, sab, car).
 function AtualizaModificadoresAtributos() {
 	// busca a raca e seus modificadores.
-	var opcoes_raca = goog.dom.getElement("raca").options;
-	var modificadores_raca =
-		modificadores_raciais[opcoes_raca[opcoes_raca.selectedIndex].value];
+	var modificadores_raca = modificadores_raciais[personagem.raca];
 
 	// Busca cada elemento das estatisticas e atualiza modificadores.
 	for (var habilidade in personagem.atributos) {
-		// valor total do atributo na planilha.
-		var input_atributo = goog.dom.getElement(habilidade + VALOR_BASE);
-		personagem.atributos[habilidade].valor = parseInt(input_atributo.value);
-
 		// modificador racial.
 		if (modificadores_raca[habilidade]) {
 			var modificador_racial = modificadores_raca[habilidade];
@@ -96,7 +118,8 @@ function AtualizaModificadoresAtributos() {
 			ImprimeSinalizado(
 					modificador_racial,
 					goog.dom.getElement(habilidade + MOD_RACIAL));
-		} else {
+		} 
+		else {
 			ImprimeNaoSinalizado('', goog.dom.getElement(habilidade + MOD_RACIAL));
 		}
 
@@ -111,12 +134,27 @@ function AtualizaModificadoresAtributos() {
 		// Escreve o modificador.
 		ImprimeSinalizado(
 				personagem.atributos[habilidade].modificador,
-				goog.dom.getElement(habilidade + MOD_TOTAL));
+				goog.dom.getElementsByClass(habilidade + MOD_TOTAL));
 	}
 }
 
+// Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
+function AtualizaAtaque() {
+	var bba = 0;
+	for (var classe in personagem.classes) {
+		bba += tabelas_bba[classe](personagem.classes[classe]);
+	}
+	ImprimeSinalizado(bba, goog.dom.getElementsByClass("bba"));
+	ImprimeSinalizado(
+			bba + personagem.atributos.forca.modificador, 
+			goog.dom.getElement("bba-corpo-a-corpo"));
+	ImprimeSinalizado(
+			bba + personagem.atributos.destreza.modificador, 
+			goog.dom.getElement("bba-distancia"));
+}
 
-// 
+// Atualiza as salvacoes, calculando o bonus base de acordo com a classe e
+// modificando pelo atributo relevante.
 function AtualizaSalvacoes() {
 	var habilidades_salvacoes = {
 		fortitude: 'constituicao',
@@ -124,10 +162,11 @@ function AtualizaSalvacoes() {
 		vontade: 'sabedoria'
 	};
 	for (var tipo_salvacao in habilidades_salvacoes) {
-		var classe = goog.dom.getElement('classe').value;
-		var nivel = parseInt(goog.dom.getElement('nivel').value);
-		var valor_base =
-			tabelas_salvacao[classe][tipo_salvacao](nivel);
+		var valor_base = 0;
+		for (var classe in personagem.classes) {
+			valor_base += 
+				tabelas_salvacao[classe][tipo_salvacao](personagem.classes[classe]);
+		}
 		var habilidade_modificadora = habilidades_salvacoes[tipo_salvacao];
 		var modificador_atributo = 
 			personagem.atributos[habilidade_modificadora].modificador;
@@ -136,14 +175,9 @@ function AtualizaSalvacoes() {
 				valor_base,
 				goog.dom.getElement(tipo_salvacao + VALOR_BASE));
 		ImprimeSinalizado(
-				modificador_atributo,
-				goog.dom.getElement(tipo_salvacao + MOD + habilidade_modificadora));
-		ImprimeSinalizado(
 				personagem.salvacoes[tipo_salvacao],
 				goog.dom.getElement(tipo_salvacao + MOD_TOTAL));
 	}
-
-
 }
 
 
