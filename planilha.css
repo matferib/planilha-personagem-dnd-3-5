@@ -7,6 +7,10 @@ div#div-stats {
 background-color: #00ff00;
 }
 
+div#div-ataque {
+background-color: #ffff00;
+}
+
 div#div-salvacoes {
 background-color: #0000ff;
 }

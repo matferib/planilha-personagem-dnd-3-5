@@ -1,12 +1,12 @@
 // Modificadores de habilidades por raca.
 var modificadores_raciais = {
-	anao: { constituicao: +2, carisma: -2 },
-	halfling: { forca: -2, destreza: +2 },
-	humano: {},
-	elfo: { destreza: +2, constituicao: -2 },
-	gnomo: { forca: -2, constituicao: +2 },
-	meioelfo: {},
-	meioorc: { forca: +2, inteligencia: -2, carisma: -2 }
+	anao: { atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio' },
+	halfling: { atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno' },
+	humano: { atributos: {}, tamanho: 'medio' },
+	elfo: { atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio' },
+	gnomo: { atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno' },
+	meioelfo: { atributos: {}, tamanho: 'medio' },
+	meioorc: { atributos: {forca: +2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
 };
 
 // Bonus base de ataque.

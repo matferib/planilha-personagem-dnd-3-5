@@ -59,6 +59,34 @@ var personagem = {
 	}
 };
 
+// Adiciona uma nova classe ao personagem.
+function AdicionaClasse() {
+	var div = document.createElement('div');
+	div.setAttribute('class', 'classe');
+	div.innerHTML =
+'<select name="classe" onchange="AtualizaGeral()">' +
+'	<option value="barbaro">Bárbaro</option>' +
+'	<option value="bardo">Bardo</option>' +
+'	<option value="clerigo">Clérigo</option>' +
+'	<option value="guerreiro">Guerreiro</option>' +
+'	<option value="feiticeiro">Feiticeiro</option>' +
+'	<option value="ladino">Ladino</option>' +
+'	<option value="mago">Mago</option>' +
+'	<option value="paladino">Paladino</option>' +
+'	<option value="ranger">Ranger</option>' +
+'</select>' +
+'Nível: <input type="text" name="nivel" maxlength="2" size="2" value="1" onchange="AtualizaGeral()"/>' +
+'<br>';
+	goog.dom.getElement("classes").appendChild(div);
+}
+
+// Remove a classe mais recente do personagem.
+function RemoveClasse() {
+	var div_classes = goog.dom.getElement("classes");
+	if (div_classes.childNodes.length == 1) return;
+	div_classes.removeChild(div_classes.lastChild);
+}
+
 // Sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
 // os dados da planilha.
 function AtualizaGeral() {
@@ -106,7 +134,7 @@ function LeDados() {
 // Atualiza todos os modificadores dos atributos bases (for, des, con, int, sab, car).
 function AtualizaModificadoresAtributos() {
 	// busca a raca e seus modificadores.
-	var modificadores_raca = modificadores_raciais[personagem.raca];
+	var modificadores_raca = modificadores_raciais[personagem.raca].atributos;
 
 	// Busca cada elemento das estatisticas e atualiza modificadores.
 	for (var habilidade in personagem.atributos) {
