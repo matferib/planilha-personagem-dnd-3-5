@@ -11,6 +11,10 @@ div#div-ataque {
 background-color: #ffff00;
 }
 
+div#div-defesa {
+background-color: #00ffff;
+}
+
 div#div-salvacoes {
 background-color: #0000ff;
 }

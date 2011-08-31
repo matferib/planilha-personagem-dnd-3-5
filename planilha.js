@@ -7,57 +7,14 @@ var VALOR_TOTAL = "-valor-total";
 var MOD = '-mod-';
 var MOD_TOTAL = "-mod-total";
 var MOD_RACIAL = "-mod-racial";
-
-// Valores do personagem.
-var personagem = {
-	raca: "humano",
-	classes: {
-		barbaro: 0, 
-		bardo: 0,
-		clerigo: 0,
-		druida: 0,
-		feiticeiro: 0,
-		guerreiro: 0,
-		ladino: 0,
-		mago: 0,
-		monge: 0,
-		paladino: 0,
-		ranger: 0,
-	},
-	alinhamento: "LB",
-	atributos: {
-		forca: { 
-			valor: 0,
-			modificador: 0
-		},	
-		destreza: { 
-			valor: 0,
-			modificador: 0
-		},	
-		constituicao: { 
-			valor: 0,
-			modificador: 0
-		},	
-		inteligencia: { 
-			valor: 0,
-			modificador: 0
-		},	
-		sabedoria: { 
-			valor: 0,
-			modificador: 0
-		},	
-		carisma: { 
-			valor: 0,
-			modificador: 0
-		}
-	},
-	bba: 0,
-	salvacoes : {
-		fortitude: 0,
-		reflexo: 0,
-		vontade: 0
-	}
-};
+var TAMANHO_MOD_ATAQUE_DEFESA = "tamanho-mod-ataque-defesa";
+var BBA = "bba";
+var BBA_CORPO_A_CORPO = "bba-corpo-a-corpo";
+var BBA_DISTANCIA = "bba-distancia";
+var CA_NORMAL = "ca-normal";
+var CA_SURPRESO = "ca-surpreso";
+var CA_TOQUE = "ca-toque";
+var TAMANHO = "tamanho";
 
 // Adiciona uma nova classe ao personagem.
 function AdicionaClasse() {
@@ -73,7 +30,11 @@ function AdicionaClasse() {
 '	<option value="ladino">Ladino</option>' +
 '	<option value="mago">Mago</option>' +
 '	<option value="paladino">Paladino</option>' +
-'	<option value="ranger">Ranger</option>' +
+'	<option value="adepto">Adepto (NPC)</option>' +
+'	<option value="aristocrata">Aristocrata (NPC)</option>' +
+'	<option value="combatente">Combatente (NPC)</option>' +
+'	<option value="expert">Expert (NPC)</option>' +
+'	<option value="plebeu">Plebeu (NPC)</option>' +
 '</select>' +
 'Nível: <input type="text" name="nivel" maxlength="2" size="2" value="1" onchange="AtualizaGeral()"/>' +
 '<br>';
@@ -91,8 +52,10 @@ function RemoveClasse() {
 // os dados da planilha.
 function AtualizaGeral() {
 	LeDados();
+	AtualizaTamanho();
 	AtualizaModificadoresAtributos();
 	AtualizaAtaque();
+	AtualizaDefesa();
 	AtualizaSalvacoes();
 }
 
@@ -131,10 +94,25 @@ function LeDados() {
 	}
 }
 
-// Atualiza todos os modificadores dos atributos bases (for, des, con, int, sab, car).
+// Atualiza o tamanho em funcao da raca.
+function AtualizaTamanho() {
+	// Busca o modificador de tamanho da raca.
+	personagem.tamanho.categoria =
+	 	tabelas_raca[personagem.raca].tamanho;
+	personagem.tamanho.modificador_ataque_defesa =
+		tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
+	ImprimeSinalizado(
+			personagem.tamanho.modificador_ataque_defesa,
+			goog.dom.getElementsByClass(TAMANHO_MOD_ATAQUE_DEFESA));
+	goog.dom.getElement(TAMANHO).innerText =
+	 		tabelas_tamanho[personagem.tamanho.categoria].nome;
+}
+
+// Atualiza todos os modificadores dos atributos bases (for, des, con, int, sab, car),
+// a raca, class etc.
 function AtualizaModificadoresAtributos() {
 	// busca a raca e seus modificadores.
-	var modificadores_raca = modificadores_raciais[personagem.raca].atributos;
+	var modificadores_raca = tabelas_raca[personagem.raca].atributos;
 
 	// Busca cada elemento das estatisticas e atualiza modificadores.
 	for (var habilidade in personagem.atributos) {
@@ -174,11 +152,28 @@ function AtualizaAtaque() {
 	}
 	ImprimeSinalizado(bba, goog.dom.getElementsByClass("bba"));
 	ImprimeSinalizado(
-			bba + personagem.atributos.forca.modificador, 
-			goog.dom.getElement("bba-corpo-a-corpo"));
+			bba + personagem.atributos.forca.modificador + 
+					personagem.tamanho.modificador_ataque_defesa, 
+			goog.dom.getElement(BBA_CORPO_A_CORPO));
 	ImprimeSinalizado(
-			bba + personagem.atributos.destreza.modificador, 
-			goog.dom.getElement("bba-distancia"));
+			bba + personagem.atributos.destreza.modificador +
+					personagem.tamanho.modificador_ataque_defesa, 
+			goog.dom.getElement(BBA_DISTANCIA));
+}
+
+// Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
+function AtualizaDefesa() {
+	ImprimeNaoSinalizado(
+			10 + personagem.atributos.destreza.modificador + 
+					personagem.tamanho.modificador_ataque_defesa, 
+			goog.dom.getElementsByClass(CA_NORMAL));
+	ImprimeNaoSinalizado(
+			10 + personagem.tamanho.modificador_ataque_defesa, 
+			goog.dom.getElementsByClass(CA_SURPRESO));
+	ImprimeNaoSinalizado(
+			10 + personagem.atributos.destreza.modificador + 
+					personagem.tamanho.modificador_ataque_defesa, 
+			goog.dom.getElementsByClass(CA_TOQUE));
 }
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e

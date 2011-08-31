@@ -1,5 +1,5 @@
 // Modificadores de habilidades por raca.
-var modificadores_raciais = {
+var tabelas_raca = {
 	anao: { atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio' },
 	halfling: { atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno' },
 	humano: { atributos: {}, tamanho: 'medio' },
@@ -41,7 +41,12 @@ var tabelas_bba = {
 	monge: bba_medio,
 	paladino: bba_forte,
 	ranger: bba_forte,
-					 // TODO terminar outras classes
+	// classes NPC
+	adepto: bba_fraco,
+	aristocrata: bba_medio,
+	plebeu: bba_fraco,
+	expert: bba_medio,
+	combatente: bba_forte,
 };
 
 // Salvacoes
@@ -64,5 +69,24 @@ var tabelas_salvacao = {
 	monge: { fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_forte },
 	paladino: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
 	ranger: { fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_fraca },
-					 // TODO terminar outras classes
+	// classes NPC
+	adepto: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	aristocrata: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	plebeu: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+	expert: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	combatente: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
 };
+
+// Tabelas de tamanho.
+var tabelas_tamanho = {
+	minusculo: { nome: "Minúsculo", ataque_defesa: 8, },
+	diminuto: { nome: "Diminuto", ataque_defesa: 4, },
+	miudo: { nome: "Miúdo", ataque_defesa: 2, },
+	pequeno: { nome: "Pequeno", ataque_defesa: 1, }, 
+	medio: { nome: "Médio", ataque_defesa: 0, },
+	grande: { nome: "Grande", ataque_defesa: -1, },
+	enorme: { nome: "Enorme", ataque_defesa: -2, },
+	imenso: { nome: "Imenso", ataque_defesa: -4, },
+	colossal: { nome: "Colossal", ataque_defesa: -8, },
+};
+

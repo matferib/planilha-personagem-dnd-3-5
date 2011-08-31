@@ -8,6 +8,7 @@
 <script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="tabelas.js"></script>
 <script type="text/javascript" src="eventos.js"></script>
+<script type="text/javascript" src="personagem.js"></script>
 <script type="text/javascript" src="planilha.js"></script>
 <!-- versao compilada -->
 <!--script type="text/javascript" src="planilha_compilado.js"></script-->
@@ -96,11 +97,65 @@ Carisma:
 
 <div id="div-ataque">
 Bonus Base de Ataque: <span class="bba"></span><br>
-Corpo a corpo: <span class="bba"></span><span class="forca-mod-total"></span> = 
+Corpo a corpo: 
+<span class="bba"></span>
+<span class="forca-mod-total"></span>
+<span class="tamanho-mod-ataque-defesa"></span> = 
 <span id="bba-corpo-a-corpo"></span><br>
-Distância: <span class="bba"></span><span class="destreza-mod-total"></span> = 
+
+Distância: 
+<span class="bba"></span>
+<span class="destreza-mod-total"></span>  
+<span class="tamanho-mod-ataque-defesa"></span> = 
 <span id="bba-distancia"></span><br>
-</div>
+</div> <!-- div-ataque -->
+
+<div id="div-defesa">
+Classe de Armadura: 
+<select id="armadura">
+	<option value="nenhuma">Nenhuma</option>
+	<option value="acolchoada">Acolchoada</option>
+	<option value="couro">Couro</option>
+	<option value="couro_batido">Couro Batido</option>
+	<option value="camisao_cota_de_malha">Camisão de Cota de Malha</option>
+	<option value="gibao_de_peles">Gibão de Peles</option>
+	<option value="brunea">Brunea</option>
+	<option value="cota_de_malha">Cota de Malha</option>
+	<option value="peitoral_de_aco">Peitoral de Aço</option>
+	<option value="cota_de_talas">Cota de Talas</option>
+	<option value="loriga_segmentada">Loriga Segmentada</option>
+	<option value="meia_armadura">Meia Armadura</option>
+	<option value="armadura_de_batalha">Armadura de Batalha</option>
+</select> + 
+<select id="escudo">
+	<option value="nenhum">Nenhum</option>
+	<option value="broquel">Broquel</option>
+	<option value="escudo_leve_de_madeira">Escudo Leve de Madeira</option>
+	<option value="escudo_leve_de_aco">Escudo Leve de Aço</option>
+	<option value="escudo_pesado_de_aco">Escudo Pesado de Madeira</option>
+	<option value="escudo_pesado_de_aco">Escudo Pesado de Aço</option>
+	<option value="escudo_de_corpo">Escudo de Corpo</option>
+</select>
+
+<br>
+Normal: 10
+<span class="ac-naturalnatural"></span>
+<span class="ac-armadura"></span>
+<span class="tamanho-mod-ataque-defesa"></span>
+<span class="destreza-mod-total"></span>
+= <span class="ca-normal">10</span><br>
+
+Surpreso: 10
+<span class="ac-naturalnatural"></span>
+<span class="ac-armadura"></span>
+<span class="tamanho-mod-ataque-defesa"></span>
+= <span class="ca-surpreso">10</span><br>
+
+Toque: 10
+<span class="tamanho-mod-ataque-defesa"></span>
+<span class="destreza-mod-total"></span>
+= <span class="ca-toque">10</span><br>
+</div> <!-- div-defesa -->
 
 <div id="div-salvacoes">
 Fortitude:
@@ -121,5 +176,12 @@ Vontade:
   = <span id="vontade-mod-total">0</span>
  	<br>
 </div> <!-- div-salvacoes -->
+
+<div id="div-talentos">
+</div> <!-- div-talentos -->
+
+<div id="div-pericias">
+</div> <!-- div-pericias -->
+
 </body>
 </html>
