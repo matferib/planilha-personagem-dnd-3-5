@@ -1,7 +1,9 @@
 // Apenas os dados do personagem.
 var personagem = {
+	nome: '',
 	raca: 'humano',
 	tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
+	alinhamento: "",
 	classes: {
 		barbaro: 0, 
 		bardo: 0,
@@ -21,7 +23,6 @@ var personagem = {
 		expert: 0,
 		combatente: 0,
 	},
-	alinhamento: 'LB',
 	atributos: {
 		forca: { 
 			valor: 0,
@@ -54,7 +55,7 @@ var personagem = {
 		fortitude: 0,
 		reflexo: 0,
 		vontade: 0
-	}
+	},
 };
 
 

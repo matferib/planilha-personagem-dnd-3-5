@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="planilha.css" />
 <!-- versao normal -->
 <script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
+<script type="text/javascript" src="closure-library/closure/goog/json/json.js"></script>
 <script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="tabelas.js"></script>
 <script type="text/javascript" src="eventos.js"></script>
@@ -16,30 +17,30 @@
 <body onload="CarregamentoInicial()">
 
 <div id="div-geral">
-Nome: <input type="text" name="nome" /><br>
+Nome: <input type="text" id="nome" /><br>
 Raça: 
-<select name="raca" id="raca" onchange="AtualizaGeral()">
-	<option value="anao">Anão</option>
-	<option value="halfling">Halfling</option>
-	<option value="humano" selected>Humano</option>
-	<option value="elfo">Elfo</option>
-	<option value="gnomo">Gnomo</option>
-	<option value="meioelfo">Meio-Elfo</option>
-	<option value="meioorc">Meio-Orc</option>
+<select id="raca" onchange="AtualizaGeral()">
+	<option name="anao" value="anao">Anão</option>
+	<option name="halfling" value="halfling">Halfling</option>
+	<option name="humano" value="humano" selected>Humano</option>
+	<option name="elfo" value="elfo">Elfo</option>
+	<option name="gnomo" value="gnomo">Gnomo</option>
+	<option name="meioelfo" value="meioelfo">Meio-Elfo</option>
+	<option name="meioorc" value="meioorc">Meio-Orc</option>
 </select>&nbsp;
 Tamanho: <span id="tamanho">Médio</span>
 <br>
 Alinhamento: 
-<select name="alinhamento">
-	<option value="lb">LB</option>
-	<option value="ln">LN</option>
-	<option value="lm">LM</option>
-	<option value="nb">NB</option>
-	<option value="n">N</option>
-	<option value="nm">NM</option>
-	<option value="cb">CB</option>
-	<option value="cn">CN</option>
-	<option value="cm">CM</option>
+<select id="alinhamento" onchange="AtualizaGeral()">
+	<option name="lb" value="lb">LB</option>
+	<option name="ln" value="ln">LN</option>
+	<option name="lm" value="lm">LM</option>
+	<option name="nb" value="nb">NB</option>
+	<option name="n" value="n">N</option>
+	<option name="nm" value="nm">NM</option>
+	<option name="cb" value="cb">CB</option>
+	<option name="cn" value="cn">CN</option>
+	<option name="cm" value="cm">CM</option>
 </select>
 <br>
 Classes:
@@ -182,6 +183,11 @@ Vontade:
 
 <div id="div-pericias">
 </div> <!-- div-pericias -->
+
+<div id="div-salvar">
+<button onclick="ClickSalvar()">Salvar</button>
+<span id="link-personagem"></span>
+</div> <!-- div-salvar -->
 
 </body>
 </html>

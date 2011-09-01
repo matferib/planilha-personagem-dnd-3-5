@@ -15,29 +15,66 @@ var CA_NORMAL = "ca-normal";
 var CA_SURPRESO = "ca-surpreso";
 var CA_TOQUE = "ca-toque";
 var TAMANHO = "tamanho";
+var NOME = "nome";
+var RACA = "raca";
+var CLASSE = "classe";
+var ALINHAMENTO = "alinhamento";
 
 // Adiciona uma nova classe ao personagem.
-function AdicionaClasse() {
+// Classe e nivel sao opcionais.
+// Classe padrao: guerreiro.
+// Nivel padrao: 1.
+function AdicionaClasse(classe, nivel) {
+	if (!nivel) {
+		nivel = 1;
+	}
+	if (!classe) {
+		classe = "guerreiro";
+	}
+	var select_classe = document.createElement('select');
+	select_classe.setAttribute('name', 'classe');
+	select_classe.setAttribute('onchange', 'AtualizaGeral()');
+	var classes = [
+		{nome: "barbaro", texto: "Bárbaro"},
+		{nome: "bardo", texto: "Bardo"},
+	  {nome: "clerigo", texto: "Clérigo"},
+		{nome: "guerreiro", texto: "Guerreiro"},
+		{nome: "feiticeiro", texto: "Feiticeiro"},
+		{nome: "ladino", texto: "Ladino"},
+		{nome: "mago", texto: "Mago"},
+		{nome: "paladino", texto: "Paladino"},
+		{nome: "adepto", texto: "Adepto (NPC)"},
+		{nome: "aristocrata", texto: "Aristocrata (NPC)"},
+		{nome: "combatente", texto: "Combatente (NPC)"},
+		{nome: "expert", texto: "Expert (NPC)"},
+		{nome: "plebeu", texto: "Plebeu (NPC)"},
+	];
+	for (var i = 0; i < classes.length; ++i) {
+		var option = document.createElement('option');
+		option.setAttribute('name', classes[i].nome);
+		option.setAttribute('value', classes[i].nome);
+		option.innerText = classes[i].texto;
+		if (classes[i].nome == classe) {
+			option.selected = true;
+		}
+		select_classe .appendChild(option);
+	}
+	var span_nivel = document.createElement('span');
+	span_nivel.innerText = "Nível: ";
+	var input_nivel = document.createElement('input');
+	input_nivel.type = 'text';
+	input_nivel.name = 'nivel';
+	input_nivel.maxlength = 2;
+	input_nivel.setAttribute('onchange', 'AtualizaGeral()');
+	input_nivel.value = nivel;
+	var br_nivel = document.createElement('br');
+
 	var div = document.createElement('div');
 	div.setAttribute('class', 'classe');
-	div.innerHTML =
-'<select name="classe" onchange="AtualizaGeral()">' +
-'	<option value="barbaro">Bárbaro</option>' +
-'	<option value="bardo">Bardo</option>' +
-'	<option value="clerigo">Clérigo</option>' +
-'	<option value="guerreiro">Guerreiro</option>' +
-'	<option value="feiticeiro">Feiticeiro</option>' +
-'	<option value="ladino">Ladino</option>' +
-'	<option value="mago">Mago</option>' +
-'	<option value="paladino">Paladino</option>' +
-'	<option value="adepto">Adepto (NPC)</option>' +
-'	<option value="aristocrata">Aristocrata (NPC)</option>' +
-'	<option value="combatente">Combatente (NPC)</option>' +
-'	<option value="expert">Expert (NPC)</option>' +
-'	<option value="plebeu">Plebeu (NPC)</option>' +
-'</select>' +
-'Nível: <input type="text" name="nivel" maxlength="2" size="2" value="1" onchange="AtualizaGeral()"/>' +
-'<br>';
+	div.appendChild(select_classe);
+	div.appendChild(span_nivel);
+	div.appendChild(input_nivel);
+	div.appendChild(br_nivel);
 	goog.dom.getElement("classes").appendChild(div);
 }
 
@@ -51,7 +88,7 @@ function RemoveClasse() {
 // Sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
 // os dados da planilha.
 function AtualizaGeral() {
-	LeDados();
+	LeEntradas();
 	AtualizaTamanho();
 	AtualizaModificadoresAtributos();
 	AtualizaAtaque();
@@ -59,16 +96,41 @@ function AtualizaGeral() {
 	AtualizaSalvacoes();
 }
 
-// Le todos os inputs da planilha e armazena no personagem para calculos posteriores.
-function LeDados() {
+// Escreve todos os inputs com os valores encontrados no personagem.
+function EscreveEntradas() {
+	// nome
+	goog.dom.getElement(NOME).value = personagem.nome;
 	// raca
-	var select_raca = goog.dom.getElement("raca");
+	var select_raca = goog.dom.getElement(RACA);
+	select_raca.selectedIndex = select_raca.options.namedItem(personagem.raca).index;
+	// alinhamento
+	var select_alinhamento = goog.dom.getElement(ALINHAMENTO);
+	select_alinhamento.selectedIndex =
+		select_alinhamento.options.namedItem(personagem.alinhamento).index;
+	// classes.
+	for (var classe in personagem.classes) {
+		if (personagem.classes[classe] > 0) {
+			AdicionaClasse(classe, personagem.classes[classe]);
+		}
+	}
+}
+
+// Le todos os inputs da planilha e armazena no personagem para calculos posteriores.
+function LeEntradas() {
+	// nome
+	personagem.nome = goog.dom.getElement(NOME).value;
+	// raca
+	var select_raca = goog.dom.getElement(RACA);
 	personagem.raca = select_raca.options[select_raca.selectedIndex].value;
+	// alinhamento
+	var select_alinhamento = goog.dom.getElement(ALINHAMENTO);
+	personagem.alinhamento = select_alinhamento.options[select_alinhamento.selectedIndex].value;
+	// atributos
 	// classes, zera e depois soma os selects e niveis de classe.
 	for (var classe in personagem.classes) {
 		personagem.classes[classe] = 0;
 	}
-	var array_classes = goog.dom.getElementsByClass("classe");  // cada elemento eh um div.
+	var array_classes = goog.dom.getElementsByClass(CLASSE);  // cada elemento eh um div.
 	for (var i = 0; i < array_classes.length; ++i) {
 		var div_classe = array_classes[i];
 		var classe;
