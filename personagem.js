@@ -56,6 +56,7 @@ var personagem = {
 		reflexo: 0,
 		vontade: 0
 	},
+	armadura: '',
 };
 
 

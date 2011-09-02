@@ -1,4 +1,5 @@
 // Apenas tratamento de eventos.
+goog.require('goog.json');
 
 // Chamado pelo carregamento inicial da pagina.
 function CarregamentoInicial() {
@@ -10,7 +11,7 @@ function CarregamentoInicial() {
 	else {
 		// carrega pelos parametros.
 		var json_personagem = decodeURIComponent(document.URL.slice(indice_igual + 1));
-		personagem = goog.json.parse(json_personagem);
+		entradas = goog.json.parse(json_personagem);
 		EscreveEntradas();
 	}
 	AtualizaGeral();
@@ -34,7 +35,7 @@ function ClickSalvar() {
 	var indice_interrogacao = document.URL.indexOf('?');
 	var url = 
 		(indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) + 
-		'?pc=' + encodeURIComponent(goog.json.serialize(personagem));
+		'?pc=' + encodeURIComponent(goog.json.serialize(entradas));
 	goog.dom.getElement("link-personagem").innerHTML = 
 		'<a href="' + url + '">Link</a>';
 }

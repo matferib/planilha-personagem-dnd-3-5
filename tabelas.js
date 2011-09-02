@@ -79,14 +79,42 @@ var tabelas_salvacao = {
 
 // Tabelas de tamanho.
 var tabelas_tamanho = {
-	minusculo: { nome: "Minúsculo", ataque_defesa: 8, },
-	diminuto: { nome: "Diminuto", ataque_defesa: 4, },
-	miudo: { nome: "Miúdo", ataque_defesa: 2, },
-	pequeno: { nome: "Pequeno", ataque_defesa: 1, }, 
-	medio: { nome: "Médio", ataque_defesa: 0, },
-	grande: { nome: "Grande", ataque_defesa: -1, },
-	enorme: { nome: "Enorme", ataque_defesa: -2, },
-	imenso: { nome: "Imenso", ataque_defesa: -4, },
-	colossal: { nome: "Colossal", ataque_defesa: -8, },
+	minusculo: { nome: 'Minúsculo', ataque_defesa: 8, },
+	diminuto: { nome: 'Diminuto', ataque_defesa: 4, },
+	miudo: { nome: 'Miúdo', ataque_defesa: 2, },
+	pequeno: { nome: 'Pequeno', ataque_defesa: 1, }, 
+	medio: { nome: 'Médio', ataque_defesa: 0, },
+	grande: { nome: 'Grande', ataque_defesa: -1, },
+	enorme: { nome: 'Enorme', ataque_defesa: -2, },
+	imenso: { nome: 'Imenso', ataque_defesa: -4, },
+	colossal: { nome: 'Colossal', ataque_defesa: -8, },
+};
+
+// Tabelas de armaduras.
+var tabelas_armaduras = {
+	nenhuma: { nome: 'Nenhuma', bonus: 0, },
+	acolchoada: { nome: 'Acolchoada', bonus: 1, },
+	couro: { nome: 'Couro', bonus: 2, },
+	couro_batido: { nome: 'Couro Batido', bonus: 3, },
+	camisao_cota_de_malha: { nome: 'Camisão de Cota de Malha', bonus: 4, },
+	gibao_de_peles: { nome: 'Gibão de Peles', bonus: 3, },
+	brunea: { nome: 'Brunea', bonus: 4, },
+	cota_de_malha: { nome: 'Cota de Malha', bonus: 5, },
+	peitoral_de_aco: { nome: 'Peitoral de Aço', bonus: 5, },
+	cota_de_talas: { nome: 'Cota de Talas', bonus: 6, },
+	loriga_segmentada: { nome: 'Loriga Segmentada', bonus: 6, },
+	meia_armadura: { nome: 'Meia Armadura', bonus: 7, },
+	armadura_de_batalha: { nome: 'Armadura de Batalha', bonus: 8, },
+};
+
+// Tabelas de escudos (TODO terminar).
+var tabelas_escudos = {
+	nenhum: "Nenhum",
+	broquel: "Broquel",
+	escudo_leve_de_madeira: "Escudo Leve de Madeira",
+	escudo_leve_de_aco: "Escudo Leve de Aço",
+	escudo_pesado_de_aco: "Escudo Pesado de Madeira",
+	escudo_pesado_de_aco: "Escudo Pesado de Aço",
+	escudo_de_corpo: "Escudo de Corpo",
 };
 
