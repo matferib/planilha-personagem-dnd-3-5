@@ -28,6 +28,28 @@ function bba_fraco(nivel) {
 function bba_nulo() {
 	return 0;
 }
+
+// Tabelas de dados de vida.
+var tabelas_dados_vida = {
+	barbaro: 12, 
+	bardo: 6,
+	clerigo: 8,
+	druida: 8,
+	guerreiro: 10,
+	feiticeiro: 4,
+	ladino: 6,
+	mago: 4,
+	monge: 8,
+	paladino: 10,
+	ranger: 8,
+	// classes NPC
+	adepto: 6,
+	aristocrata: 8,
+	plebeu: 4,
+	expert: 6,
+	combatente: 8,
+};
+
 // Tabelas de BBA.
 var tabelas_bba = {
 	barbaro: bba_forte, 
@@ -58,23 +80,39 @@ function salvacao_fraca(nivel) {
 }
 // Tabelas de salvacao.
 var tabelas_salvacao = {
-	barbaro: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-	bardo: { fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_forte },
-	clerigo: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	druida: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	feiticeiro: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	guerreiro: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-	ladino: { fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_fraca },
-	mago: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	monge: { fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_forte },
-	paladino: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-	ranger: { fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_fraca },
+	barbaro: { 
+		fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+	bardo: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_forte },
+	clerigo: { 
+		fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	druida: { 
+		fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	feiticeiro: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	guerreiro: { 
+		fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+	ladino: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_fraca },
+	mago: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	monge: { 
+		fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_forte },
+	paladino: { 
+		fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+	ranger: { 
+		fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_fraca },
 	// classes NPC
-	adepto: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	aristocrata: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	plebeu: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-	expert: { fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-	combatente: { fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+	adepto: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	aristocrata: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	plebeu: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+	expert: { 
+		fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+	combatente: { 
+		fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
 };
 
 // Tabelas de tamanho.
@@ -92,29 +130,42 @@ var tabelas_tamanho = {
 
 // Tabelas de armaduras.
 var tabelas_armaduras = {
-	nenhuma: { nome: 'Nenhuma', bonus: 0, },
-	acolchoada: { nome: 'Acolchoada', bonus: 1, },
-	couro: { nome: 'Couro', bonus: 2, },
-	couro_batido: { nome: 'Couro Batido', bonus: 3, },
-	camisao_cota_de_malha: { nome: 'Camisão de Cota de Malha', bonus: 4, },
-	gibao_de_peles: { nome: 'Gibão de Peles', bonus: 3, },
-	brunea: { nome: 'Brunea', bonus: 4, },
-	cota_de_malha: { nome: 'Cota de Malha', bonus: 5, },
-	peitoral_de_aco: { nome: 'Peitoral de Aço', bonus: 5, },
-	cota_de_talas: { nome: 'Cota de Talas', bonus: 6, },
-	loriga_segmentada: { nome: 'Loriga Segmentada', bonus: 6, },
-	meia_armadura: { nome: 'Meia Armadura', bonus: 7, },
-	armadura_de_batalha: { nome: 'Armadura de Batalha', bonus: 8, },
+	nenhuma: { 
+		nome: 'Nenhuma', bonus: 0, },
+	acolchoada: { 
+		nome: 'Acolchoada', bonus: 1, maximo_bonus_destreza: 8 },
+	couro: { 
+		nome: 'Couro', bonus: 2,  maximo_bonus_destreza: 6 },
+	couro_batido: { 
+		nome: 'Couro Batido', bonus: 3, maximo_bonus_destreza: 5 },
+	camisao_cota_de_malha: { 
+		nome: 'Camisão de Cota de Malha', bonus: 4, maximo_bonus_destreza: 4 },
+	gibao_de_peles: { 
+		nome: 'Gibão de Peles', bonus: 3, maximo_bonus_destreza: 4 },
+	brunea: { 
+		nome: 'Brunea', bonus: 4, maximo_bonus_destreza: 3 },
+	cota_de_malha: { 
+		nome: 'Cota de Malha', bonus: 5, maximo_bonus_destreza: 2 },
+	peitoral_de_aco: { 
+		nome: 'Peitoral de Aço', bonus: 5, maximo_bonus_destreza: 3 },
+	cota_de_talas: { 
+		nome: 'Cota de Talas', bonus: 6, maximo_bonus_destreza: 0 },
+	loriga_segmentada: { 
+		nome: 'Loriga Segmentada', bonus: 6, maximo_bonus_destreza: 1 },
+	meia_armadura: { 
+		nome: 'Meia Armadura', bonus: 7, maximo_bonus_destreza: 0 },
+	armadura_de_batalha: { 
+		nome: 'Armadura de Batalha', bonus: 8, maximo_bonus_destreza: 1 },
 };
 
 // Tabelas de escudos (TODO terminar).
 var tabelas_escudos = {
-	nenhum: "Nenhum",
-	broquel: "Broquel",
-	escudo_leve_de_madeira: "Escudo Leve de Madeira",
-	escudo_leve_de_aco: "Escudo Leve de Aço",
-	escudo_pesado_de_aco: "Escudo Pesado de Madeira",
-	escudo_pesado_de_aco: "Escudo Pesado de Aço",
-	escudo_de_corpo: "Escudo de Corpo",
+	nenhum: { nome: "Nenhum", bonus: 0 },
+	broquel: { nome: "Broquel", bonus: 1 },
+	escudo_leve_de_madeira: { nome: "Escudo Leve de Madeira", bonus: 1 },
+	escudo_leve_de_aco: { nome: "Escudo Leve de Aço", bonus: 1 },
+	escudo_pesado_de_aco: { nome: "Escudo Pesado de Madeira", bonus: 2 },
+	escudo_pesado_de_aco: { nome: "Escudo Pesado de Aço", bonus: 2 },
+	escudo_de_corpo: { nome: "Escudo de Corpo", bonus: 4, maximo_bonus_destreza: 2 },
 };
 

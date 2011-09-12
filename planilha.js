@@ -8,12 +8,16 @@ function RemoveClasse() {
 }
 
 // Sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
-// os dados da planilha.
+// os dados da planilha. Partes que dependem de outras devem vir apos sua dependencia.
 function AtualizaGeral() {
-	LeEntradas();
+ 	// Apenas le as entradas para a estrutura de entradas.
+	LeEntradas(); 
+  // converte a estrutura de entradas para a de personagem.
 	ConverteEntradasParaPersonagem();
+	// Aqui ocorrem as atualizacoes.
 	AtualizaTamanho();
 	AtualizaModificadoresAtributos();
+	AtualizaDadosVida();
 	AtualizaAtaque();
 	AtualizaDefesa();
 	AtualizaSalvacoes();
@@ -34,6 +38,7 @@ function ConverteEntradasParaPersonagem() {
 		personagem.atributos[atributo].valor = entradas[atributo];
 	}
 	personagem.armadura = entradas.armadura;
+	personagem.escudo = entradas.escudo;
 }
 
 // Atualiza o tamanho em funcao da raca.
@@ -79,11 +84,49 @@ function AtualizaModificadoresAtributos() {
 		// modificador da habilidade.
 		personagem.atributos[habilidade].modificador = 
 			Math.floor((personagem.atributos[habilidade].valor - 10) / 2);
+		// Caso especial: destreza. Depende da armadura e escudo.
+		if (habilidade == 'destreza') {
+			var armadura = tabelas_armaduras[personagem.armadura];
+			if (armadura.maximo_bonus_destreza && 
+					armadura.maximo_bonus_destreza < personagem.atributos[habilidade].modificador) {
+				personagem.atributos[habilidade].modificador = armadura.maximo_bonus_destreza;
+			}
+			var escudo = tabelas_escudos[personagem.escudo];
+			if (escudo.maximo_bonus_destreza &&
+					escudo.maximo_bonus_destreza < personagem.atributos[habilidade].modificador) {
+				personagem.atributos[habilidade].modificador = escudo.maximo_bonus_destreza;
+			}
+		}
 		// Escreve o modificador.
 		ImprimeSinalizado(
 				personagem.atributos[habilidade].modificador,
 				goog.dom.getElementsByClass(habilidade + MOD_TOTAL));
 	}
+}
+
+// Atualiza os dados de vida do personagem de acordo com as classes.
+function AtualizaDadosVida() {
+	var primeiro = true;  // primeira classe nao eh sinalizada.
+	var string_dados_vida = '';
+	var dados_vida_total = 0;
+	for (var classe in personagem.classes) {
+		if (personagem.classes[classe] > 0) {
+			dados_vida_total += personagem.classes[classe];
+			if (primeiro) {
+				primeiro = false;
+			} else {
+				string_dados_vida += ' +';
+			}
+			string_dados_vida += 
+				personagem.classes[classe] + 'd' + tabelas_dados_vida[classe];
+		}
+	}
+	if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
+		string_dados_vida += 
+			' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
+	}
+	var span_dados = goog.dom.getElement(DADOS_VIDA_CLASSES);
+	span_dados.innerText = string_dados_vida;
 }
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
@@ -106,17 +149,22 @@ function AtualizaAtaque() {
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
 function AtualizaDefesa() {
 	ImprimeSinalizado(tabelas_armaduras[personagem.armadura].bonus,
-			              goog.dom.getElementsByClass(AC_ARMADURA));
+			              goog.dom.getElementsByClass(CA_ARMADURA));
+	ImprimeSinalizado(tabelas_escudos[personagem.escudo].bonus,
+			              goog.dom.getElementsByClass(CA_ESCUDO));
+
 	// AC normal.
 	ImprimeNaoSinalizado(
 			10 + personagem.atributos.destreza.modificador +
 		      tabelas_armaduras[personagem.armadura].bonus +
+		      tabelas_escudos[personagem.escudo].bonus +
 					personagem.tamanho.modificador_ataque_defesa, 
 			goog.dom.getElementsByClass(CA_NORMAL));
 	// AC surpreso.
 	ImprimeNaoSinalizado(
 			10 + personagem.tamanho.modificador_ataque_defesa + 
-		      tabelas_armaduras[personagem.armadura].bonus,
+		      tabelas_armaduras[personagem.armadura].bonus +
+		      tabelas_escudos[personagem.escudo].bonus,
 			goog.dom.getElementsByClass(CA_SURPRESO));
 	// AC toque.
 	ImprimeNaoSinalizado(
