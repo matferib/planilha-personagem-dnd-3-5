@@ -4,7 +4,7 @@ var personagem = {
 	raca: 'humano',
 	tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
 	alinhamento: "",
-	classes: {
+/*	classes: {
 		barbaro: 0, 
 		bardo: 0,
 		clerigo: 0,
@@ -22,6 +22,12 @@ var personagem = {
 		plebeu: 0,
 		expert: 0,
 		combatente: 0,
+	},*/
+	classes: [],
+	pontos_vida: {
+		total: 0,
+		ferimentos: 0,
+		temporarios: 0
 	},
 	atributos: {
 		forca: { 

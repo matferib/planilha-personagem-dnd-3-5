@@ -51,8 +51,11 @@ Classes:
 <!-- placeholder para as classes, criado dinamicamente. -->
 <div id="classes"></div>
 <div id="pontos-vida">
+Dados de Vida: <span id="dados-vida-classes"></span><br>
 Pontos de Vida:
-<input id="pontos-vida-total" maxlength="3" size="3"/> = <span id="dados-vida-classes"><span>
+<span id=pontos-vida-corrente></span> = 
+<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> -
+<input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/>
 </div>
 </div> <!-- div-geral-->
 
@@ -185,16 +188,25 @@ Vontade:
  	<br>
 </div> <!-- div-salvacoes -->
 
+<div id="div-equipamentos">
+Moedas:<br>
+Platina:<input id="" size="5"/>
+Ouro:<input id="" size="5"/> 
+Prata:<input id="" size="5"/>
+Cobre:<input id="" size="5"/>
+</div> <!-- div-equipamentos -->
+
+<div id="div-salvar">
+<button onclick="ClickSalvar()">Salvar</button>
+<span id="link-personagem"></span>
+</div> <!-- div-salvar -->
+
 <div id="div-talentos">
 </div> <!-- div-talentos -->
 
 <div id="div-pericias">
 </div> <!-- div-pericias -->
 
-<div id="div-salvar">
-<button onclick="ClickSalvar()">Salvar</button>
-<span id="link-personagem"></span>
-</div> <!-- div-salvar -->
 
 </body>
 </html>

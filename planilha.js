@@ -28,12 +28,9 @@ function ConverteEntradasParaPersonagem() {
 	personagem.nome = entradas.nome;
 	personagem.raca = entradas.raca;
 	personagem.alinhamento = entradas.alinhamento;
-	for (var classe in personagem.classes) {
-		personagem.classes[classe] = 0;
-	}
-	for (var i = 0; i < entradas.classes.length; ++i) {
-		personagem.classes[entradas.classes[i].classe] += entradas.classes[i].nivel;
-	}
+	personagem.classes = entradas.classes;
+	personagem.pontos_vida.total = entradas.pontos_vida;
+	personagem.pontos_vida.ferimentos = entradas.ferimentos;
 	for (var atributo in personagem.atributos) {
 		personagem.atributos[atributo].valor = entradas[atributo];
 	}
@@ -109,17 +106,16 @@ function AtualizaDadosVida() {
 	var primeiro = true;  // primeira classe nao eh sinalizada.
 	var string_dados_vida = '';
 	var dados_vida_total = 0;
-	for (var classe in personagem.classes) {
-		if (personagem.classes[classe] > 0) {
-			dados_vida_total += personagem.classes[classe];
+	for (var i = 0; i < personagem.classes.length; ++i) {
+			dados_vida_total += personagem.classes[i].nivel;
 			if (primeiro) {
 				primeiro = false;
 			} else {
 				string_dados_vida += ' +';
 			}
 			string_dados_vida += 
-				personagem.classes[classe] + 'd' + tabelas_dados_vida[classe];
-		}
+				personagem.classes[i].nivel + 'd' + tabelas_dados_vida[personagem.classes[i].classe];
+
 	}
 	if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
 		string_dados_vida += 
@@ -127,15 +123,18 @@ function AtualizaDadosVida() {
 	}
 	var span_dados = goog.dom.getElement(DADOS_VIDA_CLASSES);
 	span_dados.innerText = string_dados_vida;
+	// Pontos de vida.
+	var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
+	ImprimeNaoSinalizado(pontos_vida_corrente, goog.dom.getElement(PONTOS_VIDA_CORRENTE));
 }
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
 function AtualizaAtaque() {
 	var bba = 0;
-	for (var classe in personagem.classes) {
-		bba += tabelas_bba[classe](personagem.classes[classe]);
+	for (var i = 0; i < personagem.classes.length; ++i) {
+		bba += tabelas_bba[personagem.classes[i].classe](personagem.classes[i].nivel);
 	}
-	ImprimeSinalizado(bba, goog.dom.getElementsByClass("bba"));
+	ImprimeSinalizado(bba, goog.dom.getElementsByClass(BBA));
 	ImprimeSinalizado(
 			bba + personagem.atributos.forca.modificador + 
 					personagem.tamanho.modificador_ataque_defesa, 
@@ -183,9 +182,10 @@ function AtualizaSalvacoes() {
 	};
 	for (var tipo_salvacao in habilidades_salvacoes) {
 		var valor_base = 0;
-		for (var classe in personagem.classes) {
+		for (var i = 0; i < personagem.classes.length; ++i) {
+			var classe = personagem.classes[i].classe;
 			valor_base += 
-				tabelas_salvacao[classe][tipo_salvacao](personagem.classes[classe]);
+				tabelas_salvacao[classe][tipo_salvacao](personagem.classes[i].nivel);
 		}
 		var habilidade_modificadora = habilidades_salvacoes[tipo_salvacao];
 		var modificador_atributo = 

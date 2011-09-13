@@ -23,4 +23,6 @@ var ARMADURA = 'armadura';
 var CA_ESCUDO = 'ac-escudo';
 var ESCUDO = 'escudo';
 var PONTOS_VIDA_TOTAL = 'pontos-vida-total';
+var PONTOS_VIDA_CORRENTE = 'pontos-vida-corrente';
 var DADOS_VIDA_CLASSES = 'dados-vida-classes';
+var FERIMENTOS = 'ferimentos';

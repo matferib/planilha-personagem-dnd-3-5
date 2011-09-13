@@ -73,7 +73,7 @@ function AdicionaClasse(classe, nivel) {
 	var input_nivel = document.createElement('input');
 	input_nivel.type = 'text';
 	input_nivel.name = 'nivel';
-	input_nivel.maxlength = 2;
+	input_nivel.maxLength = input_nivel.size = 2;
 	input_nivel.setAttribute('onchange', 'AtualizaGeral()');
 	input_nivel.value = nivel;
 	var br_nivel = document.createElement('br');
