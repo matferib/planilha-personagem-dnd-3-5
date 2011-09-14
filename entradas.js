@@ -84,8 +84,10 @@ function EscreveEntradas() {
 	// alinhamento
 	SelecionaValor(entradas.alinhamento, goog.dom.getElement(ALINHAMENTO));
 	// classes.
+	var classes_desabilitadas = [];
 	for (var i = 0; i < entradas.classes.length; ++i) {
-		AdicionaClasse(entradas.classes[i].classe, entradas.classes[i].nivel);
+		AdicionaClasse(classes_desabilitadas, entradas.classes[i].classe, entradas.classes[i].nivel);
+		//classes_desabilitadas.push(entradas.classes[i].classe);
 	}
 	// pontos de vida e ferimentos.
 	goog.dom.getElement(PONTOS_VIDA_TOTAL).value = entradas.pontos_vida;

@@ -30,10 +30,13 @@ function ImprimeNaoSinalizado(valor, dom) {
 }
 
 // Adiciona uma nova classe na planilha. 
-// Classe e nivel sao opcionais.
+// Parametros sao todos opcionais.
 // Classe padrao: guerreiro.
 // Nivel padrao: 1.
-function AdicionaClasse(classe, nivel) {
+function AdicionaClasse(classes_desabilitadas, classe, nivel) {
+	if (!classes_desabilitadas) {
+		classes_desabilitadas = [];
+	}
 	if (!nivel) {
 		nivel = 1;
 	}
@@ -62,10 +65,16 @@ function AdicionaClasse(classe, nivel) {
 		var option = document.createElement('option');
 		option.setAttribute('name', classes[i].nome);
 		option.setAttribute('value', classes[i].nome);
+		option.selected = (classes[i].nome == classe);
 		option.innerText = classes[i].texto;
-		if (classes[i].nome == classe) {
-			option.selected = true;
+		var desabilitar_classe = false;
+		for (var j = 0; j < classes_desabilitadas.length; ++j) {
+			if (classes[i].nome == classes_desabilitadas[j]) {
+				desabilitar_classe = true;
+				break;
+			}
 		}
+		option.disabled = desabilitar_classe;
 		select_classe .appendChild(option);
 	}
 	var span_nivel = document.createElement('span');
