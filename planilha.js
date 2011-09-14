@@ -21,6 +21,7 @@ function AtualizaGeral() {
 	AtualizaAtaque();
 	AtualizaDefesa();
 	AtualizaSalvacoes();
+	AtualizaTalentos();
 }
 
 // Passa os valoes da entrada para o personagem.
@@ -117,12 +118,13 @@ function AtualizaDadosVida() {
 				personagem.classes[i].nivel + 'd' + tabelas_dados_vida[personagem.classes[i].classe];
 
 	}
+	personagem.pontos_vida.dados_vida = dados_vida_total;
 	if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
 		string_dados_vida += 
 			' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
 	}
 	var span_dados = goog.dom.getElement(DADOS_VIDA_CLASSES);
-	span_dados.innerText = string_dados_vida;
+	span_dados.innerText = dados_vida_total + ' = ' + string_dados_vida;
 	// Pontos de vida.
 	var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
 	ImprimeNaoSinalizado(pontos_vida_corrente, goog.dom.getElement(PONTOS_VIDA_CORRENTE));
@@ -199,3 +201,13 @@ function AtualizaSalvacoes() {
 				goog.dom.getElement(tipo_salvacao + MOD_TOTAL));
 	}
 }
+
+// Um talento inicial mais um a cada 3 niveis.
+function AtualizaTalentos() {
+	personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
+
+	ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass(TALENTOS_TOTAL));
+	ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass(TALENTOS_NIVEL));
+
+}
+

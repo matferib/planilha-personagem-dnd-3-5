@@ -12,6 +12,8 @@ var entradas = {
 	// pontos de vida.
 	pontos_vida: 0,
 	ferimentos: 0,
+	// experiencia.
+	experiencia: 0,
 	// atributos.
 	forca: 10,
 	destreza: 10,
@@ -22,6 +24,11 @@ var entradas = {
 	// equipamentos.
 	armadura: { nome: '',  },
 	escudo: { nome: '', },
+	// moedas
+	platina: 0,
+	ouro: 0,
+	prata: 0,
+	cobre: 0,
 };
 
 // Le todos os inputs da planilha e armazena em 'entradas'. 
@@ -45,9 +52,11 @@ function LeEntradas() {
 				nivel: parseInt(input.value)});
 		}
 	}
-	// pontos de vida.
+	// pontos de vida e ferimentos.
 	entradas.pontos_vida = parseInt(goog.dom.getElement(PONTOS_VIDA_TOTAL).value) || 0;
 	entradas.ferimentos = parseInt(goog.dom.getElement(FERIMENTOS).value) || 0;
+	// Experiencia.
+	entradas.experiencia = parseInt(goog.dom.getElement(PONTOS_EXPERIENCIA).value) || 0;
 	// atributos
 	var div_atributos = goog.dom.getElement(DIV_STATS);
 	for (var i = 0; i < div_atributos.childNodes.length; ++i) {
@@ -59,6 +68,11 @@ function LeEntradas() {
 	// Armaduras.
 	entradas.armadura = ValorSelecionado(goog.dom.getElement(ARMADURA)); 
 	entradas.escudo = ValorSelecionado(goog.dom.getElement(ESCUDO));
+	// Moedas
+	entradas.platina = parseInt(goog.dom.getElement(MOEDAS_PLATINA).value);
+	entradas.ouro = parseInt(goog.dom.getElement(MOEDAS_OURO).value);
+	entradas.prata = parseInt(goog.dom.getElement(MOEDAS_PRATA).value);
+	entradas.cobre = parseInt(goog.dom.getElement(MOEDAS_COBRE).value);
 }
 
 // Escreve todos os inputs com os valores de 'entradas'.
@@ -76,6 +90,8 @@ function EscreveEntradas() {
 	// pontos de vida e ferimentos.
 	goog.dom.getElement(PONTOS_VIDA_TOTAL).value = entradas.pontos_vida;
 	goog.dom.getElement(FERIMENTOS).value = entradas.ferimentos;
+	// experiencia.
+	goog.dom.getElement(PONTOS_EXPERIENCIA).value = entradas.experiencia;
 	// atributos.
 	var div_atributos = goog.dom.getElement(DIV_STATS);
 	for (var i = 0; i < div_atributos.childNodes.length; ++i) {
@@ -87,5 +103,10 @@ function EscreveEntradas() {
 	// Armaduras.
 	SelecionaValor(entradas.armadura, goog.dom.getElement(ARMADURA)); 
 	SelecionaValor(entradas.escudo, goog.dom.getElement(ESCUDO)); 
+	// Moedas.
+	goog.dom.getElement(MOEDAS_PLATINA).value = entradas.platina;
+	goog.dom.getElement(MOEDAS_OURO).value = entradas.ouro;
+	goog.dom.getElement(MOEDAS_PRATA).value = entradas.prata;
+	goog.dom.getElement(MOEDAS_COBRE).value = entradas.cobre;
 }
 

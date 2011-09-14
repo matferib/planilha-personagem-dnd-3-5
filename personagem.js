@@ -25,6 +25,7 @@ var personagem = {
 	},*/
 	classes: [],
 	pontos_vida: {
+		dados_vida: 0,
 		total: 0,
 		ferimentos: 0,
 		temporarios: 0
@@ -63,6 +64,13 @@ var personagem = {
 		vontade: 0
 	},
 	armadura: '',
+	// talentos
+	talentos: {
+		nivel: 0,
+		raca: 0,
+		classe: 0,
+		lista: [],
+	},
 };
 
 
