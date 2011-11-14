@@ -52,7 +52,7 @@ Classes:
 <div id="classes"></div>
 <div id="pontos-vida">
 Dados de Vida: <span id="dados-vida-classes"></span><br>
-Pontos de Vida:
+Pontos de Vida: <button onclick="ClickGerarPontosDeVida()">Gerar</button>
 <span id=pontos-vida-corrente></span> = 
 <input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> -
 <input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
@@ -136,7 +136,9 @@ Classe de Armadura:
 	<option value="loriga_segmentada">Loriga Segmentada</option>
 	<option value="meia_armadura">Meia Armadura</option>
 	<option value="armadura_de_batalha">Armadura de Batalha</option>
-</select> + 
+</select> +
+<input id="bonus-armadura" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
++ 
 <select id="escudo" onchange="AtualizaGeral()">
 	<option value="nenhum">Nenhum</option>
 	<option value="broquel">Broquel</option>
@@ -146,7 +148,7 @@ Classe de Armadura:
 	<option value="escudo_pesado_de_aco">Escudo Pesado de Aço</option>
 	<option value="escudo_de_corpo">Escudo de Corpo</option>
 </select>
-
+<input id="bonus-escudo" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
 <br>
 Normal: 10
 <span class="ac-naturalnatural"></span>
@@ -213,6 +215,10 @@ Talentos:
 <span id="link-personagem"></span>
 </div> <!-- div-salvar -->
 
+<div id="div-gerar-resumo">
+<button onclick="ClickGerarResumo()">GerarResumo</button>
+<span id="resumo-personagem"></span>
+</div> <!-- div-salvar -->
 
 
 </body>

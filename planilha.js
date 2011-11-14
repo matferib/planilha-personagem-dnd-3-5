@@ -84,12 +84,12 @@ function AtualizaModificadoresAtributos() {
 			Math.floor((personagem.atributos[habilidade].valor - 10) / 2);
 		// Caso especial: destreza. Depende da armadura e escudo.
 		if (habilidade == 'destreza') {
-			var armadura = tabelas_armaduras[personagem.armadura];
+			var armadura = tabelas_armaduras[personagem.armadura.nome];
 			if (armadura.maximo_bonus_destreza && 
 					armadura.maximo_bonus_destreza < personagem.atributos[habilidade].modificador) {
 				personagem.atributos[habilidade].modificador = armadura.maximo_bonus_destreza;
 			}
-			var escudo = tabelas_escudos[personagem.escudo];
+			var escudo = tabelas_escudos[personagem.escudo.nome];
 			if (escudo.maximo_bonus_destreza &&
 					escudo.maximo_bonus_destreza < personagem.atributos[habilidade].modificador) {
 				personagem.atributos[habilidade].modificador = escudo.maximo_bonus_destreza;
@@ -149,23 +149,27 @@ function AtualizaAtaque() {
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
 function AtualizaDefesa() {
-	ImprimeSinalizado(tabelas_armaduras[personagem.armadura].bonus,
+	ImprimeSinalizado(tabelas_armaduras[personagem.armadura.nome].bonus +
+                    personagem.armadura.bonus_magico,
 			              goog.dom.getElementsByClass(CA_ARMADURA));
-	ImprimeSinalizado(tabelas_escudos[personagem.escudo].bonus,
+	ImprimeSinalizado(tabelas_escudos[personagem.escudo.nome].bonus + 
+                    personagem.escudo.bonus_magico,
 			              goog.dom.getElementsByClass(CA_ESCUDO));
 
 	// AC normal.
 	ImprimeNaoSinalizado(
 			10 + personagem.atributos.destreza.modificador +
-		      tabelas_armaduras[personagem.armadura].bonus +
-		      tabelas_escudos[personagem.escudo].bonus +
+		      tabelas_armaduras[personagem.armadura.nome].bonus +
+		      personagem.armadura.bonus_magico +
+		      tabelas_escudos[personagem.escudo.nome].bonus +
+		      personagem.escudo.bonus_magico +
 					personagem.tamanho.modificador_ataque_defesa, 
 			goog.dom.getElementsByClass(CA_NORMAL));
 	// AC surpreso.
 	ImprimeNaoSinalizado(
 			10 + personagem.tamanho.modificador_ataque_defesa + 
-		      tabelas_armaduras[personagem.armadura].bonus +
-		      tabelas_escudos[personagem.escudo].bonus,
+		      tabelas_armaduras[personagem.armadura.nome].bonus +
+		      tabelas_escudos[personagem.escudo.nome].bonus,
 			goog.dom.getElementsByClass(CA_SURPRESO));
 	// AC toque.
 	ImprimeNaoSinalizado(

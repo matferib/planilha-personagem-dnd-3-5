@@ -43,3 +43,31 @@ function ClickSalvar() {
 	goog.dom.getElement("link-personagem").innerHTML = 
 		'<a href="' + url + '">Link</a>';
 }
+
+// Gera o resumo do personagem para utilizacao em aventuras. 
+function ClickGerarResumo() {
+	AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
+  // TODO(terminar resumo)
+  var resumo = personagem.nome + '; ' + personagem.raca + '; ';
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var info_classe = personagem.classes[i];
+    resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
+  }
+	goog.dom.getElement("resumo-personagem").innerHTML = resumo; 
+
+}
+
+function ClickGerarPontosDeVida() {
+  // Para cada classe, rolar o dado.
+  var total_pontos_vida = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var info_classe = personagem.classes[i];
+    for (var j = 0; j < info_classe.nivel; ++j) {
+      total_pontos_vida += 
+        Math.floor((Math.random() * tabelas_dados_vida[info_classe.classe])) + 1;
+    }
+  }
+  goog.dom.getElement(PONTOS_VIDA_TOTAL).value = 
+    total_pontos_vida;
+  AtualizaGeral();
+}

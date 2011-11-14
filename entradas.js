@@ -22,8 +22,8 @@ var entradas = {
 	sabedoria: 10,
 	carisma: 10,
 	// equipamentos.
-	armadura: { nome: '',  },
-	escudo: { nome: '', },
+	armadura: { nome: '', bonus_magico: 0 },
+	escudo: { nome: '', bonus_magico: 0 },
 	// moedas
 	platina: 0,
 	ouro: 0,
@@ -65,9 +65,16 @@ function LeEntradas() {
 			entradas[elemento.name] = parseInt(elemento.value);
 		}
 	}
-	// Armaduras.
-	entradas.armadura = ValorSelecionado(goog.dom.getElement(ARMADURA)); 
-	entradas.escudo = ValorSelecionado(goog.dom.getElement(ESCUDO));
+	// Armadura e escudo.
+	entradas.armadura.nome = 
+      ValorSelecionado(goog.dom.getElement(ARMADURA)); 
+	entradas.armadura.bonus_magico = 
+      parseInt(goog.dom.getElement(BONUS_ARMADURA).value) || 0; 
+	entradas.escudo.nome = 
+      ValorSelecionado(goog.dom.getElement(ESCUDO));
+	entradas.escudo.bonus_magico = 
+      parseInt(goog.dom.getElement(BONUS_ESCUDO).value) || 0;
+
 	// Moedas
 	entradas.platina = parseInt(goog.dom.getElement(MOEDAS_PLATINA).value);
 	entradas.ouro = parseInt(goog.dom.getElement(MOEDAS_OURO).value);
@@ -102,9 +109,16 @@ function EscreveEntradas() {
 			elemento.value = entradas[elemento.name];
 		}
 	}
-	// Armaduras.
-	SelecionaValor(entradas.armadura, goog.dom.getElement(ARMADURA)); 
-	SelecionaValor(entradas.escudo, goog.dom.getElement(ESCUDO)); 
+	// Armadura e escudo.
+	SelecionaValor(entradas.armadura.nome, 
+                 goog.dom.getElement(ARMADURA)); 
+  goog.dom.getElement(BONUS_ARMADURA).value = 
+    entradas.armadura.bonus_magico; 
+	SelecionaValor(entradas.escudo.nome, 
+                 goog.dom.getElement(ESCUDO));
+  goog.dom.getElement(BONUS_ESCUDO).value = 
+    entradas.escudo.bonus_magico; 
+
 	// Moedas.
 	goog.dom.getElement(MOEDAS_PLATINA).value = entradas.platina;
 	goog.dom.getElement(MOEDAS_OURO).value = entradas.ouro;

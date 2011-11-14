@@ -4,25 +4,7 @@ var personagem = {
 	raca: 'humano',
 	tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
 	alinhamento: "",
-/*	classes: {
-		barbaro: 0, 
-		bardo: 0,
-		clerigo: 0,
-		druida: 0,
-		feiticeiro: 0,
-		guerreiro: 0,
-		ladino: 0,
-		mago: 0,
-		monge: 0,
-		paladino: 0,
-		ranger: 0,
-		//NPC
-		adepto: 0,
-		aristocrata: 0,
-		plebeu: 0,
-		expert: 0,
-		combatente: 0,
-	},*/
+  // Cada classe do vetor eh um objeto com classe e nivel.
 	classes: [],
 	pontos_vida: {
 		dados_vida: 0,
