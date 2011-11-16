@@ -3,12 +3,13 @@ goog.require('goog.json');
 
 // Chamado pelo carregamento inicial da pagina.
 function CarregamentoInicial() {
+  // Monta a tabela de armas e cria as opcoes dinamicamente.
+  CarregaTabelaArmas();
+
 	var indice_igual = document.URL.indexOf('=');
 	if (indice_igual == -1) {
 		// Comeca do zero.
 		AdicionaClasse();
-    CarregaTabelaArmas();
-    CarregaTabelaArmasDistancia();
 	}
 	else {
 		// carrega pelos parametros.

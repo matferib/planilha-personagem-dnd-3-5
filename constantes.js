@@ -43,8 +43,15 @@ var TALENTOS_RACA = "talentos-raca";
 var TALENTOS_CLASSE = "talentos-classe";
 var TALENTOS_TOTAL = "talentos-total";
 var PONTOS_EXPERIENCIA = "pontos-experiencia";
-var ARMAS_CORPO_A_CORPO = "armas-corpo-a-corpo";
-var ARMAS_DISTANCIA = "armas-distancia";
+var ARMA_CORPO_A_CORPO = "arma-corpo-a-corpo";
+var BONUS_ARMA_CORPO_A_CORPO = "bonus-arma-corpo-a-corpo";
+var ARMA_DISTANCIA = "arma-distancia";
+var BONUS_ARMA_DISTANCIA = "bonus-arma-distancia";
+var DANO_ARMA_CORPO_A_CORPO = "dano-arma-corpo-a-corpo";
+var DANO_ARMA_CORPO_A_CORPO_FINAL = "dano-arma-corpo-a-corpo-final";
+var DANO_ARMA_DISTANCIA = "dano-arma-distancia";
+var DANO_ARMA_DISTANCIA_FINAL = "dano-arma-distancia-final";
+
 var BARBARO = "barbaro";
 var	BARDO = "bardo";
 var	CLERIGO = "clerigo";

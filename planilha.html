@@ -117,15 +117,26 @@ Corpo a corpo:
 <span class="bba"></span>
 <span class="forca-mod-total"></span>
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span id="bba-corpo-a-corpo"></span><button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button><br>
-<select id="armas-corpo-a-corpo" onchange="AtualizaGeral()"></select><br>
+<span class="bba-corpo-a-corpo"></span><button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button><br>
+<select id="arma-corpo-a-corpo" onchange="AtualizaGeral()"></select>
+<input id="bonus-arma-corpo-a-corpo" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
+Ataque:
+<span class="bba-arma-corpo-a-corpo-final"></span> = 
+<span class="bba-corpo-a-corpo"></span>
+<span class="bba-arma"></span>, 
+Dano:
+<span class="dano-arma-corpo-a-corpo"></span> 
+<span class="forca-mod-total"></span> 
+<br>
 
 Distância: 
 <span class="bba"></span>
 <span class="destreza-mod-total"></span>  
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span id="bba-distancia"></span><button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button><br>
-<select id="armas-distancia" onchange="AtualizaGeral()"></select><br>
+<span class="bba-distancia"></span><button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button><br>
+<select id="arma-distancia" onchange="AtualizaGeral()"></select>
+<input id="bonus-arma-distancia" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
+<br>
 </div> <!-- div-ataque -->
 
 <div id="div-defesa">
@@ -144,9 +155,9 @@ Classe de Armadura:
 	<option value="loriga_segmentada">Loriga Segmentada</option>
 	<option value="meia_armadura">Meia Armadura</option>
 	<option value="armadura_de_batalha">Armadura de Batalha</option>
-</select> +
+</select>
 <input id="bonus-armadura" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
-+ 
+, 
 <select id="escudo" onchange="AtualizaGeral()">
 	<option value="nenhum">Nenhum</option>
 	<option value="broquel">Broquel</option>

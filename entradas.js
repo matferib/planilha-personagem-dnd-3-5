@@ -22,6 +22,8 @@ var entradas = {
 	sabedoria: 10,
 	carisma: 10,
 	// equipamentos.
+  armas_cac: [ { nome: '', bonus_magico: 0 }, ],
+  armas_distancia: [ { nome: '', bonus_magico: 0 }, ],
 	armadura: { nome: '', bonus_magico: 0 },
 	escudo: { nome: '', bonus_magico: 0 },
 	// moedas
@@ -65,6 +67,16 @@ function LeEntradas() {
 			entradas[elemento.name] = parseInt(elemento.value);
 		}
 	}
+  // Armas.
+  entradas.armas_cac[0].nome =
+      ValorSelecionado(goog.dom.getElement(ARMA_CORPO_A_CORPO));
+  entradas.armas_cac[0].bonus_magico =
+      parseInt(goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO).value) || 0;
+  entradas.armas_distancia[0].nome =
+      ValorSelecionado(goog.dom.getElement(ARMA_DISTANCIA));
+  entradas.armas_distancia[0].bonus_magico =
+      parseInt(goog.dom.getElement(BONUS_ARMA_DISTANCIA).value) || 0;
+
 	// Armadura e escudo.
 	entradas.armadura.nome = 
       ValorSelecionado(goog.dom.getElement(ARMADURA)); 
@@ -109,6 +121,11 @@ function EscreveEntradas() {
 			elemento.value = entradas[elemento.name];
 		}
 	}
+  // Armas.
+  SelecionaValor(entradas.armas_cac[0].nome, goog.dom.getElement(ARMA_CORPO_A_CORPO));
+  goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO).value = entradas.armas_cac[0].bonus_magico;
+  SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_DISTANCIA));
+  goog.dom.getElement(BONUS_ARMA_DISTANCIA).value = entradas.armas_distancia[0].bonus_magico;
 	// Armadura e escudo.
 	SelecionaValor(entradas.armadura.nome, 
                  goog.dom.getElement(ARMADURA)); 

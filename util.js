@@ -96,31 +96,45 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
 	goog.dom.getElement("classes").appendChild(div);
 }
 
-// Carrega a tabela de armas. 
-function CarregaTabelaArmas() {
-  var select_armas = goog.dom.getElement(ARMAS_CORPO_A_CORPO);
+// Preenche select de armas corpo a corpo. 
+function _PreencheArmasCorpoACorpo() {
+  var select_armas = goog.dom.getElement(ARMA_CORPO_A_CORPO);
   for (var arma in tabelas_armas) {
 		var option = document.createElement('option');
 		option.setAttribute('name', arma);
 		option.setAttribute('value', arma);
-		option.innerText = tabelas_armas[arma].nome || arma;
+    tabelas_armas[arma].nome = arma;
+  	option.innerText = tabelas_armas[arma].nome;
 		select_armas.appendChild(option);
   }
 }
 
-// Carrega a tabela de armas a distancia. 
-function CarregaTabelaArmasDistancia() {
-  var select_armas = goog.dom.getElement(ARMAS_DISTANCIA);
+// Preenche select de armas a distancia. 
+function _PreencheArmasDistancia() {
+  var select_armas = goog.dom.getElement(ARMA_DISTANCIA);
   for (var arma in tabelas_armas) {
     if (tabelas_armas[arma].incremento_distancia) {
   		var option = document.createElement('option');
 	  	option.setAttribute('name', arma);
 		  option.setAttribute('value', arma);
-  		option.innerText = tabelas_armas[arma].nome || arma;
+  		option.innerText = tabelas_armas[arma].nome;
 	  	select_armas.appendChild(option);
     }
   }
 }
+
+// Preenche os nomes faltantes na tabela de armas e chama as funcoes
+// para preencher os selects de armas corpo a corpo e a distancia.
+function CarregaTabelaArmas() {
+  for (var arma in tabelas_armas) {
+    if (tabelas_armas[arma].nome == null) {
+      tabelas_armas[arma].nome = arma;
+    }
+  }
+  _PreencheArmasCorpoACorpo();
+  _PreencheArmasDistancia();
+}
+
 
 // Busca o valor selecionado de um select.
 // @param dom_select o dom representando o select.
