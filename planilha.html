@@ -7,6 +7,7 @@
 <script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
 <script type="text/javascript" src="constantes.js"></script>
 <script type="text/javascript" src="util.js"></script>
+<script type="text/javascript" src="geracao.js"></script>
 <script type="text/javascript" src="tabelas.js"></script>
 <script type="text/javascript" src="eventos.js"></script>
 <script type="text/javascript" src="personagem.js"></script>
@@ -62,10 +63,10 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 </div> <!-- div-geral-->
 
 <div id="div-stats">
-<button onclick="ClickGerarElite()">Gerar elite</button>
 <button onclick="ClickGerarComum()">Gerar comum</button>
-<button onclick="ClickGerarAleatorio()">Aleatório (3d6)</button>
-<button onclick="ClickGerarAleatorioHeroi()">Aleatório (4d6 - menor)</button><br>
+<button onclick="ClickGerarAleatorioComum()">Gerar comum aleatório (3d6)</button><br>
+<button onclick="ClickGerarElite()">Gerar elite</button>
+<button onclick="ClickGerarAleatorioElite()">Gerar elite Aleatório (4d6 - menor)</button><br>
 Força: 
 <input type="text" maxlength="2" size="2" name="forca" id="forca-valor-base" value="10" 
   	   onchange="AtualizaGeral()" />
