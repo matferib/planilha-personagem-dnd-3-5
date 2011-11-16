@@ -7,6 +7,8 @@ function CarregamentoInicial() {
 	if (indice_igual == -1) {
 		// Comeca do zero.
 		AdicionaClasse();
+    CarregaTabelaArmas();
+    CarregaTabelaArmasDistancia();
 	}
 	else {
 		// carrega pelos parametros.
@@ -70,4 +72,43 @@ function ClickGerarPontosDeVida() {
   goog.dom.getElement(PONTOS_VIDA_TOTAL).value = 
     total_pontos_vida;
   AtualizaGeral();
+}
+
+function ClickGerarAleatorio() {
+  var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
+  for (var i = 0; i < atributos.length; ++i) {
+    goog.dom.getElement(atributos[i] + VALOR_BASE).value = Rola(3, 6);
+  }
+  AtualizaGeral();
+}
+
+function ClickGerarAleatorioHeroi() {
+  var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
+  //var rolagens = [];
+  for (var i = 0; i < atributos.length; ++i) {
+    var total = 0;
+    var menor = 7;
+    for (var j = 0; j < 4; ++j) {
+      var rolagem = Rola(1, 6);
+      //rolagens.push(rolagem);
+      if (rolagem < menor) {
+        menor = rolagem;
+      }
+      total += rolagem;
+    }
+    goog.dom.getElement(atributos[i] + VALOR_BASE).value = total - menor;
+  }
+  //AtualizaGeral();
+}
+
+function ClickGerarElite() {
+}
+
+function ClickGerarComum() {
+}
+
+function ClickAdicionarArma() {
+}
+
+function ClickAdicionarArmaDistancia() {
 }

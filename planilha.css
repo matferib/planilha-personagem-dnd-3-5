@@ -1,24 +1,30 @@
 /* CSS da planilha. */
 div#div-geral {
-background-color: #ff0000;
+background-color: #D8D8D8;
+padding: 7px;
 }
 
 div#div-stats {
-background-color: #00ff00;
+background-color: #D8D8D8;
+padding: 7px;
 }
 
 div#div-ataque {
-background-color: #ffff00;
+background-color: #D8D8D8;
+padding: 7px;
 }
 
 div#div-defesa {
-background-color: #00ffff;
+background-color: #D8D8D8;
+padding: 7px;
 }
 
 div#div-equipamentos {
-background-color: #ff00ff;
+background-color: #D8D8D8;
+padding: 7px;
 }
 
 div#div-salvacoes {
-background-color: #0000ff;
+background-color: #D8D8D8;
+padding: 7px;
 }

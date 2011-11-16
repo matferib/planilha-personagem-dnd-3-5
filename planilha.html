@@ -52,15 +52,20 @@ Classes:
 <div id="classes"></div>
 <div id="pontos-vida">
 Dados de Vida: <span id="dados-vida-classes"></span><br>
-Pontos de Vida: <button onclick="ClickGerarPontosDeVida()">Gerar</button>
-<span id=pontos-vida-corrente></span> = 
+Pontos de Vida: <span id=pontos-vida-corrente></span> = 
 <input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> -
-<input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
+<input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/>
+<button onclick="ClickGerarPontosDeVida()">Gerar</button>
+<br>
 Experiência: <input type="text" id="pontos-experiencia" size="6"/> 
 </div>
 </div> <!-- div-geral-->
 
 <div id="div-stats">
+<button onclick="ClickGerarElite()">Gerar elite</button>
+<button onclick="ClickGerarComum()">Gerar comum</button>
+<button onclick="ClickGerarAleatorio()">Aleatório (3d6)</button>
+<button onclick="ClickGerarAleatorioHeroi()">Aleatório (4d6 - menor)</button><br>
 Força: 
 <input type="text" maxlength="2" size="2" name="forca" id="forca-valor-base" value="10" 
   	   onchange="AtualizaGeral()" />
@@ -111,13 +116,15 @@ Corpo a corpo:
 <span class="bba"></span>
 <span class="forca-mod-total"></span>
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span id="bba-corpo-a-corpo"></span><br>
+<span id="bba-corpo-a-corpo"></span><button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button><br>
+<select id="armas-corpo-a-corpo" onchange="AtualizaGeral()"></select><br>
 
 Distância: 
 <span class="bba"></span>
 <span class="destreza-mod-total"></span>  
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span id="bba-distancia"></span><br>
+<span id="bba-distancia"></span><button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button><br>
+<select id="armas-distancia" onchange="AtualizaGeral()"></select><br>
 </div> <!-- div-ataque -->
 
 <div id="div-defesa">
@@ -209,6 +216,13 @@ Talentos:
 
 <div id="div-pericias">
 </div> <!-- div-pericias -->
+
+<div id="equipamentos">
+Equipamentos:
+Armas:
+Armaduras:
+Escudos:
+</div> <!-- div-equipamentos -->
 
 <div id="div-salvar">
 <button onclick="ClickSalvar()">Salvar</button>

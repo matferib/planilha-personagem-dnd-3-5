@@ -1,4 +1,10 @@
 // Constantes usadas.
+var FORCA = "forca";
+var DESTREZA = "destreza";
+var CONSTITUICAO = "constituicao";
+var INTELIGENCIA = "inteligencia";
+var SABEDORIA = "sabedoria";
+var CARISMA = "carisma";
 var VALOR_BASE = '-valor-base';
 var VALOR_TOTAL = '-valor-total';
 var MOD = '-mod-';
@@ -37,3 +43,5 @@ var TALENTOS_RACA = "talentos-raca";
 var TALENTOS_CLASSE = "talentos-classe";
 var TALENTOS_TOTAL = "talentos-total";
 var PONTOS_EXPERIENCIA = "pontos-experiencia";
+var ARMAS_CORPO_A_CORPO = "armas-corpo-a-corpo";
+var ARMAS_DISTANCIA = "armas-distancia";

@@ -75,7 +75,7 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
 			}
 		}
 		option.disabled = desabilitar_classe;
-		select_classe .appendChild(option);
+		select_classe.appendChild(option);
 	}
 	var span_nivel = document.createElement('span');
 	span_nivel.innerText = "Nível: ";
@@ -96,6 +96,32 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
 	goog.dom.getElement("classes").appendChild(div);
 }
 
+// Carrega a tabela de armas. 
+function CarregaTabelaArmas() {
+  var select_armas = goog.dom.getElement(ARMAS_CORPO_A_CORPO);
+  for (var arma in tabelas_armas) {
+		var option = document.createElement('option');
+		option.setAttribute('name', arma);
+		option.setAttribute('value', arma);
+		option.innerText = tabelas_armas[arma].nome || arma;
+		select_armas.appendChild(option);
+  }
+}
+
+// Carrega a tabela de armas a distancia. 
+function CarregaTabelaArmasDistancia() {
+  var select_armas = goog.dom.getElement(ARMAS_DISTANCIA);
+  for (var arma in tabelas_armas) {
+    if (tabelas_armas[arma].incremento_distancia) {
+  		var option = document.createElement('option');
+	  	option.setAttribute('name', arma);
+		  option.setAttribute('value', arma);
+  		option.innerText = tabelas_armas[arma].nome || arma;
+	  	select_armas.appendChild(option);
+    }
+  }
+}
+
 // Busca o valor selecionado de um select.
 // @param dom_select o dom representando o select.
 function ValorSelecionado(dom_select) {
@@ -112,5 +138,14 @@ function SelecionaValor(valor_selecionado, dom_select) {
 			return;
 		}
 	}	
+}
+
+// Retorna numero * [1, limite].
+function Rola(numero, limite) {
+  var resultado = 0;
+  for (var i = 0; i < numero; ++i) {
+    resultado += Math.floor(Math.random() * limite) + 1;
+  }
+  return resultado;
 }
 
