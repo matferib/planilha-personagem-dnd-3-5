@@ -67,7 +67,7 @@ function ClickGerarPontosDeVida() {
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
 function ClickGerarAleatorioComum() {
-  GeraAleatorio();
+  GeraAleatorioComum();
 }
 
 // Gera os atributos do personagem rolando 4d6 menos o menor.

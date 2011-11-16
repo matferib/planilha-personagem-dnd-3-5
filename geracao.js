@@ -16,7 +16,7 @@ function GeraPontosDeVida() {
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
-function GeraAleatorio() {
+function GeraAleatorioComum() {
   var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
   for (var i = 0; i < atributos.length; ++i) {
     goog.dom.getElement(atributos[i] + VALOR_BASE).value = Rola(3, 6);
@@ -44,8 +44,8 @@ function GeraAleatorioElite() {
   AtualizaGeral();
 }
 
-// Gera os atributos do personagem usando o 'elite array'. Usa a primeira classe.
-function GeraElite() {
+// Tabelados, valores eh um array de valores a serem usados.
+function _GeraTabelado(valores) {
   if (personagem.classes.length == 0) {
     // Nunca deve acontecer.
     alert('Personagem sem classe');
@@ -57,30 +57,20 @@ function GeraElite() {
     alert("É recomendado colocar os valores na mão para aristocratas e experts");
   }
 
-  var valores = [ 15, 14, 13, 12, 10, 8 ];
   for (var i = 0; i < valores.length; ++i) {
     goog.dom.getElement(tabelas_geracao_atributos[primeira_classe.classe][i]  + VALOR_BASE).value = valores[i];
   }
   AtualizaGeral();
+
+}
+
+// Gera os atributos do personagem usando o 'elite array'. Usa a primeira classe.
+function GeraElite() {
+  _GeraTabelado( [ 15, 14, 13, 12, 10, 8 ]);
 }
 
 // Gera os atributos do personagem usando o 'non elite array'. Usa a primeira classe.
 function GeraComum() {
-  if (personagem.classes.length == 0) {
-    // Nunca deve acontecer.
-    alert('Personagem sem classe');
-    return;
-  }
-
-  var primeira_classe = personagem.classes[0];
-  if (primeira_classe.classe == ARISTOCRATA || primeira_classe.classe == EXPERT) {
-    alert("É recomendado colocar os valores na mão para aristocratas e experts");
-  }
-
-  var valores = [ 13, 12, 11, 10, 9, 8 ];
-  for (var i = 0; i < valores.length; ++i) {
-    goog.dom.getElement(tabelas_geracao_atributos[primeira_classe.classe][i]  + VALOR_BASE).value = valores[i];
-  }
-  AtualizaGeral();
+  _GeraTabelado([ 13, 12, 11, 10, 9, 8 ]);
 }
 
