@@ -59,6 +59,8 @@ function ClickGerarResumo() {
 
 }
 
+// Gera os pontos de vida do personagem de acordo com as classes.
+// TODO personagens elite recebem maximo no primeiro nivel.
 function ClickGerarPontosDeVida() {
   // Para cada classe, rolar o dado.
   var total_pontos_vida = 0;
@@ -74,6 +76,7 @@ function ClickGerarPontosDeVida() {
   AtualizaGeral();
 }
 
+// Gera os atributos do personagem rolando 3d6 para cada um.
 function ClickGerarAleatorio() {
   var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
   for (var i = 0; i < atributos.length; ++i) {
@@ -82,6 +85,7 @@ function ClickGerarAleatorio() {
   AtualizaGeral();
 }
 
+// Gera os atributos do personagem rolando 4d6 menos o menor.
 function ClickGerarAleatorioHeroi() {
   var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
   //var rolagens = [];
@@ -98,13 +102,47 @@ function ClickGerarAleatorioHeroi() {
     }
     goog.dom.getElement(atributos[i] + VALOR_BASE).value = total - menor;
   }
-  //AtualizaGeral();
+  AtualizaGeral();
 }
 
+// Gera os atributos do personagem usando o 'elite array'. Usa a primeira classe.
 function ClickGerarElite() {
+  if (personagem.classes.length == 0) {
+    // Nunca deve acontecer.
+    alert('Personagem sem classe');
+    return;
+  }
+
+  var primeira_classe = personagem.classes[0];
+  if (primeira_classe.classe == ARISTOCRATA || primeira_classe.classe == EXPERT) {
+    alert("É recomendado colocar os valores na mão para aristocratas e experts");
+  }
+
+  var valores = [ 15, 14, 13, 12, 10, 8 ];
+  for (var i = 0; i < valores.length; ++i) {
+    goog.dom.getElement(tabelas_geracao_atributos[primeira_classe.classe][i]  + VALOR_BASE).value = valores[i];
+  }
+  AtualizaGeral();
 }
 
+// Gera os atributos do personagem usando o 'non elite array'. Usa a primeira classe.
 function ClickGerarComum() {
+  if (personagem.classes.length == 0) {
+    // Nunca deve acontecer.
+    alert('Personagem sem classe');
+    return;
+  }
+
+  var primeira_classe = personagem.classes[0];
+  if (primeira_classe.classe == ARISTOCRATA || primeira_classe.classe == EXPERT) {
+    alert("É recomendado colocar os valores na mão para aristocratas e experts");
+  }
+
+  var valores = [ 13, 12, 11, 10, 9, 8 ];
+  for (var i = 0; i < valores.length; ++i) {
+    goog.dom.getElement(tabelas_geracao_atributos[primeira_classe.classe][i]  + VALOR_BASE).value = valores[i];
+  }
+  AtualizaGeral();
 }
 
 function ClickAdicionarArma() {
