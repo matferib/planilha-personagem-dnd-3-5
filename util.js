@@ -1,3 +1,7 @@
+// Tudo que for util e nao se encaixar em lugar nenhum.
+
+goog.require('goog.dom');
+
 // Imprime um valor de forma sinalizada ou seja, com +/- na frente).
 // @param dom pode ser um span ou div, ou qualquer elemento que possua innerText.
 // Tambem pode ser um array de dom.
@@ -163,3 +167,26 @@ function Rola(numero, limite) {
   return resultado;
 }
 
+// Remove a classe mais recente do personagem.
+function RemoveClasse() {
+  var div_classes = goog.dom.getElement("classes");
+  if (div_classes.childNodes.length == 1) return;
+  div_classes.removeChild(div_classes.lastChild);
+}
+
+// Passa os valoes da entrada para o personagem.
+function ConverteEntradasParaPersonagem() {
+  personagem.nome = entradas.nome;
+  personagem.raca = entradas.raca;
+  personagem.alinhamento = entradas.alinhamento;
+  personagem.classes = entradas.classes;
+  personagem.pontos_vida.total = entradas.pontos_vida;
+  personagem.pontos_vida.ferimentos = entradas.ferimentos;
+  for (var atributo in personagem.atributos) {
+    personagem.atributos[atributo].valor = entradas[atributo];
+  }
+  personagem.armas_cac = entradas.armas_cac;
+  personagem.armas_distancia = entradas.armas_distancia;
+  personagem.armadura = entradas.armadura;
+  personagem.escudo = entradas.escudo;
+}
