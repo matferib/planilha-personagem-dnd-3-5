@@ -100,29 +100,40 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
 	goog.dom.getElement("classes").appendChild(div);
 }
 
+// Remove a classe mais recente do personagem.
+function RemoveClasse() {
+  var div_classes = goog.dom.getElement("classes");
+  if (div_classes.childNodes.length == 1) return;
+  div_classes.removeChild(div_classes.lastChild);
+}
+
 // Preenche select de armas corpo a corpo. 
 function _PreencheArmasCorpoACorpo() {
-  var select_armas = goog.dom.getElement(ARMA_CORPO_A_CORPO);
-  for (var arma in tabelas_armas) {
-		var option = document.createElement('option');
-		option.setAttribute('name', arma);
-		option.setAttribute('value', arma);
-    tabelas_armas[arma].nome = arma;
-  	option.innerText = tabelas_armas[arma].nome;
-		select_armas.appendChild(option);
+  for (var i = 0; i < entradas.armas_cac.length; ++i) {
+    var select_armas = goog.dom.getElement(ARMA_CORPO_A_CORPO + "-" + i);
+    for (var arma in tabelas_armas) {
+  		var option = document.createElement('option');
+	  	option.setAttribute('name', arma);
+		  option.setAttribute('value', arma);
+      tabelas_armas[arma].nome = arma;
+    	option.innerText = tabelas_armas[arma].nome;
+		  select_armas.appendChild(option);
+    }
   }
 }
 
 // Preenche select de armas a distancia. 
 function _PreencheArmasDistancia() {
-  var select_armas = goog.dom.getElement(ARMA_DISTANCIA);
-  for (var arma in tabelas_armas) {
-    if (tabelas_armas[arma].incremento_distancia) {
-  		var option = document.createElement('option');
-	  	option.setAttribute('name', arma);
-		  option.setAttribute('value', arma);
-  		option.innerText = tabelas_armas[arma].nome;
-	  	select_armas.appendChild(option);
+  for (var i = 0; i < entradas.armas_distancia.length; ++i) {
+    var select_armas = goog.dom.getElement(ARMA_DISTANCIA + "-" + i);
+    for (var arma in tabelas_armas) {
+      if (tabelas_armas[arma].incremento_distancia) {
+        var option = document.createElement('option');
+        option.setAttribute('name', arma);
+        option.setAttribute('value', arma);
+        option.innerText = tabelas_armas[arma].nome;
+        select_armas.appendChild(option);
+      }
     }
   }
 }
@@ -167,13 +178,6 @@ function Rola(numero, limite) {
   return resultado;
 }
 
-// Remove a classe mais recente do personagem.
-function RemoveClasse() {
-  var div_classes = goog.dom.getElement("classes");
-  if (div_classes.childNodes.length == 1) return;
-  div_classes.removeChild(div_classes.lastChild);
-}
-
 // Passa os valoes da entrada para o personagem.
 function ConverteEntradasParaPersonagem() {
   personagem.nome = entradas.nome;
@@ -185,7 +189,23 @@ function ConverteEntradasParaPersonagem() {
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].valor = entradas[atributo];
   }
-  personagem.armas_cac = entradas.armas_cac;
+  // As armas tem que ser copiadas porque no personagem sao adicionados
+  // outros campos nao presentes na entrada, como bonus final.
+  personagem.armas_cac = [];
+  for (var i = 0; i < entradas.armas_cac.length; ++i) {
+    var arma_personagem = {};
+    arma_personagem.nome = entradas.armas_cac[i].nome;
+    arma_personagem.obra_prima = entradas.armas_cac[i].obra_prima;
+    if (arma_personagem.obra_prima) {
+      arma_personagem.bonus_ataque = 1;
+      arma_personagem.bonus_dano = 0;
+    } else {
+      arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 
+          entradas.armas_cac[i].bonus;
+    }
+    personagem.armas_cac.push(arma_personagem);
+  }
+  //personagem.armas_cac = entradas.armas_cac;
   personagem.armas_distancia = entradas.armas_distancia;
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;

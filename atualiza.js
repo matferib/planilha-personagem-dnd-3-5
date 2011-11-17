@@ -115,19 +115,45 @@ function _AtualizaAtaque() {
     bba += tabelas_bba[personagem.classes[i].classe](personagem.classes[i].nivel);
   }
   ImprimeSinalizado(bba, goog.dom.getElementsByClass(BBA));
+  personagem.bba = bba;
   // Corpo a corpo.
-  ImprimeSinalizado(
+  personagem.bba_cac = 
       bba + personagem.atributos.forca.modificador + 
-          personagem.tamanho.modificador_ataque_defesa, 
+      personagem.tamanho.modificador_ataque_defesa;
+  ImprimeSinalizado(
+      personagem.bba_cac,
       goog.dom.getElementsByClass(BBA_CORPO_A_CORPO));
-  ImprimeNaoSinalizado(
-      tabelas_armas[personagem.armas_cac[0].nome].dano[personagem.tamanho.categoria],
-      goog.dom.getElementsByClass(DANO_ARMA_CORPO_A_CORPO));
+  // Armas corpo a corpo.
+  for (var i = 0; i < personagem.armas_cac.length; ++i) {
+    // Ataque.
+    // bba: ja feito.
+    // bonus-ataque-arma-corpo-a-corpo:
+    ImprimeSinalizado(
+        personagem.armas_cac[i].bonus_ataque,
+        goog.dom.getElementsByClass(BONUS_ATAQUE_ARMA_CORPO_A_CORPO + "-" + i));
+    // Final:
+    ImprimeSinalizado(
+        personagem.bba_cac + personagem.armas_cac[i].bonus_ataque,
+        goog.dom.getElementsByClass(BBA_ARMA_CORPO_A_CORPO_FINAL + "-" + i));
+
+    // Dano.
+    // dano-arma-corpo-a-corpo.
+    ImprimeNaoSinalizado(
+        tabelas_armas[personagem.armas_cac[0].nome].dano[personagem.tamanho.categoria],
+        goog.dom.getElementsByClass(DANO_ARMA_CORPO_A_CORPO + "-" + i));
+    // forca-mod-total: ja feito.
+    // bonus-dano-arma-corpo-a-corpo:
+    ImprimeSinalizado(
+        personagem.armas_cac[i].bonus_dano,
+        goog.dom.getElementsByClass(BONUS_DANO_ARMA_CORPO_A_CORPO + "-" + i));
+  }
+
   // Distancia.
   ImprimeSinalizado(
       bba + personagem.atributos.destreza.modificador +
           personagem.tamanho.modificador_ataque_defesa, 
       goog.dom.getElementsByClass(BBA_DISTANCIA));
+  // Armas distancia.
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.

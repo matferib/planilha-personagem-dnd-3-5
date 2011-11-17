@@ -12,7 +12,6 @@
 <script type="text/javascript" src="eventos.js"></script>
 <script type="text/javascript" src="personagem.js"></script>
 <script type="text/javascript" src="entradas.js"></script>
-<script type="text/javascript" src="planilha.js"></script>
 <script type="text/javascript" src="atualiza.js"></script>
 <!-- versao compilada -->
 <!--script type="text/javascript" src="planilha_compilado.js"></script-->
@@ -118,25 +117,29 @@ Corpo a corpo:
 <span class="bba"></span>
 <span class="forca-mod-total"></span>
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span class="bba-corpo-a-corpo"></span><button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button><br>
-<select id="arma-corpo-a-corpo" onchange="AtualizaGeral()"></select>
-<input id="bonus-arma-corpo-a-corpo" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
-Ataque:
-<span class="bba-arma-corpo-a-corpo-final"></span> = 
 <span class="bba-corpo-a-corpo"></span>
-<span class="bba-arma"></span>, 
+<!--button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button--><br>
+<select id="arma-corpo-a-corpo-0" onchange="AtualizaGeral()"></select>
+<input id="arma-corpo-a-corpo-obra-prima-0" type="checkbox" onchange="AtualizaGeral()">OP</input>
+<input id="bonus-arma-corpo-a-corpo-0" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
+Ataque:
+<span class="bba-corpo-a-corpo"></span>
+<span class="bonus-ataque-arma-corpo-a-corpo-0"></span> =  
+<span class="bba-arma-corpo-a-corpo-final-0"></span>, 
 Dano:
-<span class="dano-arma-corpo-a-corpo"></span> 
+<span class="dano-arma-corpo-a-corpo-0"></span> 
 <span class="forca-mod-total"></span> 
+<span class="bonus-dano-arma-corpo-a-corpo-0"></span> 
 <br>
 
 Distância: 
 <span class="bba"></span>
 <span class="destreza-mod-total"></span>  
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span class="bba-distancia"></span><button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button><br>
-<select id="arma-distancia" onchange="AtualizaGeral()"></select>
-<input id="bonus-arma-distancia" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
+<span class="bba-distancia"></span>
+<!--button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button--><br>
+<select id="arma-distancia-0" onchange="AtualizaGeral()"></select>
+<input id="bonus-arma-distancia-0" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
 <br>
 </div> <!-- div-ataque -->
 
