@@ -40,7 +40,7 @@ var personagem = {
   },
   bba: 0,
   bba_cac: 0,  // inclui tamanho e forca.
-  bbc_distancia: 0,  // inclui tamanho e destreza.
+  bba_distancia: 0,  // inclui tamanho e destreza.
   ca: { normal: 10, surpreso: 10, toque: 10 },
   salvacoes : {
     fortitude: 0,
@@ -49,6 +49,7 @@ var personagem = {
   },
   // As armas possuem  { nome, obra_prima, bonus_ataque, bonus_dano } 
   armas_cac: [],
+  armas_arremesso: [],
   armas_distancia: [],
   armadura: {},
   // talentos

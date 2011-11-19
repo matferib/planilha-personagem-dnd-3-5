@@ -149,11 +149,36 @@ function _AtualizaAtaque() {
   }
 
   // Distancia.
+  personagem.bba_distancia = 
+      bba + personagem.atributos.destreza.modificador + 
+      personagem.tamanho.modificador_ataque_defesa;
   ImprimeSinalizado(
-      bba + personagem.atributos.destreza.modificador +
-          personagem.tamanho.modificador_ataque_defesa, 
+      personagem.bba_distancia,
       goog.dom.getElementsByClass(BBA_DISTANCIA));
-  // Armas distancia.
+  for (var i = 0; i < personagem.armas_distancia.length; ++i) {
+    // Arremesso.
+    // Ataque.
+    // bba: ja feito.
+    // bonus-ataque-arremesso:
+    ImprimeSinalizado(
+        personagem.armas_arremesso[i].bonus_ataque,
+        goog.dom.getElementsByClass(BONUS_ATAQUE_ARMA_ARREMESSO + "-" + i));
+    // Final:
+    ImprimeSinalizado(
+        personagem.bba_distancia + personagem.armas_arremesso[i].bonus_ataque,
+        goog.dom.getElementsByClass(BBA_ARMA_ARREMESSO_FINAL + "-" + i));
+
+    // Dano.
+    // dano-arma-arremesso.
+    ImprimeNaoSinalizado(
+        tabelas_armas[personagem.armas_arremesso[0].nome].dano[personagem.tamanho.categoria],
+        goog.dom.getElementsByClass(DANO_ARMA_ARREMESSO + "-" + i));
+    // forca-mod-total: ja feito.
+    // bonus-dano-arma-corpo-a-corpo:
+    ImprimeSinalizado(
+        personagem.armas_arremesso[i].bonus_dano,
+        goog.dom.getElementsByClass(BONUS_DANO_ARMA_CORPO_A_CORPO + "-" + i));
+  }
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.

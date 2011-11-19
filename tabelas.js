@@ -194,7 +194,7 @@ var tabelas_escudos = {
 var tabelas_armas = {
   // Unarmed Attacks
   desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"} , 
-               critico: "×2", peso: "0", tipo: "estouro", },
+               critico: "×2", peso: "0", tipo: "estouro", incremento_distancia: "0 quadrados" },
   manoplas: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3"} , 
               critico: "×2", peso: "500g", tipo: "estouro", },
   /*

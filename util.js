@@ -123,9 +123,9 @@ function _PreencheArmasCorpoACorpo() {
 }
 
 // Preenche select de armas a distancia. 
-function _PreencheArmasDistancia() {
+function _PreencheArmasArremesso() {
   for (var i = 0; i < entradas.armas_distancia.length; ++i) {
-    var select_armas = goog.dom.getElement(ARMA_DISTANCIA + "-" + i);
+    var select_armas = goog.dom.getElement(ARMA_ARREMESSO + "-" + i);
     for (var arma in tabelas_armas) {
       if (tabelas_armas[arma].incremento_distancia) {
         var option = document.createElement('option');
@@ -138,6 +138,23 @@ function _PreencheArmasDistancia() {
   }
 }
 
+// Preenche select de armas a distancia. 
+function _PreencheArmasDistancia() {
+  /*
+  for (var i = 0; i < entradas.armas_distancia.length; ++i) {
+    var select_armas = goog.dom.getElement(ARMA_DISTANCIA + "-" + i);
+    for (var arma in tabelas_armas) {
+      if (tabelas_armas[arma].incremento_distancia) {
+        var option = document.createElement('option');
+        option.setAttribute('name', arma);
+        option.setAttribute('value', arma);
+        option.innerText = tabelas_armas[arma].nome;
+        select_armas.appendChild(option);
+      }
+    }
+  }*/
+}
+
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function CarregaTabelaArmas() {
@@ -147,6 +164,7 @@ function CarregaTabelaArmas() {
     }
   }
   _PreencheArmasCorpoACorpo();
+  _PreencheArmasArremesso();
   _PreencheArmasDistancia();
 }
 
@@ -193,20 +211,33 @@ function ConverteEntradasParaPersonagem() {
   // outros campos nao presentes na entrada, como bonus final.
   personagem.armas_cac = [];
   for (var i = 0; i < entradas.armas_cac.length; ++i) {
-    var arma_personagem = {};
-    arma_personagem.nome = entradas.armas_cac[i].nome;
-    arma_personagem.obra_prima = entradas.armas_cac[i].obra_prima;
-    if (arma_personagem.obra_prima) {
-      arma_personagem.bonus_ataque = 1;
-      arma_personagem.bonus_dano = 0;
-    } else {
-      arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 
-          entradas.armas_cac[i].bonus;
-    }
-    personagem.armas_cac.push(arma_personagem);
+    personagem.armas_cac.push(_ConverteArma(entradas.armas_cac[i]));
   }
-  //personagem.armas_cac = entradas.armas_cac;
-  personagem.armas_distancia = entradas.armas_distancia;
+  personagem.armas_arremesso = [];
+  for (var i = 0; i < entradas.armas_arremesso.length; ++i) {
+    personagem.armas_arremesso.push(_ConverteArma(entradas.armas_arremesso[i]));
+  }
+  personagem.armas_distancia = [];
+  for (var i = 0; i < entradas.armas_distancia.length; ++i) {
+    personagem.armas_distancia.push(_ConverteArma(entradas.armas_distancia[i]));
+  }
+
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
+}
+
+// Converte uma arma da entrada para personagem.
+// @return a arma convertida.
+function _ConverteArma(arma_entrada) {
+  var arma_personagem = {};
+  arma_personagem.nome = arma_entrada.nome;
+  arma_personagem.obra_prima = arma_entrada.obra_prima;
+  if (arma_personagem.obra_prima) {
+    arma_personagem.bonus_ataque = 1;
+    arma_personagem.bonus_dano = 0;
+  } else {
+    arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 
+        arma_entrada.bonus;
+  }
+  return arma_personagem;
 }

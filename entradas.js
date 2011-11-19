@@ -23,6 +23,7 @@ var entradas = {
   carisma: 10,
   // equipamentos.
   armas_cac: [ { nome: '', obra_prima: false, bonus: 0 }, ],
+  armas_arremesso: [ { nome: '', obra_prima: false, bonus: 0 }, ],
   armas_distancia: [ { nome: '', obra_prima: false, bonus: 0 }, ],
   armadura: { nome: '', bonus_magico: 0 },
   escudo: { nome: '', bonus_magico: 0 },
@@ -68,6 +69,7 @@ function LeEntradas() {
     }
   }
   // Armas.
+  // Corpo a corpo.
   entradas.armas_cac[0].nome =
       ValorSelecionado(goog.dom.getElement(ARMA_CORPO_A_CORPO + "-0"));
   entradas.armas_cac[0].obra_prima =
@@ -80,10 +82,17 @@ function LeEntradas() {
   }
   goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO + "-0").disabled = 
       entradas.armas_cac[0].obra_prima;
-  entradas.armas_distancia[0].nome =
-      ValorSelecionado(goog.dom.getElement(ARMA_DISTANCIA + "-0"));
-  entradas.armas_distancia[0].bonus =
-      parseInt(goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value) || 0;
+  // Distancia.
+  // Arremesso.
+  entradas.armas_arremesso[0].nome =
+      ValorSelecionado(goog.dom.getElement(ARMA_ARREMESSO + "-0"));
+  entradas.armas_arremesso[0].bonus =
+      parseInt(goog.dom.getElement(BONUS_ARMA_ARREMESSO + "-0").value) || 0;
+  // Projetil.
+  //entradas.armas_distancia[0].nome =
+  //    ValorSelecionado(goog.dom.getElement(ARMA_DISTANCIA + "-0"));
+  //entradas.armas_distancia[0].bonus =
+  //    parseInt(goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value) || 0;
 
   // Armadura e escudo.
   entradas.armadura.nome = 
@@ -136,8 +145,12 @@ function EscreveEntradas() {
     entradas.armas_cac[0].obra_prima;
   goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO + "-0").value = entradas.armas_cac[0].bonus;
   // distancia.
-  SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_DISTANCIA + "-0"));
-  goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value = entradas.armas_distancia[0].bonus;
+  // Arremesso.
+  SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_ARREMESSO + "-0"));
+  goog.dom.getElement(BONUS_ARMA_ARREMESSO + "-0").value = entradas.armas_distancia[0].bonus;
+  // Projetil.
+  //SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_DISTANCIA + "-0"));
+  //goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value = entradas.armas_distancia[0].bonus;
   // Armadura e escudo.
   SelecionaValor(entradas.armadura.nome, 
                  goog.dom.getElement(ARMADURA)); 
