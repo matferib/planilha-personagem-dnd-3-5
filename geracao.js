@@ -1,17 +1,35 @@
 // Gera os pontos de vida do personagem de acordo com as classes.
-// TODO personagens elite recebem maximo no primeiro nivel.
-function GeraPontosDeVida() {
+// @param modo pode ser elite, comum, personagem.
+function GeraPontosDeVida(modo) {
+  if (modo != 'personagem' && modo != 'elite' && modo != 'comum') {
+    alert('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
+    return;
+  }
   // Para cada classe, rolar o dado.
   var total_pontos_vida = 0;
+  // Primeiro hit die eh maximo na elite.
+  var primeiro_maximo = (modo == 'elite') ? true : false;
   for (var i = 0; i < personagem.classes.length; ++i) {
     var info_classe = personagem.classes[i];
     for (var j = 0; j < info_classe.nivel; ++j) {
-      total_pontos_vida += 
-        Math.floor((Math.random() * tabelas_dados_vida[info_classe.classe])) + 1;
+      if (primeiro_maximo) {
+        total_pontos_vida += tabelas_dados_vida[info_classe.classe];
+          personagem.atributos.constituicao.modificador;
+        primeiro_maximo = false;
+      } else {
+        total_pontos_vida += Rola(1, tabelas_dados_vida[info_classe.classe]);
+      }
+      total_pontos_vida += personagem.atributos.constituicao.modificador;
     }
   }
-  goog.dom.getElement(PONTOS_VIDA_TOTAL).value = 
-    total_pontos_vida;
+  // Nessa variante, eh igual ao comum exceto que o primeiro eh contituicao + dado. 
+  // Portanto, deve-se subtrair o modificador de constituicao que foi colocado e 
+  // adicionar o valor da constituicao.
+  if (modo == 'personagem') {
+    total_pontos_vida += 
+        personagem.atributos.constituicao.valor - personagem.atributos.constituicao.modificador;
+  }
+  goog.dom.getElement(PONTOS_VIDA_TOTAL).value = total_pontos_vida;
   AtualizaGeral();
 }
 

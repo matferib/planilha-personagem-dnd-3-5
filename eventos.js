@@ -61,9 +61,9 @@ function ClickGerarResumo() {
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
-// TODO personagens elite recebem maximo no primeiro nivel.
-function ClickGerarPontosDeVida() {
-  GeraPontosDeVida();
+// Ver funcao GeraPontosDeVida para modos validos.
+function ClickGerarPontosDeVida(modo) {
+  GeraPontosDeVida(modo);
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
