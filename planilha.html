@@ -18,7 +18,7 @@
 </head>
 <body onload="CarregamentoInicial()">
 
-<div id="div-geral">
+<div id="div-geral" class="divs-principais">
 Nome: <input type="text" id="nome" /><br>
 Raça: 
 <select id="raca" onchange="AtualizaGeral()">
@@ -46,7 +46,7 @@ Alinhamento:
 </select>
 <br>
 Classes:
-<button type="button" onclick="ClickAdicionaClasse()">+</button>
+<button type="button" onclick="ClickAdicionarClasse()">+</button>
 <button type="button" onclick="ClickRemoveClasse()">-</button>
 <br>
 <!-- placeholder para as classes, criado dinamicamente. -->
@@ -64,7 +64,7 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 </div>
 </div> <!-- div-geral-->
 
-<div id="div-stats">
+<div id="div-stats" class="divs-principais">
 <button onclick="ClickGerarComum()">Gerar comum</button>
 <button onclick="ClickGerarAleatorioComum()">Gerar comum aleatório (3d6)</button><br>
 <button onclick="ClickGerarElite()">Gerar elite</button>
@@ -113,16 +113,21 @@ Carisma:
 
 </div> <!-- div-stats -->
 
-<div id="div-ataque">
+<div id="div-ataque" class="divs-principais">
 Bonus Base de Ataque: <span class="bba"></span><br>
-
 Corpo a corpo: 
 <span class="bba"></span>
 <span class="forca-mod-total"></span>
 <span class="tamanho-mod-ataque-defesa"></span> = 
-<span class="bba-corpo-a-corpo"></span>
-<!--button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button--><br>
-<select id="arma-corpo-a-corpo-0" onchange="AtualizaGeral()"></select>
+<span class="bba-corpo-a-corpo"></span><br>
+Distância: 
+<span class="bba"></span>
+<span class="destreza-mod-total"></span>  
+<span class="tamanho-mod-ataque-defesa"></span> = 
+<span class="bba-distancia"></span><br>
+
+<!--button id="adicionar-arma" onclick="ClickAdicionarArma()">+</button><br-->
+<!--select id="arma-corpo-a-corpo-0" onchange="AtualizaGeral()"></select>
 <input id="arma-corpo-a-corpo-obra-prima-0" type="checkbox" onchange="AtualizaGeral()">OP</input>
 <input id="bonus-arma-corpo-a-corpo-0" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
 Ataque:
@@ -133,16 +138,10 @@ Dano:
 <span class="dano-arma-corpo-a-corpo-0"></span> 
 <span class="forca-mod-total"></span> 
 <span class="bonus-dano-arma-corpo-a-corpo-0"></span> 
-<br>
+<br-->
 
-Distância: 
-<span class="bba"></span>
-<span class="destreza-mod-total"></span>  
-<span class="tamanho-mod-ataque-defesa"></span> = 
-<span class="bba-distancia"></span>
-<!--button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button--><br>
-Arremesso:<br>
-<select id="arma-arremesso-0" onchange="AtualizaGeral()"></select>
+<!--button id="adicionar-arma-distancia" onclick="ClickAdicionarArmaDistancia()">+</button><br-->
+<!--select id="arma-arremesso-0" onchange="AtualizaGeral()"></select>
 <input id="bonus-arma-arremesso-0" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
 Ataque:
 <span class="bba-distancia"></span>
@@ -152,11 +151,10 @@ Dano:
 <span class="dano-arma-arremesso-0"></span> 
 <span class="forca-mod-total"></span> 
 <span class="bonus-dano-arma-arremesso-0"></span> 
-<br>
-
+<br-->
 </div> <!-- div-ataque -->
 
-<div id="div-defesa">
+<div id="div-defesa" class="divs-principais">
 Classe de Armadura: 
 <select id="armadura" onchange="AtualizaGeral()">
 	<option value="nenhuma">Nenhuma</option>
@@ -207,7 +205,7 @@ Toque: 10
 = <span class="ca-toque">10</span><br>
 </div> <!-- div-defesa -->
 
-<div id="div-salvacoes">
+<div id="div-salvacoes" class="divs-principais">
 Fortitude:
 	<span id="fortitude-valor-base">0</span>
  	<span class="constituicao-mod-total"></span>
@@ -227,15 +225,19 @@ Vontade:
  	<br>
 </div> <!-- div-salvacoes -->
 
-<div id="div-equipamentos">
+<div id="div-equipamentos" class="divs-principais">
 Moedas:<br>
 Platina:<input id="moedas-platina" size="5"/>
 Ouro:<input id="moedas-ouro" size="5"/> 
 Prata:<input id="moedas-prata" size="5"/>
 Cobre:<input id="moedas-cobre" size="5"/>
+Armas: <button type="button" onclick="ClickAdicionarArma()">+</button>
+<div id="div-equipamentos-armas"></div><br>
+Armaduras:<br>
+Outros Equipamentos:
 </div> <!-- div-equipamentos -->
 
-<div id="div-talentos">
+<div id="div-talentos" class="divs-principais">
 Talentos: 
 <span class="talentos-total"></span> = 
 <span class="talentos-nivel"></span>
@@ -243,13 +245,10 @@ Talentos:
 <span class="talentos-classe"></span>
 </div> <!-- div-talentos -->
 
-<div id="div-pericias">
+<div id="div-pericias" class="divs-principais">
 Pericias:
 </div> <!-- div-pericias -->
 
-<div id="equipamentos">
-Outros Equipamentos:
-</div> <!-- div-equipamentos -->
 
 <div id="div-salvar">
 <button onclick="ClickSalvar()">Salvar</button>

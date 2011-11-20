@@ -22,9 +22,12 @@ var entradas = {
   sabedoria: 10,
   carisma: 10,
   // equipamentos.
-  armas_cac: [ { nome: '', obra_prima: false, bonus: 0 }, ],
+  /*armas_cac: [ { nome: '', obra_prima: false, bonus: 0 }, ],
   armas_arremesso: [ { nome: '', obra_prima: false, bonus: 0 }, ],
   armas_distancia: [ { nome: '', obra_prima: false, bonus: 0 }, ],
+  */
+  // Cada entrada eh do tipo: { nome: '', obra_prima: false, bonus: 0 }
+  armas: [],
   armadura: { nome: '', bonus_magico: 0 },
   escudo: { nome: '', bonus_magico: 0 },
   // moedas
@@ -70,6 +73,7 @@ function LeEntradas() {
   }
   // Armas.
   // Corpo a corpo.
+  /*
   entradas.armas_cac[0].nome =
       ValorSelecionado(goog.dom.getElement(ARMA_CORPO_A_CORPO + "-0"));
   entradas.armas_cac[0].obra_prima =
@@ -93,6 +97,7 @@ function LeEntradas() {
   //    ValorSelecionado(goog.dom.getElement(ARMA_DISTANCIA + "-0"));
   //entradas.armas_distancia[0].bonus =
   //    parseInt(goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value) || 0;
+  */
 
   // Armadura e escudo.
   entradas.armadura.nome = 
@@ -109,6 +114,21 @@ function LeEntradas() {
   entradas.ouro = parseInt(goog.dom.getElement(MOEDAS_OURO).value);
   entradas.prata = parseInt(goog.dom.getElement(MOEDAS_PRATA).value);
   entradas.cobre = parseInt(goog.dom.getElement(MOEDAS_COBRE).value);
+
+  // Equipamentos.
+  // Armas: Este div possui divs filhos com select, checkbox, input
+  var div_armas = goog.dom.getElement('div-equipamentos-armas');
+  for (var i = 0; i < div_armas.childNotes.length; ++i) {
+    var div_arma = div_armas.childNotes[i];
+    for (var j = 0; j < div_arma.childNodes.length; ++j) {
+      var filho = div_arma.childNodes[j];
+      if (filho.tagName == 'SELECT') {
+        // TODO equipamentos
+      } else if (filho.tagName == 'INPUT') {
+        // TODO equipamentos
+      }
+    }
+  }
 }
 
 // Escreve todos os inputs com os valores de 'entradas'.
@@ -138,6 +158,7 @@ function EscreveEntradas() {
       elemento.value = entradas[elemento.name];
     }
   }
+  /*
   // Armas.
   // cac.
   SelecionaValor(entradas.armas_cac[0].nome, goog.dom.getElement(ARMA_CORPO_A_CORPO + "-0"));
@@ -151,6 +172,7 @@ function EscreveEntradas() {
   // Projetil.
   //SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_DISTANCIA + "-0"));
   //goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value = entradas.armas_distancia[0].bonus;
+  */
   // Armadura e escudo.
   SelecionaValor(entradas.armadura.nome, 
                  goog.dom.getElement(ARMADURA)); 

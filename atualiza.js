@@ -123,6 +123,7 @@ function _AtualizaAtaque() {
   ImprimeSinalizado(
       personagem.bba_cac,
       goog.dom.getElementsByClass(BBA_CORPO_A_CORPO));
+  /*
   // Armas corpo a corpo.
   for (var i = 0; i < personagem.armas_cac.length; ++i) {
     // Ataque.
@@ -147,6 +148,7 @@ function _AtualizaAtaque() {
         personagem.armas_cac[i].bonus_dano,
         goog.dom.getElementsByClass(BONUS_DANO_ARMA_CORPO_A_CORPO + "-" + i));
   }
+  */
 
   // Distancia.
   personagem.bba_distancia = 
@@ -155,6 +157,7 @@ function _AtualizaAtaque() {
   ImprimeSinalizado(
       personagem.bba_distancia,
       goog.dom.getElementsByClass(BBA_DISTANCIA));
+  /*
   for (var i = 0; i < personagem.armas_distancia.length; ++i) {
     // Arremesso.
     // Ataque.
@@ -179,6 +182,7 @@ function _AtualizaAtaque() {
         personagem.armas_arremesso[i].bonus_dano,
         goog.dom.getElementsByClass(BONUS_DANO_ARMA_CORPO_A_CORPO + "-" + i));
   }
+  */
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.

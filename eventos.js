@@ -21,7 +21,7 @@ function CarregamentoInicial() {
 }
 
 // Botao de adicionar classe apertado.
-function ClickAdicionaClasse() {
+function ClickAdicionarClasse() {
 	var classes_desabilitadas = [];
 	//for (var i = 0; i < personagem.classes.length; ++i) {
 	//	classes_desabilitadas.push(personagem.classes[i].classe);
@@ -86,7 +86,9 @@ function ClickGerarComum() {
   GeraComum();
 }
 
-function ClickAdicionarArma() {
+// Adiciona uma arma a lista de equipamentos.
+function ClickAdicionarArma(arma) {
+  AdicionaArma(arma);
 }
 
 function ClickAdicionarArmaDistancia() {

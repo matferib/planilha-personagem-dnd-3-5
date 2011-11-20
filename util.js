@@ -109,6 +109,7 @@ function RemoveClasse() {
 
 // Preenche select de armas corpo a corpo. 
 function _PreencheArmasCorpoACorpo() {
+  /*
   for (var i = 0; i < entradas.armas_cac.length; ++i) {
     var select_armas = goog.dom.getElement(ARMA_CORPO_A_CORPO + "-" + i);
     for (var arma in tabelas_armas) {
@@ -120,10 +121,12 @@ function _PreencheArmasCorpoACorpo() {
 		  select_armas.appendChild(option);
     }
   }
+  */
 }
 
 // Preenche select de armas a distancia. 
 function _PreencheArmasArremesso() {
+  /*
   for (var i = 0; i < entradas.armas_distancia.length; ++i) {
     var select_armas = goog.dom.getElement(ARMA_ARREMESSO + "-" + i);
     for (var arma in tabelas_armas) {
@@ -136,6 +139,7 @@ function _PreencheArmasArremesso() {
       }
     }
   }
+  */
 }
 
 // Preenche select de armas a distancia. 
@@ -209,6 +213,7 @@ function ConverteEntradasParaPersonagem() {
   }
   // As armas tem que ser copiadas porque no personagem sao adicionados
   // outros campos nao presentes na entrada, como bonus final.
+  /*
   personagem.armas_cac = [];
   for (var i = 0; i < entradas.armas_cac.length; ++i) {
     personagem.armas_cac.push(_ConverteArma(entradas.armas_cac[i]));
@@ -221,6 +226,7 @@ function ConverteEntradasParaPersonagem() {
   for (var i = 0; i < entradas.armas_distancia.length; ++i) {
     personagem.armas_distancia.push(_ConverteArma(entradas.armas_distancia[i]));
   }
+  */
 
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
@@ -228,7 +234,7 @@ function ConverteEntradasParaPersonagem() {
 
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
-function _ConverteArma(arma_entrada) {
+/*function _ConverteArma(arma_entrada) {
   var arma_personagem = {};
   arma_personagem.nome = arma_entrada.nome;
   arma_personagem.obra_prima = arma_entrada.obra_prima;
@@ -240,4 +246,43 @@ function _ConverteArma(arma_entrada) {
         arma_entrada.bonus;
   }
   return arma_personagem;
+}*/
+
+// Adiciona uma nova arma a lista de equipamentos.
+// @param arma nome da arma sendo adicionada, null para nenhum.
+function AdicionaArma(arma) {
+	var select = document.createElement('select');
+	select.setAttribute('name', 'arma');
+	select.setAttribute('onchange', 'AtualizaGeral()');
+	for (var arma_corrente in tabelas_armas) {
+		var option = document.createElement('option');
+		option.setAttribute('name', arma_corrente);
+		option.setAttribute('value', arma_corrente);
+		option.selected = (arma_corrente == arma);
+		option.innerText = tabelas_armas[arma_corrente].nome;
+		select.appendChild(option);
+	}
+  var span_obra_prima = document.createElement('span');
+  span_obra_prima.innerText = " OP";
+
+  var input_obra_prima = document.createElement('input');
+	input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
+  input_obra_prima.setAttribute('type', "checkbox");
+
+	var input_bonus = document.createElement('input');
+  input_bonus.setAttribute('type', "text");
+  input_bonus.setAttribute('maxlength', 2);
+  input_bonus.setAttribute('size', 2);
+
+  var div = document.createElement('div');
+  div.appendChild(select);
+  div.appendChild(span_obra_prima);
+  div.appendChild(input_obra_prima);
+  div.appendChild(input_bonus);
+	goog.dom.getElement("div-equipamentos-armas").appendChild(div);
 }
+
+// Remove a arma selecionada.
+function RemoveArma() {
+}
+

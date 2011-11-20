@@ -1,30 +1,24 @@
 /* CSS da planilha. */
-div#div-geral {
+/* os divs principais da planilha. */
+div.divs-principais {
 background-color: #D8D8D8;
 padding: 7px;
+}
+
+div#div-geral {
 }
 
 div#div-stats {
-background-color: #D8D8D8;
-padding: 7px;
 }
 
 div#div-ataque {
-background-color: #D8D8D8;
-padding: 7px;
 }
 
 div#div-defesa {
-background-color: #D8D8D8;
-padding: 7px;
 }
 
 div#div-equipamentos {
-background-color: #D8D8D8;
-padding: 7px;
 }
 
 div#div-salvacoes {
-background-color: #D8D8D8;
-padding: 7px;
 }
