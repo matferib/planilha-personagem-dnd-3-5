@@ -7,27 +7,31 @@ function GeraPontosDeVida(modo) {
   }
   // Para cada classe, rolar o dado.
   var total_pontos_vida = 0;
-  // Primeiro hit die eh maximo na elite.
-  var primeiro_maximo = (modo == 'elite') ? true : false;
+  // Primeiro eh diferente na elite e personagem.
+  var primeiro = (modo == 'comum') ? false : true;
   for (var i = 0; i < personagem.classes.length; ++i) {
     var info_classe = personagem.classes[i];
     for (var j = 0; j < info_classe.nivel; ++j) {
-      if (primeiro_maximo) {
-        total_pontos_vida += tabelas_dados_vida[info_classe.classe];
-          personagem.atributos.constituicao.modificador;
-        primeiro_maximo = false;
+      var pontos_vida_nivel = 0;
+      if (primeiro) {
+        if (modo == 'elite') {
+          pontos_vida_nivel = tabelas_dados_vida[info_classe.classe] +
+              personagem.atributos.constituicao.modificador;
+        } else {
+          pontos_vida_nivel = Rola(1, tabelas_dados_vida[info_classe.classe]) +
+              personagem.atributos.constituicao.valor;
+        }
+        primeiro= false;
       } else {
-        total_pontos_vida += Rola(1, tabelas_dados_vida[info_classe.classe]);
+        pontos_vida_nivel = Rola(1, tabelas_dados_vida[info_classe.classe]) +
+            personagem.atributos.constituicao.modificador;
       }
-      total_pontos_vida += personagem.atributos.constituicao.modificador;
+      // Nunca pode ganhar menos de 1 ponto por nivel.
+      if (pontos_vida_nivel < 1) {
+        pontos_vida_nivel = 1;
+      }
+      total_pontos_vida += pontos_vida_nivel;
     }
-  }
-  // Nessa variante, eh igual ao comum exceto que o primeiro eh contituicao + dado. 
-  // Portanto, deve-se subtrair o modificador de constituicao que foi colocado e 
-  // adicionar o valor da constituicao.
-  if (modo == 'personagem') {
-    total_pontos_vida += 
-        personagem.atributos.constituicao.valor - personagem.atributos.constituicao.modificador;
   }
   goog.dom.getElement(PONTOS_VIDA_TOTAL).value = total_pontos_vida;
   AtualizaGeral();
