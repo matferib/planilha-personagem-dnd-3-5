@@ -118,7 +118,7 @@ function LeEntradas() {
   // Equipamentos.
   // Armas: Este div possui divs filhos com select, checkbox, input
   var div_armas = goog.dom.getElement('div-equipamentos-armas');
-  for (var i = 0; i < div_armas.childNotes.length; ++i) {
+  for (var i = 0; i < div_armas.childNodes.length; ++i) {
     var div_arma = div_armas.childNotes[i];
     for (var j = 0; j < div_arma.childNodes.length; ++j) {
       var filho = div_arma.childNodes[j];
