@@ -71,44 +71,6 @@ function Rola(numero, limite) {
   return resultado;
 }
 
-// Passa os valoes da entrada para o personagem.
-function ConverteEntradasParaPersonagem() {
-  personagem.nome = entradas.nome;
-  personagem.raca = entradas.raca;
-  personagem.alinhamento = entradas.alinhamento;
-  personagem.classes = entradas.classes;
-  personagem.pontos_vida.total = entradas.pontos_vida;
-  personagem.pontos_vida.ferimentos = entradas.ferimentos;
-  for (var atributo in personagem.atributos) {
-    personagem.atributos[atributo].valor = entradas[atributo];
-  }
-
-  personagem.armadura = entradas.armadura;
-  personagem.escudo = entradas.escudo;
-  personagem.armas = [];
-  for (var i = 0; i < entradas.armas.length; ++i) {
-    personagem.armas.push(_ConverteArma(entradas.armas[i]));
-  }
-}
-
-// Converte uma arma da entrada para personagem.
-// @return a arma convertida.
-function _ConverteArma(arma_entrada) {
-  var arma_personagem = {};
-  arma_personagem.nome = arma_entrada.nome;
-  arma_personagem.nome_gerado = arma_entrada.nome;
-  if (arma_personagem.obra_prima) {
-    arma_personagem.bonus_ataque = 1;
-    arma_personagem.bonus_dano = 0;
-    arma_personagem.nome_gerado += ' OP';
-  } else {
-    arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 
-        arma_entrada.bonus;
-    arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
-  }
-  return arma_personagem;
-}
-
 // Gera um identificador unico para o filho de um elemento.
 function GeraId(prefixo, elemento) {
   return prefixo + '-' + elemento.childNodes.length;
@@ -116,5 +78,3 @@ function GeraId(prefixo, elemento) {
   //for (var i = 0; i < elemento.childNodes.length; ++i) {
   //}
 }
-
-

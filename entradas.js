@@ -69,33 +69,6 @@ function LeEntradas() {
       entradas[elemento.name] = parseInt(elemento.value);
     }
   }
-  // Armas.
-  // Corpo a corpo.
-  /*
-  entradas.armas_cac[0].nome =
-      ValorSelecionado(goog.dom.getElement(ARMA_CORPO_A_CORPO + "-0"));
-  entradas.armas_cac[0].obra_prima =
-      goog.dom.getElement(ARMA_CORPO_A_CORPO_OBRA_PRIMA + "-0").checked;
-  if (entradas.armas_cac[0].obra_prima) {
-    entradas.armas_cac[0].bonus = 0;
-  } else {
-    entradas.armas_cac[0].bonus =
-        parseInt(goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO + "-0").value) || 0;
-  }
-  goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO + "-0").disabled = 
-      entradas.armas_cac[0].obra_prima;
-  // Distancia.
-  // Arremesso.
-  entradas.armas_arremesso[0].nome =
-      ValorSelecionado(goog.dom.getElement(ARMA_ARREMESSO + "-0"));
-  entradas.armas_arremesso[0].bonus =
-      parseInt(goog.dom.getElement(BONUS_ARMA_ARREMESSO + "-0").value) || 0;
-  // Projetil.
-  //entradas.armas_distancia[0].nome =
-  //    ValorSelecionado(goog.dom.getElement(ARMA_DISTANCIA + "-0"));
-  //entradas.armas_distancia[0].bonus =
-  //    parseInt(goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value) || 0;
-  */
 
   // Armadura e escudo.
   entradas.armadura.nome = 
