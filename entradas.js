@@ -21,6 +21,8 @@ var entradas = {
   inteligencia: 10,
   sabedoria: 10,
   carisma: 10,
+  // Estilos de luta: { tipo, principal, secundaria }
+  estilos_luta: [],
   // moedas
   platina: 0,
   ouro: 0,

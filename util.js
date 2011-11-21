@@ -33,132 +33,6 @@ function ImprimeNaoSinalizado(valor, dom) {
 	}
 }
 
-// Adiciona uma nova classe na planilha. 
-// Parametros sao todos opcionais.
-// Classe padrao: guerreiro.
-// Nivel padrao: 1.
-function AdicionaClasse(classes_desabilitadas, classe, nivel) {
-	if (!classes_desabilitadas) {
-		classes_desabilitadas = [];
-	}
-	if (!nivel) {
-		nivel = 1;
-	}
-	if (!classe) {
-		classe = "guerreiro";
-	}
-	var select_classe = document.createElement('select');
-	select_classe.setAttribute('name', 'classe');
-	select_classe.setAttribute('onchange', 'AtualizaGeral()');
-	var classes = [
-		{nome: "barbaro", texto: "Bárbaro"},
-		{nome: "bardo", texto: "Bardo"},
-	  {nome: "clerigo", texto: "Clérigo"},
-		{nome: "guerreiro", texto: "Guerreiro"},
-		{nome: "feiticeiro", texto: "Feiticeiro"},
-		{nome: "ladino", texto: "Ladino"},
-		{nome: "mago", texto: "Mago"},
-		{nome: "paladino", texto: "Paladino"},
-		{nome: "adepto", texto: "Adepto (NPC)"},
-		{nome: "aristocrata", texto: "Aristocrata (NPC)"},
-		{nome: "combatente", texto: "Combatente (NPC)"},
-		{nome: "expert", texto: "Expert (NPC)"},
-		{nome: "plebeu", texto: "Plebeu (NPC)"},
-	];
-	for (var i = 0; i < classes.length; ++i) {
-		var option = document.createElement('option');
-		option.setAttribute('name', classes[i].nome);
-		option.setAttribute('value', classes[i].nome);
-		option.selected = (classes[i].nome == classe);
-		option.innerText = classes[i].texto;
-		var desabilitar_classe = false;
-		for (var j = 0; j < classes_desabilitadas.length; ++j) {
-			if (classes[i].nome == classes_desabilitadas[j]) {
-				desabilitar_classe = true;
-				break;
-			}
-		}
-		option.disabled = desabilitar_classe;
-		select_classe.appendChild(option);
-	}
-	var span_nivel = document.createElement('span');
-	span_nivel.innerText = "Nível: ";
-	var input_nivel = document.createElement('input');
-	input_nivel.type = 'text';
-	input_nivel.name = 'nivel';
-	input_nivel.maxLength = input_nivel.size = 2;
-	input_nivel.setAttribute('onchange', 'AtualizaGeral()');
-	input_nivel.value = nivel;
-	var br_nivel = document.createElement('br');
-
-	var div = document.createElement('div');
-	div.setAttribute('class', 'classe');
-	div.appendChild(select_classe);
-	div.appendChild(span_nivel);
-	div.appendChild(input_nivel);
-	div.appendChild(br_nivel);
-	goog.dom.getElement("classes").appendChild(div);
-}
-
-// Remove a classe mais recente do personagem.
-function RemoveClasse() {
-  var div_classes = goog.dom.getElement("classes");
-  if (div_classes.childNodes.length == 1) return;
-  div_classes.removeChild(div_classes.lastChild);
-}
-
-// Preenche select de armas corpo a corpo. 
-function _PreencheArmasCorpoACorpo() {
-  /*
-  for (var i = 0; i < entradas.armas_cac.length; ++i) {
-    var select_armas = goog.dom.getElement(ARMA_CORPO_A_CORPO + "-" + i);
-    for (var arma in tabelas_armas) {
-  		var option = document.createElement('option');
-	  	option.setAttribute('name', arma);
-		  option.setAttribute('value', arma);
-      tabelas_armas[arma].nome = arma;
-    	option.innerText = tabelas_armas[arma].nome;
-		  select_armas.appendChild(option);
-    }
-  }
-  */
-}
-
-// Preenche select de armas a distancia. 
-function _PreencheArmasArremesso() {
-  /*
-  for (var i = 0; i < entradas.armas_distancia.length; ++i) {
-    var select_armas = goog.dom.getElement(ARMA_ARREMESSO + "-" + i);
-    for (var arma in tabelas_armas) {
-      if (tabelas_armas[arma].incremento_distancia) {
-        var option = document.createElement('option');
-        option.setAttribute('name', arma);
-        option.setAttribute('value', arma);
-        option.innerText = tabelas_armas[arma].nome;
-        select_armas.appendChild(option);
-      }
-    }
-  }
-  */
-}
-
-// Preenche select de armas a distancia. 
-function _PreencheArmasDistancia() {
-  /*
-  for (var i = 0; i < entradas.armas_distancia.length; ++i) {
-    var select_armas = goog.dom.getElement(ARMA_DISTANCIA + "-" + i);
-    for (var arma in tabelas_armas) {
-      if (tabelas_armas[arma].incremento_distancia) {
-        var option = document.createElement('option');
-        option.setAttribute('name', arma);
-        option.setAttribute('value', arma);
-        option.innerText = tabelas_armas[arma].nome;
-        select_armas.appendChild(option);
-      }
-    }
-  }*/
-}
-
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function CarregaTabelaArmas() {
@@ -167,9 +41,6 @@ function CarregaTabelaArmas() {
       tabelas_armas[arma].nome = arma;
     }
   }
-  _PreencheArmasCorpoACorpo();
-  _PreencheArmasArremesso();
-  _PreencheArmasDistancia();
 }
 
 
@@ -211,82 +82,39 @@ function ConverteEntradasParaPersonagem() {
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].valor = entradas[atributo];
   }
-  // As armas tem que ser copiadas porque no personagem sao adicionados
-  // outros campos nao presentes na entrada, como bonus final.
-  /*
-  personagem.armas_cac = [];
-  for (var i = 0; i < entradas.armas_cac.length; ++i) {
-    personagem.armas_cac.push(_ConverteArma(entradas.armas_cac[i]));
-  }
-  personagem.armas_arremesso = [];
-  for (var i = 0; i < entradas.armas_arremesso.length; ++i) {
-    personagem.armas_arremesso.push(_ConverteArma(entradas.armas_arremesso[i]));
-  }
-  personagem.armas_distancia = [];
-  for (var i = 0; i < entradas.armas_distancia.length; ++i) {
-    personagem.armas_distancia.push(_ConverteArma(entradas.armas_distancia[i]));
-  }
-  */
 
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
+  personagem.armas = [];
+  for (var i = 0; i < entradas.armas.length; ++i) {
+    personagem.armas.push(_ConverteArma(entradas.armas[i]));
+  }
 }
 
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
-/*function _ConverteArma(arma_entrada) {
+function _ConverteArma(arma_entrada) {
   var arma_personagem = {};
   arma_personagem.nome = arma_entrada.nome;
-  arma_personagem.obra_prima = arma_entrada.obra_prima;
+  arma_personagem.nome_gerado = arma_entrada.nome;
   if (arma_personagem.obra_prima) {
     arma_personagem.bonus_ataque = 1;
     arma_personagem.bonus_dano = 0;
+    arma_personagem.nome_gerado += ' OP';
   } else {
     arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 
         arma_entrada.bonus;
+    arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
   }
   return arma_personagem;
-}*/
-
-// Adiciona uma nova arma a lista de equipamentos. Todos parametros sao opcionais.
-// @param arma opcional nome da arma sendo adicionada.
-// @param obra_prima indica se a arma eh obra_prima.
-// @param bonus da arma.
-function AdicionaArma(arma, obra_prima, bonus) {
-	var select = document.createElement('select');
-	select.setAttribute('name', 'arma');
-	select.setAttribute('onchange', 'AtualizaGeral()');
-	for (var arma_corrente in tabelas_armas) {
-		var option = document.createElement('option');
-		option.setAttribute('name', arma_corrente);
-		option.setAttribute('value', arma_corrente);
-		option.selected = (arma_corrente == arma);
-		option.innerText = tabelas_armas[arma_corrente].nome;
-		select.appendChild(option);
-	}
-  var span_obra_prima = document.createElement('span');
-  span_obra_prima.innerText = " OP";
-
-  var input_obra_prima = document.createElement('input');
-	input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
-  input_obra_prima.setAttribute('type', "checkbox");
-  input_obra_prima.checked = obra_prima;
-
-	var input_bonus = document.createElement('input');
-  input_bonus.setAttribute('type', "text");
-  input_bonus.setAttribute('maxlength', 2);
-  input_bonus.setAttribute('size', 2);
-  input_bonus.value = bonus || 0;
-
-  var div = document.createElement('div');
-  div.appendChild(select);
-  div.appendChild(span_obra_prima);
-  div.appendChild(input_obra_prima);
-  div.appendChild(input_bonus);
-	goog.dom.getElement("div-equipamentos-armas").appendChild(div);
 }
 
-// Remove a arma selecionada.
-function RemoveArma() {
+// Gera um identificador unico para o filho de um elemento.
+function GeraId(prefixo, elemento) {
+  return prefixo + '-' + elemento.childNodes.length;
+  // TODO
+  //for (var i = 0; i < elemento.childNodes.length; ++i) {
+  //}
 }
+
 

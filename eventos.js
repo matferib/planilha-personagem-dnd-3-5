@@ -57,39 +57,54 @@ function ClickGerarResumo() {
     resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
   }
 	goog.dom.getElement("resumo-personagem").innerHTML = resumo; 
-
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
 // Ver funcao GeraPontosDeVida para modos validos.
 function ClickGerarPontosDeVida(modo) {
   GeraPontosDeVida(modo);
+	AtualizaGeral();
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
 function ClickGerarAleatorioComum() {
   GeraAleatorioComum();
+	AtualizaGeral();
 }
 
 // Gera os atributos do personagem rolando 4d6 menos o menor.
 function ClickGerarAleatorioElite() {
   GeraAleatorioElite();
+	AtualizaGeral();
 }
 
 // Gera os atributos do personagem usando o 'elite array'. Usa a primeira classe.
 function ClickGerarElite() {
   GeraElite();
+	AtualizaGeral();
 }
 
 // Gera os atributos do personagem usando o 'non elite array'. Usa a primeira classe.
 function ClickGerarComum() {
   GeraComum();
+	AtualizaGeral();
 }
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma(arma) {
   AdicionaArma(arma);
+  AtualizaGeral();
 }
 
-function ClickAdicionarArmaDistancia() {
+// Remove uma arma especifica da lista de equipamentos. 
+function ClickRemoverArma(id_div_arma) {
+  RemoveArma(id_div_arma);
+  AtualizaGeral();
 }
+
+// Evento para adicionar um novo estilo de luta.
+function ClickAdicionarEstiloLuta(estilo, arma_principal, secundaria) {
+  AdicionaEstilo(estilo, arma_principal, secundaria);
+  AtualizaGeral();
+}
+

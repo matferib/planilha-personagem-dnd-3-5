@@ -34,7 +34,6 @@ function GeraPontosDeVida(modo) {
     }
   }
   goog.dom.getElement(PONTOS_VIDA_TOTAL).value = total_pontos_vida;
-  AtualizaGeral();
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
@@ -43,7 +42,6 @@ function GeraAleatorioComum() {
   for (var i = 0; i < atributos.length; ++i) {
     goog.dom.getElement(atributos[i] + VALOR_BASE).value = Rola(3, 6);
   }
-  AtualizaGeral();
 }
 
 // Gera os atributos do personagem rolando 4d6 menos o menor.
@@ -63,7 +61,6 @@ function GeraAleatorioElite() {
     }
     goog.dom.getElement(atributos[i] + VALOR_BASE).value = total - menor;
   }
-  AtualizaGeral();
 }
 
 // Tabelados, valores eh um array de valores a serem usados.
@@ -82,8 +79,6 @@ function _GeraTabelado(valores) {
   for (var i = 0; i < valores.length; ++i) {
     goog.dom.getElement(tabelas_geracao_atributos[primeira_classe.classe][i]  + VALOR_BASE).value = valores[i];
   }
-  AtualizaGeral();
-
 }
 
 // Gera os atributos do personagem usando o 'elite array'. Usa a primeira classe.

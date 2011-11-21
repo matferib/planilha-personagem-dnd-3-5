@@ -47,11 +47,6 @@ var personagem = {
     reflexo: 0,
     vontade: 0
   },
-  // As armas possuem  { nome, obra_prima, bonus_ataque, bonus_dano } 
-  armas_cac: [],
-  armas_arremesso: [],
-  armas_distancia: [],
-  armadura: {},
   // talentos
   talentos: {
     nivel: 0,
@@ -59,6 +54,11 @@ var personagem = {
     classe: 0,
     lista: [],
   },
+  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano };
+  // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
+  armas: [],
+  // Armadura
+  armadura: {},
 };
 
 
