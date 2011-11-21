@@ -248,9 +248,11 @@ function ConverteEntradasParaPersonagem() {
   return arma_personagem;
 }*/
 
-// Adiciona uma nova arma a lista de equipamentos.
-// @param arma nome da arma sendo adicionada, null para nenhum.
-function AdicionaArma(arma) {
+// Adiciona uma nova arma a lista de equipamentos. Todos parametros sao opcionais.
+// @param arma opcional nome da arma sendo adicionada.
+// @param obra_prima indica se a arma eh obra_prima.
+// @param bonus da arma.
+function AdicionaArma(arma, obra_prima, bonus) {
 	var select = document.createElement('select');
 	select.setAttribute('name', 'arma');
 	select.setAttribute('onchange', 'AtualizaGeral()');
@@ -268,11 +270,13 @@ function AdicionaArma(arma) {
   var input_obra_prima = document.createElement('input');
 	input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
   input_obra_prima.setAttribute('type', "checkbox");
+  input_obra_prima.checked = obra_prima;
 
 	var input_bonus = document.createElement('input');
   input_bonus.setAttribute('type', "text");
   input_bonus.setAttribute('maxlength', 2);
   input_bonus.setAttribute('size', 2);
+  input_bonus.value = bonus || 0;
 
   var div = document.createElement('div');
   div.appendChild(select);

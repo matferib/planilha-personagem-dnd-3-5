@@ -21,20 +21,16 @@ var entradas = {
   inteligencia: 10,
   sabedoria: 10,
   carisma: 10,
-  // equipamentos.
-  /*armas_cac: [ { nome: '', obra_prima: false, bonus: 0 }, ],
-  armas_arremesso: [ { nome: '', obra_prima: false, bonus: 0 }, ],
-  armas_distancia: [ { nome: '', obra_prima: false, bonus: 0 }, ],
-  */
-  // Cada entrada eh do tipo: { nome: '', obra_prima: false, bonus: 0 }
-  armas: [],
-  armadura: { nome: '', bonus_magico: 0 },
-  escudo: { nome: '', bonus_magico: 0 },
   // moedas
   platina: 0,
   ouro: 0,
   prata: 0,
   cobre: 0,
+  // equipamentos.
+  // Cada entrada eh do tipo: { nome: '', obra_prima: false, bonus: 0 }
+  armas: [],
+  armadura: { nome: '', bonus_magico: 0 },
+  escudo: { nome: '', bonus_magico: 0 },
 };
 
 // Le todos os inputs da planilha e armazena em 'entradas'. 
@@ -117,18 +113,29 @@ function LeEntradas() {
 
   // Equipamentos.
   // Armas: Este div possui divs filhos com select, checkbox, input
+  entradas.armas = [];
   var div_armas = goog.dom.getElement('div-equipamentos-armas');
   for (var i = 0; i < div_armas.childNodes.length; ++i) {
-    var div_arma = div_armas.childNotes[i];
-    for (var j = 0; j < div_arma.childNodes.length; ++j) {
-      var filho = div_arma.childNodes[j];
-      if (filho.tagName == 'SELECT') {
-        // TODO equipamentos
-      } else if (filho.tagName == 'INPUT') {
-        // TODO equipamentos
+    entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
+  }
+}
+
+// Le uma arma de seu div.
+function _LeEntradaArma(div_arma) {
+  var arma_lida = {};
+  for (var i = 0; i < div_arma.childNodes.length; ++i) {
+    var filho = div_arma.childNodes[i];
+    if (filho.tagName == 'SELECT') {
+      arma_lida.nome = ValorSelecionado(filho);
+    } else if (filho.tagName == 'INPUT') {
+      if (filho.type == 'checkbox') {
+        arma_lida.obra_prima = filho.checked;
+      } else {
+        arma_lida.bonus = parseInt(filho.value) || 0;
       }
     }
   }
+  return arma_lida;
 }
 
 // Escreve todos os inputs com os valores de 'entradas'.
@@ -188,5 +195,11 @@ function EscreveEntradas() {
   goog.dom.getElement(MOEDAS_OURO).value = entradas.ouro;
   goog.dom.getElement(MOEDAS_PRATA).value = entradas.prata;
   goog.dom.getElement(MOEDAS_COBRE).value = entradas.cobre;
+  // Equipamentos.
+  // Armas.
+  for (var i = 0; i < entradas.armas.length; ++i) {
+    var arma = entradas.armas[i];
+    AdicionaArma(arma.nome, arma.obra_prima, arma.bonus);
+  }
 }
 
