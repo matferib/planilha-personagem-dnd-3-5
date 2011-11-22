@@ -72,9 +72,24 @@ function Rola(numero, limite) {
 }
 
 // Gera um identificador unico para o filho de um elemento.
+// @return prefixo-id, onde nenhum outro filho do elemento possui
+// identificador igual.
 function GeraId(prefixo, elemento) {
-  return prefixo + '-' + elemento.childNodes.length;
-  // TODO
-  //for (var i = 0; i < elemento.childNodes.length; ++i) {
-  //}
+  //return prefixo + '-' + elemento.childNodes.length;
+  var id = 0;
+  while (true) {
+    var tentativa = prefixo + '-' + id;
+    var encontrou_igual = false;
+    for (var i = 0; i < elemento.childNodes.length; ++i) {
+      var filho = elemento.childNodes[i];
+      if (filho.id && filho.id.indexOf(tentativa) != -1) {
+        encontrou_igual = true;
+      }
+    }
+    if (encontrou_igual) {
+      ++id;
+    } else {
+      return tentativa;
+    }
+  }
 }

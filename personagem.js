@@ -79,6 +79,7 @@ function ConverteEntradasParaPersonagem() {
   for (var i = 0; i < entradas.armas.length; ++i) {
     personagem.armas.push(_ConverteArma(entradas.armas[i]));
   }
+
 }
 
 // Converte uma arma da entrada para personagem.
