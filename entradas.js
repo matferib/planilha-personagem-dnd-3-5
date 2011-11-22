@@ -21,7 +21,7 @@ var entradas = {
   inteligencia: 10,
   sabedoria: 10,
   carisma: 10,
-  // Estilos de luta: { tipo, principal, secundaria }
+  // Cada entrada: { nome, arma_principal, arma_secundaria}.
   estilos_luta: [],
   // moedas
   platina: 0,
@@ -70,6 +70,13 @@ function LeEntradas() {
     }
   }
 
+  // Estilos de luta.
+  entradas.estilos_luta = [];
+  var div_estilos_luta = goog.dom.getElement('div-estilos-luta');
+  for (var i = 0; i < div_estilos_luta.childNodes.length; ++i) {
+    entradas.estilos_luta.push(_LeEntradaEstiloLuta(div_estilos_luta.childNodes[i]));
+  }
+
   // Armadura e escudo.
   entradas.armadura.nome = 
       ValorSelecionado(goog.dom.getElement(ARMADURA)); 
@@ -96,6 +103,7 @@ function LeEntradas() {
 }
 
 // Le uma arma de seu div.
+// @return a arma lida.
 function _LeEntradaArma(div_arma) {
   var arma_lida = {};
   for (var i = 0; i < div_arma.childNodes.length; ++i) {
@@ -113,25 +121,51 @@ function _LeEntradaArma(div_arma) {
   return arma_lida;
 }
 
+// @return a arma lida.
+function _LeEntradaEstiloLuta(div_estilo_luta) {
+  var estilo = {};
+  for (var i = 0; i < div_estilo_luta.childNodes.length; ++i) {
+    var filho = div_estilo_luta.childNodes[i];
+    if (filho.tagName == 'INPUT') {
+      if (filho.checked) {
+        estilo.nome = filho.nome; 
+      }
+    } else if (filho.tagName == 'SELECT') {
+      if (filho.id.indexOf('primario') != -1) {
+        estilo.arma_primaria = ValorSelecionado(filho);
+      } else {
+        estilo.arma_secundaria = ValorSelecionado(filho);
+      }
+    }
+  }
+  return estilo;
+}
+
 // Escreve todos os inputs com os valores de 'entradas'.
 function EscreveEntradas() {
   // nome
   goog.dom.getElement(NOME).value = entradas.nome;
+
   // raca
   SelecionaValor(entradas.raca, goog.dom.getElement(RACA));
+
   // alinhamento
   SelecionaValor(entradas.alinhamento, goog.dom.getElement(ALINHAMENTO));
+
   // classes.
   var classes_desabilitadas = [];
   for (var i = 0; i < entradas.classes.length; ++i) {
     AdicionaClasse(classes_desabilitadas, entradas.classes[i].classe, entradas.classes[i].nivel);
     //classes_desabilitadas.push(entradas.classes[i].classe);
   }
+
   // pontos de vida e ferimentos.
   goog.dom.getElement(PONTOS_VIDA_TOTAL).value = entradas.pontos_vida;
   goog.dom.getElement(FERIMENTOS).value = entradas.ferimentos;
+
   // experiencia.
   goog.dom.getElement(PONTOS_EXPERIENCIA).value = entradas.experiencia;
+
   // atributos.
   var div_atributos = goog.dom.getElement(DIV_STATS);
   for (var i = 0; i < div_atributos.childNodes.length; ++i) {
@@ -140,21 +174,14 @@ function EscreveEntradas() {
       elemento.value = entradas[elemento.name];
     }
   }
-  /*
-  // Armas.
-  // cac.
-  SelecionaValor(entradas.armas_cac[0].nome, goog.dom.getElement(ARMA_CORPO_A_CORPO + "-0"));
-  goog.dom.getElement(ARMA_CORPO_A_CORPO_OBRA_PRIMA + "-0").checked =
-    entradas.armas_cac[0].obra_prima;
-  goog.dom.getElement(BONUS_ARMA_CORPO_A_CORPO + "-0").value = entradas.armas_cac[0].bonus;
-  // distancia.
-  // Arremesso.
-  SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_ARREMESSO + "-0"));
-  goog.dom.getElement(BONUS_ARMA_ARREMESSO + "-0").value = entradas.armas_distancia[0].bonus;
-  // Projetil.
-  //SelecionaValor(entradas.armas_distancia[0].nome, goog.dom.getElement(ARMA_DISTANCIA + "-0"));
-  //goog.dom.getElement(BONUS_ARMA_DISTANCIA + "-0").value = entradas.armas_distancia[0].bonus;
-  */
+
+  // Estilos de luta.
+  goog.dom.getElement('div-estilos-luta').childNodes = [];
+  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
+    var estilo = entradas.estilos_luta[i];
+    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
+  }
+
   // Armadura e escudo.
   SelecionaValor(entradas.armadura.nome, 
                  goog.dom.getElement(ARMADURA)); 

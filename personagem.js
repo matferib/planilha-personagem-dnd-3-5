@@ -41,6 +41,8 @@ var personagem = {
   bba: 0,
   bba_cac: 0,  // inclui tamanho e forca.
   bba_distancia: 0,  // inclui tamanho e destreza.
+  // Cada entrada: { nome, arma_principal, arma_secundaria}.
+  estilos_luta: [],
   ca: { normal: 10, surpreso: 10, toque: 10 },
   salvacoes : {
     fortitude: 0,
@@ -73,6 +75,7 @@ function ConverteEntradasParaPersonagem() {
     personagem.atributos[atributo].valor = entradas[atributo];
   }
 
+  personagem.estilos_luta = entradas.estilos_luta;
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.armas = [];

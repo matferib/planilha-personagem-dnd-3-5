@@ -93,3 +93,15 @@ function GeraId(prefixo, elemento) {
     }
   }
 }
+
+// Remove o filho do pai com o id passado.
+// @param id_filho identificador do filho.
+// @param pai elemento que contem os filhos.
+function RemoveFilho(id_filho, pai) {
+  for (var i = 0; i < pai.childNodes.length; ++i) {
+    var filho = pai.childNodes[i];
+    if (filho.id == id_filho) {
+      pai.removeChild(filho);
+    }
+  }
+}

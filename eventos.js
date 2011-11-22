@@ -96,15 +96,29 @@ function ClickAdicionarArma(arma) {
   AtualizaGeral();
 }
 
-// Remove uma arma especifica da lista de equipamentos. 
-function ClickRemoverArma(id_div_arma) {
-  RemoveArma(id_div_arma);
+// Evento para adicionar um novo estilo de luta.
+function ClickAdicionarEstiloLuta() {
+  AdicionaEstiloLuta('uma_arma');
   AtualizaGeral();
 }
 
-// Evento para adicionar um novo estilo de luta.
-function ClickAdicionarEstiloLuta(estilo, arma_principal, secundaria) {
-  AdicionaEstilo(estilo, arma_principal, secundaria);
+// Remove uma arma especifica da lista de equipamentos. 
+function ClickRemoverFilho(id_filho, id_pai) {
+  RemoveFilho(id_filho, goog.dom.getElement(id_pai));
   AtualizaGeral();
+}
+
+// Trata o clique de um estilo de luta.
+// @param nome_estilo nome do estilo selecionado.
+// @param id_select_secundario id do select secundario do estilo sendo modificado.
+function ClickEstilo(nome_estilo, id_select_secundario) {
+  var select_secundario = goog.dom.getElement(id_select_secundario);
+  if (nome_estilo == 'uma_arma' || nome_estilo == 'arma_escudo') {
+    select_secundario.disabled = true;
+  } else if (nome_estilo == 'duas_armas')  {
+    select_secundario.disabled = false;
+  } else {
+    alert('Nome de estilo invalido: ' + nome_estilo);
+  }
 }
 

@@ -79,7 +79,8 @@ function RemoveClasse() {
 // @param obra_prima indica se a arma eh obra_prima.
 // @param bonus da arma.
 function AdicionaArma(arma, obra_prima, bonus) {
-  var div_armas = goog.dom.getElement("div-equipamentos-armas");
+  var id_div_equipamentos_armas = "div-equipamentos-armas";
+  var div_armas = goog.dom.getElement(id_div_equipamentos_armas);
   var id_gerado = GeraId('div-arma', div_armas);
   var select = document.createElement('select');
   select.setAttribute('name', 'arma');
@@ -109,7 +110,8 @@ function AdicionaArma(arma, obra_prima, bonus) {
 
   var button_remover = document.createElement('button');
   button_remover.setAttribute('type', 'button');
-  button_remover.setAttribute('onclick', 'ClickRemoverArma("' + id_gerado + '")');
+  button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
+        id_gerado + '", "' + id_div_equipamentos_armas + '")');
   button_remover.innerText = '-';
 
   var div = document.createElement('div');
@@ -122,42 +124,47 @@ function AdicionaArma(arma, obra_prima, bonus) {
   div_armas.appendChild(div);
 }
 
-// Remove a arma selecionada.
-// @param id_div_arma id do div da arma.
-function RemoveArma(id_div_arma) {
-  var div_armas = goog.dom.getElement("div-equipamentos-armas");
-  for (var i = 0; i < div_armas.childNodes.length; ++i) {
-    var div_arma = div_armas.childNodes[i];
-    if (div_arma.id == id_div_arma) {
-      div_armas.removeChild(div_arma);
-    }
-  }
-}
-
-// Adiciona um novo estilo de luta. Todos os parametros sao opcionais.
-// @param estilo: uma_arma, arma_escudo, duas_armas.
+// Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
+// @param nome_estilo: uma_arma, arma_escudo, duas_armas.
 // @param arma_principal nome da arma principal.
 // @param arma_secundaria nome da arma secundaria.
-function AdicionaEstilo(estilo, arma_principal, arma_secundaria) {
-  var div_estilo_luta = goog.dom.getElement('div-estilos-luta');
+function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
+  var id_div_estilos_luta = 'div-estilos-luta';
+  var div_estilos_luta = goog.dom.getElement(id_div_estilos_luta);
   var div_novo_estilo = document.createElement('div');
-  div_novo_estilo.setAttribute('class', 'div-estilo-luta');
-  var indice_estilo = entradas.estilos_luta.length;
+  var id_estilo = GeraId('id-estilo', div_estilos_luta);
+  var id_select_primario = 
+      id_estilo.replace('id-estilo', 'id-select-primario-estilo');
+  var id_select_secundario = 
+      id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
   div_novo_estilo.innerHTML = 
-      '<input type="radio" name="estilo-' + indice_estilo + '" value="uma_arma">Uma arma</input>' +
-      '<input type="radio" name="estilo-' + indice_estilo + '" value="arma_escudo">Arma + escudo</input>' +
-      '<input type="radio" name="estilo-' + indice_estilo + '" value="duas_armas">Duas armas</input><br>' +
-      'Principal: <select></select><br>' +
-      'Secundária: <select></select>';
+      '<input type="radio" name="' + id_estilo + 
+          '" value="uma_arma" onclick="ClickEstilo(\'uma_arma\', \'' + 
+          id_select_secundario + '\')" ' + 
+          (nome_estilo == null || nome_estilo == 'uma_arma' ? 'checked' : '') + '>Uma arma</input>' +
+      '<input type="radio" name="' + id_estilo + 
+          '" value="arma_escudo" onclick="ClickEstilo(\'arma_escudo\', \'' + 
+          id_select_secundario + '\')" ' + 
+          (nome_estilo == 'arma_escudo' ? 'checked' : '') + '>Arma + escudo</input>' +
+      '<input type="radio" name="' + id_estilo + 
+          '" value="duas_armas" onclick="ClickEstilo(\'duas_armas\', \'' + 
+          id_select_secundario +'\')' + 
+          (nome_estilo == 'duas_armas' ? 'checked' : '') + '">Duas armas</input>' +
+      '<button type="button" onclick="ClickRemoverFilho(\'' + 
+          id_estilo + '\',\'' + id_div_estilos_luta + '\')">-</button><br>' +
+      'Principal: <select id="' + id_select_primario + '"></select><br>' +
+      'Secundária: <select id="' + id_select_secundario + '"></select>';
+  // Popula os selects.
   for (var i = 0; i < div_novo_estilo.childNodes.length; ++i) {
     var filho = div_novo_estilo.childNodes[i];
     if (filho.tagName == 'SELECT') {
       _PopulaSelectEstilo(filho);
+      filho.disabled = 
+          filho.id == id_select_secundario && nome_estilo != 'duas_armas';
     }
   }
-  div_estilo_luta.appendChild(div_novo_estilo);
-  entradas.estilos_luta.push(
-      { estilo: estilo, arma_principal: arma_principal, arma_secundaria: arma_secundaria});
+  div_novo_estilo.id = id_estilo;
+  div_estilos_luta.appendChild(div_novo_estilo);
 }
 
 // Preenche o select passado com todas as armas equipadas.
@@ -171,4 +178,3 @@ function _PopulaSelectEstilo(select_arma) {
     select_arma.appendChild(option);
   }
 }
-

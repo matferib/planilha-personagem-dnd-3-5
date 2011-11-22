@@ -12,6 +12,7 @@ function AtualizaGeral() {
   _AtualizaModificadoresAtributos();
   _AtualizaDadosVida();
   _AtualizaAtaque();
+  _AtualizaEstilosLuta();
   _AtualizaDefesa();
   _AtualizaSalvacoes();
   _AtualizaTalentos();
@@ -123,32 +124,6 @@ function _AtualizaAtaque() {
   ImprimeSinalizado(
       personagem.bba_cac,
       goog.dom.getElementsByClass(BBA_CORPO_A_CORPO));
-  /*
-  // Armas corpo a corpo.
-  for (var i = 0; i < personagem.armas_cac.length; ++i) {
-    // Ataque.
-    // bba: ja feito.
-    // bonus-ataque-arma-corpo-a-corpo:
-    ImprimeSinalizado(
-        personagem.armas_cac[i].bonus_ataque,
-        goog.dom.getElementsByClass(BONUS_ATAQUE_ARMA_CORPO_A_CORPO + "-" + i));
-    // Final:
-    ImprimeSinalizado(
-        personagem.bba_cac + personagem.armas_cac[i].bonus_ataque,
-        goog.dom.getElementsByClass(BBA_ARMA_CORPO_A_CORPO_FINAL + "-" + i));
-
-    // Dano.
-    // dano-arma-corpo-a-corpo.
-    ImprimeNaoSinalizado(
-        tabelas_armas[personagem.armas_cac[0].nome].dano[personagem.tamanho.categoria],
-        goog.dom.getElementsByClass(DANO_ARMA_CORPO_A_CORPO + "-" + i));
-    // forca-mod-total: ja feito.
-    // bonus-dano-arma-corpo-a-corpo:
-    ImprimeSinalizado(
-        personagem.armas_cac[i].bonus_dano,
-        goog.dom.getElementsByClass(BONUS_DANO_ARMA_CORPO_A_CORPO + "-" + i));
-  }
-  */
 
   // Distancia.
   personagem.bba_distancia = 
@@ -157,32 +132,16 @@ function _AtualizaAtaque() {
   ImprimeSinalizado(
       personagem.bba_distancia,
       goog.dom.getElementsByClass(BBA_DISTANCIA));
-  /*
-  for (var i = 0; i < personagem.armas_distancia.length; ++i) {
-    // Arremesso.
-    // Ataque.
-    // bba: ja feito.
-    // bonus-ataque-arremesso:
-    ImprimeSinalizado(
-        personagem.armas_arremesso[i].bonus_ataque,
-        goog.dom.getElementsByClass(BONUS_ATAQUE_ARMA_ARREMESSO + "-" + i));
-    // Final:
-    ImprimeSinalizado(
-        personagem.bba_distancia + personagem.armas_arremesso[i].bonus_ataque,
-        goog.dom.getElementsByClass(BBA_ARMA_ARREMESSO_FINAL + "-" + i));
+}
 
-    // Dano.
-    // dano-arma-arremesso.
-    ImprimeNaoSinalizado(
-        tabelas_armas[personagem.armas_arremesso[0].nome].dano[personagem.tamanho.categoria],
-        goog.dom.getElementsByClass(DANO_ARMA_ARREMESSO + "-" + i));
-    // forca-mod-total: ja feito.
-    // bonus-dano-arma-corpo-a-corpo:
-    ImprimeSinalizado(
-        personagem.armas_arremesso[i].bonus_dano,
-        goog.dom.getElementsByClass(BONUS_DANO_ARMA_CORPO_A_CORPO + "-" + i));
+function _AtualizaEstilosLuta() {
+  var div_estilo_luta = goog.dom.getElement('div-estilos-luta'); 
+  div_estilo_luta.childNodes = [];
+  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
+    var estilo = personagem.estilos_luta[i];
+    AdicionaEstiloLuta(
+        estilo.nome_estilo, estilo.arma_primaria, estilo.arma_secundaria);
   }
-  */
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
