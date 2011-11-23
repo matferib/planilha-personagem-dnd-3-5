@@ -135,13 +135,6 @@ function _AtualizaAtaque() {
 }
 
 function _AtualizaEstilosLuta() {
-  var div_estilo_luta = goog.dom.getElement('div-estilos-luta'); 
-  div_estilo_luta.childNodes = [];
-  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
-    var estilo = personagem.estilos_luta[i];
-    AdicionaEstiloLuta(
-        estilo.nome_estilo, estilo.arma_primaria, estilo.arma_secundaria);
-  }
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.

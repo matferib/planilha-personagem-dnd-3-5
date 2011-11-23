@@ -128,7 +128,7 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
     var filho = div_estilo_luta.childNodes[i];
     if (filho.tagName == 'INPUT') {
       if (filho.checked) {
-        estilo.nome = filho.nome; 
+        estilo.nome = filho.value; 
       }
     } else if (filho.tagName == 'SELECT') {
       if (filho.id.indexOf('primario') != -1) {
@@ -175,13 +175,6 @@ function EscreveEntradas() {
     }
   }
 
-  // Estilos de luta.
-  goog.dom.getElement('div-estilos-luta').childNodes = [];
-  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
-    var estilo = entradas.estilos_luta[i];
-    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
-  }
-
   // Armadura e escudo.
   SelecionaValor(entradas.armadura.nome, 
                  goog.dom.getElement(ARMADURA)); 
@@ -202,6 +195,13 @@ function EscreveEntradas() {
   for (var i = 0; i < entradas.armas.length; ++i) {
     var arma = entradas.armas[i];
     AdicionaArma(arma.nome, arma.obra_prima, arma.bonus);
+  }
+
+  // Estilos de luta. Depende das armas.
+  goog.dom.getElement('div-estilos-luta').childNodes = [];
+  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
+    var estilo = entradas.estilos_luta[i];
+    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
   }
 }
 
