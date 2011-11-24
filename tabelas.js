@@ -53,23 +53,23 @@ var tabelas_dados_vida = {
 // Tabelas de geracao de atributos.
 var tabelas_geracao_atributos = {
   // Peguei do livro do mestre.
-  barbaro: [FORCA, DESTREZA, CONSTITUICAO, SABEDORIA, INTELIGENCIA, CARISMA ], 
-	bardo: [ CARISMA, INTELIGENCIA, DESTREZA, CONSTITUICAO, FORCA, SABEDORIA ],
-	clerigo: [ SABEDORIA, CONSTITUICAO, FORCA, CARISMA, INTELIGENCIA,  DESTREZA ],
-	druida: [ SABEDORIA, DESTREZA, CONSTITUICAO, INTELIGENCIA, FORCA, CARISMA ],
-	guerreiro: [ FORCA, CONSTITUICAO, DESTREZA, SABEDORIA, INTELIGENCIA, CARISMA ],
-	feiticeiro: [ CARISMA, DESTREZA, CONSTITUICAO, SABEDORIA, INTELIGENCIA, FORCA ],
-	ladino: [ DESTREZA, INTELIGENCIA, CONSTITUICAO, FORCA, SABEDORIA, CARISMA ],
-	mago: [ INTELIGENCIA, DESTREZA, CONSTITUICAO, SABEDORIA, FORCA, CARISMA ],
-	monge: [ SABEDORIA, FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, CARISMA ],
-	paladino: [ CARISMA, FORCA, SABEDORIA, CONSTITUICAO, INTELIGENCIA, DESTREZA ],
-	ranger: [ DESTREZA, FORCA, CONSTITUICAO, SABEDORIA, INTELIGENCIA, CARISMA ],
+  barbaro: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ], 
+	bardo: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
+	clerigo: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
+	druida: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
+	guerreiro: [ 'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
+	feiticeiro: [ 'carisma', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'forca' ],
+	ladino: [ 'destreza', 'inteligencia', 'constituicao', 'forca', 'sabedoria', 'carisma' ],
+	mago: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
+	monge: [ 'sabedoria', 'forca', 'destreza', 'constituicao', 'inteligencia', 'carisma' ],
+	paladino: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
+	ranger: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
 	// classes NPC: nao existe uma tabela para esses, coloquei o que achei mais adequado.
-	adepto: [ SABEDORIA, DESTREZA, CONSTITUICAO, INTELIGENCIA, FORCA, CARISMA ],
-	aristocrata: [ DESTREZA, INTELIGENCIA, CARISMA, FORCA, CONSTITUICAO, SABEDORIA ], // Esse ta muito ruim...
-	plebeu: [ FORCA, CONSTITUICAO, SABEDORIA, DESTREZA, INTELIGENCIA, CARISMA ],
-	expert: [ INTELIGENCIA, FORCA, DESTREZA, CONSTITUICAO, SABEDORIA, CARISMA ], // esse aqui varia de acordo com as escolhas
-	combatente: [  FORCA, CONSTITUICAO, DESTREZA, SABEDORIA, INTELIGENCIA, CARISMA ],
+	adepto: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
+	aristocrata: [ 'destreza', 'inteligencia', 'carisma', 'forca', 'constituicao', 'sabedoria' ], // Esse ta muito ruim...
+	plebeu: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
+	expert: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ], // esse aqui varia de acordo com as escolhas
+	combatente: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
 };
 
 // Tabelas de BBA.

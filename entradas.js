@@ -38,14 +38,14 @@ var entradas = {
 // Le todos os inputs da planilha e armazena em 'entradas'. 
 function LeEntradas() {
   // nome
-  entradas.nome = goog.dom.getElement(NOME).value;
+  entradas.nome = goog.dom.getElement('nome').value;
   // raca
-  entradas.raca = ValorSelecionado(goog.dom.getElement(RACA));
+  entradas.raca = ValorSelecionado(goog.dom.getElement('raca'));
   // alinhamento
-  entradas.alinhamento = ValorSelecionado(goog.dom.getElement(ALINHAMENTO));
+  entradas.alinhamento = ValorSelecionado(goog.dom.getElement('alinhamento'));
   // classes.
   entradas.classes.length = 0;
-  var div_classes = goog.dom.getElement(DIV_CLASSES);
+  var div_classes = goog.dom.getElement('classes');
   for (var i = 0; i < div_classes.childNodes.length; ++i) {
     var elemento = div_classes.childNodes[i];
     if (elemento.tagName == "DIV") {
@@ -57,12 +57,12 @@ function LeEntradas() {
     }
   }
   // pontos de vida e ferimentos.
-  entradas.pontos_vida = parseInt(goog.dom.getElement(PONTOS_VIDA_TOTAL).value) || 0;
-  entradas.ferimentos = parseInt(goog.dom.getElement(FERIMENTOS).value) || 0;
+  entradas.pontos_vida = parseInt(goog.dom.getElement('pontos-vida-total').value) || 0;
+  entradas.ferimentos = parseInt(goog.dom.getElement('ferimentos').value) || 0;
   // Experiencia.
-  entradas.experiencia = parseInt(goog.dom.getElement(PONTOS_EXPERIENCIA).value) || 0;
+  entradas.experiencia = parseInt(goog.dom.getElement('pontos-experiencia').value) || 0;
   // atributos
-  var div_atributos = goog.dom.getElement(DIV_STATS);
+  var div_atributos = goog.dom.getElement('div-stats');
   for (var i = 0; i < div_atributos.childNodes.length; ++i) {
     var elemento = div_atributos.childNodes[i];
     if (elemento.tagName == "INPUT") {
@@ -79,19 +79,19 @@ function LeEntradas() {
 
   // Armadura e escudo.
   entradas.armadura.nome = 
-      ValorSelecionado(goog.dom.getElement(ARMADURA)); 
+      ValorSelecionado(goog.dom.getElement('armadura')); 
   entradas.armadura.bonus_magico = 
-      parseInt(goog.dom.getElement(BONUS_ARMADURA).value) || 0; 
+      parseInt(goog.dom.getElement('bonus-armadura').value) || 0; 
   entradas.escudo.nome = 
-      ValorSelecionado(goog.dom.getElement(ESCUDO));
+      ValorSelecionado(goog.dom.getElement('escudo'));
   entradas.escudo.bonus_magico = 
-      parseInt(goog.dom.getElement(BONUS_ESCUDO).value) || 0;
+      parseInt(goog.dom.getElement('bonus-escudo').value) || 0;
 
   // Moedas
-  entradas.platina = parseInt(goog.dom.getElement(MOEDAS_PLATINA).value);
-  entradas.ouro = parseInt(goog.dom.getElement(MOEDAS_OURO).value);
-  entradas.prata = parseInt(goog.dom.getElement(MOEDAS_PRATA).value);
-  entradas.cobre = parseInt(goog.dom.getElement(MOEDAS_COBRE).value);
+  entradas.platina = parseInt(goog.dom.getElement('moedas-platina').value);
+  entradas.ouro = parseInt(goog.dom.getElement('moedas-ouro').value);
+  entradas.prata = parseInt(goog.dom.getElement('moedas-prata').value);
+  entradas.cobre = parseInt(goog.dom.getElement('moedas-cobre').value);
 
   // Equipamentos.
   // Armas: Este div possui divs filhos com select, checkbox, input
@@ -144,13 +144,13 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
 // Escreve todos os inputs com os valores de 'entradas'.
 function EscreveEntradas() {
   // nome
-  goog.dom.getElement(NOME).value = entradas.nome;
+  goog.dom.getElement('nome').value = entradas.nome;
 
   // raca
-  SelecionaValor(entradas.raca, goog.dom.getElement(RACA));
+  SelecionaValor(entradas.raca, goog.dom.getElement('raca'));
 
   // alinhamento
-  SelecionaValor(entradas.alinhamento, goog.dom.getElement(ALINHAMENTO));
+  SelecionaValor(entradas.alinhamento, goog.dom.getElement('alinhamento'));
 
   // classes.
   var classes_desabilitadas = [];
@@ -160,14 +160,14 @@ function EscreveEntradas() {
   }
 
   // pontos de vida e ferimentos.
-  goog.dom.getElement(PONTOS_VIDA_TOTAL).value = entradas.pontos_vida;
-  goog.dom.getElement(FERIMENTOS).value = entradas.ferimentos;
+  goog.dom.getElement('pontos-vida-total').value = entradas.pontos_vida;
+  goog.dom.getElement('ferimentos').value = entradas.ferimentos;
 
   // experiencia.
-  goog.dom.getElement(PONTOS_EXPERIENCIA).value = entradas.experiencia;
+  goog.dom.getElement('pontos-experiencia').value = entradas.experiencia;
 
   // atributos.
-  var div_atributos = goog.dom.getElement(DIV_STATS);
+  var div_atributos = goog.dom.getElement('div-stats');
   for (var i = 0; i < div_atributos.childNodes.length; ++i) {
     var elemento = div_atributos.childNodes[i];
     if (elemento.tagName == "INPUT") {
@@ -177,19 +177,19 @@ function EscreveEntradas() {
 
   // Armadura e escudo.
   SelecionaValor(entradas.armadura.nome, 
-                 goog.dom.getElement(ARMADURA)); 
-  goog.dom.getElement(BONUS_ARMADURA).value = 
+                 goog.dom.getElement('armadura')); 
+  goog.dom.getElement('bonus-armadura').value = 
     entradas.armadura.bonus_magico; 
   SelecionaValor(entradas.escudo.nome, 
-                 goog.dom.getElement(ESCUDO));
-  goog.dom.getElement(BONUS_ESCUDO).value = 
+                 goog.dom.getElement('escudo'));
+  goog.dom.getElement('bonus-escudo').value = 
     entradas.escudo.bonus_magico; 
 
   // Moedas.
-  goog.dom.getElement(MOEDAS_PLATINA).value = entradas.platina;
-  goog.dom.getElement(MOEDAS_OURO).value = entradas.ouro;
-  goog.dom.getElement(MOEDAS_PRATA).value = entradas.prata;
-  goog.dom.getElement(MOEDAS_COBRE).value = entradas.cobre;
+  goog.dom.getElement('moedas-platina').value = entradas.platina;
+  goog.dom.getElement('moedas-ouro').value = entradas.ouro;
+  goog.dom.getElement('moedas-prata').value = entradas.prata;
+  goog.dom.getElement('moedas-cobre').value = entradas.cobre;
   // Equipamentos.
   // Armas.
   for (var i = 0; i < entradas.armas.length; ++i) {

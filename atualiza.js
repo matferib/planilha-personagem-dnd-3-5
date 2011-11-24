@@ -36,8 +36,8 @@ function _AtualizaTamanho() {
     tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
   ImprimeSinalizado(
       personagem.tamanho.modificador_ataque_defesa,
-      goog.dom.getElementsByClass(TAMANHO_MOD_ATAQUE_DEFESA));
-  goog.dom.getElement(TAMANHO).innerText =
+      goog.dom.getElementsByClass('tamanho-mod-ataque-defesa'));
+  goog.dom.getElement('tamanho').innerText =
       tabelas_tamanho[personagem.tamanho.categoria].nome;
 }
 
@@ -56,16 +56,16 @@ function _AtualizaModificadoresAtributos() {
       // Escreve o modificador racial.
       ImprimeSinalizado(
           modificador_racial,
-          goog.dom.getElement(habilidade + MOD_RACIAL));
+          goog.dom.getElement(habilidade + '-mod-racial'));
     } 
     else {
-      ImprimeNaoSinalizado('', goog.dom.getElement(habilidade + MOD_RACIAL));
+      ImprimeNaoSinalizado('', goog.dom.getElement(habilidade + '-mod-racial'));
     }
 
     // Escreve o valor total.
     ImprimeNaoSinalizado(
         personagem.atributos[habilidade].valor, 
-        goog.dom.getElement(habilidade + VALOR_TOTAL));
+        goog.dom.getElement(habilidade + '-valor-total'));
 
     // modificador da habilidade.
     personagem.atributos[habilidade].modificador = 
@@ -86,7 +86,7 @@ function _AtualizaModificadoresAtributos() {
     // Escreve o modificador.
     ImprimeSinalizado(
         personagem.atributos[habilidade].modificador,
-        goog.dom.getElementsByClass(habilidade + MOD_TOTAL));
+        goog.dom.getElementsByClass(habilidade + '-mod-total'));
   }
 }
 
@@ -111,11 +111,11 @@ function _AtualizaDadosVida() {
     string_dados_vida += 
       ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
   }
-  var span_dados = goog.dom.getElement(DADOS_VIDA_CLASSES);
+  var span_dados = goog.dom.getElement('dados-vida-classes');
   span_dados.innerText = dados_vida_total + ' = ' + string_dados_vida;
   // Pontos de vida.
   var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
-  ImprimeNaoSinalizado(pontos_vida_corrente, goog.dom.getElement(PONTOS_VIDA_CORRENTE));
+  ImprimeNaoSinalizado(pontos_vida_corrente, goog.dom.getElement('pontos-vida-corrente'));
 }
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
@@ -124,7 +124,7 @@ function _AtualizaAtaque() {
   for (var i = 0; i < personagem.classes.length; ++i) {
     bba += tabelas_bba[personagem.classes[i].classe](personagem.classes[i].nivel);
   }
-  ImprimeSinalizado(bba, goog.dom.getElementsByClass(BBA));
+  ImprimeSinalizado(bba, goog.dom.getElementsByClass('bba'));
   personagem.bba = bba;
   // Corpo a corpo.
   personagem.bba_cac = 
@@ -132,7 +132,7 @@ function _AtualizaAtaque() {
       personagem.tamanho.modificador_ataque_defesa;
   ImprimeSinalizado(
       personagem.bba_cac,
-      goog.dom.getElementsByClass(BBA_CORPO_A_CORPO));
+      goog.dom.getElementsByClass('bba-corpo-a-corpo'));
 
   // Distancia.
   personagem.bba_distancia = 
@@ -140,7 +140,7 @@ function _AtualizaAtaque() {
       personagem.tamanho.modificador_ataque_defesa;
   ImprimeSinalizado(
       personagem.bba_distancia,
-      goog.dom.getElementsByClass(BBA_DISTANCIA));
+      goog.dom.getElementsByClass('bba-distancia'));
 }
 
 // Atualiza a lista de armas de cada estilo.
@@ -165,10 +165,10 @@ function _AtualizaEstilo(div_estilo) {
 function _AtualizaDefesa() {
   ImprimeSinalizado(tabelas_armaduras[personagem.armadura.nome].bonus +
                     personagem.armadura.bonus_magico,
-                    goog.dom.getElementsByClass(CA_ARMADURA));
+                    goog.dom.getElementsByClass('ca-armadura'));
   ImprimeSinalizado(tabelas_escudos[personagem.escudo.nome].bonus + 
                     personagem.escudo.bonus_magico,
-                    goog.dom.getElementsByClass(CA_ESCUDO));
+                    goog.dom.getElementsByClass('ca-escudo'));
 
   // AC normal.
   ImprimeNaoSinalizado(
@@ -178,18 +178,18 @@ function _AtualizaDefesa() {
           tabelas_escudos[personagem.escudo.nome].bonus +
           personagem.escudo.bonus_magico +
           personagem.tamanho.modificador_ataque_defesa, 
-      goog.dom.getElementsByClass(CA_NORMAL));
+      goog.dom.getElementsByClass('ca-normal'));
   // AC surpreso.
   ImprimeNaoSinalizado(
       10 + personagem.tamanho.modificador_ataque_defesa + 
           tabelas_armaduras[personagem.armadura.nome].bonus +
           tabelas_escudos[personagem.escudo.nome].bonus,
-      goog.dom.getElementsByClass(CA_SURPRESO));
+      goog.dom.getElementsByClass('ca-surpreso'));
   // AC toque.
   ImprimeNaoSinalizado(
       10 + personagem.atributos.destreza.modificador + 
           personagem.tamanho.modificador_ataque_defesa, 
-      goog.dom.getElementsByClass(CA_TOQUE));
+      goog.dom.getElementsByClass('ca-toque'));
 }
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e
@@ -213,10 +213,10 @@ function _AtualizaSalvacoes() {
     personagem.salvacoes[tipo_salvacao] = valor_base + modificador_atributo;
     ImprimeNaoSinalizado(
         valor_base,
-        goog.dom.getElement(tipo_salvacao + VALOR_BASE));
+        goog.dom.getElement(tipo_salvacao + '-valor-base'));
     ImprimeSinalizado(
         personagem.salvacoes[tipo_salvacao],
-        goog.dom.getElement(tipo_salvacao + MOD_TOTAL));
+        goog.dom.getElement(tipo_salvacao + '-mod-total'));
   }
 }
 
@@ -224,8 +224,8 @@ function _AtualizaSalvacoes() {
 function _AtualizaTalentos() {
   personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
 
-  ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass(TALENTOS_TOTAL));
-  ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass(TALENTOS_NIVEL));
+  ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass('talentos-total'));
+  ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass('talentos-nivel'));
 
 }
 

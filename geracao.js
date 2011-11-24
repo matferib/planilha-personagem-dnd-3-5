@@ -33,20 +33,20 @@ function GeraPontosDeVida(modo) {
       total_pontos_vida += pontos_vida_nivel;
     }
   }
-  goog.dom.getElement(PONTOS_VIDA_TOTAL).value = total_pontos_vida;
+  goog.dom.getElement('pontos-vida-total').value = total_pontos_vida;
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
 function GeraAleatorioComum() {
-  var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
+  var atributos = [ 'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
-    goog.dom.getElement(atributos[i] + VALOR_BASE).value = Rola(3, 6);
+    goog.dom.getElement(atributos[i] + '-valor-base').value = Rola(3, 6);
   }
 }
 
 // Gera os atributos do personagem rolando 4d6 menos o menor.
 function GeraAleatorioElite() {
-  var atributos = [ FORCA, DESTREZA, CONSTITUICAO, INTELIGENCIA, SABEDORIA, CARISMA ];
+  var atributos = [ 'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   //var rolagens = [];
   for (var i = 0; i < atributos.length; ++i) {
     var total = 0;
@@ -59,7 +59,7 @@ function GeraAleatorioElite() {
       }
       total += rolagem;
     }
-    goog.dom.getElement(atributos[i] + VALOR_BASE).value = total - menor;
+    goog.dom.getElement(atributos[i] + '-valor-base').value = total - menor;
   }
 }
 
@@ -72,12 +72,14 @@ function _GeraTabelado(valores) {
   }
 
   var primeira_classe = personagem.classes[0];
-  if (primeira_classe.classe == ARISTOCRATA || primeira_classe.classe == EXPERT) {
+  if (primeira_classe.classe == 'aristocrata' || primeira_classe.classe == 'expert') {
     alert("É recomendado colocar os valores na mão para aristocratas e experts");
   }
 
   for (var i = 0; i < valores.length; ++i) {
-    goog.dom.getElement(tabelas_geracao_atributos[primeira_classe.classe][i]  + VALOR_BASE).value = valores[i];
+    goog.dom.getElement(
+        tabelas_geracao_atributos[primeira_classe.classe][i]  + '-valor-base').value = 
+            valores[i];
   }
 }
 
