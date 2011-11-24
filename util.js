@@ -46,9 +46,20 @@ function CarregaTabelaArmas() {
 
 // Busca o valor selecionado de um select.
 // @param dom_select o dom representando o select.
+// @return null se nao houver valor selecionado (select vazio).
 function ValorSelecionado(dom_select) {
-	return dom_select.options[dom_select.selectedIndex].value;
+	return dom_select.length > 0 ?
+      dom_select.options[dom_select.selectedIndex].value : null;
 }
+
+// Limpa as opcoes de um select.
+// @param dom_select o dom representando o select.
+function LimpaSelect(dom_select) {
+  while (dom_select.length > 0) {
+    dom_select.remove(0);
+  }
+}
+
 
 // Seleciona um valor de um select.
 // @param valor_selecionado o novo valor selecionado do dom.

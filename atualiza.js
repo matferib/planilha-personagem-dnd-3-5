@@ -143,7 +143,22 @@ function _AtualizaAtaque() {
       goog.dom.getElementsByClass(BBA_DISTANCIA));
 }
 
+// Atualiza a lista de armas de cada estilo.
 function _AtualizaEstilosLuta() {
+  var div_estilos = goog.dom.getElement("div-estilos-luta");
+  for (var i = 0; i < div_estilos.childNodes.length; ++i) {
+    _AtualizaEstilo(div_estilos.childNodes[i]);
+  }
+}
+
+// Usada por _AtualizaEstilosLuta.
+function _AtualizaEstilo(div_estilo) {
+  for (var i = 0; i < div_estilo.childNodes.length; ++i) {
+    var filho = div_estilo.childNodes[i];
+    if (filho.tagName == 'SELECT') {
+      AdicionaArmasAoEstilo(filho, ValorSelecionado(filho));
+    }
+  }
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.

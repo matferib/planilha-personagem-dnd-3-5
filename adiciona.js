@@ -158,9 +158,12 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
   for (var i = 0; i < div_novo_estilo.childNodes.length; ++i) {
     var filho = div_novo_estilo.childNodes[i];
     if (filho.tagName == 'SELECT') {
-      _PopulaSelectEstilo(filho);
-      filho.disabled = 
-          filho.id == id_select_secundario && nome_estilo != 'duas_armas';
+      if (filho.id == id_select_primario) {
+        AdicionaArmasAoEstilo(filho, arma_principal);
+      } else {
+        AdicionaArmasAoEstilo(filho, arma_secundaria);
+        filho.disabled = (nome_estilo != 'duas_armas');
+      }
     }
   }
   div_novo_estilo.id = id_estilo;
@@ -168,13 +171,19 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
 }
 
 // Preenche o select passado com todas as armas equipadas.
-function _PopulaSelectEstilo(select_arma) {
+// @param select_arma o dom do select da arma.
+// @param arma_selecionada opcional, o nome da arma selecionada.
+function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
+  LimpaSelect(select_arma);
   for (var i = 0; i < personagem.armas.length; ++i) {
     var arma = personagem.armas[i];
     var option = document.createElement('option');
     option.setAttribute('name', arma.nome_gerado);
     option.setAttribute('value', arma.nome_gerado);
     option.innerText = arma.nome_gerado;
-    select_arma.appendChild(option);
+    if (arma_selecionada == arma.nome_gerado) {
+      option.selected = true;
+    }
+    select_arma.options.add(option);
   }
 }
