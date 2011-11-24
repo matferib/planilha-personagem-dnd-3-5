@@ -7,7 +7,16 @@ function AtualizaGeral() {
   LeEntradas(); 
   // converte a estrutura de entradas para a de personagem.
   ConverteEntradasParaPersonagem();
-  // Aqui ocorrem as atualizacoes.
+  _AtualizaGeral();
+}
+
+// Chamada apenas para a atualizacao inicial apos leitura da URL.
+function AtualizaGeralSemLerOuEscrever() {
+  _AtualizaGeral();
+}
+
+// Apenas atualizacoes, sem leitura ou escrita de entradas.
+function _AtualizaGeral() {
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaDadosVida();

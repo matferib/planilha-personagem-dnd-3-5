@@ -10,14 +10,16 @@ function CarregamentoInicial() {
 	if (indice_igual == -1) {
 		// Comeca do zero.
 		AdicionaClasse();
+	  AtualizaGeral();
 	}
 	else {
 		// carrega pelos parametros.
 		var json_personagem = decodeURIComponent(document.URL.slice(indice_igual + 1));
 		entradas = goog.json.parse(json_personagem);
+    ConverteEntradasParaPersonagem();
 		EscreveEntradas();
+    AtualizaGeralSemLerOuEscrever();
 	}
-	AtualizaGeral();
 }
 
 // Botao de adicionar classe apertado.
