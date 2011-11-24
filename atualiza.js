@@ -157,6 +157,13 @@ function _AtualizaEstilo(div_estilo) {
     var filho = div_estilo.childNodes[i];
     if (filho.tagName == 'SELECT') {
       AdicionaArmasAoEstilo(filho, ValorSelecionado(filho));
+    } else if (filho.tagName == 'SPAN') {
+      // TODO refazer isso aqui tudo e terminar o dano.
+      if (filho.id.indexOf('id-span-ataque-primario-estilo') != -1) {
+        ImprimeSinalizado(personagem.bba, filho);
+      } else if (filho.id.indexOf('id-span-ataque-secundario-estilo') != -1) {
+        ImprimeSinalizado(personagem.bba - 2, filho);
+      }
     }
   }
 }
