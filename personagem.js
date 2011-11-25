@@ -56,7 +56,7 @@ var personagem = {
     classe: 0,
     lista: [],
   },
-  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano };
+  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   armas: [],
   // Armadura
@@ -88,9 +88,11 @@ function ConverteEntradasParaPersonagem() {
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
 function _ConverteArma(arma_entrada) {
+  var arma_tabela = tabelas_armas[arma_entrada.nome];
   var arma_personagem = {};
+  arma_personagem.arma_tabela = arma_tabela;
   // O nome da entrada eh apenas um indice na tabela de armas.
-  arma_personagem.nome = tabelas_armas[arma_entrada.nome].nome;
+  arma_personagem.nome = arma_tabela.nome;
   arma_personagem.nome_gerado = arma_personagem.nome;
   if (arma_entrada.obra_prima) {
     arma_personagem.bonus_ataque = 1;
@@ -105,5 +107,18 @@ function _ConverteArma(arma_entrada) {
   }
   return arma_personagem;
 }
+
+// Encontra uma arma pelo nome gerado.
+// @return a arma do personagem.
+function ArmaPersonagem(nome_gerado) {
+  for (var i = 0; i < personagem.armas.length; ++i) {
+    var arma = personagem.armas[i];
+    if (arma.nome_gerado == nome_gerado) {
+      return arma;
+    }
+  }
+  return null;
+}
+
 
 

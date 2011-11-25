@@ -137,14 +137,10 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
   var id_select_secundario = 
       id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
-  var id_span_ataque_primario =
-      id_estilo.replace('id-estilo', 'id-span-ataque-primario-estilo');
-  var id_span_ataque_secundario =
-      id_estilo.replace('id-estilo', 'id-span-ataque-secundario-estilo');
-  var id_span_dano_primario =
-      id_estilo.replace('id-estilo', 'id-span-dano-primario-estilo');
-  var id_span_dano_secundario =
-      id_estilo.replace('id-estilo', 'id-span-dano-secundario-estilo');
+  var id_span_primario =
+      id_estilo.replace('id-estilo', 'id-span-primario-estilo');
+  var id_span_secundario =
+      id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
 
   div_novo_estilo.innerHTML = 
       '<input type="radio" name="' + id_estilo + 
@@ -162,11 +158,9 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
       '<button type="button" onclick="ClickRemoverFilho(\'' + 
           id_estilo + '\',\'' + id_div_estilos_luta + '\')">-</button><br>' +
       'Principal: <select id="' + id_select_primario + '"></select> ' +
-      'Bonus Ataque: <span id="' + id_span_ataque_primario + '"></span>, ' +
-      'Dano: <span id="' + id_span_dano_primario + '"></span><br>' +
+      '<span id="' + id_span_primario + '"></span><br> ' +
       'Secundária: <select id="' + id_select_secundario + '"></select> ' +
-      'Bonus Ataque: <span id="' + id_span_ataque_secundario + '"></span>, ' +
-      'Dano: <span id="' + id_span_dano_secundario + '"></span><br>';
+      '<span id="' + id_span_secundario + '"></span><br>';
   // Popula os selects.
   for (var i = 0; i < div_novo_estilo.childNodes.length; ++i) {
     var filho = div_novo_estilo.childNodes[i];

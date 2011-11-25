@@ -193,9 +193,11 @@ var tabelas_escudos = {
 
 var tabelas_armas = {
   // Unarmed Attacks
-  desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"} , 
+  desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
+               categorias: { cac_leve: true },
                critico: "×2", peso: "0", tipo: "estouro", incremento_distancia: "0 quadrados" },
-  manoplas: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3"} , 
+  manoplas: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
+              categorias: { cac_leve: true },
               critico: "×2", peso: "500g", tipo: "estouro", },
   /*
 //Light Melee Weapons
@@ -207,6 +209,7 @@ Sickle  6 gp  1d4 1d6 ×2  — 2 lb. Slashing
 // One-Handed Melee Weapons
 */
   porrete: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2", 
+             categorias: { cac_leve: true, arremesso: true },
              incremento_distancia: "2 quadrados", peso: "1,5Kg", tipo: "estouro" },
 /*
 Mace, heavy 12 gp 1d6 1d8 ×2  — 8 lb. Bludgeoning
@@ -217,11 +220,14 @@ Longspear4  5 gp  1d6 1d8 ×3  — 9 lb. Piercing
 Quarterstaff5 — 1d4/1d4 1d6/1d6 ×2  — 4 lb. Bludgeoning
 */
   lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3", 
+           categorias: { cac_leve: true, arremesso: true },
            incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
-  /*
-Ranged Weapons
-Crossbow, heavy 50 gp 1d8 1d10  19-20/×2  120 ft. 8 lb. Piercing
-Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
+//Ranged Weapons
+  besta: { nome: "besta pesada", preco: "50 gp", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
+           categorias: { distancia: true },
+           incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },
+//Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
+ /*
 Crossbow, light 35 gp 1d6 1d8 19-20/×2  80 ft.  4 lb. Piercing
 Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
 Dart  5 sp  1d3 1d4 ×2  20 ft.  ½ lb. Piercing
@@ -244,7 +250,8 @@ Sword, short  10 gp 1d4 1d6 19-20/×2  — 2 lb. Piercing
 Battleaxe 10 gp 1d6 1d8 ×3  — 6 lb. Slashing
 Flail 8 gp  1d6 1d8 ×2  — 5 lb. Bludgeoning
 */
-  espada_longa: { nome: "espada longa", preco: "15 PO", dano: { pequeno: "1d6", medio: "1d8"} , 
+  espada_longa: { nome: "espada longa", preco: "15 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                  categorias: { cac: true },
                   critico: "19-20/×2", peso: "2kg", tipo: "cortante", },
   /*
 Pick, heavy 8 gp  1d4 1d6 ×4  — 6 lb. Piercing

@@ -153,17 +153,46 @@ function _AtualizaEstilosLuta() {
 
 // Usada por _AtualizaEstilosLuta.
 function _AtualizaEstilo(div_estilo) {
-  for (var i = 0; i < div_estilo.childNodes.length; ++i) {
-    var filho = div_estilo.childNodes[i];
-    if (filho.tagName == 'SELECT') {
-      AdicionaArmasAoEstilo(filho, ValorSelecionado(filho));
-    } else if (filho.tagName == 'SPAN') {
-      // TODO refazer isso aqui tudo e terminar o dano.
-      if (filho.id.indexOf('id-span-ataque-primario-estilo') != -1) {
-        ImprimeSinalizado(personagem.bba, filho);
-      } else if (filho.id.indexOf('id-span-ataque-secundario-estilo') != -1) {
-        ImprimeSinalizado(personagem.bba - 2, filho);
-      }
+  var id_estilo = div_estilo.id; 
+
+  var id_select_primario = 
+      id_estilo.replace('id-estilo', 'id-select-primario-estilo');
+  var id_span_primario =
+      id_estilo.replace('id-estilo', 'id-span-primario-estilo');
+  var select_primario = goog.dom.getElement(id_select_primario);
+  var nome_arma_primaria = ValorSelecionado(select_primario);
+  AdicionaArmasAoEstilo(select_primario, nome_arma_primaria);
+  _AtualizaArma(nome_arma_primaria, goog.dom.getElement(id_span_primario));
+
+  var id_select_secundario = 
+      id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
+  var id_span_secundario =
+      id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
+  var select_secundario = goog.dom.getElement(id_select_secundario);
+  var nome_arma_secundaria = ValorSelecionado(select_secundario);
+  AdicionaArmasAoEstilo(select_secundario, nome_arma_secundaria);
+  _AtualizaArma(nome_arma_secundaria, goog.dom.getElement(id_span_secundario));
+}
+
+// Atualiza o span de uma arma no estilo de luta com seus valores de ataque e defesa
+// @param span_arma o dom da arma, que eh um span.
+function _AtualizaArma(nome_arma, span_arma) {
+  // TODO terminar.
+  span_arma.innerText = '';
+  var arma = ArmaPersonagem(nome_arma);
+  var arma_tabela = arma.arma_tabela;
+  for (var categoria in arma_tabela.categorias) {
+    if (!arma_tabela.categorias[categoria]) {
+      continue;
+    }
+    if (categoria.indexOf('cac') != -1) {
+      span_arma.innerText += categoria + ': ' + 
+                             StringSinalizada(personagem.bba_cac + arma.bonus_ataque) + ', ' + 
+                             arma_tabela.dano[personagem.tamanho.categoria] + 
+                             StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano) +
+                             '; ';
+    } else {
+      span_arma.innerText += categoria + ': ...';
     }
   }
 }

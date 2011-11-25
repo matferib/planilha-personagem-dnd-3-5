@@ -2,6 +2,15 @@
 
 goog.require('goog.dom');
 
+// Retorna uma string do valor de forma sinalizada.
+function StringSinalizada(valor) {
+  var return_value = '';
+	if (valor >= 0) {
+		return_value = '+';
+	}
+  return return_value + valor;
+}
+
 // Imprime um valor de forma sinalizada ou seja, com +/- na frente).
 // @param dom pode ser um span ou div, ou qualquer elemento que possua innerText.
 // Tambem pode ser um array de dom.
