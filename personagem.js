@@ -58,6 +58,7 @@ var personagem = {
   },
   // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
+  // Sempre havera um ataque desarmado aqui.
   armas: [],
   // Armadura
   armadura: {},
@@ -79,10 +80,17 @@ function ConverteEntradasParaPersonagem() {
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.armas = [];
+  // entrada fake para desarmado.
+  var entrada_desarmado = {
+    nome: 'desarmado', 
+    nome_gerado: 'desarmado', 
+    obra_prima: false, 
+    bonus: 0
+  };
+  personagem.armas.push(_ConverteArma(entrada_desarmado));
   for (var i = 0; i < entradas.armas.length; ++i) {
     personagem.armas.push(_ConverteArma(entradas.armas[i]));
   }
-
 }
 
 // Converte uma arma da entrada para personagem.

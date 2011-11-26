@@ -3,7 +3,16 @@
 goog.require('goog.dom');
 
 // Retorna uma string do valor de forma sinalizada.
-function StringSinalizada(valor) {
+// @param valor a ser impresso.
+// @param imprime_zero opcional, default true. Se false, retorna vazio quando
+// o valor for zero.
+function StringSinalizada(valor, imprime_zero) {
+  if (imprime_zero == null) {
+    imprime_zero = true;
+  }
+  if (!imprime_zero && valor == 0) {
+    return '';
+  }
   var return_value = '';
 	if (valor >= 0) {
 		return_value = '+';

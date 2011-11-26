@@ -86,6 +86,10 @@ function AdicionaArma(arma, obra_prima, bonus) {
   select.setAttribute('name', 'arma');
   select.setAttribute('onchange', 'AtualizaGeral()');
   for (var arma_corrente in tabelas_armas) {
+    if (arma_corrente == 'desarmado') {
+      // Desarmado eh um caso especial.
+      continue;
+    }
     var option = document.createElement('option');
     option.setAttribute('name', arma_corrente);
     option.setAttribute('value', arma_corrente);

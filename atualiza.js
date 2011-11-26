@@ -161,8 +161,12 @@ function _AtualizaEstilo(div_estilo) {
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
   var select_primario = goog.dom.getElement(id_select_primario);
   var nome_arma_primaria = ValorSelecionado(select_primario);
+  var arma_primaria = ArmaPersonagem(nome_arma_primaria) || 
+                      ArmaPersonagem('desarmado');
+  nome_arma_primaria = arma_primaria.nome;
   AdicionaArmasAoEstilo(select_primario, nome_arma_primaria);
-  _AtualizaArma(nome_arma_primaria, goog.dom.getElement(id_span_primario));
+  _AtualizaArma(arma_primaria, 
+                goog.dom.getElement(id_span_primario));
 
   var id_select_secundario = 
       id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
@@ -170,16 +174,20 @@ function _AtualizaEstilo(div_estilo) {
       id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
   var select_secundario = goog.dom.getElement(id_select_secundario);
   var nome_arma_secundaria = ValorSelecionado(select_secundario);
+  var arma_secundaria = ArmaPersonagem(nome_arma_secundaria) || 
+                        ArmaPersonagem('desarmado');
+  nome_arma_secundaria = arma_secundaria.nome;
   AdicionaArmasAoEstilo(select_secundario, nome_arma_secundaria);
-  _AtualizaArma(nome_arma_secundaria, goog.dom.getElement(id_span_secundario));
+  _AtualizaArma(arma_secundaria,
+                goog.dom.getElement(id_span_secundario));
 }
 
 // Atualiza o span de uma arma no estilo de luta com seus valores de ataque e defesa
+// @param arma do personagem.
 // @param span_arma o dom da arma, que eh um span.
-function _AtualizaArma(nome_arma, span_arma) {
+function _AtualizaArma(arma, span_arma) {
   // TODO terminar.
   span_arma.innerText = '';
-  var arma = ArmaPersonagem(nome_arma);
   var arma_tabela = arma.arma_tabela;
   for (var categoria in arma_tabela.categorias) {
     if (!arma_tabela.categorias[categoria]) {
@@ -189,9 +197,9 @@ function _AtualizaArma(nome_arma, span_arma) {
       span_arma.innerText += categoria + ': ' + 
                              StringSinalizada(personagem.bba_cac + arma.bonus_ataque) + ', ' + 
                              arma_tabela.dano[personagem.tamanho.categoria] + 
-                             StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano) +
+                             StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano, false) +
                              '; ';
-    } else {
+    } else if (categoria.indexOf('arremesso') != -1) {
       span_arma.innerText += categoria + ': ...';
     }
   }
