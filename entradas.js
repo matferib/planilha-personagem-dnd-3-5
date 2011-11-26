@@ -121,7 +121,8 @@ function _LeEntradaArma(div_arma) {
   return arma_lida;
 }
 
-// @return a arma lida.
+// Le um div de estilo de luta.
+// @return o estilo lido. 
 function _LeEntradaEstiloLuta(div_estilo_luta) {
   var estilo = {};
   for (var i = 0; i < div_estilo_luta.childNodes.length; ++i) {

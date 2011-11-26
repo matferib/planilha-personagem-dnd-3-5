@@ -161,9 +161,9 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
           (nome_estilo == 'duas_armas' ? 'checked' : '') + '">Duas armas</input>' +
       '<button type="button" onclick="ClickRemoverFilho(\'' + 
           id_estilo + '\',\'' + id_div_estilos_luta + '\')">-</button><br>' +
-      'Principal: <select id="' + id_select_primario + '"></select> ' +
+      'Principal: <select id="' + id_select_primario + '" onchange="AtualizaGeral()"></select> ' +
       '<span id="' + id_span_primario + '"></span><br> ' +
-      'Secundária: <select id="' + id_select_secundario + '"></select> ' +
+      'Secundária: <select id="' + id_select_secundario + '" onchange="AtualizaGeral()"></select> ' +
       '<span id="' + id_span_secundario + '"></span><br>';
   // Popula os selects.
   for (var i = 0; i < div_novo_estilo.childNodes.length; ++i) {

@@ -147,45 +147,45 @@ function _AtualizaAtaque() {
 function _AtualizaEstilosLuta() {
   var div_estilos = goog.dom.getElement("div-estilos-luta");
   for (var i = 0; i < div_estilos.childNodes.length; ++i) {
-    _AtualizaEstilo(div_estilos.childNodes[i]);
+    _AtualizaEstilo(div_estilos.childNodes[i], personagem.estilos_luta[i]);
   }
 }
 
 // Usada por _AtualizaEstilosLuta.
-function _AtualizaEstilo(div_estilo) {
+// @param div_estilo o div do estilo.
+// @param estilo a entrada do estilo no personagem.
+function _AtualizaEstilo(div_estilo, estilo) {
   var id_estilo = div_estilo.id; 
 
-  var id_select_primario = 
-      id_estilo.replace('id-estilo', 'id-select-primario-estilo');
   var id_span_primario =
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
-  var select_primario = goog.dom.getElement(id_select_primario);
-  var nome_arma_primaria = ValorSelecionado(select_primario);
-  var arma_primaria = ArmaPersonagem(nome_arma_primaria) || 
-                      ArmaPersonagem('desarmado');
-  nome_arma_primaria = arma_primaria.nome;
-  AdicionaArmasAoEstilo(select_primario, nome_arma_primaria);
-  _AtualizaArma(arma_primaria, 
-                goog.dom.getElement(id_span_primario));
+  var id_select_primario = 
+      id_estilo.replace('id-estilo', 'id-select-primario-estilo');
+  var arma_primaria = ArmaPersonagem(estilo.arma_primaria);
+  AdicionaArmasAoEstilo(goog.dom.getElement(id_select_primario), 
+                        estilo.arma_primaria);
+  _AtualizaArmaEstilo(arma_primaria, 
+                      goog.dom.getElement(id_span_primario));
 
-  var id_select_secundario = 
-      id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
   var id_span_secundario =
-      id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
-  var select_secundario = goog.dom.getElement(id_select_secundario);
-  var nome_arma_secundaria = ValorSelecionado(select_secundario);
-  var arma_secundaria = ArmaPersonagem(nome_arma_secundaria) || 
-                        ArmaPersonagem('desarmado');
-  nome_arma_secundaria = arma_secundaria.nome;
-  AdicionaArmasAoEstilo(select_secundario, nome_arma_secundaria);
-  _AtualizaArma(arma_secundaria,
-                goog.dom.getElement(id_span_secundario));
+    id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
+  if (estilo.nome == 'duas_armas') {
+    var id_select_secundario = 
+        id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
+    var arma_secundaria = ArmaPersonagem(estilo.arma_secundaria);
+    AdicionaArmasAoEstilo(goog.dom.getElement(id_select_secundario), 
+                          estilo.arma_secundaria);
+    _AtualizaArmaEstilo(arma_secundaria,
+                        goog.dom.getElement(id_span_secundario));
+  } else {
+    goog.dom.getElement(id_span_secundario).innerText = '';
+  }
 }
 
 // Atualiza o span de uma arma no estilo de luta com seus valores de ataque e defesa
 // @param arma do personagem.
 // @param span_arma o dom da arma, que eh um span.
-function _AtualizaArma(arma, span_arma) {
+function _AtualizaArmaEstilo(arma, span_arma) {
   // TODO terminar.
   span_arma.innerText = '';
   var arma_tabela = arma.arma_tabela;
@@ -200,7 +200,18 @@ function _AtualizaArma(arma, span_arma) {
                              StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano, false) +
                              '; ';
     } else if (categoria.indexOf('arremesso') != -1) {
-      span_arma.innerText += categoria + ': ...';
+      span_arma.innerText += categoria + ': ' + 
+                             StringSinalizada(personagem.bba_distancia + arma.bonus_ataque) + ', ' + 
+                             arma_tabela.dano[personagem.tamanho.categoria] + 
+                             StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano, false) +
+                             '; ';
+    } else if (categoria.indexOf('distancia') != -1) {
+      // TODO como tratar arcos compostos?
+      span_arma.innerText += categoria + ': ' + 
+                             StringSinalizada(personagem.bba_distancia + arma.bonus_ataque) + ', ' + 
+                             arma_tabela.dano[personagem.tamanho.categoria] + 
+                             StringSinalizada(arma.bonus_dano, false) +
+                             '; ';
     }
   }
 }

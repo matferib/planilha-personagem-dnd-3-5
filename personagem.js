@@ -76,7 +76,6 @@ function ConverteEntradasParaPersonagem() {
     personagem.atributos[atributo].valor = entradas[atributo];
   }
 
-  personagem.estilos_luta = entradas.estilos_luta;
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.armas = [];
@@ -90,6 +89,20 @@ function ConverteEntradasParaPersonagem() {
   personagem.armas.push(_ConverteArma(entrada_desarmado));
   for (var i = 0; i < entradas.armas.length; ++i) {
     personagem.armas.push(_ConverteArma(entradas.armas[i]));
+  }
+
+  // Estilos tem que vir apos a atualizacao das armas do personagem.
+  personagem.estilos_luta = [];
+  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
+    var estilo_entrada = entradas.estilos_luta[i];
+    var estilo_personagem = { 
+      nome: estilo_entrada.nome,
+      arma_primaria: ArmaPersonagem(estilo_entrada.arma_primaria) ? 
+          estilo_entrada.arma_primaria : 'desarmado',
+      arma_secundaria: ArmaPersonagem(estilo_entrada.arma_secundaria) ? 
+          estilo_entrada.arma_secundaria : 'desarmado'
+    };
+    personagem.estilos_luta.push(estilo_personagem);
   }
 }
 
@@ -116,7 +129,7 @@ function _ConverteArma(arma_entrada) {
   return arma_personagem;
 }
 
-// Encontra uma arma pelo nome gerado.
+// Encontra uma arma do personagem pelo nome gerado.
 // @return a arma do personagem.
 function ArmaPersonagem(nome_gerado) {
   for (var i = 0; i < personagem.armas.length; ++i) {

@@ -122,5 +122,6 @@ function ClickEstilo(nome_estilo, id_select_secundario) {
   } else {
     alert('Nome de estilo invalido: ' + nome_estilo);
   }
+  AtualizaGeral();
 }
 
