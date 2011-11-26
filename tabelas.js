@@ -192,48 +192,108 @@ var tabelas_escudos = {
 };
 
 var tabelas_armas = {
-  // Unarmed Attacks
+
+// Unarmed Attacks
+  
+  
   desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
                categorias: { cac_leve: true },
                critico: "×2", peso: "0", tipo: "estouro", incremento_distancia: "0 quadrados" },
   manoplas: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
               categorias: { cac_leve: true },
               critico: "×2", peso: "500g", tipo: "estouro", },
-  /*
+
 //Light Melee Weapons
-Dagger  2 gp  1d3 1d4 19-20/×2  10 ft.  1 lb. Piercing or slashing
-Dagger, punching  2 gp  1d3 1d4 ×3  — 1 lb. Piercing
-Gauntlet, spiked  5 gp  1d3 1d4 ×2  — 1 lb. Piercing
-Mace, light 5 gp  1d4 1d6 ×2  — 4 lb. Bludgeoning
-Sickle  6 gp  1d4 1d6 ×2  — 2 lb. Slashing
+
+
+  adaga: { nome: "Adaga", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+                  categorias: { cac_leve: true, arremesso: true } ,
+                  incremento_distancia: "2 quadrados", critico: "19-20/×2", peso: "0,5kg", tipo: "cortante/perfurante" },
+
+  adaga_punching: { nome: "Adaga, punching", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+                  categorias: { cac_leve: true } ,
+                  critico: "×3", peso: "0,5kg", tipo: "perfurante" },
+
+  gauntlet_spiked: { nome: "Gauntlet, spiked", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+                  categorias: { cac_leve: true } ,
+                  critico: "×2", peso: "0,5kg", tipo: "perfurante" },
+
+  maca_leve: { nome: "Maça, leve", preco: "5 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                  categorias: { cac_leve: true } ,
+                  critico: "×2", peso: "2kg", tipo: "estouro" },
+
+  sickle: { nome: "Sickle", preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                  categorias: { cac_leve: true } ,
+                  critico: "×2", peso: "1kg", tipo: "cortante" },
+                  
 // One-Handed Melee Weapons
-*/
+
   porrete: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2", 
              categorias: { cac_leve: true, arremesso: true },
              incremento_distancia: "2 quadrados", peso: "1,5Kg", tipo: "estouro" },
-/*
-Mace, heavy 12 gp 1d6 1d8 ×2  — 8 lb. Bludgeoning
-Morningstar 8 gp  1d6 1d8 ×2  — 6 lb. Bludgeoning and piercing
-Shortspear  1 gp  1d4 1d6 ×2  20 ft.  3 lb. Piercing
+             
+  maca_pesada: { nome: "Maça, pesada", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                  categorias: { cac: true } ,
+                  critico: "×2", peso: "4kg", tipo: "estouro" },                                                   
+                    
+  morningstar: { nome: "Morningstar", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                  categorias: { cac: true } ,
+                  critico: "×2", peso: "3kg", tipo: "estouro/perfurante" },     
+                  
+  lanca_curta: { nome: "Lança, curta", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                  categorias: { cac: true, arremesso: true} ,
+                  incremento_distancia: "4 quadrados", critico: "×2", peso: "1,5kg", tipo: "perfurante" },                                      
+                                                                        
 // Two-Handed Melee Weapons
-Longspear4  5 gp  1d6 1d8 ×3  — 9 lb. Piercing
-Quarterstaff5 — 1d4/1d4 1d6/1d6 ×2  — 4 lb. Bludgeoning
-*/
-  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3", 
-           categorias: { cac_leve: true, arremesso: true },
+    
+    
+  lanca_longa: { nome: "Lança, longa", preco: "5 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                  categorias: { cac: true } ,
+                  critico: "×3", peso: "4,5kg", tipo: "perfurante" },         
+    
+  quarterstaff: { nome: "Quarterstaff", preco: "0 PO", dano: { pequeno: "1d4/1d4", medio: "1d6/1d6"} ,
+                  categorias: { cac: true } ,
+                  critico: "×2", peso: "2kg", tipo: "estouro" },  
+                  
+  lanca: { nome: "Lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3", 
+           categorias: { cac: true, arremesso: true },
            incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
+           
 //Ranged Weapons
-  besta: { nome: "besta pesada", preco: "50 gp", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
+
+
+  besta_pesada: { nome: "Besta, pesada", preco: "50 PO", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
            categorias: { distancia: true },
-           incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },
+           incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },          
+           
+  besta_leve: { nome: "Besta, leve", preco: "35 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/×2",
+           categorias: { distancia: true },
+           incremento_distancia: "16 quadrados", peso: "2kg", tipo: "perfurante" },      
+
+  dardo: { nome: "Dardo", preco: "5 PP", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
+           categorias: { distancia: true },
+           incremento_distancia: "4 quadrados", peso: "250g", tipo: "perfurante" },    
+
+  javelin: { nome: "Javelin", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
+           categorias: { distancia: true },
+           incremento_distancia: "6 quadrados", peso: "1Kg", tipo: "perfurante" },  
+           
+  sling: { nome: "Sling", preco: "0 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
+           categorias: { distancia: true },
+           incremento_distancia: "10 quadrados", peso: "0Kg", tipo: "estouro" },              
+             
+              
+
+
+//Munição
 //Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
+//Bullets, sling (10) 1 sp  — — — — 5 lb. —
+
+
  /*
-Crossbow, light 35 gp 1d6 1d8 19-20/×2  80 ft.  4 lb. Piercing
-Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
-Dart  5 sp  1d3 1d4 ×2  20 ft.  ½ lb. Piercing
-Javelin 1 gp  1d4 1d6 ×2  30 ft.  2 lb. Piercing
-Sling — 1d3 1d4 ×2  50 ft.  0 lb. Bludgeoning
-Bullets, sling (10) 1 sp  — — — — 5 lb. —
+
+
+
 // Martial Weapons Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
 // Light Melee Weapons
 Axe, throwing 8 gp  1d4 1d6 ×2  10 ft.  2 lb. Slashing
