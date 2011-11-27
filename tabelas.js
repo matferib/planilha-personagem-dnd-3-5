@@ -198,89 +198,89 @@ var tabelas_armas = {
   
   desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
                categorias: { cac_leve: true },
-               critico: "×2", peso: "0", tipo: "estouro", incremento_distancia: "0 quadrados" },
-  manoplas: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
-              categorias: { cac_leve: true },
-              critico: "×2", peso: "500g", tipo: "estouro", },
+               critico: "×2", peso: "0", tipo: "concussao", incremento_distancia: "0 quadrados" },
+  manopla: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
+             categorias: { cac_leve: true },
+             critico: "×2", peso: "500g", tipo: "concussao", },
 
 //Light Melee Weapons
 
 
-  adaga: { nome: "Adaga", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
-                  categorias: { cac_leve: true, arremesso: true } ,
-                  incremento_distancia: "2 quadrados", critico: "19-20/×2", peso: "0,5kg", tipo: "cortante/perfurante" },
+  adaga: { preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+           categorias: { cac_leve: true, arremesso: true } ,
+           incremento_distancia: "2 quadrados", critico: "19-20/×2", peso: "0,5kg", tipo: "cortante/perfurante" },
 
-  adaga_punching: { nome: "Adaga, punching", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
-                  categorias: { cac_leve: true } ,
+  adaga_de_soco: { nome: "adaga de soco", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"},
+                  categorias: { cac_leve: true },
                   critico: "×3", peso: "0,5kg", tipo: "perfurante" },
 
-  gauntlet_spiked: { nome: "Gauntlet, spiked", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
-                  categorias: { cac_leve: true } ,
-                  critico: "×2", peso: "0,5kg", tipo: "perfurante" },
+  manopla_com_cravos: { nome: "manopla com cravos", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+                        categorias: { cac_leve: true } ,
+                        critico: "×2", peso: "0,5kg", tipo: "perfurante" },
 
-  maca_leve: { nome: "Maça, leve", preco: "5 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
-                  categorias: { cac_leve: true } ,
-                  critico: "×2", peso: "2kg", tipo: "estouro" },
+  maca_leve: { nome: "maça leve", preco: "5 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+               categorias: { cac_leve: true } ,
+               critico: "×2", peso: "2kg", tipo: "concussao" },
 
-  sickle: { nome: "Sickle", preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  foice_curta: { nome: "foice curta", preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
                   categorias: { cac_leve: true } ,
                   critico: "×2", peso: "1kg", tipo: "cortante" },
                   
 // One-Handed Melee Weapons
 
-  porrete: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2", 
-             categorias: { cac_leve: true, arremesso: true },
-             incremento_distancia: "2 quadrados", peso: "1,5Kg", tipo: "estouro" },
+  clava: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2", 
+           categorias: { cac_leve: true, arremesso: true },
+           incremento_distancia: "2 quadrados", peso: "1,5Kg", tipo: "concussao" },
              
-  maca_pesada: { nome: "Maça, pesada", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
-                  categorias: { cac: true } ,
-                  critico: "×2", peso: "4kg", tipo: "estouro" },                                                   
+  maca_pesada: { nome: "maça pesada", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                 categorias: { cac: true } ,
+                 critico: "×2", peso: "4kg", tipo: "concussao" },                                                   
                     
-  morningstar: { nome: "Morningstar", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  maca_estrela: { nome: "maça estrela", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "3kg", tipo: "estouro/perfurante" },     
+                  critico: "×2", peso: "3kg", tipo: "concussao/perfurante" },     
                   
-  lanca_curta: { nome: "Lança, curta", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
-                  categorias: { cac: true, arremesso: true} ,
-                  incremento_distancia: "4 quadrados", critico: "×2", peso: "1,5kg", tipo: "perfurante" },                                      
+  lanca_curta: { nome: "lança curta", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                 categorias: { cac: true, arremesso: true} ,
+                 incremento_distancia: "4 quadrados", critico: "×2", peso: "1,5kg", tipo: "perfurante" },                                      
                                                                         
 // Two-Handed Melee Weapons
     
     
-  lanca_longa: { nome: "Lança, longa", preco: "5 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
-                  categorias: { cac: true } ,
-                  critico: "×3", peso: "4,5kg", tipo: "perfurante" },         
+  lanca_longa: { nome: "lança longa", preco: "5 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                 categorias: { cac: true } ,
+                 critico: "×3", peso: "4,5kg", tipo: "perfurante" },         
     
-  quarterstaff: { nome: "Quarterstaff", preco: "0 PO", dano: { pequeno: "1d4/1d4", medio: "1d6/1d6"} ,
+  quarterstaff: { nome: "quarterstaff", preco: "0 PO", dano: { pequeno: "1d4/1d4", medio: "1d6/1d6"} ,
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "2kg", tipo: "estouro" },  
+                  critico: "×2", peso: "2kg", tipo: "concussao" },  
                   
-  lanca: { nome: "Lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3", 
+  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3", 
            categorias: { cac: true, arremesso: true },
            incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
            
 //Ranged Weapons
 
 
-  besta_pesada: { nome: "Besta, pesada", preco: "50 PO", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
-           categorias: { distancia: true },
-           incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },          
+  besta_pesada: { nome: "besta pesada", preco: "50 PO", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
+                  categorias: { distancia: true },
+                  incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },          
            
-  besta_leve: { nome: "Besta, leve", preco: "35 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/×2",
-           categorias: { distancia: true },
-           incremento_distancia: "16 quadrados", peso: "2kg", tipo: "perfurante" },      
+  besta_leve: { nome: "besta leve", preco: "35 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/×2",
+                categorias: { distancia: true },
+                incremento_distancia: "16 quadrados", peso: "2kg", tipo: "perfurante" },      
 
-  dardo: { nome: "Dardo", preco: "5 PP", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
+  dardo: { nome: "dardo", preco: "5 PP", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
            categorias: { distancia: true },
            incremento_distancia: "4 quadrados", peso: "250g", tipo: "perfurante" },    
 
-  javelin: { nome: "Javelin", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
-           categorias: { distancia: true },
-           incremento_distancia: "6 quadrados", peso: "1Kg", tipo: "perfurante" },  
+  javelin: { nome: "javelin", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
+             categorias: { distancia: true },
+             incremento_distancia: "6 quadrados", peso: "1Kg", tipo: "perfurante" },  
            
-  sling: { nome: "Sling", preco: "0 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
+  funda: { nome: "funda", preco: "0 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
            categorias: { distancia: true },
-           incremento_distancia: "10 quadrados", peso: "0Kg", tipo: "estouro" },              
+           incremento_distancia: "10 quadrados", peso: "0Kg", tipo: "concussao" },              
              
               
 
