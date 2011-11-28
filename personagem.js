@@ -41,7 +41,10 @@ var personagem = {
   bba: 0,
   bba_cac: 0,  // inclui tamanho e forca.
   bba_distancia: 0,  // inclui tamanho e destreza.
-  // Cada entrada: { nome, arma_principal, arma_secundaria}.
+  // Cada entrada: { nome, 
+  //                 arma_primaria: {  nome, 
+  //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
+  //                 arma_secundaria: { idem }, }.
   estilos_luta: [],
   ca: { normal: 10, surpreso: 10, toque: 10 },
   salvacoes : {
@@ -74,7 +77,20 @@ function ConverteEntradasParaPersonagem() {
   personagem.pontos_vida.ferimentos = entradas.ferimentos;
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].valor = entradas[atributo];
+    personagem.atributos[atributo].modificador = 
+        Math.floor((personagem.atributos[atributo].valor - 10) / 2);
   }
+  personagem.bba = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    personagem.bba += 
+        tabelas_bba[personagem.classes[i].classe](personagem.classes[i].nivel);
+  }
+  personagem.bba_cac = 
+      personagem.bba + personagem.atributos.forca.modificador + 
+      personagem.tamanho.modificador_ataque_defesa;
+  personagem.bba_distancia = 
+      personagem.bba + personagem.atributos.destreza.modificador + 
+      personagem.tamanho.modificador_ataque_defesa;
 
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
@@ -94,16 +110,71 @@ function ConverteEntradasParaPersonagem() {
   // Estilos tem que vir apos a atualizacao das armas do personagem.
   personagem.estilos_luta = [];
   for (var i = 0; i < entradas.estilos_luta.length; ++i) {
-    var estilo_entrada = entradas.estilos_luta[i];
-    var estilo_personagem = { 
-      nome: estilo_entrada.nome,
-      arma_primaria: ArmaPersonagem(estilo_entrada.arma_primaria) ? 
-          estilo_entrada.arma_primaria : 'desarmado',
-      arma_secundaria: ArmaPersonagem(estilo_entrada.arma_secundaria) ? 
-          estilo_entrada.arma_secundaria : 'desarmado'
-    };
-    personagem.estilos_luta.push(estilo_personagem);
+    personagem.estilos_luta.push(_ConverteEstilo(entradas.estilos_luta[i]));
   }
+}
+
+// Converte um estilo da entrada para o personagem.
+function _ConverteEstilo(estilo_entrada) {
+  var arma_primaria = ArmaPersonagem(estilo_entrada.arma_primaria);
+  var arma_secundaria = ArmaPersonagem(estilo_entrada.arma_secundaria);
+  var estilo_personagem = { 
+    nome: estilo_entrada.nome,
+    arma_primaria: { 
+      nome: arma_primaria != null ? 
+        estilo_entrada.arma_primaria : 'desarmado',
+      bonus_por_categoria: {}
+    },
+    arma_secundaria: {
+      nome: arma_secundaria != null ? 
+        estilo_entrada.arma_secundaria : 'desarmado',
+      bonus_por_categoria: {}
+    },
+  };
+
+  // Atualiza cada categoria da arma no estilo.
+  for (var categoria in arma_primaria.arma_tabela.categorias) {
+    if (estilo_entrada.nome == 'uma_arma') {
+      var multiplicador_dano_forca = categoria.indexOf('leve') != -1 ? 1.0 : 1.5;
+      estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
+        _ConverteBonusPorCategoria(categoria, arma_primaria, multiplicador_dano_forca);
+    } else if (estilo_entrada.nome == 'arma_escudo') {
+      estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
+        _ConverteBonusPorCategoria(categoria, arma_primaria, 1.0);
+    } else if (estilo_entrada.nome == 'duas_armas') {
+      estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
+        _ConverteBonusPorCategoria(categoria, arma_primaria, 1.0);
+      estilo_personagem.arma_secundaria.bonus_por_categoria[categoria] =
+        _ConverteBonusPorCategoria(categoria, arma_secundaria, 0.5);
+    }
+  }
+
+  return estilo_personagem;
+}
+
+// Converte os bonus de ataque e dano para a categoria passada.
+// @param categoria o nome da categoria.
+// @param arma_personagem a arma do personagem.
+// @param multiplicador_dano_forca o multiplicador do dano. (0.5, 1.0 ou 1.5).
+function _ConverteBonusPorCategoria(categoria, arma_personagem, multiplicador_dano_forca) {
+  var bonus_por_categoria = { ataque: null, dano: null };
+  if (categoria.indexOf('cac') != -1) {
+    bonus_por_categoria.ataque = 
+        personagem.bba_cac + arma_personagem.bonus_ataque;
+    bonus_por_categoria.dano = 
+        Math.floor(personagem.atributos.forca.modificador * multiplicador_dano_forca) + 
+        arma_personagem.bonus_dano;
+  } else if (categoria.indexOf('arremesso') != -1) {
+    bonus_por_categoria.ataque = 
+        personagem.bba_distancia + arma_personagem.bonus_ataque;
+    bonus_por_categoria.dano = 
+        personagem.atributos.forca.modificador + arma_personagem.bonus_dano;
+  } else if (categoria.indexOf('distancia')) {
+    bonus_por_categoria.ataque = 
+        personagem.bba_distancia + arma_personagem.bonus_ataque;
+    bonus_por_categoria.dano = arma_personagem.bonus_dano;
+  }
+  return bonus_por_categoria;
 }
 
 // Converte uma arma da entrada para personagem.
@@ -126,6 +197,7 @@ function _ConverteArma(arma_entrada) {
       arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
     }
   }
+  arma_personagem.dano_basico = arma_tabela.dano[personagem.tamanho.categoria];
   return arma_personagem;
 }
 
