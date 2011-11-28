@@ -68,8 +68,6 @@ function _AtualizaModificadoresAtributos() {
         goog.dom.getElement(habilidade + '-valor-total'));
 
     // modificador da habilidade.
-    personagem.atributos[habilidade].modificador = 
-      Math.floor((personagem.atributos[habilidade].valor - 10) / 2);
     // Caso especial: destreza. Depende da armadura e escudo.
     if (habilidade == 'destreza') {
       var armadura = tabelas_armaduras[personagem.armadura.nome];
@@ -120,24 +118,13 @@ function _AtualizaDadosVida() {
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
 function _AtualizaAtaque() {
-  var bba = 0;
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    bba += tabelas_bba[personagem.classes[i].classe](personagem.classes[i].nivel);
-  }
-  ImprimeSinalizado(bba, goog.dom.getElementsByClass('bba'));
-  personagem.bba = bba;
+  ImprimeSinalizado(personagem.bba, goog.dom.getElementsByClass('bba'));
   // Corpo a corpo.
-  personagem.bba_cac = 
-      bba + personagem.atributos.forca.modificador + 
-      personagem.tamanho.modificador_ataque_defesa;
   ImprimeSinalizado(
       personagem.bba_cac,
       goog.dom.getElementsByClass('bba-corpo-a-corpo'));
 
   // Distancia.
-  personagem.bba_distancia = 
-      bba + personagem.atributos.destreza.modificador + 
-      personagem.tamanho.modificador_ataque_defesa;
   ImprimeSinalizado(
       personagem.bba_distancia,
       goog.dom.getElementsByClass('bba-distancia'));
@@ -161,10 +148,10 @@ function _AtualizaEstilo(div_estilo, estilo) {
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
   var id_select_primario = 
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
-  var arma_primaria = ArmaPersonagem(estilo.arma_primaria);
+  var arma_primaria = ArmaPersonagem(estilo.arma_primaria.nome);
   AdicionaArmasAoEstilo(goog.dom.getElement(id_select_primario), 
-                        estilo.arma_primaria);
-  _AtualizaArmaEstilo(arma_primaria, 
+                        estilo.arma_primaria.nome);
+  _AtualizaArmaEstilo(arma_primaria, true, estilo,
                       goog.dom.getElement(id_span_primario));
 
   var id_span_secundario =
@@ -172,10 +159,10 @@ function _AtualizaEstilo(div_estilo, estilo) {
   if (estilo.nome == 'duas_armas') {
     var id_select_secundario = 
         id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
-    var arma_secundaria = ArmaPersonagem(estilo.arma_secundaria);
+    var arma_secundaria = ArmaPersonagem(estilo.arma_secundaria.nome);
     AdicionaArmasAoEstilo(goog.dom.getElement(id_select_secundario), 
-                          estilo.arma_secundaria);
-    _AtualizaArmaEstilo(arma_secundaria,
+                          estilo.arma_secundaria.nome);
+    _AtualizaArmaEstilo(arma_secundaria, false, estilo,
                         goog.dom.getElement(id_span_secundario));
   } else {
     goog.dom.getElement(id_span_secundario).innerText = '';
@@ -184,35 +171,17 @@ function _AtualizaEstilo(div_estilo, estilo) {
 
 // Atualiza o span de uma arma no estilo de luta com seus valores de ataque e defesa
 // @param arma do personagem.
+// @param primaria booleano indicando se a arma eh primaria ou secundaria.
+// @param estilo de luta cuja arma esta sendo atualizada.
 // @param span_arma o dom da arma, que eh um span.
-function _AtualizaArmaEstilo(arma, span_arma) {
-  // TODO terminar.
+function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
   span_arma.innerText = '';
-  var arma_tabela = arma.arma_tabela;
-  for (var categoria in arma_tabela.categorias) {
-    if (!arma_tabela.categorias[categoria]) {
-      continue;
-    }
-    if (categoria.indexOf('cac') != -1) {
-      span_arma.innerText += categoria + ': ' + 
-                             StringSinalizada(personagem.bba_cac + arma.bonus_ataque) + ', ' + 
-                             arma_tabela.dano[personagem.tamanho.categoria] + 
-                             StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano, false) +
-                             '; ';
-    } else if (categoria.indexOf('arremesso') != -1) {
-      span_arma.innerText += categoria + ': ' + 
-                             StringSinalizada(personagem.bba_distancia + arma.bonus_ataque) + ', ' + 
-                             arma_tabela.dano[personagem.tamanho.categoria] + 
-                             StringSinalizada(personagem.atributos.forca.modificador + arma.bonus_dano, false) +
-                             '; ';
-    } else if (categoria.indexOf('distancia') != -1) {
-      // TODO como tratar arcos compostos?
-      span_arma.innerText += categoria + ': ' + 
-                             StringSinalizada(personagem.bba_distancia + arma.bonus_ataque) + ', ' + 
-                             arma_tabela.dano[personagem.tamanho.categoria] + 
-                             StringSinalizada(arma.bonus_dano, false) +
-                             '; ';
-    }
+  var arma_estilo = primaria ? estilo.arma_primaria : estilo.arma_secundaria;
+  for (var categoria in arma_estilo.bonus_por_categoria) {
+    var bonus = arma_estilo.bonus_por_categoria[categoria];
+    span_arma.innerText += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
+    span_arma.innerText += arma.dano_basico + 
+                           StringSinalizada(bonus.dano, false) + '; ';
   }
 }
 
