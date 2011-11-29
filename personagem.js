@@ -59,7 +59,7 @@ var personagem = {
     classe: 0,
     lista: [],
   },
-  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, arma_tabela };
+  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, proficiente, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
@@ -133,47 +133,77 @@ function _ConverteEstilo(estilo_entrada) {
   };
 
   // Atualiza cada categoria da arma no estilo.
-  for (var categoria in arma_primaria.arma_tabela.categorias) {
-    if (estilo_entrada.nome == 'uma_arma') {
-      var multiplicador_dano_forca = categoria.indexOf('leve') != -1 ? 1.0 : 1.5;
-      estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
-        _ConverteBonusPorCategoria(categoria, arma_primaria, multiplicador_dano_forca);
-    } else if (estilo_entrada.nome == 'arma_escudo') {
-      estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
-        _ConverteBonusPorCategoria(categoria, arma_primaria, 1.0);
-    } else if (estilo_entrada.nome == 'duas_armas') {
-      estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
-        _ConverteBonusPorCategoria(categoria, arma_primaria, 1.0);
-      estilo_personagem.arma_secundaria.bonus_por_categoria[categoria] =
-        _ConverteBonusPorCategoria(categoria, arma_secundaria, 0.5);
+  var secundaria_leve = false;
+  for (var categoria in arma_secundaria.arma_tabela.categorias) {
+    if (estilo_entrada.nome == 'duas_armas') {
+      if (categoria.indexOf('leve') != -1) {
+        secundaria_leve = true;
+      }
     }
+  }
+  for (var categoria in arma_secundaria.arma_tabela.categorias) {
+    if (estilo_entrada.nome == 'duas_armas') {
+      if (categoria.indexOf('leve') != -1) {
+        secundaria_leve = true;
+      }
+      estilo_personagem.arma_secundaria.bonus_por_categoria[categoria] =
+        _ConverteBonusPorCategoria(
+            categoria, arma_secundaria, estilo_personagem, false, secundaria_leve);
+    }
+  }
+
+  for (var categoria in arma_primaria.arma_tabela.categorias) {
+    estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
+      _ConverteBonusPorCategoria(
+          categoria, arma_primaria, estilo_personagem, true, secundaria_leve);
   }
 
   return estilo_personagem;
 }
 
 // Converte os bonus de ataque e dano para a categoria passada.
-// @param categoria o nome da categoria.
+// @param categoria o nome da categoria da arma.
 // @param arma_personagem a arma do personagem.
-// @param multiplicador_dano_forca o multiplicador do dano. (0.5, 1.0 ou 1.5).
-function _ConverteBonusPorCategoria(categoria, arma_personagem, multiplicador_dano_forca) {
-  var bonus_por_categoria = { ataque: null, dano: null };
+// @param primaria se true, indica se a arma eh primaria.
+function _ConverteBonusPorCategoria(
+    categoria, arma_personagem, estilo, primaria, secundaria_leve) {
+  var bonus_por_categoria = { ataque: 0, dano: 0 };
+  var multiplicador_dano_forca = 0;
+  if (estilo.nome == 'uma_arma') {
+    multiplicador_dano_forca = categoria.indexOf('leve') != -1 ? 1.0 : 1.5;
+  } else if (estilo.nome == 'arma_escudo') {
+    multiplicador_dano_forca = 1.0;
+  } else if (estilo.nome == 'duas_armas') {
+    if (primaria) {
+      bonus_por_categoria.ataque = secundaria_leve ? -4 : -6;
+    } else {
+      bonus_por_categoria.ataque = secundaria_leve ? -8 : -10;
+    }
+    multiplicador_dano_forca = primaria ? 1.0 : 0.5;
+  }
+
   if (categoria.indexOf('cac') != -1) {
-    bonus_por_categoria.ataque = 
+    bonus_por_categoria.ataque += 
         personagem.bba_cac + arma_personagem.bonus_ataque;
-    bonus_por_categoria.dano = 
+    bonus_por_categoria.dano += 
         Math.floor(personagem.atributos.forca.modificador * multiplicador_dano_forca) + 
         arma_personagem.bonus_dano;
   } else if (categoria.indexOf('arremesso') != -1) {
-    bonus_por_categoria.ataque = 
+    bonus_por_categoria.ataque += 
         personagem.bba_distancia + arma_personagem.bonus_ataque;
-    bonus_por_categoria.dano = 
+    bonus_por_categoria.dano += 
         personagem.atributos.forca.modificador + arma_personagem.bonus_dano;
   } else if (categoria.indexOf('distancia')) {
-    bonus_por_categoria.ataque = 
+    bonus_por_categoria.ataque += 
         personagem.bba_distancia + arma_personagem.bonus_ataque;
-    bonus_por_categoria.dano = arma_personagem.bonus_dano;
+    bonus_por_categoria.dano += arma_personagem.bonus_dano;
   }
+
+  // Proficiencia.
+  if (!arma_personagem.proficiente) {
+    bonus_por_categoria.ataque -= 4;
+  }
+
   return bonus_por_categoria;
 }
 
@@ -198,6 +228,8 @@ function _ConverteArma(arma_entrada) {
     }
   }
   arma_personagem.dano_basico = arma_tabela.dano[personagem.tamanho.categoria];
+  // TODO: proficiente
+  arma_personagem.proficiente = true;
   return arma_personagem;
 }
 
