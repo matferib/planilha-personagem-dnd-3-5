@@ -543,6 +543,135 @@ var tabelas_armas = {
 
 //Bolts (10)  1 gp  — — — — 1 lb. —
 //Bolts (5) 1 gp  — — — — 1 lb. —
+};
 
+// Cada entrada tem suas dependencias.
+var tabelas_talentos = {
+  /*
+Acrobatic
+Agile
+Alertness
+Animal Affinity
+Armor Proficiency (Light)
+Armor Proficiency (Medium)
+Armor Proficiency (Heavy)
+Athletic
+Augment Summoning
+Blind-Fight
+Combat Casting
+Combat Expertise
+Improved Disarm
+Improved Feint
+Improved Trip
+Whirlwind Attack
+Combat Reflexes
+Deceitful
+Deft Hands
+Diligent
+Dodge
+Mobility
+Spring Attack
+Endurance
+Diehard
+Eschew Materials
+Extra Turning
+Great Fortitude
+Improved Counterspell
+Improved Critical
+Improved Familiar
+Improved Initiative
+Improved Turning
+Improved Unarmed Strike
+Deflect Arrows
+Improved Grapple
+Snatch Arrows
+Stunning Fist
+Investigator
+Iron Will
+Leadership
+Lightning Reflexes
+Magical Aptitude
+Mounted Combat
+Mounted Archery
+Ride-By Attack
+Spirited Charge
+Trample
+Natural Spell
+Negotiator
+Nimble Fingers
+Persuasive
+Point Blank Shot
+Far Shot
+Precise Shot
+Improved Precise Shot
+Rapid Shot
+Manyshot
+Shot On The Run
+Power Attack
+Cleave
+Great Cleave
+Improved Bull Rush
+Improved Overrun
+Improved Sunder
+Quick Draw
+Rapid Reload
+Run
+Self-Sufficient
+Shield Proficiency
+Improved Shield Bash
+Tower Shield Proficiency,
+*/
+  // Exotic Weapon Proficiency
+  usar_arma_exotica: { 
+      nome: 'Usar arma exótica',
+      requisitos: { bba: 1 } },
 
+  // Simple Weapon Proficiency
+  usar_armas_simples: { nome: 'Usar armas simples', },
+
+  // Martial weapon proficiency
+  usar_arma_comum: { nome: 'Usar arma comum' }, 
+
+  // Two-Weapon Fighting
+  combater_duas_armas: { 
+      nome: 'Combater com duas armas',
+      requisitos: { habilidades: { des: 15 } } },
+
+/*
+Skill Focus
+Spell Focus
+Greater Spell Focus
+Spell Mastery
+Spell Penetration
+Greater Spell Penetration
+Stealthy
+Toughness
+Track
+Two-Weapon Defense
+Improved Two-Weapon Fighting
+Greater Two-Weapon Fighting
+Weapon Finesse
+Weapon Focus
+Weapon Specialization
+Greater Weapon Focus
+Greater Weapon Specialization
+
+Brew Potion
+Craft Magic Arms And Armor
+Craft Rod
+Craft Staff
+Craft Wand
+Craft Wondrous Item
+Forge Ring
+Scribe Scroll
+Empower Spell
+Enlarge Spell
+Extend Spell
+Heighten Spell
+Maximize Spell
+Quicken Spell
+Silent Spell
+Still Spell
+Widen Spell
+     */
 };
