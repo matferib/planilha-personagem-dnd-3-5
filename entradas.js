@@ -33,6 +33,9 @@ var entradas = {
   armas: [],
   armadura: { nome: '', bonus_magico: 0 },
   escudo: { nome: '', bonus_magico: 0 },
+
+  // talentos.
+  talentos: [],
 };
 
 // Le todos os inputs da planilha e armazena em 'entradas'. 
@@ -99,6 +102,14 @@ function LeEntradas() {
   var div_armas = goog.dom.getElement('div-equipamentos-armas');
   for (var i = 0; i < div_armas.childNodes.length; ++i) {
     entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
+  }
+
+  // talentos.
+  entradas.talentos = [];
+  var selects_talento = goog.dom.getElementsByClass('selects-talento');
+  for (var i = 0; i < selects_talento.length; ++i) {
+    var select_talento = selects_talento[i];
+    entradas.talentos.push(ValorSelecionado(select_talento));
   }
 }
 
@@ -198,11 +209,16 @@ function EscreveEntradas() {
     AdicionaArma(arma.nome, arma.obra_prima, arma.bonus);
   }
 
-  // Estilos de luta. Depende das armas.
+  // Estilos de luta.
   goog.dom.getElement('div-estilos-luta').childNodes = [];
   for (var i = 0; i < entradas.estilos_luta.length; ++i) {
     var estilo = entradas.estilos_luta[i];
     AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
+  }
+
+  // talentos.
+  for (var i = 0; i < entradas.talentos.length; ++i) {
+    AdicionaTalento(i, entradas.talentos[i]);
   }
 }
 

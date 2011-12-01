@@ -10,6 +10,7 @@ function CarregamentoInicial() {
   if (indice_igual == -1) {
     // Comeca do zero.
     AdicionaClasse();
+    AdicionaTalento(0);
     AtualizaGeral();
   }
   else {
