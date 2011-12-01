@@ -25,6 +25,12 @@ function ConverteEntradasParaPersonagem() {
       personagem.bba + personagem.atributos.destreza.modificador + 
       personagem.tamanho.modificador_ataque_defesa;
 
+  // Talentos.
+  personagem.talentos.lista = [];
+  for (var i = 0; i < entradas.talentos.length; ++i) {
+    personagem.talentos.lista.push(entradas.talentos[i]);
+  }
+
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.armas = [];
@@ -109,8 +115,14 @@ function _ConverteBonusPorCategoria(
   } else if (estilo.nome == 'duas_armas') {
     if (primaria) {
       bonus_por_categoria.ataque = secundaria_leve ? -4 : -6;
+      if (PersonagemPossuiTalento('combater_duas_armas')) {
+        bonus_por_categoria.ataque += 2; 
+      }
     } else {
       bonus_por_categoria.ataque = secundaria_leve ? -8 : -10;
+      if (PersonagemPossuiTalento('combater_duas_armas')) {
+        bonus_por_categoria.ataque += 6; 
+      }
     }
     multiplicador_dano_forca = primaria ? 1.0 : 0.5;
   }

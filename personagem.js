@@ -41,6 +41,13 @@ var personagem = {
   bba: 0,
   bba_cac: 0,  // inclui tamanho e forca.
   bba_distancia: 0,  // inclui tamanho e destreza.
+  // talentos
+  talentos: {
+    nivel: 0,
+    raca: 0,
+    classe: 0,
+    lista: [],
+  },
   // Cada entrada: { nome, 
   //                 arma_primaria: {  nome, 
   //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
@@ -51,13 +58,6 @@ var personagem = {
     fortitude: 0,
     reflexo: 0,
     vontade: 0
-  },
-  // talentos
-  talentos: {
-    nivel: 0,
-    raca: 0,
-    classe: 0,
-    lista: [],
   },
   // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, proficiente, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
@@ -79,5 +79,17 @@ function ArmaPersonagem(nome_gerado) {
   return null;
 }
 
-
+// @param nome_talento nome do talento na tabela ou nome do indice na tabela.
+// @return true se o personagem tiver o talento passado.
+function PersonagemPossuiTalento(nome_talento) {
+  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+    if (nome_talento == personagem.talentos.lista[i]) {
+      return true;
+    }
+    if (nome_talento == tabelas_talentos[personagem.talentos.lista[i].nome]) {
+      return true;
+    }
+  }
+  return false;
+}
 

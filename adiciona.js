@@ -198,3 +198,27 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
     select_arma.options.add(option);
   }
 }
+
+// Adiciona um talento a planilha.
+// @param id numero identificando o id do talento.
+// @param nome_talento nome do talento sendo adicionado (opcional).
+function AdicionaTalento(id, nome_talento) {
+  var div_select_talentos = goog.dom.getElement('div-select-talentos');
+  var select_talento = document.createElement('select');
+  select_talento.id = 'select-talento-' + id;
+  select_talento.className = 'selects-talento';
+  select_talento.setAttribute('onchange', 'AtualizaGeral()');
+  for (var talento in tabelas_talentos) {
+    var option_talento = document.createElement('option');
+    option_talento.text = tabelas_talentos[talento].nome;
+    option_talento.value = talento;
+    option_talento.selected = nome_talento && nome_talento == talento;
+    select_talento.add(option_talento, null);
+  }
+
+  var div_select_talento = document.createElement('div');
+  div_select_talento.id = 'div-select-talento-' + id;
+  div_select_talento.appendChild(select_talento);
+
+  div_select_talentos.appendChild(div_select_talento);
+}
