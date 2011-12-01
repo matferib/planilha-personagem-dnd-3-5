@@ -31,7 +31,7 @@ function bba_nulo() {
 
 // Tabelas de dados de vida.
 var tabelas_dados_vida = {
-  barbaro: 12, 
+  barbaro: 12,
   bardo: 6,
   clerigo: 8,
   druida: 8,
@@ -53,7 +53,7 @@ var tabelas_dados_vida = {
 // Tabelas de geracao de atributos.
 var tabelas_geracao_atributos = {
   // Peguei do livro do mestre.
-  barbaro: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ], 
+  barbaro: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
   bardo: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
   clerigo: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
   druida: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
@@ -74,7 +74,7 @@ var tabelas_geracao_atributos = {
 
 // Tabelas de BBA.
 var tabelas_bba = {
-  barbaro: bba_forte, 
+  barbaro: bba_forte,
   bardo: bba_medio,
   clerigo: bba_medio,
   druida: bba_medio,
@@ -102,38 +102,38 @@ function salvacao_fraca(nivel) {
 }
 // Tabelas de salvacao.
 var tabelas_salvacao = {
-  barbaro: { 
+  barbaro: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-  bardo: { 
+  bardo: {
     fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_forte },
-  clerigo: { 
+  clerigo: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  druida: { 
+  druida: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  feiticeiro: { 
+  feiticeiro: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  guerreiro: { 
+  guerreiro: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-  ladino: { 
+  ladino: {
     fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_fraca },
-  mago: { 
+  mago: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  monge: { 
+  monge: {
     fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_forte },
-  paladino: { 
+  paladino: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-  ranger: { 
+  ranger: {
     fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_fraca },
   // classes NPC
-  adepto: { 
+  adepto: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  aristocrata: { 
+  aristocrata: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  plebeu: { 
+  plebeu: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_fraca },
-  expert: { 
+  expert: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
-  combatente: { 
+  combatente: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
 };
 
@@ -142,7 +142,7 @@ var tabelas_tamanho = {
   minusculo: { nome: 'Minúsculo', ataque_defesa: 8, },
   diminuto: { nome: 'Diminuto', ataque_defesa: 4, },
   miudo: { nome: 'Miúdo', ataque_defesa: 2, },
-  pequeno: { nome: 'Pequeno', ataque_defesa: 1, }, 
+  pequeno: { nome: 'Pequeno', ataque_defesa: 1, },
   medio: { nome: 'Médio', ataque_defesa: 0, },
   grande: { nome: 'Grande', ataque_defesa: -1, },
   enorme: { nome: 'Enorme', ataque_defesa: -2, },
@@ -152,35 +152,35 @@ var tabelas_tamanho = {
 
 // Tabelas de armaduras.
 var tabelas_armaduras = {
-  nenhuma: { 
+  nenhuma: {
     nome: 'Nenhuma', bonus: 0, },
-  acolchoada: { 
+  acolchoada: {
     nome: 'Acolchoada', bonus: 1, maximo_bonus_destreza: 8 },
-  couro: { 
+  couro: {
     nome: 'Couro', bonus: 2,  maximo_bonus_destreza: 6 },
-  couro_batido: { 
+  couro_batido: {
     nome: 'Couro Batido', bonus: 3, maximo_bonus_destreza: 5 },
-  camisao_cota_de_malha: { 
+  camisao_cota_de_malha: {
     nome: 'Camisão de Cota de Malha', bonus: 4, maximo_bonus_destreza: 4 },
-  gibao_de_peles: { 
+  gibao_de_peles: {
     nome: 'Gibão de Peles', bonus: 3, maximo_bonus_destreza: 4 },
-  brunea: { 
+  brunea: {
     nome: 'Brunea', bonus: 4, maximo_bonus_destreza: 3 },
-  cota_de_malha: { 
+  cota_de_malha: {
     nome: 'Cota de Malha', bonus: 5, maximo_bonus_destreza: 2 },
-  peitoral_de_aco: { 
+  peitoral_de_aco: {
     nome: 'Peitoral de Aço', bonus: 5, maximo_bonus_destreza: 3 },
-  cota_de_talas: { 
+  cota_de_talas: {
     nome: 'Cota de Talas', bonus: 6, maximo_bonus_destreza: 0 },
-  loriga_segmentada: { 
+  loriga_segmentada: {
     nome: 'Loriga Segmentada', bonus: 6, maximo_bonus_destreza: 1 },
-  meia_armadura: { 
+  meia_armadura: {
     nome: 'Meia Armadura', bonus: 7, maximo_bonus_destreza: 0 },
-  armadura_de_batalha: { 
+  armadura_de_batalha: {
     nome: 'Armadura de Batalha', bonus: 8, maximo_bonus_destreza: 1 },
 };
 
-// Tabelas de escudos (TODO terminar).
+// Tabelas de escudos (TODO terminar outros atributos).
 var tabelas_escudos = {
   nenhum: { nome: "Nenhum", bonus: 0 },
   broquel: { nome: "Broquel", bonus: 1 },
@@ -193,13 +193,16 @@ var tabelas_escudos = {
 
 var tabelas_armas = {
 
+//As primeiras armas estão ordenadas de acordo com o livro inglês,
+// a partir das Martial Weapons do livro em português - FC
 // Unarmed Attacks
-  
-  
-  desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"}, 
+
+
+  desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"},
                categorias: { cac_leve: true },
                critico: "×2", peso: "0", tipo: "concussao", incremento_distancia: "0 quadrados" },
-  manopla: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3" }, 
+
+  manopla: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3" },
              categorias: { cac_leve: true },
              critico: "×2", peso: "500g", tipo: "concussao", },
 
@@ -211,7 +214,7 @@ var tabelas_armas = {
            incremento_distancia: "2 quadrados", critico: "19-20/×2", peso: "0,5kg", tipo: "cortante/perfurante" },
 
   adaga_de_soco: { nome: "adaga de soco", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"},
-                  categorias: { cac_leve: true },
+                categorias: { cac_leve: true },
                   critico: "×3", peso: "0,5kg", tipo: "perfurante" },
 
   manopla_com_cravos: { nome: "manopla com cravos", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
@@ -225,64 +228,62 @@ var tabelas_armas = {
   foice_curta: { nome: "foice curta", preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
                   categorias: { cac_leve: true } ,
                   critico: "×2", peso: "1kg", tipo: "cortante" },
-                  
+
 // One-Handed Melee Weapons
 
-  clava: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2", 
+  clava: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
            categorias: { cac_leve: true, arremesso: true },
            incremento_distancia: "2 quadrados", peso: "1,5Kg", tipo: "concussao" },
-             
+
   maca_pesada: { nome: "maça pesada", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
                  categorias: { cac: true } ,
-                 critico: "×2", peso: "4kg", tipo: "concussao" },                                                   
-                    
+                 critico: "×2", peso: "4kg", tipo: "concussao" },
+
   maca_estrela: { nome: "maça estrela", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "3kg", tipo: "concussao/perfurante" },     
-                  
+                  critico: "×2", peso: "3kg", tipo: "concussao/perfurante" },
+
   lanca_curta: { nome: "lança curta", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
                  categorias: { cac: true, arremesso: true} ,
-                 incremento_distancia: "4 quadrados", critico: "×2", peso: "1,5kg", tipo: "perfurante" },                                      
-                                                                        
+                 incremento_distancia: "4 quadrados", critico: "×2", peso: "1,5kg", tipo: "perfurante" },
+
 // Two-Handed Melee Weapons
-    
-    
+
+
   lanca_longa: { nome: "lança longa", preco: "5 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
                  categorias: { cac: true } ,
-                 critico: "×3", peso: "4,5kg", tipo: "perfurante" },         
-    
+                 critico: "×3", peso: "4,5kg", tipo: "perfurante" },
+
   bordao: { nome: "bordão", preco: "0 PO", dano: { pequeno: "1d4/1d4", medio: "1d6/1d6"} ,
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "2kg", tipo: "concussao" },  
-                  
-  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3", 
+                  critico: "×2", peso: "2kg", tipo: "concussao" },
+
+  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3",
            categorias: { cac: true, arremesso: true },
            incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
-           
+
 //Ranged Weapons
 
 
   besta_pesada: { nome: "besta pesada", preco: "50 PO", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
                   categorias: { distancia: true },
-                  incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },          
-           
+                  incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },
+
   besta_leve: { nome: "besta leve", preco: "35 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/×2",
                 categorias: { distancia: true },
-                incremento_distancia: "16 quadrados", peso: "2kg", tipo: "perfurante" },      
+                incremento_distancia: "16 quadrados", peso: "2kg", tipo: "perfurante" },
 
   dardo: { nome: "dardo", preco: "5 PP", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
            categorias: { arremesso: true },
-           incremento_distancia: "4 quadrados", peso: "250g", tipo: "perfurante" },    
+           incremento_distancia: "4 quadrados", peso: "250g", tipo: "perfurante" },
 
   azagaia: { preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
              categorias: { arremesso: true },
-             incremento_distancia: "6 quadrados", peso: "1Kg", tipo: "perfurante" },  
-           
+             incremento_distancia: "6 quadrados", peso: "1Kg", tipo: "perfurante" },
+
   funda: { nome: "funda", preco: "0 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
            categorias: { arremesso: true },
-           incremento_distancia: "10 quadrados", peso: "0Kg", tipo: "concussao" },              
-             
-              
+           incremento_distancia: "10 quadrados", peso: "0Kg", tipo: "concussao" },
 
 
 //Munição
@@ -290,84 +291,258 @@ var tabelas_armas = {
 //Bullets, sling (10) 1 sp  — — — — 5 lb. —
 
 
- /*
-
-
-
 // Martial Weapons Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
-// Light Melee Weapons
-Axe, throwing 8 gp  1d4 1d6 ×2  10 ft.  2 lb. Slashing
-Hammer, light 1 gp  1d3 1d4 ×2  20 ft.  2 lb. Bludgeoning
-Handaxe 6 gp  1d4 1d6 ×3  — 3 lb. Slashing
-Kukri 8 gp  1d3 1d4 18-20/×2  — 2 lb. Slashing
-Pick, light 4 gp  1d3 1d4 ×4  — 3 lb. Piercing
-Sap 1 gp  1d43  1d63  ×2  — 2 lb. Bludgeoning
-Shield, light special 1d2 1d3 ×2  — special Bludgeoning
-Spiked armor  special 1d4 1d6 ×2  — special Piercing
-Spiked shield, light  special 1d3 1d4 ×2  — special Piercing
-Sword, short  10 gp 1d4 1d6 19-20/×2  — 2 lb. Piercing
+// Light Melee Weapons, ordenado de acordo com o livro do jogador 3.5, português
+
+  armadura_com_cravos: { nome: "armadura com cravos", preco: "especial",
+                         dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
+                         categorias: { cac_leve: true },
+                         peso: "especial", tipo: "perfurante" },
+
+  escudo_pequeno: { nome: "escudo pequeno", preco: "especial", dano: { pequeno: "1d2", medio: "1d3"} ,
+                    categorias: { cac_leve: true } ,
+                    critico: "×2", peso: "especial", tipo: "concussão" },
+
+  escudo_pequeno_com_cavos: { nome: "escudo pequeno com cravos", preco: "especial", 
+                              dano: { pequeno: "1d3", medio: "1d4"}, categorias: { cac_leve: true } ,
+                              critico: "×2", peso: "especial", tipo: "perfurante" },
+
+  espada_curta: { nome: "espada curta", preco: "10 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                  categorias: { cac_leve: true } ,
+                  critico: "19-20/×2", peso: "1kg", tipo: "perfurante" },
+
+  kukri: { preco: "8 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+           categorias: { cac_leve: true } ,
+           critico: "18-20/×2", peso: "1kg", tipo: "cortante" },
+
+  machadinha: { preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                categorias: { cac_leve: true } ,
+                critico: "×3", peso: "1,5kg", tipo: "cortante" },
+
+  machado_de_arremesso: { nome: "machado de arremesso", preco: "8 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                          categorias: { cac_leve: true, arremesso: true} ,
+                          incremento_distancia: "2 quadrados", critico: "×2", peso: "1kg", tipo: "cortante" },
+
+  martelo_leve: { nome: "martelo leve", preco: "1 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+                  categorias: { cac_leve: true, arremesso: true} ,
+                  incremento_distancia: "4 quadrados", critico: "×2", peso: "1kg", tipo: "concussão" },
+
+  picareta_leve: { nome: "picareta leve", preco: "4 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+                   categorias: { cac_leve: true } ,
+                   critico: "×4", peso: "1,5kg", tipo: "perfurante" },
+
+  porrete: { nome: "porrete", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+             categorias: { cac_leve: true } ,
+             critico: "×2", peso: "1kg", tipo: "concussão" },
+
 // One-Handed Melee Weapons
-Battleaxe 10 gp 1d6 1d8 ×3  — 6 lb. Slashing
-Flail 8 gp  1d6 1d8 ×2  — 5 lb. Bludgeoning
-*/
+
+  cimitarra: { nome: "cimitarra", preco: "15 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+               categorias: { cac: true } ,
+               critico: "18-20/×2", peso: "2kg", tipo: "cortante" },
+
+  escudo_grande: { nome: "escudo grande", preco: "especial", dano: { pequeno: "1d3", medio: "1d4"} ,
+                   categorias: { cac: true } ,
+                   critico: "×2", peso: "especial", tipo: "concussão" },
+
+  escudo_grande_com_cravos: { nome: "escudo grande com cravos", preco: "especial", dano: { pequeno: "1d4", medio: "1d6"} ,
+                 categorias: { cac: true } ,
+                 critico: "×2", peso: "especial", tipo: "perfurante" },
+
   espada_longa: { nome: "espada longa", preco: "15 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
                   categorias: { cac: true },
                   critico: "19-20/×2", peso: "2kg", tipo: "cortante", },
-  /*
-Pick, heavy 8 gp  1d4 1d6 ×4  — 6 lb. Piercing
-Rapier  20 gp 1d4 1d6 18-20/×2  — 2 lb. Piercing
-Scimitar  15 gp 1d4 1d6 18-20/×2  — 4 lb. Slashing
-Shield, heavy special 1d3 1d4 ×2  — special Bludgeoning
-Spiked shield, heavy  special 1d4 1d6 ×2  — special Piercing
-Trident 15 gp 1d6 1d8 ×2  10 ft.  4 lb. Piercing
-Warhammer 12 gp 1d6 1d8 ×3  — 5 lb. Bludgeoning
+
+  machado_de_batalha: { nome: "machado de batalha", preco: "10 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                        categorias: { cac: true } ,
+                        critico: "×3", peso: "3kg", tipo: "cortante" },
+
+  mangual: { nome: "mangual", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+             categorias: { cac: true } ,
+             critico: "×2", peso: "2,5kg", tipo: "concussão" },
+
+  martelo_de_guerra: { nome: "martelo de guerra", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                       categorias: { cac: true } ,
+                       critico: "×3", peso: "2,5kg", tipo: "concussão" },
+
+  picareta_pesada: { nome: "picareta pesada", preco: "8 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                     categorias: { cac: true } ,
+                     critico: "×4", peso: "3kg", tipo: "perfurante" },
+
+  sabre: { nome: "sabre", preco: "20 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+           categorias: { cac: true } ,
+           critico: "18-20/x2", peso: "1kg", tipo: "perfurante" },
+
+  tridente: { nome: "tridente", preco: "15 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+              categorias: { cac: true, arremesso: true} ,
+              incremento_distancia: "2 quadrados", critico: "×2", peso: "2kg", tipo: "perfurante" },
+
+
 // Two-Handed Melee Weapons
-Falchion  75 gp 1d6 2d4 18-20/×2  — 8 lb. Slashing
-Glaive4 8 gp  1d8 1d10  ×3  — 10 lb.  Slashing
-Greataxe  20 gp 1d10  1d12  ×3  — 12 lb.  Slashing
-Greatclub 5 gp  1d8 1d10  ×2  — 8 lb. Bludgeoning
-Flail, heavy  15 gp 1d8 1d10  19-20/×2  — 10 lb.  Bludgeoning
-Greatsword  50 gp 1d10  2d6 19-20/×2  — 8 lb. Slashing
-Guisarme4 9 gp  1d6 2d4 ×3  — 12 lb.  Slashing
-Halberd 10 gp 1d8 1d10  ×3  — 12 lb.  Piercing or slashing
-Lance4  10 gp 1d6 1d8 ×3  — 10 lb.  Piercing
-Ranseur4  10 gp 1d6 2d4 ×3  — 12 lb.  Piercing
-Scythe  18 gp 1d6 2d4 ×4  — 10 lb.  Piercing or slashing
+  alabarda: { nome: "alabarda", preco: "10 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+              categorias: { cac: true } ,
+              critico: "×3", peso: "11kg", tipo: "cortante/perfurante" },
+
+  clava_grande: { nome: "clava grande", preco: "5 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+                  categorias: { cac: true } ,
+                  critico: "×2", peso: "4Kg", tipo: "concussão" },
+
+  espada_larga: { nome: "espada larga", preco: "50 PO", dano: { pequeno: "1d10", medio: "2d6"} ,
+                  categorias: { cac: true } ,
+                  critico: "19-20/×2", peso: "4Kg", tipo: "cortante" },
+
+  falcione: { nome: "falcione", preco: "75 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+              categorias: { cac: true },
+              critico: "18-20/×2", peso: "4kg", tipo: "cortante", },
+
+  foice_longa: { nome: "foice longa", preco: "18 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+                 categorias: { cac: true } ,
+                 critico: "×4", peso: "10kg", tipo: "cortante/perfurante" },
+
+  glaive: { nome: "glaive", preco: "8 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+            categorias: { cac: true } ,
+            critico: "×3", peso: "10Kg", tipo: "cortante" },
+
+  guisarme: { nome: "guisarme", preco: "9 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+              categorias: { cac: true } ,
+              critico: "×3", peso: "11kg", tipo: "cortante" },
+
+  lanca: { nome: "lança", preco: "10 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+           categorias: { cac: true } ,
+           critico: "×3", peso: "10kg", tipo: "perfurante" },
+
+  machado_grande: { nome: "machado grande", preco: "20 PO", dano: { pequeno: "1d10", medio: "1d12"} ,
+                    categorias: { cac: true } ,
+                    critico: "x3", peso: "11kg", tipo: "cortante" },
+
+  mangual_pesado: { nome: "mangual pesado", preco: "15 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+                    categorias: { cac: true } ,
+                    critico: "19-20/x2", peso: "10kg", tipo: "concussão" },
+
+  ranseur: { nome: "ranseur", preco: "10 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+             categorias: { cac: true } ,
+             critico: "x3", peso: "11kg", tipo: "perfurante" },
+
 // Ranged Weapons
-Longbow 75 gp 1d6 1d8 ×3  100 ft. 3 lb. Piercing
-Arrows (20) 1 gp  — — — — 3 lb. —
-Longbow, composite  100 gp  1d6 1d8 ×3  110 ft. 3 lb. Piercing
-Arrows (20) 1 gp  — — — — 3 lb. —
-Shortbow  30 gp 1d4 1d6 ×3  60 ft.  2 lb. Piercing
-Arrows (20) 1 gp  — — — — 3 lb. —
-Shortbow, composite 75 gp 1d4 1d6 ×3  70 ft.  2 lb. Piercing
-Arrows (20) 1 gp  — — — — 3 lb. —
+
+  arco_curto: { nome: "arco curto", preco: "30 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×3",
+                categorias: { distancia: true },
+                incremento_distancia: "12 quadrados", peso: "1Kg", tipo: "perfurante" },
+
+  arco_curto_composto: { nome: "arco curto composto", preco: "75 PO",
+                         dano: { pequeno: "1d4", medio: "1d6" }, critico: "x3",
+                         categorias: { distancia: true },
+                         incremento_distancia: "14 quadrados", peso: "1kg", tipo: "perfurante" },
+
+  arco_longo: { nome: "arco longo", preco: "75 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "x3",
+                categorias: { distancia: true },
+                incremento_distancia: "20 quadrados", peso: "1,5kg", tipo: "perfurante" },
+
+  arco_longo_composto: { nome: "arco longo composto", preco: "100 PO",
+                         dano: { pequeno: "1d6", medio: "1d8" }, critico: "x3",
+                         categorias: { distancia: true },
+                         incremento_distancia: "22 quadrados", peso: "1,5kg", tipo: "perfurante" },
+
+//Arrows (20) 1 gp  — — — — 3 lb. —
+
+
 // Exotic Weapons  Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
 // Light Melee Weapons
-Kama  2 gp  1d4 1d6 ×2  — 2 lb. Slashing
-Nunchaku  2 gp  1d4 1d6 ×2  — 2 lb. Bludgeoning
-Sai 1 gp  1d3 1d4 ×2  10 ft.  1 lb. Bludgeoning
-Siangham  3 gp  1d4 1d6 ×2  — 1 lb. Piercing
+
+
+  kama: { nome: "kama", preco: "2 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+          categorias: { cac_leve: true } ,
+          critico: "×2", peso: "1Kg", tipo: "cortante" },
+
+  nunchaku: { nome: "nunchaku", preco: "2 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+              categorias: { cac_leve: true } ,
+              critico: "×2", peso: "1Kg", tipo: "concussão" },
+
+  sai: { nome: "sai", preco: "1 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+         categorias: { cac_leve: true, arremesso: true } ,
+         incremento_distancia: "2 quadrados", critico: "×2", peso: "0,5kg", tipo: "concussão" },
+
+  siangham: { preco: "3 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+              categorias: { cac_leve: true } ,
+              critico: "×2", peso: "0,5kg", tipo: "perfurante" },
+
+  machadinha: { preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+                categorias: { cac_leve: true } ,
+                critico: "×3", peso: "1,5kg", tipo: "cortante" },
+
+
 // One-Handed Melee Weapons
-Sword, bastard  35 gp 1d8 1d10  19-20/×2  — 6 lb. Slashing
-Waraxe, dwarven 30 gp 1d8 1d10  ×3  — 8 lb. Slashing
-Whip4 1 gp  1d23  1d33  ×2  — 2 lb. Slashing
+
+  chicote: { nome: "chicote", preco: "1 PO", dano: { pequeno: "1d2", medio: "1d3"} ,
+             categorias: { cac: true } ,
+             critico: "×2", peso: "1kg", tipo: "cortante" },
+
+  espada_bastarda: { nome: "espada bastarda", preco: "35 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+                     categorias: { cac: true } ,
+                     critico: "19-20/x2", peso: "3Kg", tipo: "cortante" },
+
+  machado_de_guerra_anao: { nome: "machado de guerra anão", preco: "30 PO",
+                            dano: { pequeno: "1d8", medio: "1d10"}, categorias: { cac: true } ,
+                            critico: "×3", peso: "4Kg", tipo: "cortante" },
+
 // Two-Handed Melee Weapons
-Axe, orc double5  60 gp 1d6/1d6 1d8/1d8 ×3  — 15 lb.  Slashing
-Chain, spiked4  25 gp 1d6 2d4 ×2  — 10 lb.  Piercing
-Flail, dire5  90 gp 1d6/1d6 1d8/1d8 ×2  — 10 lb.  Bludgeoning
-Hammer, gnome hooked5 20 gp 1d6/1d4 1d8/1d6 ×3/×4 — 6 lb. Bludgeoning/Piercing
-Sword, two-bladed5  100 gp  1d6/1d6 1d8/1d8 19-20/×2  — 10 lb.  Slashing
-Urgrosh, dwarven5 50 gp 1d6/1d4 1d8/1d6 ×3  — 12 lb.  Slashing or piercing
+
+
+  corrente_com_cravos: { nome: "corrente com cravos", preco: "25 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+                         categorias: { cac: true },
+                         critico: "×2", peso: "10kg", tipo: "perfurante", },
+
+  espada_de_duas_laminas: { nome: "espada de duas lâminas", preco: "100 PO",
+                            dano: { pequeno: "1d6/1d6", medio: "1d8/1d8"}, categorias: { cac: true } ,
+                            critico: "19-20/x2", peso: "10Kg", tipo: "cortante" },
+
+  machado_orc_duplo: { nome: "machado orc duplo", preco: "60 PO",
+                       dano: { pequeno: "1d6/1d6", medio: "1d8/1d8"},
+                       categorias: { cac: true }, critico: "×3", peso: "12,5kg", tipo: "cortante" },
+
+  mangual_atroz: { nome: "mangual atroz", preco: "90 PO", dano: { pequeno: "1d6/1d6", medio: "1d8/1d8"},
+                   categorias: { cac: true } ,
+                   critico: "×2", peso: "10kg", tipo: "concussão" },
+
+  martelo_gnomo_com_gancho: { nome: "martelo gnomo com gancho", preco: "20 PO",
+                              dano: { pequeno: "1d6/1d4", medio: "1d8/1d6"}, categorias: { cac: true },
+                              critico: "×3/x4", peso: "3kg", tipo: "concussão e perfurante" },
+
+  urgrosh_anao: { nome: "urgrosh anão", preco: "50 PO", dano: { pequeno: "1d6/1d4", medio: "1d8/1d6"},
+                  categorias: { cac: true },
+                  critico: "x3", peso: "11kg", tipo: "cortante ou perfurante" },
+
+
 // Ranged Weapons
-Bolas 5 gp  1d33  1d43  ×2  10 ft.  2 lb. Bludgeoning
-Crossbow, hand  100 gp  1d3 1d4 19-20/×2  30 ft.  2 lb. Piercing
-Bolts (10)  1 gp  — — — — 1 lb. —
-Crossbow, repeating heavy 400 gp  1d8 1d10  19-20/×2  120 ft. 12 lb.  Piercing
-Bolts (5) 1 gp  — — — — 1 lb. —
-Crossbow, repeating light 250 gp  1d6 1d8 19-20/×2  80 ft.  6 lb. Piercing
-Bolts (5) 1 gp  — — — — 1 lb. —
-Net 20 gp — — — 10 ft.  6 lb. —
-Shuriken (5)  1 gp  1 1d2 ×2  10 ft.  ½ lb. Piercing
-*/
+
+  besta_leve_de_repeticao: { nome: "besta leve de repetição", preco: "250 PO",
+                             dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/x2",
+                             categorias: { distancia: true },
+                             incremento_distancia: "16 quadrados", peso: "3Kg", tipo: "perfurante" },
+
+  besta_pesada_de_repeticao: { nome: "besta pesada de repetição", preco: "400 PO",
+                               dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/x2",
+                               categorias: { distancia: true },
+                               incremento_distancia: "24 quadrados", peso: "11kg", tipo: "perfurante" },
+
+  besta_de_mao: { nome: "besta de mão", preco: "100 PO", dano: { pequeno: "1d3", medio: "1d4" },
+                  critico: "19-20/x2", categorias: { distancia: true },
+                  incremento_distancia: "6 quadrados", peso: "1kg", tipo: "perfurante" },
+
+  boleadeira: { nome: "boleadeira", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "x2",
+                categorias: { distancia: true },
+                incremento_distancia: "2 quadrados", peso: "1kg", tipo: "concussão" },
+
+  rede: { nome: "rede", preco: "20 PO", dano: { pequeno: "-", medio: "-" }, critico: "-",
+          categorias: { distancia: true },
+          incremento_distancia: "2 quadrados", peso: "3kg", tipo: "-" },
+
+  shuriken: { nome: "shuriken (5)", preco: "1 PO", dano: { pequeno: "1", medio: "1d2" }, critico: "x2",
+              categorias: { distancia: true },
+              incremento_distancia: "2 quadrados", peso: "0,25kg", tipo: "perfurante" },
+
+//Bolts (10)  1 gp  — — — — 1 lb. —
+//Bolts (5) 1 gp  — — — — 1 lb. —
+
+
 };
