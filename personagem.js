@@ -4,7 +4,7 @@ var personagem = {
   raca: 'humano',
   tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
   alinhamento: "",
-  // Cada classe do vetor eh um objeto com classe e nivel.
+  // Cada entrada: { classe, nivel }.
   classes: [],
   pontos_vida: {
     dados_vida: 0,
@@ -43,6 +43,7 @@ var personagem = {
   bba_distancia: 0,  // inclui tamanho e destreza.
   // talentos
   talentos: {
+    total: 0,  // soma de nivel, raca, classe.
     nivel: 0,
     raca: 0,
     classe: 0,

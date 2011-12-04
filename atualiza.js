@@ -104,7 +104,6 @@ function _AtualizaDadosVida() {
         personagem.classes[i].nivel + 'd' + tabelas_dados_vida[personagem.classes[i].classe];
 
   }
-  personagem.pontos_vida.dados_vida = dados_vida_total;
   if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
     string_dados_vida += 
       ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
@@ -246,10 +245,13 @@ function _AtualizaSalvacoes() {
 
 // Um talento inicial mais um a cada 3 niveis.
 function _AtualizaTalentos() {
-  personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
-
-  ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass('talentos-total'));
+  ImprimeNaoSinalizado(personagem.talentos.total, goog.dom.getElementByClass('talentos-total'));
   ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass('talentos-nivel'));
-
+  var div_talentos = goog.dom.getElement('div-select-talentos');
+  RemoveFilhos(div_talentos);
+  for (var i = 0; i < personagem.talentos.total; ++i) {
+    AdicionaTalento(i, 
+        i < personagem.talentos.lista.length ? personagem.talentos.lista[i] : null);
+  }
 }
 
