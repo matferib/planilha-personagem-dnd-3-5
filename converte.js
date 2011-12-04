@@ -78,6 +78,9 @@ function _ConverteEstilo(estilo_entrada) {
       bonus_por_categoria: {}
     },
   };
+  // Atualiza as armas que podem ter mudado.
+  arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
+  arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
 
   // Atualiza cada categoria da arma no estilo.
   var secundaria_leve = false;
@@ -181,8 +184,8 @@ function _ConverteArma(arma_entrada) {
     }
   }
   arma_personagem.dano_basico = arma_tabela.dano[personagem.tamanho.categoria];
-  // TODO: proficiente
-  arma_personagem.proficiente = true;
+  arma_personagem.proficiente = PersonagemPossuiTalento(
+      arma_tabela.talento_relacionado, arma_tabela.nome);
   return arma_personagem;
 }
 
