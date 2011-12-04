@@ -191,7 +191,14 @@ var tabelas_escudos = {
   escudo_de_corpo: { nome: "Escudo de Corpo", bonus: 4, maximo_bonus_destreza: 2 },
 };
 
+// Esta tabela eh composta pela juncao das tabelas de armas simples, comuns e exoticas.
 var tabelas_armas = {
+  // Cada entrada:
+  // entrada: { nome, preco, dano: { pequeno, medio}, categorias: { cac, cac_leve, arremesso, distancia},
+  //            critico, peso, tipo, incremento_distancia, talento_relacionado }
+};
+
+var tabelas_armas_simples = {
 
 //As primeiras armas estão ordenadas de acordo com o livro inglês,
 // a partir das Martial Weapons do livro em português - FC
@@ -262,7 +269,7 @@ var tabelas_armas = {
            categorias: { cac: true, arremesso: true },
            incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
 
-//Ranged Weapons
+// Ranged Weapons
 
 
   besta_pesada: { nome: "besta pesada", preco: "50 PO", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
@@ -289,7 +296,10 @@ var tabelas_armas = {
 //Munição
 //Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
 //Bullets, sling (10) 1 sp  — — — — 5 lb. —
+};
 
+// Martial weapons.
+var tabelas_armas_comuns = {
 
 // Martial Weapons Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
 // Light Melee Weapons, ordenado de acordo com o livro do jogador 3.5, português
@@ -444,11 +454,12 @@ var tabelas_armas = {
                          incremento_distancia: "22 quadrados", peso: "1,5kg", tipo: "perfurante" },
 
 //Arrows (20) 1 gp  — — — — 3 lb. —
+};
 
+var tabelas_armas_exoticas = {
 
 // Exotic Weapons  Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
 // Light Melee Weapons
-
 
   kama: { nome: "kama", preco: "2 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
           categorias: { cac_leve: true } ,
@@ -511,7 +522,6 @@ var tabelas_armas = {
   urgrosh_anao: { nome: "urgrosh anão", preco: "50 PO", dano: { pequeno: "1d6/1d4", medio: "1d8/1d6"},
                   categorias: { cac: true },
                   critico: "x3", peso: "11kg", tipo: "cortante ou perfurante" },
-
 
 // Ranged Weapons
 
@@ -621,16 +631,16 @@ Shield Proficiency
 Improved Shield Bash
 Tower Shield Proficiency,
 */
-  // Exotic Weapon Proficiency
-  usar_arma_exotica: { 
-      nome: 'Usar arma exótica',
-      requisitos: { bba: 1 } },
-
   // Simple Weapon Proficiency
   usar_armas_simples: { nome: 'Usar armas simples', },
 
   // Martial weapon proficiency
   usar_arma_comum: { nome: 'Usar arma comum' }, 
+
+  // Exotic Weapon Proficiency
+  usar_arma_exotica: { 
+      nome: 'Usar arma exótica',
+      requisitos: { bba: 1 } },
 
   // Two-Weapon Fighting
   combater_duas_armas: { 
