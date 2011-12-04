@@ -81,13 +81,14 @@ function ArmaPersonagem(nome_gerado) {
 }
 
 // @param nome_talento nome do talento na tabela ou nome do indice na tabela.
+// @param complemento alguns talentos precisam de um complemento. Por exemplo,
+//        conhecimento (complemento), usar_arma_comum (complemento).
 // @return true se o personagem tiver o talento passado.
-function PersonagemPossuiTalento(nome_talento) {
+function PersonagemPossuiTalento(nome_talento, complemento) {
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    if (nome_talento == personagem.talentos.lista[i]) {
-      return true;
-    }
-    if (nome_talento == tabelas_talentos[personagem.talentos.lista[i].nome]) {
+    if (nome_talento == personagem.talentos.lista[i] ||
+        nome_talento == tabelas_talentos[personagem.talentos.lista[i].nome]) {
+      // TODO tratar complemento.
       return true;
     }
   }

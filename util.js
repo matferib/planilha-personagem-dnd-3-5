@@ -54,9 +54,20 @@ function ImprimeNaoSinalizado(valor, dom) {
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function CarregaTabelaArmas() {
-  for (var arma in tabelas_armas) {
-    if (tabelas_armas[arma].nome == null) {
-      tabelas_armas[arma].nome = arma;
+  var tabelas_armas_especificas = [ 
+      tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
+  var talento_relacionado = [
+      'usar_armas_simples', 'usar_arma_comum', 'usar_arma_exotica' ];
+  for (var i = 0; i < tabelas_armas_especificas.length; ++i) {
+    var tabela_especifica = tabelas_armas_especificas[i];
+    for (var arma in tabela_especifica) {
+      // Primeiro, preenche o nome da arma.
+      if (tabela_especifica[arma].nome == null) {
+        tabela_especifica[arma].nome = arma;
+      }
+      tabela_especifica[arma].talento_relacionado = talento_relacionado[i];
+      // Compoe a tabela principal.
+      tabelas_armas[arma] = tabela_especifica[arma];
     }
   }
 }
