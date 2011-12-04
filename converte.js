@@ -8,6 +8,10 @@ function ConverteEntradasParaPersonagem() {
   personagem.classes = entradas.classes;
   personagem.pontos_vida.total = entradas.pontos_vida;
   personagem.pontos_vida.ferimentos = entradas.ferimentos;
+  personagem.pontos_vida.dados_vida = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
+  }
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].valor = entradas[atributo];
     personagem.atributos[atributo].modificador = 
@@ -26,6 +30,10 @@ function ConverteEntradasParaPersonagem() {
       personagem.tamanho.modificador_ataque_defesa;
 
   // Talentos.
+  personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
+  personagem.talentos.total = personagem.talentos.nivel + 
+                              personagem.talentos.raca + 
+                              personagem.talentos.classe;
   personagem.talentos.lista = [];
   for (var i = 0; i < entradas.talentos.length; ++i) {
     personagem.talentos.lista.push(entradas.talentos[i]);

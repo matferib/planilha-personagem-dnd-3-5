@@ -134,3 +134,8 @@ function RemoveFilho(id_filho, pai) {
     }
   }
 }
+
+// Remove os filhos de um dom.
+function RemoveFilhos(dom) {
+  goog.dom.removeChildren(dom);
+}
