@@ -39,6 +39,10 @@ function ConverteEntradasParaPersonagem() {
     personagem.talentos.lista.push(entradas.talentos[i]);
   }
 
+  // Atualizacao da proficiencia em armas.
+  _ConverteProficienciaArmas();
+
+  // Atualizacao de equipamentos.
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.armas = [];
@@ -54,7 +58,7 @@ function ConverteEntradasParaPersonagem() {
     personagem.armas.push(_ConverteArma(entradas.armas[i]));
   }
 
-  // Estilos tem que vir apos a atualizacao das armas do personagem.
+  // Estilos tem que vir apos a atualizacao das armas do personagem, talentos e lista de armas.
   personagem.estilos_luta = [];
   for (var i = 0; i < entradas.estilos_luta.length; ++i) {
     personagem.estilos_luta.push(_ConverteEstilo(entradas.estilos_luta[i]));
@@ -163,6 +167,39 @@ function _ConverteBonusPorCategoria(
   return bonus_por_categoria;
 }
 
+// Converte a proficiencia em armas do personagem.
+function _ConverteProficienciaArmas() {
+  var todas_simples = false;
+  var todas_comuns = false;
+  personagem.proficiencia_armas = [];
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var nome_classe = personagem.classes[i].classe;
+    var armas_classe = tabelas_proficiencia_arma_por_classe[nome_classe].armas;
+    for (var j = 0; armas_classe != null && j < armas_classe.length; ++j) {
+      personagem.proficiencia_armas[armas_classe[j]] = true;
+    }
+    var talentos_classe = tabelas_proficiencia_arma_por_classe[nome_classe].talentos;
+    for (var j = 0; talentos_classe != null && j < talentos_classe.length; ++j) {
+      if (talentos_classe[j] == 'usar_armas_simples') {
+        todas_simples = true;
+      } else if (talentos_classe[j] == 'usar_armas_comuns') {
+        todas_comuns = true;
+      }
+    }
+  }
+  if (todas_simples) {
+    for (var arma in tabelas_armas_simples) {
+      personagem.proficiencia_armas[arma] = true;
+    }
+  }
+  if (todas_comuns) {
+    for (var arma in tabelas_armas_comuns) {
+      personagem.proficiencia_armas[arma] = true;
+    }
+  }
+  // TODO ver as pericias.
+}
+
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
 function _ConverteArma(arma_entrada) {
@@ -184,8 +221,7 @@ function _ConverteArma(arma_entrada) {
     }
   }
   arma_personagem.dano_basico = arma_tabela.dano[personagem.tamanho.categoria];
-  arma_personagem.proficiente = PersonagemPossuiTalento(
-      arma_tabela.talento_relacionado, arma_tabela.nome);
+  arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.nome);
   return arma_personagem;
 }
 

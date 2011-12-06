@@ -60,6 +60,10 @@ var personagem = {
     reflexo: 0,
     vontade: 0
   },
+  // Lista de armas que o personagem eh proficiente.
+  // Cada entrada: nome: {}, onde nome eh o nome da chave. So a presenca do campo eh
+  // suficiente para indicar proficiencia, sem necessidade de um booleano.
+  proficiencia_armas: {},
   // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, proficiente, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
@@ -78,6 +82,12 @@ function ArmaPersonagem(nome_gerado) {
     }
   }
   return null;
+}
+
+// @return true se o personagem for proficiente com uma arma.
+function PersonagemProficienteComArma(nome_arma) {
+  // Verifica lista de armas.
+  return personagem.proficiencia_armas[nome_arma] != null;
 }
 
 // @param nome_talento nome do talento na tabela ou nome do indice na tabela.
