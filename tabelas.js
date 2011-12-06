@@ -66,9 +66,11 @@ var tabelas_geracao_atributos = {
   ranger: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
   // classes NPC: nao existe uma tabela para esses, coloquei o que achei mais adequado.
   adepto: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
-  aristocrata: [ 'destreza', 'inteligencia', 'carisma', 'forca', 'constituicao', 'sabedoria' ], // Esse ta muito ruim...
+    // Esse ta muito ruim...
+  aristocrata: [ 'destreza', 'inteligencia', 'forca', 'carisma', 'constituicao', 'sabedoria' ],
   plebeu: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
-  expert: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ], // esse aqui varia de acordo com as escolhas
+    // esse aqui varia de acordo com as escolhas da area de expertise.
+  expert: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ],
   combatente: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
 };
 
@@ -257,6 +259,10 @@ var tabelas_armas_simples = {
 // Two-Handed Melee Weapons
 
 
+  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3",
+           categorias: { cac: true, arremesso: true },
+           incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
+
   lanca_longa: { nome: "lança longa", preco: "5 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
                  categorias: { cac: true } ,
                  critico: "×3", peso: "4,5kg", tipo: "perfurante" },
@@ -265,9 +271,6 @@ var tabelas_armas_simples = {
                   categorias: { cac: true } ,
                   critico: "×2", peso: "2kg", tipo: "concussao" },
 
-  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3",
-           categorias: { cac: true, arremesso: true },
-           incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
 
 // Ranged Weapons
 
@@ -417,9 +420,9 @@ var tabelas_armas_comuns = {
               categorias: { cac: true } ,
               critico: "×3", peso: "11kg", tipo: "cortante" },
 
-  lanca: { nome: "lança", preco: "10 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
-           categorias: { cac: true } ,
-           critico: "×3", peso: "10kg", tipo: "perfurante" },
+  lanca_montada: { nome: "lança montada", preco: "10 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+                   categorias: { cac: true } ,
+                   critico: "×3", peso: "10kg", tipo: "perfurante" },
 
   machado_grande: { nome: "machado grande", preco: "20 PO", dano: { pequeno: "1d10", medio: "1d12"} ,
                     categorias: { cac: true } ,
@@ -553,6 +556,66 @@ var tabelas_armas_exoticas = {
 
 //Bolts (10)  1 gp  — — — — 1 lb. —
 //Bolts (5) 1 gp  — — — — 1 lb. —
+};
+
+// Talento das classes.
+var tabelas_proficiencia_arma_por_classe = {
+  barbaro: { 
+      talentos: [ 'usar_armas_simples', 'usar_armas_comuns' ]
+  },  
+  bardo: { 
+      talentos: [ 'usar_armas_simples' ],
+      armas: [ 'espada_longa', 'sabre', 'porrete',  'espada_curta', 'arco_curto', 'chicote' ] 
+  },
+  clerigo: {
+      talentos: [ 'usar_armas_simples' ]
+  },
+  druida: { 
+      armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice',  
+                 'lanca_curta', 'funda', 'lanca' ]
+  },
+  feiticeiro: { 
+      talentos: [ 'usar_armas_simples' ]
+  },
+  guerreiro: { 
+      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
+  },
+  ladino: { 
+      talentos: [ 'usar_armas_simples' ],
+      armas: [ 'besta_de_mao', 'sabre', 'porrete', 'arco_curto', 'espada_curta' ]
+  },
+  mago: { 
+      talentos: ['usar_armas_simples' ], 
+      armas: [ 'clava', 'adaga', 'besta_pesada', 'besta leve', 'bordao' ] 
+  },
+  monge: {
+      armas: [ 'clava', 'besta leve', 'besta pesada', 'adaga', 'machadinha', 'azagaia', 
+               'kama', 'nunchaku', 'bordao', 'sai', 'shuriken', 'siangham', 'funda' ],
+  },
+  paladino: {
+      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
+  },
+  ranger: {
+      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
+  },
+
+  // NPCs.
+  adepto: {
+      talentos: ['usar_armas_simples' ],
+  },
+  aristocrata: {
+      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ] 
+  },
+  plebeu: {
+      // na verdade o plebeu eh proficiente com uma arma simples, eu escolhi clava.
+      armas: [ 'clava' ]
+  },
+  expert: {
+      talentos: ['usar_armas_simples' ]
+  },
+  combatente: {
+      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
+  }
 };
 
 // Cada entrada tem suas dependencias.
