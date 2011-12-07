@@ -34,7 +34,7 @@ var entradas = {
   armadura: { nome: '', bonus_magico: 0 },
   escudo: { nome: '', bonus_magico: 0 },
 
-  // talentos.
+  // talentos. Cada entrada possui { nome, complemento }, se houver.
   talentos: [],
 };
 
@@ -106,10 +106,16 @@ function LeEntradas() {
 
   // talentos.
   entradas.talentos = [];
-  var selects_talento = goog.dom.getElementsByClass('selects-talento');
-  for (var i = 0; i < selects_talento.length; ++i) {
-    var select_talento = selects_talento[i];
-    entradas.talentos.push(ValorSelecionado(select_talento));
+  // Ler ate nao achar mais talentos.
+  for (var i = 0; ; ++i) {
+    var select_talento = goog.dom.getElement('select-talento-' + i);
+    var input_complemento_talento = goog.dom.getElement('input-complemento-talento-' + i);
+    if (select_talento == null) {
+      break;
+    }
+    entradas.talentos.push({ 
+        nome: ValorSelecionado(select_talento), 
+        complemento: input_complemento_talento.disabled ? null : input_complemento_talento.value});
   }
 }
 
@@ -218,7 +224,7 @@ function EscreveEntradas() {
 
   // talentos.
   for (var i = 0; i < entradas.talentos.length; ++i) {
-    AdicionaTalento(i, entradas.talentos[i]);
+    AdicionaTalento(i, entradas.talentos[i].nome, entradas.talentos[i].complemento);
   }
 }
 

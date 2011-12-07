@@ -203,12 +203,17 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 // Adiciona um talento a planilha.
 // @param id numero identificando o id do talento.
 // @param nome_talento nome do talento sendo adicionado (opcional).
-function AdicionaTalento(id, nome_talento) {
+// @param complemento_talento caso o talento tenha complemento (opcional).
+function AdicionaTalento(id, nome_talento, complemento) {
+  if (nome_talento == null) {
+    nome_talento = 'usar_armas_simples';
+  }
   var div_select_talentos = goog.dom.getElement('div-select-talentos');
   var select_talento = document.createElement('select');
   select_talento.id = 'select-talento-' + id;
   select_talento.className = 'selects-talento';
   select_talento.setAttribute('onchange', 'AtualizaGeral()');
+  var option_selected;
   for (var talento in tabelas_talentos) {
     var option_talento = document.createElement('option');
     option_talento.text = tabelas_talentos[talento].nome;
@@ -216,10 +221,18 @@ function AdicionaTalento(id, nome_talento) {
     option_talento.selected = nome_talento && nome_talento == talento;
     select_talento.add(option_talento, null);
   }
+  var talento = tabelas_talentos[nome_talento];
+  var input_complemento_talento = document.createElement('input');
+  input_complemento_talento.id = 'input-complemento-talento-' + id;
+  input_complemento_talento.type = 'text';
+  input_complemento_talento.disabled = !talento.complemento;
+  input_complemento_talento.value = complemento ? complemento : '';
+  //input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
 
   var div_select_talento = document.createElement('div');
   div_select_talento.id = 'div-select-talento-' + id;
   div_select_talento.appendChild(select_talento);
+  div_select_talento.appendChild(input_complemento_talento);
 
   div_select_talentos.appendChild(div_select_talento);
 }
