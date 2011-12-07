@@ -193,11 +193,16 @@ var tabelas_escudos = {
   escudo_de_corpo: { nome: "Escudo de Corpo", bonus: 4, maximo_bonus_destreza: 2 },
 };
 
+// Mapeia o nome para a chave. Necessario para computar proficiencias.
+var tabelas_armas_invertida = {
+  // Cada entrada: nome_completo: nome_entrada.
+};
+
 // Esta tabela eh composta pela juncao das tabelas de armas simples, comuns e exoticas.
 var tabelas_armas = {
   // Cada entrada:
-  // entrada: { nome, preco, dano: { pequeno, medio}, categorias: { cac, cac_leve, arremesso, distancia},
-  //            critico, peso, tipo, incremento_distancia, talento_relacionado }
+  // chave: { nome, preco, dano: { pequeno, medio}, categorias: { cac, cac_leve, arremesso, distancia},
+  //          critico, peso, tipo, incremento_distancia, talento_relacionado }
 };
 
 var tabelas_armas_simples = {

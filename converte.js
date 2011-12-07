@@ -30,16 +30,7 @@ function ConverteEntradasParaPersonagem() {
       personagem.tamanho.modificador_ataque_defesa;
 
   // Talentos.
-  personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
-  personagem.talentos.total = personagem.talentos.nivel + 
-                              personagem.talentos.raca + 
-                              personagem.talentos.classe;
-  personagem.talentos.lista = [];
-  for (var i = 0; i < entradas.talentos.length; ++i) {
-    personagem.talentos.lista.push({
-        nome: entradas.talentos[i].nome,
-        complemento: entradas.talentos[i].complemento });
-  }
+  _ConverteTalentos();
 
   // Atualizacao da proficiencia em armas.
   _ConverteProficienciaArmas();
@@ -169,6 +160,20 @@ function _ConverteBonusPorCategoria(
   return bonus_por_categoria;
 }
 
+// Converte os talentos do personagem.
+function _ConverteTalentos() {
+  personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
+  personagem.talentos.total = personagem.talentos.nivel + 
+                              personagem.talentos.raca + 
+                              personagem.talentos.classe;
+  personagem.talentos.lista = [];
+  for (var i = 0; i < entradas.talentos.length; ++i) {
+    personagem.talentos.lista.push({
+        nome: entradas.talentos[i].nome,
+        complemento: entradas.talentos[i].complemento });
+  }
+}
+
 // Converte a proficiencia em armas do personagem.
 function _ConverteProficienciaArmas() {
   var todas_simples = false;
@@ -199,7 +204,14 @@ function _ConverteProficienciaArmas() {
       personagem.proficiencia_armas[arma] = true;
     }
   }
-  // TODO ver as pericias.
+  // Talentos. Preciso obter o nome da chave na tabela de armas.
+  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+    var talento = personagem.talentos.lista[i];
+    if ((talento.nome == 'usar_arma_comum' || talento.nome == 'usar_arma_exotica') && 
+        (talento.complemento != null)) {
+      personagem.proficiencia_armas[tabelas_armas_invertida[talento.complemento]] = true;
+    }
+  }
 }
 
 // Converte uma arma da entrada para personagem.
