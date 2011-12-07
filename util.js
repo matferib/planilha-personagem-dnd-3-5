@@ -68,6 +68,8 @@ function CarregaTabelaArmas() {
       tabela_especifica[arma].talento_relacionado = talento_relacionado[i];
       // Compoe a tabela principal.
       tabelas_armas[arma] = tabela_especifica[arma];
+      // Compoe a tabela invertida.
+      tabelas_armas_invertida[tabela_especifica[arma].nome] = arma;
     }
   }
 }
