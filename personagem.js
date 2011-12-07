@@ -47,6 +47,7 @@ var personagem = {
     nivel: 0,
     raca: 0,
     classe: 0,
+    // Cada entrada, { nome, complemento }.
     lista: [],
   },
   // Cada entrada: { nome, 
