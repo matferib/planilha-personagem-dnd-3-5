@@ -572,7 +572,7 @@ var tabelas_proficiencia_arma_por_classe = {
   },
   druida: { 
       armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice',  
-                 'lanca_curta', 'funda', 'lanca' ]
+               'lanca_curta', 'funda', 'lanca' ]
   },
   feiticeiro: { 
       talentos: [ 'usar_armas_simples' ]
@@ -695,14 +695,14 @@ Improved Shield Bash
 Tower Shield Proficiency,
 */
   // Simple Weapon Proficiency
-  usar_armas_simples: { nome: 'Usar armas simples', },
+  usar_armas_simples: { nome: 'Usar armas simples' },
 
   // Martial weapon proficiency
-  usar_arma_comum: { nome: 'Usar arma comum' }, 
+  usar_arma_comum: { nome: 'Usar arma comum', complemento: true }, 
 
   // Exotic Weapon Proficiency
   usar_arma_exotica: { 
-      nome: 'Usar arma exótica',
+      nome: 'Usar arma exótica', complemento: true,
       requisitos: { bba: 1 } },
 
   // Two-Weapon Fighting

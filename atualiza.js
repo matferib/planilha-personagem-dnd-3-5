@@ -251,7 +251,8 @@ function _AtualizaTalentos() {
   RemoveFilhos(div_talentos);
   for (var i = 0; i < personagem.talentos.total; ++i) {
     AdicionaTalento(i, 
-        i < personagem.talentos.lista.length ? personagem.talentos.lista[i] : null);
+        i < personagem.talentos.lista.length ? personagem.talentos.lista[i].nome : null,
+        i < personagem.talentos.lista.length ? personagem.talentos.lista[i].complemento : null);
   }
 }
 

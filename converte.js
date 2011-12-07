@@ -36,7 +36,9 @@ function ConverteEntradasParaPersonagem() {
                               personagem.talentos.classe;
   personagem.talentos.lista = [];
   for (var i = 0; i < entradas.talentos.length; ++i) {
-    personagem.talentos.lista.push(entradas.talentos[i]);
+    personagem.talentos.lista.push({
+        nome: entradas.talentos[i].nome,
+        complemento: entradas.talentos[i].complemento });
   }
 
   // Atualizacao da proficiencia em armas.
