@@ -29,7 +29,7 @@ var entradas = {
   prata: 0,
   cobre: 0,
   // equipamentos.
-  // Cada entrada eh do tipo: { nome: '', obra_prima: false, bonus: 0 }
+  // Cada entrada eh do tipo: { nome: obra_prima, bonus }
   armas: [],
   armadura: { nome: '', bonus_magico: 0 },
   escudo: { nome: '', bonus_magico: 0 },
