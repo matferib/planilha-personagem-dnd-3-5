@@ -591,10 +591,10 @@ var tabelas_proficiencia_arma_por_classe = {
   },
   mago: { 
       talentos: ['usar_armas_simples' ], 
-      armas: [ 'clava', 'adaga', 'besta_pesada', 'besta leve', 'bordao' ] 
+      armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ] 
   },
   monge: {
-      armas: [ 'clava', 'besta leve', 'besta pesada', 'adaga', 'machadinha', 'azagaia', 
+      armas: [ 'clava', 'besta_leve', 'besta_pesada', 'adaga', 'machadinha', 'azagaia', 
                'kama', 'nunchaku', 'bordao', 'sai', 'shuriken', 'siangham', 'funda' ],
   },
   paladino: {
@@ -622,6 +622,30 @@ var tabelas_proficiencia_arma_por_classe = {
       talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
   }
 };
+
+// Racas tambem possuem proficiencias.
+var tabelas_proficiencia_arma_por_raca = {
+  anao: {
+      // Algumas armas sao consideradas comuns: machado de guerra anao e urgrosh
+  },
+  humano: { 
+  },
+  elfo: {
+      armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
+               'arco_curto_composto'],
+  },
+  gnomo: {
+      // Arma considerada comum: martelo_gnomo_com_gancho.
+  },
+  meio_elfo: {
+  },
+  meio_orc: {
+  },
+  halfling: {
+      // +1 ataque com armas de arremeco e fundas.
+  },
+};
+
 
 // Cada entrada tem suas dependencias.
 var tabelas_talentos = {
