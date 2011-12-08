@@ -10,9 +10,6 @@ function CarregamentoInicial() {
   if (indice_igual == -1) {
     // Comeca do zero.
     AdicionaClasse();
-    // Quando considerar os talentos raciais aqui tera que ser alterado ja que por
-    // padrao, humano possui um talento a mais.
-    AdicionaTalento(0);
     AtualizaGeral();
   }
   else {

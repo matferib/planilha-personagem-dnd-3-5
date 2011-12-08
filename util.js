@@ -148,7 +148,20 @@ function RemoveFilho(id_filho, pai) {
   }
 }
 
-// Remove os filhos de um dom.
+// Remove os filhos de um dom. Antes, remove todos os onchange do elemento
+// para evitar chamadas de onchange durante a remocao.
 function RemoveFilhos(dom) {
+  _RemoveOnChange(dom, false);
   goog.dom.removeChildren(dom);
+}
+
+// Remove o atributo onchange do elemento e seus filhos.
+// @param dom que tera onchange removido e de seus filhos.
+function _RemoveOnChange(dom) {
+  for (var filho = dom.firstChild; filho != null; filho = filho.nextSibling) {
+    if (filho.removeAttribute) {
+      filho.removeAttribute('onchange');
+      _RemoveOnChange(filho);
+    }
+  }
 }
