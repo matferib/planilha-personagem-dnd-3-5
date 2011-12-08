@@ -209,7 +209,19 @@ function _ConverteProficienciaArmas() {
     var talento = personagem.talentos.lista[i];
     if ((talento.nome == 'usar_arma_comum' || talento.nome == 'usar_arma_exotica') && 
         (talento.complemento != null)) {
-      personagem.proficiencia_armas[tabelas_armas_invertida[talento.complemento]] = true;
+      var chave_arma = tabelas_armas_invertida[talento.complemento];
+      if (chave_arma == null) {
+        alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+              tabelas_talentos[talento.nome].nome + '"');
+        continue;
+      }
+      var arma_tabela = tabelas_armas[chave_arma];
+      if (arma_tabela.talento_relacionado != talento.nome) {
+        alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+              tabelas_talentos[talento.nome].nome + '"');
+        continue;
+      }
+      personagem.proficiencia_armas[chave_arma] = true;
     }
   }
 }
