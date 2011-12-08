@@ -204,6 +204,12 @@ function _ConverteProficienciaArmas() {
       personagem.proficiencia_armas[arma] = true;
     }
   }
+  // Raciais.
+  var armas_raca = tabelas_proficiencia_arma_por_raca[personagem.raca].armas;
+  for (var i = 0; armas_raca != null && i < armas_raca.length; ++i) {
+    personagem.proficiencia_armas[armas_raca[i]] = true;
+  }
+
   // Talentos. Preciso obter o nome da chave na tabela de armas.
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
     var talento = personagem.talentos.lista[i];
