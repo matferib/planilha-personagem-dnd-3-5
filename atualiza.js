@@ -254,5 +254,12 @@ function _AtualizaTalentos() {
         i < personagem.talentos.lista.length ? personagem.talentos.lista[i].nome : null,
         i < personagem.talentos.lista.length ? personagem.talentos.lista[i].complemento : null);
   }
+  var span_proficiencia_armas = goog.dom.getElement('div-proficiencia-armas');
+  var string_proficiencia = '';
+  for (var proficiencia in personagem.proficiencia_armas) {
+    string_proficiencia += tabelas_armas[proficiencia].nome + ', ';
+  }
+  string_proficiencia += '.';
+  span_proficiencia_armas.innerText = string_proficiencia.replace(', .', '.');
 }
 

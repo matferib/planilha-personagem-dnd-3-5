@@ -227,7 +227,7 @@ function AdicionaTalento(id, nome_talento, complemento) {
   input_complemento_talento.type = 'text';
   input_complemento_talento.disabled = !talento.complemento;
   input_complemento_talento.value = complemento ? complemento : '';
-  //input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
+  input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
 
   var div_select_talento = document.createElement('div');
   div_select_talento.id = 'div-select-talento-' + id;
