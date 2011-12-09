@@ -14,6 +14,11 @@ function ConverteEntradasParaPersonagem() {
   }
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].valor = entradas[atributo];
+    if (tabelas_raca[personagem.raca].atributos[atributo]) {
+      // Modificador racial.
+      personagem.atributos[atributo].valor += 
+          tabelas_raca[personagem.raca].atributos[atributo];
+    }
     personagem.atributos[atributo].modificador = 
         Math.floor((personagem.atributos[atributo].valor - 10) / 2);
   }
@@ -157,6 +162,16 @@ function _ConverteBonusPorCategoria(
     bonus_por_categoria.ataque -= 4;
   }
 
+  // Bonus raciais.
+  var bonus_racial = tabelas_raca[personagem.raca].bonus_ataque;
+  if (bonus_racial) {
+    if (bonus_racial.armas[arma_personagem.nome]) {
+      bonus_por_categoria.ataque += bonus_racial.armas[arma_personagem.nome];
+    } else if (bonus_racial.categorias[categoria]) {
+      bonus_por_categoria.ataque += bonus_racial.categorias[categoria];
+    }
+  }
+
   return bonus_por_categoria;
 }
 
@@ -205,7 +220,7 @@ function _ConverteProficienciaArmas() {
     }
   }
   // Raciais.
-  var armas_raca = tabelas_proficiencia_arma_por_raca[personagem.raca].armas;
+  var armas_raca = tabelas_raca[personagem.raca].proficiencia_armas;
   for (var i = 0; armas_raca != null && i < armas_raca.length; ++i) {
     personagem.proficiencia_armas[armas_raca[i]] = true;
   }
