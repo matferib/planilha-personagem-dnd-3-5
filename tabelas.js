@@ -1,10 +1,22 @@
 // Modificadores de habilidades por raca.
 var tabelas_raca = {
-  anao: { atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio' },
-  halfling: { atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno' },
+  anao: { 
+      atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio' 
+      // Algumas armas sao consideradas comuns: machado de guerra anao e urgrosh
+  },
+  halfling: { 
+      atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno',
+      bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
+  },
   humano: { atributos: {}, tamanho: 'medio' },
-  elfo: { atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio' },
-  gnomo: { atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno' },
+  elfo: { 
+      atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
+      proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
+                            'arco_curto_composto'] },
+  gnomo: { 
+      atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
+      // Arma considerada comum: martelo_gnomo_com_gancho.
+  },
   meioelfo: { atributos: {}, tamanho: 'medio' },
   meioorc: { atributos: {forca: +2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
 };
@@ -622,30 +634,6 @@ var tabelas_proficiencia_arma_por_classe = {
       talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
   }
 };
-
-// Racas tambem possuem proficiencias.
-var tabelas_proficiencia_arma_por_raca = {
-  anao: {
-      // Algumas armas sao consideradas comuns: machado de guerra anao e urgrosh
-  },
-  humano: { 
-  },
-  elfo: {
-      armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
-               'arco_curto_composto'],
-  },
-  gnomo: {
-      // Arma considerada comum: martelo_gnomo_com_gancho.
-  },
-  meio_elfo: {
-  },
-  meio_orc: {
-  },
-  halfling: {
-      // +1 ataque com armas de arremeco e fundas.
-  },
-};
-
 
 // Cada entrada tem suas dependencias.
 var tabelas_talentos = {

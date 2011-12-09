@@ -52,7 +52,6 @@ function _AtualizaModificadoresAtributos() {
     // modificador racial.
     if (modificadores_raca[habilidade]) {
       var modificador_racial = modificadores_raca[habilidade];
-      personagem.atributos[habilidade].valor += modificador_racial;
       // Escreve o modificador racial.
       ImprimeSinalizado(
           modificador_racial,
@@ -67,20 +66,6 @@ function _AtualizaModificadoresAtributos() {
         personagem.atributos[habilidade].valor, 
         goog.dom.getElement(habilidade + '-valor-total'));
 
-    // modificador da habilidade.
-    // Caso especial: destreza. Depende da armadura e escudo.
-    if (habilidade == 'destreza') {
-      var armadura = tabelas_armaduras[personagem.armadura.nome];
-      if (armadura.maximo_bonus_destreza && 
-          armadura.maximo_bonus_destreza < personagem.atributos[habilidade].modificador) {
-        personagem.atributos[habilidade].modificador = armadura.maximo_bonus_destreza;
-      }
-      var escudo = tabelas_escudos[personagem.escudo.nome];
-      if (escudo.maximo_bonus_destreza &&
-          escudo.maximo_bonus_destreza < personagem.atributos[habilidade].modificador) {
-        personagem.atributos[habilidade].modificador = escudo.maximo_bonus_destreza;
-      }
-    }
     // Escreve o modificador.
     ImprimeSinalizado(
         personagem.atributos[habilidade].modificador,

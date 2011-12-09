@@ -65,7 +65,8 @@ var personagem = {
   // Cada entrada: nome: true, onde nome eh o nome da chave. So a presenca do campo eh
   // suficiente para indicar proficiencia, sem necessidade de um booleano.
   proficiencia_armas: {},
-  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, proficiente, arma_tabela };
+  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, 
+  //                     proficiente, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
