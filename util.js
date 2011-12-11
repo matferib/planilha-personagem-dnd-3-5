@@ -66,6 +66,21 @@ function CarregaTabelaArmas() {
         tabela_especifica[arma].nome = arma;
       }
       tabela_especifica[arma].talento_relacionado = talento_relacionado[i];
+      // Verifica se a arma eh dupla (usa o medio para saber, mas poderia ser qq um).
+      tabela_especifica[arma].arma_dupla = tabela_especifica[arma].dano.medio.indexOf('/') != -1
+      if (tabela_especifica.arma_dupla) {
+        // Gera os danos para cada categoria de arma.
+        for (var tamanho_arma in tabela_especifica[arma].dano) {
+          var danos = tabela_especifica[arma].dano[tamanho_arma].split('/');
+          if (danos.length != 2) {
+            alert("Erro convertendo entrada '" + arma + "'");
+            continue;
+          }
+          tabela_especifica[arma].dano_primario = { tamanho_arma: danos[0] };
+          tabela_especifica[arma].dano_secundario = { tamanho_arma: danos[1] };
+        }
+      }
+
       // Compoe a tabela principal.
       tabelas_armas[arma] = tabela_especifica[arma];
       // Compoe a tabela invertida.
