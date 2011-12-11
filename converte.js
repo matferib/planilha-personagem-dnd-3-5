@@ -238,9 +238,19 @@ function _ConverteProficienciaArmas() {
       }
       var arma_tabela = tabelas_armas[chave_arma];
       if (arma_tabela.talento_relacionado != talento.nome) {
-        alert('Arma "' + talento.complemento + '" inválida para talento "' + 
-              tabelas_talentos[talento.nome].nome + '"');
-        continue;
+        // Check familiarity.
+        var familiar = false;
+        if (arma_tabela.talento_relacionado == 'usar_arma_exotica' && 
+            tabelas_raca[personagem.raca].familiaridade_arma &&
+            tabelas_raca[personagem.raca].familiaridade_arma[chave_arma] &&
+            talento.nome == 'usar_arma_comum') {
+          familiar = true;
+        }
+        if (!familiar) {
+          alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+                tabelas_talentos[talento.nome].nome + '"');
+          continue;
+        }
       }
       personagem.proficiencia_armas[chave_arma] = true;
     }
