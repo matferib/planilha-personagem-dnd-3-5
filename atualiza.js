@@ -128,6 +128,10 @@ function _AtualizaEstilosLuta() {
 function _AtualizaEstilo(div_estilo, estilo) {
   var id_estilo = div_estilo.id; 
 
+  var id_radio = 
+    id_estilo.replace('id-estilo', 'id-estilo-' + estilo.nome.replace('_', '-'));
+  goog.dom.getElement(id_radio).checked = true;
+
   var id_span_primario =
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
   var id_select_primario = 

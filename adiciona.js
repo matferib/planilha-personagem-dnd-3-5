@@ -130,7 +130,7 @@ function AdicionaArma(arma, obra_prima, bonus) {
 }
 
 // Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
-// @param nome_estilo: uma_arma, arma_escudo, duas_armas.
+// @param nome_estilo: uma_arma, arma_escudo, duas_armas, arma_dupla.
 // @param arma_principal nome da arma principal.
 // @param arma_secundaria nome da arma secundaria.
 function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
@@ -138,6 +138,14 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
   var div_estilos_luta = goog.dom.getElement(id_div_estilos_luta);
   var div_novo_estilo = document.createElement('div');
   var id_estilo = GeraId('id-estilo', div_estilos_luta);
+  var id_estilo_uma_arma =
+      id_estilo.replace('id-estilo', 'id-estilo-uma-arma');
+  var id_estilo_arma_escudo =
+      id_estilo.replace('id-estilo', 'id-estilo-arma-escudo');
+  var id_estilo_duas_armas =
+      id_estilo.replace('id-estilo', 'id-estilo-duas-armas');
+  var id_estilo_arma_dupla =
+      id_estilo.replace('id-estilo', 'id-estilo-arma-dupla');
   var id_select_primario = 
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
   var id_select_secundario = 
@@ -148,18 +156,22 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
       id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
 
   div_novo_estilo.innerHTML = 
-      '<input type="radio" name="' + id_estilo + 
+      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_uma_arma + 
           '" value="uma_arma" onclick="ClickEstilo(\'uma_arma\', \'' + 
           id_select_secundario + '\')" ' + 
           (nome_estilo == null || nome_estilo == 'uma_arma' ? 'checked' : '') + '>Uma arma</input>' +
-      '<input type="radio" name="' + id_estilo + 
+      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_arma_escudo + 
           '" value="arma_escudo" onclick="ClickEstilo(\'arma_escudo\', \'' + 
           id_select_secundario + '\')" ' + 
           (nome_estilo == 'arma_escudo' ? 'checked' : '') + '>Arma + escudo</input>' +
-      '<input type="radio" name="' + id_estilo + 
+      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_duas_armas +
           '" value="duas_armas" onclick="ClickEstilo(\'duas_armas\', \'' + 
           id_select_secundario +'\')" ' + 
           (nome_estilo == 'duas_armas' ? 'checked' : '') + '>Duas armas</input>' +
+      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_arma_dupla +
+          '" value="arma_dupla" onclick="ClickEstilo(\'arma_dupla\', \'' + 
+          id_select_secundario +'\')" ' + 
+          (nome_estilo == 'arma_dupla' ? 'checked' : '') + '>Arma dupla</input>' +
       '<button type="button" onclick="ClickRemoverFilho(\'' + 
           id_estilo + '\',\'' + id_div_estilos_luta + '\')">-</button><br>' +
       'Principal: <select id="' + id_select_primario + '" onchange="AtualizaGeral()"></select> ' +
