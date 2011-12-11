@@ -196,13 +196,13 @@ var tabelas_armaduras = {
 
 // Tabelas de escudos (TODO terminar outros atributos).
 var tabelas_escudos = {
-  nenhum: { nome: "Nenhum", bonus: 0 },
-  broquel: { nome: "Broquel", bonus: 1 },
-  escudo_leve_de_madeira: { nome: "Escudo Leve de Madeira", bonus: 1 },
-  escudo_leve_de_aco: { nome: "Escudo Leve de Aço", bonus: 1 },
-  escudo_pesado_de_aco: { nome: "Escudo Pesado de Madeira", bonus: 2 },
-  escudo_pesado_de_aco: { nome: "Escudo Pesado de Aço", bonus: 2 },
-  escudo_de_corpo: { nome: "Escudo de Corpo", bonus: 4, maximo_bonus_destreza: 2 },
+  nenhum: { nome: 'Nenhum', bonus: 0 },
+  broquel: { nome: 'Broquel', bonus: 1 },
+  escudo_leve_de_madeira: { nome: 'Escudo Leve de Madeira', bonus: 1 },
+  escudo_leve_de_aco: { nome: 'Escudo Leve de Aço', bonus: 1 },
+  escudo_pesado_de_aco: { nome: 'Escudo Pesado de Madeira', bonus: 2 },
+  escudo_pesado_de_aco: { nome: 'Escudo Pesado de Aço', bonus: 2 },
+  escudo_de_corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2 },
 };
 
 // Mapeia o nome para a chave. Necessario para computar proficiencias.
@@ -214,7 +214,7 @@ var tabelas_armas_invertida = {
 var tabelas_armas = {
   // Cada entrada:
   // chave: { nome, preco, dano: { pequeno, medio}, categorias: { cac, cac_leve, arremesso, distancia},
-  //          critico, peso, tipo, incremento_distancia, talento_relacionado }
+  //          critico, peso, tipo, incremento_distancia, talento_relacionado, arma_dupla }
 };
 
 var tabelas_armas_simples = {
@@ -224,93 +224,94 @@ var tabelas_armas_simples = {
 // Unarmed Attacks
 
 
-  desarmado: { preco: "0 PO", dano: { pequeno: "1d2", medio: "1d3"},
+  desarmado: { preco: '0 PO', dano: { pequeno: '1d2', medio: '1d3'},
                categorias: { cac_leve: true },
-               critico: "×2", peso: "0", tipo: "concussao", incremento_distancia: "0 quadrados" },
+               critico: '×2', peso: '0', tipo: 'concussao', incremento_distancia: '0 quadrados' },
 
-  manopla: { preco: "2 PO", dano: { pequeno: "1d2", medio: "1d3" },
+  manopla: { preco: '2 PO', dano: { pequeno: '1d2', medio: '1d3' },
              categorias: { cac_leve: true },
-             critico: "×2", peso: "500g", tipo: "concussao", },
+             critico: '×2', peso: '500g', tipo: 'concussao', },
 
 //Light Melee Weapons
 
 
-  adaga: { preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+  adaga: { preco: '2 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
            categorias: { cac_leve: true, arremesso: true } ,
-           incremento_distancia: "2 quadrados", critico: "19-20/×2", peso: "0,5kg", tipo: "cortante/perfurante" },
+           incremento_distancia: '2 quadrados', critico: '19-20/×2', peso: '0,5kg',
+           tipo: 'cortante/perfurante' },
 
-  adaga_de_soco: { nome: "adaga de soco", preco: "2 PO", dano: { pequeno: "1d3", medio: "1d4"},
+  adaga_de_soco: { nome: 'adaga de soco', preco: '2 PO', dano: { pequeno: '1d3', medio: '1d4'},
                 categorias: { cac_leve: true },
-                  critico: "×3", peso: "0,5kg", tipo: "perfurante" },
+                  critico: '×3', peso: '0,5kg', tipo: 'perfurante' },
 
-  manopla_com_cravos: { nome: "manopla com cravos", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+  manopla_com_cravos: { nome: 'manopla com cravos', preco: '5 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
                         categorias: { cac_leve: true } ,
-                        critico: "×2", peso: "0,5kg", tipo: "perfurante" },
+                        critico: '×2', peso: '0,5kg', tipo: 'perfurante' },
 
-  maca_leve: { nome: "maça leve", preco: "5 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  maca_leve: { nome: 'maça leve', preco: '5 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                categorias: { cac_leve: true } ,
-               critico: "×2", peso: "2kg", tipo: "concussao" },
+               critico: '×2', peso: '2kg', tipo: 'concussao' },
 
-  foice_curta: { nome: "foice curta", preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  foice_curta: { nome: 'foice curta', preco: '6 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                   categorias: { cac_leve: true } ,
-                  critico: "×2", peso: "1kg", tipo: "cortante" },
+                  critico: '×2', peso: '1kg', tipo: 'cortante' },
 
 // One-Handed Melee Weapons
 
-  clava: { preco: "0 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
+  clava: { preco: '0 PO', dano: { pequeno: '1d4', medio: '1d6' }, critico: '×2',
            categorias: { cac_leve: true, arremesso: true },
-           incremento_distancia: "2 quadrados", peso: "1,5Kg", tipo: "concussao" },
+           incremento_distancia: '2 quadrados', peso: '1,5Kg', tipo: 'concussao' },
 
-  maca_pesada: { nome: "maça pesada", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  maca_pesada: { nome: 'maça pesada', preco: '12 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                  categorias: { cac: true } ,
-                 critico: "×2", peso: "4kg", tipo: "concussao" },
+                 critico: '×2', peso: '4kg', tipo: 'concussao' },
 
-  maca_estrela: { nome: "maça estrela", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  maca_estrela: { nome: 'maça estrela', preco: '8 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "3kg", tipo: "concussao/perfurante" },
+                  critico: '×2', peso: '3kg', tipo: 'concussao/perfurante' },
 
-  lanca_curta: { nome: "lança curta", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  lanca_curta: { nome: 'lança curta', preco: '1 PO', dano: { pequeno: '1d4', medio: '1d6'},
                  categorias: { cac: true, arremesso: true} ,
-                 incremento_distancia: "4 quadrados", critico: "×2", peso: "1,5kg", tipo: "perfurante" },
+                 incremento_distancia: '4 quadrados', critico: '×2', peso: '1,5kg', tipo: 'perfurante' },
 
 // Two-Handed Melee Weapons
 
 
-  lanca: { nome: "lança", preco: "2 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "×3",
+  lanca: { nome: 'lança', preco: '2 PO', dano: { pequeno: '1d6', medio: '1d8' }, critico: '×3',
            categorias: { cac: true, arremesso: true },
-           incremento_distancia: "4 quadrados", peso: "3kg", tipo: "perfurante" },
+           incremento_distancia: '4 quadrados', peso: '3kg', tipo: 'perfurante' },
 
-  lanca_longa: { nome: "lança longa", preco: "5 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  lanca_longa: { nome: 'lança longa', preco: '5 PO', dano: { pequeno: '1d6', medio: '1d8'},
                  categorias: { cac: true } ,
-                 critico: "×3", peso: "4,5kg", tipo: "perfurante" },
+                 critico: '×3', peso: '4,5kg', tipo: 'perfurante' },
 
-  bordao: { nome: "bordão", preco: "0 PO", dano: { pequeno: "1d4/1d4", medio: "1d6/1d6"} ,
+  bordao: { nome: 'bordão', preco: '0 PO', dano: { pequeno: '1d4/1d4', medio: '1d6/1d6'},
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "2kg", tipo: "concussao" },
+                  critico: '×2', peso: '2kg', tipo: 'concussao' },
 
 
 // Ranged Weapons
 
 
-  besta_pesada: { nome: "besta pesada", preco: "50 PO", dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/×2",
+  besta_pesada: { nome: 'besta pesada', preco: '50 PO', dano: { pequeno: '1d8', medio: '1d10' }, critico: '19-20/×2',
                   categorias: { distancia: true },
-                  incremento_distancia: "24 quadrados", peso: "4kg", tipo: "perfurante" },
+                  incremento_distancia: '24 quadrados', peso: '4kg', tipo: 'perfurante' },
 
-  besta_leve: { nome: "besta leve", preco: "35 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/×2",
+  besta_leve: { nome: 'besta leve', preco: '35 PO', dano: { pequeno: '1d6', medio: '1d8' }, critico: '19-20/×2',
                 categorias: { distancia: true },
-                incremento_distancia: "16 quadrados", peso: "2kg", tipo: "perfurante" },
+                incremento_distancia: '16 quadrados', peso: '2kg', tipo: 'perfurante' },
 
-  dardo: { nome: "dardo", preco: "5 PP", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
+  dardo: { nome: 'dardo', preco: '5 PP', dano: { pequeno: '1d3', medio: '1d4' }, critico: '×2',
            categorias: { arremesso: true },
-           incremento_distancia: "4 quadrados", peso: "250g", tipo: "perfurante" },
+           incremento_distancia: '4 quadrados', peso: '250g', tipo: 'perfurante' },
 
-  azagaia: { preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
+  azagaia: { preco: '1 PO', dano: { pequeno: '1d4', medio: '1d6' }, critico: '×2',
              categorias: { arremesso: true },
-             incremento_distancia: "6 quadrados", peso: "1Kg", tipo: "perfurante" },
+             incremento_distancia: '6 quadrados', peso: '1Kg', tipo: 'perfurante' },
 
-  funda: { nome: "funda", preco: "0 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "×2",
+  funda: { nome: 'funda', preco: '0 PO', dano: { pequeno: '1d3', medio: '1d4' }, critico: '×2',
            categorias: { arremesso: true },
-           incremento_distancia: "10 quadrados", peso: "0Kg", tipo: "concussao" },
+           incremento_distancia: '10 quadrados', peso: '0Kg', tipo: 'concussao' },
 
 
 //Munição
@@ -324,154 +325,154 @@ var tabelas_armas_comuns = {
 // Martial Weapons Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
 // Light Melee Weapons, ordenado de acordo com o livro do jogador 3.5, português
 
-  armadura_com_cravos: { nome: "armadura com cravos", preco: "especial",
-                         dano: { pequeno: "1d4", medio: "1d6" }, critico: "×2",
+  armadura_com_cravos: { nome: 'armadura com cravos', preco: 'especial',
+                         dano: { pequeno: '1d4', medio: '1d6' }, critico: '×2',
                          categorias: { cac_leve: true },
-                         peso: "especial", tipo: "perfurante" },
+                         peso: 'especial', tipo: 'perfurante' },
 
-  escudo_pequeno: { nome: "escudo pequeno", preco: "especial", dano: { pequeno: "1d2", medio: "1d3"} ,
+  escudo_pequeno: { nome: 'escudo pequeno', preco: 'especial', dano: { pequeno: '1d2', medio: '1d3'} ,
                     categorias: { cac_leve: true } ,
-                    critico: "×2", peso: "especial", tipo: "concussão" },
+                    critico: '×2', peso: 'especial', tipo: 'concussão' },
 
-  escudo_pequeno_com_cavos: { nome: "escudo pequeno com cravos", preco: "especial", 
-                              dano: { pequeno: "1d3", medio: "1d4"}, categorias: { cac_leve: true } ,
-                              critico: "×2", peso: "especial", tipo: "perfurante" },
+  escudo_pequeno_com_cavos: { nome: 'escudo pequeno com cravos', preco: 'especial', 
+                              dano: { pequeno: '1d3', medio: '1d4'}, categorias: { cac_leve: true } ,
+                              critico: '×2', peso: 'especial', tipo: 'perfurante' },
 
-  espada_curta: { nome: "espada curta", preco: "10 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  espada_curta: { nome: 'espada curta', preco: '10 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                   categorias: { cac_leve: true } ,
-                  critico: "19-20/×2", peso: "1kg", tipo: "perfurante" },
+                  critico: '19-20/×2', peso: '1kg', tipo: 'perfurante' },
 
-  kukri: { preco: "8 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+  kukri: { preco: '8 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
            categorias: { cac_leve: true } ,
-           critico: "18-20/×2", peso: "1kg", tipo: "cortante" },
+           critico: '18-20/×2', peso: '1kg', tipo: 'cortante' },
 
-  machadinha: { preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  machadinha: { preco: '6 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                 categorias: { cac_leve: true } ,
-                critico: "×3", peso: "1,5kg", tipo: "cortante" },
+                critico: '×3', peso: '1,5kg', tipo: 'cortante' },
 
-  machado_de_arremesso: { nome: "machado de arremesso", preco: "8 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  machado_de_arremesso: { nome: 'machado de arremesso', preco: '8 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                           categorias: { cac_leve: true, arremesso: true} ,
-                          incremento_distancia: "2 quadrados", critico: "×2", peso: "1kg", tipo: "cortante" },
+                          incremento_distancia: '2 quadrados', critico: '×2', peso: '1kg', tipo: 'cortante' },
 
-  martelo_leve: { nome: "martelo leve", preco: "1 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+  martelo_leve: { nome: 'martelo leve', preco: '1 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
                   categorias: { cac_leve: true, arremesso: true} ,
-                  incremento_distancia: "4 quadrados", critico: "×2", peso: "1kg", tipo: "concussão" },
+                  incremento_distancia: '4 quadrados', critico: '×2', peso: '1kg', tipo: 'concussão' },
 
-  picareta_leve: { nome: "picareta leve", preco: "4 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+  picareta_leve: { nome: 'picareta leve', preco: '4 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
                    categorias: { cac_leve: true } ,
-                   critico: "×4", peso: "1,5kg", tipo: "perfurante" },
+                   critico: '×4', peso: '1,5kg', tipo: 'perfurante' },
 
-  porrete: { nome: "porrete", preco: "1 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  porrete: { nome: 'porrete', preco: '1 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
              categorias: { cac_leve: true } ,
-             critico: "×2", peso: "1kg", tipo: "concussão" },
+             critico: '×2', peso: '1kg', tipo: 'concussão' },
 
 // One-Handed Melee Weapons
 
-  cimitarra: { nome: "cimitarra", preco: "15 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  cimitarra: { nome: 'cimitarra', preco: '15 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                categorias: { cac: true } ,
-               critico: "18-20/×2", peso: "2kg", tipo: "cortante" },
+               critico: '18-20/×2', peso: '2kg', tipo: 'cortante' },
 
-  escudo_grande: { nome: "escudo grande", preco: "especial", dano: { pequeno: "1d3", medio: "1d4"} ,
+  escudo_grande: { nome: 'escudo grande', preco: 'especial', dano: { pequeno: '1d3', medio: '1d4'} ,
                    categorias: { cac: true } ,
-                   critico: "×2", peso: "especial", tipo: "concussão" },
+                   critico: '×2', peso: 'especial', tipo: 'concussão' },
 
-  escudo_grande_com_cravos: { nome: "escudo grande com cravos", preco: "especial", dano: { pequeno: "1d4", medio: "1d6"} ,
+  escudo_grande_com_cravos: { nome: 'escudo grande com cravos', preco: 'especial', dano: { pequeno: '1d4', medio: '1d6'} ,
                  categorias: { cac: true } ,
-                 critico: "×2", peso: "especial", tipo: "perfurante" },
+                 critico: '×2', peso: 'especial', tipo: 'perfurante' },
 
-  espada_longa: { nome: "espada longa", preco: "15 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  espada_longa: { nome: 'espada longa', preco: '15 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                   categorias: { cac: true },
-                  critico: "19-20/×2", peso: "2kg", tipo: "cortante", },
+                  critico: '19-20/×2', peso: '2kg', tipo: 'cortante', },
 
-  machado_de_batalha: { nome: "machado de batalha", preco: "10 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  machado_de_batalha: { nome: 'machado de batalha', preco: '10 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                         categorias: { cac: true } ,
-                        critico: "×3", peso: "3kg", tipo: "cortante" },
+                        critico: '×3', peso: '3kg', tipo: 'cortante' },
 
-  mangual: { nome: "mangual", preco: "8 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  mangual: { nome: 'mangual', preco: '8 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
              categorias: { cac: true } ,
-             critico: "×2", peso: "2,5kg", tipo: "concussão" },
+             critico: '×2', peso: '2,5kg', tipo: 'concussão' },
 
-  martelo_de_guerra: { nome: "martelo de guerra", preco: "12 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  martelo_de_guerra: { nome: 'martelo de guerra', preco: '12 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                        categorias: { cac: true } ,
-                       critico: "×3", peso: "2,5kg", tipo: "concussão" },
+                       critico: '×3', peso: '2,5kg', tipo: 'concussão' },
 
-  picareta_pesada: { nome: "picareta pesada", preco: "8 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  picareta_pesada: { nome: 'picareta pesada', preco: '8 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                      categorias: { cac: true } ,
-                     critico: "×4", peso: "3kg", tipo: "perfurante" },
+                     critico: '×4', peso: '3kg', tipo: 'perfurante' },
 
-  sabre: { nome: "sabre", preco: "20 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  sabre: { nome: 'sabre', preco: '20 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
            categorias: { cac: true } ,
-           critico: "18-20/x2", peso: "1kg", tipo: "perfurante" },
+           critico: '18-20/x2', peso: '1kg', tipo: 'perfurante' },
 
-  tridente: { nome: "tridente", preco: "15 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  tridente: { nome: 'tridente', preco: '15 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
               categorias: { cac: true, arremesso: true} ,
-              incremento_distancia: "2 quadrados", critico: "×2", peso: "2kg", tipo: "perfurante" },
+              incremento_distancia: '2 quadrados', critico: '×2', peso: '2kg', tipo: 'perfurante' },
 
 
 // Two-Handed Melee Weapons
-  alabarda: { nome: "alabarda", preco: "10 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+  alabarda: { nome: 'alabarda', preco: '10 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
               categorias: { cac: true } ,
-              critico: "×3", peso: "11kg", tipo: "cortante/perfurante" },
+              critico: '×3', peso: '11kg', tipo: 'cortante/perfurante' },
 
-  clava_grande: { nome: "clava grande", preco: "5 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+  clava_grande: { nome: 'clava grande', preco: '5 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
                   categorias: { cac: true } ,
-                  critico: "×2", peso: "4Kg", tipo: "concussão" },
+                  critico: '×2', peso: '4Kg', tipo: 'concussão' },
 
-  espada_larga: { nome: "espada larga", preco: "50 PO", dano: { pequeno: "1d10", medio: "2d6"} ,
+  espada_larga: { nome: 'espada larga', preco: '50 PO', dano: { pequeno: '1d10', medio: '2d6'} ,
                   categorias: { cac: true } ,
-                  critico: "19-20/×2", peso: "4Kg", tipo: "cortante" },
+                  critico: '19-20/×2', peso: '4Kg', tipo: 'cortante' },
 
-  falcione: { nome: "falcione", preco: "75 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+  falcione: { nome: 'falcione', preco: '75 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
               categorias: { cac: true },
-              critico: "18-20/×2", peso: "4kg", tipo: "cortante", },
+              critico: '18-20/×2', peso: '4kg', tipo: 'cortante', },
 
-  foice_longa: { nome: "foice longa", preco: "18 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+  foice_longa: { nome: 'foice longa', preco: '18 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
                  categorias: { cac: true } ,
-                 critico: "×4", peso: "10kg", tipo: "cortante/perfurante" },
+                 critico: '×4', peso: '10kg', tipo: 'cortante/perfurante' },
 
-  glaive: { nome: "glaive", preco: "8 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+  glaive: { nome: 'glaive', preco: '8 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
             categorias: { cac: true } ,
-            critico: "×3", peso: "10Kg", tipo: "cortante" },
+            critico: '×3', peso: '10Kg', tipo: 'cortante' },
 
-  guisarme: { nome: "guisarme", preco: "9 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+  guisarme: { nome: 'guisarme', preco: '9 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
               categorias: { cac: true } ,
-              critico: "×3", peso: "11kg", tipo: "cortante" },
+              critico: '×3', peso: '11kg', tipo: 'cortante' },
 
-  lanca_montada: { nome: "lança montada", preco: "10 PO", dano: { pequeno: "1d6", medio: "1d8"} ,
+  lanca_montada: { nome: 'lança montada', preco: '10 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                    categorias: { cac: true } ,
-                   critico: "×3", peso: "10kg", tipo: "perfurante" },
+                   critico: '×3', peso: '10kg', tipo: 'perfurante' },
 
-  machado_grande: { nome: "machado grande", preco: "20 PO", dano: { pequeno: "1d10", medio: "1d12"} ,
+  machado_grande: { nome: 'machado grande', preco: '20 PO', dano: { pequeno: '1d10', medio: '1d12'} ,
                     categorias: { cac: true } ,
-                    critico: "x3", peso: "11kg", tipo: "cortante" },
+                    critico: 'x3', peso: '11kg', tipo: 'cortante' },
 
-  mangual_pesado: { nome: "mangual pesado", preco: "15 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+  mangual_pesado: { nome: 'mangual pesado', preco: '15 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
                     categorias: { cac: true } ,
-                    critico: "19-20/x2", peso: "10kg", tipo: "concussão" },
+                    critico: '19-20/x2', peso: '10kg', tipo: 'concussão' },
 
-  ranseur: { nome: "ranseur", preco: "10 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+  ranseur: { nome: 'ranseur', preco: '10 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
              categorias: { cac: true } ,
-             critico: "x3", peso: "11kg", tipo: "perfurante" },
+             critico: 'x3', peso: '11kg', tipo: 'perfurante' },
 
 // Ranged Weapons
 
-  arco_curto: { nome: "arco curto", preco: "30 PO", dano: { pequeno: "1d4", medio: "1d6" }, critico: "×3",
+  arco_curto: { nome: 'arco curto', preco: '30 PO', dano: { pequeno: '1d4', medio: '1d6' }, critico: '×3',
                 categorias: { distancia: true },
-                incremento_distancia: "12 quadrados", peso: "1Kg", tipo: "perfurante" },
+                incremento_distancia: '12 quadrados', peso: '1Kg', tipo: 'perfurante' },
 
-  arco_curto_composto: { nome: "arco curto composto", preco: "75 PO",
-                         dano: { pequeno: "1d4", medio: "1d6" }, critico: "x3",
+  arco_curto_composto: { nome: 'arco curto composto', preco: '75 PO',
+                         dano: { pequeno: '1d4', medio: '1d6' }, critico: 'x3',
                          categorias: { distancia: true },
-                         incremento_distancia: "14 quadrados", peso: "1kg", tipo: "perfurante" },
+                         incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
 
-  arco_longo: { nome: "arco longo", preco: "75 PO", dano: { pequeno: "1d6", medio: "1d8" }, critico: "x3",
+  arco_longo: { nome: 'arco longo', preco: '75 PO', dano: { pequeno: '1d6', medio: '1d8' }, critico: 'x3',
                 categorias: { distancia: true },
-                incremento_distancia: "20 quadrados", peso: "1,5kg", tipo: "perfurante" },
+                incremento_distancia: '20 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
-  arco_longo_composto: { nome: "arco longo composto", preco: "100 PO",
-                         dano: { pequeno: "1d6", medio: "1d8" }, critico: "x3",
+  arco_longo_composto: { nome: 'arco longo composto', preco: '100 PO',
+                         dano: { pequeno: '1d6', medio: '1d8' }, critico: 'x3',
                          categorias: { distancia: true },
-                         incremento_distancia: "22 quadrados", peso: "1,5kg", tipo: "perfurante" },
+                         incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
 //Arrows (20) 1 gp  — — — — 3 lb. —
 };
@@ -481,95 +482,95 @@ var tabelas_armas_exoticas = {
 // Exotic Weapons  Cost  Dmg (S) Dmg (M) Critical  Range Increment Weight1 Type2
 // Light Melee Weapons
 
-  kama: { nome: "kama", preco: "2 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  kama: { nome: 'kama', preco: '2 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
           categorias: { cac_leve: true } ,
-          critico: "×2", peso: "1Kg", tipo: "cortante" },
+          critico: '×2', peso: '1Kg', tipo: 'cortante' },
 
-  nunchaku: { nome: "nunchaku", preco: "2 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  nunchaku: { nome: 'nunchaku', preco: '2 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
               categorias: { cac_leve: true } ,
-              critico: "×2", peso: "1Kg", tipo: "concussão" },
+              critico: '×2', peso: '1Kg', tipo: 'concussão' },
 
-  sai: { nome: "sai", preco: "1 PO", dano: { pequeno: "1d3", medio: "1d4"} ,
+  sai: { nome: 'sai', preco: '1 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
          categorias: { cac_leve: true, arremesso: true } ,
-         incremento_distancia: "2 quadrados", critico: "×2", peso: "0,5kg", tipo: "concussão" },
+         incremento_distancia: '2 quadrados', critico: '×2', peso: '0,5kg', tipo: 'concussão' },
 
-  siangham: { preco: "3 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  siangham: { preco: '3 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
               categorias: { cac_leve: true } ,
-              critico: "×2", peso: "0,5kg", tipo: "perfurante" },
+              critico: '×2', peso: '0,5kg', tipo: 'perfurante' },
 
-  machadinha: { preco: "6 PO", dano: { pequeno: "1d4", medio: "1d6"} ,
+  machadinha: { preco: '6 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                 categorias: { cac_leve: true } ,
-                critico: "×3", peso: "1,5kg", tipo: "cortante" },
+                critico: '×3', peso: '1,5kg', tipo: 'cortante' },
 
 
 // One-Handed Melee Weapons
 
-  chicote: { nome: "chicote", preco: "1 PO", dano: { pequeno: "1d2", medio: "1d3"} ,
+  chicote: { nome: 'chicote', preco: '1 PO', dano: { pequeno: '1d2', medio: '1d3'} ,
              categorias: { cac: true } ,
-             critico: "×2", peso: "1kg", tipo: "cortante" },
+             critico: '×2', peso: '1kg', tipo: 'cortante' },
 
-  espada_bastarda: { nome: "espada bastarda", preco: "35 PO", dano: { pequeno: "1d8", medio: "1d10"} ,
+  espada_bastarda: { nome: 'espada bastarda', preco: '35 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
                      categorias: { cac: true } ,
-                     critico: "19-20/x2", peso: "3Kg", tipo: "cortante" },
+                     critico: '19-20/x2', peso: '3Kg', tipo: 'cortante' },
 
-  machado_de_guerra_anao: { nome: "machado de guerra anão", preco: "30 PO",
-                            dano: { pequeno: "1d8", medio: "1d10"}, categorias: { cac: true } ,
-                            critico: "×3", peso: "4Kg", tipo: "cortante" },
+  machado_de_guerra_anao: { nome: 'machado de guerra anão', preco: '30 PO',
+                            dano: { pequeno: '1d8', medio: '1d10'}, categorias: { cac: true } ,
+                            critico: '×3', peso: '4Kg', tipo: 'cortante' },
 
 // Two-Handed Melee Weapons
 
 
-  corrente_com_cravos: { nome: "corrente com cravos", preco: "25 PO", dano: { pequeno: "1d6", medio: "2d4"} ,
+  corrente_com_cravos: { nome: 'corrente com cravos', preco: '25 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
                          categorias: { cac: true },
-                         critico: "×2", peso: "10kg", tipo: "perfurante", },
+                         critico: '×2', peso: '10kg', tipo: 'perfurante', },
 
-  espada_de_duas_laminas: { nome: "espada de duas lâminas", preco: "100 PO",
-                            dano: { pequeno: "1d6/1d6", medio: "1d8/1d8"}, categorias: { cac: true } ,
-                            critico: "19-20/x2", peso: "10Kg", tipo: "cortante" },
+  espada_de_duas_laminas: { nome: 'espada de duas lâminas', preco: '100 PO',
+                            dano: { pequeno: '1d6/1d6', medio: '1d8/1d8'}, categorias: { cac: true } ,
+                            critico: '19-20/x2', peso: '10Kg', tipo: 'cortante' },
 
-  machado_orc_duplo: { nome: "machado orc duplo", preco: "60 PO",
-                       dano: { pequeno: "1d6/1d6", medio: "1d8/1d8"},
-                       categorias: { cac: true }, critico: "×3", peso: "12,5kg", tipo: "cortante" },
+  machado_orc_duplo: { nome: 'machado orc duplo', preco: '60 PO',
+                       dano: { pequeno: '1d6/1d6', medio: '1d8/1d8'},
+                       categorias: { cac: true }, critico: '×3', peso: '12,5kg', tipo: 'cortante' },
 
-  mangual_atroz: { nome: "mangual atroz", preco: "90 PO", dano: { pequeno: "1d6/1d6", medio: "1d8/1d8"},
+  mangual_atroz: { nome: 'mangual atroz', preco: '90 PO', dano: { pequeno: '1d6/1d6', medio: '1d8/1d8'},
                    categorias: { cac: true } ,
-                   critico: "×2", peso: "10kg", tipo: "concussão" },
+                   critico: '×2', peso: '10kg', tipo: 'concussão' },
 
-  martelo_gnomo_com_gancho: { nome: "martelo gnomo com gancho", preco: "20 PO",
-                              dano: { pequeno: "1d6/1d4", medio: "1d8/1d6"}, categorias: { cac: true },
-                              critico: "×3/x4", peso: "3kg", tipo: "concussão e perfurante" },
+  martelo_gnomo_com_gancho: { nome: 'martelo gnomo com gancho', preco: '20 PO',
+                              dano: { pequeno: '1d6/1d4', medio: '1d8/1d6'}, categorias: { cac: true },
+                              critico: '×3/x4', peso: '3kg', tipo: 'concussão e perfurante' },
 
-  urgrosh_anao: { nome: "urgrosh anão", preco: "50 PO", dano: { pequeno: "1d6/1d4", medio: "1d8/1d6"},
+  urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO', dano: { pequeno: '1d6/1d4', medio: '1d8/1d6'},
                   categorias: { cac: true },
-                  critico: "x3", peso: "11kg", tipo: "cortante ou perfurante" },
+                  critico: 'x3', peso: '11kg', tipo: 'cortante ou perfurante' },
 
 // Ranged Weapons
 
-  besta_leve_de_repeticao: { nome: "besta leve de repetição", preco: "250 PO",
-                             dano: { pequeno: "1d6", medio: "1d8" }, critico: "19-20/x2",
+  besta_leve_de_repeticao: { nome: 'besta leve de repetição', preco: '250 PO',
+                             dano: { pequeno: '1d6', medio: '1d8' }, critico: '19-20/x2',
                              categorias: { distancia: true },
-                             incremento_distancia: "16 quadrados", peso: "3Kg", tipo: "perfurante" },
+                             incremento_distancia: '16 quadrados', peso: '3Kg', tipo: 'perfurante' },
 
-  besta_pesada_de_repeticao: { nome: "besta pesada de repetição", preco: "400 PO",
-                               dano: { pequeno: "1d8", medio: "1d10" }, critico: "19-20/x2",
+  besta_pesada_de_repeticao: { nome: 'besta pesada de repetição', preco: '400 PO',
+                               dano: { pequeno: '1d8', medio: '1d10' }, critico: '19-20/x2',
                                categorias: { distancia: true },
-                               incremento_distancia: "24 quadrados", peso: "11kg", tipo: "perfurante" },
+                               incremento_distancia: '24 quadrados', peso: '11kg', tipo: 'perfurante' },
 
-  besta_de_mao: { nome: "besta de mão", preco: "100 PO", dano: { pequeno: "1d3", medio: "1d4" },
-                  critico: "19-20/x2", categorias: { distancia: true },
-                  incremento_distancia: "6 quadrados", peso: "1kg", tipo: "perfurante" },
+  besta_de_mao: { nome: 'besta de mão', preco: '100 PO', dano: { pequeno: '1d3', medio: '1d4' },
+                  critico: '19-20/x2', categorias: { distancia: true },
+                  incremento_distancia: '6 quadrados', peso: '1kg', tipo: 'perfurante' },
 
-  boleadeira: { nome: "boleadeira", preco: "5 PO", dano: { pequeno: "1d3", medio: "1d4" }, critico: "x2",
+  boleadeira: { nome: 'boleadeira', preco: '5 PO', dano: { pequeno: '1d3', medio: '1d4' }, critico: 'x2',
                 categorias: { distancia: true },
-                incremento_distancia: "2 quadrados", peso: "1kg", tipo: "concussão" },
+                incremento_distancia: '2 quadrados', peso: '1kg', tipo: 'concussão' },
 
-  rede: { nome: "rede", preco: "20 PO", dano: { pequeno: "-", medio: "-" }, critico: "-",
+  rede: { nome: 'rede', preco: '20 PO', dano: { pequeno: '-', medio: '-' }, critico: '-',
           categorias: { distancia: true },
-          incremento_distancia: "2 quadrados", peso: "3kg", tipo: "-" },
+          incremento_distancia: '2 quadrados', peso: '3kg', tipo: '-' },
 
-  shuriken: { nome: "shuriken (5)", preco: "1 PO", dano: { pequeno: "1", medio: "1d2" }, critico: "x2",
+  shuriken: { nome: 'shuriken (5)', preco: '1 PO', dano: { pequeno: '1', medio: '1d2' }, critico: 'x2',
               categorias: { distancia: true },
-              incremento_distancia: "2 quadrados", peso: "0,25kg", tipo: "perfurante" },
+              incremento_distancia: '2 quadrados', peso: '0,25kg', tipo: 'perfurante' },
 
 //Bolts (10)  1 gp  — — — — 1 lb. —
 //Bolts (5) 1 gp  — — — — 1 lb. —

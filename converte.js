@@ -66,21 +66,26 @@ function ConverteEntradasParaPersonagem() {
 // Converte um estilo da entrada para o personagem.
 function _ConverteEstilo(estilo_entrada) {
   var arma_primaria = ArmaPersonagem(estilo_entrada.arma_primaria);
+  if (estilo_entrada.nome == 'arma_dupla' && !arma_primaria.arma_tabela.arma_dupla) {
+    alert('Arma "' + arma_primaria.nome + '" não é dupla');
+    // Nao pode ter estilo arma dupla se a arma nao for dupla.
+    estilo_entrada.nome = 'uma_arma';
+  }
   var arma_secundaria = ArmaPersonagem(estilo_entrada.arma_secundaria);
   var estilo_personagem = { 
     nome: estilo_entrada.nome,
     arma_primaria: { 
       nome: arma_primaria != null ? 
-        estilo_entrada.arma_primaria : 'desarmado',
+          estilo_entrada.arma_primaria : 'desarmado',
       bonus_por_categoria: {}
     },
     arma_secundaria: {
       nome: arma_secundaria != null ? 
-        estilo_entrada.arma_secundaria : 'desarmado',
+          estilo_entrada.arma_secundaria : 'desarmado',
       bonus_por_categoria: {}
     },
   };
-  // Atualiza as armas que podem ter mudado.
+  // Atualiza as armas de novo, que podem ter virado 'desarmado' acima.
   arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
   arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
 
@@ -99,15 +104,15 @@ function _ConverteEstilo(estilo_entrada) {
         secundaria_leve = true;
       }
       estilo_personagem.arma_secundaria.bonus_por_categoria[categoria] =
-        _ConverteBonusPorCategoria(
-            categoria, arma_secundaria, estilo_personagem, false, secundaria_leve);
+          _ConverteBonusPorCategoria(
+              categoria, arma_secundaria, estilo_personagem, false, secundaria_leve);
     }
   }
 
   for (var categoria in arma_primaria.arma_tabela.categorias) {
     estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
-      _ConverteBonusPorCategoria(
-          categoria, arma_primaria, estilo_personagem, true, secundaria_leve);
+        _ConverteBonusPorCategoria(
+            categoria, arma_primaria, estilo_personagem, true, secundaria_leve);
   }
 
   return estilo_personagem;
