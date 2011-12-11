@@ -1,8 +1,8 @@
 // Modificadores de habilidades por raca.
 var tabelas_raca = {
   anao: { 
-      atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio' 
-      // Algumas armas sao consideradas comuns: machado de guerra anao e urgrosh
+      atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio',
+      familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
   },
   halfling: { 
       atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno',
@@ -15,7 +15,7 @@ var tabelas_raca = {
                             'arco_curto_composto'] },
   gnomo: { 
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
-      // Arma considerada comum: martelo_gnomo_com_gancho.
+      familiaridade_arma: { martelo_gnomo_com_gancho: true }
   },
   meioelfo: { atributos: {}, tamanho: 'medio' },
   meioorc: { atributos: {forca: +2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }

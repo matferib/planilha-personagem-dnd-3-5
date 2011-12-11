@@ -104,7 +104,7 @@ function LeEntradas() {
     entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
   }
 
-  // talentos.
+  // Talentos.
   entradas.talentos = [];
   // Ler ate nao achar mais talentos.
   for (var i = 0; ; ++i) {
