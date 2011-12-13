@@ -144,7 +144,7 @@ function _AtualizaEstilo(div_estilo, estilo) {
 
   var id_span_secundario =
     id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
-  if (estilo.nome == 'duas_armas') {
+  if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
     var id_select_secundario = 
         id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
     var arma_secundaria = ArmaPersonagem(estilo.arma_secundaria.nome);
@@ -168,8 +168,13 @@ function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
   for (var categoria in arma_estilo.bonus_por_categoria) {
     var bonus = arma_estilo.bonus_por_categoria[categoria];
     span_arma.innerText += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
-    span_arma.innerText += arma.dano_basico + 
-                           StringSinalizada(bonus.dano, false) + '; ';
+    var arma_tabela = arma.arma_tabela;
+    if (estilo.nome == 'arma_dupla' && !primaria) {
+      span_arma.innerText += arma_tabela.dano_secundario[personagem.tamanho.categoria];
+    } else {
+      span_arma.innerText += arma_tabela.dano[personagem.tamanho.categoria];
+    }
+    span_arma.innerText += StringSinalizada(bonus.dano, false) + '; ';
   }
 }
 

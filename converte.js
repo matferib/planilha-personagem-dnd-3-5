@@ -66,11 +66,6 @@ function ConverteEntradasParaPersonagem() {
 // Converte um estilo da entrada para o personagem.
 function _ConverteEstilo(estilo_entrada) {
   var arma_primaria = ArmaPersonagem(estilo_entrada.arma_primaria);
-  if (estilo_entrada.nome == 'arma_dupla' && !arma_primaria.arma_tabela.arma_dupla) {
-    alert('Arma "' + arma_primaria.nome + '" não é dupla');
-    // Nao pode ter estilo arma dupla se a arma nao for dupla.
-    estilo_entrada.nome = 'uma_arma';
-  }
   var arma_secundaria = ArmaPersonagem(estilo_entrada.arma_secundaria);
   var estilo_personagem = { 
     nome: estilo_entrada.nome,
@@ -85,6 +80,17 @@ function _ConverteEstilo(estilo_entrada) {
       bonus_por_categoria: {}
     },
   };
+  if (estilo_entrada.nome == 'arma_dupla' &&
+      (arma_primaria == null || !arma_primaria.arma_tabela.arma_dupla)) {
+    alert('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla');
+    estilo_personagem.nome = 'uma_arma';
+  }
+
+  // Se o estilo eh duplo, forca segunda arma ser igual a primeira.
+  if (estilo_entrada.nome == 'arma_dupla') {
+    estilo_personagem.arma_secundaria.nome = estilo_personagem.arma_primaria.nome;
+  }
+
   // Atualiza as armas de novo, que podem ter virado 'desarmado' acima.
   arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
   arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
@@ -92,27 +98,22 @@ function _ConverteEstilo(estilo_entrada) {
   // Atualiza cada categoria da arma no estilo.
   var secundaria_leve = false;
   for (var categoria in arma_secundaria.arma_tabela.categorias) {
-    if (estilo_entrada.nome == 'duas_armas') {
-      if (categoria.indexOf('leve') != -1) {
-        secundaria_leve = true;
-      }
-    }
-  }
-  for (var categoria in arma_secundaria.arma_tabela.categorias) {
-    if (estilo_entrada.nome == 'duas_armas') {
-      if (categoria.indexOf('leve') != -1) {
-        secundaria_leve = true;
-      }
-      estilo_personagem.arma_secundaria.bonus_por_categoria[categoria] =
-          _ConverteBonusPorCategoria(
-              categoria, arma_secundaria, estilo_personagem, false, secundaria_leve);
-    }
+    secundaria_leve = 
+        (estilo_entrada.nome == 'duas_armas' && categoria.indexOf('leve') != -1) ||
+        estilo_entrada.nome == 'arma_dupla';
   }
 
   for (var categoria in arma_primaria.arma_tabela.categorias) {
     estilo_personagem.arma_primaria.bonus_por_categoria[categoria] =
         _ConverteBonusPorCategoria(
             categoria, arma_primaria, estilo_personagem, true, secundaria_leve);
+  }
+  if (estilo_entrada.nome == 'duas_armas' || estilo_entrada.nome == 'arma_dupla') {
+    for (var categoria in arma_secundaria.arma_tabela.categorias) {
+        estilo_personagem.arma_secundaria.bonus_por_categoria[categoria] =
+            _ConverteBonusPorCategoria(
+                categoria, arma_secundaria, estilo_personagem, false, secundaria_leve);
+    }
   }
 
   return estilo_personagem;
@@ -130,7 +131,7 @@ function _ConverteBonusPorCategoria(
     multiplicador_dano_forca = categoria.indexOf('leve') != -1 ? 1.0 : 1.5;
   } else if (estilo.nome == 'arma_escudo') {
     multiplicador_dano_forca = 1.0;
-  } else if (estilo.nome == 'duas_armas') {
+  } else if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
     if (primaria) {
       bonus_por_categoria.ataque = secundaria_leve ? -4 : -6;
       if (PersonagemPossuiTalento('combater_duas_armas')) {
@@ -223,6 +224,10 @@ function _ConverteProficienciaArmas() {
     for (var arma in tabelas_armas_comuns) {
       personagem.proficiencia_armas[arma] = true;
     }
+    // Familiaridade.
+    for (var arma in tabelas_raca[personagem.raca].familiaridade_arma) {
+      personagem.proficiencia_armas[arma] = true;
+    }
   }
   // Raciais.
   var armas_raca = tabelas_raca[personagem.raca].proficiencia_armas;
@@ -243,7 +248,7 @@ function _ConverteProficienciaArmas() {
       }
       var arma_tabela = tabelas_armas[chave_arma];
       if (arma_tabela.talento_relacionado != talento.nome) {
-        // Check familiarity.
+        // verifica familiaridade.
         var familiar = false;
         if (arma_tabela.talento_relacionado == 'usar_arma_exotica' && 
             tabelas_raca[personagem.raca].familiaridade_arma &&
@@ -282,7 +287,6 @@ function _ConverteArma(arma_entrada) {
       arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
     }
   }
-  arma_personagem.dano_basico = arma_tabela.dano[personagem.tamanho.categoria];
   arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.nome);
   return arma_personagem;
 }
