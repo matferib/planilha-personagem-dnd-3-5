@@ -98,7 +98,7 @@ function PersonagemProficienteComArma(nome_arma) {
 // @return true se o personagem tiver o talento passado.
 function PersonagemPossuiTalento(nome_talento, complemento) {
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    if (nome_talento == personagem.talentos.lista[i] ||
+    if (nome_talento == personagem.talentos.lista[i].nome ||
         nome_talento == tabelas_talentos[personagem.talentos.lista[i].nome]) {
       // TODO tratar complemento.
       return true;
