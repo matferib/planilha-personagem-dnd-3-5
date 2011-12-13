@@ -211,28 +211,17 @@ function _AtualizaDefesa() {
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e
 // modificando pelo atributo relevante.
+// TODO fazer outros tipo tb.
 function _AtualizaSalvacoes() {
-  var habilidades_salvacoes = {
-    fortitude: 'constituicao',
-    reflexo: 'destreza',
-    vontade: 'sabedoria'
-  };
-  for (var tipo_salvacao in habilidades_salvacoes) {
-    var valor_base = 0;
-    for (var i = 0; i < personagem.classes.length; ++i) {
-      var classe = personagem.classes[i].classe;
-      valor_base += 
-        tabelas_salvacao[classe][tipo_salvacao](personagem.classes[i].nivel);
-    }
-    var habilidade_modificadora = habilidades_salvacoes[tipo_salvacao];
-    var modificador_atributo = 
-      personagem.atributos[habilidade_modificadora].modificador;
-    personagem.salvacoes[tipo_salvacao] = valor_base + modificador_atributo;
+  for (var tipo_salvacao in personagem.salvacoes) {
     ImprimeNaoSinalizado(
-        valor_base,
+        personagem.salvacoes[tipo_salvacao].base,
         goog.dom.getElement(tipo_salvacao + '-valor-base'));
     ImprimeSinalizado(
-        personagem.salvacoes[tipo_salvacao],
+        personagem.salvacoes[tipo_salvacao].racial,
+        goog.dom.getElement(tipo_salvacao + '-valor-racial'));
+    ImprimeSinalizado(
+        personagem.salvacoes[tipo_salvacao].total,
         goog.dom.getElement(tipo_salvacao + '-mod-total'));
   }
 }
@@ -240,7 +229,6 @@ function _AtualizaSalvacoes() {
 // Um talento inicial mais um a cada 3 niveis.
 function _AtualizaTalentos() {
   ImprimeNaoSinalizado(personagem.talentos.total, goog.dom.getElementByClass('talentos-total'));
-  ImprimeNaoSinalizado(personagem.talentos.nivel, goog.dom.getElementByClass('talentos-nivel'));
   var div_talentos = goog.dom.getElement('div-select-talentos');
   RemoveFilhos(div_talentos);
   for (var i = 0; i < personagem.talentos.total; ++i) {

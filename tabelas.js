@@ -3,19 +3,22 @@ var tabelas_raca = {
   anao: { 
       atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio',
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
+      salvacoes: { veneno: 2, magias: +2, },
   },
   halfling: { 
       atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno',
       bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
+      salvacoes: { fortitude: 1, vontade: 1, reflexo: 1 },
   },
-  humano: { atributos: {}, tamanho: 'medio' },
+  humano: { atributos: {}, tamanho: 'medio', talento_extra: true },
   elfo: { 
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
                             'arco_curto_composto'] },
   gnomo: { 
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
-      familiaridade_arma: { martelo_gnomo_com_gancho: true }
+      familiaridade_arma: { martelo_gnomo_com_gancho: true },
+      salvacoes: { ilusoes: +2 },
   },
   meioelfo: { atributos: {}, tamanho: 'medio' },
   meioorc: { atributos: {forca: +2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
