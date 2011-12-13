@@ -212,8 +212,9 @@ var tabelas_armas_invertida = {
 
 // Esta tabela eh composta pela juncao das tabelas de armas simples, comuns e exoticas.
 var tabelas_armas = {
-  // Cada entrada:
-  // chave: { nome, preco, dano: { pequeno, medio}, categorias: { cac, cac_leve, arremesso, distancia},
+  // Cada entrada (dano secundario apenas para armas duplas):
+  // chave: { nome, preco, dano: { pequeno, medio}, dano_secundario: {pequeno, medio}, 
+  // categorias: { cac, cac_leve, arremesso, distancia},
   //          critico, peso, tipo, incremento_distancia, talento_relacionado, arma_dupla }
 };
 
@@ -285,16 +286,16 @@ var tabelas_armas_simples = {
                  categorias: { cac: true } ,
                  critico: '×3', peso: '4,5kg', tipo: 'perfurante' },
 
-  bordao: { nome: 'bordão', preco: '0 PO', dano: { pequeno: '1d4/1d4', medio: '1d6/1d6'},
-                  categorias: { cac: true } ,
-                  critico: '×2', peso: '2kg', tipo: 'concussao' },
+  bordao: { nome: 'bordão', preco: '0 PO', dano: { pequeno: '1d4', medio: '1d6'}, 
+            dano_secundario: { pequeno: '1d4', medio: '1d6' }, categorias: { cac: true } ,
+            critico: '×2', peso: '2kg', tipo: 'concussao', arma_dupla: true },
 
 
 // Ranged Weapons
 
 
-  besta_pesada: { nome: 'besta pesada', preco: '50 PO', dano: { pequeno: '1d8', medio: '1d10' }, critico: '19-20/×2',
-                  categorias: { distancia: true },
+  besta_pesada: { nome: 'besta pesada', preco: '50 PO', dano: { pequeno: '1d8', medio: '1d10' }, 
+                  critico: '19-20/×2', categorias: { distancia: true },
                   incremento_distancia: '24 quadrados', peso: '4kg', tipo: 'perfurante' },
 
   besta_leve: { nome: 'besta leve', preco: '35 PO', dano: { pequeno: '1d6', medio: '1d8' }, critico: '19-20/×2',
@@ -525,23 +526,33 @@ var tabelas_armas_exoticas = {
                          critico: '×2', peso: '10kg', tipo: 'perfurante', },
 
   espada_de_duas_laminas: { nome: 'espada de duas lâminas', preco: '100 PO',
-                            dano: { pequeno: '1d6/1d6', medio: '1d8/1d8'}, categorias: { cac: true } ,
+                            dano: { pequeno: '1d6', medio: '1d8' }, 
+                            dano_secundario: {pequeno: '1d6', medio: '1d8' },
+                            categorias: { cac: true }, arma_dupla: true,
                             critico: '19-20/x2', peso: '10Kg', tipo: 'cortante' },
 
   machado_orc_duplo: { nome: 'machado orc duplo', preco: '60 PO',
-                       dano: { pequeno: '1d6/1d6', medio: '1d8/1d8'},
+                       dano: { pequeno: '1d6', medio: '1d8' },
+                       dano_secundario: { pequeno: '1d6', medio: '1d8' },
+                       arma_dupla: true,
                        categorias: { cac: true }, critico: '×3', peso: '12,5kg', tipo: 'cortante' },
 
-  mangual_atroz: { nome: 'mangual atroz', preco: '90 PO', dano: { pequeno: '1d6/1d6', medio: '1d8/1d8'},
-                   categorias: { cac: true } ,
+  mangual_atroz: { nome: 'mangual atroz', preco: '90 PO', 
+                   dano: { pequeno: '1d6', medio: '1d8'},
+                   dano_secundario: { pequeno: '1d6', medio: '1d8'},
+                   categorias: { cac: true }, arma_dupla: true,
                    critico: '×2', peso: '10kg', tipo: 'concussão' },
 
   martelo_gnomo_com_gancho: { nome: 'martelo gnomo com gancho', preco: '20 PO',
-                              dano: { pequeno: '1d6/1d4', medio: '1d8/1d6'}, categorias: { cac: true },
+                              dano: { pequeno: '1d6', medio: '1d8'},
+                              dano_secundario: { pequeno: '1d4', medio: '1d6'},
+                              categorias: { cac: true }, arma_dupla: true,
                               critico: '×3/x4', peso: '3kg', tipo: 'concussão e perfurante' },
 
-  urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO', dano: { pequeno: '1d6/1d4', medio: '1d8/1d6'},
-                  categorias: { cac: true },
+  urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO', 
+                  dano: { pequeno: '1d6', medio: '1d8'},
+                  dano_secundario: { pequeno: '1d4', medio: '1d6'},
+                  categorias: { cac: true }, arma_dupla: true,
                   critico: 'x3', peso: '11kg', tipo: 'cortante ou perfurante' },
 
 // Ranged Weapons
