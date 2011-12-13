@@ -42,13 +42,12 @@ var personagem = {
   bba_cac: 0,  // inclui tamanho e forca.
   bba_distancia: 0,  // inclui tamanho e destreza.
   // talentos
-  talentos: {
-    total: 0,  // soma de nivel, raca, classe.
-    nivel: 0,
-    raca: 0,
-    classe: 0,
-    // Cada entrada, { nome, complemento }.
-    lista: [],
+  talentos: {  
+    // talentos livres.
+    total: 0,
+    lista: [],  // Cada entrada, { nome, complemento }.
+    // talentos especificos de classe.
+    // TODO
   },
   // Cada entrada: { nome, 
   //                 arma_primaria: {  nome, 
@@ -57,9 +56,10 @@ var personagem = {
   estilos_luta: [],
   ca: { normal: 10, surpreso: 10, toque: 10 },
   salvacoes : {
-    fortitude: 0,
-    reflexo: 0,
-    vontade: 0
+    fortitude: { base: 0, racial: 0, total: 0 },
+    reflexo: { base: 0, racial: 0, total: 0 },
+    vontade: { base: 0, racial: 0, total: 0 },
+    // Outras salvacoes derivadas.
   },
   // Lista de armas que o personagem eh proficiente.
   // Cada entrada: nome: true, onde nome eh o nome da chave. So a presenca do campo eh
