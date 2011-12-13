@@ -61,6 +61,9 @@ function ConverteEntradasParaPersonagem() {
   for (var i = 0; i < entradas.estilos_luta.length; ++i) {
     personagem.estilos_luta.push(_ConverteEstilo(entradas.estilos_luta[i]));
   }
+
+  // Salvacoes
+  _ConverteSalvacoes();
 }
 
 // Converte um estilo da entrada para o personagem.
@@ -184,9 +187,9 @@ function _ConverteBonusPorCategoria(
 // Converte os talentos do personagem.
 function _ConverteTalentos() {
   personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
-  personagem.talentos.total = personagem.talentos.nivel + 
-                              personagem.talentos.raca + 
-                              personagem.talentos.classe;
+  personagem.talentos.total = 
+      personagem.talentos.nivel + 
+      (tabelas_raca[personagem.raca].talento_extra ? 1 : 0);
   personagem.talentos.lista = [];
   for (var i = 0; i < entradas.talentos.length; ++i) {
     personagem.talentos.lista.push({
@@ -291,4 +294,33 @@ function _ConverteArma(arma_entrada) {
   return arma_personagem;
 }
 
-
+// Converte as salvacoes dos personagem de acordo com classes e modificadores.
+// TODO fazer outros tipos de salvacao tb.
+function _ConverteSalvacoes() {
+  var habilidades_salvacoes = {
+    fortitude: 'constituicao',
+    reflexo: 'destreza',
+    vontade: 'sabedoria'
+  };
+  for (var tipo_salvacao in habilidades_salvacoes) {
+    var valor_base = 0;
+    for (var i = 0; i < personagem.classes.length; ++i) {
+      var classe = personagem.classes[i].classe;
+      valor_base += 
+          tabelas_salvacao[classe][tipo_salvacao](personagem.classes[i].nivel);
+    }
+    var habilidade_modificadora = habilidades_salvacoes[tipo_salvacao];
+    personagem.salvacoes[tipo_salvacao].base = valor_base;
+    // modificador racial.
+    var salvacoes_raca = tabelas_raca[personagem.raca].salvacoes;
+    if (salvacoes_raca && salvacoes_raca[tipo_salvacao]) {
+      personagem.salvacoes[tipo_salvacao].racial = salvacoes_raca[tipo_salvacao];
+    } else {
+      personagem.salvacoes[tipo_salvacao].racial = 0;
+    }
+    personagem.salvacoes[tipo_salvacao].total = 
+        personagem.salvacoes[tipo_salvacao].base +
+        personagem.salvacoes[tipo_salvacao].racial +
+        personagem.atributos[habilidade_modificadora].modificador;
+  }
+}
