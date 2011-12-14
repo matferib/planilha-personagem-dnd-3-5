@@ -62,11 +62,13 @@ var personagem = {
     // Outras salvacoes derivadas.
   },
   // Lista de armas que o personagem eh proficiente.
-  // Cada entrada: nome: true, onde nome eh o nome da chave. So a presenca do campo eh
+  // Cada entrada: { nome: true }, onde nome eh o nome da chave. So a presenca do campo eh
   // suficiente para indicar proficiencia, sem necessidade de um booleano.
   proficiencia_armas: {},
+  // Cada entrada: { nome: 1|2 }.
+  foco_armas: {},
   // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, 
-  //                     proficiente, arma_tabela };
+  //                     proficiente, foco: { maior }, especializado: { maior }, arma_tabela };
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
@@ -90,6 +92,13 @@ function ArmaPersonagem(nome_gerado) {
 function PersonagemProficienteComArma(nome_arma) {
   // Verifica lista de armas.
   return personagem.proficiencia_armas[nome_arma] != null;
+}
+
+// @return o valor do foco do personagem com a arma (0, 1, 2).
+// @param nome_arma chave da arma.
+// @param maior indica se o foco eh maior.
+function PersonagemFocoComArma(nome_arma, maior) {
+  return personagem.foco_armas[nome_arma];
 }
 
 // @param nome_talento nome do talento na tabela ou nome do indice na tabela.

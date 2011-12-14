@@ -743,6 +743,11 @@ Tower Shield Proficiency,
       nome: 'Combater com duas armas',
       requisitos: { habilidades: { des: 15 } } },
 
+  foco_em_arma: {
+      nome: 'Foco em arma',
+      complemento: true,
+      requisitos: { bba: 1, proficiencia_arma: true }
+  },
 /*
 Skill Focus
 Spell Focus
@@ -757,7 +762,6 @@ Two-Weapon Defense
 Improved Two-Weapon Fighting
 Greater Two-Weapon Fighting
 Weapon Finesse
-Weapon Focus
 Weapon Specialization
 Greater Weapon Focus
 Greater Weapon Specialization
