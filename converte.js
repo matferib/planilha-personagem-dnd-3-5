@@ -37,8 +37,10 @@ function ConverteEntradasParaPersonagem() {
   // Talentos.
   _ConverteTalentos();
 
-  // Atualizacao da proficiencia em armas.
+  // Atualizacao da proficiencia e foco em armas.
   _ConverteProficienciaArmas();
+  _ConverteFocoArmas();
+  //_ConverteEspecializacaoArmas();
 
   // Atualizacao de equipamentos.
   personagem.armadura = entradas.armadura;
@@ -169,6 +171,8 @@ function _ConverteBonusPorCategoria(
   // Proficiencia.
   if (!arma_personagem.proficiente) {
     bonus_por_categoria.ataque -= 4;
+  } else if (arma_personagem.foco) {
+    bonus_por_categoria.ataque += arma_personagem.foco;
   }
 
   // Bonus raciais.
@@ -185,6 +189,7 @@ function _ConverteBonusPorCategoria(
 }
 
 // Converte os talentos do personagem.
+// TODO verificar pre requisitos de cada talento.
 function _ConverteTalentos() {
   personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
   personagem.talentos.total = 
@@ -270,6 +275,24 @@ function _ConverteProficienciaArmas() {
   }
 }
 
+// Converte o foco em armas do personagem.
+function _ConverteFocoArmas() {
+  personagem.foco_armas = {};
+  // Talentos. Preciso obter o nome da chave na tabela de armas.
+  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+    var talento = personagem.talentos.lista[i];
+    if (talento.nome == 'foco_em_arma' && talento.complemento != null) {
+      var chave_arma = tabelas_armas_invertida[talento.complemento];
+      if (chave_arma == null) {
+        alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+              tabelas_talentos[talento.nome].nome + '"');
+        continue;
+      }
+      personagem.foco_armas[chave_arma] = 1;
+    }
+  }
+}
+
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
 function _ConverteArma(arma_entrada) {
@@ -291,6 +314,7 @@ function _ConverteArma(arma_entrada) {
     }
   }
   arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.nome);
+  arma_personagem.foco = PersonagemFocoComArma(arma_entrada.nome);
   return arma_personagem;
 }
 
