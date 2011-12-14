@@ -297,12 +297,14 @@ function _ConverteArma(arma_entrada) {
 // Converte as salvacoes dos personagem de acordo com classes e modificadores.
 // TODO fazer outros tipos de salvacao tb.
 function _ConverteSalvacoes() {
+  personagem.salvacoes = {};
   var habilidades_salvacoes = {
     fortitude: 'constituicao',
     reflexo: 'destreza',
     vontade: 'sabedoria'
   };
   for (var tipo_salvacao in habilidades_salvacoes) {
+    personagem.salvacoes[tipo_salvacao] = {};
     var valor_base = 0;
     for (var i = 0; i < personagem.classes.length; ++i) {
       var classe = personagem.classes[i].classe;
@@ -322,5 +324,17 @@ function _ConverteSalvacoes() {
         personagem.salvacoes[tipo_salvacao].base +
         personagem.salvacoes[tipo_salvacao].racial +
         personagem.atributos[habilidade_modificadora].modificador;
+  }
+  var outras_salvacoes_raca = tabelas_raca[personagem.raca].outras_salvacoes;
+  for (var tipo_salvacao in outras_salvacoes_raca) {
+    for (var i = 0; i < outras_salvacoes_raca[tipo_salvacao].base.length; ++i) {
+      var nome_salvacao = tipo_salvacao + ' (' + outras_salvacoes_raca[tipo_salvacao].base[i] + ')';
+      personagem.salvacoes[nome_salvacao] = {};
+      personagem.salvacoes[nome_salvacao].base =
+          personagem.salvacoes[outras_salvacoes_raca[tipo_salvacao].base[i]].total;
+      personagem.salvacoes[nome_salvacao].racial = outras_salvacoes_raca[tipo_salvacao].bonus;
+      personagem.salvacoes[nome_salvacao].total = personagem.salvacoes[nome_salvacao].base  +
+                                                  personagem.salvacoes[nome_salvacao].racial;
+    }
   }
 }
