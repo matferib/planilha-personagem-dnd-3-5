@@ -1,12 +1,13 @@
 // Modificadores de habilidades por raca.
 var tabelas_raca = {
   anao: { 
-      atributos: {constituicao: +2, carisma: -2}, tamanho: 'medio',
+      atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
-      salvacoes: { veneno: 2, magias: +2, },
+      outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 }, 
+                          magias: { base: ['fortitude', 'reflexo', 'vontade' ], bonus: 2, } },
   },
   halfling: { 
-      atributos: { forca: -2, destreza: +2}, tamanho: 'pequeno',
+      atributos: { forca: -2, destreza: 2}, tamanho: 'pequeno',
       bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
       salvacoes: { fortitude: 1, vontade: 1, reflexo: 1 },
   },
@@ -18,10 +19,10 @@ var tabelas_raca = {
   gnomo: { 
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
-      salvacoes: { ilusoes: +2 },
+      outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
   },
   meioelfo: { atributos: {}, tamanho: 'medio' },
-  meioorc: { atributos: {forca: +2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
+  meioorc: { atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
 };
 
 // Bonus base de ataque.

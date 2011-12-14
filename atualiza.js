@@ -213,16 +213,18 @@ function _AtualizaDefesa() {
 // modificando pelo atributo relevante.
 // TODO fazer outros tipo tb.
 function _AtualizaSalvacoes() {
+  var div_salvacoes = goog.dom.getElement('div-salvacoes');
+  RemoveFilhos(div_salvacoes);
   for (var tipo_salvacao in personagem.salvacoes) {
-    ImprimeNaoSinalizado(
-        personagem.salvacoes[tipo_salvacao].base,
-        goog.dom.getElement(tipo_salvacao + '-valor-base'));
-    ImprimeSinalizado(
-        personagem.salvacoes[tipo_salvacao].racial,
-        goog.dom.getElement(tipo_salvacao + '-valor-racial'));
-    ImprimeSinalizado(
-        personagem.salvacoes[tipo_salvacao].total,
-        goog.dom.getElement(tipo_salvacao + '-mod-total'));
+    var div_salvacao = document.createElement('div');
+    AdicionaSpanAoDiv(tipo_salvacao + ': ', null, div_salvacao);
+    AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].base, true) + ' ', 
+                      null, div_salvacao);
+    AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].racial) + ' ', 
+                      null, div_salvacao);
+    AdicionaSpanAoDiv('= ' + StringSinalizada(personagem.salvacoes[tipo_salvacao].total), 
+                      null, div_salvacao);
+    div_salvacoes.appendChild(div_salvacao);
   }
 }
 

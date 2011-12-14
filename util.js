@@ -51,6 +51,14 @@ function ImprimeNaoSinalizado(valor, dom) {
 	}
 }
 
+// Adiciona um elemento span ao div
+function AdicionaSpanAoDiv(texto, id_span, div) {
+  var span = document.createElement('span');
+  span.id = id_span;
+  span.innerText = texto;
+  div.appendChild(span);
+}
+
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function CarregaTabelaArmas() {
