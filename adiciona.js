@@ -49,8 +49,7 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
     option.disabled = desabilitar_classe;
     select_classe.appendChild(option);
   }
-  var span_nivel = document.createElement('span');
-  span_nivel.innerText = "Nível: ";
+  var span_nivel = CriaSpan('Nível: ');
   var input_nivel = document.createElement('input');
   input_nivel.type = 'text';
   input_nivel.name = 'nivel';
@@ -59,8 +58,7 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
   input_nivel.value = nivel;
   var br_nivel = document.createElement('br');
 
-  var div = document.createElement('div');
-  div.setAttribute('class', 'classe');
+  var div = CriaDiv(null, 'classe');
   div.appendChild(select_classe);
   div.appendChild(span_nivel);
   div.appendChild(input_nivel);
@@ -98,8 +96,7 @@ function AdicionaArma(arma, obra_prima, bonus) {
     option.innerText = tabelas_armas[arma_corrente].nome;
     select.appendChild(option);
   }
-  var span_obra_prima = document.createElement('span');
-  span_obra_prima.innerText = " OP";
+  var span_obra_prima = CriaSpan(' OP');
 
   var input_obra_prima = document.createElement('input');
   input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
@@ -113,14 +110,11 @@ function AdicionaArma(arma, obra_prima, bonus) {
   input_bonus.setAttribute('size', 2);
   input_bonus.value = bonus || 0;
 
-  var button_remover = document.createElement('button');
-  button_remover.setAttribute('type', 'button');
+  var button_remover = CriaBotao('-');
   button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
         id_gerado + '", "' + id_div_equipamentos_armas + '")');
-  button_remover.innerText = '-';
 
-  var div = document.createElement('div');
-  div.id = id_gerado;
+  var div = CriaDiv(id_gerado);
   div.appendChild(select);
   div.appendChild(span_obra_prima);
   div.appendChild(input_obra_prima);
@@ -136,7 +130,7 @@ function AdicionaArma(arma, obra_prima, bonus) {
 function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
   var id_div_estilos_luta = 'div-estilos-luta';
   var div_estilos_luta = goog.dom.getElement(id_div_estilos_luta);
-  var div_novo_estilo = document.createElement('div');
+  var div_novo_estilo = CriaDiv();
   var id_estilo = GeraId('id-estilo', div_estilos_luta);
   var id_estilo_uma_arma =
       id_estilo.replace('id-estilo', 'id-estilo-uma-arma');
@@ -241,8 +235,7 @@ function AdicionaTalento(id, nome_talento, complemento) {
   input_complemento_talento.value = complemento ? complemento : '';
   input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
 
-  var div_select_talento = document.createElement('div');
-  div_select_talento.id = 'div-select-talento-' + id;
+  var div_select_talento = CriaDiv('div-select-talento-' + id);
   div_select_talento.appendChild(select_talento);
   div_select_talento.appendChild(input_complemento_talento);
 

@@ -36,6 +36,9 @@ var entradas = {
 
   // talentos. Cada entrada possui { nome, complemento }, se houver.
   talentos: [],
+
+  // pericias: cada entrada possui { chave, pontos }
+  pericias: [],
 };
 
 // Le todos os inputs da planilha e armazena em 'entradas'. 
@@ -116,6 +119,13 @@ function LeEntradas() {
     entradas.talentos.push({ 
         nome: ValorSelecionado(select_talento), 
         complemento: input_complemento_talento.disabled ? null : input_complemento_talento.value});
+  }
+
+  // Pericias.
+  entradas.pericias = [];
+  for (var chave_pericia in tabelas_pericias) {
+    var input_pontos = goog.dom.getElement('pericia-' + chave_pericia + '-pontos');
+    entradas.pericias.push({ chave: chave_pericia, pontos: parseInt(input_pontos.value) || 0 });
   }
 }
 
@@ -225,6 +235,12 @@ function EscreveEntradas() {
   // talentos.
   for (var i = 0; i < entradas.talentos.length; ++i) {
     AdicionaTalento(i, entradas.talentos[i].nome, entradas.talentos[i].complemento);
+  }
+
+  // Pericias.
+  for (var i = 0; i < entradas.pericias.length; ++i) {
+    var input_pontos = goog.dom.getElement('pericia-' + entradas.pericias[i].chave + '-pontos');
+    input_pontos.value = entradas.pericias[i].pontos;
   }
 }
 
