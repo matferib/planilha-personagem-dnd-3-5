@@ -25,6 +25,7 @@ function _AtualizaGeral() {
   _AtualizaDefesa();
   _AtualizaSalvacoes();
   _AtualizaTalentos();
+  _AtualizaPericias();
 }
 
 // Atualiza o tamanho em funcao da raca.
@@ -247,3 +248,14 @@ function _AtualizaTalentos() {
   span_proficiencia_armas.innerText = string_proficiencia.replace(', .', '.');
 }
 
+// Escreve todas as pericias e atualiza de acordo com a classe dos personagem.
+function _AtualizaPericias() {
+  for (var chave in personagem.pericias.lista) {
+    var dom_graduacoes = goog.dom.getElement('pericia-' + chave + '-graduacoes');
+    dom_graduacoes.innerText = personagem.pericias.lista[chave].pontos;
+    var dom_sinergia = goog.dom.getElement('pericia-' + chave + '-sinergia');
+    dom_sinergia.innerText = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
+    var dom_total = goog.dom.getElement('pericia-' + chave + '-total');
+    dom_total.innerText = StringSinalizada(personagem.pericias.lista[chave].total);
+  }
+}

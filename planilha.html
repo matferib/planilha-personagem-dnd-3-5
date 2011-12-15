@@ -7,7 +7,9 @@
 <script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
 <script type="text/javascript" src="adiciona.js"></script>
 <script type="text/javascript" src="atualiza.js"></script>
+<script type="text/javascript" src="carrega.js"></script>
 <script type="text/javascript" src="converte.js"></script>
+<script type="text/javascript" src="dom.js"></script>
 <script type="text/javascript" src="entradas.js"></script>
 <script type="text/javascript" src="eventos.js"></script>
 <script type="text/javascript" src="geracao.js"></script>
@@ -209,8 +211,8 @@ Outros Equipamentos:
 </div> <!-- div-equipamentos -->
 
 <div id="div-talentos" class="divs-principais">
-Talentos: 
-<span class="talentos-total"></span><br> 
+Talentos:<br>
+Total: <span class="talentos-total"></span><br> 
 <div id="div-select-talentos"></div>
 <div>Proficiente com: <span id="div-proficiencia-armas"></span></div>
 </div> <!-- div-talentos -->
@@ -218,7 +220,6 @@ Talentos:
 <div id="div-pericias" class="divs-principais">
 Pericias:
 </div> <!-- div-pericias -->
-
 
 <div id="div-salvar">
 <button type="button" onclick="ClickSalvar()">Salvar</button>
@@ -229,7 +230,6 @@ Pericias:
 <button type="button"  onclick="ClickGerarResumo()">GerarResumo</button>
 <span id="resumo-personagem"></span>
 </div> <!-- div-salvar -->
-
 
 </body>
 </html>

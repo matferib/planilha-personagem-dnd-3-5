@@ -37,6 +37,9 @@ function ConverteEntradasParaPersonagem() {
   // Talentos.
   _ConverteTalentos();
 
+  // Pericias.
+  _ConvertePericias();
+
   // Atualizacao da proficiencia e foco em armas.
   _ConverteProficienciaArmas();
   _ConverteFocoArmas();
@@ -200,6 +203,27 @@ function _ConverteTalentos() {
     personagem.talentos.lista.push({
         nome: entradas.talentos[i].nome,
         complemento: entradas.talentos[i].complemento });
+  }
+}
+
+// Converte todas as pericias.
+function _ConvertePericias() {
+  // TODO pontos de pericia.
+  personagem.pericias.lista = {};
+  for (var i = 0; i < entradas.pericias.length; ++i) {
+    var pericia = tabelas_pericias[entradas.pericias[i].chave];
+    var pericia_personagem = {};
+    pericia_personagem.pontos = entradas.pericias[i].pontos;
+    pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasse(pericia.classes) ?
+        pericia_personagem.pontos : Math.floor(pericia_personagem.pontos);
+    pericia_personagem.bonus_sinergia = 0;
+    pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
+    pericia_personagem.total = 
+        pericia_personagem.graduacoes + 
+        pericia_personagem.bonus_habilidade + 
+        pericia_personagem.bonus_sinergia;
+
+    personagem.pericias.lista[entradas.pericias[i].chave] = pericia_personagem; 
   }
 }
 
