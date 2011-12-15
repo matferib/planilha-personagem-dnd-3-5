@@ -785,3 +785,62 @@ Still Spell
 Widen Spell
      */
 };
+
+var tabelas_pericias = {
+  abrir_fechaduras: { 
+      nome: 'Abrir Fechaduras', classes: [ 'ladino', ], 
+      sem_treinamento: false, habilidade: 'destreza' },
+  acrobacias: {
+      nome: 'Acrobacias', classes: [ 'bardo', 'monge', 'ladino' ],
+      sem_treinamento: false, habilidade: 'destreza' },
+  adestrar_animais: {
+      nome: 'Adestrar Animais', classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger' ], 
+      sem_treinamento: false, habilidade: 'carisma' },
+  arte_da_fuga: {
+      nome: 'Arte da Fuga', classes: [ 'bardo', 'monge', 'ladino', ],
+      sem_treinamento: true, habilidade: 'destreza' },
+/*
+Perícias Bbr Brd Clr Drd Gue Mng Pal Rgr Lad Fet Mag S/T H/C
+Atuação Po Pc Po Po Po Pc Po Po Pc Po Po Sim Car
+Avaliação Po Pc Po Po Po Po Po Po Pc Po Po Sim Int
+Blefar Po Pc Po Po Po Po Po Po Pc Pc Po Sim Car
+Cavalgar Pc Po Po Pc Pc Po Pc Pc Po Po Po Sim Des
+Concentração Po Pc Pc Pc Po Pc Pc Pc Po Pc Pc Sim Con
+Conhecimento (arcano) Po Pc Pc Po Po Pc Po Po Po Pc Pc Não Int
+Conhecimento (arquitetura e engenharia) Po Pc Po Po Po Po Po Po Po Po Pc Não Int
+Conhecimento (geografia) Po Pc Po Po Po Po Po Pc Po Po Pc Não Int
+Conhecimento (história) Po Pc Pc Po Po Po Po Po Po Po Pc Não Int
+Conhecimento (local) Po Pc Po Pc Po Po Po Po Pc Po Pc Não Int
+Conhecimento (masmorras) Po Pc Po Po Po Po Po Pc Po Po Pc Não Int
+Conhecimento (natureza) Po Pc Po Po Po Po Po Pc Po Po Pc Não Int
+Conhecimento (nobreza e realeza) Po Pc Po Po Po Po Pc Po Po Po Pc Não Int
+Conhecimento (planos) Po Pc Pc Po Po Po Po Po Po Po Pc Não Int
+Conhecimento (religião) Po Pc Pc Po Po Pc Pc Po Po Po Pc Não Int
+Cura Po Po Pc Pc Po Po Pc Pc Po Po Po Sim Sab
+Decifrar Escrita Po Pc Po Po Po Po Po Po Pc Po Pc Não Int
+Diplomacia Po Pc Pc Pc Po Pc Pc Po Pc Po Po Sim Car
+Disfarces Po Pc Po Po Po Po Po Po Pc Po Po Sim Car
+Equilíbrio Po Pc Po Po Po Pc Po Po Pc Po Po Sim Des*
+Escalar Pc Pc Po Po Pc Pc Po Pc Pc Po Po Sim For*
+Esconder-se Po Pc Po Po Po Pc Po Pc Pc Po Po Sim Des*
+Falar Idioma Po Pc Po Po Po Po Po Po Po Po Po Não N/A
+Falsificação Po Po Po Po Po Po Po Po Pc Po Po Sim Int
+Furtividade Po Pc Po Po Po Pc Po Pc Pc Po Po Sim Des*
+Identificar Magia Po Pc Pc Pc Po Po Po Po Po Pc Pc Não Int
+Intimidação Pc Po Po Po Pc Po Po Po Pc Po Po Sim Car
+Natação Pc Pc Po Pc Pc Pc Po Pc Pc Po Po Sim For**
+Observar Po Po Po Pc Po Pc Po Pc Pc Po Po Sim Sab
+Obter Informação Po Pc Po Po Po Po Po Po Pc Po Po Sim Car
+Ofícios Pc Pc Pc Pc Pc Pc Pc Pc Pc Pc Pc Sim Int
+Operar Mecanismo Po Po Po Po Po Po Po Po Pc Po Po Não Int
+Ouvir Pc Pc Po Pc Po Pc Po Pc Pc Po Po Sim Sab
+Prestidigitação Po Pc Po Po Po Po Po Po Pc Po Po Não Des*
+Procurar Po Po Po Po Po Po Po Pc Pc Po Po Sim Int
+Profissão Po Pc Pc Pc Po Pc Pc Pc Pc Pc Pc Não Sab
+Saltar Pc Pc Po Po Pc Pc Po Pc Pc Po Po Sim For*
+Sentir Motivação Po Pc Po Po Po Pc Pc Po Pc Po Po Sim Sab
+Sobrevivência Pc Po Po Pc Po Po Po Pc Po Po Po Sim Sab
+Usar Cordas Po Po Po Po Po Po Po Pc Pc Po Po Sim Des
+Usar Intrumento Mágico Po Pc Po Po Po Po Po Po Pc Po Po Não Car
+*/
+};

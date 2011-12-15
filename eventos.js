@@ -5,6 +5,7 @@ goog.require('goog.json');
 function CarregamentoInicial() {
   // Monta a tabela de armas e cria as opcoes dinamicamente.
   CarregaTabelaArmas();
+  CarregaPericias();
 
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual == -1) {

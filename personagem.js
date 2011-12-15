@@ -49,6 +49,12 @@ var personagem = {
     // talentos especificos de classe.
     // TODO
   },
+  // pericias.
+  pericias: {
+    total_pontos: 0,
+    // Cada entrada: chave_pericia: { pontos, graduacoes, bonus_sinergia, bonus_habilidade, total}
+    lista: {},
+  },
   // Cada entrada: { nome, 
   //                 arma_primaria: {  nome, 
   //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
@@ -111,6 +117,20 @@ function PersonagemPossuiTalento(nome_talento, complemento) {
         nome_talento == tabelas_talentos[personagem.talentos.lista[i].nome]) {
       // TODO tratar complemento.
       return true;
+    }
+  }
+  return false;
+}
+
+// @return true se o personagem possuir uma das classes passadas.
+// @param classes array de classe ou classe.
+function PersonagemPossuiUmaDasClasse(classes) {
+  var array_classes = classes.length ? classes : [ classes ];
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    for (var j = 0; j < array_classes.length; ++j) {
+      if (array_classes[j] == personagem.classes[i].classe) {
+        return true;
+      }
     }
   }
   return false;

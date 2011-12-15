@@ -53,35 +53,9 @@ function ImprimeNaoSinalizado(valor, dom) {
 
 // Adiciona um elemento span ao div
 function AdicionaSpanAoDiv(texto, id_span, div) {
-  var span = document.createElement('span');
-  span.id = id_span;
-  span.innerText = texto;
+  var span = CriaSpan(texto, id_span);
   div.appendChild(span);
 }
-
-// Preenche os nomes faltantes na tabela de armas e chama as funcoes
-// para preencher os selects de armas corpo a corpo e a distancia.
-function CarregaTabelaArmas() {
-  var tabelas_armas_especificas = [ 
-      tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
-  var talento_relacionado = [
-      'usar_armas_simples', 'usar_arma_comum', 'usar_arma_exotica' ];
-  for (var i = 0; i < tabelas_armas_especificas.length; ++i) {
-    var tabela_especifica = tabelas_armas_especificas[i];
-    for (var arma in tabela_especifica) {
-      // Primeiro, preenche o nome da arma.
-      if (tabela_especifica[arma].nome == null) {
-        tabela_especifica[arma].nome = arma;
-      }
-      tabela_especifica[arma].talento_relacionado = talento_relacionado[i];
-      // Compoe a tabela principal.
-      tabelas_armas[arma] = tabela_especifica[arma];
-      // Compoe a tabela invertida.
-      tabelas_armas_invertida[tabela_especifica[arma].nome] = arma;
-    }
-  }
-}
-
 
 // Busca o valor selecionado de um select.
 // @param dom_select o dom representando o select.
@@ -98,7 +72,6 @@ function LimpaSelect(dom_select) {
     dom_select.remove(0);
   }
 }
-
 
 // Seleciona um valor de um select.
 // @param valor_selecionado o novo valor selecionado do dom.
@@ -140,36 +113,6 @@ function GeraId(prefixo, elemento) {
       ++id;
     } else {
       return tentativa;
-    }
-  }
-}
-
-// Remove o filho do pai com o id passado.
-// @param id_filho identificador do filho.
-// @param pai elemento que contem os filhos.
-function RemoveFilho(id_filho, pai) {
-  for (var i = 0; i < pai.childNodes.length; ++i) {
-    var filho = pai.childNodes[i];
-    if (filho.id == id_filho) {
-      pai.removeChild(filho);
-    }
-  }
-}
-
-// Remove os filhos de um dom. Antes, remove todos os onchange do elemento
-// para evitar chamadas de onchange durante a remocao.
-function RemoveFilhos(dom) {
-  _RemoveOnChange(dom, false);
-  goog.dom.removeChildren(dom);
-}
-
-// Remove o atributo onchange do elemento e seus filhos.
-// @param dom que tera onchange removido e de seus filhos.
-function _RemoveOnChange(dom) {
-  for (var filho = dom.firstChild; filho != null; filho = filho.nextSibling) {
-    if (filho.removeAttribute) {
-      filho.removeAttribute('onchange');
-      _RemoveOnChange(filho);
     }
   }
 }
