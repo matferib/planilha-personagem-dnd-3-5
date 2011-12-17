@@ -51,7 +51,10 @@ var personagem = {
   },
   // pericias.
   pericias: {
+    // Quantos pontos o personagem pode gastar.
     total_pontos: 0,
+    // Quantos ele ja gastou.
+    pontos_gastos: 0,
     // Cada entrada: chave_pericia: { pontos, graduacoes, bonus_sinergia, bonus_habilidade, total}
     lista: {},
   },

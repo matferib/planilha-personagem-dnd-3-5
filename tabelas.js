@@ -1,4 +1,4 @@
-// Modificadores de habilidades por raca.
+// Dados das racas.
 var tabelas_raca = {
   anao: { 
       atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
@@ -25,6 +25,28 @@ var tabelas_raca = {
   meioorc: { atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
 };
 
+// Dados relacionados a classes. 
+// TODO passar tudo de classes pra ca.
+var tabelas_classes = {
+  barbaro: { dados_vida: 12, pontos_pericia: 4, },
+  bardo: { dados_vida: 6, pontos_pericia: 6, },
+  clerigo: { dados_vida: 8, pontos_pericia: 2,  },
+  druida: { dados_vida: 8, pontos_pericia: 4, },
+  guerreiro: { dados_vida: 10, pontos_pericia: 2 },
+  feiticeiro: { dados_vida: 4, pontos_pericia: 2, },
+  ladino: { dados_vida: 6, pontos_pericia: 8, },
+  mago: { dados_vida: 4, pontos_pericia: 2, },
+  monge: { dados_vida: 8, pontos_pericia: 4, },
+  paladino: { dados_vida: 10, pontos_pericia: 2, },
+  ranger: { dados_vida: 8, pontos_pericia: 6, },
+  // classes NPC
+  adepto: { dados_vida: 6, pontos_pericia: 2, },
+  aristocrata: { dados_vida: 8, pontos_pericia: 4, },
+  plebeu: { dados_vida: 4, pontos_pericia: 2, },
+  expert: { dados_vida: 6, pontos_pericia: 6, },
+  combatente: { dados_vida: 8, pontos_pericia: 2, },
+};
+
 // Bonus base de ataque.
 function bba_forte(nivel) {
   if (nivel == 0) return 0;
@@ -45,6 +67,7 @@ function bba_nulo() {
   return 0;
 }
 
+// TODO remover essa tabela que ja esta nas classes apos alterar o codigo.
 // Tabelas de dados de vida.
 var tabelas_dados_vida = {
   barbaro: 12,
@@ -211,7 +234,7 @@ var tabelas_escudos = {
 
 // Mapeia o nome para a chave. Necessario para computar proficiencias.
 var tabelas_armas_invertida = {
-  // Cada entrada: nome_completo: nome_entrada.
+  // Cada entrada: nome_completo: chave_entrada.
 };
 
 // Esta tabela eh composta pela juncao das tabelas de armas simples, comuns e exoticas.
@@ -799,9 +822,11 @@ var tabelas_pericias = {
   arte_da_fuga: {
       nome: 'Arte da Fuga', classes: [ 'bardo', 'monge', 'ladino', ],
       sem_treinamento: true, habilidade: 'destreza' },
+  atuacao: {
+      nome: 'Atuação', classes: [ 'bardo', 'monge', 'ladino', ],
+      sem_treinamento: true, habilidade: 'inteligencia' },
 /*
 Perícias Bbr Brd Clr Drd Gue Mng Pal Rgr Lad Fet Mag S/T H/C
-Atuação Po Pc Po Po Po Pc Po Po Pc Po Po Sim Car
 Avaliação Po Pc Po Po Po Po Po Po Pc Po Po Sim Int
 Blefar Po Pc Po Po Po Po Po Po Pc Pc Po Sim Car
 Cavalgar Pc Po Po Pc Pc Po Pc Pc Po Po Po Sim Des

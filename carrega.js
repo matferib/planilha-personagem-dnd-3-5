@@ -25,7 +25,6 @@ function CarregaTabelaArmas() {
 
 // Popula as pericias iniciais.
 function CarregaPericias() {
-//  <div>Nome Pericia: <button>+</button><button>-</button> Pontos: <span>0</span>; <span>0 </span>+0 <span>+0 </span>=<span> +0</span></div>
   var div_pericias = goog.dom.getElement('div-pericias');
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
@@ -33,8 +32,12 @@ function CarregaPericias() {
     var prefixo_id = 'pericia-' + chave_pericia;
     var div = CriaDiv(prefixo_id);
     div.appendChild(CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): '));
-    div.appendChild(CriaBotao('+', prefixo_id + '-botao-mais'));
-    div.appendChild(CriaBotao('-', prefixo_id + '-botao-menos'));
+    var botao_mais = CriaBotao('+', prefixo_id + '-botao-mais');
+    botao_mais.setAttribute('onclick', "ClickPericia('" + chave_pericia + "', 1)");
+    div.appendChild(botao_mais);
+    var botao_menos = CriaBotao('-', prefixo_id + '-botao-menos');
+    botao_menos.setAttribute('onclick', "ClickPericia('" + chave_pericia + "', -1)");
+    div.appendChild(botao_menos);
     var input_pontos = CriaInputTexto(0, prefixo_id + '-pontos');
     input_pontos.size = 2;
     input_pontos.readOnly = true;
