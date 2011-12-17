@@ -217,7 +217,7 @@ function _AtualizaSalvacoes() {
   var div_salvacoes = goog.dom.getElement('div-salvacoes');
   RemoveFilhos(div_salvacoes);
   for (var tipo_salvacao in personagem.salvacoes) {
-    var div_salvacao = document.createElement('div');
+    var div_salvacao = CriaDiv();
     AdicionaSpanAoDiv(tipo_salvacao + ': ', null, div_salvacao);
     AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].base, true) + ' ', 
                       null, div_salvacao);
@@ -250,6 +250,11 @@ function _AtualizaTalentos() {
 
 // Escreve todas as pericias e atualiza de acordo com a classe dos personagem.
 function _AtualizaPericias() {
+  var span_total = goog.dom.getElement('pericias-total-pontos');
+  span_total.innerText = personagem.pericias.total_pontos;
+  var span_gastos = goog.dom.getElement('pericias-pontos-gastos');
+  span_gastos.innerText = personagem.pericias.pontos_gastos;
+
   for (var chave in personagem.pericias.lista) {
     var dom_graduacoes = goog.dom.getElement('pericia-' + chave + '-graduacoes');
     dom_graduacoes.innerText = personagem.pericias.lista[chave].pontos;

@@ -206,16 +206,33 @@ function _ConverteTalentos() {
   }
 }
 
-// Converte todas as pericias.
+// Converte todas as pericias. Primeiro calcula o total de pontos e depois varre as entradas
+// de pericia, computando o valor de cada uma e o numero de pontos disponiveis.
 function _ConvertePericias() {
-  // TODO pontos de pericia.
+  personagem.pericias.total_pontos = 0;
+  var first_level = true;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var nivel = personagem.classes[i].nivel;
+    var pontos_classe = tabelas_classes[personagem.classes[i].classe].pontos_pericia;
+    var pontos_inteligencia = personagem.atributos.inteligencia.modificador;
+
+    // Se o primeiro nivel estiver neste pacote de niveis, ele conta como 3 niveis a mais.
+    var pontos_iteracao = 0;
+    if (first_level) {
+      nivel += 3;
+      first_level = false;
+    }
+    personagem.pericias.total_pontos += (pontos_classe + pontos_inteligencia) * nivel;
+  }
+
+  personagem.pericias.pontos_gastos = 0;
   personagem.pericias.lista = {};
   for (var i = 0; i < entradas.pericias.length; ++i) {
     var pericia = tabelas_pericias[entradas.pericias[i].chave];
     var pericia_personagem = {};
     pericia_personagem.pontos = entradas.pericias[i].pontos;
     pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasse(pericia.classes) ?
-        pericia_personagem.pontos : Math.floor(pericia_personagem.pontos);
+        pericia_personagem.pontos : Math.floor(pericia_personagem.pontos / 2);
     pericia_personagem.bonus_sinergia = 0;
     pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
     pericia_personagem.total = 
@@ -223,6 +240,7 @@ function _ConvertePericias() {
         pericia_personagem.bonus_habilidade + 
         pericia_personagem.bonus_sinergia;
 
+    personagem.pericias.pontos_gastos += pericia_personagem.pontos;
     personagem.pericias.lista[entradas.pericias[i].chave] = pericia_personagem; 
   }
 }
