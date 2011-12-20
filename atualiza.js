@@ -31,10 +31,6 @@ function _AtualizaGeral() {
 // Atualiza o tamanho em funcao da raca.
 function _AtualizaTamanho() {
   // Busca o modificador de tamanho da raca.
-  personagem.tamanho.categoria =
-    tabelas_raca[personagem.raca].tamanho;
-  personagem.tamanho.modificador_ataque_defesa =
-    tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
   ImprimeSinalizado(
       personagem.tamanho.modificador_ataque_defesa,
       goog.dom.getElementsByClass('tamanho-mod-ataque-defesa'));
