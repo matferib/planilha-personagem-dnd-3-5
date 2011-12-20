@@ -26,6 +26,7 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
     {nome: "feiticeiro", texto: "Feiticeiro"},
     {nome: "ladino", texto: "Ladino"},
     {nome: "mago", texto: "Mago"},
+    {nome: "monge", texto: "Monge"},
     {nome: "paladino", texto: "Paladino"},
     {nome: "adepto", texto: "Adepto (NPC)"},
     {nome: "aristocrata", texto: "Aristocrata (NPC)"},
