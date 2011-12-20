@@ -809,63 +809,186 @@ Widen Spell
      */
 };
 
+// A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
 var tabelas_pericias = {
   abrir_fechaduras: { 
-      nome: 'Abrir Fechaduras', classes: [ 'ladino', ], 
+      nome: 'Abrir Fechaduras', 
+      classes: [ 'ladino', ], 
       sem_treinamento: false, habilidade: 'destreza' },
   acrobacias: {
-      nome: 'Acrobacias', classes: [ 'bardo', 'monge', 'ladino' ],
-      sem_treinamento: false, habilidade: 'destreza' },
+      nome: 'Acrobacias', 
+      classes: [ 'bardo', 'monge', 'ladino' ],
+      sem_treinamento: false, habilidade: 'destreza', penalidade_armadura: 1 },
   adestrar_animais: {
-      nome: 'Adestrar Animais', classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger' ], 
+      nome: 'Adestrar Animais', 
+      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger' ], 
       sem_treinamento: false, habilidade: 'carisma' },
   arte_da_fuga: {
-      nome: 'Arte da Fuga', classes: [ 'bardo', 'monge', 'ladino', ],
-      sem_treinamento: true, habilidade: 'destreza' },
+      nome: 'Arte da Fuga', 
+      classes: [ 'bardo', 'monge', 'ladino', ],
+      sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   atuacao: {
-      nome: 'Atuação', classes: [ 'bardo', 'monge', 'ladino', ],
+      nome: 'Atuação', 
+      classes: [ 'bardo', 'monge', 'ladino', ],
       sem_treinamento: true, habilidade: 'inteligencia' },
-/*
-Perícias Bbr Brd Clr Drd Gue Mng Pal Rgr Lad Fet Mag S/T H/C
-Avaliação Po Pc Po Po Po Po Po Po Pc Po Po Sim Int
-Blefar Po Pc Po Po Po Po Po Po Pc Pc Po Sim Car
-Cavalgar Pc Po Po Pc Pc Po Pc Pc Po Po Po Sim Des
-Concentração Po Pc Pc Pc Po Pc Pc Pc Po Pc Pc Sim Con
-Conhecimento (arcano) Po Pc Pc Po Po Pc Po Po Po Pc Pc Não Int
-Conhecimento (arquitetura e engenharia) Po Pc Po Po Po Po Po Po Po Po Pc Não Int
-Conhecimento (geografia) Po Pc Po Po Po Po Po Pc Po Po Pc Não Int
-Conhecimento (história) Po Pc Pc Po Po Po Po Po Po Po Pc Não Int
-Conhecimento (local) Po Pc Po Pc Po Po Po Po Pc Po Pc Não Int
-Conhecimento (masmorras) Po Pc Po Po Po Po Po Pc Po Po Pc Não Int
-Conhecimento (natureza) Po Pc Po Po Po Po Po Pc Po Po Pc Não Int
-Conhecimento (nobreza e realeza) Po Pc Po Po Po Po Pc Po Po Po Pc Não Int
-Conhecimento (planos) Po Pc Pc Po Po Po Po Po Po Po Pc Não Int
-Conhecimento (religião) Po Pc Pc Po Po Pc Pc Po Po Po Pc Não Int
-Cura Po Po Pc Pc Po Po Pc Pc Po Po Po Sim Sab
-Decifrar Escrita Po Pc Po Po Po Po Po Po Pc Po Pc Não Int
-Diplomacia Po Pc Pc Pc Po Pc Pc Po Pc Po Po Sim Car
-Disfarces Po Pc Po Po Po Po Po Po Pc Po Po Sim Car
-Equilíbrio Po Pc Po Po Po Pc Po Po Pc Po Po Sim Des*
-Escalar Pc Pc Po Po Pc Pc Po Pc Pc Po Po Sim For*
-Esconder-se Po Pc Po Po Po Pc Po Pc Pc Po Po Sim Des*
-Falar Idioma Po Pc Po Po Po Po Po Po Po Po Po Não N/A
-Falsificação Po Po Po Po Po Po Po Po Pc Po Po Sim Int
-Furtividade Po Pc Po Po Po Pc Po Pc Pc Po Po Sim Des*
-Identificar Magia Po Pc Pc Pc Po Po Po Po Po Pc Pc Não Int
-Intimidação Pc Po Po Po Pc Po Po Po Pc Po Po Sim Car
-Natação Pc Pc Po Pc Pc Pc Po Pc Pc Po Po Sim For**
-Observar Po Po Po Pc Po Pc Po Pc Pc Po Po Sim Sab
-Obter Informação Po Pc Po Po Po Po Po Po Pc Po Po Sim Car
-Ofícios Pc Pc Pc Pc Pc Pc Pc Pc Pc Pc Pc Sim Int
-Operar Mecanismo Po Po Po Po Po Po Po Po Pc Po Po Não Int
-Ouvir Pc Pc Po Pc Po Pc Po Pc Pc Po Po Sim Sab
-Prestidigitação Po Pc Po Po Po Po Po Po Pc Po Po Não Des*
-Procurar Po Po Po Po Po Po Po Pc Pc Po Po Sim Int
-Profissão Po Pc Pc Pc Po Pc Pc Pc Pc Pc Pc Não Sab
-Saltar Pc Pc Po Po Pc Pc Po Pc Pc Po Po Sim For*
-Sentir Motivação Po Pc Po Po Po Pc Pc Po Pc Po Po Sim Sab
-Sobrevivência Pc Po Po Pc Po Po Po Pc Po Po Po Sim Sab
-Usar Cordas Po Po Po Po Po Po Po Pc Pc Po Po Sim Des
-Usar Intrumento Mágico Po Pc Po Po Po Po Po Po Pc Po Po Não Car
-*/
+  avaliacao: {
+      nome: 'Avaliação', 
+      classes: [ 'bardo', 'ladino' ],
+      sem_treinamento: true, habilidade: 'inteligencia' },
+  blefar: {
+      nome: 'Blefar', 
+      classes: [  'bardo', 'ladino', 'feiticeiro' ], 
+      sem_treinamento: true,  habilidade: 'carisma' },
+  cavalgar: {
+      nome: 'Cavalgar', 
+      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger' ], 
+      sem_treinamento: true,  habilidade: 'destreza' },
+  concentracao: {
+      nome: 'Concentração', 
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 'feiticeiro', 'mago' ], 
+      sem_treinamento: true,  habilidade: 'constituicao' },
+  conhecimento_arcano: {
+      nome: 'Conhecimento (arcano)',
+      classes: [  'bardo', 'clerigo', 'monge', 'feiticeiro', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_arquitetura_e_engenharia: {
+      nome: 'Conhecimento(arquitetura_e_engenharia)',
+      classes: [  'bardo', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_geografia: {
+      nome: 'Conhecimento (geografia)',
+      classes: [  'bardo', 'ranger', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_história: {
+      nome: 'Conhecimento (história)',
+      classes: [  'bardo', 'clerigo', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_local: {
+      nome: 'Conhecimento (local)',
+      classes: [  'bardo', 'ladino', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_masmorras: {
+      nome: 'Conhecimento (masmorras)',
+      classes: [  'bardo', 'ranger', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_natureza: {
+      nome: 'Conhecimento (natureza)',
+      classes: [  'bardo', 'druida', 'ranger', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_nobreza_e_realeza: {
+      nome: 'Conhecimento (nobreza_e_realeza)',
+      classes: [  'bardo', 'paladino', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_planos: {
+      nome: 'Conhecimento (planos)',
+      classes: [  'bardo', 'clerigo', 'mago' ],
+      habilidade: 'inteligencia' },
+  conhecimento_religiao: {
+      nome: 'Conhecimento (religião)',
+      classes: [  'bardo', 'clerigo', 'monge', 'paladino', 'mago' ],
+      habilidade: 'inteligencia' },
+  cura: {
+      nome: 'Cura',
+      classes: [  'clerigo', 'druida', 'paladino', 'ranger' ],
+      sem_treinamento: true, habilidade: 'sabedoria' },
+  decifrar_escrita: {
+      nome: 'Decifrar Escrita',
+      classes: [  'bardo', 'ladino', 'mago' ],
+      habilidade: 'inteligencia' },
+  diplomacia: {
+      nome: 'Diplomacia',
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ladino', ],
+      sem_treinamento: true, habilidade: 'carisma' },
+  disfarces: {
+      nome: 'Disfarces',
+      classes: [  'bardo', 'ladino', ],
+      sem_treinamento: true, habilidade: 'carisma' },
+  equilibrio: {
+      nome: 'Equilíbrio',
+      classes: [  'bardo', 'monge', 'ladino', ],
+      sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
+  escalar: {
+      nome: 'Escalar',
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
+  esconderse: {
+      nome: 'Esconder-se',
+      classes: [  'bardo', 'monge', 'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
+  falar_idioma: {
+      nome: 'falar idioma',
+      classes: [ 'bardo'],
+      habilidade: 'sabedoria' },
+  falsificacao: {
+      nome: 'Falsificação',
+      classes: [  'ladino', ],
+      sem_treinamento: true, habilidade: 'inteligencia' },
+  furtividade: {
+      nome: 'Furtividade',
+      classes: [  'bardo', 'monge', 'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
+  identificar_magia: {
+      nome: 'identificar magia',
+      classes: [  'bardo', 'clerigo', 'druida', 'feiticeiro', 'mago'],
+      habilidade: 'inteligencia' },
+  intimidacao: {
+      nome: 'Intimidação',
+      classes: [  'barbaro', 'guerreiro', 'ladino', ],
+      sem_treinamento: true, habilidade: 'carisma' },
+  natacao: {
+      nome: 'Natação',
+      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 2 },
+  observar: {
+      nome: 'Observar',
+      classes: [  'druida', 'monge', 'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'sabedoria' },
+  obter_informacao: {
+      nome: 'Obter Informação',
+      classes: [  'bardo', 'ladino', ],
+      sem_treinamento: true, habilidade: 'carisma' },
+  oficios: {
+      nome: 'Ofícios',
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge', 'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      sem_treinamento: true, habilidade: 'inteligencia' },
+  operar_mecanismo: {
+      nome: 'Operar Mecanismo',
+      classes: [  'ladino'],
+      habilidade: 'inteligencia' },
+  ouvir: {
+      nome: 'Ouvir',
+      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', ],
+       sem_treinamento: true, habilidade: 'sabedoria' },
+  prestidigitacao: {
+      nome: 'Prestidigitação',
+      classes: [  'bardo', 'ladino'],
+      habilidade: 'destreza', penalidade_armadura: 1 },
+  procurar: {
+      nome: 'Procurar',
+      classes: [  'ranger', 'ladino', ],
+       sem_treinamento: true,habilidade: 'inteligencia' },
+  profissao: {
+      nome: 'Profissão',
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago'],
+      habilidade: 'sabedoria' },
+  saltar: {
+      nome: 'Saltar',
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
+  sentir_motivacao: {
+      nome: 'Sentir Motivação',
+      classes: [  'bardo', 'monge', 'paladino', 'ladino', ],
+      sem_treinamento: true, habilidade: 'sabedoria' },
+  sobrevivência: {
+      nome: 'Sobrevivência',
+      classes: [  'barbaro', 'druida', 'ranger', ],
+      sem_treinamento: true, habilidade: 'sabedoria' },
+  usar_cordas: {
+      nome: 'Usar Cordas',
+      classes: [  'ranger', 'ladino', ],
+      sem_treinamento: true, habilidade: 'destreza' },
+  usar_instrumento_magico: {
+      nome: 'Usar Instrumento Mágico',
+      classes: [  'bardo', 'ladino' ],
+      habilidade: 'carisma' },
 };
