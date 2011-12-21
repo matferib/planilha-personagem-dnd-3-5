@@ -26,9 +26,9 @@ function CarregamentoInicial() {
 // Botao de adicionar classe apertado.
 function ClickAdicionarClasse() {
   var classes_desabilitadas = [];
-  //for (var i = 0; i < personagem.classes.length; ++i) {
-  //  classes_desabilitadas.push(personagem.classes[i].classe);
-  //}
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    classes_desabilitadas.push(personagem.classes[i].classe);
+  }
   AdicionaClasse(classes_desabilitadas);
   AtualizaGeral();
 }
