@@ -11,48 +11,31 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
   if (!nivel) {
     nivel = 1;
   }
-  if (!classe) {
-    classe = "guerreiro";
-  }
-  var select_classe = document.createElement('select');
+  var select_classe = CriaSelect(null, 'selects-classes');
   select_classe.setAttribute('name', 'classe');
   select_classe.setAttribute('onchange', 'AtualizaGeral()');
-  var classes = [
-    {nome: "barbaro", texto: "Bárbaro"},
-    {nome: "bardo", texto: "Bardo"},
-    {nome: "clerigo", texto: "Clérigo"},
-    {nome: "druida", texto: "Druida"},
-    {nome: "guerreiro", texto: "Guerreiro"},
-    {nome: "feiticeiro", texto: "Feiticeiro"},
-    {nome: "ladino", texto: "Ladino"},
-    {nome: "mago", texto: "Mago"},
-    {nome: "monge", texto: "Monge"},
-    {nome: "paladino", texto: "Paladino"},
-    {nome: "adepto", texto: "Adepto (NPC)"},
-    {nome: "aristocrata", texto: "Aristocrata (NPC)"},
-    {nome: "combatente", texto: "Combatente (NPC)"},
-    {nome: "expert", texto: "Expert (NPC)"},
-    {nome: "plebeu", texto: "Plebeu (NPC)"},
-  ];
-  for (var i = 0; i < classes.length; ++i) {
-    var option = document.createElement('option');
-    option.setAttribute('name', classes[i].nome);
-    option.setAttribute('value', classes[i].nome);
-    option.selected = (classes[i].nome == classe);
-    option.innerText = classes[i].texto;
+  for (var chave_classe in tabelas_classes) {
     var desabilitar_classe = false;
     for (var j = 0; j < classes_desabilitadas.length; ++j) {
-      if (classes[i].nome == classes_desabilitadas[j]) {
+      if (chave_classe == classes_desabilitadas[j]) {
         desabilitar_classe = true;
         break;
       }
     }
+    if (desabilitar_classe) {
+      // Nao adiciona classe desabilitada.
+      continue;
+    }
+    var option = document.createElement('option');
+    option.setAttribute('name', chave_classe);
+    option.setAttribute('value', chave_classe);
+    option.innerText = tabelas_classes[chave_classe].nome;
+    option.selected = (chave_classe == classe) && !desabilitar_classe;
     option.disabled = desabilitar_classe;
     select_classe.appendChild(option);
   }
   var span_nivel = CriaSpan('Nível: ');
-  var input_nivel = document.createElement('input');
-  input_nivel.type = 'text';
+  var input_nivel = CriaInputTexto(nivel);
   input_nivel.name = 'nivel';
   input_nivel.maxLength = input_nivel.size = 2;
   input_nivel.setAttribute('onchange', 'AtualizaGeral()');
@@ -70,7 +53,10 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
 // Remove a classe mais recente do personagem.
 function RemoveClasse() {
   var div_classes = goog.dom.getElement("classes");
-  if (div_classes.childNodes.length == 1) return;
+  if (div_classes.childNodes.length == 1) {
+    alert('Personagem deve ter pelo menos uma classe');
+    return;
+  }
   div_classes.removeChild(div_classes.lastChild);
 }
 

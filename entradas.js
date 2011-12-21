@@ -184,7 +184,7 @@ function EscreveEntradas() {
   var classes_desabilitadas = [];
   for (var i = 0; i < entradas.classes.length; ++i) {
     AdicionaClasse(classes_desabilitadas, entradas.classes[i].classe, entradas.classes[i].nivel);
-    //classes_desabilitadas.push(entradas.classes[i].classe);
+    classes_desabilitadas.push(entradas.classes[i].classe);
   }
 
   // pontos de vida e ferimentos.

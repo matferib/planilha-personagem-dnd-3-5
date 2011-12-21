@@ -35,6 +35,11 @@ function CriaInputTexto(texto, id, classe) {
   return input;
 }
 
+function CriaSelect(id, classe) {
+  var select = CriaDom('select', id, classe);
+  return select;
+}
+
 // Remove o filho do pai com o id passado.
 // @param id_filho identificador do filho.
 // @param pai elemento que contem os filhos.

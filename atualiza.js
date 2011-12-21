@@ -17,6 +17,7 @@ function AtualizaGeralSemLerOuEscrever() {
 
 // Apenas atualizacoes, sem leitura ou escrita de entradas.
 function _AtualizaGeral() {
+  _AtualizaClasses();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaDadosVida();
@@ -26,6 +27,15 @@ function _AtualizaGeral() {
   _AtualizaSalvacoes();
   _AtualizaTalentos();
   _AtualizaPericias();
+}
+
+// Torna todas as classes exceto a ultima desabilitadas. 
+function _AtualizaClasses() {
+  var selects_classes = goog.dom.getElementsByClass('selects-classes'); 
+  for (var i = 0; i < selects_classes.length - 1; ++i) {
+    selects_classes[i].disabled = true;
+  }
+  selects_classes[selects_classes.length - 1].disabled = false;
 }
 
 // Atualiza o tamanho em funcao da raca.
