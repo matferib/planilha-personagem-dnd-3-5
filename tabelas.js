@@ -28,23 +28,23 @@ var tabelas_raca = {
 // Dados relacionados a classes. 
 // TODO passar tudo de classes pra ca.
 var tabelas_classes = {
-  barbaro: { dados_vida: 12, pontos_pericia: 4, },
-  bardo: { dados_vida: 6, pontos_pericia: 6, },
-  clerigo: { dados_vida: 8, pontos_pericia: 2,  },
-  druida: { dados_vida: 8, pontos_pericia: 4, },
-  guerreiro: { dados_vida: 10, pontos_pericia: 2 },
-  feiticeiro: { dados_vida: 4, pontos_pericia: 2, },
-  ladino: { dados_vida: 6, pontos_pericia: 8, },
-  mago: { dados_vida: 4, pontos_pericia: 2, },
-  monge: { dados_vida: 8, pontos_pericia: 4, },
-  paladino: { dados_vida: 10, pontos_pericia: 2, },
-  ranger: { dados_vida: 8, pontos_pericia: 6, },
+  barbaro: { nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, },
+  bardo: { nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, },
+  clerigo: { nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  },
+  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, },
+  guerreiro: { nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2 },
+  feiticeiro: { nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, },
+  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, },
+  mago: { nome: 'Mago', dados_vida: 4, pontos_pericia: 2, },
+  monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, },
+  paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, },
+  ranger: { nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, },
   // classes NPC
-  adepto: { dados_vida: 6, pontos_pericia: 2, },
-  aristocrata: { dados_vida: 8, pontos_pericia: 4, },
-  plebeu: { dados_vida: 4, pontos_pericia: 2, },
-  expert: { dados_vida: 6, pontos_pericia: 6, },
-  combatente: { dados_vida: 8, pontos_pericia: 2, },
+  adepto: { nome: 'Adepto', dados_vida: 6, pontos_pericia: 2, },
+  aristocrata: { nome: 'Aristocrata', dados_vida: 8, pontos_pericia: 4, },
+  plebeu: { nome: 'Plebeu', dados_vida: 4, pontos_pericia: 2, },
+  expert: { nome: 'Expert', dados_vida: 6, pontos_pericia: 6, },
+  combatente: { nome: 'Combatente', dados_vida: 8, pontos_pericia: 2, },
 };
 
 // Bonus base de ataque.
