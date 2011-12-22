@@ -235,7 +235,7 @@ function _AtualizaSalvacoes() {
   }
 }
 
-// Um talento inicial mais um a cada 3 niveis.
+// Atualiza os numeros e listas relacionados a talentos.
 function _AtualizaTalentos() {
   ImprimeNaoSinalizado(personagem.talentos.total, goog.dom.getElementByClass('talentos-total'));
   var div_talentos = goog.dom.getElement('div-select-talentos');
@@ -266,6 +266,12 @@ function _AtualizaPericias() {
     dom_graduacoes.innerText = personagem.pericias.lista[chave].pontos;
     var dom_sinergia = goog.dom.getElement('pericia-' + chave + '-sinergia');
     dom_sinergia.innerText = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
+    var bonus_talentos_total = 0;
+    for (var chave_talento in personagem.pericias.lista[chave].bonus_talentos) {
+      bonus_talentos_total += personagem.pericias.lista[chave].bonus_talentos[chave_talento];
+    }
+    var dom_bonus_talento = goog.dom.getElement('pericia-' + chave + '-bonus-talento');
+    dom_bonus_talento.innerText = StringSinalizada(bonus_talentos_total, false);
     var dom_total = goog.dom.getElement('pericia-' + chave + '-total');
     dom_total.innerText = StringSinalizada(personagem.pericias.lista[chave].total);
   }

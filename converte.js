@@ -199,15 +199,25 @@ function _ConverteBonusPorCategoria(
 // Converte os talentos do personagem.
 // TODO verificar pre requisitos de cada talento.
 function _ConverteTalentos() {
+  // Zera os bonus de talentos de todas as pericias.
+  for (var chave_pericia in personagem.pericias.lista) {
+    personagem.pericias.lista[chave_pericia].bonus_talentos = {};
+  }
+
   personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
   personagem.talentos.total = 
       personagem.talentos.nivel + 
       (tabelas_raca[personagem.raca].talento_extra ? 1 : 0);
   personagem.talentos.lista = [];
   for (var i = 0; i < entradas.talentos.length; ++i) {
+    var chave_talento = entradas.talentos[i].nome;
     personagem.talentos.lista.push({
-        nome: entradas.talentos[i].nome,
+        nome: chave_talento,
         complemento: entradas.talentos[i].complemento });
+    var bonus_pericias = tabelas_talentos[chave_talento].bonus_pericias;
+    for (var chave_pericia in bonus_pericias) {
+      personagem.pericias.lista[chave_pericia].bonus_talentos[chave_talento] = bonus_pericias[chave_pericia];
+    }
   }
 }
 
@@ -231,22 +241,26 @@ function _ConvertePericias() {
   }
 
   personagem.pericias.pontos_gastos = 0;
-  personagem.pericias.lista = {};
   for (var i = 0; i < entradas.pericias.length; ++i) {
     var pericia = tabelas_pericias[entradas.pericias[i].chave];
-    var pericia_personagem = {};
+    var pericia_personagem = personagem.pericias.lista[entradas.pericias[i].chave];
     pericia_personagem.pontos = entradas.pericias[i].pontos;
     pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasse(pericia.classes) ?
         pericia_personagem.pontos : Math.floor(pericia_personagem.pontos / 2);
     pericia_personagem.bonus_sinergia = 0;
     pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
+    // soma todos os bonus de talentos.
+    var bonus_talentos_total = 0;
+    for (var chave_talento in pericia_personagem.bonus_talentos) {
+      bonus_talentos_total += pericia_personagem.bonus_talentos[chave_talento];
+    }
     pericia_personagem.total = 
         pericia_personagem.graduacoes + 
         pericia_personagem.bonus_habilidade + 
+        bonus_talentos_total +
         pericia_personagem.bonus_sinergia;
 
     personagem.pericias.pontos_gastos += pericia_personagem.pontos;
-    personagem.pericias.lista[entradas.pericias[i].chave] = pericia_personagem; 
   }
 }
 
