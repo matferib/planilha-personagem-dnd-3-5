@@ -15,15 +15,15 @@ function GeraPontosDeVida(modo) {
       var pontos_vida_nivel = 0;
       if (primeiro) {
         if (modo == 'elite') {
-          pontos_vida_nivel = tabelas_dados_vida[info_classe.classe] +
+          pontos_vida_nivel = tabelas_classes[info_classe.classe].dados_vida +
               personagem.atributos.constituicao.modificador;
         } else {
-          pontos_vida_nivel = Rola(1, tabelas_dados_vida[info_classe.classe]) +
+          pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida) +
               personagem.atributos.constituicao.valor;
         }
         primeiro= false;
       } else {
-        pontos_vida_nivel = Rola(1, tabelas_dados_vida[info_classe.classe]) +
+        pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida) +
             personagem.atributos.constituicao.modificador;
       }
       // Nunca pode ganhar menos de 1 ponto por nivel.
