@@ -93,7 +93,7 @@ function _AtualizaDadosVida() {
         string_dados_vida += ' +';
       }
       string_dados_vida += 
-        personagem.classes[i].nivel + 'd' + tabelas_dados_vida[personagem.classes[i].classe];
+        personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
 
   }
   if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {

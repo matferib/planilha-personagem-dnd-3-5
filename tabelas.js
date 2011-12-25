@@ -67,28 +67,6 @@ function bba_nulo() {
   return 0;
 }
 
-// TODO remover essa tabela que ja esta nas classes apos alterar o codigo.
-// Tabelas de dados de vida.
-var tabelas_dados_vida = {
-  barbaro: 12,
-  bardo: 6,
-  clerigo: 8,
-  druida: 8,
-  guerreiro: 10,
-  feiticeiro: 4,
-  ladino: 6,
-  mago: 4,
-  monge: 8,
-  paladino: 10,
-  ranger: 8,
-  // classes NPC
-  adepto: 6,
-  aristocrata: 8,
-  plebeu: 4,
-  expert: 6,
-  combatente: 8,
-};
-
 // Tabelas de geracao de atributos.
 var tabelas_geracao_atributos = {
   // Peguei do livro do mestre.
