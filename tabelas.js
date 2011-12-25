@@ -28,23 +28,23 @@ var tabelas_raca = {
 // Dados relacionados a classes. 
 // TODO passar tudo de classes pra ca.
 var tabelas_classes = {
-  barbaro: { nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, },
-  bardo: { nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, },
-  clerigo: { nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  },
-  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, },
-  guerreiro: { nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2 },
-  feiticeiro: { nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, },
-  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, },
-  mago: { nome: 'Mago', dados_vida: 4, pontos_pericia: 2, },
-  monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, },
-  paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, },
-  ranger: { nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, },
+  barbaro: { nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte, },
+  bardo: { nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
+  clerigo: { nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio, },
+  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+  guerreiro: { nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
+  feiticeiro: { nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
+  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio, },
+  mago: { nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
+  monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+  paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
+  ranger: { nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte, },
   // classes NPC
-  adepto: { nome: 'Adepto', dados_vida: 6, pontos_pericia: 2, },
-  aristocrata: { nome: 'Aristocrata', dados_vida: 8, pontos_pericia: 4, },
-  plebeu: { nome: 'Plebeu', dados_vida: 4, pontos_pericia: 2, },
-  expert: { nome: 'Expert', dados_vida: 6, pontos_pericia: 6, },
-  combatente: { nome: 'Combatente', dados_vida: 8, pontos_pericia: 2, },
+  adepto: { nome: 'Adepto', dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, },
+  aristocrata: { nome: 'Aristocrata', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+  plebeu: { nome: 'Plebeu', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
+  expert: { nome: 'Expert', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
+  combatente: { nome: 'Combatente', dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
 };
 
 // Bonus base de ataque.
@@ -89,27 +89,6 @@ var tabelas_geracao_atributos = {
     // esse aqui varia de acordo com as escolhas da area de expertise.
   expert: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ],
   combatente: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
-};
-
-// Tabelas de BBA.
-var tabelas_bba = {
-  barbaro: bba_forte,
-  bardo: bba_medio,
-  clerigo: bba_medio,
-  druida: bba_medio,
-  guerreiro: bba_forte,
-  feiticeiro: bba_fraco,
-  ladino: bba_medio,
-  mago: bba_fraco,
-  monge: bba_medio,
-  paladino: bba_forte,
-  ranger: bba_forte,
-  // classes NPC
-  adepto: bba_fraco,
-  aristocrata: bba_medio,
-  plebeu: bba_fraco,
-  expert: bba_medio,
-  combatente: bba_forte,
 };
 
 // Salvacoes
@@ -605,7 +584,7 @@ var tabelas_proficiencia_arma_por_classe = {
       talentos: [ 'usar_armas_simples' ]
   },
   druida: { 
-      armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice',  
+      armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice_curta',  
                'lanca_curta', 'funda', 'lanca' ]
   },
   feiticeiro: { 

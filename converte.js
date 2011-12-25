@@ -30,7 +30,7 @@ function ConverteEntradasParaPersonagem() {
   personagem.bba = 0;
   for (var i = 0; i < personagem.classes.length; ++i) {
     personagem.bba += 
-        tabelas_bba[personagem.classes[i].classe](personagem.classes[i].nivel);
+        tabelas_classes[personagem.classes[i].classe].bba(personagem.classes[i].nivel);
   }
   personagem.bba_cac = 
       personagem.bba + personagem.atributos.forca.modificador + 
