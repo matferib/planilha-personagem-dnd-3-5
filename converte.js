@@ -74,6 +74,9 @@ function ConverteEntradasParaPersonagem() {
 
   // Salvacoes
   _ConverteSalvacoes();
+
+  // Feiticos.
+  _ConverteFeiticos();
 }
 
 // Converte um estilo da entrada para o personagem.
@@ -423,3 +426,59 @@ function _ConverteSalvacoes() {
     }
   }
 }
+
+// Converte todos os feiticos do personagem.
+function _ConverteFeiticos() {
+  // Completa o objeto de feiticos de acordo com as classes de personagem.
+  personagem.feiticos = {};
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var chave_classe = personagem.classes[i].classe;
+    var feiticos_classe = tabelas_feiticos[chave_classe];
+    if (feiticos_classe == null) {
+      continue;
+    }
+    personagem.feiticos[chave_classe] = {
+      habilidade_chave: tabelas_feiticos[chave_classe].habilidade_chave,
+      conhecidos: {},
+      slots: {}
+    };
+    var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
+    var feiticos_por_nivel = feiticos_classe.por_nivel[personagem.classes[i].nivel];
+    // TODO usar slots ao inves de conhecidos, ja que nem sempre a classe usa conhecidos.
+    for (var indice = 0; indice < feiticos_por_nivel.conhecidos.length; ++indice) {
+      var nivel_feitico = nivel_inicial + indice;
+      // conhecidos.
+      var array_conhecidos_nivel = new Array();
+      array_conhecidos_nivel.length = parseInt(feiticos_por_nivel.conhecidos.charAt(indice)) || 0;
+      personagem.feiticos[chave_classe].conhecidos[nivel_feitico] = array_conhecidos_nivel;
+
+      // slots.
+      var personagem_slots_nivel = {
+          base: parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0,
+          bonus_habilidade: 0,  // TODO
+          feiticos: [],
+      }
+      personagem_slots_nivel.feiticos.length = 
+          personagem_slots_nivel.base + personagem_slots_nivel.bonus_habilidade;
+      personagem.feiticos[chave_classe].slots[nivel_feitico] = personagem_slots_nivel;
+    }
+  }
+
+  // Preenche objeto de feiticos com as entradas.
+  for (var i = 0; i < entradas.feiticos.conhecidos.length; ++i) {
+    var entrada_feitico = entradas.feiticos.conhecidos[i];
+    var personagem_feiticos = personagem.feiticos[entrada_feitico.classe];
+    if (personagem_feiticos == null ||
+        personagem_feiticos.conhecidos == null || 
+        personagem_feiticos.conhecidos[entrada_feitico.nivel] == null ||
+        personagem_feiticos.conhecidos[entrada_feitico.nivel].length <= entrada_feitico.slot) {
+      // Pode acontecer ao diminuir nivel ou remover classe com feitico.
+      continue;
+    }
+    personagem_feiticos.conhecidos[entrada_feitico.nivel][entrada_feitico.slot] =
+        entrada_feitico.feitico;
+  }
+
+  // TODO slots.
+}
+

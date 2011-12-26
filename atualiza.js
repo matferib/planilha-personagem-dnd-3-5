@@ -27,6 +27,7 @@ function _AtualizaGeral() {
   _AtualizaSalvacoes();
   _AtualizaTalentos();
   _AtualizaPericias();
+  _AtualizaFeiticos();
 }
 
 // Torna todas as classes exceto a ultima desabilitadas. 
@@ -274,5 +275,39 @@ function _AtualizaPericias() {
     dom_bonus_talento.innerText = StringSinalizada(bonus_talentos_total, false);
     var dom_total = goog.dom.getElement('pericia-' + chave + '-total');
     dom_total.innerText = StringSinalizada(personagem.pericias.lista[chave].total);
+  }
+}
+
+function _AtualizaFeiticos() {
+  // Cria os elementos da planilha.
+  var div_feiticos = goog.dom.getElement('div-feiticos');
+  RemoveFilhos(div_feiticos);
+  for (var chave_classe in personagem.feiticos) {
+    // Da classe.
+    var div_classe = CriaDiv('div-feiticos-' + chave_classe);
+    div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
+    // Conhecidos.
+    var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
+    div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
+    // Por nivel.
+    var feiticos_classe = personagem.feiticos[chave_classe];
+    for (var nivel in feiticos_classe.conhecidos) {
+      var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
+      div_nivel.appendChild(
+          CriaSpan('Nível: ' + nivel + 
+                   ', feitiços: ' + feiticos_classe.conhecidos[nivel].length));
+      div_nivel.appendChild(CriaBr());
+      for (var j = 0; j < feiticos_classe.conhecidos[nivel].length; ++j) {
+        // Adiciona os inputs.
+        div_nivel.appendChild(CriaInputTexto(
+            feiticos_classe.conhecidos[nivel][j],
+            'input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + j, 
+            'feiticos-conhecidos'));
+        div_nivel.appendChild(CriaBr());
+      }
+      div_conhecidos.appendChild(div_nivel);
+    }
+    div_classe.appendChild(div_conhecidos);
+    div_feiticos.appendChild(div_classe);
   }
 }

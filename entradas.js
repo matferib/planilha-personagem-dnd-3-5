@@ -39,6 +39,12 @@ var entradas = {
 
   // pericias: cada entrada possui { chave, pontos }
   pericias: [],
+
+  // Feiticos. cada entrada:
+  // TODO mudar esse slot do conhecimento que ta fazendo confusao com slots.
+  // conhecidos: { feitico, classe, nivel, slot, gastos },
+  // slots: 
+  feiticos: { conhecidos: [], slots: [] },
 };
 
 // Le todos os inputs da planilha e armazena em 'entradas'. 
@@ -126,6 +132,28 @@ function LeEntradas() {
   for (var chave_pericia in tabelas_pericias) {
     var input_pontos = goog.dom.getElement('pericia-' + chave_pericia + '-pontos');
     entradas.pericias.push({ chave: chave_pericia, pontos: parseInt(input_pontos.value) || 0 });
+  }
+
+  // Feiticos.
+  _LeFeiticos();
+}
+
+function _LeFeiticos() {
+  entradas.feiticos.conhecidos = [];
+  var nomes_feiticos = goog.dom.getElementsByClass('feiticos-conhecidos');
+  for (var i = 0; i < nomes_feiticos.length; ++i) {
+    var classe_nivel_slot = nomes_feiticos[i].id.split('-');
+    // remove o prefixo input-feiticos-conhecidos
+    classe_nivel_slot.shift();
+    classe_nivel_slot.shift();
+    classe_nivel_slot.shift();
+    entradas.feiticos.conhecidos.push({ 
+      feitico: nomes_feiticos[i].value,
+      classe: classe_nivel_slot[0],
+      nivel: classe_nivel_slot[1],
+      slot: classe_nivel_slot[2],
+      gastos: 0 
+    });
   }
 }
 
@@ -241,6 +269,17 @@ function EscreveEntradas() {
   for (var i = 0; i < entradas.pericias.length; ++i) {
     var input_pontos = goog.dom.getElement('pericia-' + entradas.pericias[i].chave + '-pontos');
     input_pontos.value = entradas.pericias[i].pontos;
+  }
+
+  _EscreveFeiticos();
+}
+
+function _EscreveFeiticos() {
+  for (var i = 0; i < entradas.feiticos.conhecidos.length; ++i) {
+    var entrada_feitico = entradas.feiticos.conhecidos[i];
+    var id = 'input-feiticos-conhecidos-' + entrada_feitico.classe + '-' + 
+             entrada_feitico.nivel + '-' + entrada_feitico.slot;
+    goog.dom.getElement(id).value = entrada_feitico.feitico;
   }
 }
 

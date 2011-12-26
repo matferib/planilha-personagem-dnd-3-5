@@ -84,6 +84,11 @@ var personagem = {
   armas: [],
   // Armadura
   armadura: {},
+  // Feiticos. Cada entrada: chave_classe: { 
+  //   habilidade_chave, 
+  //   conhecidos: { 0: [], ..., 9 },
+  //   slots: { 0: { base, bonus_habilidade, feiticos: [] }, ... 9 } }
+  feiticos: {},
 };
 
 // Encontra uma arma do personagem pelo nome gerado.
