@@ -4,6 +4,7 @@ var personagem = {
   raca: 'humano',
   tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
   alinhamento: "",
+  experiencia: 0,
   // Cada entrada: { classe, nivel }.
   classes: [],
   pontos_vida: {
@@ -82,13 +83,14 @@ var personagem = {
   // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
-  // Armadura
+  // Armadura: TODO igual entrada?
   armadura: {},
   // Feiticos. Cada entrada: chave_classe: { 
   //   habilidade_chave, 
   //   conhecidos: { 0: [], ..., 9 },
   //   slots: { 0: { base, bonus_habilidade, feiticos: [] }, ... 9 } }
   feiticos: {},
+  moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
 };
 
 // Encontra uma arma do personagem pelo nome gerado.
