@@ -32,16 +32,8 @@ function CarregaPericias() {
     var prefixo_id = 'pericia-' + chave_pericia;
     var div = CriaDiv(prefixo_id);
     div.appendChild(CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): '));
-    var botao_mais = CriaBotao('+', prefixo_id + '-botao-mais');
-    botao_mais.setAttribute('onclick', "ClickPericia('" + chave_pericia + "', 1)");
-    div.appendChild(botao_mais);
-    var botao_menos = CriaBotao('-', prefixo_id + '-botao-menos');
-    botao_menos.setAttribute('onclick', "ClickPericia('" + chave_pericia + "', -1)");
-    div.appendChild(botao_menos);
-    var input_pontos = CriaInputTexto(0, prefixo_id + '-pontos');
-    input_pontos.size = 2;
-    input_pontos.readOnly = true;
-    div.appendChild(input_pontos);
+    div.appendChild(CriaBotoesMaisMenos(prefixo_id + '-pontos', null, 'ClickPericia', chave_pericia));
+
     div.appendChild(CriaSpan(' pontos; '));
     div.appendChild(CriaSpan('0', prefixo_id + '-graduacoes'));
     div.appendChild(CriaSpan('+0', null, habilidade + '-mod-total'));
