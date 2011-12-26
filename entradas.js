@@ -1,14 +1,14 @@
 // Tudo relacionado a entradas. Isso eh o que devera ser
 // serializado e deserializado.
 
-// Variavel contendo os valores das entradas.
+// Variavel contendo os valores das entradas. Iniciado com valores padroes da criacao.
 var entradas = {
   // geral
   nome: "",
-  raca: "",
-  alinhamento: "",
+  raca: "humano",
+  alinhamento: "LB",
   // Cada entrada possui classe e nivel.
-  classes: [],
+  classes: [ { classe: 'guerreiro', nivel: 1 } ],
   // pontos de vida.
   pontos_vida: 0,
   ferimentos: 0,
@@ -31,8 +31,8 @@ var entradas = {
   // equipamentos.
   // Cada entrada eh do tipo: { nome: obra_prima, bonus }
   armas: [],
-  armadura: { nome: '', bonus_magico: 0 },
-  escudo: { nome: '', bonus_magico: 0 },
+  armadura: { nome: 'nenhuma', bonus_magico: 0 },
+  escudo: { nome: 'nenhum', bonus_magico: 0 },
 
   // talentos. Cada entrada possui { nome, complemento }, se houver.
   talentos: [],
@@ -196,90 +196,3 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
   }
   return estilo;
 }
-
-// Escreve todos os inputs com os valores de 'entradas'.
-function EscreveEntradas() {
-  // nome
-  goog.dom.getElement('nome').value = entradas.nome;
-
-  // raca
-  SelecionaValor(entradas.raca, goog.dom.getElement('raca'));
-
-  // alinhamento
-  SelecionaValor(entradas.alinhamento, goog.dom.getElement('alinhamento'));
-
-  // classes.
-  var classes_desabilitadas = [];
-  for (var i = 0; i < entradas.classes.length; ++i) {
-    AdicionaClasse(classes_desabilitadas, entradas.classes[i].classe, entradas.classes[i].nivel);
-    classes_desabilitadas.push(entradas.classes[i].classe);
-  }
-
-  // pontos de vida e ferimentos.
-  goog.dom.getElement('pontos-vida-total').value = entradas.pontos_vida;
-  goog.dom.getElement('ferimentos').value = entradas.ferimentos;
-
-  // experiencia.
-  goog.dom.getElement('pontos-experiencia').value = entradas.experiencia;
-
-  // atributos.
-  var div_atributos = goog.dom.getElement('div-stats');
-  for (var i = 0; i < div_atributos.childNodes.length; ++i) {
-    var elemento = div_atributos.childNodes[i];
-    if (elemento.tagName == "INPUT") {
-      elemento.value = entradas[elemento.name];
-    }
-  }
-
-  // Armadura e escudo.
-  SelecionaValor(entradas.armadura.nome, 
-                 goog.dom.getElement('armadura')); 
-  goog.dom.getElement('bonus-armadura').value = 
-    entradas.armadura.bonus_magico; 
-  SelecionaValor(entradas.escudo.nome, 
-                 goog.dom.getElement('escudo'));
-  goog.dom.getElement('bonus-escudo').value = 
-    entradas.escudo.bonus_magico; 
-
-  // Moedas.
-  goog.dom.getElement('moedas-platina').value = entradas.platina;
-  goog.dom.getElement('moedas-ouro').value = entradas.ouro;
-  goog.dom.getElement('moedas-prata').value = entradas.prata;
-  goog.dom.getElement('moedas-cobre').value = entradas.cobre;
-  // Equipamentos.
-  // Armas.
-  for (var i = 0; i < entradas.armas.length; ++i) {
-    var arma = entradas.armas[i];
-    AdicionaArma(arma.nome, arma.obra_prima, arma.bonus);
-  }
-
-  // Estilos de luta.
-  goog.dom.getElement('div-estilos-luta').childNodes = [];
-  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
-    var estilo = entradas.estilos_luta[i];
-    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
-  }
-
-  // talentos.
-  for (var i = 0; i < entradas.talentos.length; ++i) {
-    AdicionaTalento(i, entradas.talentos[i].nome, entradas.talentos[i].complemento);
-  }
-
-  // Pericias.
-  for (var i = 0; i < entradas.pericias.length; ++i) {
-    var input_pontos = goog.dom.getElement('pericia-' + entradas.pericias[i].chave + '-pontos');
-    input_pontos.value = entradas.pericias[i].pontos;
-  }
-
-  _EscreveFeiticos();
-}
-
-function _EscreveFeiticos() {
-  for (var i = 0; i < entradas.feiticos.conhecidos.length; ++i) {
-    var entrada_feitico = entradas.feiticos.conhecidos[i];
-    var id = 'input-feiticos-conhecidos-' + entrada_feitico.classe + '-' + 
-             entrada_feitico.nivel + '-' + entrada_feitico.slot;
-    goog.dom.getElement(id).value = entrada_feitico.feitico;
-  }
-}
-

@@ -14,6 +14,7 @@ function ConverteEntradasParaPersonagem() {
   personagem.pontos_vida.total = entradas.pontos_vida;
   personagem.pontos_vida.ferimentos = entradas.ferimentos;
   personagem.pontos_vida.dados_vida = 0;
+  personagem.experiencia = entradas.experiencia;
   for (var i = 0; i < personagem.classes.length; ++i) {
     personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
   }
@@ -51,6 +52,10 @@ function ConverteEntradasParaPersonagem() {
   //_ConverteEspecializacaoArmas();
 
   // Atualizacao de equipamentos.
+  // moedas.
+  for (var tipo_moeda in personagem.moedas) {
+    personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
+  }
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.armas = [];

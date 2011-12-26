@@ -15,8 +15,33 @@ function AtualizaGeralSemLerOuEscrever() {
   _AtualizaGeral();
 }
 
+/*
+-// Escreve todos os inputs com os valores de 'entradas'.
+-function EscreveEntradas() {
+-  // Estilos de luta.
+-  goog.dom.getElement('div-estilos-luta').childNodes = [];
+-  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
+-    var estilo = entradas.estilos_luta[i];
+-    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
+-  }
+-}
+*/
+
 // Apenas atualizacoes, sem leitura ou escrita de entradas.
 function _AtualizaGeral() {
+  // nome
+  goog.dom.getElement('nome').value = personagem.nome;
+  // raca
+  SelecionaValor(personagem.raca, goog.dom.getElement('raca'));
+  // alinhamento
+  SelecionaValor(personagem.alinhamento, goog.dom.getElement('alinhamento'));
+  // pontos de vida e ferimentos.
+  goog.dom.getElement('pontos-vida-total').value = personagem.pontos_vida.total;
+  goog.dom.getElement('ferimentos').value = personagem.pontos_vida.ferimentos;
+  // experiencia.
+  goog.dom.getElement('pontos-experiencia').value = personagem.experiencia;
+  // Equipamentos.
+  _AtualizaAtributos();
   _AtualizaClasses();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
@@ -27,11 +52,31 @@ function _AtualizaGeral() {
   _AtualizaSalvacoes();
   _AtualizaTalentos();
   _AtualizaPericias();
+  _AtualizaMoedas();
   _AtualizaFeiticos();
+}
+
+function _AtualizaAtributos() {
+  var div_atributos = goog.dom.getElement('div-stats');
+  for (var i = 0; i < div_atributos.childNodes.length; ++i) {
+    var elemento = div_atributos.childNodes[i];
+    if (elemento.tagName == "INPUT") {
+      elemento.value = entradas[elemento.name];
+    }
+  }
 }
 
 // Torna todas as classes exceto a ultima desabilitadas. 
 function _AtualizaClasses() {
+  RemoveFilhos(goog.dom.getElement('classes'));
+  var classes_desabilitadas = [];
+  // Cria os selects.
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, personagem.classes[i].nivel);
+    classes_desabilitadas.push(entradas.classes[i].classe);
+  }
+
+  // Desabilita selects.
   var selects_classes = goog.dom.getElementsByClass('selects-classes'); 
   for (var i = 0; i < selects_classes.length - 1; ++i) {
     selects_classes[i].disabled = true;
@@ -188,6 +233,15 @@ function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
 function _AtualizaDefesa() {
+  // Armadura e escudo.
+  SelecionaValor(personagem.armadura.nome, 
+                 goog.dom.getElement('armadura')); 
+  goog.dom.getElement('bonus-armadura').value = personagem.armadura.bonus_magico; 
+  SelecionaValor(personagem.escudo.nome, 
+                 goog.dom.getElement('escudo'));
+  goog.dom.getElement('bonus-escudo').value = personagem.escudo.bonus_magico; 
+
+
   ImprimeSinalizado(tabelas_armaduras[personagem.armadura.nome].bonus +
                     personagem.armadura.bonus_magico,
                     goog.dom.getElementsByClass('ca-armadura'));
@@ -263,6 +317,8 @@ function _AtualizaPericias() {
   span_gastos.innerText = personagem.pericias.pontos_gastos;
 
   for (var chave in personagem.pericias.lista) {
+    var input_pontos = goog.dom.getElement('pericia-' + chave + '-pontos');
+    input_pontos.value = personagem.pericias.lista[chave].pontos;
     var dom_graduacoes = goog.dom.getElement('pericia-' + chave + '-graduacoes');
     dom_graduacoes.innerText = personagem.pericias.lista[chave].pontos;
     var dom_sinergia = goog.dom.getElement('pericia-' + chave + '-sinergia');
@@ -311,3 +367,10 @@ function _AtualizaFeiticos() {
     div_feiticos.appendChild(div_classe);
   }
 }
+
+function _AtualizaMoedas() {
+  for (var tipo_moeda in personagem.moedas) {
+    goog.dom.getElement('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
+  }
+}
+
