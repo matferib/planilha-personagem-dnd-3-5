@@ -146,3 +146,26 @@ function ClickPericia(chave_pericia, incremento) {
   AtualizaGeral();
 }
 
+// Trata o click de um feitico.
+// @param classe_nivel_slot a classe, nivel e slot do feitico em questao, separados por -;
+// @param incremento do clique.
+function ClickFeitico(classe_nivel_slot, incremento) {
+/*
+  var classe_nivel_slot_array = classe_nivel_slot.split('-');
+  if (incremento > 0 && personagem.feiticos.total == personagem.feiticos.gastos) {
+    alert('Não há feitiços disponíveis para o nível');
+    return;
+  }
+  // pega o input do campo
+  var input = goog.dom.getElement('feiticos-' + chave_pericia + '-pontos');
+  var input = parseInt(input_pericia.value) || 0;
+  if (incremento < 0 && input_pericia_valor == 0) {
+    alert('Feitiço não possui pontos');
+    return;
+  }
+
+  input.value = input + incremento;
+  AtualizaGeral();
+  */
+}
+

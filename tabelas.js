@@ -47,6 +47,35 @@ var tabelas_classes = {
   combatente: { nome: 'Combatente', dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
 };
 
+// Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
+var tabelas_feiticos = {
+  bardo: { 
+      habilidade_chave: 'carisma', 
+      precisa_conhecer: true,
+      possui_nivel_zero: true,
+      por_nivel: { 
+          1: { por_dia: '2', conhecidos: '4', }, 
+          2: { por_dia: '30', conhecidos: '52', }, 
+          3: { por_dia: '31', conhecidos: '63', }, 
+          4: { por_dia: '320', conhecidos: '632', }, 
+          5: { por_dia: '331', conhecidos: '643', }, 
+          6: { por_dia: '332', conhecidos: '643', }, 
+          7: { por_dia: '3320', conhecidos: '6442', }, 
+          8: { por_dia: '3331', conhecidos: '6443', }, 
+          9: { por_dia: '3332', conhecidos: '6443', }, 
+          10: { por_dia: '33320', conhecidos: '64442', }, 
+          11: { por_dia: '33331', conhecidos: '64443', }, 
+          12: { por_dia: '33332', conhecidos: '64443', }, 
+          13: { por_dia: '333320', conhecidos: '644442', }, 
+          14: { por_dia: '433331', conhecidos: '644443', }, 
+          15: { por_dia: '443332', conhecidos: '644443', },
+          16: { por_dia: '4443320', conhecidos: '6544442', }, 
+          17: { por_dia: '4444331', conhecidos: '6554443', }, 
+          18: { por_dia: '4444432', conhecidos: '6555443', }, 
+          19: { por_dia: '4444443', conhecidos: '6555544', }, 
+          20: { por_dia: '4444444', conhecidos: '6555554', }, }, },
+};
+
 // Bonus base de ataque.
 function bba_forte(nivel) {
   if (nivel == 0) return 0;
