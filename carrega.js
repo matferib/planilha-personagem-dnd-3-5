@@ -45,6 +45,8 @@ function CarregaPericias() {
     // Adiciona ao div.
     div_pericias.appendChild(div);
 
+    // Adiciona as entradas
+    entradas.pericias.push({ chave: chave_pericia, pontos: 0 });
     // Adiciona ao personagem.
     personagem.pericias.lista[chave_pericia] = {
         graduacoes: 0, bonus_habilidade: 0, bonus_talentos: {}, bonus_sinergia: 0
