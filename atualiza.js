@@ -11,7 +11,8 @@ function AtualizaGeral() {
 }
 
 // Chamada apenas para a atualizacao inicial apos leitura da URL.
-function AtualizaGeralSemLerOuEscrever() {
+function AtualizaGeralSemLerEntradas() {
+  ConverteEntradasParaPersonagem();
   _AtualizaGeral();
 }
 
@@ -29,18 +30,8 @@ function AtualizaGeralSemLerOuEscrever() {
 
 // Apenas atualizacoes, sem leitura ou escrita de entradas.
 function _AtualizaGeral() {
-  // nome
-  goog.dom.getElement('nome').value = personagem.nome;
-  // raca
-  SelecionaValor(personagem.raca, goog.dom.getElement('raca'));
-  // alinhamento
-  SelecionaValor(personagem.alinhamento, goog.dom.getElement('alinhamento'));
-  // pontos de vida e ferimentos.
-  goog.dom.getElement('pontos-vida-total').value = personagem.pontos_vida.total;
-  goog.dom.getElement('ferimentos').value = personagem.pontos_vida.ferimentos;
-  // experiencia.
-  goog.dom.getElement('pontos-experiencia').value = personagem.experiencia;
-  // Equipamentos.
+  _AtualizaNomeRacaAlinhamentoXp();
+  _AtualizaDadosPontosVida();
   _AtualizaAtributos();
   _AtualizaClasses();
   _AtualizaTamanho();
@@ -52,8 +43,21 @@ function _AtualizaGeral() {
   _AtualizaSalvacoes();
   _AtualizaTalentos();
   _AtualizaPericias();
+  _AtualizaListaArmas();
   _AtualizaMoedas();
   _AtualizaFeiticos();
+}
+
+function _AtualizaNomeRacaAlinhamentoXp() {
+  goog.dom.getElement('nome').value = personagem.nome;
+  SelecionaValor(personagem.raca, goog.dom.getElement('raca'));
+  SelecionaValor(personagem.alinhamento, goog.dom.getElement('alinhamento'));
+  goog.dom.getElement('pontos-experiencia').value = personagem.experiencia;
+}
+
+function _AtualizaDadosPontosVida() {
+  goog.dom.getElement('pontos-vida-total').value = personagem.pontos_vida.total;
+  goog.dom.getElement('ferimentos').value = personagem.pontos_vida.ferimentos;
 }
 
 function _AtualizaAtributos() {
@@ -374,3 +378,13 @@ function _AtualizaMoedas() {
   }
 }
 
+// TODO remover entradas e passar tudo pra personagem. 
+function _AtualizaListaArmas() {
+  var div_armas = goog.dom.getElement('div-equipamentos-armas');
+  RemoveFilhos(div_armas);
+  for (var i = 0; i < entradas.armas.length; ++i) {
+    var arma_entrada = entradas.armas[i];
+    AdicionaArma(
+        arma_entrada.nome, arma_entrada.obra_prima, arma_entrada.bonus);
+  }
+}

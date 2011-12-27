@@ -1,23 +1,7 @@
 // Apenas tratamento de eventos.
 goog.require('goog.json');
 
-// Chamado pelo carregamento inicial da pagina.
-function CarregamentoInicial() {
-  // Monta a tabela de armas e cria as opcoes dinamicamente.
-  CarregaTabelaArmas();
-  CarregaPericias();
-
-  var indice_igual = document.URL.indexOf('=');
-  if (indice_igual == -1) {
-  }
-  else {
-    // carrega pelos parametros.
-    var json_personagem = decodeURIComponent(document.URL.slice(indice_igual + 1));
-    entradas = goog.json.parse(json_personagem);
-  }
-  ConverteEntradasParaPersonagem();
-  AtualizaGeralSemLerOuEscrever();
-}
+// Funcao de CarregamentoInicial no arquivo carrega.js.
 
 // Botao de adicionar classe apertado.
 function ClickAdicionarClasse() {
@@ -90,9 +74,9 @@ function ClickGerarComum() {
 }
 
 // Adiciona uma arma a lista de equipamentos.
-function ClickAdicionarArma(arma) {
-  AdicionaArma(arma);
-  AtualizaGeral();
+function ClickAdicionarArma() {
+  entradas.armas.push({nome: 'adaga', obra_prima: false, bonus: 0});
+  AtualizaGeralSemLerEntradas();
 }
 
 // Evento para adicionar um novo estilo de luta.
