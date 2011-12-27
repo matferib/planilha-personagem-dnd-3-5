@@ -128,10 +128,10 @@ function LeEntradas() {
   }
 
   // Pericias.
-  entradas.pericias = [];
-  for (var chave_pericia in tabelas_pericias) {
-    var input_pontos = goog.dom.getElement('pericia-' + chave_pericia + '-pontos');
-    entradas.pericias.push({ chave: chave_pericia, pontos: parseInt(input_pontos.value) || 0 });
+  for (var i = 0; i < entradas.pericias.length; ++i) {
+    var entrada_pericia = entradas.pericias[i];
+    var input_pontos = goog.dom.getElement('pericia-' + entrada_pericia.chave + '-pontos');
+    entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
   }
 
   // Feiticos.

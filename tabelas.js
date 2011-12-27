@@ -909,7 +909,7 @@ var tabelas_pericias = {
       classes: [  'bardo', 'druida', 'ranger', 'mago' ],
       habilidade: 'inteligencia' },
   conhecimento_nobreza_e_realeza: {
-      nome: 'Conhecimento (nobreza_e_realeza)',
+      nome: 'Conhecimento (nobreza e realeza)',
       classes: [  'bardo', 'paladino', 'mago' ],
       habilidade: 'inteligencia' },
   conhecimento_planos: {
