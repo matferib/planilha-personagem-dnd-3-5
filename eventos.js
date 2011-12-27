@@ -75,7 +75,7 @@ function ClickGerarComum() {
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma() {
-  entradas.armas.push({nome: 'adaga', obra_prima: false, bonus: 0});
+  entradas.armas.push({ chave: 'adaga', obra_prima: false, bonus: 0 });
   AtualizaGeralSemLerEntradas();
 }
 
