@@ -82,7 +82,6 @@ function ClickAdicionarArma() {
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
   entradas.estilos_luta.push({ nome: 'uma_arma', arma_primaria: 'desarmado'});
-  //AdicionaEstiloLuta('uma_arma');
   AtualizaGeralSemLerEntradas();
 }
 

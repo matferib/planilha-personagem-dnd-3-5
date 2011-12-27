@@ -1,7 +1,10 @@
 // Todas as funcoes de atualizacao.
+// Idealmente, nao deve haver nenhuma referencia a entradas neste arquivo,
+// exceto a chamada AtualizaGeral.
 
-// Sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
-// os dados da planilha. Partes que dependem de outras devem vir apos sua dependencia.
+// Quase sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
+// os dados da planilha. Ela lera as entradas, convertendo-nas e em seguida atualizara
+// os diversos elementos da planilha.
 function AtualizaGeral() {
   // Apenas le as entradas para a estrutura de entradas.
   LeEntradas(); 
@@ -10,13 +13,16 @@ function AtualizaGeral() {
   _AtualizaGeral();
 }
 
-// Chamada apenas para a atualizacao inicial apos leitura da URL.
+// Sempre que for necessaria uma atualizacao sem leitura de entradas, essa funcao sera chamada.
+// Eh o caso de elementos criados de forma independente (armas, estilos) que devem ser adicionados
+// manualmente a entrada e em seguida chamam essa funcao. O carregamento inicial por URL faz o mesmo,
+// ja que as entradas vem todas no objeto JSON.
 function AtualizaGeralSemLerEntradas() {
   ConverteEntradasParaPersonagem();
   _AtualizaGeral();
 }
 
-// Apenas atualizacoes, sem leitura ou escrita de entradas.
+// Apenas atualizacoes a planilha a partir do personagem, sem leitura de entradas.
 function _AtualizaGeral() {
   _AtualizaNomeRacaAlinhamentoXp();
   _AtualizaDadosPontosVida();
@@ -50,11 +56,9 @@ function _AtualizaDadosPontosVida() {
 
 function _AtualizaAtributos() {
   var div_atributos = goog.dom.getElement('div-stats');
-  for (var i = 0; i < div_atributos.childNodes.length; ++i) {
-    var elemento = div_atributos.childNodes[i];
-    if (elemento.tagName == "INPUT") {
-      elemento.value = entradas[elemento.name];
-    }
+  for (var atributo in personagem.atributos) {
+    var input_atributo = goog.dom.getElement(atributo + '-valor-base');
+    input_atributo.value = personagem.atributos[atributo].base;
   }
 }
 
@@ -65,7 +69,7 @@ function _AtualizaClasses() {
   // Cria os selects.
   for (var i = 0; i < personagem.classes.length; ++i) {
     AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, personagem.classes[i].nivel);
-    classes_desabilitadas.push(entradas.classes[i].classe);
+    classes_desabilitadas.push(personagem.classes[i].classe);
   }
 
   // Desabilita selects.
@@ -159,16 +163,16 @@ function _AtualizaAtaque() {
       goog.dom.getElementsByClass('bba-distancia'));
 }
 
-// TODO remover entradas e passar para personagem.
 // Atualiza a lista de armas de cada estilo.
 function _AtualizaEstilosLuta() {
-  // Estilos de luta.
+  // Recria os elementos do estilos. 
   RemoveFilhos(goog.dom.getElement('div-estilos-luta'));
-  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
-    var estilo = entradas.estilos_luta[i];
+  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
+    var estilo = personagem.estilos_luta[i];
     AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
   }
 
+  // Atualiza os valores dos estilos.
   var div_estilos = goog.dom.getElement("div-estilos-luta");
   for (var i = 0; i < div_estilos.childNodes.length; ++i) {
     _AtualizaEstilo(div_estilos.childNodes[i], personagem.estilos_luta[i]);
@@ -177,7 +181,7 @@ function _AtualizaEstilosLuta() {
 
 // Usada por _AtualizaEstilosLuta.
 // @param div_estilo o div do estilo.
-// @param estilo a entrada do estilo no personagem.
+// @param estilo no personagem.
 function _AtualizaEstilo(div_estilo, estilo) {
   var id_estilo = div_estilo.id; 
 
@@ -374,13 +378,15 @@ function _AtualizaMoedas() {
   }
 }
 
-// TODO remover entradas e passar tudo pra personagem. 
 function _AtualizaListaArmas() {
   var div_armas = goog.dom.getElement('div-equipamentos-armas');
   RemoveFilhos(div_armas);
-  for (var i = 0; i < entradas.armas.length; ++i) {
-    var arma_entrada = entradas.armas[i];
+  // Ignoramos a primeira arma, desarmado.
+  for (var i = 1; i < personagem.armas.length; ++i) {
+    var arma_personagem_entrada = personagem.armas[i].entrada;
     AdicionaArma(
-        arma_entrada.nome, arma_entrada.obra_prima, arma_entrada.bonus);
+        arma_personagem_entrada.chave, 
+        arma_personagem_entrada.obra_prima, 
+        arma_personagem_entrada.bonus);
   }
 }
