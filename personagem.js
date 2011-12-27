@@ -15,26 +15,32 @@ var personagem = {
   },
   atributos: {
     forca: { 
+      base: 0,
       valor: 0,
       modificador: 0
     },  
-    destreza: { 
+    destreza: {
+      base: 0, 
       valor: 0,
       modificador: 0
     },  
     constituicao: { 
+      base: 0, 
       valor: 0,
       modificador: 0
     },  
     inteligencia: { 
+      base: 0, 
       valor: 0,
       modificador: 0
     },  
     sabedoria: { 
+      base: 0, 
       valor: 0,
       modificador: 0
     },  
     carisma: { 
+      base: 0, 
       valor: 0,
       modificador: 0
     }
@@ -78,8 +84,9 @@ var personagem = {
   proficiencia_armas: {},
   // Cada entrada: { nome: 1|2 }.
   foco_armas: {},
-  // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, 
-  //                     proficiente, foco: { maior }, especializado: { maior }, arma_tabela };
+  // Cada entrada: 
+  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, bonus_ataque, bonus_dano, 
+  //       proficiente, foco: { maior }, especializado: { maior }, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],

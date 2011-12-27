@@ -5,9 +5,9 @@ function ConverteEntradasParaPersonagem() {
   personagem.nome = entradas.nome;
   personagem.raca = entradas.raca;
   personagem.tamanho.categoria =
-    tabelas_raca[personagem.raca].tamanho;
+      tabelas_raca[personagem.raca].tamanho;
   personagem.tamanho.modificador_ataque_defesa =
-    tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
+      tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
 
   personagem.alinhamento = entradas.alinhamento;
   personagem.classes = entradas.classes;
@@ -18,35 +18,11 @@ function ConverteEntradasParaPersonagem() {
   for (var i = 0; i < personagem.classes.length; ++i) {
     personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
   }
-  for (var atributo in personagem.atributos) {
-    personagem.atributos[atributo].valor = entradas[atributo];
-    if (tabelas_raca[personagem.raca].atributos[atributo]) {
-      // Modificador racial.
-      personagem.atributos[atributo].valor += 
-          tabelas_raca[personagem.raca].atributos[atributo];
-    }
-    personagem.atributos[atributo].modificador = 
-        Math.floor((personagem.atributos[atributo].valor - 10) / 2);
-  }
-  personagem.bba = 0;
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    personagem.bba += 
-        tabelas_classes[personagem.classes[i].classe].bba(personagem.classes[i].nivel);
-  }
-  personagem.bba_cac = 
-      personagem.bba + personagem.atributos.forca.modificador + 
-      personagem.tamanho.modificador_ataque_defesa;
-  personagem.bba_distancia = 
-      personagem.bba + personagem.atributos.destreza.modificador + 
-      personagem.tamanho.modificador_ataque_defesa;
 
-  // Talentos.
+  _ConverteAtributos();
+  _ConverteBba();
   _ConverteTalentos();
-
-  // Pericias.
   _ConvertePericias();
-
-  // Atualizacao da proficiencia e foco em armas.
   _ConverteProficienciaArmas();
   _ConverteFocoArmas();
   //_ConverteEspecializacaoArmas();
@@ -58,18 +34,7 @@ function ConverteEntradasParaPersonagem() {
   }
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
-  personagem.armas = [];
-  // entrada fake para desarmado.
-  var entrada_desarmado = {
-    nome: 'desarmado', 
-    nome_gerado: 'desarmado', 
-    obra_prima: false, 
-    bonus: 0
-  };
-  personagem.armas.push(_ConverteArma(entrada_desarmado));
-  for (var i = 0; i < entradas.armas.length; ++i) {
-    personagem.armas.push(_ConverteArma(entradas.armas[i]));
-  }
+  _ConverteListaArmas();
 
   // Estilos tem que vir apos a atualizacao das armas do personagem, talentos e lista de armas.
   personagem.estilos_luta = [];
@@ -82,6 +47,36 @@ function ConverteEntradasParaPersonagem() {
 
   // Feiticos.
   _ConverteFeiticos();
+}
+
+function _ConverteBba() {
+  personagem.bba = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    personagem.bba += 
+        tabelas_classes[personagem.classes[i].classe].bba(personagem.classes[i].nivel);
+  }
+  personagem.bba_cac = 
+      personagem.bba + personagem.atributos.forca.modificador + 
+      personagem.tamanho.modificador_ataque_defesa;
+  personagem.bba_distancia = 
+      personagem.bba + personagem.atributos.destreza.modificador + 
+      personagem.tamanho.modificador_ataque_defesa;
+}
+
+function _ConverteAtributos() {
+  for (var atributo in personagem.atributos) {
+    personagem.atributos[atributo].base = entradas[atributo];
+    personagem.atributos[atributo].valor = 
+        personagem.atributos[atributo].base;
+
+    if (tabelas_raca[personagem.raca].atributos[atributo]) {
+      // Modificador racial.
+      personagem.atributos[atributo].valor += 
+          tabelas_raca[personagem.raca].atributos[atributo];
+    }
+    personagem.atributos[atributo].modificador = 
+        Math.floor((personagem.atributos[atributo].valor - 10) / 2);
+  }
 }
 
 // Converte um estilo da entrada para o personagem.
@@ -104,7 +99,7 @@ function _ConverteEstilo(estilo_entrada) {
   if (estilo_entrada.nome == 'arma_dupla' &&
       (arma_primaria == null || !arma_primaria.arma_tabela.arma_dupla)) {
     alert('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla');
-    estilo_personagem.nome = 'uma_arma';
+    estilo_entrada.nome = estilo_personagem.nome = 'uma_arma';
   }
 
   // Se o estilo eh duplo, forca segunda arma ser igual a primeira.
@@ -194,8 +189,8 @@ function _ConverteBonusPorCategoria(
   // Bonus raciais.
   var bonus_racial = tabelas_raca[personagem.raca].bonus_ataque;
   if (bonus_racial) {
-    if (bonus_racial.armas[arma_personagem.nome]) {
-      bonus_por_categoria.ataque += bonus_racial.armas[arma_personagem.nome];
+    if (bonus_racial.armas[arma_personagem.entrada.chave]) {
+      bonus_por_categoria.ataque += bonus_racial.armas[arma_personagem.entrada.chave];
     } else if (bonus_racial.categorias[categoria]) {
       bonus_por_categoria.ataque += bonus_racial.categorias[categoria];
     }
@@ -362,6 +357,22 @@ function _ConverteFocoArmas() {
   }
 }
 
+// Converte a lista de armas do personagem.
+function _ConverteListaArmas() {
+  personagem.armas = [];
+  // entrada fake para desarmado.
+  var entrada_desarmado = {
+    nome: 'desarmado', 
+    nome_gerado: 'desarmado', 
+    obra_prima: false, 
+    bonus: 0
+  };
+  personagem.armas.push(_ConverteArma(entrada_desarmado));
+  for (var i = 0; i < entradas.armas.length; ++i) {
+    personagem.armas.push(_ConverteArma(entradas.armas[i]));
+  }
+}
+
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
 function _ConverteArma(arma_entrada) {
@@ -369,8 +380,12 @@ function _ConverteArma(arma_entrada) {
   var arma_personagem = {};
   arma_personagem.arma_tabela = arma_tabela;
   // O nome da entrada eh apenas um indice na tabela de armas.
-  arma_personagem.nome = arma_tabela.nome;
-  arma_personagem.nome_gerado = arma_personagem.nome;
+  arma_personagem.entrada = {
+    chave: arma_entrada.nome, 
+    bonus: arma_entrada.bonus, 
+    obra_prima: arma_entrada.obra_prima
+  };
+  arma_personagem.nome_gerado = arma_tabela.nome;
   if (arma_entrada.obra_prima) {
     arma_personagem.bonus_ataque = 1;
     arma_personagem.bonus_dano = 0;
