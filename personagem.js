@@ -80,7 +80,7 @@ var personagem = {
   foco_armas: {},
   // As armas possuem  { nome, nome_gerado, bonus_ataque, bonus_dano, 
   //                     proficiente, foco: { maior }, especializado: { maior }, arma_tabela };
-  // O nome gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
+  // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
   // Armadura: TODO igual entrada?

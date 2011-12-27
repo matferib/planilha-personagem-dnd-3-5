@@ -1,5 +1,21 @@
 // Funcoes de carregamento chamadas ao se carregar a pagina.
 
+// Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
+// preferi manter neste arquivo ao inves de eventos.
+function CarregamentoInicial() {
+  // Monta a tabela de armas e cria as opcoes dinamicamente.
+  CarregaTabelaArmas();
+  CarregaPericias();
+
+  var indice_igual = document.URL.indexOf('=');
+  if (indice_igual != -1) {
+    // carrega pelos parametros. Caso contrario, usara a entrada padrao.
+    var json_personagem = decodeURIComponent(document.URL.slice(indice_igual + 1));
+    entradas = goog.json.parse(json_personagem);
+  }
+  AtualizaGeralSemLerEntradas();
+}
+
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function CarregaTabelaArmas() {
