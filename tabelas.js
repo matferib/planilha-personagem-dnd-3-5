@@ -50,7 +50,7 @@ var tabelas_classes = {
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
 var tabelas_feiticos = {
   bardo: { 
-      habilidade_chave: 'carisma', 
+      atributo_chave: 'carisma', 
       precisa_conhecer: true,
       possui_nivel_zero: true,
       por_nivel: { 
@@ -120,6 +120,27 @@ var tabelas_geracao_atributos = {
   combatente: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
 };
 
+// Atributos:
+// Modificador.
+function modificador_atributo(valor_atributo) {
+  return Math.floor((valor_atributo - 10) / 2);
+}
+// Feiticos.
+// @return um array de 0-9 onde o 0 eh sempre zerado pois
+//         nao ha bonus para nivel 0.
+function feiticos_atributo(valor_atributo) {
+  // A cada 4 pontos, ganha um novo nos de baixo.
+  var modificador = modificador_atributo(valor_atributo);
+  var feiticos_nivel = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
+  for (var nivel = 1; nivel <= 9; ++nivel) {
+    if (modificador < nivel) {
+      continue;
+    }
+    feiticos_nivel[nivel] = Math.floor(((modificador - nivel) / 4) + 1);
+  }
+  return feiticos_nivel;
+}
+
 // Salvacoes
 function salvacao_forte(nivel) {
   return (nivel > 0) ? Math.floor(nivel / 2) + 2 : 0;
@@ -127,6 +148,8 @@ function salvacao_forte(nivel) {
 function salvacao_fraca(nivel) {
   return (nivel > 0) ? Math.floor(nivel / 3) : 0;
 }
+
+// TODO passar para tabela de classes.
 // Tabelas de salvacao.
 var tabelas_salvacao = {
   barbaro: {
