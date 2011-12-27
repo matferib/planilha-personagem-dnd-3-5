@@ -90,12 +90,12 @@ var personagem = {
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
-  // Armadura: TODO igual entrada?
+  // Armadura: { nome, bonus_magico }
   armadura: {},
   // Feiticos. Cada entrada: chave_classe: { 
   //   habilidade_chave, 
   //   conhecidos: { 0: [], ..., 9 },
-  //   slots: { 0: { base, bonus_habilidade, feiticos: [] }, ... 9 } }
+  //   slots: { 0: { base, bonus_atributo, feiticos: [] }, ... 9 } }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
 };
