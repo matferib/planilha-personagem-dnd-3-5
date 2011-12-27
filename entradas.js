@@ -41,8 +41,7 @@ var entradas = {
   pericias: [],
 
   // Feiticos. cada entrada:
-  // TODO mudar esse slot do conhecimento que ta fazendo confusao com slots.
-  // conhecidos: { feitico, classe, nivel, slot, gastos },
+  // conhecidos: { feitico, classe, nivel, indice, gastos },
   // slots: 
   feiticos: { conhecidos: [], slots: [] },
 };
@@ -142,16 +141,16 @@ function _LeFeiticos() {
   entradas.feiticos.conhecidos = [];
   var nomes_feiticos = goog.dom.getElementsByClass('feiticos-conhecidos');
   for (var i = 0; i < nomes_feiticos.length; ++i) {
-    var classe_nivel_slot = nomes_feiticos[i].id.split('-');
+    var classe_nivel_indice = nomes_feiticos[i].id.split('-');
     // remove o prefixo input-feiticos-conhecidos
-    classe_nivel_slot.shift();
-    classe_nivel_slot.shift();
-    classe_nivel_slot.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
     entradas.feiticos.conhecidos.push({ 
       feitico: nomes_feiticos[i].value,
-      classe: classe_nivel_slot[0],
-      nivel: classe_nivel_slot[1],
-      slot: classe_nivel_slot[2],
+      classe: classe_nivel_indice[0],
+      nivel: classe_nivel_indice[1],
+      indice: classe_nivel_indice[2],
       gastos: 0 
     });
   }
