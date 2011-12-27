@@ -362,7 +362,7 @@ function _ConverteListaArmas() {
   personagem.armas = [];
   // entrada fake para desarmado.
   var entrada_desarmado = {
-    nome: 'desarmado', 
+    chave: 'desarmado', 
     nome_gerado: 'desarmado', 
     obra_prima: false, 
     bonus: 0
@@ -376,12 +376,12 @@ function _ConverteListaArmas() {
 // Converte uma arma da entrada para personagem.
 // @return a arma convertida.
 function _ConverteArma(arma_entrada) {
-  var arma_tabela = tabelas_armas[arma_entrada.nome];
+  var arma_tabela = tabelas_armas[arma_entrada.chave];
   var arma_personagem = {};
   arma_personagem.arma_tabela = arma_tabela;
   // O nome da entrada eh apenas um indice na tabela de armas.
   arma_personagem.entrada = {
-    chave: arma_entrada.nome, 
+    chave: arma_entrada.chave, 
     bonus: arma_entrada.bonus, 
     obra_prima: arma_entrada.obra_prima
   };
@@ -397,8 +397,8 @@ function _ConverteArma(arma_entrada) {
       arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
     }
   }
-  arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.nome);
-  arma_personagem.foco = PersonagemFocoComArma(arma_entrada.nome);
+  arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.chave);
+  arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   return arma_personagem;
 }
 

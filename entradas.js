@@ -29,8 +29,7 @@ var entradas = {
   prata: 0,
   cobre: 0,
   // equipamentos.
-  // TODO mudar nome para chave.
-  // Cada entrada eh do tipo: { nome, obra_prima, bonus }
+  // Cada entrada eh do tipo: { chave, obra_prima, bonus }
   armas: [],
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum', bonus_magico: 0 },
@@ -165,7 +164,7 @@ function _LeEntradaArma(div_arma) {
   for (var i = 0; i < div_arma.childNodes.length; ++i) {
     var filho = div_arma.childNodes[i];
     if (filho.tagName == 'SELECT') {
-      arma_lida.nome = ValorSelecionado(filho);
+      arma_lida.chave = ValorSelecionado(filho);
     } else if (filho.tagName == 'INPUT') {
       if (filho.type == 'checkbox') {
         arma_lida.obra_prima = filho.checked;
