@@ -61,10 +61,10 @@ function RemoveClasse() {
 }
 
 // Adiciona uma nova arma a lista de equipamentos. Todos parametros sao opcionais.
-// @param arma opcional nome da arma sendo adicionada.
+// @param chave_arma opcional chave da arma sendo adicionada.
 // @param obra_prima indica se a arma eh obra_prima.
 // @param bonus da arma.
-function AdicionaArma(arma, obra_prima, bonus) {
+function AdicionaArma(chave_arma, obra_prima, bonus) {
   var id_div_equipamentos_armas = "div-equipamentos-armas";
   var div_armas = goog.dom.getElement(id_div_equipamentos_armas);
   var id_gerado = GeraId('div-arma', div_armas);
@@ -79,7 +79,7 @@ function AdicionaArma(arma, obra_prima, bonus) {
     var option = document.createElement('option');
     option.setAttribute('name', arma_corrente);
     option.setAttribute('value', arma_corrente);
-    option.selected = (arma_corrente == arma);
+    option.selected = (arma_corrente == chave_arma);
     option.innerText = tabelas_armas[arma_corrente].nome;
     select.appendChild(option);
   }

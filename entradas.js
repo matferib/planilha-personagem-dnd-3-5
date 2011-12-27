@@ -29,7 +29,8 @@ var entradas = {
   prata: 0,
   cobre: 0,
   // equipamentos.
-  // Cada entrada eh do tipo: { nome: obra_prima, bonus }
+  // TODO mudar nome para chave.
+  // Cada entrada eh do tipo: { nome, obra_prima, bonus }
   armas: [],
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum', bonus_magico: 0 },
