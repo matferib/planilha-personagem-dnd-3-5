@@ -16,18 +16,6 @@ function AtualizaGeralSemLerEntradas() {
   _AtualizaGeral();
 }
 
-/*
--// Escreve todos os inputs com os valores de 'entradas'.
--function EscreveEntradas() {
--  // Estilos de luta.
--  goog.dom.getElement('div-estilos-luta').childNodes = [];
--  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
--    var estilo = entradas.estilos_luta[i];
--    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
--  }
--}
-*/
-
 // Apenas atualizacoes, sem leitura ou escrita de entradas.
 function _AtualizaGeral() {
   _AtualizaNomeRacaAlinhamentoXp();
@@ -171,8 +159,16 @@ function _AtualizaAtaque() {
       goog.dom.getElementsByClass('bba-distancia'));
 }
 
+// TODO remover entradas e passar para personagem.
 // Atualiza a lista de armas de cada estilo.
 function _AtualizaEstilosLuta() {
+  // Estilos de luta.
+  RemoveFilhos(goog.dom.getElement('div-estilos-luta'));
+  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
+    var estilo = entradas.estilos_luta[i];
+    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
+  }
+
   var div_estilos = goog.dom.getElement("div-estilos-luta");
   for (var i = 0; i < div_estilos.childNodes.length; ++i) {
     _AtualizaEstilo(div_estilos.childNodes[i], personagem.estilos_luta[i]);
