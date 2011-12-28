@@ -41,7 +41,7 @@ var entradas = {
   pericias: [],
 
   // Feiticos. cada entrada:
-  // conhecidos: { feitico, classe, nivel, indice, gastos },
+  // conhecidos: { feitico, classe, nivel, indice, },
   // slots: 
   feiticos: { conhecidos: [], slots: [] },
 };
@@ -151,9 +151,24 @@ function _LeFeiticos() {
       classe: classe_nivel_indice[0],
       nivel: classe_nivel_indice[1],
       indice: classe_nivel_indice[2],
-      gastos: 0 
     });
   }
+  entradas.feiticos.slots= [];
+  var nomes_feiticos = goog.dom.getElementsByClass('feiticos-slots');
+  for (var i = 0; i < nomes_feiticos.length; ++i) {
+    var classe_nivel_indice = nomes_feiticos[i].id.split('-');
+    // remove o prefixo input-feiticos-slots
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    entradas.feiticos.slots.push({ 
+      feitico: nomes_feiticos[i].value,
+      classe: classe_nivel_indice[0],
+      nivel: classe_nivel_indice[1],
+      indice: classe_nivel_indice[2],
+    });
+  }
+
 }
 
 // Le uma arma de seu div.
