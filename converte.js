@@ -478,22 +478,26 @@ function _ConverteNumeroFeiticosParaClasse(classe_personagem) {
   };
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
   var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
-  var bonus_feiticos_atributo = feiticos_atributo(valor_atributo_chave);
-  // TODO usar slots ao inves de conhecidos, ja que nem sempre a classe usa conhecidos.
-  for (var indice = 0; indice < feiticos_por_nivel.conhecidos.length; ++indice) {
+  // Feiticos conhecidos (se houver)
+  for (var indice = 0; 
+       feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length; 
+       ++indice) {
     var nivel_feitico = nivel_inicial + indice;
 
     // Feiticos conhecidos.
     var array_conhecidos_nivel = new Array();
     array_conhecidos_nivel.length = 
         parseInt(feiticos_por_nivel.conhecidos.charAt(indice)) || 0;
-    personagem.feiticos[chave_classe].conhecidos[nivel_feitico] = 
-        array_conhecidos_nivel;
-
+    personagem.feiticos[chave_classe].conhecidos[nivel_feitico] = array_conhecidos_nivel;
+  }
+  // Slots de feiticos.
+  var array_bonus_feiticos_atributo = feiticos_atributo(valor_atributo_chave);
+  for (var indice = 0; indice < feiticos_por_nivel.por_dia.length; ++indice) {
+    var nivel_feitico = nivel_inicial + indice;
     // Slots de feiticos.
     var personagem_slots_nivel = {
         base: parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0,
-        bonus_atributo: bonus_feiticos_atributo[nivel_feitico],
+        bonus_atributo: array_bonus_feiticos_atributo[nivel_feitico],
         feiticos: [],
     }
     personagem_slots_nivel.feiticos.length = 
@@ -521,6 +525,17 @@ function _ConverteFeiticosConhecidos() {
 }
 
 function _ConverteFeiticosSlots() {
+  for (var i = 0; i < entradas.feiticos.slots.length; ++i) {
+    var entrada_feitico = entradas.feiticos.slots[i];
+    var feiticos_classe = personagem.feiticos[entrada_feitico.classe];
+    if (feiticos_classe == null ||
+        feiticos_classe.slots == null || 
+        feiticos_classe.slots[entrada_feitico.nivel] == null ||
+        feiticos_classe.slots[entrada_feitico.nivel].length <= entrada_feitico.indice) {
+      // Pode acontecer ao diminuir nivel ou remover classe com feitico.
+      continue;
+    }
+    feiticos_classe.slots[entrada_feitico.nivel].feiticos[entrada_feitico.indice] =
+        entrada_feitico.feitico;
+  }
 }
-
-
