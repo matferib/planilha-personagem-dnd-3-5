@@ -352,11 +352,14 @@ function _AtualizaFeiticos() {
 }
 
 function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
+  var feiticos_classe = personagem.feiticos[chave_classe];
+  if (feiticos_classe.conhecidos == null) {
+    return;
+  }
   // Conhecidos.
   var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
   div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
   // Por nivel.
-  var feiticos_classe = personagem.feiticos[chave_classe];
   for (var nivel in feiticos_classe.conhecidos) {
     var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
