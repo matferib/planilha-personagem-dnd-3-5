@@ -471,13 +471,13 @@ function _ConverteNumeroFeiticosParaClasse(classe_personagem) {
   var chave_classe = classe_personagem.classe;
   var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
   var valor_atributo_chave = personagem.atributos[atributo_chave].valor;
+  var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   personagem.feiticos[chave_classe] = {
     atributo_chave: atributo_chave,
-    conhecidos: {},
+    conhecidos: feiticos_por_nivel.conhecidos ? {} : null,
     slots: {}
   };
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
-  var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   // Feiticos conhecidos (se houver)
   for (var indice = 0; 
        feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length; 
