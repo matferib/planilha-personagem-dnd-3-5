@@ -1,11 +1,12 @@
 // Funcoes de carregamento chamadas ao se carregar a pagina.
 
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
-// preferi manter neste arquivo ao inves de eventos.
+// preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
+  _CarregaAtributos();
   // Monta a tabela de armas e cria as opcoes dinamicamente.
-  CarregaTabelaArmas();
-  CarregaPericias();
+  _CarregaTabelaArmas();
+  _CarregaPericias();
 
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual != -1) {
@@ -16,9 +17,36 @@ function CarregamentoInicial() {
   AtualizaGeralSemLerEntradas();
 }
 
+function _CarregaAtributos() {
+  var div = goog.dom.getElement('div-stats');
+  var atributos = { 
+      forca: 'Força', 
+      destreza: 'Destreza', 
+      constituicao: 'Constituicao', 
+      inteligencia: 'Inteligencia',
+      sabedoria: 'Sabedoria', 
+      carisma: 'Carisma' };
+  for (var chave_atributo in atributos) {
+    var div_atributo = CriaDiv();
+    div_atributo.appendChild(CriaSpan(atributos[chave_atributo]));
+    var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
+    input_atributo.size = 2;
+    input_atributo.maxLength = 2;
+    input_atributo.setAttribute('onchange', 'AtualizaGeral()');
+    div_atributo.appendChild(input_atributo);
+    div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-racial'));
+    div_atributo.appendChild(CriaSpan(' = '));
+    div_atributo.appendChild(CriaSpan('0', chave_atributo + '-valor-total'));
+    div_atributo.appendChild(CriaSpan(', modificador: '));
+    div_atributo.appendChild(CriaSpan('0', null, chave_atributo + '-mod-total'));
+
+    div.appendChild(div_atributo);
+  }
+}
+
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
-function CarregaTabelaArmas() {
+function _CarregaTabelaArmas() {
   var tabelas_armas_especificas = [ 
       tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
   var talento_relacionado = [
@@ -40,7 +68,7 @@ function CarregaTabelaArmas() {
 }
 
 // Popula as pericias iniciais.
-function CarregaPericias() {
+function _CarregaPericias() {
   var div_pericias = goog.dom.getElement('div-pericias');
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
