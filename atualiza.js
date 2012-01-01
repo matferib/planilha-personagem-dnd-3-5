@@ -392,10 +392,19 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
                  ', feitiços por dia: ' + feiticos_classe.slots[nivel].feiticos.length));
     div_nivel.appendChild(CriaBr());
     for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
-      // Adiciona os inputs.
+      // Adiciona os inputs de indices.
       div_nivel.appendChild(CriaInputTexto(
           feiticos_classe.slots[nivel].feiticos[indice],
           'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
+          'feiticos-slots'));
+      div_nivel.appendChild(CriaBr());
+    }
+    // Adiciona input de dominio se houver.
+    if (feiticos_classe.slots[nivel].feitico_dominio != null) {
+      div_nivel.appendChild(CriaSpan('D:'));
+      div_nivel.appendChild(CriaInputTexto(
+          feiticos_classe.slots[nivel].feitico_dominio,
+          'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom', 
           'feiticos-slots'));
       div_nivel.appendChild(CriaBr());
     }
