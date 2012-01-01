@@ -471,6 +471,7 @@ function _ConverteNumeroFeiticosParaClasse(classe_personagem) {
   var chave_classe = classe_personagem.classe;
   var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
   var valor_atributo_chave = personagem.atributos[atributo_chave].valor;
+  var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
   var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   personagem.feiticos[chave_classe] = {
     atributo_chave: atributo_chave,
@@ -499,6 +500,7 @@ function _ConverteNumeroFeiticosParaClasse(classe_personagem) {
         base: parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0,
         bonus_atributo: array_bonus_feiticos_atributo[nivel_feitico],
         feiticos: [],
+        feitico_dominio: (possui_dominio && nivel_feitico > 0) ? '' : null,
     }
     personagem_slots_nivel.feiticos.length = 
         personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
@@ -530,12 +532,24 @@ function _ConverteFeiticosSlots() {
     var feiticos_classe = personagem.feiticos[entrada_feitico.classe];
     if (feiticos_classe == null ||
         feiticos_classe.slots == null || 
-        feiticos_classe.slots[entrada_feitico.nivel] == null ||
-        feiticos_classe.slots[entrada_feitico.nivel].length <= entrada_feitico.indice) {
+        feiticos_classe.slots[entrada_feitico.nivel] == null) {
       // Pode acontecer ao diminuir nivel ou remover classe com feitico.
       continue;
     }
-    feiticos_classe.slots[entrada_feitico.nivel].feiticos[entrada_feitico.indice] =
-        entrada_feitico.feitico;
+    var slots_classe = feiticos_classe.slots[entrada_feitico.nivel];
+    if (entrada_feitico.indice == 'dom') {
+      if (slots_classe.feitico_dominio == null) {
+        // Nao possui feitico de dominio.
+        continue;
+      }
+      slots_classe.feitico_dominio = entrada_feitico.feitico;
+    } else {
+      if (entrada_feitico.indice >= feiticos_classe.slots[entrada_feitico.nivel].length) {
+        // Slot nao existente.
+        continue;
+      }
+      feiticos_classe.slots[entrada_feitico.nivel].feiticos[entrada_feitico.indice] =
+          entrada_feitico.feitico;
+    }
   }
 }
