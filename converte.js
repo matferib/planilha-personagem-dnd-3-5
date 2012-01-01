@@ -64,6 +64,12 @@ function _ConverteBba() {
 }
 
 function _ConverteAtributos() {
+  var nivel_total = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    nivel_total += personagem.classes[i].nivel;
+  }
+  personagem.atributos.pontos.disponiveis = 
+     Math.floor(nivel_total / 4);
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].base = entradas[atributo];
     personagem.atributos[atributo].valor = 
