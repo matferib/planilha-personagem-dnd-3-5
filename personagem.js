@@ -14,6 +14,10 @@ var personagem = {
     temporarios: 0
   },
   atributos: {
+    pontos: {
+      disponiveis: 0,
+      gastos: [],  // cada entrada, um atributo
+    },
     forca: { 
       base: 0,
       valor: 0,

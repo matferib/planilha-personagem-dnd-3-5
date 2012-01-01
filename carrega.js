@@ -19,6 +19,14 @@ function CarregamentoInicial() {
 
 function _CarregaAtributos() {
   var div = goog.dom.getElement('div-stats');
+
+  div.appendChild(CriaSpan('Atributos'));
+  div.appendChild(CriaBr());
+  div.appendChild(CriaSpan('Total: '));
+  div.appendChild(CriaSpan('0', 'pontos-atributos-total'));
+  div.appendChild(CriaSpan(', gastos: '));
+  div.appendChild(CriaSpan('0', 'pontos-atributos-gastos'));
+
   var atributos = { 
       forca: 'Força', 
       destreza: 'Destreza', 
@@ -35,6 +43,7 @@ function _CarregaAtributos() {
     input_atributo.setAttribute('onchange', 'AtualizaGeral()');
     div_atributo.appendChild(input_atributo);
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-racial'));
+    div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-nivel'));
     div_atributo.appendChild(CriaSpan(' = '));
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-valor-total'));
     div_atributo.appendChild(CriaSpan(', modificador: '));

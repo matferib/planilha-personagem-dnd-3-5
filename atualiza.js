@@ -55,8 +55,14 @@ function _AtualizaDadosPontosVida() {
 }
 
 function _AtualizaAtributos() {
+  goog.dom.getElement('pontos-atributos-total').innerText =
+      personagem.atributos.pontos.disponiveis;
+
   var div_atributos = goog.dom.getElement('div-stats');
-  for (var atributo in personagem.atributos) {
+  var atributos = [ 
+      'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
+  for (var i = 0; i < atributos.length; ++i) {
+    var atributo = atributos[i];
     var input_atributo = goog.dom.getElement(atributo + '-valor-base');
     input_atributo.value = personagem.atributos[atributo].base;
   }
@@ -97,28 +103,31 @@ function _AtualizaModificadoresAtributos() {
   var modificadores_raca = tabelas_raca[personagem.raca].atributos;
 
   // Busca cada elemento das estatisticas e atualiza modificadores.
-  for (var habilidade in personagem.atributos) {
+  var atributos = [ 
+      'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
+  for (var i = 0; i < atributos.length; ++i) {
+    var atributo = atributos[i];
     // modificador racial.
-    if (modificadores_raca[habilidade]) {
-      var modificador_racial = modificadores_raca[habilidade];
+    if (modificadores_raca[atributo]) {
+      var modificador_racial = modificadores_raca[atributo];
       // Escreve o modificador racial.
       ImprimeSinalizado(
           modificador_racial,
-          goog.dom.getElement(habilidade + '-mod-racial'));
+          goog.dom.getElement(atributo + '-mod-racial'));
     } 
     else {
-      ImprimeNaoSinalizado('', goog.dom.getElement(habilidade + '-mod-racial'));
+      ImprimeNaoSinalizado('', goog.dom.getElement(atributo + '-mod-racial'));
     }
 
     // Escreve o valor total.
     ImprimeNaoSinalizado(
-        personagem.atributos[habilidade].valor, 
-        goog.dom.getElement(habilidade + '-valor-total'));
+        personagem.atributos[atributo].valor, 
+        goog.dom.getElement(atributo + '-valor-total'));
 
     // Escreve o modificador.
     ImprimeSinalizado(
-        personagem.atributos[habilidade].modificador,
-        goog.dom.getElementsByClass(habilidade + '-mod-total'));
+        personagem.atributos[atributo].modificador,
+        goog.dom.getElementsByClass(atributo + '-mod-total'));
   }
 }
 
