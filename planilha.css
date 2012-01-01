@@ -1,0 +1,24 @@
+/* CSS da planilha. */
+/* os divs principais da planilha. */
+div.divs-principais {
+background-color: #D8D8D8;
+padding: 7px;
+}
+
+div#div-geral {
+}
+
+div#div-stats {
+}
+
+div#div-ataque {
+}
+
+div#div-defesa {
+}
+
+div#div-equipamentos {
+}
+
+div#div-salvacoes {
+}
