@@ -73,12 +73,11 @@ function LeEntradas() {
   // Experiencia.
   entradas.experiencia = parseInt(goog.dom.getElement('pontos-experiencia').value) || 0;
   // atributos
-  var div_atributos = goog.dom.getElement('div-stats');
-  for (var i = 0; i < div_atributos.childNodes.length; ++i) {
-    var elemento = div_atributos.childNodes[i];
-    if (elemento.tagName == "INPUT") {
-      entradas[elemento.name] = parseInt(elemento.value);
-    }
+  var atributos = [ 
+      'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
+  for (var i = 0; i < atributos.length; ++i) {
+    entradas[atributos[i]] = 
+        parseInt(goog.dom.getElement(atributos[i] + '-valor-base').value);
   }
 
   // Estilos de luta.
