@@ -42,7 +42,7 @@ var entradas = {
 
   // Feiticos. cada entrada:
   // conhecidos: { feitico, classe, nivel, indice, },
-  // slots: 
+  // slots: { feitico, classe, nivel, indice, }, // indice pode ser dom para dominio.
   feiticos: { conhecidos: [], slots: [] },
 };
 
