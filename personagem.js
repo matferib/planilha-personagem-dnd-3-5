@@ -20,31 +20,37 @@ var personagem = {
     },
     forca: { 
       base: 0,
+      bonus_nivel: 0,
       valor: 0,
       modificador: 0
     },  
     destreza: {
       base: 0, 
+      bonus_nivel: 0,
       valor: 0,
       modificador: 0
     },  
     constituicao: { 
       base: 0, 
+      bonus_nivel: 0,
       valor: 0,
       modificador: 0
     },  
     inteligencia: { 
       base: 0, 
+      bonus_nivel: 0,
       valor: 0,
       modificador: 0
     },  
     sabedoria: { 
       base: 0, 
+      bonus_nivel: 0,
       valor: 0,
       modificador: 0
     },  
     carisma: { 
       base: 0, 
+      bonus_nivel: 0,
       valor: 0,
       modificador: 0
     }

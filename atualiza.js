@@ -55,6 +55,33 @@ function _AtualizaDadosPontosVida() {
 }
 
 function _AtualizaAtributos() {
+  // Botoes de atributos.
+  var botoes_atributos = goog.dom.getElementsByClass('botoes-atributos');
+  for (var i = 0; i < botoes_atributos.length; ++i) {
+    if (personagem.atributos.pontos.gastos.length < 
+        personagem.atributos.pontos.disponiveis) {
+      // habilita botoes de atributos.
+      botoes_atributos[i].style.display = 'inline';
+    } else {
+      // desabilita botoes de atributos.
+      botoes_atributos[i].style.display = 'none';
+    }
+  }
+  var botao_atributo_menos = goog.dom.getElement('botao-atributos-menos');
+  if (personagem.atributos.pontos.gastos.length > 0) {
+    botao_atributo_menos.style.display = 'inline';
+  } else {
+    botao_atributo_menos.style.display = 'none';
+  }
+  // Bonus gastos.
+  var string_gastos = '';
+  for (var i = 0; i < personagem.atributos.pontos.gastos.length; ++i) {
+    string_gastos += tabelas_atributos[personagem.atributos.pontos.gastos[i]];
+    if (i < personagem.atributos.pontos.gastos.length - 1) {
+      string_gastos += ', ';
+    }
+  }
+  goog.dom.getElement('pontos-atributos-gastos').innerText = string_gastos;
   goog.dom.getElement('pontos-atributos-total').innerText =
       personagem.atributos.pontos.disponiveis;
 
@@ -74,7 +101,8 @@ function _AtualizaClasses() {
   var classes_desabilitadas = [];
   // Cria os selects.
   for (var i = 0; i < personagem.classes.length; ++i) {
-    AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, personagem.classes[i].nivel);
+    AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, 
+                   personagem.classes[i].nivel);
     classes_desabilitadas.push(personagem.classes[i].classe);
   }
 
@@ -116,7 +144,7 @@ function _AtualizaModificadoresAtributos() {
 
     // bonus nivel;
     ImprimeSinalizado(
-        0,
+        personagem.atributos[atributo].bonus_nivel,
         goog.dom.getElement(atributo + '-mod-nivel'),
         false);
 

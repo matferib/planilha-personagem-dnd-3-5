@@ -1115,5 +1115,21 @@ var tabelas_visoes = {
     esconder: { classes: ['divs-principais'], elementos: []}, 
     mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
   },
+};
 
+var tabelas_atributos = {
+  forca: "Força",
+  destreza: "Destreza",
+  constituicao: "Constitruição",
+  inteligencia: "Inteligência",
+  sabedoria: "Sabedoria",
+  carisma: "Carisma",
+};
+var tabelas_atributos_invertidos = {
+  'Força': 'forca',
+  'Destreza': 'destreza',
+  'Constitruição': 'constituicao',
+  'Inteligência': 'inteligencia',
+  'Sabedoria': 'sabedoria',
+  'Carisma': 'carisma',
 };

@@ -64,14 +64,28 @@ function _ConverteBba() {
 }
 
 function _ConverteAtributos() {
+  // Bonus de atributos de acordo com nivel total de personagem.
   var nivel_total = 0;
   for (var i = 0; i < personagem.classes.length; ++i) {
     nivel_total += personagem.classes[i].nivel;
   }
   personagem.atributos.pontos.disponiveis = 
      Math.floor(nivel_total / 4);
+  personagem.atributos.pontos.gastos.length = 0;
+  for (var i = 0; i < entradas.bonus_atributos.length; ++i) {
+    personagem.atributos.pontos.gastos.push(entradas.bonus_atributos[i]);
+  }
+  if (personagem.atributos.pontos.gastos.length > 
+      personagem.atributos.pontos.disponiveis) {
+    // Pode acontecer com retirada de um nivel ou diminuicao.
+    personagem.atributos.pontos.gastos.length = 
+        personagem.atributos.pontos.disponiveis;
+  }
+
+  // Calcula o valor dos atributos.
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].base = entradas[atributo];
+    personagem.atributos[atributo].bonus_nivel = 0;
     personagem.atributos[atributo].valor = 
         personagem.atributos[atributo].base;
 
@@ -82,6 +96,11 @@ function _ConverteAtributos() {
     }
     personagem.atributos[atributo].modificador =
         modificador_atributo(personagem.atributos[atributo].valor);
+  }
+  // Modifica pelo bonus de nivel.
+  for (var i = 0; i < personagem.atributos.pontos.gastos.length; ++i) {
+    ++personagem.atributos[personagem.atributos.pontos.gastos[i]].bonus_nivel;
+    ++personagem.atributos[personagem.atributos.pontos.gastos[i]].valor;
   }
 }
 
