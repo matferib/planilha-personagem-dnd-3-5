@@ -1059,5 +1059,9 @@ var tabelas_visoes = {
     esconder: { classes: ['divs-principais'], elementos: []}, 
     mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
   },
-  
+  role_playing: {
+    esconder: { classes: ['divs-principais'], elementos: []}, 
+    mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
+  },
+
 };
