@@ -14,6 +14,10 @@ var personagem = {
     temporarios: 0
   },
   atributos: {
+    pontos: {
+      disponiveis: 0,
+      gastos: [],  // cada entrada, um atributo
+    },
     forca: { 
       base: 0,
       valor: 0,
@@ -95,7 +99,7 @@ var personagem = {
   // Feiticos. Cada entrada: chave_classe: { 
   //   habilidade_chave, 
   //   conhecidos: { 0: [], ..., 9 },
-  //   slots: { 0: { base, bonus_atributo, feiticos: [] }, ... 9 } }
+  //   slots: { 0: { base, bonus_atributo, feiticos: [], feitico_dominio  }, ... 9 } }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
 };
