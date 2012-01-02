@@ -14,41 +14,52 @@ function StringSinalizada(valor, imprime_zero) {
     return '';
   }
   var return_value = '';
-	if (valor >= 0) {
-		return_value = '+';
-	}
+  if (valor >= 0) {
+    return_value = '+';
+  }
   return return_value + valor;
 }
 
 // Imprime um valor de forma sinalizada ou seja, com +/- na frente).
 // @param dom pode ser um span ou div, ou qualquer elemento que possua innerText.
 // Tambem pode ser um array de dom.
-function ImprimeSinalizado(valor, dom) {
-	if (dom.length == null) {
-		if (valor >= 0) {
-			dom.innerText = '+' + valor;
-		} else {
-			dom.innerText = valor;
-		}
-	}
-	else {
-		for (var i = 0; i < dom.length; ++i) {
-			ImprimeSinalizado(valor, dom[i]);
-		}
-	}
+// @param imprime_zero opcional, default true. Se false, imprime_vazio no dom. 
+function ImprimeSinalizado(valor, dom, imprime_zero) {
+  if (imprime_zero == null) {
+    imprime_zero = true;
+  }
+
+  if (dom.length == null) {
+    if (valor > 0) {
+      dom.innerText = '+' + valor;
+    } else if (valor == 0) {
+      dom.innerText = imprime_zero ? '+0' : '';
+    } else {
+      dom.innerText = valor;
+    }
+  }
+  else {
+    for (var i = 0; i < dom.length; ++i) {
+      ImprimeSinalizado(valor, dom[i], imprime_zero);
+    }
+  }
 }
 
 // Imprime um valor de forma nao sinalizada no caso positivo.
 // @param dom pode ser um span ou div, ou qualquer elemento que possua innerText.
-function ImprimeNaoSinalizado(valor, dom) {
-	if (dom.length == null) {
-		dom.innerText = valor;
-	}
-	else {
-		for (var i = 0; i < dom.length; ++i) {
-			ImprimeNaoSinalizado(valor, dom[i]);
-		}
-	}
+function ImprimeNaoSinalizado(valor, dom, imprime_zero) {
+  if (imprime_zero == null) {
+    imprime_zero = true;
+  }
+
+  if (dom.length == null) {
+    dom.innerText = imprime_zero ? valor : '';
+  }
+  else {
+    for (var i = 0; i < dom.length; ++i) {
+      ImprimeNaoSinalizado(valor, dom[i]);
+    }
+  }
 }
 
 // Adiciona um elemento span ao div
@@ -61,7 +72,7 @@ function AdicionaSpanAoDiv(texto, id_span, div) {
 // @param dom_select o dom representando o select.
 // @return null se nao houver valor selecionado (select vazio).
 function ValorSelecionado(dom_select) {
-	return dom_select.length > 0 ?
+  return dom_select.length > 0 ?
       dom_select.options[dom_select.selectedIndex].value : null;
 }
 
@@ -77,12 +88,12 @@ function LimpaSelect(dom_select) {
 // @param valor_selecionado o novo valor selecionado do dom.
 // @param dom_select o dom representando o select.
 function SelecionaValor(valor_selecionado, dom_select) {
-	for (var i = 0; i < dom_select.options.length; ++i) {
-		if (dom_select.options[i].value == valor_selecionado) {
-			dom_select.selectedIndex = i;
-			return;
-		}
-	}	
+  for (var i = 0; i < dom_select.options.length; ++i) {
+    if (dom_select.options[i].value == valor_selecionado) {
+      dom_select.selectedIndex = i;
+      return;
+    }
+  } 
 }
 
 // Retorna numero * [1, limite].
