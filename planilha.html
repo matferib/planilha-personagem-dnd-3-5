@@ -21,6 +21,12 @@
 </head>
 <body onload="CarregamentoInicial()">
 
+
+<div id="div-visoes" >
+<button type="button" onclick="ClickVisao('completo')">Completo</button>
+<button type="button" onclick="ClickVisao('combate')">Combate</button>
+</div> <!--div-visoes-->
+
 <div id="div-geral" class="divs-principais">
 Nome: <input type="text" id="nome" /><br>
 Raça: 
@@ -116,7 +122,7 @@ Carisma:
 
 </div> <!-- div-stats -->
 
-<div id="div-ataque" class="divs-principais divs-combate">
+<div id="div-ataque" class="divs-principais">
 Bonus Base de Ataque: <span class="bba"></span><br>
 Corpo a corpo: 
 <span class="bba"></span>
@@ -132,7 +138,7 @@ Estilos de Luta: <button type="button" onclick="ClickAdicionarEstiloLuta()">+</b
 <div id="div-estilos-luta"></div>
 </div> <!-- div-ataque -->
 
-<div id="div-defesa" class="divs-principais divs-combate">
+<div id="div-defesa" class="divs-principais">
 Classe de Armadura: 
 <select id="armadura" onchange="AtualizaGeral()">
 	<option value="nenhuma">Nenhuma</option>
