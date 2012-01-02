@@ -50,6 +50,8 @@ function _CarregaAtributos() {
       carisma: 'Carisma' };
   for (var chave_atributo in atributos) {
     var div_atributo = CriaDiv();
+    //div_atributo.appendChild(CriaBotao('+', null, null, Click));
+
     div_atributo.appendChild(CriaSpan(atributos[chave_atributo]));
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
     input_atributo.size = 2;
