@@ -108,16 +108,17 @@ function _AtualizaModificadoresAtributos() {
   for (var i = 0; i < atributos.length; ++i) {
     var atributo = atributos[i];
     // modificador racial.
-    if (modificadores_raca[atributo]) {
-      var modificador_racial = modificadores_raca[atributo];
-      // Escreve o modificador racial.
-      ImprimeSinalizado(
-          modificador_racial,
-          goog.dom.getElement(atributo + '-mod-racial'));
-    } 
-    else {
-      ImprimeNaoSinalizado('', goog.dom.getElement(atributo + '-mod-racial'));
-    }
+    var modificador_racial = modificadores_raca[atributo] || 0;
+    ImprimeSinalizado(
+        modificador_racial,
+        goog.dom.getElement(atributo + '-mod-racial'),
+        false);
+
+    // bonus nivel;
+    ImprimeSinalizado(
+        0,
+        goog.dom.getElement(atributo + '-mod-nivel'),
+        false);
 
     // Escreve o valor total.
     ImprimeNaoSinalizado(
