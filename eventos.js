@@ -177,3 +177,16 @@ function ClickFeitico(classe_nivel_slot, incremento) {
   */
 }
 
+// Trata o click de adicionar bonus a um atributo, colocando-o no final da fila.
+function ClickBotaoAtributoMais(chave_atributo) {
+  entradas.bonus_atributos.push(chave_atributo);
+  AtualizaGeralSemLerEntradas();
+}
+
+// Trata o click de remover bonus de um atributo. 
+// Retira o ultimo bonus colocado (se houver).
+function ClickBotaoAtributoMenos() {
+  entradas.bonus_atributos.pop();
+  AtualizaGeralSemLerEntradas();
+}
+

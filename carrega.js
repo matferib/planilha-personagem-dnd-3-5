@@ -38,8 +38,17 @@ function _CarregaAtributos() {
   div.appendChild(CriaBr());
   div.appendChild(CriaSpan('Total: '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-total'));
-  div.appendChild(CriaSpan(', gastos: '));
+  div.appendChild(CriaSpan(', gastos: [ '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-gastos'));
+  div.appendChild(CriaSpan(' ]'));
+  div.appendChild(
+      CriaBotao('-', 
+                'botao-atributos-menos', 
+                null, 
+                { handleEvent: function (evento) { 
+                    ClickBotaoAtributoMenos(); 
+                    evento.stopPropagation();
+                } }));
 
   var atributos = { 
       forca: 'Força', 
@@ -50,8 +59,16 @@ function _CarregaAtributos() {
       carisma: 'Carisma' };
   for (var chave_atributo in atributos) {
     var div_atributo = CriaDiv();
-    //div_atributo.appendChild(CriaBotao('+', null, null, Click));
-
+    div_atributo.appendChild(
+        CriaBotao('+', 
+                  'botao-atributos-mais-' + chave_atributo, 
+                  'botoes-atributos', 
+                  { 
+                      chave_atributo: chave_atributo,
+                      handleEvent: function (evento) { 
+                          ClickBotaoAtributoMais(this.chave_atributo); 
+                          evento.stopPropagation();
+                  } }));
     div_atributo.appendChild(CriaSpan(atributos[chave_atributo]));
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
     input_atributo.size = 2;

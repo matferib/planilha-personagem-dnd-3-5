@@ -15,6 +15,7 @@ var entradas = {
   // experiencia.
   experiencia: 0,
   // atributos.
+  bonus_atributos: [],
   forca: 10,
   destreza: 10,
   constituicao: 10,
@@ -73,6 +74,13 @@ function LeEntradas() {
   // Experiencia.
   entradas.experiencia = parseInt(goog.dom.getElement('pontos-experiencia').value) || 0;
   // atributos
+  var span_bonus_atributos = goog.dom.getElement('pontos-atributos-gastos');
+  var array_bonus = span_bonus_atributos.innerText.split(',');
+  for (var i = 0; i < array_bonus; ++i) {
+    // Trim direita.
+    array_bonus[i] = tabelas_atributos_invertidos[
+        array_bonus[i].replace(/\s*$/, "")];
+  }
   var atributos = [ 
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
