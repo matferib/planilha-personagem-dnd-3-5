@@ -1100,3 +1100,20 @@ var tabelas_pericias = {
       classes: [  'bardo', 'ladino' ],
       habilidade: 'carisma' },
 };
+
+
+var tabelas_visoes = {
+  completo: {
+    esconder: { classes: [], elementos: []}, 
+    mostrar: { classes: ['divs-principais'], elementos:[]},
+  },
+  combate: {
+    esconder: { classes: ['divs-principais'], elementos: []}, 
+    mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
+  },
+  role_playing: {
+    esconder: { classes: ['divs-principais'], elementos: []}, 
+    mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
+  },
+
+};
