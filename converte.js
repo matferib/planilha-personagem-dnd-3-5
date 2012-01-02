@@ -64,6 +64,12 @@ function _ConverteBba() {
 }
 
 function _ConverteAtributos() {
+  var nivel_total = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    nivel_total += personagem.classes[i].nivel;
+  }
+  personagem.atributos.pontos.disponiveis = 
+     Math.floor(nivel_total / 4);
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].base = entradas[atributo];
     personagem.atributos[atributo].valor = 
@@ -471,30 +477,36 @@ function _ConverteNumeroFeiticosParaClasse(classe_personagem) {
   var chave_classe = classe_personagem.classe;
   var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
   var valor_atributo_chave = personagem.atributos[atributo_chave].valor;
+  var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
+  var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   personagem.feiticos[chave_classe] = {
     atributo_chave: atributo_chave,
-    conhecidos: {},
+    conhecidos: feiticos_por_nivel.conhecidos ? {} : null,
     slots: {}
   };
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
-  var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
-  var bonus_feiticos_atributo = feiticos_atributo(valor_atributo_chave);
-  // TODO usar slots ao inves de conhecidos, ja que nem sempre a classe usa conhecidos.
-  for (var indice = 0; indice < feiticos_por_nivel.conhecidos.length; ++indice) {
+  // Feiticos conhecidos (se houver)
+  for (var indice = 0; 
+       feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length; 
+       ++indice) {
     var nivel_feitico = nivel_inicial + indice;
 
     // Feiticos conhecidos.
     var array_conhecidos_nivel = new Array();
     array_conhecidos_nivel.length = 
         parseInt(feiticos_por_nivel.conhecidos.charAt(indice)) || 0;
-    personagem.feiticos[chave_classe].conhecidos[nivel_feitico] = 
-        array_conhecidos_nivel;
-
+    personagem.feiticos[chave_classe].conhecidos[nivel_feitico] = array_conhecidos_nivel;
+  }
+  // Slots de feiticos.
+  var array_bonus_feiticos_atributo = feiticos_atributo(valor_atributo_chave);
+  for (var indice = 0; indice < feiticos_por_nivel.por_dia.length; ++indice) {
+    var nivel_feitico = nivel_inicial + indice;
     // Slots de feiticos.
     var personagem_slots_nivel = {
         base: parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0,
-        bonus_atributo: bonus_feiticos_atributo[nivel_feitico],
+        bonus_atributo: array_bonus_feiticos_atributo[nivel_feitico],
         feiticos: [],
+        feitico_dominio: (possui_dominio && nivel_feitico > 0) ? '' : null,
     }
     personagem_slots_nivel.feiticos.length = 
         personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
@@ -521,6 +533,29 @@ function _ConverteFeiticosConhecidos() {
 }
 
 function _ConverteFeiticosSlots() {
+  for (var i = 0; i < entradas.feiticos.slots.length; ++i) {
+    var entrada_feitico = entradas.feiticos.slots[i];
+    var feiticos_classe = personagem.feiticos[entrada_feitico.classe];
+    if (feiticos_classe == null ||
+        feiticos_classe.slots == null || 
+        feiticos_classe.slots[entrada_feitico.nivel] == null) {
+      // Pode acontecer ao diminuir nivel ou remover classe com feitico.
+      continue;
+    }
+    var slots_classe = feiticos_classe.slots[entrada_feitico.nivel];
+    if (entrada_feitico.indice == 'dom') {
+      if (slots_classe.feitico_dominio == null) {
+        // Nao possui feitico de dominio.
+        continue;
+      }
+      slots_classe.feitico_dominio = entrada_feitico.feitico;
+    } else {
+      if (entrada_feitico.indice >= feiticos_classe.slots[entrada_feitico.nivel].length) {
+        // Slot nao existente.
+        continue;
+      }
+      feiticos_classe.slots[entrada_feitico.nivel].feiticos[entrada_feitico.indice] =
+          entrada_feitico.feitico;
+    }
+  }
 }
-
-

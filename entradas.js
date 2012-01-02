@@ -41,8 +41,8 @@ var entradas = {
   pericias: [],
 
   // Feiticos. cada entrada:
-  // conhecidos: { feitico, classe, nivel, indice, gastos },
-  // slots: 
+  // conhecidos: { feitico, classe, nivel, indice, },
+  // slots: { feitico, classe, nivel, indice, }, // indice pode ser dom para dominio.
   feiticos: { conhecidos: [], slots: [] },
 };
 
@@ -73,12 +73,11 @@ function LeEntradas() {
   // Experiencia.
   entradas.experiencia = parseInt(goog.dom.getElement('pontos-experiencia').value) || 0;
   // atributos
-  var div_atributos = goog.dom.getElement('div-stats');
-  for (var i = 0; i < div_atributos.childNodes.length; ++i) {
-    var elemento = div_atributos.childNodes[i];
-    if (elemento.tagName == "INPUT") {
-      entradas[elemento.name] = parseInt(elemento.value);
-    }
+  var atributos = [ 
+      'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
+  for (var i = 0; i < atributos.length; ++i) {
+    entradas[atributos[i]] = 
+        parseInt(goog.dom.getElement(atributos[i] + '-valor-base').value);
   }
 
   // Estilos de luta.
@@ -151,9 +150,24 @@ function _LeFeiticos() {
       classe: classe_nivel_indice[0],
       nivel: classe_nivel_indice[1],
       indice: classe_nivel_indice[2],
-      gastos: 0 
     });
   }
+  entradas.feiticos.slots= [];
+  var nomes_feiticos = goog.dom.getElementsByClass('feiticos-slots');
+  for (var i = 0; i < nomes_feiticos.length; ++i) {
+    var classe_nivel_indice = nomes_feiticos[i].id.split('-');
+    // remove o prefixo input-feiticos-slots
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    entradas.feiticos.slots.push({ 
+      feitico: nomes_feiticos[i].value,
+      classe: classe_nivel_indice[0],
+      nivel: classe_nivel_indice[1],
+      indice: classe_nivel_indice[2],
+    });
+  }
+
 }
 
 // Le uma arma de seu div.
