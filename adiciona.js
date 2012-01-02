@@ -103,6 +103,12 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   input_bonus.readOnly = true;
   }
 
+  // Se obra prima estiver selecionada, ignora o bonus da arma.
+  if (input_obra_prima.checked == true) {
+    input_bonus.value = 0;
+    input_bonus.readOnly = true;
+  }
+
   var button_remover = CriaBotao('-');
   button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
         id_gerado + '", "' + id_div_equipamentos_armas + '")');
