@@ -96,11 +96,11 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   input_bonus.setAttribute('maxlength', 2);
   input_bonus.setAttribute('size', 2);
   input_bonus.value = bonus || 0;
- 
-  //  Criado para impedir que uma arma OP tenha bônus mágico. FC.
+
+  // Se obra prima estiver selecionada, ignora o bonus da arma.
   if (input_obra_prima.checked == true) {
-  input_bonus.value = 0;
-  input_bonus.readOnly = true;
+    input_bonus.value = 0;
+    input_bonus.readOnly = true;
   }
 
   var button_remover = CriaBotao('-');
