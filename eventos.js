@@ -3,6 +3,34 @@ goog.require('goog.json');
 
 // Funcao de CarregamentoInicial no arquivo carrega.js.
 
+//Evento para mudar divs visiveis na planilha.
+
+function ClickVisao(modo) { 
+  // Loop para esconder tudo.
+  for (var j = 0; j < tabelas_visoes[modo].esconder.classes.length; ++j) {
+    var divs_esconder = goog.dom.getElementsByClass(tabelas_visoes[modo].esconder.classes[j]);
+    for (var i = 0; i < divs_esconder.length; ++i) {
+      divs_esconder[i].style.display = 'none';
+    }
+  }
+  for (var i = 0; i < tabelas_visoes[modo].esconder.elementos.length; ++i) {
+    var divs_combate = goog.dom.getElement(tabelas_visoes[modo].esconder.elementos[i]);
+    divs_combate.style.display = 'none';
+  }
+  // Loop para mostrar.
+  for (var j = 0; j < tabelas_visoes[modo].mostrar.classes.length; ++j) {
+    var divs_mostrar = goog.dom.getElementsByClass(tabelas_visoes[modo].mostrar.classes[j]);
+    for (var i = 0; i < divs_mostrar.length; ++i) {
+      divs_mostrar[i].style.display = 'block';
+    }
+  }
+  for (var i = 0; i < tabelas_visoes[modo].mostrar.elementos.length; ++i) {
+    var divs_combate = goog.dom.getElement(tabelas_visoes[modo].mostrar.elementos[i]);
+    divs_combate.style.display = 'block';
+  }
+}
+
+
 // Botao de adicionar classe apertado.
 function ClickAdicionarClasse() {
   var classes_desabilitadas = [];
