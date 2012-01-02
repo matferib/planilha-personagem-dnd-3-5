@@ -16,10 +16,13 @@ function CriaBr() {
   return CriaDom('br');
 }
 
-function CriaBotao(texto, id, classe) {
+function CriaBotao(texto, id, classe, funcao) {
   var botao = CriaDom('button', id, classe);
   botao.setAttribute('type', 'button');
   botao.innerText = texto;
+  if (funcao) {
+    botao.addEventListener('click', funcao, false);
+  }
   return botao;
 }
 
