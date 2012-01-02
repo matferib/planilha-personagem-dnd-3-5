@@ -55,8 +55,14 @@ function _AtualizaDadosPontosVida() {
 }
 
 function _AtualizaAtributos() {
+  goog.dom.getElement('pontos-atributos-total').innerText =
+      personagem.atributos.pontos.disponiveis;
+
   var div_atributos = goog.dom.getElement('div-stats');
-  for (var atributo in personagem.atributos) {
+  var atributos = [ 
+      'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
+  for (var i = 0; i < atributos.length; ++i) {
+    var atributo = atributos[i];
     var input_atributo = goog.dom.getElement(atributo + '-valor-base');
     input_atributo.value = personagem.atributos[atributo].base;
   }
@@ -97,28 +103,32 @@ function _AtualizaModificadoresAtributos() {
   var modificadores_raca = tabelas_raca[personagem.raca].atributos;
 
   // Busca cada elemento das estatisticas e atualiza modificadores.
-  for (var habilidade in personagem.atributos) {
+  var atributos = [ 
+      'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
+  for (var i = 0; i < atributos.length; ++i) {
+    var atributo = atributos[i];
     // modificador racial.
-    if (modificadores_raca[habilidade]) {
-      var modificador_racial = modificadores_raca[habilidade];
-      // Escreve o modificador racial.
-      ImprimeSinalizado(
-          modificador_racial,
-          goog.dom.getElement(habilidade + '-mod-racial'));
-    } 
-    else {
-      ImprimeNaoSinalizado('', goog.dom.getElement(habilidade + '-mod-racial'));
-    }
+    var modificador_racial = modificadores_raca[atributo] || 0;
+    ImprimeSinalizado(
+        modificador_racial,
+        goog.dom.getElement(atributo + '-mod-racial'),
+        false);
+
+    // bonus nivel;
+    ImprimeSinalizado(
+        0,
+        goog.dom.getElement(atributo + '-mod-nivel'),
+        false);
 
     // Escreve o valor total.
     ImprimeNaoSinalizado(
-        personagem.atributos[habilidade].valor, 
-        goog.dom.getElement(habilidade + '-valor-total'));
+        personagem.atributos[atributo].valor, 
+        goog.dom.getElement(atributo + '-valor-total'));
 
     // Escreve o modificador.
     ImprimeSinalizado(
-        personagem.atributos[habilidade].modificador,
-        goog.dom.getElementsByClass(habilidade + '-mod-total'));
+        personagem.atributos[atributo].modificador,
+        goog.dom.getElementsByClass(atributo + '-mod-total'));
   }
 }
 
@@ -352,11 +362,14 @@ function _AtualizaFeiticos() {
 }
 
 function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
+  var feiticos_classe = personagem.feiticos[chave_classe];
+  if (feiticos_classe.conhecidos == null) {
+    return;
+  }
   // Conhecidos.
   var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
   div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
   // Por nivel.
-  var feiticos_classe = personagem.feiticos[chave_classe];
   for (var nivel in feiticos_classe.conhecidos) {
     var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
@@ -389,10 +402,19 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
                  ', feitiços por dia: ' + feiticos_classe.slots[nivel].feiticos.length));
     div_nivel.appendChild(CriaBr());
     for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
-      // Adiciona os inputs.
+      // Adiciona os inputs de indices.
       div_nivel.appendChild(CriaInputTexto(
           feiticos_classe.slots[nivel].feiticos[indice],
           'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
+          'feiticos-slots'));
+      div_nivel.appendChild(CriaBr());
+    }
+    // Adiciona input de dominio se houver.
+    if (feiticos_classe.slots[nivel].feitico_dominio != null) {
+      div_nivel.appendChild(CriaSpan('D:'));
+      div_nivel.appendChild(CriaInputTexto(
+          feiticos_classe.slots[nivel].feitico_dominio,
+          'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom', 
           'feiticos-slots'));
       div_nivel.appendChild(CriaBr());
     }
