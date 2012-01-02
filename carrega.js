@@ -3,6 +3,7 @@
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
 // preferi manter neste arquivo ao inves de eventos.
 function CarregamentoInicial() {
+  _CarregaBotoesVisao();
   // Monta a tabela de armas e cria as opcoes dinamicamente.
   CarregaTabelaArmas();
   CarregaPericias();
@@ -14,6 +15,16 @@ function CarregamentoInicial() {
     entradas = goog.json.parse(json_personagem);
   }
   AtualizaGeralSemLerEntradas();
+}
+
+// Adiciona botoes dinamicamente na planilha.
+function _CarregaBotoesVisao() {
+  var div_visoes = goog.dom.getElement('div-visoes');
+  for (var visao in tabelas_visoes) {
+    var botao_visao = CriaBotao(visao, null, null);
+    botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
+    div_visoes.appendChild(botao_visao);
+  }
 }
 
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
