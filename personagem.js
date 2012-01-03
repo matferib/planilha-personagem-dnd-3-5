@@ -103,6 +103,8 @@ var personagem = {
   armas: [],
   // Armadura: { nome, bonus_magico }
   armadura: {},
+  // Valor pode ser qualquer coisa.
+  equipamentos: '',
   // Feiticos. Cada entrada: chave_classe: { 
   //   habilidade_chave, 
   //   conhecidos: { 0: [], ..., 9 },
@@ -111,6 +113,8 @@ var personagem = {
   //   slots: { 0: { base, bonus_atributo, feiticos: [ { nome, gasto} ], feitico_dominio: {nome, gasto}  }, ... 9 } }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
+
+  notas: '',
 };
 
 // Encontra uma arma do personagem pelo nome gerado.

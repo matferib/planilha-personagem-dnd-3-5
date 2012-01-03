@@ -33,14 +33,14 @@ function GeraPontosDeVida(modo) {
       total_pontos_vida += pontos_vida_nivel;
     }
   }
-  goog.dom.getElement('pontos-vida-total').value = total_pontos_vida;
+  Dom('pontos-vida-total').value = total_pontos_vida;
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.
 function GeraAleatorioComum() {
   var atributos = [ 'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
-    goog.dom.getElement(atributos[i] + '-valor-base').value = Rola(3, 6);
+    Dom(atributos[i] + '-valor-base').value = Rola(3, 6);
   }
 }
 
@@ -59,7 +59,7 @@ function GeraAleatorioElite() {
       }
       total += rolagem;
     }
-    goog.dom.getElement(atributos[i] + '-valor-base').value = total - menor;
+    Dom(atributos[i] + '-valor-base').value = total - menor;
   }
 }
 
@@ -77,7 +77,7 @@ function _GeraTabelado(valores) {
   }
 
   for (var i = 0; i < valores.length; ++i) {
-    goog.dom.getElement(
+    Dom(
         tabelas_geracao_atributos[primeira_classe.classe][i]  + '-valor-base').value = 
             valores[i];
   }

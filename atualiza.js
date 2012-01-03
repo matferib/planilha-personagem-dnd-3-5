@@ -38,21 +38,22 @@ function _AtualizaGeral() {
   _AtualizaTalentos();
   _AtualizaPericias();
   _AtualizaListaArmas();
-  _AtualizaMoedas();
+  _AtualizaEquipamentos();
   _AtualizaFeiticos();
+  _AtualizaNotas();
   _AtualizaModoVisao();
 }
 
 function _AtualizaNomeRacaAlinhamentoXp() {
-  goog.dom.getElement('nome').value = personagem.nome;
-  SelecionaValor(personagem.raca, goog.dom.getElement('raca'));
-  SelecionaValor(personagem.alinhamento, goog.dom.getElement('alinhamento'));
-  goog.dom.getElement('pontos-experiencia').value = personagem.experiencia;
+  Dom('nome').value = personagem.nome;
+  SelecionaValor(personagem.raca, Dom('raca'));
+  SelecionaValor(personagem.alinhamento, Dom('alinhamento'));
+  Dom('pontos-experiencia').value = personagem.experiencia;
 }
 
 function _AtualizaDadosPontosVida() {
-  goog.dom.getElement('pontos-vida-total').value = personagem.pontos_vida.total;
-  goog.dom.getElement('ferimentos').value = personagem.pontos_vida.ferimentos;
+  Dom('pontos-vida-total').value = personagem.pontos_vida.total;
+  Dom('ferimentos').value = personagem.pontos_vida.ferimentos;
 }
 
 function _AtualizaAtributos() {
@@ -68,7 +69,7 @@ function _AtualizaAtributos() {
       botoes_atributos[i].style.display = 'none';
     }
   }
-  var botao_atributo_menos = goog.dom.getElement('botao-atributos-menos');
+  var botao_atributo_menos = Dom('botao-atributos-menos');
   if (personagem.atributos.pontos.gastos.length > 0) {
     botao_atributo_menos.style.display = 'inline';
   } else {
@@ -82,23 +83,23 @@ function _AtualizaAtributos() {
       string_gastos += ', ';
     }
   }
-  goog.dom.getElement('pontos-atributos-gastos').innerText = string_gastos;
-  goog.dom.getElement('pontos-atributos-total').innerText =
+  Dom('pontos-atributos-gastos').innerText = string_gastos;
+  Dom('pontos-atributos-total').innerText =
       personagem.atributos.pontos.disponiveis;
 
-  var div_atributos = goog.dom.getElement('div-stats');
+  var div_atributos = Dom('div-stats');
   var atributos = [ 
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
     var atributo = atributos[i];
-    var input_atributo = goog.dom.getElement(atributo + '-valor-base');
+    var input_atributo = Dom(atributo + '-valor-base');
     input_atributo.value = personagem.atributos[atributo].base;
   }
 }
 
 // Torna todas as classes exceto a ultima desabilitadas. 
 function _AtualizaClasses() {
-  RemoveFilhos(goog.dom.getElement('classes'));
+  RemoveFilhos(Dom('classes'));
   var classes_desabilitadas = [];
   // Cria os selects.
   for (var i = 0; i < personagem.classes.length; ++i) {
@@ -121,7 +122,7 @@ function _AtualizaTamanho() {
   ImprimeSinalizado(
       personagem.tamanho.modificador_ataque_defesa,
       goog.dom.getElementsByClass('tamanho-mod-ataque-defesa'));
-  goog.dom.getElement('tamanho').innerText =
+  Dom('tamanho').innerText =
       tabelas_tamanho[personagem.tamanho.categoria].nome;
 }
 
@@ -140,19 +141,19 @@ function _AtualizaModificadoresAtributos() {
     var modificador_racial = modificadores_raca[atributo] || 0;
     ImprimeSinalizado(
         modificador_racial,
-        goog.dom.getElement(atributo + '-mod-racial'),
+        Dom(atributo + '-mod-racial'),
         false);
 
     // bonus nivel;
     ImprimeSinalizado(
         personagem.atributos[atributo].bonus_nivel,
-        goog.dom.getElement(atributo + '-mod-nivel'),
+        Dom(atributo + '-mod-nivel'),
         false);
 
     // Escreve o valor total.
     ImprimeNaoSinalizado(
         personagem.atributos[atributo].valor, 
-        goog.dom.getElement(atributo + '-valor-total'));
+        Dom(atributo + '-valor-total'));
 
     // Escreve o modificador.
     ImprimeSinalizado(
@@ -181,11 +182,11 @@ function _AtualizaDadosVida() {
     string_dados_vida += 
       ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
   }
-  var span_dados = goog.dom.getElement('dados-vida-classes');
+  var span_dados = Dom('dados-vida-classes');
   span_dados.innerText = dados_vida_total + ' = ' + string_dados_vida;
   // Pontos de vida.
   var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
-  ImprimeNaoSinalizado(pontos_vida_corrente, goog.dom.getElement('pontos-vida-corrente'));
+  ImprimeNaoSinalizado(pontos_vida_corrente, Dom('pontos-vida-corrente'));
 }
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
@@ -205,14 +206,14 @@ function _AtualizaAtaque() {
 // Atualiza a lista de armas de cada estilo.
 function _AtualizaEstilosLuta() {
   // Recria os elementos do estilos. 
-  RemoveFilhos(goog.dom.getElement('div-estilos-luta'));
+  RemoveFilhos(Dom('div-estilos-luta'));
   for (var i = 0; i < personagem.estilos_luta.length; ++i) {
     var estilo = personagem.estilos_luta[i];
     AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
   }
 
   // Atualiza os valores dos estilos.
-  var div_estilos = goog.dom.getElement("div-estilos-luta");
+  var div_estilos = Dom("div-estilos-luta");
   for (var i = 0; i < div_estilos.childNodes.length; ++i) {
     _AtualizaEstilo(div_estilos.childNodes[i], personagem.estilos_luta[i]);
   }
@@ -226,17 +227,17 @@ function _AtualizaEstilo(div_estilo, estilo) {
 
   var id_radio = 
     id_estilo.replace('id-estilo', 'id-estilo-' + estilo.nome.replace('_', '-'));
-  goog.dom.getElement(id_radio).checked = true;
+  Dom(id_radio).checked = true;
 
   var id_span_primario =
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
   var id_select_primario = 
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
   var arma_primaria = ArmaPersonagem(estilo.arma_primaria.nome);
-  AdicionaArmasAoEstilo(goog.dom.getElement(id_select_primario), 
+  AdicionaArmasAoEstilo(Dom(id_select_primario), 
                         estilo.arma_primaria.nome);
   _AtualizaArmaEstilo(arma_primaria, true, estilo,
-                      goog.dom.getElement(id_span_primario));
+                      Dom(id_span_primario));
 
   var id_span_secundario =
     id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
@@ -244,12 +245,12 @@ function _AtualizaEstilo(div_estilo, estilo) {
     var id_select_secundario = 
         id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
     var arma_secundaria = ArmaPersonagem(estilo.arma_secundaria.nome);
-    AdicionaArmasAoEstilo(goog.dom.getElement(id_select_secundario), 
+    AdicionaArmasAoEstilo(Dom(id_select_secundario), 
                           estilo.arma_secundaria.nome);
     _AtualizaArmaEstilo(arma_secundaria, false, estilo,
-                        goog.dom.getElement(id_span_secundario));
+                        Dom(id_span_secundario));
   } else {
-    goog.dom.getElement(id_span_secundario).innerText = '';
+    Dom(id_span_secundario).innerText = '';
   }
 }
 
@@ -278,11 +279,11 @@ function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
 function _AtualizaDefesa() {
   // Armadura e escudo.
   SelecionaValor(personagem.armadura.nome, 
-                 goog.dom.getElement('armadura')); 
-  goog.dom.getElement('bonus-armadura').value = personagem.armadura.bonus_magico; 
+                 Dom('armadura')); 
+  Dom('bonus-armadura').value = personagem.armadura.bonus_magico; 
   SelecionaValor(personagem.escudo.nome, 
-                 goog.dom.getElement('escudo'));
-  goog.dom.getElement('bonus-escudo').value = personagem.escudo.bonus_magico; 
+                 Dom('escudo'));
+  Dom('bonus-escudo').value = personagem.escudo.bonus_magico; 
 
 
   ImprimeSinalizado(tabelas_armaduras[personagem.armadura.nome].bonus +
@@ -318,7 +319,7 @@ function _AtualizaDefesa() {
 // modificando pelo atributo relevante.
 // TODO fazer outros tipo tb.
 function _AtualizaSalvacoes() {
-  var div_salvacoes = goog.dom.getElement('div-salvacoes');
+  var div_salvacoes = Dom('div-salvacoes');
   RemoveFilhos(div_salvacoes);
   for (var tipo_salvacao in personagem.salvacoes) {
     var div_salvacao = CriaDiv();
@@ -336,14 +337,14 @@ function _AtualizaSalvacoes() {
 // Atualiza os numeros e listas relacionados a talentos.
 function _AtualizaTalentos() {
   ImprimeNaoSinalizado(personagem.talentos.total, goog.dom.getElementByClass('talentos-total'));
-  var div_talentos = goog.dom.getElement('div-select-talentos');
+  var div_talentos = Dom('div-select-talentos');
   RemoveFilhos(div_talentos);
   for (var i = 0; i < personagem.talentos.total; ++i) {
     AdicionaTalento(i, 
         i < personagem.talentos.lista.length ? personagem.talentos.lista[i].nome : null,
         i < personagem.talentos.lista.length ? personagem.talentos.lista[i].complemento : null);
   }
-  var span_proficiencia_armas = goog.dom.getElement('div-proficiencia-armas');
+  var span_proficiencia_armas = Dom('div-proficiencia-armas');
   var string_proficiencia = '';
   for (var proficiencia in personagem.proficiencia_armas) {
     string_proficiencia += tabelas_armas[proficiencia].nome + ', ';
@@ -354,31 +355,31 @@ function _AtualizaTalentos() {
 
 // Escreve todas as pericias e atualiza de acordo com a classe dos personagem.
 function _AtualizaPericias() {
-  var span_total = goog.dom.getElement('pericias-total-pontos');
+  var span_total = Dom('pericias-total-pontos');
   span_total.innerText = personagem.pericias.total_pontos;
-  var span_gastos = goog.dom.getElement('pericias-pontos-gastos');
+  var span_gastos = Dom('pericias-pontos-gastos');
   span_gastos.innerText = personagem.pericias.pontos_gastos;
 
   for (var chave in personagem.pericias.lista) {
-    var input_pontos = goog.dom.getElement('pericia-' + chave + '-pontos');
+    var input_pontos = Dom('pericia-' + chave + '-pontos');
     input_pontos.value = personagem.pericias.lista[chave].pontos;
-    var dom_graduacoes = goog.dom.getElement('pericia-' + chave + '-graduacoes');
+    var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
     dom_graduacoes.innerText = personagem.pericias.lista[chave].pontos;
-    var dom_sinergia = goog.dom.getElement('pericia-' + chave + '-sinergia');
+    var dom_sinergia = Dom('pericia-' + chave + '-sinergia');
     dom_sinergia.innerText = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
     var bonus_talentos_total = 0;
     for (var chave_talento in personagem.pericias.lista[chave].bonus_talentos) {
       bonus_talentos_total += personagem.pericias.lista[chave].bonus_talentos[chave_talento];
     }
-    var dom_bonus_talento = goog.dom.getElement('pericia-' + chave + '-bonus-talento');
+    var dom_bonus_talento = Dom('pericia-' + chave + '-bonus-talento');
     dom_bonus_talento.innerText = StringSinalizada(bonus_talentos_total, false);
-    var dom_total = goog.dom.getElement('pericia-' + chave + '-total');
+    var dom_total = Dom('pericia-' + chave + '-total');
     dom_total.innerText = StringSinalizada(personagem.pericias.lista[chave].total);
   }
 }
 
 function _AtualizaFeiticos() {
-  var div_feiticos = goog.dom.getElement('div-feiticos');
+  var div_feiticos = Dom('div-feiticos');
   RemoveFilhos(div_feiticos);
   for (var chave_classe in personagem.feiticos) {
     // Da classe.
@@ -452,14 +453,16 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   div_classe.appendChild(div_slots);
 }
 
-function _AtualizaMoedas() {
+function _AtualizaEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
-    goog.dom.getElement('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
+    Dom('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
   }
+  Dom('text-area-outros-equipamentos').value =
+      personagem.outros_equipamentos;;
 }
 
 function _AtualizaListaArmas() {
-  var div_armas = goog.dom.getElement('div-equipamentos-armas');
+  var div_armas = Dom('div-equipamentos-armas');
   RemoveFilhos(div_armas);
   // Ignoramos a primeira arma, desarmado.
   for (var i = 1; i < personagem.armas.length; ++i) {
@@ -471,10 +474,15 @@ function _AtualizaListaArmas() {
   }
 }
 
+<<<<<<< local
+function _AtualizaNotas() {
+  Dom('text-area-notas').value = personagem.notas;
+=======
 function _AtualizaModoVisao() {
   for (var visao in tabelas_visoes) {
     var span_visao = goog.dom.getElement('span-' + visao);
     span_visao.className = personagem.modo_visao == visao ?
         'selecionado': '';
   }
+>>>>>>> other
 }
