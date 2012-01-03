@@ -26,12 +26,7 @@ function ConverteEntradasParaPersonagem() {
   _ConverteProficienciaArmas();
   _ConverteFocoArmas();
   //_ConverteEspecializacaoArmas();
-
-  // Atualizacao de equipamentos.
-  // moedas.
-  for (var tipo_moeda in personagem.moedas) {
-    personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
-  }
+  _ConverteEquipamentos();
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   _ConverteListaArmas();
@@ -47,6 +42,17 @@ function ConverteEntradasParaPersonagem() {
 
   // Feiticos.
   _ConverteFeiticos();
+
+  personagem.notas = entradas.notas;
+}
+
+function _ConverteEquipamentos() {
+  // moedas.
+  for (var tipo_moeda in personagem.moedas) {
+    personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
+  }
+  // outros.
+  personagem.outros_equipamentos = entradas.outros_equipamentos;
 }
 
 function _ConverteBba() {

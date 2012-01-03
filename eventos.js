@@ -14,7 +14,7 @@ function ClickVisao(modo) {
     }
   }
   for (var i = 0; i < tabelas_visoes[modo].esconder.elementos.length; ++i) {
-    var divs_combate = goog.dom.getElement(tabelas_visoes[modo].esconder.elementos[i]);
+    var divs_combate = Dom(tabelas_visoes[modo].esconder.elementos[i]);
     divs_combate.style.display = 'none';
   }
   // Loop para mostrar.
@@ -25,7 +25,7 @@ function ClickVisao(modo) {
     }
   }
   for (var i = 0; i < tabelas_visoes[modo].mostrar.elementos.length; ++i) {
-    var divs_combate = goog.dom.getElement(tabelas_visoes[modo].mostrar.elementos[i]);
+    var divs_combate = Dom(tabelas_visoes[modo].mostrar.elementos[i]);
     divs_combate.style.display = 'block';
   }
 }
@@ -54,7 +54,7 @@ function ClickSalvar() {
   var url = 
     (indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) + 
     '?pc=' + encodeURIComponent(goog.json.serialize(entradas));
-  goog.dom.getElement("link-personagem").innerHTML = 
+  Dom("link-personagem").innerHTML = 
     '<a href="' + url + '">Link</a>';
 }
 
@@ -67,7 +67,7 @@ function ClickGerarResumo() {
     var info_classe = personagem.classes[i];
     resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
   }
-  goog.dom.getElement("resumo-personagem").innerHTML = resumo; 
+  Dom("resumo-personagem").innerHTML = resumo; 
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
@@ -115,7 +115,7 @@ function ClickAdicionarEstiloLuta() {
 
 // Remove uma arma especifica da lista de equipamentos. 
 function ClickRemoverFilho(id_filho, id_pai) {
-  RemoveFilho(id_filho, goog.dom.getElement(id_pai));
+  RemoveFilho(id_filho, Dom(id_pai));
   AtualizaGeral();
 }
 
@@ -123,7 +123,7 @@ function ClickRemoverFilho(id_filho, id_pai) {
 // @param nome_estilo nome do estilo selecionado.
 // @param id_select_secundario id do select secundario do estilo sendo modificado.
 function ClickEstilo(nome_estilo, id_select_secundario) {
-  var select_secundario = goog.dom.getElement(id_select_secundario);
+  var select_secundario = Dom(id_select_secundario);
   if (nome_estilo == 'uma_arma' || nome_estilo == 'arma_escudo' || nome_estilo == 'arma_dupla') {
     select_secundario.disabled = true;
   } else if (nome_estilo == 'duas_armas')  {
@@ -143,7 +143,7 @@ function ClickPericia(chave_pericia, incremento) {
     return;
   }
   // pega o input do campo
-  var input_pericia = goog.dom.getElement('pericia-' + chave_pericia + '-pontos');
+  var input_pericia = Dom('pericia-' + chave_pericia + '-pontos');
   var input_pericia_valor = parseInt(input_pericia.value) || 0;
   if (incremento < 0 && input_pericia_valor == 0) {
     alert('Perícia não possui pontos');
@@ -165,7 +165,7 @@ function ClickFeitico(classe_nivel_slot, incremento) {
     return;
   }
   // pega o input do campo
-  var input = goog.dom.getElement('feiticos-' + chave_pericia + '-pontos');
+  var input = Dom('feiticos-' + chave_pericia + '-pontos');
   var input = parseInt(input_pericia.value) || 0;
   if (incremento < 0 && input_pericia_valor == 0) {
     alert('Feitiço não possui pontos');
