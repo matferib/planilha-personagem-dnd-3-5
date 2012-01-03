@@ -5,10 +5,12 @@ div#div-visoes span {
 background-color: #A8A8A8;
 margin-right: 2px;
 margin-left: 2px;
+margin-bottom: 0px;
 padding: 5px;
 padding-bottom: 0px;
 border-top-right-radius: 8px;
 border-top-left-radius: 8px;
+cursor: default;
 }
 
 div#div-visoes span.selecionado {
