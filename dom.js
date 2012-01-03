@@ -1,5 +1,10 @@
 // Funcoes uteis relacionadas a dom.
 
+// @return o dom com o id passado.
+function Dom(id) {
+  return document.getElementById(id);
+}
+
 function CriaDom(tipo, id, classe) {
   var dom_criado = document.createElement(tipo);
   if (id) {

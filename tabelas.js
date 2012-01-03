@@ -739,9 +739,6 @@ var tabelas_proficiencia_arma_por_classe = {
 var tabelas_talentos = {
 /*
 Acuidade com Arma¹² Usar arma, bônus base de ataque +1 Aplica o modificador de Des (em vez de For) para ataques corporais com armas leves
-Afinidade com Animais - +2 de bônus nos testes de Adestrar Animais e Cavalgar
-Ágil - +2 de bônus nos testes de Equilíbrio e Arte da Fuga
-Aptidão Mágica - +2 de bônus nos testes de Identificar Magia e Usar Instrumento Mágico
 Ataque Desarmado Aprimorado¹ - Considerado armado quando estiver desarmado
 Agarrar Aprimorado¹ Des 13, Ataque Desarmado Aprimorado +4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade
 Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distância por rodada
@@ -779,8 +776,6 @@ Adquire um terceiro ataque com a mão inábil
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Corrida - Percorre 5 vezes o deslocamento padrão, +4 de bônus nos testes de Saltar no final de uma
 corrida
-Dedos Lépidos - +2 de bônus nos teste de Operar Mecanismos e Abrir Fechaduras
-Diligente - +2 de bônus nos teste de Avaliação e Decifrar Escrita
 Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
 Especialização em Combate¹ Int 13 Substitui bônus de ataque por CA (máximo 5 pontos)
 Desarme Aprimorado¹ Especialização em Combate +4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade
@@ -816,21 +811,16 @@ Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escol
 Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
-Fraudulento - +2 de bônus nos teste de Disfarces e Falsificação
 Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
 Iniciativa Aprimorada¹ - +4 de bônus nos testes de Iniciativa
-Investigador - +2 de bônus nos testes de Obter Informação e Procurar
 Liderança 6° nível de personagem Atrai parceiros e seguidores
 Lutar às Cegas¹ - Jogar novamente chance de falha por camuflagem
 Magia Natural Sab 13, Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
 Magia Penetrante - +2 de bônus nos testes de conjurador contra Resistência à Magia
 Magia Penetrante Maior Magia Penetrante +4 de bônus nos testes de conjurador contra Resistência à Magia
 Magia em Combate - +4 de bônus nos teste de Concentração para conjurar na defensiva
-Mãos Leves - +2 de bônus nos teste de Prestidigitação e Usar Cordas
 Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
-Persuasivo - +2 de bônus nos teste de Blefar e Intimidar
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
-Prontidão - +2 de bônus nos testes de Ouvir e Observar
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Rastrear - Utiliza Sobrevivência para rastrear
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
@@ -891,9 +881,38 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
 */
   // Acrobatic
   acrobatico: { 
-      nome: "Acrobático",
+      nome: 'Acrobático',
       bonus_pericias: { saltar: 2, acrobacias: 2 } },
-
+  afinidade_com_animais: {
+      nome: 'Afinidade com Animais',
+      bonus_pericias: { cavalgar: 2, adestrar_animais: 2 } },
+  agil: {
+      nome: 'Ágil',
+      bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 } },
+  aptidao_magica: {
+      nome: 'Aptidão Mágica',
+      bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
+  dedos_lepidos: {
+      nome: 'Dedos Lépidos',
+      bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },
+  diligente: {
+      nome: 'Diligente',
+      bonus_pericias: { avaliacao: 2, decifrar_escrita: 2 } },
+  fraudulento: {
+      nome: 'Fraudulento',
+      bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
+  investigador: {
+      nome: 'Investigador',
+      bonus_pericias: { obter_informacao: 2, procurar: 2 } },
+  maos_levels: {
+      nome: 'Mãos Leves',
+      bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
+  persuasivo: {
+      nome: 'Persuasivo',
+      bonus_pericias: { blefar: 2, intimidacao: 2 } },
+  prontidao: {
+      nome: 'Prontidão',
+      bonus_pericias: { ouvir: 2, observar: 2 } },
   // Simple Weapon Proficiency
   usar_armas_simples: { nome: 'Usar armas simples' },
 

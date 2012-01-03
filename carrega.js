@@ -22,7 +22,7 @@ function CarregamentoInicial() {
 
 // Adiciona botoes dinamicamente na planilha.
 function _CarregaBotoesVisao() {
-  var div_visoes = goog.dom.getElement('div-visoes');
+  var div_visoes = Dom('div-visoes');
   for (var visao in tabelas_visoes) {
     var botao_visao = CriaSpan(visao, 'span-' + visao, null);
     botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
@@ -32,7 +32,7 @@ function _CarregaBotoesVisao() {
 
 
 function _CarregaAtributos() {
-  var div = goog.dom.getElement('div-stats');
+  var div = Dom('div-stats');
 
   div.appendChild(CriaSpan('Atributos'));
   div.appendChild(CriaBr());
@@ -112,7 +112,7 @@ function _CarregaTabelaArmas() {
 
 // Popula as pericias iniciais.
 function _CarregaPericias() {
-  var div_pericias = goog.dom.getElement('div-pericias');
+  var div_pericias = Dom('div-pericias');
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
     var habilidade = pericia.habilidade;
