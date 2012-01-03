@@ -474,15 +474,14 @@ function _AtualizaListaArmas() {
   }
 }
 
-<<<<<<< local
 function _AtualizaNotas() {
   Dom('text-area-notas').value = personagem.notas;
-=======
+}
+
 function _AtualizaModoVisao() {
   for (var visao in tabelas_visoes) {
     var span_visao = goog.dom.getElement('span-' + visao);
     span_visao.className = personagem.modo_visao == visao ?
         'selecionado': '';
   }
->>>>>>> other
 }
