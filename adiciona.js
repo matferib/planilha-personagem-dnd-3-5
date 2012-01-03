@@ -47,12 +47,12 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
   div.appendChild(span_nivel);
   div.appendChild(input_nivel);
   div.appendChild(br_nivel);
-  goog.dom.getElement("classes").appendChild(div);
+  Dom("classes").appendChild(div);
 }
 
 // Remove a classe mais recente do personagem.
 function RemoveClasse() {
-  var div_classes = goog.dom.getElement("classes");
+  var div_classes = Dom("classes");
   if (div_classes.childNodes.length == 1) {
     alert('Personagem deve ter pelo menos uma classe');
     return;
@@ -66,7 +66,7 @@ function RemoveClasse() {
 // @param bonus da arma.
 function AdicionaArma(chave_arma, obra_prima, bonus) {
   var id_div_equipamentos_armas = "div-equipamentos-armas";
-  var div_armas = goog.dom.getElement(id_div_equipamentos_armas);
+  var div_armas = Dom(id_div_equipamentos_armas);
   var id_gerado = GeraId('div-arma', div_armas);
   var select = document.createElement('select');
   select.setAttribute('name', 'arma');
@@ -128,7 +128,7 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
 // @param arma_secundaria nome da arma secundaria.
 function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
   var id_div_estilos_luta = 'div-estilos-luta';
-  var div_estilos_luta = goog.dom.getElement(id_div_estilos_luta);
+  var div_estilos_luta = Dom(id_div_estilos_luta);
   var div_novo_estilo = CriaDiv();
   var id_estilo = GeraId('id-estilo', div_estilos_luta);
   var id_estilo_uma_arma =
@@ -213,7 +213,7 @@ function AdicionaTalento(id, nome_talento, complemento) {
   if (nome_talento == null) {
     nome_talento = 'usar_armas_simples';
   }
-  var div_select_talentos = goog.dom.getElement('div-select-talentos');
+  var div_select_talentos = Dom('div-select-talentos');
   var select_talento = document.createElement('select');
   select_talento.id = 'select-talento-' + id;
   select_talento.className = 'selects-talento';
