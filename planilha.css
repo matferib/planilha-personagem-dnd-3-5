@@ -1,4 +1,27 @@
 /* CSS da planilha. */
+
+
+div#div-visoes span {
+background-color: #A8A8A8;
+margin-right: 2px;
+margin-left: 2px;
+padding: 5px;
+padding-bottom: 0px;
+border-top-right-radius: 8px;
+border-top-left-radius: 8px;
+}
+
+div#div-visoes span.selecionado {
+background-color: #D8D8D8;
+}
+
+.pericias-nome {
+display: block;
+float: left;
+min-width: 350px;
+}
+
+
 /* os divs principais da planilha. */
 div.divs-principais {
 background-color: #D8D8D8;

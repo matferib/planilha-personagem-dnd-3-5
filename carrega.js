@@ -24,7 +24,7 @@ function CarregamentoInicial() {
 function _CarregaBotoesVisao() {
   var div_visoes = Dom('div-visoes');
   for (var visao in tabelas_visoes) {
-    var botao_visao = CriaBotao(visao, null, null);
+    var botao_visao = CriaSpan(visao, 'span-' + visao, null);
     botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
     div_visoes.appendChild(botao_visao);
   }
@@ -118,7 +118,9 @@ function _CarregaPericias() {
     var habilidade = pericia.habilidade;
     var prefixo_id = 'pericia-' + chave_pericia;
     var div = CriaDiv(prefixo_id);
-    div.appendChild(CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): '));
+    div.appendChild(
+        CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): ', null, 
+                 'pericias-nome'));
     div.appendChild(CriaBotoesMaisMenos(prefixo_id + '-pontos', null, 'ClickPericia', chave_pericia));
 
     div.appendChild(CriaSpan(' pontos; '));

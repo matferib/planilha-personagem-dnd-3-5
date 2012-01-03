@@ -28,6 +28,8 @@ function ClickVisao(modo) {
     var divs_combate = Dom(tabelas_visoes[modo].mostrar.elementos[i]);
     divs_combate.style.display = 'block';
   }
+  personagem.modo_visao = modo;
+  _AtualizaGeral();
 }
 
 

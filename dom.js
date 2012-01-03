@@ -31,6 +31,17 @@ function CriaBotao(texto, id, classe, funcao) {
   return botao;
 }
 
+function CriaRadio(texto, id, classe, nome_grupo, funcao) {
+  var botao = CriaDom('input', id, classe);
+  botao.setAttribute('type', 'radio');
+  botao.name = nome_grupo;
+  // botao.innerText = texto;
+  if (funcao) {
+    botao.addEventListener('click', funcao, false);
+  }
+  return botao;
+}
+
 function CriaDiv(id, classe) {
   return CriaDom('div', id, classe);
 }
