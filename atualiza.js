@@ -40,6 +40,7 @@ function _AtualizaGeral() {
   _AtualizaListaArmas();
   _AtualizaMoedas();
   _AtualizaFeiticos();
+  _AtualizaModoVisao();
 }
 
 function _AtualizaNomeRacaAlinhamentoXp() {
@@ -467,5 +468,13 @@ function _AtualizaListaArmas() {
         arma_personagem_entrada.chave, 
         arma_personagem_entrada.obra_prima, 
         arma_personagem_entrada.bonus);
+  }
+}
+
+function _AtualizaModoVisao() {
+  for (var visao in tabelas_visoes) {
+    var span_visao = goog.dom.getElement('span-' + visao);
+    span_visao.className = personagem.modo_visao == visao ?
+        'selecionado': '';
   }
 }
