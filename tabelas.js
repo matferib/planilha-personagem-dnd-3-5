@@ -1098,6 +1098,8 @@ var tabelas_pericias = {
 };
 
 
+// Todos os elementos devem pertencer a classe divs-principais e 
+// nao podem ser filhos de um elemento da classe divs-principais.
 var tabelas_visoes = {
   completo: {
     esconder: { classes: [], elementos: []}, 
@@ -1105,11 +1107,11 @@ var tabelas_visoes = {
   },
   combate: {
     esconder: { classes: ['divs-principais'], elementos: []}, 
-    mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
+    mostrar: { classes: [], elementos:['div-pontos-vida', 'div-ataque', 'div-defesa']},
   },
   role_playing: {
     esconder: { classes: ['divs-principais'], elementos: []}, 
-    mostrar: { classes: [], elementos:['pontos-vida', 'div-ataque', 'div-defesa']},
+    mostrar: { classes: [], elementos:[ 'div-pericias' ]},
   },
 };
 
