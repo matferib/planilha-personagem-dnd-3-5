@@ -307,23 +307,15 @@ var tabelas_armas = {
 };
 
 var tabelas_armas_simples = {
-
-//As primeiras armas estão ordenadas de acordo com o livro inglês,
-// a partir das Martial Weapons do livro em português - FC
-// Unarmed Attacks
-
-
+  // Unarmed Attacks
   desarmado: { preco: '0 PO', dano: { pequeno: '1d2', medio: '1d3'},
                categorias: { cac_leve: true },
                critico: '×2', peso: '0', tipo: 'concussao', incremento_distancia: '0 quadrados' },
-
   manopla: { preco: '2 PO', dano: { pequeno: '1d2', medio: '1d3' },
              categorias: { cac_leve: true },
              critico: '×2', peso: '500g', tipo: 'concussao', },
 
-//Light Melee Weapons
-
-
+  //Light Melee Weapons
   adaga: { preco: '2 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
            categorias: { cac_leve: true, arremesso: true } ,
            incremento_distancia: '2 quadrados', critico: '19-20/×2', peso: '0,5kg',
@@ -332,76 +324,58 @@ var tabelas_armas_simples = {
   adaga_de_soco: { nome: 'adaga de soco', preco: '2 PO', dano: { pequeno: '1d3', medio: '1d4'},
                 categorias: { cac_leve: true },
                   critico: '×3', peso: '0,5kg', tipo: 'perfurante' },
-
   manopla_com_cravos: { nome: 'manopla com cravos', preco: '5 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
                         categorias: { cac_leve: true } ,
                         critico: '×2', peso: '0,5kg', tipo: 'perfurante' },
-
   maca_leve: { nome: 'maça leve', preco: '5 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                categorias: { cac_leve: true } ,
                critico: '×2', peso: '2kg', tipo: 'concussao' },
-
   foice_curta: { nome: 'foice curta', preco: '6 PO', dano: { pequeno: '1d4', medio: '1d6'} ,
                   categorias: { cac_leve: true } ,
                   critico: '×2', peso: '1kg', tipo: 'cortante' },
 
-// One-Handed Melee Weapons
-
+  // One-Handed Melee Weapons
   clava: { preco: '0 PO', dano: { pequeno: '1d4', medio: '1d6' }, critico: '×2',
            categorias: { cac_leve: true, arremesso: true },
            incremento_distancia: '2 quadrados', peso: '1,5Kg', tipo: 'concussao' },
-
   maca_pesada: { nome: 'maça pesada', preco: '12 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                  categorias: { cac: true } ,
                  critico: '×2', peso: '4kg', tipo: 'concussao' },
-
   maca_estrela: { nome: 'maça estrela', preco: '8 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
                   categorias: { cac: true } ,
                   critico: '×2', peso: '3kg', tipo: 'concussao/perfurante' },
-
   lanca_curta: { nome: 'lança curta', preco: '1 PO', dano: { pequeno: '1d4', medio: '1d6'},
                  categorias: { cac: true, arremesso: true} ,
                  incremento_distancia: '4 quadrados', critico: '×2', peso: '1,5kg', tipo: 'perfurante' },
 
-// Two-Handed Melee Weapons
-
-
+  // Two-Handed Melee Weapons
   lanca: { nome: 'lança', preco: '2 PO', dano: { pequeno: '1d6', medio: '1d8' }, critico: '×3',
            categorias: { cac: true, arremesso: true },
            incremento_distancia: '4 quadrados', peso: '3kg', tipo: 'perfurante' },
-
   lanca_longa: { nome: 'lança longa', preco: '5 PO', dano: { pequeno: '1d6', medio: '1d8'},
                  categorias: { cac: true } ,
                  critico: '×3', peso: '4,5kg', tipo: 'perfurante' },
-
   bordao: { nome: 'bordão', preco: '0 PO', dano: { pequeno: '1d4', medio: '1d6'}, 
             dano_secundario: { pequeno: '1d4', medio: '1d6' }, categorias: { cac: true } ,
             critico: '×2', peso: '2kg', tipo: 'concussao', arma_dupla: true },
 
 
-// Ranged Weapons
-
-
+  // Ranged Weapons
   besta_pesada: { nome: 'besta pesada', preco: '50 PO', dano: { pequeno: '1d8', medio: '1d10' }, 
                   critico: '19-20/×2', categorias: { distancia: true },
                   incremento_distancia: '24 quadrados', peso: '4kg', tipo: 'perfurante' },
-
   besta_leve: { nome: 'besta leve', preco: '35 PO', dano: { pequeno: '1d6', medio: '1d8' }, critico: '19-20/×2',
                 categorias: { distancia: true },
                 incremento_distancia: '16 quadrados', peso: '2kg', tipo: 'perfurante' },
-
   dardo: { nome: 'dardo', preco: '5 PP', dano: { pequeno: '1d3', medio: '1d4' }, critico: '×2',
            categorias: { arremesso: true },
            incremento_distancia: '4 quadrados', peso: '250g', tipo: 'perfurante' },
-
   azagaia: { preco: '1 PO', dano: { pequeno: '1d4', medio: '1d6' }, critico: '×2',
              categorias: { arremesso: true },
              incremento_distancia: '6 quadrados', peso: '1Kg', tipo: 'perfurante' },
-
   funda: { nome: 'funda', preco: '0 PO', dano: { pequeno: '1d3', medio: '1d4' }, critico: '×2',
            categorias: { arremesso: true },
            incremento_distancia: '10 quadrados', peso: '0Kg', tipo: 'concussao' },
-
 
 //Munição
 //Bolts, crossbow (10)  1 gp  — — — — 1 lb. —
@@ -756,8 +730,6 @@ Trespassar sem limite de ataques por rodada
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
 Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e não provoca ataques de oportunidade
-Atlético - +2 de bônus nos testes de Escalar e Natação
-Auto-Suficiente - +2 de bônus nos testes de Cura e Sobrevivência
 Combate Montado¹ 1 graduação em Cavalgar Evita os ataques contra a montaria com um teste de Cavalgar
 Arquearia Montada¹ Combate Montado Sofre metade das penalidades nos ataques à distância realizados sobre montarias
 Investida Montada¹ Combate Montado Pode se deslocar antes e depois de uma investida montada
@@ -879,7 +851,6 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
 
 
 */
-  // Acrobatic
   acrobatico: { 
       nome: 'Acrobático',
       bonus_pericias: { saltar: 2, acrobacias: 2 } },
@@ -892,6 +863,12 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   aptidao_magica: {
       nome: 'Aptidão Mágica',
       bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
+  atletico: { 
+      nome: 'Atlético',
+      bonus_pericias: { escalar: 2, natacao: 2 } },
+  auto_suficiente: {
+      nome: 'Auto-Suficiente',
+      bonus_pericias: { cura: 2, sobrevivencia: 2 } },
   dedos_lepidos: {
       nome: 'Dedos Lépidos',
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },

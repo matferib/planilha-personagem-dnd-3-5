@@ -21,6 +21,16 @@ function CriaBr() {
   return CriaDom('br');
 }
 
+function CriaOptGroup(rotulo) {
+  var optgroup = CriaDom('optgroup');
+  optgroup.label = rotulo;
+  return optgroup;
+}
+
+function CriaOption() {
+  return CriaDom('option');
+}
+
 function CriaBotao(texto, id, classe, funcao) {
   var botao = CriaDom('button', id, classe);
   botao.setAttribute('type', 'button');
