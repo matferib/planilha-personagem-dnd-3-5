@@ -1,6 +1,13 @@
 /* CSS da planilha. */
 
 
+div#div-visoes {
+padding: 0px;
+border: 0px;
+background-color: red;
+margin-bottom: 0px;
+}
+
 div#div-visoes span {
 background-color: #A8A8A8;
 margin-right: 2px;

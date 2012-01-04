@@ -68,20 +68,27 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   var id_div_equipamentos_armas = "div-equipamentos-armas";
   var div_armas = Dom(id_div_equipamentos_armas);
   var id_gerado = GeraId('div-arma', div_armas);
-  var select = document.createElement('select');
+  var select = CriaSelect();
   select.setAttribute('name', 'arma');
   select.setAttribute('onchange', 'AtualizaGeral()');
-  for (var arma_corrente in tabelas_armas) {
-    if (arma_corrente == 'desarmado') {
-      // Desarmado eh um caso especial.
-      continue;
+  var tabelas = [ 
+      tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
+  var rotulos_tabelas = [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ];
+  for (var i = 0; i < tabelas.length; ++i) {
+    var optgroup = CriaOptGroup(rotulos_tabelas[i]);
+    for (var arma_corrente in tabelas[i]) {
+      if (arma_corrente == 'desarmado') {
+        // Desarmado eh um caso especial.
+        continue;
+      }
+      var option = CriaOption('option');
+      option.setAttribute('name', arma_corrente);
+      option.setAttribute('value', arma_corrente);
+      option.selected = (arma_corrente == chave_arma);
+      option.innerText = tabelas[i][arma_corrente].nome;
+      optgroup.appendChild(option);
     }
-    var option = document.createElement('option');
-    option.setAttribute('name', arma_corrente);
-    option.setAttribute('value', arma_corrente);
-    option.selected = (arma_corrente == chave_arma);
-    option.innerText = tabelas_armas[arma_corrente].nome;
-    select.appendChild(option);
+    select.appendChild(optgroup);
   }
   var span_obra_prima = CriaSpan(' OP');
 
