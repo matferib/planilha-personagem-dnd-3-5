@@ -126,6 +126,31 @@ var tabelas_feiticos = {
           18: { por_dia: '6555544332' },
           19: { por_dia: '6555554433' },
           20: { por_dia: '6555554444' }, }, },
+  paladino: {
+      atributo_chave: 'sabedoria',
+      precisa_conhecer: false,
+      possui_nivel_zero: false,
+      por_nivel: {
+          1: { por_dia: '' },
+          2: { por_dia: '' },
+          3: { por_dia: '' },
+          4: { por_dia: '0' },
+          5: { por_dia: '0' },
+          6: { por_dia: '1' },
+          7: { por_dia: '1' },
+          8: { por_dia: '10' },
+          9: { por_dia: '10' },
+          10: { por_dia: '11' },
+          11: { por_dia: '110' },
+          12: { por_dia: '111' },
+          13: { por_dia: '111' },
+          14: { por_dia: '2110' },
+          15: { por_dia: '2111' },
+          16: { por_dia: '2211' },
+          17: { por_dia: '2221' },
+          18: { por_dia: '3221' },
+          19: { por_dia: '3332' },
+          20: { por_dia: '3333' }, }, },
 };
 
 // Bonus base de ataque.
