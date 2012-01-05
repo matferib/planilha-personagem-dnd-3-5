@@ -22,13 +22,18 @@ function ConverteEntradasParaPersonagem() {
   _ConverteAtributos();
   _ConverteBba();
   _ConverteTalentos();
-  _ConvertePericias();
   _ConverteProficienciaArmas();
+  // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
+  // talentos, proficiencias...
+  _VerificaPrerequisitosTalento();
+  
+  // Tem que ser depois de conferir pre requisitos.
+  _ConvertePericias();
   _ConverteFocoArmas();
+
   //_ConverteEspecializacaoArmas();
   _ConverteEquipamentos();
-  personagem.armadura = entradas.armadura;
-  personagem.escudo = entradas.escudo;
+  _ConverteArmadurasEscudos();
   _ConverteListaArmas();
 
   // Estilos tem que vir apos a atualizacao das armas do personagem, talentos e lista de armas.
@@ -53,6 +58,11 @@ function _ConverteEquipamentos() {
   }
   // outros.
   personagem.outros_equipamentos = entradas.outros_equipamentos;
+}
+
+function _ConverteArmadurasEscudos() {
+  personagem.armadura = entradas.armadura;
+  personagem.escudo = entradas.escudo;
 }
 
 function _ConverteBba() {
@@ -88,25 +98,25 @@ function _ConverteAtributos() {
         personagem.atributos.pontos.disponiveis;
   }
 
-  // Calcula o valor dos atributos.
+  // Calcula o componentes dos atributos.
   for (var atributo in personagem.atributos) {
     personagem.atributos[atributo].base = entradas[atributo];
     personagem.atributos[atributo].bonus_nivel = 0;
-    personagem.atributos[atributo].valor = 
-        personagem.atributos[atributo].base;
-
-    if (tabelas_raca[personagem.raca].atributos[atributo]) {
-      // Modificador racial.
-      personagem.atributos[atributo].valor += 
-          tabelas_raca[personagem.raca].atributos[atributo];
-    }
-    personagem.atributos[atributo].modificador =
-        modificador_atributo(personagem.atributos[atributo].valor);
+    personagem.atributos[atributo].racial = 
+        tabelas_raca[personagem.raca].atributos[atributo] || 0;
   }
-  // Modifica pelo bonus de nivel.
+  // Calcula os bonus de nivel para cada atributo.
   for (var i = 0; i < personagem.atributos.pontos.gastos.length; ++i) {
     ++personagem.atributos[personagem.atributos.pontos.gastos[i]].bonus_nivel;
-    ++personagem.atributos[personagem.atributos.pontos.gastos[i]].valor;
+  }
+  // Valor final e modificador.
+  for (var atributo in personagem.atributos) {
+    personagem.atributos[atributo].valor = 
+        personagem.atributos[atributo].base +
+        personagem.atributos[atributo].bonus_nivel +
+        personagem.atributos[atributo].racial;
+    personagem.atributos[atributo].modificador =
+        modificador_atributo(personagem.atributos[atributo].valor);
   }
 }
 
@@ -245,12 +255,26 @@ function _ConverteTalentos() {
   personagem.talentos.lista = [];
   for (var i = 0; i < entradas.talentos.length; ++i) {
     var chave_talento = entradas.talentos[i].nome;
-    personagem.talentos.lista.push({
+    var talento_personagem = {
         nome: chave_talento,
-        complemento: entradas.talentos[i].complemento });
+        complemento: entradas.talentos[i].complemento };
+    personagem.talentos.lista.push(talento_personagem);
     var bonus_pericias = tabelas_talentos[chave_talento].bonus_pericias;
     for (var chave_pericia in bonus_pericias) {
       personagem.pericias.lista[chave_pericia].bonus_talentos[chave_talento] = bonus_pericias[chave_pericia];
+    }
+  }
+}
+
+function _VerificaPrerequisitosTalento() {
+  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+    var talento = personagem.talentos.lista[i];
+    if (!PersonagemVerificaPrerequisitosTalento(talento.nome, talento.complemento)) {
+      // Se tiver complemento so limpa o complemento
+      talento.complemento = null;
+      if (!tabelas_talentos[talento.nome].complemento) {
+        talento.nome = null;
+      }
     }
   }
 }
@@ -376,14 +400,15 @@ function _ConverteFocoArmas() {
   // Talentos. Preciso obter o nome da chave na tabela de armas.
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
     var talento = personagem.talentos.lista[i];
-    if (talento.nome == 'foco_em_arma' && talento.complemento != null) {
+    if (talento.nome && talento.nome.indexOf('foco_em_arma') != -1 && 
+        talento.complemento != null) {
       var chave_arma = tabelas_armas_invertida[talento.complemento];
       if (chave_arma == null) {
         alert('Arma "' + talento.complemento + '" inválida para talento "' + 
               tabelas_talentos[talento.nome].nome + '"');
         continue;
       }
-      personagem.foco_armas[chave_arma] = 1;
+      personagem.foco_armas[chave_arma] = talento.nome.indexOf('_maior') == -1 ? 1 : 2;
     }
   }
 }
