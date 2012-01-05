@@ -735,6 +735,14 @@ var tabelas_proficiencia_arma_por_classe = {
 };
 
 // Cada entrada tem suas dependencias.
+// { nome, bonus_pericias: { percicia1: valor, pericia2: valor, ... } 
+//   complemento, (se o talento precisa de um complemento por exemplo, 
+//                 arma de usar arma exotica)
+//   guerreiro, indica se o talento pode ser usado em bonus de guerreiro 
+//                  (que tambem devera atender aos requisitos)
+//   requisitos: { bba, talentos: [], atributos: { nome: valor }, 
+//                 nivel: { classe: nivel }, proficiencia_arma, } 
+// },
 var tabelas_talentos = {
 /*
 Acuidade com Arma¹² Usar arma, bônus base de ataque +1 Aplica o modificador de Des (em vez de For) para ataques corporais com armas leves
@@ -760,12 +768,7 @@ Arquearia Montada¹ Combate Montado Sofre metade das penalidades nos ataques à 
 Investida Montada¹ Combate Montado Pode se deslocar antes e depois de uma investida montada
 Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas causam dano dobrado
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
-Combater com Duas Armas¹ Des 15 Reduz -2 nas penalidades para combater com duas armas
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
-Combater com Duas
-Armas Aprimorado¹ Des 17, Combater com Duas Armas,
-bônus base de ataque +6
-Adquire um segundo ataque com a mão inábil
 Armas Maior¹ Des 19, Combater com Duas Armas
 Aprimorado, Combater com Duas Armas,
 bônus base de ataque +11
@@ -791,18 +794,10 @@ criaturas
 Expulsão Aprimorada Habilidade de expulsar ou fascinar
 criaturas
 +1 nível efetivo para testes de expulsão
-Foco em Arma¹² Usar a arma, bônus base de ataque +1 +1 de bônus nas jogadas de ataque com a arma escolhida
 Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de
 guerreiro
 +2 de bônus no dano com a arma escolhida
-Foco em Arma Maior¹² Usar a arma, Foco em Arma na arma, 8°
-nível de guerreiro
-+2 de bônus nas jogadas de ataque com a arma escolhida
-Especialização em Arma
-Maior¹²
-Usar a arma, Foco em Arma Maior, Foco
-em Arma, Especialização em Arma, 12°
-nível de guerreiro
+Especialização em Arma Maior¹² Usar a arma, Foco em Arma Maior, Foco em Arma, Especialização em Arma, 12° nível de guerreiro
 +4 de bônus no dano com a arma escolhida
 Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
@@ -926,16 +921,28 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Usar arma exótica', complemento: true,
       requisitos: { bba: 1 } },
 
-  // Two-Weapon Fighting
+  // Reduz penalidade ao usar duas maos em 2.
   combater_duas_armas: { 
       nome: 'Combater com duas armas',
-      requisitos: { habilidades: { des: 15 } } },
-
+      requisitos: { atributos: { des: 15 } },
+      guerreiro: true, },
+  // Ataque adicional com a segunda mao.
+  combater_duas_armas_aprimorado: {
+      nome: 'Combater com duas armas aprimorado',
+      requisitos: { atributos: { des: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
+      guerreiro: true, },
+  // +1 de bônus nas jogadas de ataque com a arma escolhida.
   foco_em_arma: {
       nome: 'Foco em arma',
       complemento: true,
-      requisitos: { bba: 1, proficiencia_arma: true }
-  },
+      requisitos: { bba: 1, proficiencia_arma: true },
+      guerreiro: true, },
+  // +2 de bônus nas jogadas de ataque com a arma escolhida
+  foco_em_arma_maior: {
+      nome: 'Foco em arma maior',
+      complemento: true,
+      requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
+      guerreiro: true },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
