@@ -22,36 +22,42 @@ var personagem = {
     forca: { 
       base: 0,
       bonus_nivel: 0,
+      racial: 0,
       valor: 0,
       modificador: 0
     },  
     destreza: {
       base: 0, 
       bonus_nivel: 0,
+      racial: 0,
       valor: 0,
       modificador: 0
     },  
     constituicao: { 
       base: 0, 
       bonus_nivel: 0,
+      racial: 0,
       valor: 0,
       modificador: 0
     },  
     inteligencia: { 
       base: 0, 
       bonus_nivel: 0,
+      racial: 0,
       valor: 0,
       modificador: 0
     },  
     sabedoria: { 
       base: 0, 
       bonus_nivel: 0,
+      racial: 0,
       valor: 0,
       modificador: 0
     },  
     carisma: { 
       base: 0, 
       bonus_nivel: 0,
+      racial: 0,
       valor: 0,
       modificador: 0
     }
@@ -62,8 +68,10 @@ var personagem = {
   // talentos
   talentos: {  
     // talentos livres.
-    total: 0,
-    lista: [],  // Cada entrada, { nome, complemento }.
+    total: 0,  
+    // Cada entrada, { nome, complemento }. 
+    // Ambos podem ser null, pela verificacao de requisito.
+    lista: [],
     // talentos especificos de classe.
     // TODO
   },
@@ -138,20 +146,29 @@ function PersonagemProficienteComArma(nome_arma) {
 // @return o valor do foco do personagem com a arma (0, 1, 2).
 // @param nome_arma chave da arma.
 // @param maior indica se o foco eh maior.
-function PersonagemFocoComArma(nome_arma, maior) {
+function PersonagemFocoComArma(nome_arma) {
   return personagem.foco_armas[nome_arma];
 }
 
-// @param nome_talento nome do talento na tabela ou nome do indice na tabela.
+// @param nome_talento nome do talento na tabela ou chave na tabela.
 // @param complemento alguns talentos precisam de um complemento. Por exemplo,
 //        conhecimento (complemento), usar_arma_comum (complemento).
 // @return true se o personagem tiver o talento passado.
 function PersonagemPossuiTalento(nome_talento, complemento) {
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    if (nome_talento == personagem.talentos.lista[i].nome ||
-        nome_talento == tabelas_talentos[personagem.talentos.lista[i].nome]) {
-      // TODO tratar complemento.
-      return true;
+    var chave_talento = personagem.talentos.lista[i].nome;
+    if (nome_talento == chave_talento ||
+        nome_talento == tabelas_talentos[chave_talento].nome) {
+      // TODO ver essa logica de complemento com calma.
+      if (tabelas_talentos[chave_talento].complemento && 
+          personagem.talentos.lista[i].complemento && complemento) {
+        // Trata complemento se houver.
+        if (personagem.talentos.lista[i].complemento == complemento) {
+          return true;
+        }
+      } else {
+        return true;
+      }
     }
   }
   return false;
@@ -171,3 +188,54 @@ function PersonagemPossuiUmaDasClasse(classes) {
   return false;
 }
 
+// @return o nivel do personagem na classe passada, zero se nao possuir.
+function PersonagemNivelClasse(classe) {
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    if (personagem.classes[i].classe == classe) {
+      return personagem.classes[i].nivel;
+    }
+  }
+  return 0;
+}
+
+// @return true se o personagem atender todos os requisitos do talento.
+function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
+  var requisitos = tabelas_talentos[chave_talento].requisitos;
+  var prefixo_erro = tabelas_talentos[chave_talento].nome + ' requer ';
+  if (requisitos == null) {
+    return true;
+  }
+  if (requisitos.bba) {
+    if (personagem.bba < requisitos.bba) {
+      alert(prefixo_erro + 'BBA >= ' + requisitos.bba);
+      return false;
+    }
+  }
+  for (var atributo in requisitos.atributos) {
+    if (personagem.atributos[atributo] < requisitos.atributos[atributo]) {
+      alert(prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
+      return false;
+    }
+  }
+  for (var classe in requisitos.nivel) {
+    if (PersonagemNivelClasse(classe) < requisitos.nivel[classe]) {
+      alert(prefixo_erro + 'nivel em ' + classe + ' >= ' + requisitos.nivel[classe]);
+      return false;
+    }
+  }
+  for (var i = 0;  requisitos.talentos && i < requisitos.talentos.length; ++i) {
+    if (!PersonagemPossuiTalento(requisitos.talentos[i], complemento)) {
+      alert(prefixo_erro + 'talento ' + tabelas_talentos[requisitos.talentos[i]].nome + ' ' +
+          (complemento ? complemento : ''));
+      return false;
+    }
+  }
+  if (requisitos.proficiencia_arma && complemento) {
+    var chave_arma = tabelas_armas_invertida[complemento];
+    if (!PersonagemProficienteComArma(complemento)) {
+      alert(prefixo_erro + 'proficiencia com ' + complemento);
+      return false;
+    }
+  }
+  return true;
+}

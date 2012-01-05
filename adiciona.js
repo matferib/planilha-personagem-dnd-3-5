@@ -214,11 +214,13 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 
 // Adiciona um talento a planilha.
 // @param id numero identificando o id do talento.
-// @param nome_talento nome do talento sendo adicionado (opcional).
+// @param chave_talento nome do talento sendo adicionado (opcional).
 // @param complemento_talento caso o talento tenha complemento (opcional).
-function AdicionaTalento(id, nome_talento, complemento) {
-  if (nome_talento == null) {
-    nome_talento = 'usar_armas_simples';
+function AdicionaTalento(id, chave_talento, complemento) {
+  var talento = tabelas_talentos[chave_talento];
+  if (chave_talento == null || talento == null) {
+    chave_talento = 'usar_armas_simples';
+    talento = tabelas_talentos[chave_talento];
   }
   var div_select_talentos = Dom('div-select-talentos');
   var select_talento = document.createElement('select');
@@ -226,14 +228,13 @@ function AdicionaTalento(id, nome_talento, complemento) {
   select_talento.className = 'selects-talento';
   select_talento.setAttribute('onchange', 'AtualizaGeral()');
   var option_selected;
-  for (var talento in tabelas_talentos) {
+  for (var talento_tabela in tabelas_talentos) {
     var option_talento = document.createElement('option');
-    option_talento.text = tabelas_talentos[talento].nome;
-    option_talento.value = talento;
-    option_talento.selected = nome_talento && nome_talento == talento;
+    option_talento.text = tabelas_talentos[talento_tabela].nome;
+    option_talento.value = talento_tabela;
+    option_talento.selected = chave_talento && chave_talento == talento_tabela;
     select_talento.add(option_talento, null);
   }
-  var talento = tabelas_talentos[nome_talento];
   var input_complemento_talento = document.createElement('input');
   input_complemento_talento.id = 'input-complemento-talento-' + id;
   input_complemento_talento.type = 'text';
