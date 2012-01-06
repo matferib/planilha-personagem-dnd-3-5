@@ -39,14 +39,26 @@ function ClickAdicionarClasse() {
   for (var i = 0; i < personagem.classes.length; ++i) {
     classes_desabilitadas.push(personagem.classes[i].classe);
   }
-  AdicionaClasse(classes_desabilitadas);
-  AtualizaGeral();
+  // Tenta uma entrada nao esteja desabilidada.
+  var nova_classe = null;
+  for (var classe in tabelas_classes) {
+    if (!PersonagemPossuiUmaDasClasses([ classe ])) {
+      nova_classe = classe;
+      break;
+    }
+  }
+  if (nova_classe == null) {
+    alert('Impossível criar nova classe');
+    return;
+  }
+  entradas.classes.push({ classe: nova_classe, nivel: 1 });
+  AtualizaGeralSemLerEntradas();
 }
 
 // Botao de remover classe apertado.
 function ClickRemoveClasse() {
-  RemoveClasse();
-  AtualizaGeral();
+  entradas.classes.pop();
+  AtualizaGeralSemLerEntradas();
 }
 
 // Codifica o objeto personagem como JSON.

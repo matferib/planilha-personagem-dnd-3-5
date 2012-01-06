@@ -4,7 +4,7 @@
 // Parametros sao todos opcionais.
 // Classe padrao: guerreiro.
 // Nivel padrao: 1.
-function AdicionaClasse(classes_desabilitadas, classe, nivel) {
+function AdicionaClasse(classes_desabilitadas, classe, nivel, indice) {
   if (!classes_desabilitadas) {
     classes_desabilitadas = [];
   }
@@ -35,14 +35,15 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel) {
     select_classe.appendChild(option);
   }
   var span_nivel = CriaSpan('Nível: ');
-  var input_nivel = CriaInputTexto(nivel);
+  var input_nivel = CriaInputNumerico(
+      nivel, null, null, 
+      { handleEvent: function() { AtualizaGeral() } });
   input_nivel.name = 'nivel';
+  input_nivel.min = '1';
   input_nivel.maxLength = input_nivel.size = 2;
-  input_nivel.setAttribute('onchange', 'AtualizaGeral()');
   input_nivel.value = nivel;
   var br_nivel = document.createElement('br');
-
-  var div = CriaDiv(null, 'classe');
+  var div = CriaDiv('classe-' + (indice || 0), 'classe');
   div.appendChild(select_classe);
   div.appendChild(span_nivel);
   div.appendChild(input_nivel);

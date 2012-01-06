@@ -98,14 +98,24 @@ function _AtualizaAtributos() {
 }
 
 // Torna todas as classes exceto a ultima desabilitadas. 
+// Remove classes sobrando e adiciona faltantes.
 function _AtualizaClasses() {
-  RemoveFilhos(Dom('classes'));
   var classes_desabilitadas = [];
-  // Cria os selects.
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, 
-                   personagem.classes[i].nivel);
-    classes_desabilitadas.push(personagem.classes[i].classe);
+  var div_classes = Dom('classes');
+  var divs_classes = goog.dom.getElementsByClass('classe');
+  var maior_indice = divs_classes.length > personagem.classes.length ?
+      divs_classes.length : personagem.classes.length;
+  for (var i = 0; i < maior_indice; ++i) {
+    var div_classe = divs_classes[i];
+    if (i < personagem.classes.length) {
+      if (!div_classe) {
+        AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, 
+            personagem.classes[i].nivel, i);
+      }
+      classes_desabilitadas.push(personagem.classes[i].classe);
+    } else {
+      RemoveFilho(div_classe.id, div_classes);
+    }
   }
 
   // Desabilita selects.

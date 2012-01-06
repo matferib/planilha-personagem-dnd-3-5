@@ -303,7 +303,7 @@ function _ConvertePericias() {
     var pericia = tabelas_pericias[entradas.pericias[i].chave];
     var pericia_personagem = personagem.pericias.lista[entradas.pericias[i].chave];
     pericia_personagem.pontos = entradas.pericias[i].pontos;
-    pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasse(pericia.classes) ?
+    pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasses(pericia.classes) ?
         pericia_personagem.pontos : Math.floor(pericia_personagem.pontos / 2);
     pericia_personagem.bonus_sinergia = 0;
     pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
