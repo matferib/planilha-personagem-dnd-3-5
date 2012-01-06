@@ -136,23 +136,19 @@ function ClickEstilo(nome_estilo, id_select_secundario) {
   AtualizaGeral();
 }
 
-// Trata o clique dos botoes de pericia.
+// Trata a alteracao de uma pericia.
 // @param chave_pericia a chave da pericia.
-// @param incremento -1 ou 1.
-function ClickPericia(chave_pericia, incremento) {
-  if (incremento > 0 && personagem.pericias.total_pontos == personagem.pericias.pontos_gastos) {
-    alert('Não há pontos de perícia disponíveis');
-    return;
-  }
+function ClickPericia(chave_pericia) {
   // pega o input do campo
   var input_pericia = Dom('pericia-' + chave_pericia + '-pontos');
   var input_pericia_valor = parseInt(input_pericia.value) || 0;
-  if (incremento < 0 && input_pericia_valor == 0) {
-    alert('Perícia não possui pontos');
+  var valor_corrente = personagem.pericias.lista[chave_pericia].pontos;
+  if (input_pericia_valor - valor_corrente > 
+      personagem.pericias.total_pontos - personagem.pericias.pontos_gastos) {
+    input_pericia.value = valor_corrente;
+    alert('Não há pontos de perícia disponíveis');
     return;
   }
-
-  input_pericia.value = input_pericia_valor + incremento;
   AtualizaGeral();
 }
 

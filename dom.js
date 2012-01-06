@@ -77,6 +77,24 @@ function CriaInputTexto(texto, id, classe) {
   return input;
 }
 
+// Cria um input de numero com os atributos passados.
+// @param numero o numero mostrado dentro do input.
+// @param id do input.
+// @param classe do input.
+// @param funcao ou handler a ser chamado.
+function CriaInputNumerico(numero, id, classe, funcao) {
+  var input = CriaDom('input', id, classe);
+  input.type = 'number';
+  if (numero) {
+    input.value = numero;
+  }
+  if (funcao) {
+    //input.addEventListener('onchange', funcao, false);
+    input.addEventListener('input', funcao, false);
+  }
+  return input;
+}
+
 function CriaSelect(id, classe) {
   var select = CriaDom('select', id, classe);
   return select;
