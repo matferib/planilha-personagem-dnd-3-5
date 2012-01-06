@@ -175,12 +175,11 @@ function PersonagemPossuiTalento(nome_talento, complemento) {
 }
 
 // @return true se o personagem possuir uma das classes passadas.
-// @param classes array de classe ou classe.
-function PersonagemPossuiUmaDasClasse(classes) {
-  var array_classes = classes.length ? classes : [ classes ];
+// @param classes array de classe.
+function PersonagemPossuiUmaDasClasses(classes) {
   for (var i = 0; i < personagem.classes.length; ++i) {
-    for (var j = 0; j < array_classes.length; ++j) {
-      if (array_classes[j] == personagem.classes[i].classe) {
+    for (var j = 0; j < classes.length; ++j) {
+      if (classes[j] == personagem.classes[i].classe) {
         return true;
       }
     }
