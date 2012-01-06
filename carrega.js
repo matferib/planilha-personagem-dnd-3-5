@@ -121,7 +121,15 @@ function _CarregaPericias() {
     div.appendChild(
         CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): ', null, 
                  'pericias-nome'));
-    div.appendChild(CriaBotoesMaisMenos(prefixo_id + '-pontos', null, 'ClickPericia', chave_pericia));
+    var input_pontos =
+        CriaInputNumerico(0, prefixo_id + '-pontos', null, 
+        { chave_pericia: chave_pericia,
+          handleEvent: function(evento) {
+            ClickPericia(this.chave_pericia);
+            evento.stopPropagation(); } });
+    input_pontos.min = 0;
+    input_pontos.maxlength = input_pontos.size = 2;
+    div.appendChild(input_pontos);
 
     div.appendChild(CriaSpan(' pontos; '));
     div.appendChild(CriaSpan('0', prefixo_id + '-graduacoes'));
