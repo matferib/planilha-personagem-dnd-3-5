@@ -61,8 +61,21 @@ function ClickRemoveClasse() {
   AtualizaGeralSemLerEntradas();
 }
 
-// Codifica o objeto personagem como JSON.
+// Salva entrada do personagem no historico local.
 function ClickSalvar() {
+  AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
+  localStorage.setItem('saved_pc', goog.json.serialize(entradas));
+  alert('Personagem salvo com sucesso');
+}
+
+// Carrega o personagem do historico local.
+function ClickAbrir() {
+  entradas = goog.json.parse(localStorage.getItem('saved_pc'));
+  AtualizaGeralSemLerEntradas();
+}
+
+// Codifica o objeto personagem como JSON e gera o link.
+function ClickLink() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var indice_interrogacao = document.URL.indexOf('?');
   var url = 
