@@ -326,7 +326,7 @@ function _ConvertePericias() {
 function _ConverteProficienciaArmas() {
   var todas_simples = false;
   var todas_comuns = false;
-  personagem.proficiencia_armas = [];
+  personagem.proficiencia_armas = {};
   for (var i = 0; i < personagem.classes.length; ++i) {
     var nome_classe = personagem.classes[i].classe;
     var armas_classe = tabelas_proficiencia_arma_por_classe[nome_classe].armas;
@@ -603,14 +603,14 @@ function _ConverteFeiticosSlots() {
         continue;
       }
       slots_classe.feitico_dominio.nome = entrada_feitico.feitico;
-      slots_classe.feitico_dominio.gasto = false;
+      slots_classe.feitico_dominio.gasto = entrada_feitico.gasto;
     } else {
       if (entrada_feitico.indice >= slots_classe.feiticos.length) {
         // Slot nao existente.
         continue;
       }
       slots_classe.feiticos[entrada_feitico.indice].nome = entrada_feitico.feitico;
-      slots_classe.feiticos[entrada_feitico.indice].gasto = false;
+      slots_classe.feiticos[entrada_feitico.indice].gasto = entrada_feitico.gasto;
     }
   }
 }
