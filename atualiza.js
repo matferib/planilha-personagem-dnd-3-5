@@ -115,9 +115,10 @@ function _AtualizaClasses() {
     var div_classe = divs_classes[i];
     if (i < personagem.classes.length) {
       if (!div_classe) {
-        AdicionaClasse(classes_desabilitadas, personagem.classes[i].classe, 
-            personagem.classes[i].nivel, i);
+        AdicionaClasse(classes_desabilitadas, i, div_classes);
       }
+      _AtualizaClasse(classes_desabilitadas, personagem.classes[i].classe, 
+                      personagem.classes[i].nivel, i);
       classes_desabilitadas.push(personagem.classes[i].classe);
     } else {
       RemoveFilho(div_classe.id, div_classes);
@@ -130,6 +131,33 @@ function _AtualizaClasses() {
     selects_classes[i].disabled = true;
   }
   selects_classes[selects_classes.length - 1].disabled = false;
+}
+
+// Atualiza uma classe.
+function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
+  var select_classe = Dom('select-classe-' + indice);
+  select_classe.options.length = 0;
+  for (var chave_classe in tabelas_classes) {
+    var desabilitar_classe = false;
+    for (var j = 0; j < classes_desabilitadas.length; ++j) {
+      if (chave_classe == classes_desabilitadas[j]) {
+        desabilitar_classe = true;
+        break;
+      }
+    }
+    if (desabilitar_classe) {
+      // Nao adiciona classe desabilitada.
+      continue;
+    }
+    var option = CriaOption();
+    option.setAttribute('name', chave_classe);
+    option.setAttribute('value', chave_classe);
+    option.innerText = tabelas_classes[chave_classe].nome;
+    option.selected = (chave_classe == classe) && !desabilitar_classe;
+    option.disabled = desabilitar_classe;
+    select_classe.appendChild(option);
+  }
+  Dom('nivel-classe-' + indice).value = nivel;
 }
 
 // Atualiza o tamanho em funcao da raca.
@@ -477,6 +505,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
           'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom', 
           'feiticos-slots'));
       div_nivel.appendChild(CriaInputCheckbox(
+          feiticos_classe.slots[nivel].feitico_dominio.gasto,
           'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom', 
           'feiticos-slots-gastos'));
       div_nivel.appendChild(CriaBr());
