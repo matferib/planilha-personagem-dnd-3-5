@@ -211,7 +211,7 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
     }
   }
   for (var atributo in requisitos.atributos) {
-    if (personagem.atributos[atributo] < requisitos.atributos[atributo]) {
+    if (personagem.atributos[atributo].valor < requisitos.atributos[atributo]) {
       alert(prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
       return false;
     }
