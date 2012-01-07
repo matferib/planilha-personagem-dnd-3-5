@@ -22,6 +22,12 @@ function AtualizaGeralSemLerEntradas() {
   _AtualizaGeral();
 }
 
+// Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das entradas.
+// A intencao eh acabar com AtualizaGeralSemLerEntradas, salvando-se o personagem ao inves da entrada.
+function AtualizaGeralSemConverterEntradas() {
+  _AtualizaGeral();
+}
+
 // Apenas atualizacoes a planilha a partir do personagem, sem leitura de entradas.
 function _AtualizaGeral() {
   _AtualizaNomeRacaAlinhamentoXp();
@@ -430,7 +436,7 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
 }
 
 function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
-  // Conhecidos.
+  var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
   var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
   div_slots.appendChild(CriaSpan('Feitiços por Dia'));
   // Por nivel.
@@ -443,19 +449,36 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
     div_nivel.appendChild(CriaBr());
     for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
       // Adiciona os inputs de indices.
-      div_nivel.appendChild(CriaInputTexto(
-          feiticos_classe.slots[nivel].feiticos[indice],
-          'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
-          'feiticos-slots'));
+      if (!precisa_conhecer) {
+        div_nivel.appendChild(CriaInputTexto(
+            feiticos_classe.slots[nivel].feiticos[indice].nome,
+            'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
+            'feiticos-slots'));
+      }
+      div_nivel.appendChild(CriaInputCheckbox(
+          feiticos_classe.slots[nivel].feiticos[indice].gasto,
+          'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice, 
+          'feiticos-slots-gastos'));
+      if (!precisa_conhecer) {
+        // Um br apos cada feitico.
+        div_nivel.appendChild(CriaBr());
+      }
+    }
+    // Todos os checkbox em uma linha so, por o br no final.
+    if (precisa_conhecer) {
       div_nivel.appendChild(CriaBr());
     }
+
     // Adiciona input de dominio se houver.
     if (feiticos_classe.slots[nivel].feitico_dominio != null) {
       div_nivel.appendChild(CriaSpan('D:'));
       div_nivel.appendChild(CriaInputTexto(
-          feiticos_classe.slots[nivel].feitico_dominio,
+          feiticos_classe.slots[nivel].feitico_dominio.nome,
           'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom', 
           'feiticos-slots'));
+      div_nivel.appendChild(CriaInputCheckbox(
+          'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom', 
+          'feiticos-slots-gastos'));
       div_nivel.appendChild(CriaBr());
     }
     div_slots.appendChild(div_nivel);

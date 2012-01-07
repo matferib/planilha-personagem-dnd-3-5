@@ -7,7 +7,9 @@ var personagem = {
   alinhamento: "",
   experiencia: 0,
   // Cada entrada: { classe, nivel }.
-  classes: [],
+  classes: [
+      { classe: 'guerreiro', nivel: 1 },
+  ],
   pontos_vida: {
     dados_vida: 0,
     total: 0,
@@ -20,55 +22,55 @@ var personagem = {
       gastos: [],  // cada entrada, um atributo
     },
     forca: { 
-      base: 0,
+      base: 10,
       bonus_nivel: 0,
       racial: 0,
-      valor: 0,
+      valor: 10,
       modificador: 0
     },  
     destreza: {
-      base: 0, 
+      base: 10, 
       bonus_nivel: 0,
       racial: 0,
-      valor: 0,
+      valor: 10,
       modificador: 0
     },  
     constituicao: { 
-      base: 0, 
+      base: 10, 
       bonus_nivel: 0,
       racial: 0,
-      valor: 0,
+      valor: 10,
       modificador: 0
     },  
     inteligencia: { 
-      base: 0, 
+      base: 10, 
       bonus_nivel: 0,
       racial: 0,
-      valor: 0,
+      valor: 10,
       modificador: 0
     },  
     sabedoria: { 
-      base: 0, 
+      base: 10, 
       bonus_nivel: 0,
       racial: 0,
-      valor: 0,
+      valor: 10,
       modificador: 0
     },  
     carisma: { 
-      base: 0, 
+      base: 10, 
       bonus_nivel: 0,
       racial: 0,
-      valor: 0,
+      valor: 10,
       modificador: 0
     }
   },
-  bba: 0,
-  bba_cac: 0,  // inclui tamanho e forca.
-  bba_distancia: 0,  // inclui tamanho e destreza.
+  bba: 1,
+  bba_cac: 1,  // inclui tamanho e forca.
+  bba_distancia: 1,  // inclui tamanho e destreza.
   // talentos
   talentos: {  
     // talentos livres.
-    total: 0,  
+    total: 2,
     // Cada entrada, { nome, complemento }. 
     // Ambos podem ser null, pela verificacao de requisito.
     lista: [],
@@ -78,7 +80,7 @@ var personagem = {
   // pericias.
   pericias: {
     // Quantos pontos o personagem pode gastar.
-    total_pontos: 0,
+    total_pontos: 8,
     // Quantos ele ja gastou.
     pontos_gastos: 0,
     // Cada entrada: chave_pericia: { pontos, graduacoes, bonus_sinergia, 
@@ -110,15 +112,18 @@ var personagem = {
   // Sempre havera um ataque desarmado aqui.
   armas: [],
   // Armadura: { nome, bonus_magico }
-  armadura: {},
+  armadura: { nome: 'nenhuma', bonus_magico: 0 },
+  escudo: { nome: 'nenhum' , bonus_magico: 0 },
   // Valor pode ser qualquer coisa.
-  equipamentos: '',
+  outros_equipamentos: '',
   // Feiticos. Cada entrada: chave_classe: { 
   //   habilidade_chave, 
   //   conhecidos: { 0: [], ..., 9 },
-  //   slots: { 0: { base, bonus_atributo, feiticos: [], feitico_dominio  }, ... 9 } }
-  // TODO: transformar em:
-  //   slots: { 0: { base, bonus_atributo, feiticos: [ { nome, gasto} ], feitico_dominio: {nome, gasto}  }, ... 9 } }
+  //   slots: { 
+  //       0: { base, bonus_atributo, 
+  //            feiticos: [ { nome, gasto} ], 
+  //            feitico_dominio: {nome, gasto}  }, 
+  //       1: ...} }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
 
