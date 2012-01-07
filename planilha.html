@@ -63,13 +63,14 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
+<button type="button" onclick="ClickGerarPontosDeVida('comum')">Gerar Comum</button>
+<button type="button" onclick="ClickGerarPontosDeVida('elite')">Gerar Elite</button>
+<button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button><br>
 Dados de Vida: <span id="dados-vida-classes"></span><br>
 Pontos de Vida: <span id=pontos-vida-corrente></span> = 
 <input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> -
 <input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/>
-<button type="button" onclick="ClickGerarPontosDeVida('comum')">Gerar Comum</button>
-<button type="button" onclick="ClickGerarPontosDeVida('elite')">Gerar Elite</button>
-<button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button>
+<button type="button" onclick="ClickAdiciona5PtsDano()">-5</button>
 <br>
 </div> <!-- div-pontos-vida -->
 
@@ -79,7 +80,6 @@ Pontos de Vida: <span id=pontos-vida-corrente></span> =
 <button type="button" onclick="ClickGerarAleatorioComum()">Gerar comum aleatório (3d6)</button><br>
 <button type="button" onclick="ClickGerarElite()">Gerar elite</button>
 <button type="button" onclick="ClickGerarAleatorioElite()">Gerar elite Aleatório (4d6 - menor)</button><br>
-<br>
 
 </div> <!-- div-stats -->
 

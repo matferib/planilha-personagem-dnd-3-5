@@ -213,3 +213,9 @@ function ClickBotaoAtributoMenos() {
   AtualizaGeralSemLerEntradas();
 }
 
+
+// Adiciona pontos de dano no campo ferimentos
+function ClickAdiciona5PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) + 5;
+  AtualizaGeral();
+}
