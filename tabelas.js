@@ -924,12 +924,12 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   // Reduz penalidade ao usar duas maos em 2.
   combater_duas_armas: { 
       nome: 'Combater com duas armas',
-      requisitos: { atributos: { des: 15 } },
+      requisitos: { atributos: { destreza: 15 } },
       guerreiro: true, },
   // Ataque adicional com a segunda mao.
   combater_duas_armas_aprimorado: {
       nome: 'Combater com duas armas aprimorado',
-      requisitos: { atributos: { des: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
+      requisitos: { atributos: { destreza: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
       guerreiro: true, },
   // +1 de bônus nas jogadas de ataque com a arma escolhida.
   foco_em_arma: {
