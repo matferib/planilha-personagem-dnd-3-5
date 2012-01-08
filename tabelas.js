@@ -1158,18 +1158,22 @@ var tabelas_pericias = {
 // nao podem ser filhos de um elemento da classe divs-principais.
 var tabelas_visoes = {
   completo: {
+    nome: 'Completo',
     esconder: { classes: [], elementos: [] }, 
     mostrar: { classes: ['divs-principais'], elementos:[] },
   },
   combate: {
+    nome: 'Combate',
     esconder: { classes: ['divs-principais'], elementos: [] }, 
     mostrar: { classes: [], elementos:['div-pontos-vida', 'div-ataque', 'div-defesa'] },
   },
   role_playing: {
+    nome: 'Role Playing',
     esconder: { classes: ['divs-principais'], elementos: [] }, 
     mostrar: { classes: [], elementos:[ 'div-pericias' ] },
   },
   feiticos: {
+    nome: 'Feitiços',
     esconder: { classes: ['divs-principais'], elementos: [] }, 
     mostrar: { classes: [], elementos:[ 'div-feiticos' ] },
   },
