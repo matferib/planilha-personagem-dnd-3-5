@@ -14,11 +14,12 @@ function CarregamentoInicial() {
   if (indice_igual != -1) {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
     var json_personagem = decodeURIComponent(document.URL.slice(indice_igual + 1));
-    entradas = goog.json.parse(json_personagem);
+    personagem = goog.json.parse(json_personagem);
+    AtualizaGeralSemConverterEntradas();
+  } else {
+    AtualizaGeralSemLerEntradas();
   }
-  AtualizaGeralSemLerEntradas();
 }
-
 
 // Adiciona botoes dinamicamente na planilha.
 function _CarregaBotoesVisao() {
@@ -29,7 +30,6 @@ function _CarregaBotoesVisao() {
     div_visoes.appendChild(botao_visao);
   }
 }
-
 
 function _CarregaAtributos() {
   var div = Dom('div-stats');
@@ -122,7 +122,7 @@ function _CarregaPericias() {
         CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): ', null, 
                  'pericias-nome'));
     var input_pontos =
-        CriaInputNumerico(0, prefixo_id + '-pontos', null, 
+        CriaInputNumerico('0', prefixo_id + '-pontos', null, 
         { chave_pericia: chave_pericia,
           handleEvent: function(evento) {
             ClickPericia(this.chave_pericia);

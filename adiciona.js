@@ -1,17 +1,14 @@
 // Tudo o que for relacionado a adicionar ou remover na planilha.
 
-// Adiciona uma nova classe na planilha. 
-// Parametros sao todos opcionais.
-// Classe padrao: guerreiro.
-// Nivel padrao: 1.
-function AdicionaClasse(classes_desabilitadas, classe, nivel, indice) {
+// Adiciona um div de classe ao dom passado. 
+function AdicionaClasse(classes_desabilitadas, indice, dom) {
   if (!classes_desabilitadas) {
     classes_desabilitadas = [];
   }
-  if (!nivel) {
-    nivel = 1;
+  if (!indice) {
+    indice = 0;
   }
-  var select_classe = CriaSelect(null, 'selects-classes');
+  var select_classe = CriaSelect('select-classe-' + indice, 'selects-classes');
   select_classe.setAttribute('name', 'classe');
   select_classe.setAttribute('onchange', 'AtualizaGeral()');
   for (var chave_classe in tabelas_classes) {
@@ -30,25 +27,24 @@ function AdicionaClasse(classes_desabilitadas, classe, nivel, indice) {
     option.setAttribute('name', chave_classe);
     option.setAttribute('value', chave_classe);
     option.innerText = tabelas_classes[chave_classe].nome;
-    option.selected = (chave_classe == classe) && !desabilitar_classe;
+    option.selected = false;
     option.disabled = desabilitar_classe;
     select_classe.appendChild(option);
   }
   var span_nivel = CriaSpan('Nível: ');
   var input_nivel = CriaInputNumerico(
-      nivel, null, null, 
+      1, 'nivel-classe-' + indice, null, 
       { handleEvent: function() { AtualizaGeral() } });
   input_nivel.name = 'nivel';
   input_nivel.min = '1';
   input_nivel.maxLength = input_nivel.size = 2;
-  input_nivel.value = nivel;
   var br_nivel = document.createElement('br');
   var div = CriaDiv('classe-' + (indice || 0), 'classe');
   div.appendChild(select_classe);
   div.appendChild(span_nivel);
   div.appendChild(input_nivel);
   div.appendChild(br_nivel);
-  Dom("classes").appendChild(div);
+  dom.appendChild(div);
 }
 
 // Remove a classe mais recente do personagem.
