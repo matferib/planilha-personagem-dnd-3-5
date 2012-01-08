@@ -1167,8 +1167,8 @@ var tabelas_visoes = {
     esconder: { classes: ['divs-principais'], elementos: [] }, 
     mostrar: { classes: [], elementos:['div-pontos-vida', 'div-ataque', 'div-defesa'] },
   },
-  role_playing: {
-    nome: 'Role Playing',
+  pericias: {
+    nome: 'Perícias',
     esconder: { classes: ['divs-principais'], elementos: [] }, 
     mostrar: { classes: [], elementos:[ 'div-pericias' ] },
   },
