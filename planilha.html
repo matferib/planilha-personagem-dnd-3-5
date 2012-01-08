@@ -15,7 +15,7 @@
 <title>Planilha de Personagens, 3.5 ed.</title>
 <link rel="stylesheet" type="text/css" href="planilha.css" />
 <!-- versao normal -->
-<!--script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
+<script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
 <script type="text/javascript" src="adiciona.js"></script>
 <script type="text/javascript" src="atualiza.js"></script>
 <script type="text/javascript" src="carrega.js"></script>
@@ -26,9 +26,9 @@
 <script type="text/javascript" src="geracao.js"></script>
 <script type="text/javascript" src="personagem.js"></script>
 <script type="text/javascript" src="tabelas.js"></script>
-<script type="text/javascript" src="util.js"></script-->
+<script type="text/javascript" src="util.js"></script>
 <!-- versao compilada -->
-<script type="text/javascript" src="tudo.js"></script>
+<!--script type="text/javascript" src="tudo.js"></script-->
 </head>
 <body onload="CarregamentoInicial()">
 
@@ -78,17 +78,19 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 <button type="button" onclick="ClickGerarPontosDeVida('elite')">Gerar Elite</button>
 <button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button><br>
 Dados de Vida: <span id="dados-vida-classes"></span><br>
-Pontos de Vida: <span id="pontos-vida-corrente"></span> = 
-<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> -
-<input type="text" id="ferimentos" style="color:red" maxlength="3" size="3" onchange="AtualizaGeral()"/>
-Ferimentos:
-<button type="button" onclick="ClickAdiciona1PtsDano()">-1</button>
-<button type="button" onclick="ClickAdiciona3PtsDano()">-3</button>
-<button type="button" onclick="ClickAdiciona5PtsDano()">-5</button>
-Cura:
-<button type="button" onclick="ClickRemove1PtsDano()">1</button>
-<button type="button" onclick="ClickRemove3PtsDano()">3</button>
-<button type="button" onclick="ClickRemove5PtsDano()">5</button>
+Pontos de Vida: <span id="pontos-vida-corrente"></span> = Máximo: 
+<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> - Ferimentos:
+<input type="text" id="ferimentos" style="color:red" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
+<span style="color:Black" class="adiciona-remove-ferimentos">Ferimentos</span>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(1)">-1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(3)">-3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(5)">-5</button>
+<input type="text" id="adicionaferimentos" style="color:red" maxlength="3" size="3" onchange="ClickAdicionarRemoverFerimentos(parseInt(adicionaferimentos.value))"/><br>
+<span style="color:Black" class="adiciona-remove-ferimentos">Cura</span>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-1)">+1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-3)">+3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-5)">+5</button>
+<input type="text" id="removeferimentos" style="color:blue" maxlength="3" size="3" onchange="ClickAdicionarRemoverFerimentos(-parseInt(removeferimentos.value))"/>
 <br>
 </div> <!-- div-pontos-vida -->
 
