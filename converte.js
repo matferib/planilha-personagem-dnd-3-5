@@ -326,7 +326,7 @@ function _ConvertePericias() {
 function _ConverteProficienciaArmas() {
   var todas_simples = false;
   var todas_comuns = false;
-  personagem.proficiencia_armas = [];
+  personagem.proficiencia_armas = {};
   for (var i = 0; i < personagem.classes.length; ++i) {
     var nome_classe = personagem.classes[i].classe;
     var armas_classe = tabelas_proficiencia_arma_por_classe[nome_classe].armas;
@@ -556,10 +556,14 @@ function _ConverteNumeroFeiticosParaClasse(classe_personagem) {
         base: parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0,
         bonus_atributo: array_bonus_feiticos_atributo[nivel_feitico],
         feiticos: [],
-        feitico_dominio: (possui_dominio && nivel_feitico > 0) ? '' : null,
+        feitico_dominio: (possui_dominio && nivel_feitico > 0) ? 
+            { nome: '', gasto: false } : null,
     }
-    personagem_slots_nivel.feiticos.length = 
-        personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
+    var slots_por_dia = 
+        personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo
+    for (var i = 0; i < slots_por_dia; ++i) {
+      personagem_slots_nivel.feiticos.push({ nome: '', gasto: false });
+    }
     personagem.feiticos[chave_classe].slots[nivel_feitico] = personagem_slots_nivel;
   }
 }
@@ -598,14 +602,15 @@ function _ConverteFeiticosSlots() {
         // Nao possui feitico de dominio.
         continue;
       }
-      slots_classe.feitico_dominio = entrada_feitico.feitico;
+      slots_classe.feitico_dominio.nome = entrada_feitico.feitico;
+      slots_classe.feitico_dominio.gasto = entrada_feitico.gasto;
     } else {
-      if (entrada_feitico.indice >= feiticos_classe.slots[entrada_feitico.nivel].length) {
+      if (entrada_feitico.indice >= slots_classe.feiticos.length) {
         // Slot nao existente.
         continue;
       }
-      feiticos_classe.slots[entrada_feitico.nivel].feiticos[entrada_feitico.indice] =
-          entrada_feitico.feitico;
+      slots_classe.feiticos[entrada_feitico.indice].nome = entrada_feitico.feitico;
+      slots_classe.feiticos[entrada_feitico.indice].gasto = entrada_feitico.gasto;
     }
   }
 }

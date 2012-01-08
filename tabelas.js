@@ -126,6 +126,31 @@ var tabelas_feiticos = {
           18: { por_dia: '6555544332' },
           19: { por_dia: '6555554433' },
           20: { por_dia: '6555554444' }, }, },
+  feiticeiro: {
+      atributo_chave: 'carisma',
+      precisa_conhecer: true,
+      possui_nivel_zero: true,
+      por_nivel: {
+          1: { por_dia: '53', conhecidos: '42', },
+          2: { por_dia: '64', conhecidos: '52', },
+          3: { por_dia: '65', conhecidos: '53', },
+          4: { por_dia: '663', conhecidos: '631', },
+          5: { por_dia: '664', conhecidos: '642', },
+          6: { por_dia: '6653', conhecidos: '7421', },
+          7: { por_dia: '6664', conhecidos: '7532', },
+          8: { por_dia: '66653', conhecidos: '85321', },
+          9: { por_dia: '66664', conhecidos: '85432', },
+          10: { por_dia: '666653', conhecidos: '954321', },
+          11: { por_dia: '666664', conhecidos: '955432', },
+          12: { por_dia: '6666653', conhecidos: '9554321', },
+          13: { por_dia: '6666664', conhecidos: '9554432', },
+          14: { por_dia: '66666653', conhecidos: '95544321', },
+          15: { por_dia: '66666664', conhecidos: '95544432', },
+          16: { por_dia: '666666653', conhecidos: '955444321', },
+          17: { por_dia: '666666664', conhecidos: '955444332', },
+          18: { por_dia: '6666666653', conhecidos: '9554443321', },
+          19: { por_dia: '6666666664', conhecidos: '9554443332', },
+          20: { por_dia: '6666666666', conhecidos: '9554443333', }, }, },
   paladino: {
       atributo_chave: 'sabedoria',
       precisa_conhecer: false,
@@ -924,12 +949,12 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   // Reduz penalidade ao usar duas maos em 2.
   combater_duas_armas: { 
       nome: 'Combater com duas armas',
-      requisitos: { atributos: { des: 15 } },
+      requisitos: { atributos: { destreza: 15 } },
       guerreiro: true, },
   // Ataque adicional com a segunda mao.
   combater_duas_armas_aprimorado: {
       nome: 'Combater com duas armas aprimorado',
-      requisitos: { atributos: { des: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
+      requisitos: { atributos: { destreza: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
       guerreiro: true, },
   // +1 de bônus nas jogadas de ataque com a arma escolhida.
   foco_em_arma: {
@@ -1129,21 +1154,24 @@ var tabelas_pericias = {
       habilidade: 'carisma' },
 };
 
-
 // Todos os elementos devem pertencer a classe divs-principais e 
 // nao podem ser filhos de um elemento da classe divs-principais.
 var tabelas_visoes = {
   completo: {
-    esconder: { classes: [], elementos: []}, 
-    mostrar: { classes: ['divs-principais'], elementos:[]},
+    esconder: { classes: [], elementos: [] }, 
+    mostrar: { classes: ['divs-principais'], elementos:[] },
   },
   combate: {
-    esconder: { classes: ['divs-principais'], elementos: []}, 
-    mostrar: { classes: [], elementos:['div-pontos-vida', 'div-ataque', 'div-defesa']},
+    esconder: { classes: ['divs-principais'], elementos: [] }, 
+    mostrar: { classes: [], elementos:['div-pontos-vida', 'div-ataque', 'div-defesa'] },
   },
   role_playing: {
-    esconder: { classes: ['divs-principais'], elementos: []}, 
-    mostrar: { classes: [], elementos:[ 'div-pericias' ]},
+    esconder: { classes: ['divs-principais'], elementos: [] }, 
+    mostrar: { classes: [], elementos:[ 'div-pericias' ] },
+  },
+  feiticos: {
+    esconder: { classes: ['divs-principais'], elementos: [] }, 
+    mostrar: { classes: [], elementos:[ 'div-feiticos' ] },
   },
 };
 
@@ -1155,6 +1183,7 @@ var tabelas_atributos = {
   sabedoria: "Sabedoria",
   carisma: "Carisma",
 };
+
 var tabelas_atributos_invertidos = {
   'Força': 'forca',
   'Destreza': 'destreza',

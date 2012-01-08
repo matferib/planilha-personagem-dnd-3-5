@@ -165,7 +165,7 @@ function _LeFeiticos() {
       indice: classe_nivel_indice[2],
     });
   }
-  entradas.feiticos.slots= [];
+  entradas.feiticos.slots = [];
   var nomes_feiticos = goog.dom.getElementsByClass('feiticos-slots');
   for (var i = 0; i < nomes_feiticos.length; ++i) {
     var classe_nivel_indice = nomes_feiticos[i].id.split('-');
@@ -174,13 +174,22 @@ function _LeFeiticos() {
     classe_nivel_indice.shift();
     classe_nivel_indice.shift();
     entradas.feiticos.slots.push({ 
-      feitico: nomes_feiticos[i].value,
-      classe: classe_nivel_indice[0],
-      nivel: classe_nivel_indice[1],
-      indice: classe_nivel_indice[2],
+        feitico: nomes_feiticos[i].value,
+        classe: classe_nivel_indice[0],
+        nivel: classe_nivel_indice[1],
+        indice: classe_nivel_indice[2],
     });
   }
-
+  var feiticos_gastos = goog.dom.getElementsByClass('feiticos-slots-gastos');
+  for (var i = 0; i < feiticos_gastos.length; ++i) {
+    var classe_nivel_indice = nomes_feiticos[i].id.split('-');
+    // remove o prefixo input-feiticos-slots-gastos.
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    entradas.feiticos.slots[i].gasto = feiticos_gastos[i].checked; 
+  }
 }
 
 // Le uma arma de seu div.

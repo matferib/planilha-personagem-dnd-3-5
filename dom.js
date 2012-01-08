@@ -64,6 +64,14 @@ function CriaSpan(texto, id, classe) {
   return span;
 }
 
+// @param marcado true se o checkbox estiver marcado.
+function CriaInputCheckbox(marcado, id, classe) {
+  var input = CriaDom('input', id, classe);
+  input.type = 'checkbox';
+  input.checked = marcado;
+  return input;
+}
+
 // Cria um input de texto com os atributos passados.
 // @param texto o texto mostrado dentro do input.
 // @param id do input.
