@@ -213,3 +213,58 @@ function ClickBotaoAtributoMenos() {
   AtualizaGeralSemLerEntradas();
 }
 
+
+// Adiciona ou remove pontos de dano no campo ferimentos. Verifica tambem se o personagem esta morto ou inconsciente
+function ClickAdiciona1PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) + 1;
+  AtualizaGeral();
+  if (Dom('ferimentos').value > parseInt(Dom('pontos-vida-total').value)) {
+    if (Dom('ferimentos').value > (10 + parseInt(Dom('pontos-vida-total').value))) {
+      window.alert("O personagem está morto!");
+      return;
+    }
+    window.alert("O personagem está inconsciente!");
+    return;
+  }  
+}
+
+function ClickAdiciona3PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) + 3;
+  AtualizaGeral();
+  if (Dom('ferimentos').value > parseInt(Dom('pontos-vida-total').value)) {
+    if (Dom('ferimentos').value > (10 + parseInt(Dom('pontos-vida-total').value))) {
+      window.alert("O personagem está morto!");
+      return;
+    }
+    window.alert("O personagem está inconsciente!");
+    return;
+  }
+}
+
+function ClickAdiciona5PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) + 5;
+  AtualizaGeral();
+  if (parseInt(Dom('ferimentos').value) > parseInt(Dom('pontos-vida-total').value)) {
+    if (Dom('ferimentos').value > (parseInt(Dom('pontos-vida-total').value + personagem.atributos.constituicao.valor))) {
+      window.alert("O personagem está morto!");
+      return;
+    }
+    window.alert("O personagem está inconsciente!");
+    return;
+  }  
+}
+
+function ClickRemove1PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) - 1;
+  AtualizaGeral();
+}
+
+function ClickRemove3PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) - 3;
+  AtualizaGeral();
+}
+
+function ClickRemove5PtsDano() {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) - 5;
+  AtualizaGeral();
+}
