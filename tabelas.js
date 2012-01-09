@@ -1089,7 +1089,7 @@ var tabelas_pericias = {
       classes: [  'bardo', 'monge', 'ranger', 'ladino', ],
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   identificar_magia: {
-      nome: 'identificar magia',
+      nome: 'Identificar magia',
       classes: [  'bardo', 'clerigo', 'druida', 'feiticeiro', 'mago'],
       habilidade: 'inteligencia' },
   intimidacao: {
