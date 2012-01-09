@@ -2,6 +2,16 @@
 <html manifest="planilha.appcache">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="default" />
+<meta name="apple-mobile-web-app-capable"
+      content="yes" />
+<meta name="viewport"
+    content="user-scalable=no, width=device-width" />
+<link rel="apple-touch-icon"
+      href="./icon72.png" />
+<link rel="apple-touch-startup-image"
+      href="./icon1004.png" />
 <title>Planilha de Personagens, 3.5 ed.</title>
 <link rel="stylesheet" type="text/css" href="planilha.css" />
 <!-- versao normal -->
@@ -64,13 +74,23 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
-Dados de Vida: <span id="dados-vida-classes"></span><br>
-Pontos de Vida: <span id=pontos-vida-corrente></span> = 
-<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> -
-<input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/>
 <button type="button" onclick="ClickGerarPontosDeVida('comum')">Gerar Comum</button>
 <button type="button" onclick="ClickGerarPontosDeVida('elite')">Gerar Elite</button>
-<button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button>
+<button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button><br>
+Dados de Vida: <span id="dados-vida-classes"></span><br>
+Pontos de Vida: <span id="pontos-vida-corrente"></span> = Máximo: 
+<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> - Ferimentos:
+<input type="text" id="ferimentos" style="color:red" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
+<span style="color:Black" class="adiciona-remove-ferimentos">Ferimentos</span>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(1)">-1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(3)">-3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(5)">-5</button>
+<input type="text" id="adicionaferimentos" style="color:red" maxlength="3" size="3" onchange="ClickAdicionarRemoverFerimentos(parseInt(adicionaferimentos.value))"/><br>
+<span style="color:Black" class="adiciona-remove-ferimentos">Cura</span>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-1)">+1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-3)">+3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-5)">+5</button>
+<input type="text" id="removeferimentos" style="color:blue" maxlength="3" size="3" onchange="ClickAdicionarRemoverFerimentos(-parseInt(removeferimentos.value))"/>
 <br>
 </div> <!-- div-pontos-vida -->
 
@@ -80,7 +100,6 @@ Pontos de Vida: <span id=pontos-vida-corrente></span> =
 <button type="button" onclick="ClickGerarAleatorioComum()">Gerar comum aleatório (3d6)</button><br>
 <button type="button" onclick="ClickGerarElite()">Gerar elite</button>
 <button type="button" onclick="ClickGerarAleatorioElite()">Gerar elite Aleatório (4d6 - menor)</button><br>
-<br>
 
 </div> <!-- div-stats -->
 
