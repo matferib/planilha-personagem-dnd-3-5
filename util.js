@@ -21,7 +21,7 @@ function StringSinalizada(valor, imprime_zero) {
 }
 
 // Imprime um valor de forma sinalizada ou seja, com +/- na frente).
-// @param dom pode ser um span ou div, ou qualquer elemento que possua innerText.
+// @param dom pode ser um span ou div, ou qualquer elemento que possua textContent.
 // Tambem pode ser um array de dom.
 // @param imprime_zero opcional, default true. Se false, imprime_vazio no dom. 
 function ImprimeSinalizado(valor, dom, imprime_zero) {
@@ -31,11 +31,11 @@ function ImprimeSinalizado(valor, dom, imprime_zero) {
 
   if (dom.length == null) {
     if (valor > 0) {
-      dom.innerText = '+' + valor;
+      dom.textContent = '+' + valor;
     } else if (valor == 0) {
-      dom.innerText = imprime_zero ? '+0' : '';
+      dom.textContent = imprime_zero ? '+0' : '';
     } else {
-      dom.innerText = valor;
+      dom.textContent = valor;
     }
   }
   else {
@@ -46,14 +46,14 @@ function ImprimeSinalizado(valor, dom, imprime_zero) {
 }
 
 // Imprime um valor de forma nao sinalizada no caso positivo.
-// @param dom pode ser um span ou div, ou qualquer elemento que possua innerText.
+// @param dom pode ser um span ou div, ou qualquer elemento que possua textContent.
 function ImprimeNaoSinalizado(valor, dom, imprime_zero) {
   if (imprime_zero == null) {
     imprime_zero = true;
   }
 
   if (dom.length == null) {
-    dom.innerText = imprime_zero ? valor : '';
+    dom.textContent = imprime_zero ? valor : '';
   }
   else {
     for (var i = 0; i < dom.length; ++i) {
