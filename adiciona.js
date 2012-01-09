@@ -1,36 +1,13 @@
 // Tudo o que for relacionado a adicionar ou remover na planilha.
 
 // Adiciona um div de classe ao dom passado. 
-function AdicionaClasse(classes_desabilitadas, indice, dom) {
-  if (!classes_desabilitadas) {
-    classes_desabilitadas = [];
-  }
+function AdicionaClasse(indice, dom) {
   if (!indice) {
     indice = 0;
   }
   var select_classe = CriaSelect('select-classe-' + indice, 'selects-classes');
   select_classe.setAttribute('name', 'classe');
   select_classe.setAttribute('onchange', 'AtualizaGeral()');
-  for (var chave_classe in tabelas_classes) {
-    var desabilitar_classe = false;
-    for (var j = 0; j < classes_desabilitadas.length; ++j) {
-      if (chave_classe == classes_desabilitadas[j]) {
-        desabilitar_classe = true;
-        break;
-      }
-    }
-    if (desabilitar_classe) {
-      // Nao adiciona classe desabilitada.
-      continue;
-    }
-    var option = document.createElement('option');
-    option.setAttribute('name', chave_classe);
-    option.setAttribute('value', chave_classe);
-    option.innerText = tabelas_classes[chave_classe].nome;
-    option.selected = false;
-    option.disabled = desabilitar_classe;
-    select_classe.appendChild(option);
-  }
   var span_nivel = CriaSpan('Nível: ');
   var input_nivel = CriaInputNumerico(
       1, 'nivel-classe-' + indice, null, 
@@ -82,7 +59,7 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
       option.setAttribute('name', arma_corrente);
       option.setAttribute('value', arma_corrente);
       option.selected = (arma_corrente == chave_arma);
-      option.innerText = tabelas[i][arma_corrente].nome;
+      option.text = tabelas[i][arma_corrente].nome;
       optgroup.appendChild(option);
     }
     select.appendChild(optgroup);
@@ -201,7 +178,7 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
     var option = document.createElement('option');
     option.setAttribute('name', arma.nome_gerado);
     option.setAttribute('value', arma.nome_gerado);
-    option.innerText = arma.nome_gerado;
+    option.text = arma.nome_gerado;
     if (arma_selecionada == arma.nome_gerado) {
       option.selected = true;
     }

@@ -34,7 +34,7 @@ function CriaOption() {
 function CriaBotao(texto, id, classe, funcao) {
   var botao = CriaDom('button', id, classe);
   botao.setAttribute('type', 'button');
-  botao.innerText = texto;
+  botao.textContent = texto;
   if (funcao) {
     botao.addEventListener('click', funcao, false);
   }
@@ -45,7 +45,7 @@ function CriaRadio(texto, id, classe, nome_grupo, funcao) {
   var botao = CriaDom('input', id, classe);
   botao.setAttribute('type', 'radio');
   botao.name = nome_grupo;
-  // botao.innerText = texto;
+  // botao.textContent = texto;
   if (funcao) {
     botao.addEventListener('click', funcao, false);
   }
@@ -59,7 +59,7 @@ function CriaDiv(id, classe) {
 function CriaSpan(texto, id, classe) {
   var span = CriaDom('span', id, classe);
   if (texto) {
-    span.innerText = texto;
+    span.textContent = texto;
   }
   return span;
 }
