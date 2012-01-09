@@ -89,8 +89,8 @@ function _AtualizaAtributos() {
       string_gastos += ', ';
     }
   }
-  Dom('pontos-atributos-gastos').innerText = string_gastos;
-  Dom('pontos-atributos-total').innerText =
+  Dom('pontos-atributos-gastos').textContent = string_gastos;
+  Dom('pontos-atributos-total').textContent =
       personagem.atributos.pontos.disponiveis;
 
   var div_atributos = Dom('div-stats');
@@ -115,7 +115,7 @@ function _AtualizaClasses() {
     var div_classe = divs_classes[i];
     if (i < personagem.classes.length) {
       if (!div_classe) {
-        AdicionaClasse(classes_desabilitadas, i, div_classes);
+        AdicionaClasse(i, div_classes);
       }
       _AtualizaClasse(classes_desabilitadas, personagem.classes[i].classe, 
                       personagem.classes[i].nivel, i);
@@ -152,7 +152,7 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
     var option = CriaOption();
     option.setAttribute('name', chave_classe);
     option.setAttribute('value', chave_classe);
-    option.innerText = tabelas_classes[chave_classe].nome;
+    option.text = tabelas_classes[chave_classe].nome;
     option.selected = (chave_classe == classe) && !desabilitar_classe;
     option.disabled = desabilitar_classe;
     select_classe.appendChild(option);
@@ -166,7 +166,7 @@ function _AtualizaTamanho() {
   ImprimeSinalizado(
       personagem.tamanho.modificador_ataque_defesa,
       goog.dom.getElementsByClass('tamanho-mod-ataque-defesa'));
-  Dom('tamanho').innerText =
+  Dom('tamanho').textContent =
       tabelas_tamanho[personagem.tamanho.categoria].nome;
 }
 
@@ -227,7 +227,7 @@ function _AtualizaDadosVida() {
       ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
   }
   var span_dados = Dom('dados-vida-classes');
-  span_dados.innerText = dados_vida_total + ' = ' + string_dados_vida;
+  span_dados.textContent = dados_vida_total + ' = ' + string_dados_vida;
   // Pontos de vida.
   var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
   ImprimeNaoSinalizado(pontos_vida_corrente, Dom('pontos-vida-corrente'));
@@ -294,7 +294,7 @@ function _AtualizaEstilo(div_estilo, estilo) {
     _AtualizaArmaEstilo(arma_secundaria, false, estilo,
                         Dom(id_span_secundario));
   } else {
-    Dom(id_span_secundario).innerText = '';
+    Dom(id_span_secundario).textContent = '';
   }
 }
 
@@ -304,18 +304,18 @@ function _AtualizaEstilo(div_estilo, estilo) {
 // @param estilo de luta cuja arma esta sendo atualizada.
 // @param span_arma o dom da arma, que eh um span.
 function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
-  span_arma.innerText = '';
+  span_arma.textContent = '';
   var arma_estilo = primaria ? estilo.arma_primaria : estilo.arma_secundaria;
   for (var categoria in arma_estilo.bonus_por_categoria) {
     var bonus = arma_estilo.bonus_por_categoria[categoria];
-    span_arma.innerText += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
+    span_arma.textContent += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
     var arma_tabela = arma.arma_tabela;
     if (estilo.nome == 'arma_dupla' && !primaria) {
-      span_arma.innerText += arma_tabela.dano_secundario[personagem.tamanho.categoria];
+      span_arma.textContent += arma_tabela.dano_secundario[personagem.tamanho.categoria];
     } else {
-      span_arma.innerText += arma_tabela.dano[personagem.tamanho.categoria];
+      span_arma.textContent += arma_tabela.dano[personagem.tamanho.categoria];
     }
-    span_arma.innerText += StringSinalizada(bonus.dano, false) + '; ';
+    span_arma.textContent += StringSinalizada(bonus.dano, false) + '; ';
   }
 }
 
@@ -394,31 +394,31 @@ function _AtualizaTalentos() {
     string_proficiencia += tabelas_armas[proficiencia].nome + ', ';
   }
   string_proficiencia += '.';
-  span_proficiencia_armas.innerText = string_proficiencia.replace(', .', '.');
+  span_proficiencia_armas.textContent = string_proficiencia.replace(', .', '.');
 }
 
 // Escreve todas as pericias e atualiza de acordo com a classe dos personagem.
 function _AtualizaPericias() {
   var span_total = Dom('pericias-total-pontos');
-  span_total.innerText = personagem.pericias.total_pontos;
+  span_total.textContent = personagem.pericias.total_pontos;
   var span_gastos = Dom('pericias-pontos-gastos');
-  span_gastos.innerText = personagem.pericias.pontos_gastos;
+  span_gastos.textContent = personagem.pericias.pontos_gastos;
 
   for (var chave in personagem.pericias.lista) {
     var input_pontos = Dom('pericia-' + chave + '-pontos');
     input_pontos.value = personagem.pericias.lista[chave].pontos;
     var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
-    dom_graduacoes.innerText = personagem.pericias.lista[chave].pontos;
+    dom_graduacoes.textContent = personagem.pericias.lista[chave].pontos;
     var dom_sinergia = Dom('pericia-' + chave + '-sinergia');
-    dom_sinergia.innerText = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
+    dom_sinergia.textContent = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
     var bonus_talentos_total = 0;
     for (var chave_talento in personagem.pericias.lista[chave].bonus_talentos) {
       bonus_talentos_total += personagem.pericias.lista[chave].bonus_talentos[chave_talento];
     }
     var dom_bonus_talento = Dom('pericia-' + chave + '-bonus-talento');
-    dom_bonus_talento.innerText = StringSinalizada(bonus_talentos_total, false);
+    dom_bonus_talento.textContent = StringSinalizada(bonus_talentos_total, false);
     var dom_total = Dom('pericia-' + chave + '-total');
-    dom_total.innerText = StringSinalizada(personagem.pericias.lista[chave].total);
+    dom_total.textContent = StringSinalizada(personagem.pericias.lista[chave].total);
   }
 }
 

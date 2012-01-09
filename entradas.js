@@ -77,7 +77,7 @@ function LeEntradas() {
   entradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
   // atributos
   var span_bonus_atributos = Dom('pontos-atributos-gastos');
-  var array_bonus = span_bonus_atributos.innerText.split(',');
+  var array_bonus = span_bonus_atributos.textContent.split(',');
   for (var i = 0; i < array_bonus; ++i) {
     // Trim direita.
     array_bonus[i] = tabelas_atributos_invertidos[
