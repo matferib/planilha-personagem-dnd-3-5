@@ -213,3 +213,20 @@ function ClickBotaoAtributoMenos() {
   AtualizaGeralSemLerEntradas();
 }
 
+
+// Adiciona ou remove pontos de dano no campo ferimentos. Verifica tambem se o personagem esta morto ou inconsciente. Nao consegui colocar o if else statement concatenado, dava pau na soma do pontos de vida com a constituicao. FC.
+function ClickAdicionarRemoverFerimentos(valor) {
+  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) + valor;
+  // Funcao parar prevenir que o PV fique positivo
+  if (parseInt(Dom('ferimentos').value) < 0) {
+    Dom('ferimentos').value = 0;
+  }
+  AtualizaGeral();
+  if (parseInt(Dom('ferimentos').value) > (parseInt(Dom('pontos-vida-total').value)) + personagem.atributos.constituicao.valor) {
+    window.alert("O personagem está morto!");
+    return;
+  }
+  if (parseInt(Dom('ferimentos').value) > parseInt(Dom('pontos-vida-total').value)) {
+    window.alert("O personagem está inconsciente!");
+  }  
+}

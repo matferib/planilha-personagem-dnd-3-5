@@ -25,7 +25,7 @@ function CarregamentoInicial() {
 function _CarregaBotoesVisao() {
   var div_visoes = Dom('div-visoes');
   for (var visao in tabelas_visoes) {
-    var botao_visao = CriaSpan(visao, 'span-' + visao, null);
+    var botao_visao = CriaSpan(tabelas_visoes[visao].nome, 'span-' + visao, null);
     botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
     div_visoes.appendChild(botao_visao);
   }
