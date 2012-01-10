@@ -3,6 +3,7 @@
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
 // preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
+  _CarregaRacas();
   _CarregaBotoesVisao();
   _CarregaAtributos();
 
@@ -20,6 +21,14 @@ function CarregamentoInicial() {
     AtualizaGeralSemLerEntradas();
   }
 }
+
+// Adiciona racas dinamicamente na planilha
+function _CarregaRacas () {
+  for (var chave_racas in tabelas_raca) {
+    
+
+}
+
 
 // Adiciona botoes dinamicamente na planilha.
 function _CarregaBotoesVisao() {
@@ -118,9 +127,13 @@ function _CarregaPericias() {
     var habilidade = pericia.habilidade;
     var prefixo_id = 'pericia-' + chave_pericia;
     var div = CriaDiv(prefixo_id);
+    var texto_span = pericia.nome + ' (' + pericia.habilidade + '): ';
+    if (tabelas_pericias[chave_pericia].sem_treinamento) {
+    texto_span += 'ϛτ';
+    }  
     div.appendChild(
-        CriaSpan(pericia.nome + ' (' + pericia.habilidade + '): ', null, 
-                 'pericias-nome'));
+        CriaSpan(texto_span, null, 'pericias-nome'));
+      
     var input_pontos =
         CriaInputNumerico('0', prefixo_id + '-pontos', null, 
         { chave_pericia: chave_pericia,
