@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--html manifest="planilha.appcache"-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="default" />
+<meta name="apple-mobile-web-app-capable"
+      content="yes" />
+<meta name="viewport"
+    content="user-scalable=no, width=device-width" />
+<link rel="apple-touch-icon"
+      href="./icon72.png" />
+<link rel="apple-touch-startup-image"
+      href="./icon1004.png" />
+<title>Planilha de Personagens, 3.5 ed.</title>
+<link rel="stylesheet" type="text/css" href="planilha.css" />
+<!-- versao normal -->
+<script type="text/javascript" src="closure-library/closure/goog/base.js"></script>
+<script type="text/javascript" src="adiciona.js"></script>
+<script type="text/javascript" src="atualiza.js"></script>
+<script type="text/javascript" src="carrega.js"></script>
+<script type="text/javascript" src="converte.js"></script>
+<script type="text/javascript" src="dom.js"></script>
+<script type="text/javascript" src="entradas.js"></script>
+<script type="text/javascript" src="eventos.js"></script>
+<script type="text/javascript" src="geracao.js"></script>
+<script type="text/javascript" src="personagem.js"></script>
+<script type="text/javascript" src="tabelas.js"></script>
+<script type="text/javascript" src="util.js"></script>
+<!-- versao compilada -->
+<!--script type="text/javascript" src="tudo.js"></script-->
+</head>
+<body onload="CarregamentoInicial()">
+
+
+<div id="div-visoes" >
+</div> <!--div-visoes-->
+
+<div id="div-geral" class="divs-principais">
+Nome: <input type="text" id="nome" /><br>
+Raça: 
+<select id="raca" onchange="AtualizaGeral()">
+	<option name="anao" value="anao">Anão</option>
+	<option name="halfling" value="halfling">Halfling</option>
+	<option name="humano" value="humano" selected>Humano</option>
+	<option name="elfo" value="elfo">Elfo</option>
+	<option name="gnomo" value="gnomo">Gnomo</option>
+	<option name="meioelfo" value="meioelfo">Meio-Elfo</option>
+	<option name="meioorc" value="meioorc">Meio-Orc</option>
+</select>&nbsp;
+Tamanho: <span id="tamanho">Médio</span>
+<br>
+Alinhamento: 
+<select id="alinhamento" onchange="AtualizaGeral()">
+	<option name="lb" value="lb">LB</option>
+	<option name="ln" value="ln">LN</option>
+	<option name="lm" value="lm">LM</option>
+	<option name="nb" value="nb">NB</option>
+	<option name="n" value="n">N</option>
+	<option name="nm" value="nm">NM</option>
+	<option name="cb" value="cb">CB</option>
+	<option name="cn" value="cn">CN</option>
+	<option name="cm" value="cm">CM</option>
+</select>
+<br>
+Classes:
+<button type="button" onclick="ClickAdicionarClasse()">+</button>
+<button type="button" onclick="ClickRemoveClasse()">-</button>
+<br>
+<!-- placeholder para as classes, criado dinamicamente. -->
+<div id="classes"></div>
+Experiência: <input type="text" id="pontos-experiencia" size="6"/> 
+</div>
+</div> <!-- div-geral-->
+
+<div id="div-pontos-vida" class="divs-principais">
+<button type="button" onclick="ClickGerarPontosDeVida('comum')">Gerar Comum</button>
+<button type="button" onclick="ClickGerarPontosDeVida('elite')">Gerar Elite</button>
+<button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button><br>
+Dados de Vida: <span id="dados-vida-classes"></span><br>
+Pontos de Vida: <span id="pontos-vida-corrente"></span> =  
+<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> - 
+<input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
+<span style="color:Black" class="adiciona-remove-ferimentos">Ferimentos</span>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(1)">-1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(3)">-3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(5)">-5</button>
+<input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3" 
+    onchange="ClickAdicionarRemoverFerimentos(parseInt(Dom('input-adicionar-ferimentos').value))"/><br>
+<span style="color:Black" class="adiciona-remove-ferimentos">Cura</span>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-1)">+1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-3)">+3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-5)">+5</button>
+<input type="text" id="input-remover-ferimentos" maxlength="3" size="3" 
+    onchange="ClickAdicionarRemoverFerimentos(-parseInt(Dom('input-remover-ferimentos').value))"/>
+<br>
+</div> <!-- div-pontos-vida -->
+
+
+<div id="div-stats" class="divs-principais">
+<button type="button" onclick="ClickGerarComum()">Gerar comum</button>
+<button type="button" onclick="ClickGerarAleatorioComum()">Gerar comum aleatório (3d6)</button><br>
+<button type="button" onclick="ClickGerarElite()">Gerar elite</button>
+<button type="button" onclick="ClickGerarAleatorioElite()">Gerar elite Aleatório (4d6 - menor)</button><br>
+
+</div> <!-- div-stats -->
+
+<div id="div-ataque" class="divs-principais">
+Bonus Base de Ataque: <span class="bba"></span><br>
+Corpo a corpo: 
+<span class="bba"></span>
+<span class="forca-mod-total"></span>
+<span class="tamanho-mod-ataque-defesa"></span> = 
+<span class="bba-corpo-a-corpo"></span><br>
+Distância: 
+<span class="bba"></span>
+<span class="destreza-mod-total"></span>  
+<span class="tamanho-mod-ataque-defesa"></span> = 
+<span class="bba-distancia"></span><br>
+Estilos de Luta: <button type="button" onclick="ClickAdicionarEstiloLuta()">+</button>
+<div id="div-estilos-luta"></div>
+</div> <!-- div-ataque -->
+
+<div id="div-defesa" class="divs-principais">
+Classe de Armadura: 
+<select id="armadura" onchange="AtualizaGeral()">
+	<option value="nenhuma">Nenhuma</option>
+	<option value="acolchoada">Acolchoada</option>
+	<option value="couro">Couro</option>
+	<option value="couro_batido">Couro Batido</option>
+	<option value="camisao_cota_de_malha">Camisão de Cota de Malha</option>
+	<option value="gibao_de_peles">Gibão de Peles</option>
+	<option value="brunea">Brunea</option>
+	<option value="cota_de_malha">Cota de Malha</option>
+	<option value="peitoral_de_aco">Peitoral de Aço</option>
+	<option value="cota_de_talas">Cota de Talas</option>
+	<option value="loriga_segmentada">Loriga Segmentada</option>
+	<option value="meia_armadura">Meia Armadura</option>
+	<option value="armadura_de_batalha">Armadura de Batalha</option>
+</select>
+<input id="bonus-armadura" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
+, 
+<select id="escudo" onchange="AtualizaGeral()">
+	<option value="nenhum">Nenhum</option>
+	<option value="broquel">Broquel</option>
+	<option value="escudo_leve_de_madeira">Escudo Leve de Madeira</option>
+	<option value="escudo_leve_de_aco">Escudo Leve de Aço</option>
+	<option value="escudo_pesado_de_aco">Escudo Pesado de Madeira</option>
+	<option value="escudo_pesado_de_aco">Escudo Pesado de Aço</option>
+	<option value="escudo_de_corpo">Escudo de Corpo</option>
+</select>
+<input id="bonus-escudo" type="text" size="2" maxlength="2" value="0" onchange="AtualizaGeral()"></input>
+<br>
+Normal: 10
+<span class="ac-naturalnatural"></span>
+<span class="ca-armadura"></span>
+<span class="ca-escudo"></span>
+<span class="tamanho-mod-ataque-defesa"></span>
+<span class="destreza-mod-total"></span>
+= <span class="ca-normal">10</span><br>
+
+Surpreso: 10
+<span class="ac-naturalnatural"></span>
+<span class="ca-armadura"></span>
+<span class="ca-escudo"></span>
+<span class="tamanho-mod-ataque-defesa"></span>
+= <span class="ca-surpreso">10</span><br>
+
+Toque: 10
+<span class="tamanho-mod-ataque-defesa"></span>
+<span class="destreza-mod-total"></span>
+= <span class="ca-toque">10</span><br>
+</div> <!-- div-defesa -->
+
+<div id="div-salvacoes" class="divs-principais">
+</div> <!-- div-salvacoes -->
+
+<div id="div-equipamentos" class="divs-principais">
+Moedas:<br>
+Platina:<input id="moedas-platina" size="5"/>
+Ouro:<input id="moedas-ouro" size="5"/> 
+Prata:<input id="moedas-prata" size="5"/>
+Cobre:<input id="moedas-cobre" size="5"/><br>
+Armas: <button type="button" onclick="ClickAdicionarArma()">+</button>
+<!-- Cada entrada eh do tipo
+<select><input type='checkbox'>OP</input><input type='text'>Bonus</input>
+-->
+<div id="div-equipamentos-armas"></div>
+Armaduras:<br>
+Outros Equipamentos:<br>
+<textarea rows="2" cols="20" id="text-area-outros-equipamentos"></textarea>
+</div> <!-- div-equipamentos -->
+
+<div id="div-talentos" class="divs-principais">
+Talentos:<br>
+Total: <span class="talentos-total"></span><br> 
+<div id="div-select-talentos"></div>
+<div>Proficiente com: <span id="div-proficiencia-armas"></span></div>
+</div> <!-- div-talentos -->
+
+<div id="div-pericias" class="divs-principais">
+Pericias:<br>
+Total: <span id="pericias-total-pontos"></span>, gastos: <span id="pericias-pontos-gastos"></span><br>
+</div> <!-- div-pericias -->
+
+<div id="div-feiticos" class="divs-principais">
+</div> <!-- div-feiticos -->
+
+<div id="div-notas" class="divs-principais">
+Notas:<br>
+<textarea rows="5" cols="40" id="text-area-notas"></textarea>
+</div> <!-- div-notas -->
+
+<div id="div-salvar">
+<button type="button" onclick="ClickSalvar()">Salvar</button>
+<button type="button" onclick="ClickAbrir()">Abrir</button>
+</div> <!-- div-salvar -->
+
+<div id="div-link">
+<button type="button" onclick="ClickLink()">Link</button>
+<span id="link-personagem"></span>
+</div> <!-- div-link -->
+
+<div id="div-gerar-resumo">
+<button type="button"  onclick="ClickGerarResumo()">GerarResumo</button>
+<span id="resumo-personagem"></span>
+</div> <!-- div-salvar -->
+
+</body>
+</html>
