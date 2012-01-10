@@ -2,7 +2,9 @@
 var tabelas_raca = {
   aarakokra: {
       nome: 'Aarakokra', 
-      atributos: {}, tamanho: 'medio',
+      ajuste_nivel: 2, armadura_natural: 1,
+      movimento: {terrestre: 4, aereo: 18},
+      atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
   },
   anao: {
       nome: 'Anão',

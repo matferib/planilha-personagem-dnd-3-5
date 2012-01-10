@@ -23,11 +23,12 @@ function CarregamentoInicial() {
 }
 
 // Adiciona racas dinamicamente na planilha
-function _CarregaRacas () {
-  for (var chave_racas in tabelas_raca) {
-    
-
-}
+function _CarregaRacas() {
+  var select_raca = Dom('raca');
+  for (var chave_raca in tabelas_raca) {
+    select_raca.appendChild(CriaOption(tabelas_raca[chave_raca].nome, chave_raca))
+  }
+}  
 
 
 // Adiciona botoes dinamicamente na planilha.
