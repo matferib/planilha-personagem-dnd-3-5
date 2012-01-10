@@ -41,7 +41,7 @@ display: inline-block;
 width: 80px;
 }
 
-div#div-pontos-vida .botao-ferimentos {
+div#div-pontos-vida.botao-ferimentos {
 width: 40px;
 }
 
@@ -61,4 +61,8 @@ div#div-equipamentos {
 }
 
 div#div-salvacoes {
+}
+
+div.pericia-de-classe {
+background-color: Green;
 }
