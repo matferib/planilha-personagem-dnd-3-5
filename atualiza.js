@@ -405,6 +405,12 @@ function _AtualizaPericias() {
   span_gastos.textContent = personagem.pericias.pontos_gastos;
 
   for (var chave in personagem.pericias.lista) {
+    var dom_pericia = Dom('pericia-' + chave);
+    if (PersonagemPossuiUmaDasClasses(tabelas_pericias[chave].classes)) {
+      dom_pericia.className = 'pericia-de-classe';
+    } else {
+        dom_pericia.className = '';
+      }
     var input_pontos = Dom('pericia-' + chave + '-pontos');
     input_pontos.value = personagem.pericias.lista[chave].pontos;
     var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
