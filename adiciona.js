@@ -55,11 +55,9 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
         // Desarmado eh um caso especial.
         continue;
       }
-      var option = CriaOption('option');
+      var option = CriaOption(tabelas[i][arma_corrente].nome, arma_corrente);
       option.setAttribute('name', arma_corrente);
-      option.setAttribute('value', arma_corrente);
       option.selected = (arma_corrente == chave_arma);
-      option.text = tabelas[i][arma_corrente].nome;
       optgroup.appendChild(option);
     }
     select.appendChild(optgroup);
