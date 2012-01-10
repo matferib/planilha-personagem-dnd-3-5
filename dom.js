@@ -27,8 +27,11 @@ function CriaOptGroup(rotulo) {
   return optgroup;
 }
 
-function CriaOption() {
-  return CriaDom('option');
+function CriaOption(texto, valor) {
+  var option = CriaDom('option');
+  option.text = texto;
+  option.value = valor;
+  return option;
 }
 
 function CriaBotao(texto, id, classe, funcao) {
