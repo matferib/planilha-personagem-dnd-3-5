@@ -1,28 +1,43 @@
 // Dados das racas.
 var tabelas_raca = {
-  anao: { 
+  aarakokra: {
+      nome: 'Aarakokra', 
+      atributos: {}, tamanho: 'medio',
+  },
+  anao: {
+      nome: 'Anão',
       atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
       outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 }, 
                           magias: { base: ['fortitude', 'reflexo', 'vontade' ], bonus: 2, } },
   },
-  halfling: { 
+  halfling: {
+      nome: 'Halfling',
       atributos: { forca: -2, destreza: 2}, tamanho: 'pequeno',
       bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
       salvacoes: { fortitude: 1, vontade: 1, reflexo: 1 },
   },
-  humano: { atributos: {}, tamanho: 'medio', talento_extra: true },
-  elfo: { 
+  humano: {
+      nome: 'Humano',
+      atributos: {}, tamanho: 'medio', talento_extra: true },
+  elfo: {
+      nome: 'Elfo',
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
                             'arco_curto_composto'] },
-  gnomo: { 
+  gnomo: {
+      nome: 'Gnomo',
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
       outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
   },
-  meioelfo: { atributos: {}, tamanho: 'medio' },
-  meioorc: { atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio' }
+  meioelfo: {
+      nome: 'Meio-Elfo',
+      atributos: {}, tamanho: 'medio' },
+  meioorc: { 
+      nome: 'Meio-Orc',
+      atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio',
+  },
 };
 
 // Dados relacionados a classes. 

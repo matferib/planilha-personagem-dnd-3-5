@@ -433,7 +433,7 @@ function _AtualizaFeiticos() {
   RemoveFilhos(div_feiticos);
   for (var chave_classe in personagem.feiticos) {
     // Da classe.
-    var div_classe = CriaDiv('div-feiticos-' + chave_classe);
+    var div_classe = CriaDiv('div-feiticos-' + chave_classe, 'div-feiticos-classe');
     div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
     _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe);
     _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe);
@@ -453,8 +453,7 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   for (var nivel in feiticos_classe.conhecidos) {
     var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
-        CriaSpan('Nível: ' + nivel + 
-                 ', feitiços conhecidos: ' + feiticos_classe.conhecidos[nivel].length));
+        CriaSpan('Nível ' + nivel + ':')); 
     div_nivel.appendChild(CriaBr());
     for (var indice = 0; indice < feiticos_classe.conhecidos[nivel].length; ++indice) {
       // Adiciona os inputs.
@@ -478,8 +477,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   for (var nivel in feiticos_classe.slots) {
     var div_nivel = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
-        CriaSpan('Nível: ' + nivel + 
-                 ', feitiços por dia: ' + feiticos_classe.slots[nivel].feiticos.length));
+        CriaSpan('Nível ' + nivel + ':'));
     div_nivel.appendChild(CriaBr());
     for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
       // Adiciona os inputs de indices.
