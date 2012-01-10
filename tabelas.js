@@ -1,11 +1,15 @@
 // Dados das racas.
 var tabelas_raca = {
   aarakokra: {
-      nome: 'Aarakokra', 
+      nome: 'Aarakokra',
+      origem: { livro: 'Races of Faerun', pagina: '130' },
       ajuste_nivel: 2, armadura_natural: 1,
-      movimento: {terrestre: 4, aereo: 18},
+      movimento: { terrestre: 4, aereo: 18 },
       atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
-  },
+      proficiencia_armas: [ 'azagaia' ], // Javelin em ingles.
+      bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 }, //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
+      arma_natural: { garra: { nome: 'Garra', dano: { pequeno: '1d4', medio: '1d4' } } }, 
+    },
   anao: {
       nome: 'Anão',
       atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
