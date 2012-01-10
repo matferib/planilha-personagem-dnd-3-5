@@ -29,6 +29,11 @@ display: inline-block;
 width: 350px;
 }
 
+div.div-feiticos-classe {
+display: inline-block;
+vertical-align: top;
+padding: 10px;
+}
 
 /* os divs principais da planilha. */
 div.divs-principais {
