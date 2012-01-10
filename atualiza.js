@@ -149,10 +149,8 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
       // Nao adiciona classe desabilitada.
       continue;
     }
-    var option = CriaOption();
+    var option = CriaOption(tabelas_classes[chave_classe].nome, chave_classe);
     option.setAttribute('name', chave_classe);
-    option.setAttribute('value', chave_classe);
-    option.text = tabelas_classes[chave_classe].nome;
     option.selected = (chave_classe == classe) && !desabilitar_classe;
     option.disabled = desabilitar_classe;
     select_classe.appendChild(option);
