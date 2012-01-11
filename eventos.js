@@ -29,7 +29,7 @@ function ClickVisao(modo) {
     divs_combate.style.display = 'block';
   }
   personagem.modo_visao = modo;
-  _AtualizaGeral();
+  AtualizaGeralSemConverterEntradas();
 }
 
 
@@ -213,7 +213,6 @@ function ClickBotaoAtributoMenos() {
   AtualizaGeralSemLerEntradas();
 }
 
-
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
 function ClickAjustarFerimentos(valor) {
@@ -226,6 +225,7 @@ function ClickAjustarFerimentos(valor) {
 }
 
 // Esconde/mostra os botoes de geracao (class="botao-geracao)".
-// @param mostrar true se for para mostrar botoes de geracao.
-function ClickVisualizacaoGeracao(mostrar) {
+function ClickVisualizacaoModoMestre() {
+  personagem.modo_mestre = Dom('input-modo-mestre').checked;
+  AtualizaGeralSemConverterEntradas();
 }
