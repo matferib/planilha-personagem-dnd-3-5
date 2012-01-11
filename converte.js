@@ -308,14 +308,14 @@ function _ConvertePericias() {
     pericia_personagem.bonus_sinergia = 0;
     pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
     // soma todos os bonus de talentos.
-    var bonus_talentos_total = 0;
+    pericia_personagem.bonus_talentos_total = 0;
     for (var chave_talento in pericia_personagem.bonus_talentos) {
-      bonus_talentos_total += pericia_personagem.bonus_talentos[chave_talento];
+      pericia_personagem.bonus_talentos_total += pericia_personagem.bonus_talentos[chave_talento];
     }
     pericia_personagem.total = 
         pericia_personagem.graduacoes + 
         pericia_personagem.bonus_habilidade + 
-        bonus_talentos_total +
+        pericia_personagem.bonus_talentos_total +
         pericia_personagem.bonus_sinergia;
 
     personagem.pericias.pontos_gastos += pericia_personagem.pontos;

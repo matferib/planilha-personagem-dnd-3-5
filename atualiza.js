@@ -407,22 +407,19 @@ function _AtualizaPericias() {
     if (PersonagemPossuiUmaDasClasses(tabelas_pericias[chave].classes)) {
       dom_pericia.className = 'pericia-de-classe';
     } else {
-        dom_pericia.className = '';
-      }
-    var input_pontos = Dom('pericia-' + chave + '-pontos');
-    input_pontos.value = personagem.pericias.lista[chave].pontos;
-    var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
-    dom_graduacoes.textContent = personagem.pericias.lista[chave].pontos;
-    var dom_sinergia = Dom('pericia-' + chave + '-sinergia');
-    dom_sinergia.textContent = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
-    var bonus_talentos_total = 0;
-    for (var chave_talento in personagem.pericias.lista[chave].bonus_talentos) {
-      bonus_talentos_total += personagem.pericias.lista[chave].bonus_talentos[chave_talento];
+      dom_pericia.className = '';
     }
+    var pericia_personagem = personagem.pericias.lista[chave];
+    var input_pontos = Dom('pericia-' + chave + '-pontos');
+    input_pontos.value = pericia_personagem.pontos;
+    var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
+    dom_graduacoes.textContent = pericia_personagem.graduacoes;
+    var dom_sinergia = Dom('pericia-' + chave + '-sinergia');
+    dom_sinergia.textContent = StringSinalizada(pericia_personagem.bonus_sinergia, false);
     var dom_bonus_talento = Dom('pericia-' + chave + '-bonus-talento');
-    dom_bonus_talento.textContent = StringSinalizada(bonus_talentos_total, false);
+    dom_bonus_talento.textContent = StringSinalizada(pericia_personagem.bonus_talentos_total, false);
     var dom_total = Dom('pericia-' + chave + '-total');
-    dom_total.textContent = StringSinalizada(personagem.pericias.lista[chave].total);
+    dom_total.textContent = StringSinalizada(pericia_personagem.total);
   }
 }
 
