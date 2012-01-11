@@ -63,34 +63,43 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
-<button type="button" onclick="ClickGerarPontosDeVida('comum')">Gerar Comum</button>
-<button type="button" onclick="ClickGerarPontosDeVida('elite')">Gerar Elite</button>
-<button type="button" onclick="ClickGerarPontosDeVida('personagem')">Personagem</button><br>
+<button type="button" onclick="ClickGerarPontosDeVida('comum')" class="botao-geracao">
+    Gerar Comum</button>
+<button type="button" onclick="ClickGerarPontosDeVida('elite')" class="botao-geracao">
+    Gerar Elite</button>
+<!-- esse botao eh o modo que usamos para personagens. -->
+<button type="button" onclick="ClickGerarPontosDeVida('personagem')" class="botao-geracao">
+    Personagem</button><br>
+
 Dados de Vida: <span id="dados-vida-classes"></span><br>
 Pontos de Vida: <span id="pontos-vida-corrente"></span> =  
 <input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> - 
 <input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
 <span style="color:Black" class="adiciona-remove-ferimentos">Ferimentos</span>
-<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(1)">-1</button>
-<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(3)">-3</button>
-<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(5)">-5</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(1)">-1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(3)">-3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(5)">-5</button>
 <input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3" 
-    onchange="ClickAdicionarRemoverFerimentos(parseInt(Dom('input-adicionar-ferimentos').value))"/><br>
+    onchange="ClickAjustarFerimentos(parseInt(Dom('input-adicionar-ferimentos').value))"/><br>
 <span style="color:Black" class="adiciona-remove-ferimentos">Cura</span>
-<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-1)">+1</button>
-<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-3)">+3</button>
-<button type="button" class="botao-ferimentos" onclick="ClickAdicionarRemoverFerimentos(-5)">+5</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(-1)">+1</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(-3)">+3</button>
+<button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(-5)">+5</button>
 <input type="text" id="input-remover-ferimentos" maxlength="3" size="3" 
-    onchange="ClickAdicionarRemoverFerimentos(-parseInt(Dom('input-remover-ferimentos').value))"/>
+    onchange="ClickAjustarFerimentos(-parseInt(Dom('input-remover-ferimentos').value))"/>
 <br>
 </div> <!-- div-pontos-vida -->
 
 
 <div id="div-stats" class="divs-principais">
-<button type="button" onclick="ClickGerarComum()">Gerar comum</button>
-<button type="button" onclick="ClickGerarAleatorioComum()">Gerar comum aleatório (3d6)</button><br>
-<button type="button" onclick="ClickGerarElite()">Gerar elite</button>
-<button type="button" onclick="ClickGerarAleatorioElite()">Gerar elite Aleatório (4d6 - menor)</button><br>
+<button type="button" onclick="ClickGerarComum()" class="botao-geracao">
+    Gerar comum</button>
+<button type="button" onclick="ClickGerarAleatorioComum()" class="botao-geracao">
+    Gerar comum aleatório (3d6)</button><br>
+<button type="button" onclick="ClickGerarElite()" class="botao-geracao">
+    Gerar elite</button>
+<button type="button" onclick="ClickGerarAleatorioElite()" class="botao-geracao">
+    Gerar elite Aleatório (4d6 - menor)</button><br>
 
 </div> <!-- div-stats -->
 
@@ -211,7 +220,8 @@ Notas:<br>
 </div> <!-- div-link -->
 
 <div id="div-gerar-resumo">
-<button type="button"  onclick="ClickGerarResumo()">GerarResumo</button>
+<button type="button"  onclick="ClickGerarResumo()" class="botao-geracao">
+    GerarResumo</button>
 <span id="resumo-personagem"></span>
 </div> <!-- div-salvar -->
 
