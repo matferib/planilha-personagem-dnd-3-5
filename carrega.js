@@ -150,7 +150,7 @@ function _CarregaPericias() {
     div.appendChild(CriaSpan('+0', null, habilidade + '-mod-total'));
     div.appendChild(CriaSpan('+0', prefixo_id + '-sinergia'));
     div.appendChild(CriaSpan('+0', prefixo_id + '-bonus-talento'));
-    div.appendChild(CriaSpan('+0', prefixo_id + '-bonus-racial'));
+    div.appendChild(CriaSpan('', prefixo_id + '-bonus-racial'));
     div.appendChild(CriaSpan(' = '));
     div.appendChild(CriaSpan('+0', prefixo_id + '-total'));
 

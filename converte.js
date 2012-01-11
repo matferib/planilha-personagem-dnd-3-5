@@ -47,8 +47,6 @@ function ConverteEntradasParaPersonagem() {
 
   // Feiticos.
   _ConverteFeiticos();
-  
-  _ConverteBonusRacial();
 
   personagem.notas = entradas.notas;
 }
@@ -314,10 +312,20 @@ function _ConvertePericias() {
     for (var chave_talento in pericia_personagem.bonus_talentos) {
       bonus_talentos_total += pericia_personagem.bonus_talentos[chave_talento];
     }
+    // soma todos os bonus raciais.
+    var bonus_racial_total = 0;
+    var nome_pericia = entradas.pericias[i].chave;
+    for (var chave_racial in tabelas_raca[personagem.raca].bonus_pericias) {
+      if (chave_racial == nome_pericia) {
+        var bonus_racial_total = tabelas_raca[personagem.raca].bonus_pericias[nome_pericia] ;
+      }
+    }
+    
     pericia_personagem.total = 
         pericia_personagem.graduacoes + 
         pericia_personagem.bonus_habilidade + 
         bonus_talentos_total +
+        bonus_racial_total +
         pericia_personagem.bonus_sinergia;
 
     personagem.pericias.pontos_gastos += pericia_personagem.pontos;
@@ -615,8 +623,4 @@ function _ConverteFeiticosSlots() {
       slots_classe.feiticos[entrada_feitico.indice].gasto = entrada_feitico.gasto;
     }
   }
-}
-
-function _ConverteBonusRacial() {
-
 }
