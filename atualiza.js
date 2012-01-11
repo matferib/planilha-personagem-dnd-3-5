@@ -548,6 +548,7 @@ function _AtualizaModoVisao() {
     span_visao.className = personagem.modo_visao == visao ?
         'selecionado': '';
   }
+  Dom('input-modo-mestre').checked = personagem.modo_mestre;
   var botoes_geracao = goog.dom.getElementsByClass('botao-geracao');
   for (var i = 0; i < botoes_geracao.length; ++i) {
     botoes_geracao[i].style.display = personagem.modo_mestre ? 'inline' : 'none';
