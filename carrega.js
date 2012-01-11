@@ -39,6 +39,12 @@ function _CarregaBotoesVisao() {
     botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
     div_visoes.appendChild(botao_visao);
   }
+  var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
+  input_modo_mestre.setAttribute('onchange', 'ClickVisualizacaoModoMestre()');
+  //input_modo_mestre.textContent = 'modo-mestre';
+  var span_input = CriaSpan();
+  span_input.appendChild(input_modo_mestre);
+  div_visoes.appendChild(span_input);
 }
 
 function _CarregaAtributos() {
