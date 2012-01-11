@@ -823,19 +823,12 @@ Especialização em Combate¹ Int 13 Substitui bônus de ataque por CA (máximo 
 Desarme Aprimorado¹ Especialização em Combate +4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade
 Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação de movimento
 Imobilização Aprimorada¹ Especialização em Combate +4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade
-Ataque Giratório¹ Des 13, Especialização em Combate,
-Esquiva, Mobilidade, Ataque em
-Movimento, bônus base de ataque +4
-Realiza um ataque corporal contra cada oponente dentro do alcance
+Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Esquiva¹ Des 13 +1 de bônus de esquiva na CA contra um adversário à sua escolha
 Mobilidade¹ Esquiva +4 de bônus de esquiva na CA contra ataques de oportunidade
 Ataque em Movimento¹ Mobilidade, bônus base de ataque +4 Capaz de deslocar antes e depois do ataque
-Expulsão Adicional³ Habilidade de expulsar ou fascinar
-criaturas
-4 tentativas diárias adicionais de Expulsar/Fascinar
-Expulsão Aprimorada Habilidade de expulsar ou fascinar
-criaturas
-+1 nível efetivo para testes de expulsão
+Expulsão Adicional³ Habilidade de expulsar ou fascinar criaturas 4 tentativas diárias adicionais de Expulsar/Fascinar
+Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de
 guerreiro
 +2 de bônus no dano com a arma escolhida
@@ -846,7 +839,6 @@ Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de r
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
 Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
-Iniciativa Aprimorada¹ - +4 de bônus nos testes de Iniciativa
 Liderança 6° nível de personagem Atrai parceiros e seguidores
 Lutar às Cegas¹ - Jogar novamente chance de falha por camuflagem
 Magia Natural Sab 13, Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
@@ -859,7 +851,6 @@ Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Rastrear - Utiliza Sobrevivência para rastrear
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
 Reflexos Rápidos - +2 de bônus nos testes de resistência de Reflexos
-Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Certeiro¹ - +1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros
@@ -878,9 +869,6 @@ base de ataque +11
 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
 Tolerância - +4 de bônus nos testes para resistir ao dano por contusão
 Duro de Matar Tolerância Permanece consciente entre -1 e -9 PV
-Usar Arma Comum² - Não sofre penalidade nos ataques com uma arma comum específica
-Usar Arma Exótica¹² Bônus base de ataque +1 Não sofre penalidade nos ataques com uma arma exótica específica
-Usar Armas Simples - Não sofre penalidades nos ataques com armas simples
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
@@ -940,6 +928,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   fraudulento: {
       nome: 'Fraudulento',
       bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
+  // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
+  iniciativa_aprimorada: {
+      nome: 'Iniciativa Aprimorada',
+      bonus_iniciativa: 4,
+      guerreiro: true, },
   investigador: {
       nome: 'Investigador',
       bonus_pericias: { obter_informacao: 2, procurar: 2 } },
@@ -952,16 +945,19 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   prontidao: {
       nome: 'Prontidão',
       bonus_pericias: { ouvir: 2, observar: 2 } },
-  // Simple Weapon Proficiency
+  // Usar Armas Simples - Não sofre penalidades nos ataques com armas simples
   usar_armas_simples: { nome: 'Usar armas simples' },
 
-  // Martial weapon proficiency
+  // Usar Arma Comum² - Não sofre penalidade nos ataques com uma arma comum específica
   usar_arma_comum: { nome: 'Usar arma comum', complemento: true }, 
 
   // Exotic Weapon Proficiency
+  // Usar Arma Exótica¹² Bônus base de ataque +1 Não sofre penalidade nos 
+  // ataques com uma arma exótica específica
   usar_arma_exotica: { 
       nome: 'Usar arma exótica', complemento: true,
-      requisitos: { bba: 1 } },
+      requisitos: { bba: 1 },
+      guerreiro: true },
 
   // Reduz penalidade ao usar duas maos em 2.
   combater_duas_armas: { 
@@ -985,6 +981,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       complemento: true,
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
       guerreiro: true },
+  //Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
+  saque_rapido: {
+      nome: 'Saque rápido',
+      requisitos: { bba: 1 },
+      guerreiro: true, },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
