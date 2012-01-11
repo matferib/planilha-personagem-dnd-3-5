@@ -47,6 +47,8 @@ function ConverteEntradasParaPersonagem() {
 
   // Feiticos.
   _ConverteFeiticos();
+  
+  _ConverteBonusRacial();
 
   personagem.notas = entradas.notas;
 }
@@ -613,4 +615,8 @@ function _ConverteFeiticosSlots() {
       slots_classe.feiticos[entrada_feitico.indice].gasto = entrada_feitico.gasto;
     }
   }
+}
+
+function _ConverteBonusRacial() {
+
 }
