@@ -1,6 +1,7 @@
 // Apenas os dados do personagem e funcoes de conversao de entrada para personagem.
 var personagem = {
   modo_visao: 'completo',
+  modo_mestre: false,
   nome: '',
   raca: 'humano',
   tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
