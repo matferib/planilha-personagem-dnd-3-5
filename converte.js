@@ -315,10 +315,12 @@ function _ConvertePericias() {
     // soma todos os bonus raciais.
     var bonus_racial_total = 0;
     var nome_pericia = entradas.pericias[i].chave;
-    for (var chave_racial in tabelas_raca[personagem.raca].bonus_pericias) {
-      if (chave_racial == nome_pericia) {
-        var bonus_racial_total = tabelas_raca[personagem.raca].bonus_pericias[nome_pericia] ;
-      }
+    personagem.pericias.lista[nome_pericia].bonus_racial = 0;
+    for (var chave_bonus_racial in tabelas_raca[personagem.raca].bonus_pericias) {
+      if (chave_bonus_racial == nome_pericia) {
+        var bonus_racial_total = tabelas_raca[personagem.raca].bonus_pericias[nome_pericia];
+        personagem.pericias.lista[nome_pericia].bonus_racial = bonus_racial_total;
+      } 
     }
     
     pericia_personagem.total = 
