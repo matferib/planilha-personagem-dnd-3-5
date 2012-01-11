@@ -421,6 +421,10 @@ function _AtualizaPericias() {
     }
     var dom_bonus_talento = Dom('pericia-' + chave + '-bonus-talento');
     dom_bonus_talento.textContent = StringSinalizada(bonus_talentos_total, false);
+    // Bonus Racial.
+    var dom_bonus_racial = Dom('pericia-' + chave + '-bonus-racial');
+    dom_bonus_racial.textContent = StringSinalizada(personagem.pericias.lista[chave].bonus_racial, false);
+    
     var dom_total = Dom('pericia-' + chave + '-total');
     dom_total.textContent = StringSinalizada(personagem.pericias.lista[chave].total);
   }
