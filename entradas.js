@@ -34,6 +34,9 @@ var entradas = {
   armas: [],
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum', bonus_magico: 0 },
+  elmo: '',
+  // cada entrada: { nome, caracteristicas }
+  aneis: [],
   outros_equipamentos: '',
   // talentos. Cada entrada possui { nome, complemento }, se houver.
   talentos: [],
@@ -97,30 +100,7 @@ function LeEntradas() {
     entradas.estilos_luta.push(_LeEntradaEstiloLuta(div_estilos_luta.childNodes[i]));
   }
 
-  // Armadura e escudo.
-  entradas.armadura.nome = 
-      ValorSelecionado(Dom('armadura')); 
-  entradas.armadura.bonus_magico = 
-      parseInt(Dom('bonus-armadura').value) || 0; 
-  entradas.escudo.nome = 
-      ValorSelecionado(Dom('escudo'));
-  entradas.escudo.bonus_magico = 
-      parseInt(Dom('bonus-escudo').value) || 0;
-  entradas.outros_equipamentos = Dom('text-area-outros-equipamentos').value;
-
-  // Moedas
-  entradas.platina = parseInt(Dom('moedas-platina').value);
-  entradas.ouro = parseInt(Dom('moedas-ouro').value);
-  entradas.prata = parseInt(Dom('moedas-prata').value);
-  entradas.cobre = parseInt(Dom('moedas-cobre').value);
-
-  // Equipamentos.
-  // Armas: Este div possui divs filhos com select, checkbox, input
-  entradas.armas = [];
-  var div_armas = Dom('div-equipamentos-armas');
-  for (var i = 0; i < div_armas.childNodes.length; ++i) {
-    entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
-  }
+  _LeEquipamentos();
 
   // Talentos.
   entradas.talentos = [];
@@ -234,4 +214,45 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
     }
   }
   return estilo;
+}
+
+function _LeEquipamentos() {
+  // Armadura e escudo.
+  entradas.armadura.nome = 
+      ValorSelecionado(Dom('armadura')); 
+  entradas.armadura.bonus_magico = 
+      parseInt(Dom('bonus-armadura').value) || 0; 
+  entradas.escudo.nome = 
+      ValorSelecionado(Dom('escudo'));
+  entradas.escudo.bonus_magico = 
+      parseInt(Dom('bonus-escudo').value) || 0;
+  entradas.outros_equipamentos = Dom('text-area-outros-equipamentos').value;
+
+  // Moedas
+  entradas.platina = parseInt(Dom('moedas-platina').value);
+  entradas.ouro = parseInt(Dom('moedas-ouro').value);
+  entradas.prata = parseInt(Dom('moedas-prata').value);
+  entradas.cobre = parseInt(Dom('moedas-cobre').value);
+
+  // Equipamentos.
+  // Armas: Este div possui divs filhos com select, checkbox, input
+  entradas.armas = [];
+  var div_armas = Dom('div-equipamentos-armas');
+  for (var i = 0; i < div_armas.childNodes.length; ++i) {
+    entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
+  }
+
+  _LeAneis();
+}
+
+function _LeAneis() {
+  entradas.aneis = [];
+  var dom_aneis = goog.dom.getElementsByClass('div-aneis');
+  for (var i = 0; i < dom_aneis.length; ++i) {
+    var anel = {
+        nome: dom_aneis[i].firstChild.value,
+        caracteristicas: dom_aneis[i].firstChild.nextSibling.value
+    };
+    entradas.aneis.push(anel);
+  }
 }
