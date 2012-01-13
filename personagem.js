@@ -117,6 +117,11 @@ var personagem = {
   // Armadura: { nome, bonus_magico }
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum' , bonus_magico: 0 },
+  elmo: '',
+  aneis: [],
+  capa: '',
+  botas: '',
+
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',
   // Feiticos. Cada entrada: chave_classe: { 

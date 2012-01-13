@@ -138,6 +138,10 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
   var select_classe = Dom('select-classe-' + indice);
   select_classe.options.length = 0;
   for (var chave_classe in tabelas_classes) {
+    if (tabelas_classes[chave_classe].mestre && !personagem.modo_mestre) {
+      // So adiciona as classes de mestre se estiver no modo mestre.
+      continue;
+    }
     var desabilitar_classe = false;
     for (var j = 0; j < classes_desabilitadas.length; ++j) {
       if (chave_classe == classes_desabilitadas[j]) {
