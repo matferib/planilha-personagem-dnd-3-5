@@ -21,7 +21,7 @@ var tabelas_raca = {
   },
   humano: {
       nome: 'Humano',
-      atributos: {}, tamanho: 'medio', talento_extra: true },
+      atributos: {}, tamanho: 'medio', talento_extra: true, pontos_pericia: 1 },
   elfo: {
       nome: 'Elfo',
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
@@ -57,11 +57,11 @@ var tabelas_classes = {
   paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
   ranger: { nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte, },
   // classes NPC
-  adepto: { nome: 'Adepto', dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, },
-  aristocrata: { nome: 'Aristocrata', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
-  plebeu: { nome: 'Plebeu', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
-  expert: { nome: 'Expert', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
-  combatente: { nome: 'Combatente', dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
+  adepto: { nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, },
+  aristocrata: { nome: 'Aristocrata', mestre: true, dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+  plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
+  expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
+  combatente: { nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
 };
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.

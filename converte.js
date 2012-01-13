@@ -283,19 +283,21 @@ function _VerificaPrerequisitosTalento() {
 // de pericia, computando o valor de cada uma e o numero de pontos disponiveis.
 function _ConvertePericias() {
   personagem.pericias.total_pontos = 0;
-  var first_level = true;
+  var primeiro_nivel = true;
   for (var i = 0; i < personagem.classes.length; ++i) {
     var nivel = personagem.classes[i].nivel;
     var pontos_classe = tabelas_classes[personagem.classes[i].classe].pontos_pericia;
+    var pontos_raca = tabelas_raca[personagem.raca].pontos_pericia || 0;
     var pontos_inteligencia = personagem.atributos.inteligencia.modificador;
 
     // Se o primeiro nivel estiver neste pacote de niveis, ele conta como 3 niveis a mais.
     var pontos_iteracao = 0;
-    if (first_level) {
+    if (primeiro_nivel) {
       nivel += 3;
-      first_level = false;
+      primeiro_nivel = false;
     }
-    personagem.pericias.total_pontos += (pontos_classe + pontos_inteligencia) * nivel;
+    personagem.pericias.total_pontos += 
+        Math.max(pontos_classe + pontos_raca + pontos_inteligencia, 1) * nivel;
   }
 
   personagem.pericias.pontos_gastos = 0;
