@@ -522,8 +522,33 @@ function _AtualizaEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     Dom('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
   }
+  var div_aneis = goog.dom.getElementsByClass('div-aneis');
+  for (var i = 0; i < personagem.aneis.length; ++i) {
+    _AtualizaAnel(
+        personagem.aneis[i], 
+        (i >= div_aneis.length) ? null : div_aneis[i]);
+  }
   Dom('text-area-outros-equipamentos').value =
       personagem.outros_equipamentos;;
+}
+
+// Atualiza um anel, o div pode ser null, nesse caso criara um novo.
+function _AtualizaAnel(anel, div_anel) {
+  if (div_anel == null) {
+    var div_aneis = Dom('div-equipamentos-aneis');
+    div_anel = CriaDiv(null, 'div-aneis');
+    div_anel.appendChild(CriaInputTexto('nome', null));
+    div_anel.appendChild(CriaInputTexto('características', null));
+    div_anel.appendChild(CriaBotao('-', null, null, {
+        div_anel: div_anel,
+        div_aneis: div_aneis,
+        handleEvent: function(e) {
+          RemoveFilho(this.div_anel, this.div_aneis);
+          AtualizaGeral(); } }));
+    div_aneis.appendChild(div_anel);
+  }
+  div_anel.firstChild.value = anel.nome;
+  div_anel.firstChild.nextSibling.value = anel.caracteristicas;
 }
 
 function _AtualizaListaArmas() {

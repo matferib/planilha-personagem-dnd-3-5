@@ -56,6 +56,8 @@ function _ConverteEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
   }
+  // Aneis.
+  personagem.aneis = entradas.aneis;
   // outros.
   personagem.outros_equipamentos = entradas.outros_equipamentos;
 }
