@@ -229,3 +229,13 @@ function ClickVisualizacaoModoMestre() {
   personagem.modo_mestre = Dom('input-modo-mestre').checked;
   AtualizaGeralSemConverterEntradas();
 }
+
+// Trata o evento de adicionar aneis. Se a estrutura for alterada aqui,
+// mudar tambem a leitura das entradas que depende da ordem dos doms.
+function ClickAdicionarAnel() {
+  personagem.aneis.push({ nome: 'nome', caracteristicas: 'caracteristicas'});
+  AtualizaGeralSemConverterEntradas();
+}
+
+
+

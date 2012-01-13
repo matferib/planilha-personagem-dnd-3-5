@@ -133,13 +133,13 @@ function CriaBotoesMaisMenos(id, classe, nome_funcao, parametro) {
 }
 
 // Remove o filho do pai com o id passado.
-// @param id_filho identificador do filho.
+// @param filho identificador do filho ou o dom do filho.
 // @param pai elemento que contem os filhos.
-function RemoveFilho(id_filho, pai) {
+function RemoveFilho(filho, pai) {
   for (var i = 0; i < pai.childNodes.length; ++i) {
-    var filho = pai.childNodes[i];
-    if (filho.id == id_filho) {
-      pai.removeChild(filho);
+    var nodo_filho = pai.childNodes[i];
+    if (nodo_filho == filho || nodo_filho.id == filho) {
+      pai.removeChild(nodo_filho);
     }
   }
 }
