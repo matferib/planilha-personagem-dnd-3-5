@@ -220,3 +220,16 @@ function AdicionaTalento(id, chave_talento, complemento) {
 
   div_select_talentos.appendChild(div_select_talento);
 }
+
+// Cria um select com todos os aneis.
+// @return o dom do select criado.
+function AdicionaAnel(div) {
+  var select = CriaSelect();
+  for (var chave_anel in tabelas_aneis) {
+    select.appendChild(CriaOption(tabelas_aneis[chave_anel].nome, chave_anel));
+  }
+  if (div != null) {
+    div.appendChild(select);
+  }
+  return select;
+}
