@@ -237,5 +237,23 @@ function ClickAdicionarAnel() {
   AtualizaGeralSemConverterEntradas();
 }
 
-
-
+// Trata o click do checkbox de anel.
+// @param checkbox que causou a mudanca (null em caso de remocao).
+function ClickAnel(checkbox) {
+  if (checkbox.checked) {
+    var total_em_uso = 0;
+    for (var i = 0; i < personagem.aneis.length && total_em_uso < 2; ++i) {
+      if (personagem.aneis[i].em_uso) {
+        ++total_em_uso;
+      }
+    }
+    // Maior aqui so pra garantir no caso de algum bisiu louco passar de 2.
+    if (total_em_uso >= 2) {
+      // Desmarca o anel para nao permitir um terceiro.
+      alert('São permitidos no máximo 2 anéis');
+      checkbox.checked = false;
+      return;
+    }
+  }
+  AtualizaGeral();
+}

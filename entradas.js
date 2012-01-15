@@ -35,7 +35,7 @@ var entradas = {
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum', bonus_magico: 0 },
   elmo: '',
-  // cada entrada: { chave, }
+  // cada entrada: { chave, em_uso }
   aneis: [],
   outros_equipamentos: '',
   // talentos. Cada entrada possui { nome, complemento }, se houver.
@@ -251,6 +251,7 @@ function _LeAneis() {
   for (var i = 0; i < dom_aneis.length; ++i) {
     var anel = {
         chave: dom_aneis[i].firstChild.value,
+        em_uso: dom_aneis[i].firstChild.nextSibling.checked,
     };
     entradas.aneis.push(anel);
   }
