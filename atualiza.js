@@ -522,25 +522,32 @@ function _AtualizaEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     Dom('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
   }
-  var div_aneis = goog.dom.getElementsByClass('div-aneis');
-  for (var i = 0; i < personagem.aneis.length; ++i) {
-    _AtualizaAnel(
-        personagem.aneis[i],
-        (i >= div_aneis.length) ? null : div_aneis[i]);
-  }
+  _AtualizaAneis();
   Dom('text-area-outros-equipamentos').value =
       personagem.outros_equipamentos;;
 }
 
+function _AtualizaAneis() {
+  var div_aneis_pai = Dom('div-equipamentos-aneis');
+  var div_aneis_filhos = goog.dom.getElementsByClass('div-aneis');
+  for (var i = 0; i < personagem.aneis.length; ++i) {
+    _AtualizaAnel(
+        personagem.aneis[i],
+        (i >= div_aneis_filhos.length) ? null : div_aneis_filhos[i],
+        div_aneis_pai);
+  }
+}
+
 // Atualiza um anel, o div pode ser null, nesse caso criara um novo.
-function _AtualizaAnel(chave_anel, div_anel) {
+// @param anel do personagem (aneis[i]).
+function _AtualizaAnel(anel, div_anel, div_aneis) {
   if (div_anel == null) {
-    var div_aneis = Dom('div-equipamentos-aneis');
     div_anel = CriaDiv(null, 'div-aneis');
-    AdicionaAnel(div_anel);
+    AdicionaAnel(div_anel, div_aneis);
     div_aneis.appendChild(div_anel);
   }
-  SelecionaValor(chave_anel, div_anel.firstChild);
+  SelecionaValor(anel.chave, div_anel.firstChild);
+  div_anel.firstChild.nextSibling.checked = anel.em_uso;
 }
 
 function _AtualizaListaArmas() {
