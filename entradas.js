@@ -35,7 +35,7 @@ var entradas = {
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum', bonus_magico: 0 },
   elmo: '',
-  // cada entrada: { nome, caracteristicas }
+  // cada entrada: { chave, }
   aneis: [],
   outros_equipamentos: '',
   // talentos. Cada entrada possui { nome, complemento }, se houver.
@@ -250,8 +250,7 @@ function _LeAneis() {
   var dom_aneis = goog.dom.getElementsByClass('div-aneis');
   for (var i = 0; i < dom_aneis.length; ++i) {
     var anel = {
-        nome: dom_aneis[i].firstChild.value,
-        caracteristicas: dom_aneis[i].firstChild.nextSibling.value
+        chave: dom_aneis[i].firstChild.value,
     };
     entradas.aneis.push(anel);
   }

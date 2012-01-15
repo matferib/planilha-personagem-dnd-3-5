@@ -118,6 +118,7 @@ var personagem = {
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum' , bonus_magico: 0 },
   elmo: '',
+  // Cada entrada { chave, }
   aneis: [],
   capa: '',
   botas: '',
