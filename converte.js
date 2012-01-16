@@ -66,6 +66,7 @@ function _ConverteArmadurasEscudos() {
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
   personagem.ca.bonus.Limpa();
+  var aneis = [];
   with (personagem.ca.bonus) {
     Adiciona('armadura', 'armadura', tabelas_armaduras[personagem.armadura.nome].bonus);
     Adiciona('armadura_melhoria', 'armadura', personagem.armadura.bonus_magico);
@@ -73,6 +74,14 @@ function _ConverteArmadurasEscudos() {
     Adiciona('escudo_melhoria', 'escudo', personagem.escudo.bonus_magico);
     Adiciona('atributo', 'destreza', personagem.atributos.destreza.modificador);
     Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
+    for (var i = 0; i < personagem.aneis.length; ++i) {
+      if (personagem.aneis[i].em_uso) {
+        var anel = tabelas_aneis[personagem.aneis[i].chave];
+        for (var chave in anel.caracteristicas.ca) {
+          Adiciona(chave, personagem.aneis[i].chave, anel.caracteristicas.ca[chave]);
+        }
+      }
+    }
   }
 }
 
