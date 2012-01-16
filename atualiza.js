@@ -412,10 +412,8 @@ function _AtualizaPericias() {
     input_pontos.value = pericia_personagem.pontos;
     var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
     dom_graduacoes.textContent = pericia_personagem.graduacoes;
-    var dom_sinergia = Dom('pericia-' + chave + '-sinergia');
-    dom_sinergia.textContent = StringSinalizada(pericia_personagem.bonus_sinergia, false);
-    var dom_bonus_talento = Dom('pericia-' + chave + '-bonus-talento');
-    dom_bonus_talento.textContent = StringSinalizada(pericia_personagem.bonus_talentos_total, false);
+    var dom_total_bonus = Dom('pericia-' + chave + '-total-bonus');
+    dom_total_bonus.textContent = StringSinalizada(pericia_personagem.bonus.Total(), false);
     var dom_total = Dom('pericia-' + chave + '-total');
     dom_total.textContent = StringSinalizada(pericia_personagem.total);
   }
