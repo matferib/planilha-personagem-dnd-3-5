@@ -326,38 +326,32 @@ function _AtualizaDefesa() {
   // Armadura e escudo.
   SelecionaValor(personagem.armadura.nome, 
                  Dom('armadura')); 
-  Dom('bonus-armadura').value = personagem.armadura.bonus_magico; 
+  Dom('bonus-armadura').value =
+      personagem.ca.bonus.Le('armadura_melhoria', 'armadura');
   SelecionaValor(personagem.escudo.nome, 
                  Dom('escudo'));
-  Dom('bonus-escudo').value = personagem.escudo.bonus_magico; 
+  Dom('bonus-escudo').value =
+      personagem.ca.bonus.Le('escudo_melhoria', 'escudo');
 
-
-  ImprimeSinalizado(tabelas_armaduras[personagem.armadura.nome].bonus +
-                    personagem.armadura.bonus_magico,
+  ImprimeSinalizado(personagem.ca.bonus.Le('armadura', 'armadura') +
+                    personagem.ca.bonus.Le('armadura_melhoria', 'armadura'),
                     goog.dom.getElementsByClass('ca-armadura'));
-  ImprimeSinalizado(tabelas_escudos[personagem.escudo.nome].bonus + 
-                    personagem.escudo.bonus_magico,
+  ImprimeSinalizado(personagem.ca.bonus.Le('escudo', 'escudo') + 
+                    personagem.ca.bonus.Le('escudo_melhoria', 'escudo'),
                     goog.dom.getElementsByClass('ca-escudo'));
 
   // AC normal.
   ImprimeNaoSinalizado(
-      10 + personagem.atributos.destreza.modificador +
-          tabelas_armaduras[personagem.armadura.nome].bonus +
-          personagem.armadura.bonus_magico +
-          tabelas_escudos[personagem.escudo.nome].bonus +
-          personagem.escudo.bonus_magico +
-          personagem.tamanho.modificador_ataque_defesa, 
+      10 + personagem.ca.bonus.Total(),
       goog.dom.getElementsByClass('ca-normal'));
   // AC surpreso.
   ImprimeNaoSinalizado(
-      10 + personagem.tamanho.modificador_ataque_defesa + 
-          tabelas_armaduras[personagem.armadura.nome].bonus +
-          tabelas_escudos[personagem.escudo.nome].bonus,
+      10 + personagem.ca.bonus.Total(['atributo']),
       goog.dom.getElementsByClass('ca-surpreso'));
   // AC toque.
   ImprimeNaoSinalizado(
-      10 + personagem.atributos.destreza.modificador + 
-          personagem.tamanho.modificador_ataque_defesa, 
+      10 + personagem.ca.bonus.Total(
+          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']),
       goog.dom.getElementsByClass('ca-toque'));
 }
 
