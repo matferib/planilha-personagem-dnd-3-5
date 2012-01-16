@@ -19,6 +19,9 @@ function ConverteEntradasParaPersonagem() {
     personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
   }
 
+  // Equipamentos podem afetar todo o resto.
+  _ConverteEquipamentos();
+
   _ConverteAtributos();
   _ConverteBba();
   _ConverteTalentos();
@@ -32,7 +35,6 @@ function ConverteEntradasParaPersonagem() {
   _ConverteFocoArmas();
 
   //_ConverteEspecializacaoArmas();
-  _ConverteEquipamentos();
   _ConverteArmadurasEscudos();
   _ConverteListaArmas();
 
@@ -322,24 +324,42 @@ function _ConvertePericias() {
 
   personagem.pericias.pontos_gastos = 0;
   for (var i = 0; i < entradas.pericias.length; ++i) {
-    var pericia = tabelas_pericias[entradas.pericias[i].chave];
-    var pericia_personagem = personagem.pericias.lista[entradas.pericias[i].chave];
+    var chave_pericia = entradas.pericias[i].chave;
+    var pericia = tabelas_pericias[chave_pericia];
+    var pericia_personagem = personagem.pericias.lista[chave_pericia];
     pericia_personagem.pontos = entradas.pericias[i].pontos;
     pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasses(pericia.classes) ?
         pericia_personagem.pontos : Math.floor(pericia_personagem.pontos / 2);
-    pericia_personagem.bonus_sinergia = 0;
-    pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
+    pericia_personagem.bonus.Limpa();
+    pericia_personagem.bonus.Adiciona(
+        'atributo', pericia.habilidade, personagem.atributos[pericia.habilidade].modificador);
+    // TODO isso aqui deve ta quebrado.
     // soma todos os bonus de talentos.
-    pericia_personagem.bonus_talentos_total = 0;
     for (var chave_talento in pericia_personagem.bonus_talentos) {
-      pericia_personagem.bonus_talentos_total += pericia_personagem.bonus_talentos[chave_talento];
+      pericia_personagem.bonus.Adiciona(
+          'talento', chave_talento, pericia_personagem.bonus_talentos[chave_talento]);
+    }
+    // Aneis.
+    for (var j = 0; j < personagem.aneis.length; ++j) {
+      var anel_personagem = personagem.aneis[j];
+      if (!anel_personagem.em_uso) {
+        continue;
+      }
+      var anel_tabela = tabelas_aneis[anel_personagem.chave];
+      if (anel_tabela.caracteristicas == null ||
+          anel_tabela.caracteristicas.pericias == null ||
+          anel_tabela.caracteristicas.pericias[chave_pericia] == null) {
+        continue;
+      }
+      for (var chave_bonus in anel_tabela.caracteristicas.pericias[chave_pericia]) {
+        pericia_personagem.bonus.Adiciona(
+            chave_bonus,
+            anel_personagem.chave,
+            anel_tabela.caracteristicas.pericias[chave_pericia][chave_bonus]);
+      }
     }
     pericia_personagem.total = 
-        pericia_personagem.graduacoes + 
-        pericia_personagem.bonus_habilidade + 
-        pericia_personagem.bonus_talentos_total +
-        pericia_personagem.bonus_sinergia;
-
+        pericia_personagem.graduacoes + pericia_personagem.bonus.Total(); 
     personagem.pericias.pontos_gastos += pericia_personagem.pontos;
   }
 }
