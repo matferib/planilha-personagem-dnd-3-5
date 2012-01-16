@@ -95,7 +95,10 @@ var personagem = {
   //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
   //                 arma_secundaria: { idem }, }.
   estilos_luta: [],
-  ca: { normal: 10, surpreso: 10, toque: 10 },
+  ca: { 
+      normal: 10, surpreso: 10, toque: 10,
+      bonus: new Bonus(),
+  },
   salvacoes : {
     fortitude: { base: 0, racial: 0, total: 0 },
     reflexo: { base: 0, racial: 0, total: 0 },

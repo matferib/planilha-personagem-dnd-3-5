@@ -65,6 +65,15 @@ function _ConverteEquipamentos() {
 function _ConverteArmadurasEscudos() {
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
+  personagem.ca.bonus.Limpa();
+  with (personagem.ca.bonus) {
+    Adiciona('armadura', 'armadura', tabelas_armaduras[personagem.armadura.nome].bonus);
+    Adiciona('armadura_melhoria', 'armadura', personagem.armadura.bonus_magico);
+    Adiciona('escudo', 'escudo', tabelas_escudos[personagem.escudo.nome].bonus);
+    Adiciona('escudo_melhoria', 'escudo', personagem.escudo.bonus_magico);
+    Adiciona('atributo', 'destreza', personagem.atributos.destreza.modificador);
+    Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
+  }
 }
 
 function _ConverteBba() {
