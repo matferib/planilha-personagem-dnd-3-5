@@ -153,9 +153,7 @@ function _CarregaPericias() {
 
     div.appendChild(CriaSpan(' pontos; '));
     div.appendChild(CriaSpan('0', prefixo_id + '-graduacoes'));
-    div.appendChild(CriaSpan('+0', null, habilidade + '-mod-total'));
-    div.appendChild(CriaSpan('+0', prefixo_id + '-sinergia'));
-    div.appendChild(CriaSpan('+0', prefixo_id + '-bonus-talento'));
+    div.appendChild(CriaSpan('+0', prefixo_id + '-total-bonus'));
     div.appendChild(CriaSpan(' = '));
     div.appendChild(CriaSpan('+0', prefixo_id + '-total'));
 
@@ -166,7 +164,7 @@ function _CarregaPericias() {
     entradas.pericias.push({ chave: chave_pericia, pontos: 0 });
     // Adiciona ao personagem.
     personagem.pericias.lista[chave_pericia] = {
-        graduacoes: 0, bonus_habilidade: 0, bonus_talentos: {}, bonus_sinergia: 0
+        graduacoes: 0, bonus: new Bonus(),
     };
   }
 }

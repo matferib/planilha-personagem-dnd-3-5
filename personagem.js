@@ -84,10 +84,8 @@ var personagem = {
     total_pontos: 8,
     // Quantos ele ja gastou.
     pontos_gastos: 0,
-    // Cada entrada: (o bonus_talentos_total eh a soma de todos os bonus_talentos)
-    // chave_pericia: { pontos, graduacoes, bonus_sinergia, 
-    //    bonus_talentos: { chave: valor, }, bonus_talentos_total, 
-    //    bonus_habilidade, total }.
+    // Cada entrada:
+    // chave_pericia: { pontos, graduacoes, bonus.
     lista: {},
   },
   // Cada entrada: { nome, 
