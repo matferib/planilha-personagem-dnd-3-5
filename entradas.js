@@ -249,10 +249,23 @@ function _LeAneis() {
   entradas.aneis = [];
   var dom_aneis = goog.dom.getElementsByClass('div-aneis');
   for (var i = 0; i < dom_aneis.length; ++i) {
-    var anel = {
-        chave: dom_aneis[i].firstChild.value,
-        em_uso: dom_aneis[i].firstChild.nextSibling.checked,
-    };
-    entradas.aneis.push(anel);
+    _LeAnel(dom_aneis[i]);
   }
 }
+
+function _LeAnel(dom_anel) {
+  var anel = {
+      chave: '',
+      em_uso: false, 
+  };
+  for (var i = 0; i < dom_anel.childNodes.length; ++i) {
+    var filho = dom_anel.childNodes[i];
+    if (filho.name == 'anel') {
+      anel.chave = ValorSelecionado(filho);
+    } else if (filho.name == 'em_uso') {
+      anel.em_uso = filho.checked;
+    }
+  }
+  entradas.aneis.push(anel);
+}
+
