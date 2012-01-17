@@ -138,6 +138,10 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
   var select_classe = Dom('select-classe-' + indice);
   select_classe.options.length = 0;
   for (var chave_classe in tabelas_classes) {
+    if (tabelas_classes[chave_classe].mestre && !personagem.modo_mestre) {
+      // So adiciona as classes de mestre se estiver no modo mestre.
+      continue;
+    }
     var desabilitar_classe = false;
     for (var j = 0; j < classes_desabilitadas.length; ++j) {
       if (chave_classe == classes_desabilitadas[j]) {
@@ -322,38 +326,32 @@ function _AtualizaDefesa() {
   // Armadura e escudo.
   SelecionaValor(personagem.armadura.nome, 
                  Dom('armadura')); 
-  Dom('bonus-armadura').value = personagem.armadura.bonus_magico; 
+  Dom('bonus-armadura').value =
+      personagem.ca.bonus.Le('armadura_melhoria', 'armadura');
   SelecionaValor(personagem.escudo.nome, 
                  Dom('escudo'));
-  Dom('bonus-escudo').value = personagem.escudo.bonus_magico; 
+  Dom('bonus-escudo').value =
+      personagem.ca.bonus.Le('escudo_melhoria', 'escudo');
 
-
-  ImprimeSinalizado(tabelas_armaduras[personagem.armadura.nome].bonus +
-                    personagem.armadura.bonus_magico,
+  ImprimeSinalizado(personagem.ca.bonus.Le('armadura', 'armadura') +
+                    personagem.ca.bonus.Le('armadura_melhoria', 'armadura'),
                     goog.dom.getElementsByClass('ca-armadura'));
-  ImprimeSinalizado(tabelas_escudos[personagem.escudo.nome].bonus + 
-                    personagem.escudo.bonus_magico,
+  ImprimeSinalizado(personagem.ca.bonus.Le('escudo', 'escudo') + 
+                    personagem.ca.bonus.Le('escudo_melhoria', 'escudo'),
                     goog.dom.getElementsByClass('ca-escudo'));
 
   // AC normal.
   ImprimeNaoSinalizado(
-      10 + personagem.atributos.destreza.modificador +
-          tabelas_armaduras[personagem.armadura.nome].bonus +
-          personagem.armadura.bonus_magico +
-          tabelas_escudos[personagem.escudo.nome].bonus +
-          personagem.escudo.bonus_magico +
-          personagem.tamanho.modificador_ataque_defesa, 
+      10 + personagem.ca.bonus.Total(),
       goog.dom.getElementsByClass('ca-normal'));
   // AC surpreso.
   ImprimeNaoSinalizado(
-      10 + personagem.tamanho.modificador_ataque_defesa + 
-          tabelas_armaduras[personagem.armadura.nome].bonus +
-          tabelas_escudos[personagem.escudo.nome].bonus,
+      10 + personagem.ca.bonus.Total(['atributo']),
       goog.dom.getElementsByClass('ca-surpreso'));
   // AC toque.
   ImprimeNaoSinalizado(
-      10 + personagem.atributos.destreza.modificador + 
-          personagem.tamanho.modificador_ataque_defesa, 
+      10 + personagem.ca.bonus.Total(
+          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']),
       goog.dom.getElementsByClass('ca-toque'));
 }
 
@@ -407,26 +405,17 @@ function _AtualizaPericias() {
     if (PersonagemPossuiUmaDasClasses(tabelas_pericias[chave].classes)) {
       dom_pericia.className = 'pericia-de-classe';
     } else {
-        dom_pericia.className = '';
-      }
-    var input_pontos = Dom('pericia-' + chave + '-pontos');
-    input_pontos.value = personagem.pericias.lista[chave].pontos;
-    var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
-    dom_graduacoes.textContent = personagem.pericias.lista[chave].pontos;
-    var dom_sinergia = Dom('pericia-' + chave + '-sinergia');
-    dom_sinergia.textContent = StringSinalizada(personagem.pericias.lista[chave].bonus_sinergia, false);
-    var bonus_talentos_total = 0;
-    for (var chave_talento in personagem.pericias.lista[chave].bonus_talentos) {
-      bonus_talentos_total += personagem.pericias.lista[chave].bonus_talentos[chave_talento];
+      dom_pericia.className = '';
     }
-    var dom_bonus_talento = Dom('pericia-' + chave + '-bonus-talento');
-    dom_bonus_talento.textContent = StringSinalizada(bonus_talentos_total, false);
-    // Bonus Racial.
-    var dom_bonus_racial = Dom('pericia-' + chave + '-bonus-racial');
-    dom_bonus_racial.textContent = StringSinalizada(personagem.pericias.lista[chave].bonus_racial, false);
-    
+    var pericia_personagem = personagem.pericias.lista[chave];
+    var input_pontos = Dom('pericia-' + chave + '-pontos');
+    input_pontos.value = pericia_personagem.pontos;
+    var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
+    dom_graduacoes.textContent = pericia_personagem.graduacoes;
+    var dom_total_bonus = Dom('pericia-' + chave + '-total-bonus');
+    dom_total_bonus.textContent = StringSinalizada(pericia_personagem.bonus.Total(), false);
     var dom_total = Dom('pericia-' + chave + '-total');
-    dom_total.textContent = StringSinalizada(personagem.pericias.lista[chave].total);
+    dom_total.textContent = StringSinalizada(pericia_personagem.total);
   }
 }
 
@@ -525,8 +514,32 @@ function _AtualizaEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     Dom('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
   }
+  _AtualizaAneis();
   Dom('text-area-outros-equipamentos').value =
       personagem.outros_equipamentos;;
+}
+
+function _AtualizaAneis() {
+  var div_aneis_pai = Dom('div-equipamentos-aneis');
+  var div_aneis_filhos = goog.dom.getElementsByClass('div-aneis');
+  for (var i = 0; i < personagem.aneis.length; ++i) {
+    _AtualizaAnel(
+        personagem.aneis[i],
+        (i >= div_aneis_filhos.length) ? null : div_aneis_filhos[i],
+        div_aneis_pai);
+  }
+}
+
+// Atualiza um anel, o div pode ser null, nesse caso criara um novo.
+// @param anel do personagem (aneis[i]).
+function _AtualizaAnel(anel, div_anel, div_aneis) {
+  if (div_anel == null) {
+    div_anel = CriaDiv(null, 'div-aneis');
+    AdicionaAnel(div_anel, div_aneis);
+    div_aneis.appendChild(div_anel);
+  }
+  SelecionaValor(anel.chave, div_anel.firstChild);
+  div_anel.firstChild.nextSibling.checked = anel.em_uso;
 }
 
 function _AtualizaListaArmas() {
@@ -551,5 +564,10 @@ function _AtualizaModoVisao() {
     var span_visao = goog.dom.getElement('span-' + visao);
     span_visao.className = personagem.modo_visao == visao ?
         'selecionado': '';
+  }
+  Dom('input-modo-mestre').checked = personagem.modo_mestre;
+  var botoes_geracao = goog.dom.getElementsByClass('botao-geracao');
+  for (var i = 0; i < botoes_geracao.length; ++i) {
+    botoes_geracao[i].style.display = personagem.modo_mestre ? 'inline' : 'none';
   }
 }

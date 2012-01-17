@@ -29,7 +29,7 @@ function ClickVisao(modo) {
     divs_combate.style.display = 'block';
   }
   personagem.modo_visao = modo;
-  _AtualizaGeral();
+  AtualizaGeralSemConverterEntradas();
 }
 
 
@@ -213,20 +213,47 @@ function ClickBotaoAtributoMenos() {
   AtualizaGeralSemLerEntradas();
 }
 
-
-// Adiciona ou remove pontos de dano no campo ferimentos. Verifica tambem se o personagem esta morto ou inconsciente. Nao consegui colocar o if else statement concatenado, dava pau na soma do pontos de vida com a constituicao. FC.
-function ClickAdicionarRemoverFerimentos(valor) {
-  Dom('ferimentos').value = parseInt(Dom('ferimentos').value) + valor;
-  // Funcao parar prevenir que o PV fique positivo
-  if (parseInt(Dom('ferimentos').value) < 0) {
-    Dom('ferimentos').value = 0;
-  }
-  AtualizaGeral();
-  if (parseInt(Dom('ferimentos').value) > (parseInt(Dom('pontos-vida-total').value)) + personagem.atributos.constituicao.valor) {
-    window.alert("O personagem está morto!");
+// Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
+// valor negativo eh cura.
+function ClickAjustarFerimentos(valor) {
+  personagem.pontos_vida.ferimentos += valor;
+  if (personagem.pontos_vida.ferimentos < 0) {
+    personagem.pontos_vida.ferimentos = 0;
     return;
   }
-  if (parseInt(Dom('ferimentos').value) > parseInt(Dom('pontos-vida-total').value)) {
-    window.alert("O personagem está inconsciente!");
-  }  
+  AtualizaGeralSemConverterEntradas();
+}
+
+// Esconde/mostra os botoes de geracao (class="botao-geracao)".
+function ClickVisualizacaoModoMestre() {
+  personagem.modo_mestre = Dom('input-modo-mestre').checked;
+  AtualizaGeralSemConverterEntradas();
+}
+
+// Trata o evento de adicionar aneis. Se a estrutura for alterada aqui,
+// mudar tambem a leitura das entradas que depende da ordem dos doms.
+function ClickAdicionarAnel() {
+  personagem.aneis.push({ nome: 'nome', caracteristicas: 'caracteristicas'});
+  AtualizaGeralSemConverterEntradas();
+}
+
+// Trata o click do checkbox de anel.
+// @param checkbox que causou a mudanca (null em caso de remocao).
+function ClickAnel(checkbox) {
+  if (checkbox.checked) {
+    var total_em_uso = 0;
+    for (var i = 0; i < personagem.aneis.length && total_em_uso < 2; ++i) {
+      if (personagem.aneis[i].em_uso) {
+        ++total_em_uso;
+      }
+    }
+    // Maior aqui so pra garantir no caso de algum bisiu louco passar de 2.
+    if (total_em_uso >= 2) {
+      // Desmarca o anel para nao permitir um terceiro.
+      alert('São permitidos no máximo 2 anéis');
+      checkbox.checked = false;
+      return;
+    }
+  }
+  AtualizaGeral();
 }

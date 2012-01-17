@@ -220,3 +220,25 @@ function AdicionaTalento(id, chave_talento, complemento) {
 
   div_select_talentos.appendChild(div_select_talento);
 }
+
+// Cria um select com todos os aneis e um checkbox de uso.
+function AdicionaAnel(div, div_pai) {
+  var select = CriaSelect();
+  for (var chave_anel in tabelas_aneis) {
+    select.appendChild(CriaOption(tabelas_aneis[chave_anel].nome, chave_anel));
+  }
+  select.addEventListener('change', AtualizaGeral);
+  div.appendChild(select);
+  var input_em_uso = CriaInputCheckbox(false);
+  input_em_uso.addEventListener('change', function(e) {
+      ClickAnel(e.target); });
+  div.appendChild(input_em_uso);
+  var botao_remover_anel = CriaBotao('-', null, null);
+  botao_remover_anel.addEventListener('click', {
+      handleEvent: function(e) {
+        RemoveFilho(div, div_pai);
+        AtualizaGeral();
+        e.stopPropagation();
+      } });
+  div.appendChild(botao_remover_anel);
+}

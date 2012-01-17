@@ -21,7 +21,7 @@ function GeraPontosDeVida(modo) {
           pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida) +
               personagem.atributos.constituicao.valor;
         }
-        primeiro= false;
+        primeiro = false;
       } else {
         pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida) +
             personagem.atributos.constituicao.modificador;

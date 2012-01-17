@@ -28,7 +28,7 @@ var tabelas_raca = {
   humano: {
       nome: 'Humano',
       origem: { livro: 'Livro do Jogador', pagina: '' },
-      atributos: {}, tamanho: 'medio', talento_extra: true },
+      atributos: {}, tamanho: 'medio', talento_extra: true, pontos_pericia: 1 },
   elfo: {
       nome: 'Elfo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
@@ -68,11 +68,11 @@ var tabelas_classes = {
   paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
   ranger: { nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte, },
   // classes NPC
-  adepto: { nome: 'Adepto', dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, },
-  aristocrata: { nome: 'Aristocrata', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
-  plebeu: { nome: 'Plebeu', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
-  expert: { nome: 'Expert', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
-  combatente: { nome: 'Combatente', dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
+  adepto: { nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, },
+  aristocrata: { nome: 'Aristocrata', mestre: true, dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+  plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
+  expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
+  combatente: { nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
 };
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
@@ -834,19 +834,12 @@ Especialização em Combate¹ Int 13 Substitui bônus de ataque por CA (máximo 
 Desarme Aprimorado¹ Especialização em Combate +4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade
 Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação de movimento
 Imobilização Aprimorada¹ Especialização em Combate +4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade
-Ataque Giratório¹ Des 13, Especialização em Combate,
-Esquiva, Mobilidade, Ataque em
-Movimento, bônus base de ataque +4
-Realiza um ataque corporal contra cada oponente dentro do alcance
+Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Esquiva¹ Des 13 +1 de bônus de esquiva na CA contra um adversário à sua escolha
 Mobilidade¹ Esquiva +4 de bônus de esquiva na CA contra ataques de oportunidade
 Ataque em Movimento¹ Mobilidade, bônus base de ataque +4 Capaz de deslocar antes e depois do ataque
-Expulsão Adicional³ Habilidade de expulsar ou fascinar
-criaturas
-4 tentativas diárias adicionais de Expulsar/Fascinar
-Expulsão Aprimorada Habilidade de expulsar ou fascinar
-criaturas
-+1 nível efetivo para testes de expulsão
+Expulsão Adicional³ Habilidade de expulsar ou fascinar criaturas 4 tentativas diárias adicionais de Expulsar/Fascinar
+Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de
 guerreiro
 +2 de bônus no dano com a arma escolhida
@@ -857,7 +850,6 @@ Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de r
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
 Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
-Iniciativa Aprimorada¹ - +4 de bônus nos testes de Iniciativa
 Liderança 6° nível de personagem Atrai parceiros e seguidores
 Lutar às Cegas¹ - Jogar novamente chance de falha por camuflagem
 Magia Natural Sab 13, Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
@@ -870,7 +862,6 @@ Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Rastrear - Utiliza Sobrevivência para rastrear
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
 Reflexos Rápidos - +2 de bônus nos testes de resistência de Reflexos
-Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Certeiro¹ - +1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros
@@ -889,9 +880,6 @@ base de ataque +11
 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
 Tolerância - +4 de bônus nos testes para resistir ao dano por contusão
 Duro de Matar Tolerância Permanece consciente entre -1 e -9 PV
-Usar Arma Comum² - Não sofre penalidade nos ataques com uma arma comum específica
-Usar Arma Exótica¹² Bônus base de ataque +1 Não sofre penalidade nos ataques com uma arma exótica específica
-Usar Armas Simples - Não sofre penalidades nos ataques com armas simples
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
@@ -951,6 +939,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   fraudulento: {
       nome: 'Fraudulento',
       bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
+  // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
+  iniciativa_aprimorada: {
+      nome: 'Iniciativa Aprimorada',
+      bonus_iniciativa: 4,
+      guerreiro: true, },
   investigador: {
       nome: 'Investigador',
       bonus_pericias: { obter_informacao: 2, procurar: 2 } },
@@ -963,16 +956,19 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   prontidao: {
       nome: 'Prontidão',
       bonus_pericias: { ouvir: 2, observar: 2 } },
-  // Simple Weapon Proficiency
+  // Usar Armas Simples - Não sofre penalidades nos ataques com armas simples
   usar_armas_simples: { nome: 'Usar armas simples' },
 
-  // Martial weapon proficiency
+  // Usar Arma Comum² - Não sofre penalidade nos ataques com uma arma comum específica
   usar_arma_comum: { nome: 'Usar arma comum', complemento: true }, 
 
   // Exotic Weapon Proficiency
+  // Usar Arma Exótica¹² Bônus base de ataque +1 Não sofre penalidade nos 
+  // ataques com uma arma exótica específica
   usar_arma_exotica: { 
       nome: 'Usar arma exótica', complemento: true,
-      requisitos: { bba: 1 } },
+      requisitos: { bba: 1 },
+      guerreiro: true },
 
   // Reduz penalidade ao usar duas maos em 2.
   combater_duas_armas: { 
@@ -996,6 +992,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       complemento: true,
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
       guerreiro: true },
+  //Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
+  saque_rapido: {
+      nome: 'Saque rápido',
+      requisitos: { bba: 1 },
+      guerreiro: true, },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
@@ -1223,4 +1224,65 @@ var tabelas_atributos_invertidos = {
   'Inteligência': 'inteligencia',
   'Sabedoria': 'sabedoria',
   'Carisma': 'carisma',
+};
+
+var tabelas_aneis = {
+  protecao_1: { 
+      nome: 'Proteção +1', valor: '2000 PO', 
+      propriedades: { ca: { deflexao: 1 } },  },
+  queda_suave: { nome: 'Queda suave', valor: '2200 PO', },
+  sustento: { nome: 'Sustento', valor: '2500 PO', },
+  escalada: { nome: 'Escalada', valor: '2500 PO',
+      propriedades: { pericias: { escalar: { competencia: 5 } } }, },
+  salto: { nome: 'Salto', valor: '2500 PO',
+      propriedades: { pericias: { saltar: { competencia: 5 } } }, },
+  natacao: { nome: 'Natação', valor: '2500 PO',
+      propriedades: { pericias: { natacao: { competencia: 5 } } }, },
+  contramagica: { nome: 'Contramágica', valor: '4000 PO', },
+  escudo_mental: { nome: 'Escudo mental', valor: '8000 PO', },
+  protecao_2: { nome: 'Proteção +2', valor: '8000 PO',
+      propriedades: { ca: { deflexao: 2 } }, },
+  escudo_energia: { nome: 'Escudo de energia', valor: '8500 PO', },
+  ariete: { nome: 'Aríete', valor: '8600 PO', },
+  escalada_aprimorada: { nome: 'Escalada aprimorada', valor: '10000 PO',
+      propriedades: { pericias: { escalar: { competencia: 10 } } }, },
+  salto_aprimorado: { nome: 'Salto aprimorado', valor: '10000 PO', 
+      propriedades: { pericias: { saltar: { competencia: 10 } } }, },
+  natacao_aprimorada: { nome: 'Natação aprimorada', valor: '10000 PO',
+      propriedades: { pericias: { natacao: { competencia: 10 } } }, },
+  cativar_animais: { nome: 'Cativar animais', valor: '10800 PO', },
+  resistencia_elementos_menor: { nome: 'Resistência a elementos (menor)', valor: '12000 PO', },
+  poder_camaleao: { nome: 'Poder do camaleão', valor: '12700 PO', },
+  caminhar_agua: { nome: 'Caminhar na água', valor: '15000 PO', },
+  protecao_3: { nome: 'Proteção +3', valor: '18000 PO',
+      propriedades: { ca: { deflexao: 3 } },  },
+  armazenar_magia_menor: { nome: 'Armazenar magias (menor)', valor: '18000 PO', },
+  invisibilidade: { nome: 'Invisibilidade', valor: '20000 PO', },
+  arcano_i: { nome: 'Arcano (I)', valor: '20000 PO', },
+  evasao: { nome: 'Evasão', valor: '25000 PO', },
+  visao_continua: { nome: 'Visão contínua', valor: '25000 PO', },
+  movimento_subito: { nome: 'Movimento súbito', valor: '27000 PO', },
+  resistencia_elementos_maior: { nome: 'Resistência a elementos (maior)', valor: '28000 PO', },
+  protecao_4: { nome: 'Proteção +4', valor: '32000 PO',
+      propriedades: { ca: { deflexao: 4 } },  },
+  arcano_ii: { nome: 'Arcano (II)', valor: '40000 PO', },
+  movimentacao_livre: { nome: 'Movimentação livre', valor: '40000 PO', },
+  resistencia_elementos_superior: { nome: 'Resistência a elementos (superior)', valor: '44000 PO', },
+  escudo_aliado_par: { nome: 'Escudo alidado (par)', valor: '50000 PO', },
+  protecao_5: { nome: 'Proteção +5', valor: '50000 PO',
+      propriedades: { ca: { deflexao: 5 } },  },
+  estrelas_cadentes: { nome: 'Estrelas cadentes', valor: '50000 PO', },
+  armazenar_magias: { nome: 'Armazenar magias', valor: '50000 PO', },
+  arcano_iii: { nome: 'Arcano (III)', valor: '70000 PO', },
+  telecinesia: { nome: 'Telecinésia', valor: '75000 PO', },
+  regeneracao: { nome: 'Regeneração', valor: '90000 PO', },
+  tres_desejos: { nome: 'Três desejos', valor: '97950 PO', },
+  refletir_magias: { nome: 'Refletir magias', valor: '98280 PO', },
+  arcano_iv: { nome: 'Arcano (IV)', valor: '100000 PO', },
+  convocar_djinn: { nome: 'Convocar djinn', valor: '125000 PO', },
+  comandar_elemental_ar: { nome: 'Comandar elemental (ar)', valor: '200000 PO', },
+  comandar_elemental_terra: { nome: 'Comandar elemental (terra)', valor: '200000 PO', },
+  comandar_elemental_fogo: { nome: 'Comandar elemental (fogo)', valor: '200000 PO', },
+  comandar_elemental_agua: { nome: 'Comandar elemental (água)', valor: '200000 PO', },
+  armazenar_magias_maior: { nome: 'Armazenar magias (maior)', valor: '200000 PO', },
 };

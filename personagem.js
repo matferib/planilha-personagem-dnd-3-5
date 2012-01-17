@@ -1,6 +1,7 @@
 // Apenas os dados do personagem e funcoes de conversao de entrada para personagem.
 var personagem = {
   modo_visao: 'completo',
+  modo_mestre: false,
   nome: '',
   raca: 'humano',
   tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
@@ -83,8 +84,8 @@ var personagem = {
     total_pontos: 8,
     // Quantos ele ja gastou.
     pontos_gastos: 0,
-    // Cada entrada: chave_pericia: { pontos, graduacoes, bonus_sinergia, 
-    // bonus_talentos: { chave: valor }, bonus_habilidade, total }.
+    // Cada entrada:
+    // chave_pericia: { pontos, graduacoes, bonus.
     lista: {},
   },
   // Cada entrada: { nome, 
@@ -92,7 +93,10 @@ var personagem = {
   //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
   //                 arma_secundaria: { idem }, }.
   estilos_luta: [],
-  ca: { normal: 10, surpreso: 10, toque: 10 },
+  ca: { 
+      normal: 10, surpreso: 10, toque: 10,
+      bonus: new Bonus(),
+  },
   salvacoes : {
     fortitude: { base: 0, racial: 0, total: 0 },
     reflexo: { base: 0, racial: 0, total: 0 },
@@ -114,6 +118,12 @@ var personagem = {
   // Armadura: { nome, bonus_magico }
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
   escudo: { nome: 'nenhum' , bonus_magico: 0 },
+  elmo: '',
+  // Cada entrada { chave, em_uso }
+  aneis: [],
+  capa: '',
+  botas: '',
+
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',
   // Feiticos. Cada entrada: chave_classe: { 

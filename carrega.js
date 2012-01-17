@@ -39,6 +39,12 @@ function _CarregaBotoesVisao() {
     botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
     div_visoes.appendChild(botao_visao);
   }
+  var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
+  input_modo_mestre.setAttribute('onchange', 'ClickVisualizacaoModoMestre()');
+  //input_modo_mestre.textContent = 'modo-mestre';
+  var span_input = CriaSpan();
+  span_input.appendChild(input_modo_mestre);
+  div_visoes.appendChild(span_input);
 }
 
 function _CarregaAtributos() {
@@ -147,10 +153,7 @@ function _CarregaPericias() {
 
     div.appendChild(CriaSpan(' pontos; '));
     div.appendChild(CriaSpan('0', prefixo_id + '-graduacoes'));
-    div.appendChild(CriaSpan('+0', null, habilidade + '-mod-total'));
-    div.appendChild(CriaSpan('+0', prefixo_id + '-sinergia'));
-    div.appendChild(CriaSpan('+0', prefixo_id + '-bonus-talento'));
-    div.appendChild(CriaSpan('', prefixo_id + '-bonus-racial'));
+    div.appendChild(CriaSpan('+0', prefixo_id + '-total-bonus'));
     div.appendChild(CriaSpan(' = '));
     div.appendChild(CriaSpan('+0', prefixo_id + '-total'));
 
@@ -161,7 +164,7 @@ function _CarregaPericias() {
     entradas.pericias.push({ chave: chave_pericia, pontos: 0 });
     // Adiciona ao personagem.
     personagem.pericias.lista[chave_pericia] = {
-        graduacoes: 0, bonus_habilidade: 0, bonus_racial: {}, bonus_sinergia: 0, bonus_talentos: {}
+        graduacoes: 0, bonus: new Bonus(),
     };
   }
 }

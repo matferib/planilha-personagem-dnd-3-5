@@ -19,6 +19,12 @@ function ConverteEntradasParaPersonagem() {
     personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
   }
 
+  // Limpa tudo antes de comecar.
+  _LimpaBonus();
+
+  // Equipamentos podem afetar todo o resto.
+  _ConverteEquipamentos();
+
   _ConverteAtributos();
   _ConverteBba();
   _ConverteTalentos();
@@ -32,7 +38,6 @@ function ConverteEntradasParaPersonagem() {
   _ConverteFocoArmas();
 
   //_ConverteEspecializacaoArmas();
-  _ConverteEquipamentos();
   _ConverteArmadurasEscudos();
   _ConverteListaArmas();
 
@@ -51,18 +56,75 @@ function ConverteEntradasParaPersonagem() {
   personagem.notas = entradas.notas;
 }
 
+// Limpa todos os bonus.
+function _LimpaBonus() {
+  personagem.ca.bonus.Limpa();
+  for (var i = 0; i < personagem.pericias.lista.length; ++i) {
+    personagem.pericias.lista[i].bonus.Limpa();
+  }
+}
+
 function _ConverteEquipamentos() {
   // moedas.
   for (var tipo_moeda in personagem.moedas) {
     personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
   }
+  _ConverteAneis();
   // outros.
   personagem.outros_equipamentos = entradas.outros_equipamentos;
+}
+
+function _ConverteAneis() {
+  // Aneis.
+  personagem.aneis = entradas.aneis;
+  for (var i = 0; i < personagem.aneis.length; ++i) {
+    var anel_personagem = personagem.aneis[i];
+    if (!anel_personagem.em_uso) {
+      continue;
+    }
+    _ConverteAnel(anel_personagem.chave, tabelas_aneis[anel_personagem.chave]);
+  }
+}
+
+function _ConverteAnel(chave_anel, anel_tabela) {
+  for (var propriedade in anel_tabela.propriedades) {
+    if (propriedade == 'ca') {
+      _ConverteAnelCa(chave_anel, anel_tabela);
+    } else if (propriedade == 'pericias') {
+      _ConverteAnelPericias(chave_anel, anel_tabela);
+    }
+  }
+}
+
+// Converte um anel que afeta a classe de armadura.
+function _ConverteAnelCa(chave_anel, anel_tabela) {
+  for (var chave_ca in anel_tabela.propriedades.ca) {
+    personagem.ca.bonus.Adiciona(
+        chave_ca, chave_anel, anel_tabela.propriedades.ca[chave_ca]);
+  }
+}
+
+// Converte um anel que afeta pericias.
+function _ConverteAnelPericias(chave_anel, anel_tabela) {
+  for (var chave_pericia in anel_tabela.propriedades.pericias) {
+    for (var chave_bonus in anel_tabela.propriedades.pericias[chave_pericia]) {
+      personagem.pericias.lista[chave_pericia].bonus.Adiciona(
+          chave_bonus, chave_anel, anel_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
+    }
+  }
 }
 
 function _ConverteArmadurasEscudos() {
   personagem.armadura = entradas.armadura;
   personagem.escudo = entradas.escudo;
+  with (personagem.ca.bonus) {
+    Adiciona('armadura', 'armadura', tabelas_armaduras[personagem.armadura.nome].bonus);
+    Adiciona('armadura_melhoria', 'armadura', personagem.armadura.bonus_magico);
+    Adiciona('escudo', 'escudo', tabelas_escudos[personagem.escudo.nome].bonus);
+    Adiciona('escudo_melhoria', 'escudo', personagem.escudo.bonus_magico);
+    Adiciona('atributo', 'destreza', personagem.atributos.destreza.modificador);
+    Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
+  }
 }
 
 function _ConverteBba() {
@@ -283,53 +345,50 @@ function _VerificaPrerequisitosTalento() {
 // de pericia, computando o valor de cada uma e o numero de pontos disponiveis.
 function _ConvertePericias() {
   personagem.pericias.total_pontos = 0;
-  var first_level = true;
+  var primeiro_nivel = true;
   for (var i = 0; i < personagem.classes.length; ++i) {
     var nivel = personagem.classes[i].nivel;
     var pontos_classe = tabelas_classes[personagem.classes[i].classe].pontos_pericia;
+    var pontos_raca = tabelas_raca[personagem.raca].pontos_pericia || 0;
     var pontos_inteligencia = personagem.atributos.inteligencia.modificador;
 
     // Se o primeiro nivel estiver neste pacote de niveis, ele conta como 3 niveis a mais.
     var pontos_iteracao = 0;
-    if (first_level) {
+    if (primeiro_nivel) {
       nivel += 3;
-      first_level = false;
+      primeiro_nivel = false;
     }
-    personagem.pericias.total_pontos += (pontos_classe + pontos_inteligencia) * nivel;
+    personagem.pericias.total_pontos += 
+        Math.max(pontos_classe + pontos_raca + pontos_inteligencia, 1) * nivel;
   }
 
   personagem.pericias.pontos_gastos = 0;
   for (var i = 0; i < entradas.pericias.length; ++i) {
-    var pericia = tabelas_pericias[entradas.pericias[i].chave];
-    var pericia_personagem = personagem.pericias.lista[entradas.pericias[i].chave];
+    var chave_pericia = entradas.pericias[i].chave;
+    var pericia = tabelas_pericias[chave_pericia];
+    var pericia_personagem = personagem.pericias.lista[chave_pericia];
     pericia_personagem.pontos = entradas.pericias[i].pontos;
     pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasses(pericia.classes) ?
         pericia_personagem.pontos : Math.floor(pericia_personagem.pontos / 2);
-    pericia_personagem.bonus_sinergia = 0;
-    pericia_personagem.bonus_habilidade = personagem.atributos[pericia.habilidade].modificador;
+    pericia_personagem.bonus.Adiciona(
+        'atributo', pericia.habilidade, personagem.atributos[pericia.habilidade].modificador);
+    // TODO isso aqui deve ta quebrado.
     // soma todos os bonus de talentos.
-    var bonus_talentos_total = 0;
     for (var chave_talento in pericia_personagem.bonus_talentos) {
-      bonus_talentos_total += pericia_personagem.bonus_talentos[chave_talento];
+      pericia_personagem.bonus.Adiciona(
+          'talento', chave_talento, pericia_personagem.bonus_talentos[chave_talento]);
     }
     // soma todos os bonus raciais.
     var bonus_racial_total = 0;
-    var nome_pericia = entradas.pericias[i].chave;
-    personagem.pericias.lista[nome_pericia].bonus_racial = 0;
-    for (var chave_bonus_racial in tabelas_raca[personagem.raca].bonus_pericias) {
-      if (chave_bonus_racial == nome_pericia) {
-        var bonus_racial_total = tabelas_raca[personagem.raca].bonus_pericias[nome_pericia];
-        personagem.pericias.lista[nome_pericia].bonus_racial = bonus_racial_total;
-      } 
+    personagem.pericias.lista[chave_pericia].bonus_racial = 0;
+    var raca_personagem = tabelas_raca[personagem.raca];
+    if (raca_personagem.bonus_pericias && 
+        raca_personagem.bonus_pericias[chave_pericia] != null) {
+      pericia_personagem.bonus.Adiciona(
+          'racial', personagem.raca, raca_personagem.bonus_pericias[chave_pericia]);
     }
-    
     pericia_personagem.total = 
-        pericia_personagem.graduacoes + 
-        pericia_personagem.bonus_habilidade + 
-        bonus_talentos_total +
-        bonus_racial_total +
-        pericia_personagem.bonus_sinergia;
-
+        pericia_personagem.graduacoes + pericia_personagem.bonus.Total(); 
     personagem.pericias.pontos_gastos += pericia_personagem.pontos;
   }
 }
