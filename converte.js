@@ -378,6 +378,15 @@ function _ConvertePericias() {
       pericia_personagem.bonus.Adiciona(
           'talento', chave_talento, pericia_personagem.bonus_talentos[chave_talento]);
     }
+    // soma todos os bonus raciais.
+    var bonus_racial_total = 0;
+    personagem.pericias.lista[chave_pericia].bonus_racial = 0;
+    var raca_personagem = tabelas_raca[personagem.raca];
+    if (raca_personagem.bonus_pericias && 
+        raca_personagem.bonus_pericias[chave_pericia] != null) {
+      pericia_personagem.bonus.Adiciona(
+          'racial', personagem.raca, raca_personagem.bonus_pericias[chave_pericia]);
+    }
     pericia_personagem.total = 
         pericia_personagem.graduacoes + pericia_personagem.bonus.Total(); 
     personagem.pericias.pontos_gastos += pericia_personagem.pontos;

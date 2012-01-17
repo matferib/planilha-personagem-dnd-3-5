@@ -1,13 +1,18 @@
 // Dados das racas.
 var tabelas_raca = {
   aarakokra: {
-      nome: 'Aarakokra', 
+      nome: 'Aarakokra',
+      origem: { livro: 'Races of Faerun', pagina: '130' },
       ajuste_nivel: 2, armadura_natural: 1,
-      movimento: {terrestre: 4, aereo: 18},
+      movimento: { terrestre: 4, aereo: 18 },
       atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
-  },
+      proficiencia_armas: [ 'azagaia' ], // Javelin em ingles.
+      bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 }, //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
+      arma_natural: { garra: { nome: 'Garra', dano: '1d4' } }, 
+    },
   anao: {
       nome: 'Anão',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
       outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 }, 
@@ -15,29 +20,35 @@ var tabelas_raca = {
   },
   halfling: {
       nome: 'Halfling',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       atributos: { forca: -2, destreza: 2}, tamanho: 'pequeno',
       bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
       salvacoes: { fortitude: 1, vontade: 1, reflexo: 1 },
   },
   humano: {
       nome: 'Humano',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       atributos: {}, tamanho: 'medio', talento_extra: true, pontos_pericia: 1 },
   elfo: {
       nome: 'Elfo',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
                             'arco_curto_composto'] },
   gnomo: {
       nome: 'Gnomo',
+      origem: { livro: 'Livro do Jogador', pagina: '' }, 
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
       outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
   },
   meioelfo: {
       nome: 'Meio-Elfo',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       atributos: {}, tamanho: 'medio' },
   meioorc: { 
       nome: 'Meio-Orc',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio',
   },
 };
