@@ -538,8 +538,14 @@ function _AtualizaAnel(anel, div_anel, div_aneis) {
     AdicionaAnel(div_anel, div_aneis);
     div_aneis.appendChild(div_anel);
   }
-  SelecionaValor(anel.chave, div_anel.firstChild);
-  div_anel.firstChild.nextSibling.checked = anel.em_uso;
+  for (var i = 0; i < div_anel.childNodes.length; ++i) {
+    var filho = div_anel.childNodes[i];
+    if (filho.name == 'anel') {
+      SelecionaValor(anel.chave, filho);
+    } else if (filho.name == 'em_uso') {
+      filho.checked = anel.em_uso;
+    }
+  }
 }
 
 function _AtualizaListaArmas() {
