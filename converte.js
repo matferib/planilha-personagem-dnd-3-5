@@ -124,6 +124,7 @@ function _ConverteArmadurasEscudos() {
     Adiciona('escudo_melhoria', 'escudo', personagem.escudo.bonus_magico);
     Adiciona('atributo', 'destreza', personagem.atributos.destreza.modificador);
     Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
+    Adiciona('armadura_natural', 'racial', tabelas_raca[personagem.raca].armadura_natural || 0);
   }
 }
 
