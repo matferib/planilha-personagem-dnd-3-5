@@ -26,6 +26,7 @@ function ConverteEntradasParaPersonagem() {
   _ConverteEquipamentos();
 
   _ConverteAtributos();
+  _ConverteIniciativa();
   _ConverteBba();
   _ConverteTalentos();
   _ConverteProficienciaArmas();
@@ -59,6 +60,7 @@ function ConverteEntradasParaPersonagem() {
 // Limpa todos os bonus.
 function _LimpaBonus() {
   personagem.ca.bonus.Limpa();
+  personagem.iniciativa.Limpa();
   for (var i = 0; i < personagem.pericias.lista.length; ++i) {
     personagem.pericias.lista[i].bonus.Limpa();
   }
@@ -126,6 +128,11 @@ function _ConverteArmadurasEscudos() {
     Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
     Adiciona('armadura_natural', 'racial', tabelas_raca[personagem.raca].armadura_natural || 0);
   }
+}
+
+function _ConverteIniciativa() {
+  personagem.iniciativa.Adiciona(
+      'atributo', 'destreza', personagem.atributos['destreza'].modificador);
 }
 
 function _ConverteBba() {
@@ -306,11 +313,6 @@ function _ConverteBonusPorCategoria(
 // Converte os talentos do personagem.
 // TODO verificar pre requisitos de cada talento.
 function _ConverteTalentos() {
-  // Zera os bonus de talentos de todas as pericias.
-  for (var chave_pericia in personagem.pericias.lista) {
-    personagem.pericias.lista[chave_pericia].bonus_talentos = {};
-  }
-
   personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
   personagem.talentos.total = 
       personagem.talentos.nivel + 
@@ -324,7 +326,12 @@ function _ConverteTalentos() {
     personagem.talentos.lista.push(talento_personagem);
     var bonus_pericias = tabelas_talentos[chave_talento].bonus_pericias;
     for (var chave_pericia in bonus_pericias) {
-      personagem.pericias.lista[chave_pericia].bonus_talentos[chave_talento] = bonus_pericias[chave_pericia];
+      personagem.pericias.lista[chave_pericia].bonus.Adiciona(
+          'talento', chave_talento, bonus_pericias[chave_pericia]);
+    }
+    if (tabelas_talentos[chave_talento].bonus_iniciativa) {
+      personagem.iniciativa.Adiciona(
+          'talento', chave_talento, tabelas_talentos[chave_talento].bonus_iniciativa);
     }
   }
 }

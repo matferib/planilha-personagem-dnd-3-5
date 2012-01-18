@@ -65,6 +65,7 @@ var personagem = {
       modificador: 0
     }
   },
+  iniciativa: new Bonus(),
   bba: 1,
   bba_cac: 1,  // inclui tamanho e forca.
   bba_distancia: 1,  // inclui tamanho e destreza.
@@ -85,7 +86,7 @@ var personagem = {
     // Quantos ele ja gastou.
     pontos_gastos: 0,
     // Cada entrada:
-    // chave_pericia: { pontos, graduacoes, bonus.
+    // chave_pericia: { pontos, graduacoes, bonus }.
     lista: {},
   },
   // Cada entrada: { nome, 
