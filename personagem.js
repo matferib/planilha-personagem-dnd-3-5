@@ -68,12 +68,13 @@ var personagem = {
   iniciativa: new Bonus(),
   bba: 1,
   bba_cac: 1,  // inclui tamanho e forca.
+  bba_cac_acuidade: 1,  // inclui tamanho e destreza.
   bba_distancia: 1,  // inclui tamanho e destreza.
   // talentos
   talentos: {  
     // talentos livres.
     total: 2,
-    // Cada entrada, { nome, complemento }. 
+    // Cada entrada, { chave, complemento }. 
     // Ambos podem ser null, pela verificacao de requisito.
     lista: [],
     // talentos especificos de classe.
@@ -112,7 +113,7 @@ var personagem = {
   foco_armas: {},
   // Cada entrada: 
   //     { entrada: { chave, bonus, obra_prima }, nome_gerado, bonus_ataque, bonus_dano, 
-  //       proficiente, foco: { maior }, especializado: { maior }, arma_tabela };
+  //       proficiente, foco: { maior }, especializado: { maior }, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
@@ -172,7 +173,7 @@ function PersonagemFocoComArma(nome_arma) {
 // @return true se o personagem tiver o talento passado.
 function PersonagemPossuiTalento(nome_talento, complemento) {
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    var chave_talento = personagem.talentos.lista[i].nome;
+    var chave_talento = personagem.talentos.lista[i].chave;
     if (nome_talento == chave_talento ||
         nome_talento == tabelas_talentos[chave_talento].nome) {
       // TODO ver essa logica de complemento com calma.
