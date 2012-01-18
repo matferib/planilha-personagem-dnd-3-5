@@ -37,6 +37,7 @@ function _AtualizaGeral() {
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaDadosVida();
+  _AtualizaIniciativa();
   _AtualizaAtaque();
   _AtualizaEstilosLuta();
   _AtualizaDefesa();
@@ -233,6 +234,10 @@ function _AtualizaDadosVida() {
   // Pontos de vida.
   var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
   ImprimeNaoSinalizado(pontos_vida_corrente, Dom('pontos-vida-corrente'));
+}
+
+function _AtualizaIniciativa() {
+  ImprimeSinalizado(personagem.iniciativa.Total(), Dom('iniciativa'));
 }
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 

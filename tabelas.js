@@ -1193,8 +1193,11 @@ var tabelas_visoes = {
   },
   combate: {
     nome: 'Combate',
-    esconder: { classes: ['divs-principais'], elementos: [] }, 
-    mostrar: { classes: [], elementos:['div-pontos-vida', 'div-ataque', 'div-defesa'] },
+    esconder: { 
+      classes: ['divs-principais'], elementos: [] }, 
+    mostrar: { 
+      classes: [], 
+      elementos:['div-pontos-vida', 'div-ataque', 'div-defesa', 'div-iniciativa'] },
   },
   pericias: {
     nome: 'Perícias',
