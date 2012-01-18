@@ -790,15 +790,15 @@ var tabelas_proficiencia_arma_por_classe = {
 // Cada entrada tem suas dependencias.
 // { nome, bonus_pericias: { percicia1: valor, pericia2: valor, ... } 
 //   complemento, (se o talento precisa de um complemento por exemplo, 
-//                 arma de usar arma exotica)
+//                 usar arma exotica. Pode ser arma, arma_leve, arma_exotica, 
+//                 arma_comum)
 //   guerreiro, indica se o talento pode ser usado em bonus de guerreiro 
 //                  (que tambem devera atender aos requisitos)
 //   requisitos: { bba, talentos: [], atributos: { nome: valor }, 
-//                 nivel: { classe: nivel }, proficiencia_arma, } 
+//                 nivel: { classe: nivel }, proficiencia_arma, arma_leve, } 
 // },
 var tabelas_talentos = {
 /*
-Acuidade com Arma¹² Usar arma, bônus base de ataque +1 Aplica o modificador de Des (em vez de For) para ataques corporais com armas leves
 Ataque Desarmado Aprimorado¹ - Considerado armado quando estiver desarmado
 Agarrar Aprimorado¹ Des 13, Ataque Desarmado Aprimorado +4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade
 Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distância por rodada
@@ -915,6 +915,13 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   acrobatico: { 
       nome: 'Acrobático',
       bonus_pericias: { saltar: 2, acrobacias: 2 } },
+
+  // ² Usar arma, bônus base de ataque +1 Aplica o modificador de Des (em vez de For) 
+  // para ataques corporais com armas leves
+  acuidade_arma: {
+      nome: 'Acuidade com Arma', complemento: 'arma_leve',
+      guerreiro: true,
+      requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true }, },
   afinidade_com_animais: {
       nome: 'Afinidade com Animais',
       bonus_pericias: { cavalgar: 2, adestrar_animais: 2 } },
@@ -960,13 +967,13 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   usar_armas_simples: { nome: 'Usar armas simples' },
 
   // Usar Arma Comum² - Não sofre penalidade nos ataques com uma arma comum específica
-  usar_arma_comum: { nome: 'Usar arma comum', complemento: true }, 
+  usar_arma_comum: { nome: 'Usar arma comum', complemento: 'arma_comum' }, 
 
   // Exotic Weapon Proficiency
   // Usar Arma Exótica¹² Bônus base de ataque +1 Não sofre penalidade nos 
   // ataques com uma arma exótica específica
   usar_arma_exotica: { 
-      nome: 'Usar arma exótica', complemento: true,
+      nome: 'Usar arma exótica', complemento: 'arma_exotica',
       requisitos: { bba: 1 },
       guerreiro: true },
 
@@ -983,13 +990,13 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   // +1 de bônus nas jogadas de ataque com a arma escolhida.
   foco_em_arma: {
       nome: 'Foco em arma',
-      complemento: true,
+      complemento: 'arma',
       requisitos: { bba: 1, proficiencia_arma: true },
       guerreiro: true, },
   // +2 de bônus nas jogadas de ataque com a arma escolhida
   foco_em_arma_maior: {
       nome: 'Foco em arma maior',
-      complemento: true,
+      complemento: 'arma',
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
       guerreiro: true },
   //Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
