@@ -386,7 +386,7 @@ function _AtualizaTalentos() {
   RemoveFilhos(div_talentos);
   for (var i = 0; i < personagem.talentos.total; ++i) {
     AdicionaTalento(i, 
-        i < personagem.talentos.lista.length ? personagem.talentos.lista[i].nome : null,
+        i < personagem.talentos.lista.length ? personagem.talentos.lista[i].chave : null,
         i < personagem.talentos.lista.length ? personagem.talentos.lista[i].complemento : null);
   }
   var span_proficiencia_armas = Dom('div-proficiencia-armas');

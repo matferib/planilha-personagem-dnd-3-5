@@ -38,7 +38,7 @@ var entradas = {
   // cada entrada: { chave, em_uso }
   aneis: [],
   outros_equipamentos: '',
-  // talentos. Cada entrada possui { nome, complemento }, se houver.
+  // talentos. Cada entrada possui { chave, complemento }, se houver.
   talentos: [],
 
   // pericias: cada entrada possui { chave, pontos }
@@ -112,7 +112,7 @@ function LeEntradas() {
       break;
     }
     entradas.talentos.push({ 
-        nome: ValorSelecionado(select_talento), 
+        chave: ValorSelecionado(select_talento), 
         complemento: input_complemento_talento.disabled ? null : input_complemento_talento.value});
   }
 
