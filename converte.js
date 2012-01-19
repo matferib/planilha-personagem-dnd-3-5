@@ -23,8 +23,9 @@ function ConverteEntradasParaPersonagem() {
   // Talentos idem.
   _ConverteTalentos();
 
-  _ConvertePontosVida();
   _ConverteAtributos();
+  _ConverteDadosVida();
+  _ConvertePontosVida();
   _ConverteIniciativa();
   _ConverteBba();
   _ConverteProficienciaArmas();
@@ -63,12 +64,18 @@ function _LimpaGeral() {
   }
 }
 
-function _ConvertePontosVida() {
+function _ConverteDadosVida() {
   personagem.pontos_vida.dados_vida = 0;
   for (var i = 0; i < personagem.classes.length; ++i) {
     personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
   }
-  personagem.pontos_vida.total_dados_constituicao = entradas.pontos_vida;
+}
+
+function _ConvertePontosVida() {
+  personagem.pontos_vida.bonus.Adiciona(
+      'atributo', 'constituicao', 
+      personagem.pontos_vida.dados_vida * personagem.atributos['constituicao'].modificador);
+  personagem.pontos_vida.total_dados = entradas.pontos_vida;
   personagem.pontos_vida.total = 
       entradas.pontos_vida + personagem.pontos_vida.bonus.Total();
   personagem.pontos_vida.ferimentos = entradas.ferimentos;

@@ -88,8 +88,8 @@ function _AtualizaPontosVida() {
       personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
   ImprimeNaoSinalizado(
       pontos_vida_corrente, Dom('pontos-vida-corrente'));
-  Dom('pontos-vida-dados-constituicao').value = 
-      personagem.pontos_vida.total_dados_constituicao;
+  Dom('pontos-vida-dados').value = personagem.pontos_vida.total_dados ?
+      personagem.pontos_vida.total_dados : '';
   ImprimeSinalizado(
       personagem.pontos_vida.bonus.Total(), Dom('pontos-vida-bonus'), false);
   Dom('ferimentos').value = personagem.pontos_vida.ferimentos > 0 ? 
