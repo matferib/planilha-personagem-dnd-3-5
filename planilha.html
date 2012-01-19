@@ -57,7 +57,7 @@ Classes:
 <button type="button" onclick="ClickAdicionarClasse()">+</button>
 <button type="button" onclick="ClickRemoveClasse()">-</button>
 <br>
-<!-- placeholder para as classes, criado dinamicamente. -->
+<!-- classes, criadas dinamicamente. -->
 <div id="classes"></div>
 Experiência: <input type="text" id="pontos-experiencia" size="6"/> 
 </div>
@@ -75,9 +75,16 @@ Experiência: <input type="text" id="pontos-experiencia" size="6"/>
 </div>
 
 Dados de Vida: <span id="dados-vida-classes"></span><br>
-Pontos de Vida: <span id="pontos-vida-corrente"></span> =  
-<input type="text" id="pontos-vida-total" maxlength="3" size="3" onchange="AtualizaGeral()"/> - 
-<input type="text" id="ferimentos" maxlength="3" size="3" onchange="AtualizaGeral()"/><br>
+
+Pontos de Vida: 
+<span id="pontos-vida-corrente"></span> =  
+<input type="text" id="pontos-vida-dados-constituicao" maxlength="3" size="3" 
+    placeholder="dados e bonus constituição" onchange="AtualizaGeral()"/>
+<span id="pontos-vida-bonus"></span>
+-
+<input type="text" id="ferimentos" maxlength="3" size="3" 
+    placeholder="ferimentos" onchange="AtualizaGeral()"/><br>
+
 <span style="color:Black" class="adiciona-remove-ferimentos">Ferimentos</span>
 <button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(1)">-1</button>
 <button type="button" class="botao-ferimentos" onclick="ClickAjustarFerimentos(3)">-3</button>

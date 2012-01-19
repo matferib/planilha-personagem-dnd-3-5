@@ -74,7 +74,7 @@ function LeEntradas() {
     }
   }
   // pontos de vida e ferimentos.
-  entradas.pontos_vida = parseInt(Dom('pontos-vida-total').value) || 0;
+  entradas.pontos_vida = parseInt(Dom('pontos-vida-dados-constituicao').value) || 0;
   entradas.ferimentos = parseInt(Dom('ferimentos').value) || 0;
   // Experiencia.
   entradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
