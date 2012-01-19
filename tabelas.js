@@ -788,7 +788,15 @@ var tabelas_proficiencia_arma_por_classe = {
 };
 
 // Cada entrada tem suas dependencias.
-// { nome, bonus_pericias: { percicia1: valor, pericia2: valor, ... } 
+// { nome, 
+//   bonus_pericias: { percicia1: valor, pericia2: valor, ... },
+//   bonus_pv, (quantos pontos de vida o talento concede).
+//   bonus_salvacao: { tipo: valor }, (quantos pontos o talento fornece em salvacoes).
+//   bonus_iniciativa,  (bonus que o talento fornece na iniciativa do personagem)
+//   cumulativo, (se o talento puder ser selecionado mais de uma vez e acumular.
+//                eg vitalidade).
+//   multiplas_vezes, (se o talento puder ser selecionado mais de uma vez com 
+//                     complementos diferentes - eg foco em arma)
 //   complemento, (se o talento precisa de um complemento por exemplo, 
 //                 usar arma exotica. Pode ser arma, arma_leve, arma_exotica, 
 //                 arma_comum)
@@ -802,16 +810,12 @@ var tabelas_talentos = {
 Ataque Desarmado Aprimorado¹ - Considerado armado quando estiver desarmado
 Agarrar Aprimorado¹ Des 13, Ataque Desarmado Aprimorado +4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade
 Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distância por rodada
-Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque
-Desarmado Aprimorado
-Apanha uma arma arremessada ou projétil
+Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
 Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado
-Aprimorado, bônus base de ataque +8
-Atordoa a vítima com um ataque desarmado
+Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
 Ataque Poderoso¹ For 13 Substitui bônus de ataque por dano (máximo: bônus base de ataque)
 Trespassar¹ Ataque Poderoso Desfere um ataque corporal extra depois de imobilizar um oponente
-Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base
-de ataque +4
+Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base de ataque +4
 Trespassar sem limite de ataques por rodada
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
@@ -823,12 +827,8 @@ Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas c
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
 Armas Maior¹ Des 19, Combater com Duas Armas
-Aprimorado, Combater com Duas Armas,
-bônus base de ataque +11
-Adquire um terceiro ataque com a mão inábil
+Aprimorado, Combater com Duas Armas, bônus base de ataque +11 Adquire um terceiro ataque com a mão inábil
 Contramágica Aprimorada - Contramágica com magias da mesma escola
-Corrida - Percorre 5 vezes o deslocamento padrão, +4 de bônus nos testes de Saltar no final de uma
-corrida
 Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
 Especialização em Combate¹ Int 13 Substitui bônus de ataque por CA (máximo 5 pontos)
 Desarme Aprimorado¹ Especialização em Combate +4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade
@@ -884,11 +884,9 @@ Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
-Ataque com Escudo
-Aprimorado¹
+Ataque com Escudo Aprimorado¹
 Usar Escudo Conserva o bônus do escudo na CA quando ataca com ele
 Usar Escudo de Corpo Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
-Vitalidade³ - +3 pontos de vida
 Vontade de Ferro - +2 de bônus nos testes de resistência de Vontade
 Talentos de Criação de Item Pré-requisitos Benefícios
 Criar Armaduras e Armas Mágicas 5° nível de conjurador Criar armas, armaduras e escudos mágicos
@@ -937,6 +935,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   auto_suficiente: {
       nome: 'Auto-Suficiente',
       bonus_pericias: { cura: 2, sobrevivencia: 2 } },
+  // Percorre 5 vezes o deslocamento padrão, +4 de bônus nos testes de Saltar 
+  // no final de uma corrida.
+  corrida: {
+      nome: 'Corrida', 
+      bonus_pericias: { saltar: 4 } },  // TODO teoricamente esse bonus eh so se correr...
   dedos_lepidos: {
       nome: 'Dedos Lépidos',
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },
@@ -999,6 +1002,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       complemento: 'arma',
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
       guerreiro: true },
+  // toughness em ingles, ³ - +3 pontos de vida
+  vitalidade: {
+      nome: 'Vitalidade',
+      bonus_pv: 3,
+      cumulativo: true, },
   //Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
   saque_rapido: {
       nome: 'Saque rápido',
