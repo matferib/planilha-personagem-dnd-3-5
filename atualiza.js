@@ -31,12 +31,12 @@ function AtualizaGeralSemConverterEntradas() {
 // Apenas atualizacoes a planilha a partir do personagem, sem leitura de entradas.
 function _AtualizaGeral() {
   _AtualizaNomeRacaAlinhamentoXp();
-  _AtualizaDadosPontosVida();
+  _AtualizaDadosVida();
+  _AtualizaPontosVida();
   _AtualizaAtributos();
   _AtualizaClasses();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
-  _AtualizaDadosVida();
   _AtualizaIniciativa();
   _AtualizaAtaque();
   _AtualizaEstilosLuta();
@@ -58,9 +58,42 @@ function _AtualizaNomeRacaAlinhamentoXp() {
   Dom('pontos-experiencia').value = personagem.experiencia;
 }
 
-function _AtualizaDadosPontosVida() {
-  Dom('pontos-vida-total').value = personagem.pontos_vida.total;
-  Dom('ferimentos').value = personagem.pontos_vida.ferimentos;
+// Atualiza os dados de vida do personagem de acordo com as classes.
+function _AtualizaDadosVida() {
+  var primeiro = true;  // primeira classe nao eh sinalizada.
+  var string_dados_vida = '';
+  var dados_vida_total = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+      dados_vida_total += personagem.classes[i].nivel;
+      if (primeiro) {
+        primeiro = false;
+      } else {
+        string_dados_vida += ' +';
+      }
+      string_dados_vida += 
+        personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
+
+  }
+  if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
+    string_dados_vida += 
+      ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
+  }
+  var span_dados = Dom('dados-vida-classes');
+  span_dados.textContent = dados_vida_total + ' = ' + string_dados_vida;
+}
+
+// Atualiza as informacoes referentes a pontos de vida do personagem.
+function _AtualizaPontosVida() {
+  var pontos_vida_corrente = 
+      personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
+  ImprimeNaoSinalizado(
+      pontos_vida_corrente, Dom('pontos-vida-corrente'));
+  Dom('pontos-vida-dados-constituicao').value = 
+      personagem.pontos_vida.total_dados_constituicao;
+  ImprimeSinalizado(
+      personagem.pontos_vida.bonus.Total(), Dom('pontos-vida-bonus'), false);
+  Dom('ferimentos').value = personagem.pontos_vida.ferimentos > 0 ? 
+      personagem.pontos_vida.ferimentos : '';
 }
 
 function _AtualizaAtributos() {
@@ -207,33 +240,6 @@ function _AtualizaModificadoresAtributos() {
         personagem.atributos[atributo].modificador,
         goog.dom.getElementsByClass(atributo + '-mod-total'));
   }
-}
-
-// Atualiza os dados de vida do personagem de acordo com as classes.
-function _AtualizaDadosVida() {
-  var primeiro = true;  // primeira classe nao eh sinalizada.
-  var string_dados_vida = '';
-  var dados_vida_total = 0;
-  for (var i = 0; i < personagem.classes.length; ++i) {
-      dados_vida_total += personagem.classes[i].nivel;
-      if (primeiro) {
-        primeiro = false;
-      } else {
-        string_dados_vida += ' +';
-      }
-      string_dados_vida += 
-        personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
-
-  }
-  if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
-    string_dados_vida += 
-      ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
-  }
-  var span_dados = Dom('dados-vida-classes');
-  span_dados.textContent = dados_vida_total + ' = ' + string_dados_vida;
-  // Pontos de vida.
-  var pontos_vida_corrente = personagem.pontos_vida.total - personagem.pontos_vida.ferimentos;
-  ImprimeNaoSinalizado(pontos_vida_corrente, Dom('pontos-vida-corrente'));
 }
 
 function _AtualizaIniciativa() {

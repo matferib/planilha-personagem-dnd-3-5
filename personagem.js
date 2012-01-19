@@ -12,10 +12,12 @@ var personagem = {
       { classe: 'guerreiro', nivel: 1 },
   ],
   pontos_vida: {
-    dados_vida: 0,
-    total: 0,
-    ferimentos: 0,
-    temporarios: 0
+    dados_vida: 0,  // soma de todas as classes, nivel do personagem.
+    total_dados_constituicao: 0,  // total dos dados + constituicao.
+    bonus: new Bonus(), // outros bonus.
+    total: 0,  // soma dos dados mais bonus.
+    ferimentos: 0,  // ferimentos do personagem TODO(transformar em array)
+    temporarios: 0,  // pontos de vida temporarios
   },
   atributos: {
     pontos: {

@@ -2,6 +2,9 @@
 
 // Passa os valoes da entrada para o personagem.
 function ConverteEntradasParaPersonagem() {
+  // Limpa tudo antes de comecar.
+  _LimpaGeral();
+
   personagem.nome = entradas.nome;
   personagem.raca = entradas.raca;
   personagem.tamanho.categoria =
@@ -11,24 +14,19 @@ function ConverteEntradasParaPersonagem() {
 
   personagem.alinhamento = entradas.alinhamento;
   personagem.classes = entradas.classes;
-  personagem.pontos_vida.total = entradas.pontos_vida;
-  personagem.pontos_vida.ferimentos = entradas.ferimentos;
-  personagem.pontos_vida.dados_vida = 0;
-  personagem.experiencia = entradas.experiencia;
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
-  }
 
-  // Limpa tudo antes de comecar.
-  _LimpaBonus();
+  personagem.experiencia = entradas.experiencia;
 
   // Equipamentos podem afetar todo o resto.
   _ConverteEquipamentos();
 
+  // Talentos idem.
+  _ConverteTalentos();
+
+  _ConvertePontosVida();
   _ConverteAtributos();
   _ConverteIniciativa();
   _ConverteBba();
-  _ConverteTalentos();
   _ConverteProficienciaArmas();
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
@@ -54,13 +52,26 @@ function ConverteEntradasParaPersonagem() {
   personagem.notas = entradas.notas;
 }
 
-// Limpa todos os bonus.
-function _LimpaBonus() {
+// Limpa tudo antes de comecar a conversao. 
+function _LimpaGeral() {
+  personagem.pontos_vida.total = 0;
+  personagem.pontos_vida.bonus.Limpa();
   personagem.ca.bonus.Limpa();
   personagem.iniciativa.Limpa();
   for (var i = 0; i < personagem.pericias.lista.length; ++i) {
     personagem.pericias.lista[i].bonus.Limpa();
   }
+}
+
+function _ConvertePontosVida() {
+  personagem.pontos_vida.dados_vida = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    personagem.pontos_vida.dados_vida += personagem.classes[i].nivel;
+  }
+  personagem.pontos_vida.total_dados_constituicao = entradas.pontos_vida;
+  personagem.pontos_vida.total = 
+      entradas.pontos_vida + personagem.pontos_vida.bonus.Total();
+  personagem.pontos_vida.ferimentos = entradas.ferimentos;
 }
 
 function _ConverteEquipamentos() {
@@ -271,14 +282,22 @@ function _ConverteTalentos() {
         chave: chave_talento,
         complemento: entradas.talentos[i].complemento };
     personagem.talentos.lista.push(talento_personagem);
-    var bonus_pericias = tabelas_talentos[chave_talento].bonus_pericias;
+    var talento = tabelas_talentos[chave_talento];
+    var bonus_pericias = talento.bonus_pericias;
     for (var chave_pericia in bonus_pericias) {
       personagem.pericias.lista[chave_pericia].bonus.Adiciona(
           'talento', chave_talento, bonus_pericias[chave_pericia]);
     }
-    if (tabelas_talentos[chave_talento].bonus_iniciativa) {
+    // Caso o talento seja cumulativo, a chave deve ser unica pro bonus acumular.
+    var subchave_bonus = talento.cumulativo ?
+        chave_talento + '-' + i : chave_talento;
+    if ('bonus_iniciativa' in talento) {
       personagem.iniciativa.Adiciona(
-          'talento', chave_talento, tabelas_talentos[chave_talento].bonus_iniciativa);
+          'talento', subchave_bonus, talento.bonus_iniciativa);
+    }
+    if ('bonus_pv' in talento) {
+      personagem.pontos_vida.bonus.Adiciona(
+          'talento', subchave_bonus, talento.bonus_pv);
     }
   }
 }
