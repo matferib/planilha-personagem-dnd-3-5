@@ -15,16 +15,19 @@ function GeraPontosDeVida(modo) {
       var pontos_vida_nivel = 0;
       if (primeiro) {
         if (modo == 'elite') {
+          pontos_vida_nivel = tabelas_classes[info_classe.classe].dados_vida;
+        } else if (modo == 'personagem') {
+          // O modificador de constituicao eh subtraido aqui pq sera adicionado 
+          // no calculo de pontos de vida, nos bonus.
           pontos_vida_nivel = tabelas_classes[info_classe.classe].dados_vida +
-              personagem.atributos.constituicao.modificador;
+              personagem.atributos['constituicao'].valor -  
+              personagem.atributos['constituicao'].modificador;
         } else {
-          pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida) +
-              personagem.atributos.constituicao.valor;
+          pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida);
         }
         primeiro = false;
       } else {
-        pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida) +
-            personagem.atributos.constituicao.modificador;
+        pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida);
       }
       // Nunca pode ganhar menos de 1 ponto por nivel.
       if (pontos_vida_nivel < 1) {
@@ -33,7 +36,7 @@ function GeraPontosDeVida(modo) {
       total_pontos_vida += pontos_vida_nivel;
     }
   }
-  Dom('pontos-vida-total').value = total_pontos_vida;
+  Dom('pontos-vida-dados').value = total_pontos_vida;
 }
 
 // Gera os atributos do personagem rolando 3d6 para cada um.

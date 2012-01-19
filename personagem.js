@@ -13,7 +13,7 @@ var personagem = {
   ],
   pontos_vida: {
     dados_vida: 0,  // soma de todas as classes, nivel do personagem.
-    total_dados_constituicao: 0,  // total dos dados + constituicao.
+    total_dados: 0,  // total dos dados de pontos de vida.
     bonus: new Bonus(), // outros bonus.
     total: 0,  // soma dos dados mais bonus.
     ferimentos: 0,  // ferimentos do personagem TODO(transformar em array)
