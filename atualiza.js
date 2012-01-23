@@ -15,15 +15,16 @@ function AtualizaGeral() {
 
 // Sempre que for necessaria uma atualizacao sem leitura de entradas, essa funcao sera chamada.
 // Eh o caso de elementos criados de forma independente (armas, estilos) que devem ser adicionados
-// manualmente a entrada e em seguida chamam essa funcao. O carregamento inicial por URL faz o mesmo,
-// ja que as entradas vem todas no objeto JSON.
+// manualmente a entrada e em seguida chamam essa funcao. As funcoes de carregamento tambem
+// devem usar esta funcao, pois a entrada que eh salva.
 function AtualizaGeralSemLerEntradas() {
   ConverteEntradasParaPersonagem();
   _AtualizaGeral();
 }
 
-// Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das entradas.
-// A intencao eh acabar com AtualizaGeralSemLerEntradas, salvando-se o personagem ao inves da entrada.
+// Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das 
+// entradas. Normalmente os tratamentos de eventos alteram algum campo do personagem e chamam
+// esta funcao para atualizar tudo.
 function AtualizaGeralSemConverterEntradas() {
   _AtualizaGeral();
 }
