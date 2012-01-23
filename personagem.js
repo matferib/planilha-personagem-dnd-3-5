@@ -74,13 +74,12 @@ var personagem = {
   bba_distancia: 1,  // inclui tamanho e destreza.
   // talentos
   talentos: {  
-    // talentos livres.
-    total: 2,
     // Cada entrada, { chave, complemento }. 
     // Ambos podem ser null, pela verificacao de requisito.
     lista: [],
-    // talentos especificos de classe.
-    // TODO
+    // Algumas classes ganham talentos especificos.
+    // TODO outras classes.
+    lista_classe: { guerreiro: [], mago: [], monge: [] },
   },
   // pericias.
   pericias: {

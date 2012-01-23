@@ -6,6 +6,7 @@ function CarregamentoInicial() {
   _CarregaRacas();
   _CarregaBotoesVisao();
   _CarregaAtributos();
+  _CarregaTalentos();
 
   // Monta a tabela de armas e cria as opcoes dinamicamente.
   _CarregaTabelaArmas();
@@ -102,6 +103,13 @@ function _CarregaAtributos() {
   }
 }
 
+// Cria os divs com talentos de classe.
+function _CarregaTalentos() {
+  var div_talentos = Dom('div-talentos');
+  for (var chave_classe in personagem.talentos.lista_classe) {
+    div_talentos.appendChild(CriaDiv('div-talentos-' + chave_classe));
+  }
+}
 
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
