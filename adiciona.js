@@ -184,41 +184,41 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
   }
 }
 
-// Adiciona um talento a planilha.
-// @param id numero identificando o id do talento.
+// Adiciona um talento a um div.
 // @param chave_talento nome do talento sendo adicionado (opcional).
 // @param complemento_talento caso o talento tenha complemento (opcional).
-function AdicionaTalento(id, chave_talento, complemento) {
+// @param chave_classe se o talento a ser adicionado for de classe.
+// @param div_pai div onde o talento sera adicionado.
+function AdicionaTalento(chave_talento, complemento, chave_classe, div_pai) {
   var talento = tabelas_talentos[chave_talento];
   if (chave_talento == null || talento == null) {
     chave_talento = 'usar_armas_simples';
     talento = tabelas_talentos[chave_talento];
   }
   var div_select_talentos = Dom('div-select-talentos');
-  var select_talento = document.createElement('select');
-  select_talento.id = 'select-talento-' + id;
-  select_talento.className = 'selects-talento';
+  var select_talento = CriaSelect();
+  select_talento.name = 'chave-talento';
   select_talento.setAttribute('onchange', 'AtualizaGeral()');
   var option_selected;
   for (var talento_tabela in tabelas_talentos) {
-    var option_talento = document.createElement('option');
-    option_talento.text = tabelas_talentos[talento_tabela].nome;
-    option_talento.value = talento_tabela;
+    var talento_option = tabelas_talentos[talento_tabela];
+    if (chave_classe && !(chave_classe in talento_option)) {
+      continue;
+    }
+    var option_talento = CriaOption(talento_option.nome, talento_tabela);
     option_talento.selected = chave_talento && chave_talento == talento_tabela;
     select_talento.add(option_talento, null);
   }
-  var input_complemento_talento = document.createElement('input');
-  input_complemento_talento.id = 'input-complemento-talento-' + id;
-  input_complemento_talento.type = 'text';
+  var input_complemento_talento = CriaInputTexto(complemento);
+  input_complemento_talento.name = 'complemento-talento';
   input_complemento_talento.disabled = !talento.complemento;
-  input_complemento_talento.value = complemento ? complemento : '';
   input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
 
-  var div_select_talento = CriaDiv('div-select-talento-' + id);
+  var div_select_talento = CriaDiv();
   div_select_talento.appendChild(select_talento);
   div_select_talento.appendChild(input_complemento_talento);
 
-  div_select_talentos.appendChild(div_select_talento);
+  div_pai.appendChild(div_select_talento);
 }
 
 // Cria um select com todos os aneis e um checkbox de uso.
