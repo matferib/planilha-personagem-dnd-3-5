@@ -64,14 +64,14 @@ function ClickRemoveClasse() {
 // Salva entrada do personagem no historico local.
 function ClickSalvar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
-  localStorage.setItem('saved_pc', goog.json.serialize(personagem));
+  localStorage.setItem('saved_entradas', goog.json.serialize(entradas));
   alert('Personagem salvo com sucesso');
 }
 
 // Carrega o personagem do historico local.
 function ClickAbrir() {
-  personagem = goog.json.parse(localStorage.getItem('saved_pc'));
-  AtualizaGeralSemConverterEntradas();
+  entradas = goog.json.parse(localStorage.getItem('saved_entradas'));
+  AtualizaGeralSemLerEntradas();
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
