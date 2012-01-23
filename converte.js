@@ -279,33 +279,61 @@ function _ConverteBonusPorCategoria(
 // Converte os talentos do personagem.
 function _ConverteTalentos() {
   personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
-  personagem.talentos.total = 
+  // Talentos normais.
+  personagem.talentos.lista.length =
       personagem.talentos.nivel + 
       (tabelas_raca[personagem.raca].talento_extra ? 1 : 0);
-  personagem.talentos.lista = [];
-  for (var i = 0; i < entradas.talentos.length; ++i) {
-    var chave_talento = entradas.talentos[i].chave;
-    var talento_personagem = {
-        chave: chave_talento,
-        complemento: entradas.talentos[i].complemento };
-    personagem.talentos.lista.push(talento_personagem);
-    var talento = tabelas_talentos[chave_talento];
-    var bonus_pericias = talento.bonus_pericias;
-    for (var chave_pericia in bonus_pericias) {
-      personagem.pericias.lista[chave_pericia].bonus.Adiciona(
-          'talento', chave_talento, bonus_pericias[chave_pericia]);
+  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+    _ConverteTalento(
+        i < entradas.talentos.length ? 
+            entradas.talentos[i] : { chave: 'usar_armas_simples', complemento: null }, 
+        i, personagem.talentos.lista);
+  }
+
+  // Talentos de guerreiro.
+  var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
+  if (nivel_guerreiro > 0) {
+    personagem.talentos.lista_classe['guerreiro'].length = 1 + Math.floor(nivel_guerreiro / 2);
+    for (var i = 0; i < personagem.talentos.lista_classe['guerreiro'].length; ++i) {
+      _ConverteTalento(
+          i < entradas.talentos_guerreiro[i] ? 
+          entradas.talentos_guerreiro[i] : 
+          { chave: 'usar_armas_simples', complemento: null }, 
+          i, personagem.talentos.lista_classe['guerreiro']);
     }
-    // Caso o talento seja cumulativo, a chave deve ser unica pro bonus acumular.
-    var subchave_bonus = talento.cumulativo ?
-        chave_talento + '-' + i : chave_talento;
-    if ('bonus_iniciativa' in talento) {
-      personagem.iniciativa.Adiciona(
-          'talento', subchave_bonus, talento.bonus_iniciativa);
-    }
-    if ('bonus_pv' in talento) {
-      personagem.pontos_vida.bonus.Adiciona(
-          'talento', subchave_bonus, talento.bonus_pv);
-    }
+  } else {
+    personagem.talentos.lista_classe['guerreiro'].length = 0;
+  }
+}
+
+// Converte o talento de indice 'indice_talento'. Cria o mesmo se nao existir na lista.
+// @param talento_entrada o talento lido na entrada.
+// @param indice_talento o indice do talento na lista de talentos.
+function _ConverteTalento(talento_entrada, indice_talento, lista) {
+  if (lista[indice_talento] == null) {
+    lista[indice_talento] = {};
+  }
+  var talento_personagem = lista[indice_talento];
+  var chave_talento = talento_entrada.chave;
+  talento_personagem.chave = chave_talento;
+  talento_personagem.complemento = talento_entrada.complemento;
+
+  var talento = tabelas_talentos[chave_talento];
+  var bonus_pericias = talento.bonus_pericias;
+  for (var chave_pericia in bonus_pericias) {
+    personagem.pericias.lista[chave_pericia].bonus.Adiciona(
+        'talento', chave_talento, bonus_pericias[chave_pericia]);
+  }
+  // Caso o talento seja cumulativo, a chave deve ser unica pro bonus acumular.
+  var subchave_bonus = talento.cumulativo ?
+      chave_talento + '-' + i : chave_talento;
+  if ('bonus_iniciativa' in talento) {
+    personagem.iniciativa.Adiciona(
+        'talento', subchave_bonus, talento.bonus_iniciativa);
+  }
+  if ('bonus_pv' in talento) {
+    personagem.pontos_vida.bonus.Adiciona(
+        'talento', subchave_bonus, talento.bonus_pv);
   }
 }
 

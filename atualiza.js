@@ -44,6 +44,7 @@ function _AtualizaGeral() {
   _AtualizaDefesa();
   _AtualizaSalvacoes();
   _AtualizaTalentos();
+  _AtualizaProficienciaArmas();
   _AtualizaPericias();
   _AtualizaListaArmas();
   _AtualizaEquipamentos();
@@ -388,14 +389,59 @@ function _AtualizaSalvacoes() {
 
 // Atualiza os numeros e listas relacionados a talentos.
 function _AtualizaTalentos() {
-  ImprimeNaoSinalizado(personagem.talentos.total, goog.dom.getElementByClass('talentos-total'));
-  var div_talentos = Dom('div-select-talentos');
-  RemoveFilhos(div_talentos);
-  for (var i = 0; i < personagem.talentos.total; ++i) {
-    AdicionaTalento(i, 
-        i < personagem.talentos.lista.length ? personagem.talentos.lista[i].chave : null,
-        i < personagem.talentos.lista.length ? personagem.talentos.lista[i].complemento : null);
+  ImprimeNaoSinalizado(
+      personagem.talentos.lista.length, 
+      goog.dom.getElementByClass('talentos-total'));
+  var div_talentos = Dom('div-talentos-gerais');
+  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+    _AtualizaTalento(
+        personagem.talentos.lista[i], 
+        i < div_talentos.childNodes.length ? div_talentos.childNodes[i] : null,
+        null,
+        div_talentos);
   }
+
+  // Talentos de classe.
+  for (var chave_classe in personagem.talentos.lista_classe) {
+    var div_talentos_classe = Dom('div-talentos-' + chave_classe);
+    var lista_classe = personagem.talentos.lista_classe[chave_classe];
+    if (lista_classe.length > 0) {
+      div_talentos_classe.style.display = 'block';
+      for (var i = 0; i < lista_classe.length; ++i) {
+        _AtualizaTalento(
+            lista_classe[i], 
+            i < div_talentos_classe.childNodes.length ? 
+                div_talentos_classe.childNodes[i] : null,
+            chave_classe,
+            div_talentos_classe);
+      }
+    } else {
+      div_talentos_classe.style.display = 'none';
+    }
+  }
+}
+
+// Atualiza um talento. Se 'div_talento' nao for null, usa o div para o talento.
+// Caso contrario, cria o div em questao.
+// @param chave_classe chave da classe para talentos de classe, null caso contrario.
+// @param div_pai o div onde o talento sera adicionado, caso nao exista.
+function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai) {
+  if (div_talento != null) {
+    for (var i = 0; i < div_talento.childNodes.length; ++i) {
+      var filho = div_talento.childNodes[i];
+      if (filho.name == 'chave-talento') {
+        SelecionaValor(talento_personagem.chave, filho);
+      } else if (filho.name == 'complemento-talento') {
+        filho.value = talento_personagem.complemento;
+      }
+    }
+  } else {
+    AdicionaTalento(
+        talento_personagem.chave, talento_personagem.complemento, chave_classe, div_pai);
+  }
+}
+
+function _AtualizaProficienciaArmas() {
   var span_proficiencia_armas = Dom('div-proficiencia-armas');
   var string_proficiencia = '';
   for (var proficiencia in personagem.proficiencia_armas) {

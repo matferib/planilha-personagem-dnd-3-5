@@ -40,6 +40,7 @@ var entradas = {
   outros_equipamentos: '',
   // talentos. Cada entrada possui { chave, complemento }, se houver.
   talentos: [],
+  talentos_guerreiro: [],
 
   // pericias: cada entrada possui { chave, pontos }
   pericias: [],
@@ -104,16 +105,22 @@ function LeEntradas() {
 
   // Talentos.
   entradas.talentos = [];
-  // Ler ate nao achar mais talentos.
-  for (var i = 0; ; ++i) {
-    var select_talento = Dom('select-talento-' + i);
-    var input_complemento_talento = Dom('input-complemento-talento-' + i);
-    if (select_talento == null) {
-      break;
+  var div_talentos = Dom('div-talentos-gerais');
+  for (var i = 0; i < div_talentos.childNodes.length; ++i) {
+    var div_talento = div_talentos.childNodes[i];
+    var entrada_talento = {
+      chave: null,
+      complemento: null
+    };
+    for (var j = 0; j < div_talento.childNodes.length; ++j) {
+      var filho = div_talento.childNodes[j];
+      if (filho.name == 'chave-talento') {
+        entrada_talento.chave = ValorSelecionado(filho);
+      } else if (filho.name == 'complemento-talento' && !filho.disabled) {
+        entrada_talento.complemento = filho.value;
+      }
     }
-    entradas.talentos.push({ 
-        chave: ValorSelecionado(select_talento), 
-        complemento: input_complemento_talento.disabled ? null : input_complemento_talento.value});
+    entradas.talentos.push(entrada_talento); 
   }
 
   // Pericias.
