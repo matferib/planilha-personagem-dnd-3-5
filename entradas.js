@@ -40,7 +40,7 @@ var entradas = {
   outros_equipamentos: '',
   // talentos. Cada entrada possui { chave, complemento }, se houver.
   talentos: [],
-  talentos_guerreiro: [],
+  talentos_classe: { guerreiro: [], mago: [], monge: [] },
 
   // pericias: cada entrada possui { chave, pontos }
   pericias: [],
@@ -103,25 +103,7 @@ function LeEntradas() {
 
   _LeEquipamentos();
 
-  // Talentos.
-  entradas.talentos = [];
-  var div_talentos = Dom('div-talentos-gerais');
-  for (var i = 0; i < div_talentos.childNodes.length; ++i) {
-    var div_talento = div_talentos.childNodes[i];
-    var entrada_talento = {
-      chave: null,
-      complemento: null
-    };
-    for (var j = 0; j < div_talento.childNodes.length; ++j) {
-      var filho = div_talento.childNodes[j];
-      if (filho.name == 'chave-talento') {
-        entrada_talento.chave = ValorSelecionado(filho);
-      } else if (filho.name == 'complemento-talento' && !filho.disabled) {
-        entrada_talento.complemento = filho.value;
-      }
-    }
-    entradas.talentos.push(entrada_talento); 
-  }
+  _LeTalentos();
 
   // Pericias.
   for (var i = 0; i < entradas.pericias.length; ++i) {
@@ -134,6 +116,41 @@ function LeEntradas() {
   _LeFeiticos();
   
   entradas.notas = Dom('text-area-notas').value;
+}
+
+function _LeTalentos() {
+  // Talentos.
+  entradas.talentos.length = 0;
+  var div_talentos = Dom('div-talentos-gerais');
+  for (var i = 0; i < div_talentos.childNodes.length; ++i) {
+    entradas.talentos.push(_LeTalento(div_talentos.childNodes[i]));
+  }
+  // De classe.
+  for (var chave_classe in entradas.talentos_classe) {
+    entradas.talentos_classe[chave_classe].length = 0;
+    var div_talentos = Dom('div-talentos-' + chave_classe + '-selects');
+    for (var i = 0; i < div_talentos.childNodes.length; ++i) {
+      entradas.talentos_classe[chave_classe].push(
+          _LeTalento(div_talentos.childNodes[i]));
+    }
+  }
+}
+
+// Le o talento do div e o retorna no formato da entrada.
+function _LeTalento(div_talento) {
+  var entrada_talento = {
+    chave: null,
+    complemento: null
+  };
+  for (var j = 0; j < div_talento.childNodes.length; ++j) {
+    var filho = div_talento.childNodes[j];
+    if (filho.name == 'chave-talento') {
+      entrada_talento.chave = ValorSelecionado(filho);
+    } else if (filho.name == 'complemento-talento' && !filho.disabled) {
+      entrada_talento.complemento = filho.value;
+    }
+  }
+  return entrada_talento;
 }
 
 function _LeFeiticos() {

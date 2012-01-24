@@ -185,16 +185,11 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 }
 
 // Adiciona um talento a um div.
-// @param chave_talento nome do talento sendo adicionado (opcional).
-// @param complemento_talento caso o talento tenha complemento (opcional).
 // @param chave_classe se o talento a ser adicionado for de classe.
 // @param div_pai div onde o talento sera adicionado.
-function AdicionaTalento(chave_talento, complemento, chave_classe, div_pai) {
+function AdicionaTalento(chave_classe, div_pai) {
+  var chave_talento = 'usar_armas_simples';
   var talento = tabelas_talentos[chave_talento];
-  if (chave_talento == null || talento == null) {
-    chave_talento = 'usar_armas_simples';
-    talento = tabelas_talentos[chave_talento];
-  }
   var div_select_talentos = Dom('div-select-talentos');
   var select_talento = CriaSelect();
   select_talento.name = 'chave-talento';
@@ -209,9 +204,8 @@ function AdicionaTalento(chave_talento, complemento, chave_classe, div_pai) {
     option_talento.selected = chave_talento && chave_talento == talento_tabela;
     select_talento.add(option_talento, null);
   }
-  var input_complemento_talento = CriaInputTexto(complemento);
+  var input_complemento_talento = CriaInputTexto('');
   input_complemento_talento.name = 'complemento-talento';
-  input_complemento_talento.disabled = !talento.complemento;
   input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
 
   var div_select_talento = CriaDiv();
@@ -219,6 +213,7 @@ function AdicionaTalento(chave_talento, complemento, chave_classe, div_pai) {
   div_select_talento.appendChild(input_complemento_talento);
 
   div_pai.appendChild(div_select_talento);
+  return div_select_talento;
 }
 
 // Cria um select com todos os aneis e um checkbox de uso.

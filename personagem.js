@@ -174,22 +174,36 @@ function PersonagemFocoComArma(nome_arma) {
 // @return true se o personagem tiver o talento passado.
 function PersonagemPossuiTalento(nome_talento, complemento) {
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    var chave_talento = personagem.talentos.lista[i].chave;
-    if (nome_talento == chave_talento ||
-        nome_talento == tabelas_talentos[chave_talento].nome) {
-      // TODO ver essa logica de complemento com calma.
-      if (tabelas_talentos[chave_talento].complemento && 
-          personagem.talentos.lista[i].complemento && complemento) {
-        // Trata complemento se houver.
-        if (personagem.talentos.lista[i].complemento == complemento) {
-          return true;
-        }
-      } else {
+    if (_TalentoIgual(personagem.talentos.lista[i], nome_talento, complemento)) {
+      return true;
+    }
+  }
+  for (var chave_classe in personagem.talentos_classe) {
+    for (var i = 0; i < personagem.talentos_classe[chave_classe].lista.length; ++i) {
+      if (_TalentoIgual(personagem.talentos_classe[chave_classe].lista[i], 
+                        nome_talento, complemento)) {
         return true;
       }
     }
   }
   return false;
+}
+
+function _TalentoIgual(talento_personagem, nome_talento, complemento) {
+  var chave_talento = talento_personagem.chave;
+  if (nome_talento == chave_talento ||
+      nome_talento == tabelas_talentos[chave_talento].nome) {
+    // TODO ver essa logica de complemento com calma.
+    if (tabelas_talentos[chave_talento].complemento && 
+        talento_personagem.complemento && complemento) {
+      // Trata complemento se houver.
+      if (talento_personagem.complemento == complemento) {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
 }
 
 // @return true se o personagem possuir uma das classes passadas.
