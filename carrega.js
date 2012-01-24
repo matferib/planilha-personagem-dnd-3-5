@@ -107,7 +107,13 @@ function _CarregaAtributos() {
 function _CarregaTalentos() {
   var div_talentos = Dom('div-talentos');
   for (var chave_classe in personagem.talentos.lista_classe) {
-    div_talentos.appendChild(CriaDiv('div-talentos-' + chave_classe));
+    var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
+    div_talentos_classe.appendChild(
+        CriaSpan('Talentos de ' + tabelas_classes[chave_classe].nome + ': '));
+    div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
+    div_talentos_classe.appendChild(CriaBr());
+    div_talentos_classe.appendChild(CriaDiv('div-talentos-' + chave_classe + '-selects'));
+    div_talentos.appendChild(div_talentos_classe);
   }
 }
 
