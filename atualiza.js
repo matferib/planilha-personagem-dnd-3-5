@@ -391,7 +391,7 @@ function _AtualizaSalvacoes() {
 function _AtualizaTalentos() {
   ImprimeNaoSinalizado(
       personagem.talentos.lista.length, 
-      goog.dom.getElementByClass('talentos-total'));
+      Dom('talentos-gerais-total'));
   var div_talentos = Dom('div-talentos-gerais');
   for (var i = 0; i < personagem.talentos.lista.length; ++i) {
     _AtualizaTalento(
@@ -405,18 +405,23 @@ function _AtualizaTalentos() {
   for (var chave_classe in personagem.talentos.lista_classe) {
     var div_talentos_classe = Dom('div-talentos-' + chave_classe);
     var lista_classe = personagem.talentos.lista_classe[chave_classe];
+    var div_selects = Dom('div-talentos-' + chave_classe + '-selects');
     if (lista_classe.length > 0) {
-      div_talentos_classe.style.display = 'block';
+      ImprimeNaoSinalizado(
+          personagem.talentos.lista_classe[chave_classe].length, 
+          Dom('talentos-' + chave_classe + '-total'));
       for (var i = 0; i < lista_classe.length; ++i) {
         _AtualizaTalento(
             lista_classe[i], 
-            i < div_talentos_classe.childNodes.length ? 
-                div_talentos_classe.childNodes[i] : null,
+            i < div_selects.childNodes.length ? 
+                div_selects.childNodes[i] : null,
             chave_classe,
-            div_talentos_classe);
+            div_selects);
       }
+      div_talentos_classe.style.display = 'block';
     } else {
       div_talentos_classe.style.display = 'none';
+      div_selects.childNodes.length = 0;
     }
   }
 }
@@ -426,18 +431,17 @@ function _AtualizaTalentos() {
 // @param chave_classe chave da classe para talentos de classe, null caso contrario.
 // @param div_pai o div onde o talento sera adicionado, caso nao exista.
 function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai) {
-  if (div_talento != null) {
-    for (var i = 0; i < div_talento.childNodes.length; ++i) {
-      var filho = div_talento.childNodes[i];
-      if (filho.name == 'chave-talento') {
-        SelecionaValor(talento_personagem.chave, filho);
-      } else if (filho.name == 'complemento-talento') {
-        filho.value = talento_personagem.complemento;
-      }
+  if (div_talento == null) {
+    div_talento = AdicionaTalento(chave_classe, div_pai);
+  }
+  for (var i = 0; i < div_talento.childNodes.length; ++i) {
+    var filho = div_talento.childNodes[i];
+    if (filho.name == 'chave-talento') {
+      SelecionaValor(talento_personagem.chave, filho);
+    } else if (filho.name == 'complemento-talento') {
+      filho.disabled = !('complemento' in tabelas_talentos[talento_personagem.chave]);
+      filho.value = talento_personagem.complemento;
     }
-  } else {
-    AdicionaTalento(
-        talento_personagem.chave, talento_personagem.complemento, chave_classe, div_pai);
   }
 }
 

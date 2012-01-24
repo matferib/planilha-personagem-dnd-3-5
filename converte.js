@@ -293,13 +293,15 @@ function _ConverteTalentos() {
   // Talentos de guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
   if (nivel_guerreiro > 0) {
-    personagem.talentos.lista_classe['guerreiro'].length = 1 + Math.floor(nivel_guerreiro / 2);
+    personagem.talentos.lista_classe['guerreiro'].length = 
+        1 + Math.floor(nivel_guerreiro / 2);
     for (var i = 0; i < personagem.talentos.lista_classe['guerreiro'].length; ++i) {
       _ConverteTalento(
-          i < entradas.talentos_guerreiro[i] ? 
-          entradas.talentos_guerreiro[i] : 
-          { chave: 'usar_armas_simples', complemento: null }, 
-          i, personagem.talentos.lista_classe['guerreiro']);
+          i < entradas.talentos_classe['guerreiro'].length ? 
+              entradas.talentos_classe['guerreiro'][i] : 
+              { chave: 'iniciativa_aprimorada', complemento: null }, 
+          i, 
+          personagem.talentos.lista_classe['guerreiro']);
     }
   } else {
     personagem.talentos.lista_classe['guerreiro'].length = 0;
