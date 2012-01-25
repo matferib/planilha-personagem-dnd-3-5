@@ -106,10 +106,15 @@ function _CarregaAtributos() {
 // Cria os divs com talentos de classe.
 function _CarregaTalentos() {
   var div_talentos = Dom('div-talentos');
-  for (var chave_classe in personagem.talentos.lista_classe) {
+  for (var chave_classe in personagem.talentos) {
     var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
-    div_talentos_classe.appendChild(
-        CriaSpan('Talentos de ' + tabelas_classes[chave_classe].nome + ': '));
+    if (chave_classe == 'gerais') {
+      div_talentos_classe.appendChild(
+          CriaSpan('Talentos Gerais: '));
+    } else {
+      div_talentos_classe.appendChild(
+          CriaSpan('Talentos de ' + tabelas_classes[chave_classe].nome + ': '));
+    }
     div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
     div_talentos_classe.appendChild(CriaBr());
     div_talentos_classe.appendChild(CriaDiv('div-talentos-' + chave_classe + '-selects'));
@@ -150,7 +155,7 @@ function _CarregaPericias() {
     var div = CriaDiv(prefixo_id);
     var texto_span = pericia.nome + ' (' + pericia.habilidade + '): ';
     if (tabelas_pericias[chave_pericia].sem_treinamento) {
-    texto_span += 'ϛτ';
+      texto_span += 'ϛτ';
     }  
     div.appendChild(
         CriaSpan(texto_span, null, 'pericias-nome'));

@@ -74,12 +74,13 @@ var personagem = {
   bba_distancia: 1,  // inclui tamanho e destreza.
   // talentos
   talentos: {  
-    // Cada entrada, { chave, complemento }. 
-    // Ambos podem ser null, pela verificacao de requisito.
-    lista: [],
     // Algumas classes ganham talentos especificos.
+    // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
-    lista_classe: { guerreiro: [], mago: [], monge: [] },
+    gerais: [], 
+    guerreiro: [], 
+    mago: [], 
+    monge: [],
   },
   // pericias.
   pericias: {
@@ -173,14 +174,9 @@ function PersonagemFocoComArma(nome_arma) {
 //        conhecimento (complemento), usar_arma_comum (complemento).
 // @return true se o personagem tiver o talento passado.
 function PersonagemPossuiTalento(nome_talento, complemento) {
-  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    if (_TalentoIgual(personagem.talentos.lista[i], nome_talento, complemento)) {
-      return true;
-    }
-  }
-  for (var chave_classe in personagem.talentos_classe) {
-    for (var i = 0; i < personagem.talentos_classe[chave_classe].lista.length; ++i) {
-      if (_TalentoIgual(personagem.talentos_classe[chave_classe].lista[i], 
+  for (var chave_classe in personagem.talentos) {
+    for (var i = 0; i < personagem.talentos[chave_classe].length; ++i) {
+      if (_TalentoIgual(personagem.talentos[chave_classe][i], 
                         nome_talento, complemento)) {
         return true;
       }
@@ -254,7 +250,7 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
       return false;
     }
   }
-  for (var i = 0;  requisitos.talentos && i < requisitos.talentos.length; ++i) {
+  for (var i = 0; requisitos.talentos && i < requisitos.talentos.length; ++i) {
     if (!PersonagemPossuiTalento(requisitos.talentos[i], complemento)) {
       alert(prefixo_erro + 'talento ' + tabelas_talentos[requisitos.talentos[i]].nome + ' ' +
           (complemento ? complemento : ''));
@@ -263,7 +259,7 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
   }
   if (requisitos.proficiencia_arma && complemento) {
     var chave_arma = tabelas_armas_invertida[complemento];
-    if (!PersonagemProficienteComArma(complemento)) {
+    if (!PersonagemProficienteComArma(chave_arma)) {
       alert(prefixo_erro + 'proficiencia com ' + complemento);
       return false;
     }
