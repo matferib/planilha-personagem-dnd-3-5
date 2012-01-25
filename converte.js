@@ -278,33 +278,38 @@ function _ConverteBonusPorCategoria(
 
 // Converte os talentos do personagem.
 function _ConverteTalentos() {
-  personagem.talentos.nivel = 1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
+  var talentos_gerais_por_nivel = 
+      1 + Math.floor(personagem.pontos_vida.dados_vida / 3);
+  if (tabelas_raca[personagem.raca].talento_extra) {
+    ++talentos_gerais_por_nivel;
+  }
+  var lista_gerais = personagem.talentos['gerais'];
   // Talentos normais.
-  personagem.talentos.lista.length =
-      personagem.talentos.nivel + 
-      (tabelas_raca[personagem.raca].talento_extra ? 1 : 0);
-  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
+  lista_gerais.length = talentos_gerais_por_nivel;
+  for (var i = 0; i < lista_gerais.length; ++i) {
     _ConverteTalento(
-        i < entradas.talentos.length ? 
-            entradas.talentos[i] : { chave: 'usar_armas_simples', complemento: null }, 
-        i, personagem.talentos.lista);
+        (i < entradas.talentos['gerais'].length) ? 
+            entradas.talentos['gerais'][i] : 
+            { chave: 'usar_armas_simples', complemento: null }, 
+        i, 
+        lista_gerais);
   }
 
   // Talentos de guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
   if (nivel_guerreiro > 0) {
-    personagem.talentos.lista_classe['guerreiro'].length = 
-        1 + Math.floor(nivel_guerreiro / 2);
-    for (var i = 0; i < personagem.talentos.lista_classe['guerreiro'].length; ++i) {
+    var lista_guerreiro = personagem.talentos['guerreiro'];
+    lista_guerreiro.length = 1 + Math.floor(nivel_guerreiro / 2);
+    for (var i = 0; i < lista_guerreiro.length; ++i) {
       _ConverteTalento(
-          i < entradas.talentos_classe['guerreiro'].length ? 
-              entradas.talentos_classe['guerreiro'][i] : 
+          i < entradas.talentos['guerreiro'].length ? 
+              entradas.talentos['guerreiro'][i] : 
               { chave: 'iniciativa_aprimorada', complemento: null }, 
           i, 
-          personagem.talentos.lista_classe['guerreiro']);
+          lista_guerreiro);
     }
   } else {
-    personagem.talentos.lista_classe['guerreiro'].length = 0;
+    lista_guerreiro.length = 0;
   }
 }
 
@@ -340,18 +345,21 @@ function _ConverteTalento(talento_entrada, indice_talento, lista) {
 }
 
 function _VerificaPrerequisitosTalento() {
-  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    var talento = personagem.talentos.lista[i];
-    if (tabelas_talentos[talento.chave].complemento &&
-        talento.complemento &&
-        !_VerificaTipoComplementoTalento(talento)) {
-      talento.complemento = null;
-    }
-    if (!PersonagemVerificaPrerequisitosTalento(talento.chave, talento.complemento)) {
-      // Se tiver complemento so limpa o complemento
-      talento.complemento = null;
-      if (!tabelas_talentos[talento.chave].complemento) {
-        talento.chave = null;
+  for (var chave_classe in personagem.talentos) {
+    var lista_classe = personagem.talentos[chave_classe];
+    for (var i = 0; i < lista_classe.length; ++i) {
+      var talento = lista_classe[i];
+      if (tabelas_talentos[talento.chave].complemento &&
+          talento.complemento &&
+          !_VerificaTipoComplementoTalento(talento)) {
+        talento.complemento = null;
+      }
+      if (!PersonagemVerificaPrerequisitosTalento(talento.chave, talento.complemento)) {
+        // Se tiver complemento so limpa o complemento
+        talento.complemento = null;
+        if (!tabelas_talentos[talento.chave].complemento) {
+          talento.chave = null;
+        }
       }
     }
   }
@@ -469,33 +477,41 @@ function _ConverteProficienciaArmas() {
   }
 
   // Talentos. Preciso obter o nome da chave na tabela de armas.
-  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    var talento = personagem.talentos.lista[i];
-    if ((talento.chave == 'usar_arma_comum' || talento.chave == 'usar_arma_exotica') && 
-        (talento.complemento != null)) {
-      var chave_arma = tabelas_armas_invertida[talento.complemento];
-      if (chave_arma == null) {
-        alert('Arma "' + talento.complemento + '" inválida para talento "' + 
-              tabelas_talentos[talento.chave].nome + '"');
-        continue;
-      }
-      var arma_tabela = tabelas_armas[chave_arma];
-      if (arma_tabela.talento_relacionado != talento.chave) {
-        // verifica familiaridade.
-        var familiar = false;
-        if (arma_tabela.talento_relacionado == 'usar_arma_exotica' && 
-            tabelas_raca[personagem.raca].familiaridade_arma &&
-            tabelas_raca[personagem.raca].familiaridade_arma[chave_arma] &&
-            talento.chave == 'usar_arma_comum') {
-          familiar = true;
-        }
-        if (!familiar) {
+  for (var chave_classe in personagem.talentos) {
+    var lista_classe = personagem.talentos[chave_classe];
+    for (var i = 0; i < lista_classe.length; ++i) {
+      var talento = lista_classe[i];
+      if ((talento.chave == 'usar_arma_comum' || 
+           talento.chave == 'usar_arma_exotica') && 
+          (talento.complemento != null) && 
+          talento.complemento.length > 0) {
+        var chave_arma = tabelas_armas_invertida[talento.complemento];
+        // TODO remover essa verificacao quando o input dos talentos estiver
+        // terminado.
+        if (chave_arma == null) {
           alert('Arma "' + talento.complemento + '" inválida para talento "' + 
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
+        var arma_tabela = tabelas_armas[chave_arma];
+        if (arma_tabela.talento_relacionado != talento.chave) {
+          // verifica familiaridade.
+          var familiar = false;
+          if (arma_tabela.talento_relacionado == 'usar_arma_exotica' && 
+              tabelas_raca[personagem.raca].familiaridade_arma &&
+              tabelas_raca[personagem.raca].familiaridade_arma[chave_arma] &&
+              talento.chave == 'usar_arma_comum') {
+            familiar = true;
+          }
+          if (!familiar) {
+            alert('Arma "' + talento.complemento + 
+                  '" inválida para talento "' + 
+                  tabelas_talentos[talento.chave].nome + '"');
+            continue;
+          }
+        }
+        personagem.proficiencia_armas[chave_arma] = true;
       }
-      personagem.proficiencia_armas[chave_arma] = true;
     }
   }
 }
@@ -504,17 +520,20 @@ function _ConverteProficienciaArmas() {
 function _ConverteFocoArmas() {
   personagem.foco_armas = {};
   // Talentos. Preciso obter o nome da chave na tabela de armas.
-  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    var talento = personagem.talentos.lista[i];
-    if (talento.chave && talento.chave.indexOf('foco_em_arma') != -1 && 
-        talento.complemento != null) {
-      var chave_arma = tabelas_armas_invertida[talento.complemento];
-      if (chave_arma == null) {
-        alert('Arma "' + talento.complemento + '" inválida para talento "' + 
-              tabelas_talentos[talento.chave].nome + '"');
-        continue;
+  for (var chave_classe in personagem.talentos) {
+    var lista_classe = personagem.talentos[chave_classe];
+    for (var i = 0; i < lista_classe.length; ++i) {
+      var talento = lista_classe[i];
+      if (talento.chave && talento.chave.indexOf('foco_em_arma') != -1 && 
+          talento.complemento != null) {
+        var chave_arma = tabelas_armas_invertida[talento.complemento];
+        if (chave_arma == null) {
+          alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+                tabelas_talentos[talento.chave].nome + '"');
+          continue;
+        }
+        personagem.foco_armas[chave_arma] = talento.chave.indexOf('_maior') == -1 ? 1 : 2;
       }
-      personagem.foco_armas[chave_arma] = talento.chave.indexOf('_maior') == -1 ? 1 : 2;
     }
   }
 }

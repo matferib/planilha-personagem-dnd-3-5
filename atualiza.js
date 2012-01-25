@@ -389,33 +389,21 @@ function _AtualizaSalvacoes() {
 
 // Atualiza os numeros e listas relacionados a talentos.
 function _AtualizaTalentos() {
-  ImprimeNaoSinalizado(
-      personagem.talentos.lista.length, 
-      Dom('talentos-gerais-total'));
-  var div_talentos = Dom('div-talentos-gerais');
-  for (var i = 0; i < personagem.talentos.lista.length; ++i) {
-    _AtualizaTalento(
-        personagem.talentos.lista[i], 
-        i < div_talentos.childNodes.length ? div_talentos.childNodes[i] : null,
-        null,
-        div_talentos);
-  }
-
   // Talentos de classe.
-  for (var chave_classe in personagem.talentos.lista_classe) {
+  for (var chave_classe in personagem.talentos) {
     var div_talentos_classe = Dom('div-talentos-' + chave_classe);
-    var lista_classe = personagem.talentos.lista_classe[chave_classe];
+    var lista_classe = personagem.talentos[chave_classe];
     var div_selects = Dom('div-talentos-' + chave_classe + '-selects');
     if (lista_classe.length > 0) {
       ImprimeNaoSinalizado(
-          personagem.talentos.lista_classe[chave_classe].length, 
+          lista_classe.length, 
           Dom('talentos-' + chave_classe + '-total'));
       for (var i = 0; i < lista_classe.length; ++i) {
         _AtualizaTalento(
             lista_classe[i], 
             i < div_selects.childNodes.length ? 
                 div_selects.childNodes[i] : null,
-            chave_classe,
+            (chave_classe == 'gerais') ? null : chave_classe,
             div_selects);
       }
       div_talentos_classe.style.display = 'block';
