@@ -415,8 +415,10 @@ function _ConvertePericias() {
     var chave_pericia = entradas.pericias[i].chave;
     var pericia = tabelas_pericias[chave_pericia];
     var pericia_personagem = personagem.pericias.lista[chave_pericia];
-    pericia_personagem.pontos = entradas.pericias[i].pontos;
-    pericia_personagem.graduacoes = PersonagemPossuiUmaDasClasses(pericia.classes) ?
+    pericia_personagem.de_classe = PersonagemPossuiUmaDasClasses(pericia.classes);
+    var max_pontos = personagem.pontos_vida.dados_vida + 3;
+    pericia_personagem.pontos = Math.min(entradas.pericias[i].pontos, max_pontos);
+    pericia_personagem.graduacoes = pericia_personagem.de_classe ?
         pericia_personagem.pontos : Math.floor(pericia_personagem.pontos / 2);
     pericia_personagem.bonus.Adiciona(
         'atributo', pericia.habilidade, personagem.atributos[pericia.habilidade].modificador);

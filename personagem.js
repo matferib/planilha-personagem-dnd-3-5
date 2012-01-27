@@ -89,7 +89,7 @@ var personagem = {
     // Quantos ele ja gastou.
     pontos_gastos: 0,
     // Cada entrada:
-    // chave_pericia: { pontos, graduacoes, bonus }.
+    // chave_pericia: { pontos, graduacoes, bonus, de_classe }.
     lista: {},
   },
   // Cada entrada: { nome, 
