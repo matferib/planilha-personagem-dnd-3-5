@@ -3,6 +3,7 @@
 
 // Variavel contendo os valores das entradas. Iniciado com valores padroes da criacao.
 var entradas = {
+  modo_mestre: '',
   // geral
   nome: "",
   raca: "humano",
@@ -54,6 +55,8 @@ var entradas = {
 
 // Le todos os inputs da planilha e armazena em 'entradas'. 
 function LeEntradas() {
+  // Modo mestre ligado ou nao.
+  entradas.modo_mestre = Dom('input-modo-mestre').checked;
   // nome
   entradas.nome = Dom('nome').value;
   // raca
