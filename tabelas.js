@@ -1026,7 +1026,7 @@ var tabelas_pericias = {
       sem_treinamento: false, habilidade: 'destreza', penalidade_armadura: 1 },
   adestrar_animais: {
       nome: 'Adestrar Animais', 
-      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger' ], 
+      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ], 
       sem_treinamento: false, habilidade: 'carisma' },
   arte_da_fuga: {
       nome: 'Arte da Fuga', 
@@ -1034,19 +1034,19 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   atuacao: {
       nome: 'Atuação', 
-      classes: [ 'bardo', 'monge', 'ladino', ],
+      classes: [ 'bardo', 'monge', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   avaliacao: {
       nome: 'Avaliação', 
-      classes: [ 'bardo', 'ladino' ],
+      classes: [ 'bardo', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   blefar: {
       nome: 'Blefar', 
-      classes: [  'bardo', 'ladino', 'feiticeiro' ], 
+      classes: [  'bardo', 'ladino', 'feiticeiro', 'aristocrata' ], 
       sem_treinamento: true,  habilidade: 'carisma' },
   cavalgar: {
       nome: 'Cavalgar', 
-      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger' ], 
+      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ], 
       sem_treinamento: true,  habilidade: 'destreza' },
   concentracao: {
       nome: 'Concentração', 
@@ -1054,43 +1054,43 @@ var tabelas_pericias = {
       sem_treinamento: true,  habilidade: 'constituicao' },
   conhecimento_arcano: {
       nome: 'Conhecimento (arcano)',
-      classes: [  'bardo', 'clerigo', 'monge', 'feiticeiro', 'mago' ],
+      classes: [  'bardo', 'clerigo', 'monge', 'feiticeiro', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_arquitetura_e_engenharia: {
       nome: 'Conhecimento(arquitetura_e_engenharia)',
-      classes: [  'bardo', 'mago' ],
+      classes: [  'bardo', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_geografia: {
       nome: 'Conhecimento (geografia)',
-      classes: [  'bardo', 'ranger', 'mago' ],
+      classes: [  'bardo', 'ranger', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
-  conhecimento_história: {
+  conhecimento_historia: {
       nome: 'Conhecimento (história)',
-      classes: [  'bardo', 'clerigo', 'mago' ],
+      classes: [  'bardo', 'clerigo', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_local: {
       nome: 'Conhecimento (local)',
-      classes: [  'bardo', 'ladino', 'mago' ],
+      classes: [  'bardo', 'ladino', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_masmorras: {
       nome: 'Conhecimento (masmorras)',
-      classes: [  'bardo', 'ranger', 'mago' ],
+      classes: [  'bardo', 'ranger', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_natureza: {
       nome: 'Conhecimento (natureza)',
-      classes: [  'bardo', 'druida', 'ranger', 'mago' ],
+      classes: [  'bardo', 'druida', 'ranger', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_nobreza_e_realeza: {
       nome: 'Conhecimento (nobreza e realeza)',
-      classes: [  'bardo', 'paladino', 'mago' ],
+      classes: [  'bardo', 'paladino', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_planos: {
       nome: 'Conhecimento (planos)',
-      classes: [  'bardo', 'clerigo', 'mago' ],
+      classes: [  'bardo', 'clerigo', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_religiao: {
       nome: 'Conhecimento (religião)',
-      classes: [  'bardo', 'clerigo', 'monge', 'paladino', 'mago' ],
+      classes: [  'bardo', 'clerigo', 'monge', 'paladino', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   cura: {
       nome: 'Cura',
@@ -1102,11 +1102,11 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   diplomacia: {
       nome: 'Diplomacia',
-      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ladino', ],
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ladino', 'aristocrata', ],
       sem_treinamento: true, habilidade: 'carisma' },
   disfarces: {
       nome: 'Disfarces',
-      classes: [  'bardo', 'ladino', ],
+      classes: [  'bardo', 'ladino', 'aristocrata', ],
       sem_treinamento: true, habilidade: 'carisma' },
   equilibrio: {
       nome: 'Equilíbrio',
@@ -1122,11 +1122,11 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   falar_idioma: {
       nome: 'Falar Idioma',
-      classes: [ 'bardo'],
+      classes: [ 'bardo', 'aristocrata' ],
       habilidade: 'sabedoria' },
   falsificacao: {
       nome: 'Falsificação',
-      classes: [  'ladino', ],
+      classes: [  'ladino', 'aristocrata', ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   furtividade: {
       nome: 'Furtividade',
@@ -1138,23 +1138,24 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   intimidacao: {
       nome: 'Intimidação',
-      classes: [  'barbaro', 'guerreiro', 'ladino', ],
+      classes: [  'barbaro', 'guerreiro', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'carisma' },
   natacao: {
       nome: 'Natação',
-      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 2 },
   observar: {
       nome: 'Observar',
-      classes: [  'druida', 'monge', 'ranger', 'ladino', ],
+      classes: [  'druida', 'monge', 'ranger', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'sabedoria' },
   obter_informacao: {
       nome: 'Obter Informação',
-      classes: [  'bardo', 'ladino', ],
+      classes: [  'bardo', 'ladino', 'aristocrata', ],
       sem_treinamento: true, habilidade: 'carisma' },
   oficios: {
       nome: 'Ofícios',
-      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge', 'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge', 
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   operar_mecanismo: {
       nome: 'Operar Mecanismo',
@@ -1162,7 +1163,7 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   ouvir: {
       nome: 'Ouvir',
-      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', ],
+      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', 'aristocrata' ],
        sem_treinamento: true, habilidade: 'sabedoria' },
   prestidigitacao: {
       nome: 'Prestidigitação',
@@ -1174,7 +1175,8 @@ var tabelas_pericias = {
        sem_treinamento: true,habilidade: 'inteligencia' },
   profissao: {
       nome: 'Profissão',
-      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago'],
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 
+                  'ladino', 'feiticeiro', 'mago'],
       habilidade: 'sabedoria' },
   saltar: {
       nome: 'Saltar',
@@ -1182,11 +1184,11 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   sentir_motivacao: {
       nome: 'Sentir Motivação',
-      classes: [  'bardo', 'monge', 'paladino', 'ladino', ],
+      classes: [  'bardo', 'monge', 'paladino', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'sabedoria' },
-  sobrevivência: {
+  sobrevivencia: {
       nome: 'Sobrevivência',
-      classes: [  'barbaro', 'druida', 'ranger', ],
+      classes: [  'barbaro', 'druida', 'ranger', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'sabedoria' },
   usar_cordas: {
       nome: 'Usar Cordas',
