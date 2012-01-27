@@ -452,12 +452,12 @@ function _AtualizaPericias() {
 
   for (var chave in personagem.pericias.lista) {
     var dom_pericia = Dom('pericia-' + chave);
-    if (PersonagemPossuiUmaDasClasses(tabelas_pericias[chave].classes)) {
+    var pericia_personagem = personagem.pericias.lista[chave];
+    if (pericia_personagem.de_classe) {
       dom_pericia.className = 'pericia-de-classe';
     } else {
       dom_pericia.className = '';
     }
-    var pericia_personagem = personagem.pericias.lista[chave];
     var input_pontos = Dom('pericia-' + chave + '-pontos');
     input_pontos.value = pericia_personagem.pontos;
     var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
