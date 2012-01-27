@@ -21,11 +21,15 @@ function ConverteEntradasParaPersonagem() {
   // Equipamentos podem afetar todo o resto.
   _ConverteEquipamentos();
 
-  // Talentos idem.
+  // Dados de vida afetam quase tudo.
+  _ConverteDadosVida();
+
+  // Atributos dependem dos dados de vida (incrementos).
+  _ConverteAtributos();
+
+  // Talentos dependem dos dados de vida.
   _ConverteTalentos();
 
-  _ConverteAtributos();
-  _ConverteDadosVida();
   _ConvertePontosVida();
   _ConverteIniciativa();
   _ConverteBba();
