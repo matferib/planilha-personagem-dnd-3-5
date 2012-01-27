@@ -5,6 +5,7 @@ function ConverteEntradasParaPersonagem() {
   // Limpa tudo antes de comecar.
   _LimpaGeral();
 
+  personagem.modo_mestre = entradas.modo_mestre;
   personagem.nome = entradas.nome;
   personagem.raca = entradas.raca;
   personagem.tamanho.categoria =
@@ -297,8 +298,8 @@ function _ConverteTalentos() {
 
   // Talentos de guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
+  var lista_guerreiro = personagem.talentos['guerreiro'];
   if (nivel_guerreiro > 0) {
-    var lista_guerreiro = personagem.talentos['guerreiro'];
     lista_guerreiro.length = 1 + Math.floor(nivel_guerreiro / 2);
     for (var i = 0; i < lista_guerreiro.length; ++i) {
       _ConverteTalento(
