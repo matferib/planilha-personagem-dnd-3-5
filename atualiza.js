@@ -409,7 +409,7 @@ function _AtualizaTalentos() {
       div_talentos_classe.style.display = 'block';
     } else {
       div_talentos_classe.style.display = 'none';
-      div_selects.childNodes.length = 0;
+      RemoveFilhos(div_selects.childNodes);
     }
   }
 }
