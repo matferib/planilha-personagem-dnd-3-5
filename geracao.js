@@ -66,8 +66,14 @@ function GeraAleatorioElite() {
   }
 }
 
-// Tabelados, valores eh um array de valores a serem usados.
-function _GeraTabelado(valores) {
+// Gera os atributos do personagem usando as tabelas do modo.
+function _GeraAtributos(modo) {
+  var valores = null;
+  if (modo == 'elite') {
+    valores = [ 15, 14, 13, 12, 10, 8 ];
+  } else {
+    valores = [ 13, 12, 11, 10, 9, 8 ];
+  }
   if (personagem.classes.length == 0) {
     // Nunca deve acontecer.
     alert('Personagem sem classe');
@@ -79,20 +85,34 @@ function _GeraTabelado(valores) {
     alert("É recomendado colocar os valores na mão para aristocratas e experts");
   }
 
+  var atributos_primeira_classe = tabelas_geracao_atributos[primeira_classe.classe];
   for (var i = 0; i < valores.length; ++i) {
-    Dom(
-        tabelas_geracao_atributos[primeira_classe.classe][i]  + '-valor-base').value = 
-            valores[i];
+    personagem.atributos[atributos_primeira_classe[i]].base = valores[i];
   }
+
+  // Incrementa o atributo mais valioso do personagem
+  var atributo_mais_valioso = atributos_primeira_classe[0];
+  for (var i = personagem.atributos.pontos.disponiveis; i > 0; --i) {
+    personagem.atributos.pontos.gastos.push(atributo_mais_valioso);
+    ++personagem.atributos[atributo_mais_valioso].bonus_nivel;
+  }
+  personagem.atributos.pontos.disponiveis = 0;
 }
 
-// Gera os atributos do personagem usando o 'elite array'. Usa a primeira classe.
-function GeraElite() {
-  _GeraTabelado( [ 15, 14, 13, 12, 10, 8 ]);
-}
+// Gera um personagem a partir das classes e niveis.
+// @param modo 'elite' ou 'comum'.
+function GeraPersonagem(modo) {
+  _GeraAtributos(modo);
+  /*
+  _GeraPontosDeVida();
 
-// Gera os atributos do personagem usando o 'non elite array'. Usa a primeira classe.
-function GeraComum() {
-  _GeraTabelado([ 13, 12, 11, 10, 9, 8 ]);
+  _GeraEquipamentos();
+  _GeraArmas();
+  _GeraArmaduras();
+  _GeraEstilosDeLuta();
+  _GeraTalentos();
+  _GeraPericias();
+  _GeraFeiticos();
+  */
+  AtualizaGeralSemConverterEntradas();
 }
-

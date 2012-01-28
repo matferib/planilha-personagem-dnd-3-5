@@ -257,3 +257,9 @@ function ClickAnel(checkbox) {
   }
   AtualizaGeral();
 }
+
+// Trata os botoes de personagem.
+// @param modo 'elite' ou 'comum'.
+function ClickGerarPersonagem(modo) {
+  GeraPersonagem(modo);
+}
