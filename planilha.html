@@ -23,6 +23,7 @@
 <script type="text/javascript" src="geracao.js"></script>
 <script type="text/javascript" src="personagem.js"></script>
 <script type="text/javascript" src="tabelas.js"></script>
+<script type="text/javascript" src="tabelas_geracao.js"></script>
 <script type="text/javascript" src="util.js"></script>
 <!-- versao compilada -->
 <!--script type="text/javascript" src="tudo.js"></script-->
@@ -59,21 +60,16 @@ Classes:
 <br>
 <!-- classes, criadas dinamicamente. -->
 <div id="classes"></div>
-Experiência: <input type="text" id="pontos-experiencia" size="6"/> 
+<div>
+<button type="button" onclick="ClickGerarPersonagem('comum')" class="botao-geracao">
+    Gerar comum</button>
+<button type="button" onclick="ClickGerarPersonagem('elite')" class="botao-geracao">
+    Gerar elite</button>
 </div>
+Experiência: <input type="text" id="pontos-experiencia" size="6"/> 
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
-<div>
-<button type="button" onclick="ClickGerarPontosDeVida('comum')" class="botao-geracao">
-    Gerar Comum</button>
-<button type="button" onclick="ClickGerarPontosDeVida('elite')" class="botao-geracao">
-    Gerar Elite</button>
-<!-- esse botao eh o modo que usamos para personagens. -->
-<button type="button" onclick="ClickGerarPontosDeVida('personagem')" class="botao-geracao">
-    Personagem</button>
-</div>
-
 Dados de Vida: <span id="dados-vida-classes"></span><br>
 
 Pontos de Vida: 
@@ -100,18 +96,8 @@ Pontos de Vida:
 <br>
 </div> <!-- div-pontos-vida -->
 
-
+<!-- Os atributos serão inseridos aqui. -->
 <div id="div-stats" class="divs-principais">
-<div>
-<button type="button" onclick="ClickGerarComum()" class="botao-geracao">
-    Gerar comum</button>
-<button type="button" onclick="ClickGerarAleatorioComum()" class="botao-geracao">
-    Gerar comum aleatório (3d6)</button>
-<button type="button" onclick="ClickGerarElite()" class="botao-geracao">
-    Gerar elite</button>
-<button type="button" onclick="ClickGerarAleatorioElite()" class="botao-geracao">
-    Gerar elite Aleatório (4d6 - menor)</button>
-</div>
 </div> <!-- div-stats -->
 
 <div id="div-iniciativa" class="divs-principais">
