@@ -11,6 +11,7 @@ function CarregamentoInicial() {
   // Monta a tabela de armas e cria as opcoes dinamicamente.
   _CarregaTabelaArmas();
   _CarregaPericias();
+  _CarregaFeiticos();
 
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual != -1) {
@@ -185,5 +186,26 @@ function _CarregaPericias() {
     personagem.pericias.lista[chave_pericia] = {
         graduacoes: 0, bonus: new Bonus(),
     };
+  }
+}
+
+// Cria os objetos das classes que possuem feiticos no personagem.
+function _CarregaFeiticos() {
+  for (var chave_classe in tabelas_feiticos) {
+    personagem.feiticos[chave_classe] = {
+      atributo_chave: tabelas_feiticos[chave_classe].atributo_chave,
+      conhecidos: {},
+      slots: {},
+    };
+    for (var i = 0; i <= 9; ++i) {
+      personagem.feiticos[chave_classe].conhecidos[i] = [];
+      personagem.feiticos[chave_classe].slots[i] = {
+        atributo_chave: tabelas_feiticos[chave_classe].atributo_chave,
+        base: 0,
+        bonus_atributo: 0,
+        feiticos: [],
+        feitico_dominio: null,
+      };
+    }
   }
 }

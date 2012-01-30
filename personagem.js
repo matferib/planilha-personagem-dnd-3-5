@@ -13,10 +13,10 @@ var personagem = {
   ],
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {
-    total: 0,
+    nivel_personagem: 0,  // nivel efetivo do personagem.
+    //dados: [],  // cada dado de vida rolado.
   },
   pontos_vida: {
-    dados_vida: 0,  // soma de todas as classes, nivel do personagem.
     total_dados: 0,  // total dos dados de pontos de vida.
     bonus: new Bonus(), // outros bonus.
     total: 0,  // soma dos dados mais bonus.
@@ -134,8 +134,9 @@ var personagem = {
 
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',
-  // Feiticos. Cada entrada: chave_classe: { 
-  //   habilidade_chave, 
+  // Feiticos. As chaves sao criadas no carregamento. Cada entrada: 
+  // chave_classe: { 
+  //   atributo_chave, 
   //   conhecidos: { 0: [], ..., 9 },
   //   slots: { 
   //       0: { base, bonus_atributo, 
