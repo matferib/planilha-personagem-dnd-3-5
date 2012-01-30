@@ -10,6 +10,7 @@ function AtualizaGeral() {
   LeEntradas(); 
   // converte a estrutura de entradas para a de personagem.
   ConverteEntradasParaPersonagem();
+  DependenciasGerais();
   _AtualizaGeral();
 }
 
@@ -19,6 +20,7 @@ function AtualizaGeral() {
 // devem usar esta funcao, pois a entrada que eh salva.
 function AtualizaGeralSemLerEntradas() {
   ConverteEntradasParaPersonagem();
+  DependenciasGerais();
   _AtualizaGeral();
 }
 
@@ -64,9 +66,7 @@ function _AtualizaNomeRacaAlinhamentoXp() {
 function _AtualizaDadosVida() {
   var primeiro = true;  // primeira classe nao eh sinalizada.
   var string_dados_vida = '';
-  var dados_vida_total = 0;
   for (var i = 0; i < personagem.classes.length; ++i) {
-      dados_vida_total += personagem.classes[i].nivel;
       if (primeiro) {
         primeiro = false;
       } else {
@@ -74,14 +74,13 @@ function _AtualizaDadosVida() {
       }
       string_dados_vida += 
         personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
-
   }
-  if (personagem.atributos.constituicao.modificador > 0 && dados_vida_total > 0) {
+  if (personagem.atributos.constituicao.modificador > 0) {
     string_dados_vida += 
-      ' +' + (personagem.atributos.constituicao.modificador*dados_vida_total);
+      ' +' + (personagem.atributos.constituicao.modificador * personagem.dados_vida.nivel_personagem);
   }
   var span_dados = Dom('dados-vida-classes');
-  span_dados.textContent = dados_vida_total + ' = ' + string_dados_vida;
+  span_dados.textContent = personagem.dados_vida.nivel_personagem + ' = ' + string_dados_vida;
 }
 
 // Atualiza as informacoes referentes a pontos de vida do personagem.
