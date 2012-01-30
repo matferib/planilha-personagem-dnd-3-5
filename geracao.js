@@ -1,10 +1,44 @@
+// Gera os atributos do personagem usando as tabelas do modo.
+function _GeraAtributos(modo) {
+  var valores = null;
+  if (modo == 'elite') {
+    valores = [ 15, 14, 13, 12, 10, 8 ];
+  } else {
+    valores = [ 13, 12, 11, 10, 9, 8 ];
+  }
+  if (personagem.classes.length == 0) {
+    // Nunca deve acontecer.
+    alert('Personagem sem classe');
+    return;
+  }
+
+  var primeira_classe = personagem.classes[0];
+  if (primeira_classe.classe == 'aristocrata' || primeira_classe.classe == 'expert') {
+    alert("É recomendado colocar os valores na mão para aristocratas e experts");
+  }
+
+  var atributos_primeira_classe = tabelas_geracao[primeira_classe.classe].atributos;
+  for (var i = 0; i < valores.length; ++i) {
+    personagem.atributos[atributos_primeira_classe[i]].base = valores[i];
+  }
+
+  // Incrementa o atributo mais valioso do personagem
+  var atributo_mais_valioso = atributos_primeira_classe[0];
+  for (var i = personagem.atributos.pontos.disponiveis; i > 0; --i) {
+    personagem.atributos.pontos.gastos.push(atributo_mais_valioso);
+    ++personagem.atributos[atributo_mais_valioso].bonus_nivel;
+  }
+  personagem.atributos.pontos.disponiveis = 0;
+}
+
 // Gera os pontos de vida do personagem de acordo com as classes.
 // @param modo pode ser elite, comum, personagem.
-function GeraPontosDeVida(modo) {
+function _GeraPontosDeVida(modo) {
   if (modo != 'personagem' && modo != 'elite' && modo != 'comum') {
     alert('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
     return;
   }
+  personagem.dados_vida.dados.length = 0;
   // Para cada classe, rolar o dado.
   var total_pontos_vida = 0;
   // Primeiro eh diferente na elite e personagem.
@@ -33,79 +67,19 @@ function GeraPontosDeVida(modo) {
       if (pontos_vida_nivel < 1) {
         pontos_vida_nivel = 1;
       }
+      personagem.dados_vida.dados.push(pontos_vida_nivel);
       total_pontos_vida += pontos_vida_nivel;
     }
   }
-  Dom('pontos-vida-dados').value = total_pontos_vida;
-}
-
-// Gera os atributos do personagem rolando 3d6 para cada um.
-function GeraAleatorioComum() {
-  var atributos = [ 'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
-  for (var i = 0; i < atributos.length; ++i) {
-    Dom(atributos[i] + '-valor-base').value = Rola(3, 6);
-  }
-}
-
-// Gera os atributos do personagem rolando 4d6 menos o menor.
-function GeraAleatorioElite() {
-  var atributos = [ 'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
-  //var rolagens = [];
-  for (var i = 0; i < atributos.length; ++i) {
-    var total = 0;
-    var menor = 7;
-    for (var j = 0; j < 4; ++j) {
-      var rolagem = Rola(1, 6);
-      //rolagens.push(rolagem);
-      if (rolagem < menor) {
-        menor = rolagem;
-      }
-      total += rolagem;
-    }
-    Dom(atributos[i] + '-valor-base').value = total - menor;
-  }
-}
-
-// Gera os atributos do personagem usando as tabelas do modo.
-function _GeraAtributos(modo) {
-  var valores = null;
-  if (modo == 'elite') {
-    valores = [ 15, 14, 13, 12, 10, 8 ];
-  } else {
-    valores = [ 13, 12, 11, 10, 9, 8 ];
-  }
-  if (personagem.classes.length == 0) {
-    // Nunca deve acontecer.
-    alert('Personagem sem classe');
-    return;
-  }
-
-  var primeira_classe = personagem.classes[0];
-  if (primeira_classe.classe == 'aristocrata' || primeira_classe.classe == 'expert') {
-    alert("É recomendado colocar os valores na mão para aristocratas e experts");
-  }
-
-  var atributos_primeira_classe = tabelas_geracao_atributos[primeira_classe.classe];
-  for (var i = 0; i < valores.length; ++i) {
-    personagem.atributos[atributos_primeira_classe[i]].base = valores[i];
-  }
-
-  // Incrementa o atributo mais valioso do personagem
-  var atributo_mais_valioso = atributos_primeira_classe[0];
-  for (var i = personagem.atributos.pontos.disponiveis; i > 0; --i) {
-    personagem.atributos.pontos.gastos.push(atributo_mais_valioso);
-    ++personagem.atributos[atributo_mais_valioso].bonus_nivel;
-  }
-  personagem.atributos.pontos.disponiveis = 0;
 }
 
 // Gera um personagem a partir das classes e niveis.
 // @param modo 'elite' ou 'comum'.
 function GeraPersonagem(modo) {
   _GeraAtributos(modo);
-  /*
-  _GeraPontosDeVida();
+  _GeraPontosDeVida(modo);
 
+  /*
   _GeraEquipamentos();
   _GeraArmas();
   _GeraArmaduras();
