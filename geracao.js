@@ -69,6 +69,7 @@ function _GeraPontosDeVida(modo) {
       total_pontos_vida += pontos_vida_nivel;
     }
   }
+  personagem.pontos_vida.total_dados = total_pontos_vida;
 }
 
 // Gera um personagem a partir das classes e niveis.

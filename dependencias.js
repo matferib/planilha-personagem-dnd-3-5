@@ -15,6 +15,7 @@ function DependenciasGerais() {
 
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
+  // TODO se essa funcao falhar, potencialmente o personagem tera que ser recarregado.
   _VerificaPrerequisitosTalento();
 
   _DependenciasPericias();
