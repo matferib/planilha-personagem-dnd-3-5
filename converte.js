@@ -57,12 +57,14 @@ function _LimpaGeral() {
     personagem.pericias.lista[i].bonus.Limpa();
   }
   for (var chave_classe in personagem.feiticos) {
+    personagem.feiticos[chave_classe].em_uso = false;
     for (var i = 0; i <= 9; ++i) {
       personagem.feiticos[chave_classe].conhecidos[i].length = 0;
       personagem.feiticos[chave_classe].slots[i].feiticos.length = 0;
       personagem.feiticos[chave_classe].slots[i].feitico_dominio = null;
     }
   }
+  personagem.estilos_luta.length = 0;
 }
 
 function _ConverteDadosVida() {
@@ -104,52 +106,16 @@ function _ConverteAtributos() {
 
 // Converte os talentos do personagem.
 function _ConverteTalentos() {
-  var talentos_gerais_por_nivel = 
-      1 + Math.floor(personagem.dados_vida.nivel_personagem / 3);
-  if (tabelas_raca[personagem.raca].talento_extra) {
-    ++talentos_gerais_por_nivel;
-  }
-  var lista_gerais = personagem.talentos['gerais'];
-  // Talentos normais.
-  lista_gerais.length = talentos_gerais_por_nivel;
-  for (var i = 0; i < lista_gerais.length; ++i) {
-    _ConverteTalento(
-        (i < entradas.talentos['gerais'].length) ? 
-            entradas.talentos['gerais'][i] : 
-            { chave: 'usar_armas_simples', complemento: null }, 
-        i, 
-        lista_gerais);
-  }
-
-  // Talentos de guerreiro.
-  var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
-  var lista_guerreiro = personagem.talentos['guerreiro'];
-  if (nivel_guerreiro > 0) {
-    lista_guerreiro.length = 1 + Math.floor(nivel_guerreiro / 2);
-    for (var i = 0; i < lista_guerreiro.length; ++i) {
-      _ConverteTalento(
-          i < entradas.talentos['guerreiro'].length ? 
-              entradas.talentos['guerreiro'][i] : 
-              { chave: 'iniciativa_aprimorada', complemento: null }, 
-          i, 
-          lista_guerreiro);
+  for (var chave_classe in personagem.talentos) {
+    var lista = personagem.talentos[chave_classe];
+    lista.length = 0;
+    for (var i = 0; i < entradas.talentos[chave_classe].length; ++i) {
+      var talento_entrada = entradas.talentos[chave_classe][i];
+      lista.push({
+          chave: talento_entrada.chave,
+          complemento: talento_entrada.complemento });
     }
-  } else {
-    lista_guerreiro.length = 0;
   }
-}
-
-// Converte o talento de indice 'indice_talento'. Cria o mesmo se nao existir na lista.
-// @param talento_entrada o talento lido na entrada.
-// @param indice_talento o indice do talento na lista de talentos.
-function _ConverteTalento(talento_entrada, indice_talento, lista) {
-  if (lista[indice_talento] == null) {
-    lista[indice_talento] = {};
-  }
-  var talento_personagem = lista[indice_talento];
-  var chave_talento = talento_entrada.chave;
-  talento_personagem.chave = chave_talento;
-  talento_personagem.complemento = talento_entrada.complemento;
 }
 
 // Converte todas as pericias. Primeiro calcula o total de pontos e depois varre as entradas
@@ -193,7 +159,6 @@ function _ConverteArma(arma_entrada) {
 }
 
 function _ConverteEstilos() {
-  personagem.estilos_luta = [];
   for (var i = 0; i < entradas.estilos_luta.length; ++i) {
     personagem.estilos_luta.push(_ConverteEstilo(entradas.estilos_luta[i]));
   }
@@ -243,7 +208,7 @@ function _ConverteFeiticosSlots() {
     if (entrada_feitico.indice == 'dom') {
       slots_classe_nivel.feitico_dominio = feitico_slot;
     } else {
-      slots_classe_nivel.feiticos[entrada_feitico.indice].push(feitico_slot);
+      slots_classe_nivel.feiticos.push(feitico_slot);
     }
   }
 }
