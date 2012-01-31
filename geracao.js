@@ -38,7 +38,6 @@ function _GeraPontosDeVida(modo) {
     alert('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
     return;
   }
-  personagem.dados_vida.dados.length = 0;
   // Para cada classe, rolar o dado.
   var total_pontos_vida = 0;
   // Primeiro eh diferente na elite e personagem.
@@ -67,7 +66,6 @@ function _GeraPontosDeVida(modo) {
       if (pontos_vida_nivel < 1) {
         pontos_vida_nivel = 1;
       }
-      personagem.dados_vida.dados.push(pontos_vida_nivel);
       total_pontos_vida += pontos_vida_nivel;
     }
   }

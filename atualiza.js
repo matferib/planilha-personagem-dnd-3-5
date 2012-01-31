@@ -28,6 +28,7 @@ function AtualizaGeralSemLerEntradas() {
 // entradas. Normalmente os tratamentos de eventos alteram algum campo do personagem e chamam
 // esta funcao para atualizar tudo.
 function AtualizaGeralSemConverterEntradas() {
+  DependenciasGerais();
   _AtualizaGeral();
 }
 
@@ -421,6 +422,9 @@ function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai
   if (div_talento == null) {
     div_talento = AdicionaTalento(chave_classe, div_pai);
   }
+  if (talento_personagem.chave.length == 0) {
+    return;
+  }
   for (var i = 0; i < div_talento.childNodes.length; ++i) {
     var filho = div_talento.childNodes[i];
     if (filho.name == 'chave-talento') {
@@ -472,6 +476,10 @@ function _AtualizaFeiticos() {
   var div_feiticos = Dom('div-feiticos');
   RemoveFilhos(div_feiticos);
   for (var chave_classe in personagem.feiticos) {
+    if (!personagem.feiticos[chave_classe].em_uso) {
+      continue;
+    }
+
     // Da classe.
     var div_classe = CriaDiv('div-feiticos-' + chave_classe, 'div-feiticos-classe');
     div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
@@ -483,14 +491,14 @@ function _AtualizaFeiticos() {
 
 function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   var feiticos_classe = personagem.feiticos[chave_classe];
-  if (feiticos_classe.conhecidos == null) {
-    return;
-  }
   // Conhecidos.
   var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
   div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
   // Por nivel.
   for (var nivel in feiticos_classe.conhecidos) {
+    if (feiticos_classe.conhecidos[nivel].length == 0) {
+      continue;
+    }
     var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
         CriaSpan('Nível ' + nivel + ':')); 
@@ -515,6 +523,9 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   // Por nivel.
   var feiticos_classe = personagem.feiticos[chave_classe];
   for (var nivel in feiticos_classe.slots) {
+    if (feiticos_classe.slots[nivel].feiticos.length == 0) {
+      continue;
+    }
     var div_nivel = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
         CriaSpan('Nível ' + nivel + ':'));
