@@ -106,10 +106,29 @@ function _DependenciasAtributos() {
 }
 
 function _DependenciasTalentos() {
-  var lista_gerais = personagem.talentos['gerais'];
+  // Gerais.
+  var talentos_gerais_por_nivel = 
+      1 + Math.floor(personagem.dados_vida.nivel_personagem / 3);
+  if (tabelas_raca[personagem.raca].talento_extra) {
+    ++talentos_gerais_por_nivel;
+  }
+  personagem.talentos['gerais'].length = talentos_gerais_por_nivel;
+  // Guerreiro.
+  var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
+  if (nivel_guerreiro > 0) {
+    personagem.talentos['guerreiro'].length = 1 + Math.floor(nivel_guerreiro / 2);
+  } else {
+    personagem.talentos['guerreiro'].length = 0;
+  }
+
+  // Calcula o impacto dos talentos no resto.
   for (var chave_classe in personagem.talentos) {
     for (var i = 0; i < personagem.talentos[chave_classe].length; ++i) {
-      _DependenciasTalento(personagem.talentos[chave_classe][i]);
+      if (personagem.talentos[chave_classe][i] != null) {
+        _DependenciasTalento(personagem.talentos[chave_classe][i]);
+      } else {
+        personagem.talentos[chave_classe][i] = { chave: '', complemento: '' };
+      }
     }
   }
 }
@@ -118,6 +137,9 @@ function _DependenciasTalentos() {
 function _DependenciasTalento(talento_personagem, indice) {
   var chave_talento = talento_personagem.chave;
   var talento = tabelas_talentos[chave_talento];
+  if (talento == null) {
+    return;
+  }
   var bonus_pericias = talento.bonus_pericias;
   for (var chave_pericia in bonus_pericias) {
     personagem.pericias.lista[chave_pericia].bonus.Adiciona(
@@ -250,6 +272,9 @@ function _VerificaPrerequisitosTalento() {
     var lista_classe = personagem.talentos[chave_classe];
     for (var i = 0; i < lista_classe.length; ++i) {
       var talento = lista_classe[i];
+      if (tabelas_talentos[talento.chave] == null) {
+        continue;
+      }
       if (tabelas_talentos[talento.chave].complemento &&
           talento.complemento &&
           !_VerificaTipoComplementoTalento(talento)) {
@@ -398,23 +423,24 @@ function _DependenciasArma(arma_personagem) {
 
 function _DependenciasEstilos() {
   for (var i = 0; i < personagem.estilos_luta.length; ++i) {
-    personagem.estilos_luta.push(_DependenciasEstilo(personagem.estilos_luta[i]));
+    _DependenciasEstilo(personagem.estilos_luta[i]);
   }
 }
 
 function _DependenciasEstilo(estilo_personagem) {
-  var arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria);
+  var arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
   if (arma_primaria == null) {
-    estilo_personagem.arma_primaria = 'desarmado';
+    estilo_personagem.arma_primaria.nome = 'desarmado';
   }
-  var arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria);
+  var arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
   if (arma_secundaria == null) {
-    estilo_personagem.secundaria = 'desarmado';
+    estilo_personagem.arma_secundaria.nome = 'desarmado';
   }
+
   if (estilo_personagem.nome == 'arma_dupla' &&
       (arma_primaria == null || !arma_primaria.arma_tabela.arma_dupla)) {
     alert('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla');
-    estilo_personagem.nome = estilo_personagem.nome = 'uma_arma';
+    estilo_personagem.nome = 'uma_arma';
   }
 
   // Se o estilo eh duplo, forca segunda arma ser igual a primeira.
@@ -578,6 +604,7 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
   var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
+  personagem.feiticos[chave_classe].em_uso = true;
   // Feiticos conhecidos (se houver para a classe).
   for (var indice = 0; 
        feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length; 

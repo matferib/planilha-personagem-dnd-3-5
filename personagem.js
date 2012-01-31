@@ -81,6 +81,7 @@ var personagem = {
     // Algumas classes ganham talentos especificos.
     // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
+    // Cada talento: { chave, complemento }
     gerais: [], 
     guerreiro: [], 
     mago: [], 
@@ -137,6 +138,7 @@ var personagem = {
   // Feiticos. As chaves sao criadas no carregamento. Cada entrada: 
   // chave_classe: { 
   //   atributo_chave, 
+  //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9 },
   //   slots: { 
   //       0: { base, bonus_atributo, 
@@ -192,6 +194,9 @@ function PersonagemPossuiTalento(nome_talento, complemento) {
 
 function _TalentoIgual(talento_personagem, nome_talento, complemento) {
   var chave_talento = talento_personagem.chave;
+  if (tabelas_talentos[chave_talento] == null) {
+    return false;
+  }
   if (nome_talento == chave_talento ||
       nome_talento == tabelas_talentos[chave_talento].nome) {
     // TODO ver essa logica de complemento com calma.
