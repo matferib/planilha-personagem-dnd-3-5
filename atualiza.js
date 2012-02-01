@@ -568,6 +568,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
     div_slots.appendChild(div_nivel);
   }
   div_classe.appendChild(div_slots);
+  div_classe.appendChild(CriaBotao('descansar'));
 }
 
 function _AtualizaEquipamentos() {
