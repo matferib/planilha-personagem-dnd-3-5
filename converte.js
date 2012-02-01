@@ -148,7 +148,6 @@ function _ConverteListaArmas() {
 function _ConverteArma(arma_entrada) {
   var arma_tabela = tabelas_armas[arma_entrada.chave];
   var arma_personagem = {};
-  arma_personagem.arma_tabela = arma_tabela;
   // O nome da entrada eh apenas um indice na tabela de armas.
   arma_personagem.entrada = {
     chave: arma_entrada.chave, 

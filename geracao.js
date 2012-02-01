@@ -72,16 +72,62 @@ function _GeraPontosDeVida(modo) {
   personagem.pontos_vida.total_dados = total_pontos_vida;
 }
 
+// Gera os equipamentos que nao afetam outras coisas (ou ainda nao implementados)
+// como moedas. Assume um personagem do nivel da primeira classe.
+function _GeraEquipamentos(tabela_geracao_classe_por_nivel) {
+  for (var chave_moeda in tabela_geracao_classe_por_nivel.moedas) {
+    personagem.moedas[chave_moeda] = tabela_geracao_classe_por_nivel.moedas[chave_moeda];
+  }
+}
+
+function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
+  with (tabela_geracao_classe_por_nivel) {
+    personagem.armadura.nome = armadura.nome;
+    personagem.armadura.obra_prima = armadura.obra_prima || false;
+    personagem.armadura.bonus_magico = armadura.bonus_magico || 0;
+  }
+}
+
+function _GeraArmas(tabela_geracao_classe_por_nivel) {
+  with (tabela_geracao_classe_por_nivel) {
+    for (var i = 0; i < armas.length; ++i) {
+      var arma_entrada = { 
+          entrada: { 
+              chave: armas[i].chave, 
+              bonus: armas[i].bonus, 
+              obra_prima: armas[i].obra_prima 
+          } 
+      };
+      personagem.armas.push(arma_entrada);
+    }
+  }
+}
+
+function _GeraAneis(tabela_geracao_classe_por_nivel) {
+  with (tabela_geracao_classe_por_nivel) {
+    for (var i = 0; i < aneis.length; ++i) {
+      var anel_entrada = { 
+          chave: aneis[i].chave, 
+          em_uso: aneis[i].em_uso,
+      };
+      personagem.aneis.push(anel_entrada);
+    }
+  }
+}
+
 // Gera um personagem a partir das classes e niveis.
 // @param modo 'elite' ou 'comum'.
 function GeraPersonagem(modo) {
   _GeraAtributos(modo);
   _GeraPontosDeVida(modo);
 
+  var tabela_geracao_classe_por_nivel =
+      tabelas_geracao[personagem.classes[0].classe].por_nivel[personagem.classes[0].nivel];
+  _GeraEquipamentos(tabela_geracao_classe_por_nivel);
+  _GeraArmaduras(tabela_geracao_classe_por_nivel);
+  _GeraArmas(tabela_geracao_classe_por_nivel);
+  _GeraAneis(tabela_geracao_classe_por_nivel);
   /*
-  _GeraEquipamentos();
-  _GeraArmas();
-  _GeraArmaduras();
   _GeraEstilosDeLuta();
   _GeraTalentos();
   _GeraPericias();
