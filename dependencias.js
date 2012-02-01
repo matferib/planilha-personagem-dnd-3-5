@@ -402,7 +402,8 @@ function _DependenciasArmas() {
 }
 
 function _DependenciasArma(arma_personagem) {
-  var arma_tabela = arma_personagem.arma_tabela;
+  var arma_tabela = 
+      arma_personagem.arma_tabela = tabelas_armas[arma_personagem.entrada.chave];
   arma_personagem.nome_gerado = arma_tabela.nome;
   if (arma_personagem.entrada.obra_prima) {
     arma_personagem.bonus_ataque = 1;

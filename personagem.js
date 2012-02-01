@@ -125,8 +125,8 @@ var personagem = {
   // Sempre havera um ataque desarmado aqui.
   armas: [],
   // Armadura: { nome, bonus_magico }
-  armadura: { nome: 'nenhuma', bonus_magico: 0 },
-  escudo: { nome: 'nenhum' , bonus_magico: 0 },
+  armadura: { nome: 'nenhuma', obra_prima: false, bonus_magico: 0 },
+  escudo: { nome: 'nenhum' , obra_prima: false, bonus_magico: 0 },
   elmo: '',
   // Cada entrada { chave, em_uso }
   aneis: [],
