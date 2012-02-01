@@ -568,7 +568,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
     div_slots.appendChild(div_nivel);
   }
   div_classe.appendChild(div_slots);
-  div_classe.appendChild(CriaBotao('descansar'));
+  div_classe.appendChild(CriaBotao('Descansar', 'descansar', null, _RecuperaMagias));
 }
 
 function _AtualizaEquipamentos() {
@@ -637,4 +637,9 @@ function _AtualizaModoVisao() {
   for (var i = 0; i < botoes_geracao.length; ++i) {
     botoes_geracao[i].style.display = personagem.modo_mestre ? 'inline' : 'none';
   }
+}
+
+function _RecuperaMagias() {
+  Dom('input-feiticos-slots-gastos-feiticeiro-0-0').checked = false;
+
 }
