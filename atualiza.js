@@ -640,6 +640,19 @@ function _AtualizaModoVisao() {
 }
 
 function _RecuperaMagias() {
-  Dom('input-feiticos-slots-gastos-feiticeiro-0-0').checked = false;
-
+  for (var chave_classe in personagem.feiticos) {
+    if (!personagem.feiticos[chave_classe].em_uso) {
+      continue;
+    }
+    var feiticos_classe = personagem.feiticos[chave_classe];
+    for (var nivel in feiticos_classe.conhecidos) {
+      if (feiticos_classe.conhecidos[nivel].length == 0) {
+        continue;
+      }
+      for (var indice = 0; indice <= feiticos_classe.conhecidos[nivel].length; ++indice) {
+        Dom('input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' 
+      + indice).checked = false;
+      }
+    }
+  } 
 }
