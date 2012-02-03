@@ -265,7 +265,8 @@ function ClickGerarPersonagem(modo) {
 }
 
 // Trata o botao de descansar
-function ClickRecuperaMagias() {
+function ClickDescansar(modo) {
+  ClickAjustarFerimentos(modo);
   for (var chave_classe in personagem.feiticos) {
     if (!personagem.feiticos[chave_classe].em_uso) {
       continue;
