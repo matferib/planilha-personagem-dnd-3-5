@@ -29,43 +29,46 @@ function DependenciasGerais() {
 }
 
 function _DependenciasEquipamentos() {
-  _DependenciasAneis();
+  var tipos_itens = [ 'aneis', 'amuletos' ];
+  for (var i = 0; i < tipos_itens.length; ++i) {
+    _DependenciasItens(tipos_itens[i]);
+  }
 }
 
-function _DependenciasAneis() {
-  for (var i = 0; i < personagem.aneis.length; ++i) {
-    var anel_personagem = personagem.aneis[i];
-    if (!anel_personagem.em_uso) {
+function _DependenciasItens(tipo_item) {
+  for (var i = 0; i < personagem[tipo_item].length; ++i) {
+    var item = personagem[tipo_item][i];
+    if (!item.em_uso) {
       continue;
     }
-    _DependenciasAnel(anel_personagem.chave, tabelas_aneis[anel_personagem.chave]);
+    _DependenciasItem(item.chave, tabelas_itens[tipo_item][item.chave]);
   }
 }
 
-function _DependenciasAnel(chave_anel, anel_tabela) {
-  for (var propriedade in anel_tabela.propriedades) {
+function _DependenciasItem(chave_item, item_tabela) {
+  for (var propriedade in item_tabela.propriedades) {
     if (propriedade == 'ca') {
-      _DependenciasAnelCa(chave_anel, anel_tabela);
+      _DependenciasItemCa(chave_item, item_tabela);
     } else if (propriedade == 'pericias') {
-      _DependenciasAnelPericias(chave_anel, anel_tabela);
+      _DependenciasItemPericias(chave_item, item_tabela);
     }
   }
 }
 
-// Converte um anel que afeta a classe de armadura.
-function _DependenciasAnelCa(chave_anel, anel_tabela) {
-  for (var chave_ca in anel_tabela.propriedades.ca) {
+// Item que afeta a classe de armadura.
+function _DependenciasItemCa(chave_item, item_tabela) {
+  for (var chave_ca in item_tabela.propriedades.ca) {
     personagem.ca.bonus.Adiciona(
-        chave_ca, chave_anel, anel_tabela.propriedades.ca[chave_ca]);
+        chave_ca, chave_item, item_tabela.propriedades.ca[chave_ca]);
   }
 }
 
-// Converte um anel que afeta pericias.
-function _DependenciasAnelPericias(chave_anel, anel_tabela) {
-  for (var chave_pericia in anel_tabela.propriedades.pericias) {
-    for (var chave_bonus in anel_tabela.propriedades.pericias[chave_pericia]) {
+// Item que afeta pericias.
+function _DependenciasItemPericias(chave_item, item_tabela) {
+  for (var chave_pericia in item_tabela.propriedades.pericias) {
+    for (var chave_bonus in item_tabela.propriedades.pericias[chave_pericia]) {
       personagem.pericias.lista[chave_pericia].bonus.Adiciona(
-          chave_bonus, chave_anel, anel_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
+          chave_bonus, chave_item, item_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
     }
   }
 }

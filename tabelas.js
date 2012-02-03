@@ -1314,3 +1314,88 @@ var tabelas_aneis = {
   comandar_elemental_agua: { nome: 'Comandar elemental (água)', valor: '200000 PO', },
   armazenar_magias_maior: { nome: 'Armazenar magias (maior)', valor: '200000 PO', },
 };
+
+var tabelas_amuletos = {
+  armadura_natural_1: { 
+    nome: 'Armadura Natural +1', valor: '2000 PO', 
+    propriedades: { ca: { armadura_natural: 1 } },  },
+  armadura_natural_2: { 
+    nome: 'Armadura Natural +2', valor: '8000 PO', 
+    propriedades: { ca: { armadura_natural: 2 } },  },
+  armadura_natural_3: { 
+    nome: 'Armadura Natural +3', valor: '18000 PO', 
+    propriedades: { ca: { armadura_natural: 3 } },  },
+  armadura_natural_4: { 
+    nome: 'Armadura Natural +4', valor: '32000 PO', 
+    propriedades: { ca: { armadura_natural: 4 } },  },
+  armadura_natural_5: { 
+    nome: 'Armadura Natural +5', valor: '50000 PO', 
+    propriedades: { ca: { armadura_natural: 5 } },  },
+  punhos_poderosos_1: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +1', valor: '6000 PO', 
+    propriedades: {} },
+  punhos_poderosos_2: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +2', valor: '24000 PO', 
+    propriedades: {} },
+  punhos_poderosos_3: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +3', valor: '54000 PO', 
+    propriedades: {} },
+  punhos_poderosos_4: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +4', valor: '96000 PO', 
+    propriedades: {} },
+  punhos_poderosos_5: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +5', valor: '150000 PO', 
+    propriedades: {} },
+  saude_2: {
+    nome: 'Saúde +2', valor: '4000 PO', 
+    propriedades: { atributos: { constituicao: 2 } } },
+  saude_4: {
+    nome: 'Saúde +4', valor: '16000 PO', 
+    propriedades: { atributos: { constituicao: 4 } } },
+  saude_6: {
+    nome: 'Saúde +6', valor: '36000 PO', 
+    propriedades: { atributos: { constituicao: 6 } } },
+  planos: {
+    // permite usar magia viagem planar...
+    nome: 'Planos', valor: '120000 PO', 
+    propriedades: {} },
+  protecao_deteccao: {
+    // como se estivesse sob efeito de dificultar detecção...
+    nome: 'Proteção contra Localização e Detecção', valor: '35000 PO', 
+    propriedades: {} },
+  quaal_ancora: {
+    // Prender embarcações.
+    nome: 'Quaal Âncora', valor: '50 PO', 
+    propriedades: {} },
+  quaal_passaro: {
+    // Pombo correio para entregar mensagem.
+    nome: 'Quaal Pássaro', valor: '300 PO', 
+    propriedades: {} },
+  quaal_leque: {
+    // Gerar vento.
+    nome: 'Quaal Leque', valor: '200 PO', 
+    propriedades: {} },
+  quaal_barco_cisne: {
+    // Transforma-se em um barco.
+    nome: 'Quaal Barco de Cisnes', valor: '450 PO', 
+    propriedades: {} },
+  quaal_arvore: {
+    // Cria um grande carvalho.
+    nome: 'Quaal Árvore', valor: '400 PO', 
+    propriedades: {} },
+  quaal_chicote: {
+    // Cria um chicote que ataca sozinho como arma dancarina.
+    nome: 'Quaal Chicote', valor: '500 PO', 
+    propriedades: {} },
+};
+
+// Tabelas de itens, por tipo.
+var tabelas_itens = {
+  aneis: tabelas_aneis,
+  amuletos: tabelas_amuletos,
+}

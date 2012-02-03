@@ -38,6 +38,7 @@ var entradas = {
   elmo: '',
   // cada entrada: { chave, em_uso }
   aneis: [],
+  amuletos: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [] },
@@ -261,30 +262,34 @@ function _LeEquipamentos() {
     entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
   }
 
-  _LeAneis();
-}
-
-function _LeAneis() {
-  entradas.aneis = [];
-  var dom_aneis = goog.dom.getElementsByClass('div-aneis');
-  for (var i = 0; i < dom_aneis.length; ++i) {
-    _LeAnel(dom_aneis[i]);
+  var tipos_itens = [ 'aneis', 'amuletos' ];
+  for (var i = 0; i < tipos_itens.length; ++i) {
+    _LeItens(tipos_itens[i]);
   }
 }
 
-function _LeAnel(dom_anel) {
-  var anel = {
+function _LeItens(tipo_item) {
+  entradas[tipo_item] = [];
+  var dom = goog.dom.getElementsByClass('div-' + tipo_item);
+  for (var i = 0; i < dom.length; ++i) {
+    entradas[tipo_item].push(_LeItem(dom[i]));
+  }
+}
+
+// @return o item lido do dom.
+function _LeItem(dom) {
+  var item = {
       chave: '',
       em_uso: false, 
   };
-  for (var i = 0; i < dom_anel.childNodes.length; ++i) {
-    var filho = dom_anel.childNodes[i];
-    if (filho.name == 'anel') {
-      anel.chave = ValorSelecionado(filho);
+  for (var i = 0; i < dom.childNodes.length; ++i) {
+    var filho = dom.childNodes[i];
+    if (filho.name == 'item') {
+      item.chave = ValorSelecionado(filho);
     } else if (filho.name == 'em_uso') {
-      anel.em_uso = filho.checked;
+      item.em_uso = filho.checked;
     }
   }
-  entradas.aneis.push(anel);
+  return item;
 }
 

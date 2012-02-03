@@ -216,28 +216,33 @@ function AdicionaTalento(chave_classe, div_pai) {
   return div_select_talento;
 }
 
-// Cria um select com todos os aneis e um checkbox de uso.
-function AdicionaAnel(div, div_pai) {
+// Cria um select com todos os itens do tipo e um checkbox de uso.
+// Todos elementos sao criados dentro de 'div' que eh posteriormente
+// adicionado a 'div_pai'.
+function AdicionaItem(tipo_item, div, div_pai) {
   var input_em_uso = CriaInputCheckbox(false);
   input_em_uso.name = 'em_uso';
-  input_em_uso.addEventListener('change', function(e) {
-      ClickAnel(e.target); });
+  input_em_uso.addEventListener('change', {
+      tipo_item: tipo_item,
+      handleEvent: function(e) {
+        ClickUsarItem(this.tipo_item, e.target); } });
   div.appendChild(input_em_uso);
 
   var select = CriaSelect();
-  for (var chave_anel in tabelas_aneis) {
-    select.appendChild(CriaOption(tabelas_aneis[chave_anel].nome, chave_anel));
+  for (var chave in tabelas_itens[tipo_item]) {
+    select.appendChild(CriaOption(tabelas_itens[tipo_item][chave].nome, chave));
   }
   select.addEventListener('change', AtualizaGeral);
-  select.name = 'anel';
+  select.name = 'item';
   div.appendChild(select);
 
-  var botao_remover_anel = CriaBotao('-', null, null);
-  botao_remover_anel.addEventListener('click', {
+  var botao_remover = CriaBotao('-', null, null);
+  botao_remover.addEventListener('click', {
       handleEvent: function(e) {
         RemoveFilho(div, div_pai);
         AtualizaGeral();
         e.stopPropagation();
       } });
-  div.appendChild(botao_remover_anel);
+  div.appendChild(botao_remover);
+  div_pai.appendChild(div);
 }

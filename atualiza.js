@@ -575,36 +575,38 @@ function _AtualizaEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     Dom('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
   }
-  _AtualizaAneis();
+  var tipos_itens = [ 'aneis', 'amuletos' ];
+  for (var i = 0; i < tipos_itens.length; ++i) {
+    _AtualizaItens(tipos_itens[i]);
+  }
   Dom('text-area-outros-equipamentos').value =
       personagem.outros_equipamentos;;
 }
 
-function _AtualizaAneis() {
-  var div_aneis_pai = Dom('div-equipamentos-aneis');
-  var div_aneis_filhos = goog.dom.getElementsByClass('div-aneis');
-  for (var i = 0; i < personagem.aneis.length; ++i) {
-    _AtualizaAnel(
-        personagem.aneis[i],
-        (i >= div_aneis_filhos.length) ? null : div_aneis_filhos[i],
-        div_aneis_pai);
+function _AtualizaItens(tipo_item) {
+  var div_pai = Dom('div-equipamentos-' + tipo_item);
+  var div_filhos = goog.dom.getElementsByClass('div-' + tipo_item);
+  for (var i = 0; i < personagem[tipo_item].length; ++i) {
+    var div_filho;
+    if (i >= div_filhos.length) {
+      div_filho = CriaDiv(null, 'div-' + tipo_item);
+      AdicionaItem(tipo_item, div_filho, div_pai);
+    } else {
+      div_filho = div_filhos[i];
+    }
+    _AtualizaItem(personagem[tipo_item][i], div_filho, div_pai);
   }
 }
 
-// Atualiza um anel, o div pode ser null, nesse caso criara um novo.
-// @param anel do personagem (aneis[i]).
-function _AtualizaAnel(anel, div_anel, div_aneis) {
-  if (div_anel == null) {
-    div_anel = CriaDiv(null, 'div-aneis');
-    AdicionaAnel(div_anel, div_aneis);
-    div_aneis.appendChild(div_anel);
-  }
-  for (var i = 0; i < div_anel.childNodes.length; ++i) {
-    var filho = div_anel.childNodes[i];
+// Atualiza um item.
+// @param item do personagem.
+function _AtualizaItem(item, div_item, div_itens) {
+  for (var i = 0; i < div_item.childNodes.length; ++i) {
+    var filho = div_item.childNodes[i];
     if (filho.name == 'anel') {
-      SelecionaValor(anel.chave, filho);
+      SelecionaValor(item.chave, filho);
     } else if (filho.name == 'em_uso') {
-      filho.checked = anel.em_uso;
+      filho.checked = item.em_uso;
     }
   }
 }

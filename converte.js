@@ -84,7 +84,11 @@ function _ConverteEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
   }
-  personagem.aneis = entradas.aneis;
+  // itens.
+  var tipos_itens = [ 'aneis', 'amuletos' ];
+  for (var i = 0; i < tipos_itens.length; ++i) {
+    personagem[tipos_itens[i]] = entradas[tipos_itens[i]];
+  }
   // outros.
   personagem.outros_equipamentos = entradas.outros_equipamentos;
 }
