@@ -642,17 +642,17 @@ function _AtualizaModoVisao() {
 function _RecuperaMagias() {
   for (var chave_classe in personagem.feiticos) {
     if (!personagem.feiticos[chave_classe].em_uso) {
-      continue;
+    continue;
     }
     var feiticos_classe = personagem.feiticos[chave_classe];
-    for (var nivel in feiticos_classe.conhecidos) {
-      if (feiticos_classe.conhecidos[nivel].length == 0) {
+    for (var nivel in feiticos_classe.slots) {
+      if (feiticos_classe.slots[nivel].feiticos.length == 0) {
         continue;
       }
-      for (var indice = 0; indice <= feiticos_classe.conhecidos[nivel].length; ++indice) {
+      for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
         Dom('input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' 
       + indice).checked = false;
       }
     }
-  } 
+  }
 }
