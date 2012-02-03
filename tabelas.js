@@ -13,6 +13,7 @@ var tabelas_raca = {
   anao: {
       nome: 'Anão',
       origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 4 },
       atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
       outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 }, 
@@ -21,6 +22,7 @@ var tabelas_raca = {
   halfling: {
       nome: 'Halfling',
       origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 4 },
       atributos: { forca: -2, destreza: 2}, tamanho: 'pequeno',
       bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
       salvacoes: { fortitude: 1, vontade: 1, reflexo: 1 },
@@ -28,16 +30,19 @@ var tabelas_raca = {
   humano: {
       nome: 'Humano',
       origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 6 },
       atributos: {}, tamanho: 'medio', talento_extra: true, pontos_pericia: 1 },
   elfo: {
       nome: 'Elfo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 6 },
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
                             'arco_curto_composto'] },
   gnomo: {
       nome: 'Gnomo',
       origem: { livro: 'Livro do Jogador', pagina: '' }, 
+      movimento: { terrestre: 4 },
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
       outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
@@ -45,10 +50,12 @@ var tabelas_raca = {
   meioelfo: {
       nome: 'Meio-Elfo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 6 },
       atributos: {}, tamanho: 'medio' },
   meioorc: { 
       nome: 'Meio-Orc',
       origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 6 },
       atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio',
   },
 };
