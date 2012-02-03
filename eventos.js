@@ -277,9 +277,9 @@ function ClickRecuperaMagias() {
       }
       for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
         feiticos_classe.slots[nivel].feiticos[indice].gasto = 0;
-        AtualizaGeralSemConverterEntradas();
       }
     }
   }
+  AtualizaGeralSemConverterEntradas();
 }
 
