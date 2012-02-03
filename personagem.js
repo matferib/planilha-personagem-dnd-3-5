@@ -128,8 +128,10 @@ var personagem = {
   armadura: { nome: 'nenhuma', obra_prima: false, bonus_magico: 0 },
   escudo: { nome: 'nenhum' , obra_prima: false, bonus_magico: 0 },
   elmo: '',
+  // TODO: passar pra dentro de itens?
   // Cada entrada { chave, em_uso }
   aneis: [],
+  amuletos: [],
   capa: '',
   botas: '',
 

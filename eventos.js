@@ -232,18 +232,19 @@ function ClickVisualizacaoModoMestre() {
 
 // Trata o evento de adicionar aneis. Se a estrutura for alterada aqui,
 // mudar tambem a leitura das entradas que depende da ordem dos doms.
-function ClickAdicionarAnel() {
-  personagem.aneis.push({ nome: 'nome', caracteristicas: 'caracteristicas'});
+function ClickAdicionarItem(tipo_item) {
+  personagem[tipo_item].push({ nome: 'nome', caracteristicas: 'caracteristicas'});
   AtualizaGeralSemConverterEntradas();
 }
 
-// Trata o click do checkbox de anel.
+// Trata o click de uso de um item.
+// @param tipo_item.
 // @param checkbox que causou a mudanca (null em caso de remocao).
-function ClickAnel(checkbox) {
+function ClickUsarItem(tipo_item, checkbox) {
   if (checkbox.checked) {
     var total_em_uso = 0;
     for (var i = 0; i < personagem.aneis.length && total_em_uso < 2; ++i) {
-      if (personagem.aneis[i].em_uso) {
+      if (personagem[tipo_item][i].em_uso) {
         ++total_em_uso;
       }
     }
