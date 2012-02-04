@@ -1,6 +1,8 @@
 // A classe de bonus util para calcular o bonus total.
-// Bonus nao cumulativos de tipos diferentes se acumulam.
-// Bonus cumulativos de tipos iguais e subtipos diferentes se acumulam.
+// Bonus nao cumulativos de tipos diferentes se acumulam. Exemplo: alquimico e
+// armadura. Para dois bonus iguais não cumulativos, o mais forte prevalece.
+// Bonus cumulativos de tipos iguais e subtipos diferentes se acumulam. Por exemplo:
+// bonus de circusntancias de diferentes tipos.
 
 // Construtor, chamar com new Bonus.
 function Bonus() {
