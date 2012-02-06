@@ -3,7 +3,7 @@
 // Passa os valoes da entrada para o personagem.
 function ConverteEntradasParaPersonagem() {
   // Limpa tudo antes de comecar.
-  _LimpaGeral();
+  LimpaGeral();
 
   personagem.modo_mestre = entradas.modo_mestre;
   personagem.nome = entradas.nome;
@@ -48,7 +48,7 @@ function ConverteEntradasParaPersonagem() {
 }
 
 // Limpa tudo antes de comecar a conversao. 
-function _LimpaGeral() {
+function LimpaGeral() {
   personagem.pontos_vida.total = 0;
   personagem.pontos_vida.bonus.Limpa();
   personagem.ca.bonus.Limpa();
