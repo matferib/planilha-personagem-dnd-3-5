@@ -216,12 +216,7 @@ function ClickBotaoAtributoMenos() {
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
 function ClickAjustarFerimentos(valor) {
-  personagem.pontos_vida.ferimentos += valor;
-  if (personagem.pontos_vida.ferimentos < 0) {
-    personagem.pontos_vida.ferimentos = 0;
-    return;
-  }
-  AtualizaGeralSemConverterEntradas();
+  AtualizaFerimentos(valor);
 }
 
 // Esconde/mostra os botoes de geracao (class="botao-geracao)".
@@ -265,8 +260,8 @@ function ClickGerarPersonagem(modo) {
 }
 
 // Trata o botao de descansar
-function ClickDescansar(modo) {
-  ClickAjustarFerimentos(modo);
+function ClickDescansar(valor) {
+  AtualizaFerimentos(valor);
   for (var chave_classe in personagem.feiticos) {
     if (!personagem.feiticos[chave_classe].em_uso) {
       continue;
