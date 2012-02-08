@@ -103,15 +103,15 @@ function _GeraArmas(tabela_geracao_classe_por_nivel) {
   }
 }
 
-function _GeraAneis(tabela_geracao_classe_por_nivel) {
-  with (tabela_geracao_classe_por_nivel) {
-    for (var i = 0; i < aneis.length; ++i) {
-      var anel_entrada = { 
-          chave: aneis[i].chave, 
-          em_uso: aneis[i].em_uso,
-      };
-      personagem.aneis.push(anel_entrada);
-    }
+// @param tipo_item o tipo do item sendo gerado (aneis, amuletos etc).
+function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
+  for (var i = 0; i < tabela_geracao_classe_por_nivel[tipo_item].length; ++i) {
+    var item = tabela_geracao_classe_por_nivel[tipo_item][i];
+    var item_entrada = { 
+        chave: item.chave, 
+        em_uso: item.em_uso,
+    };
+    personagem[tipo_item].push(item_entrada);
   }
 }
 
@@ -126,7 +126,10 @@ function GeraPersonagem(modo) {
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
   _GeraArmas(tabela_geracao_classe_por_nivel);
-  _GeraAneis(tabela_geracao_classe_por_nivel);
+  var tipo_items = [ 'aneis', 'amuletos' ];
+  for (var i = 0; i < tipo_items.length; ++i ) {
+    _GeraItens(tipo_items[i], tabela_geracao_classe_por_nivel);
+  }
   /*
   _GeraEstilosDeLuta();
   _GeraTalentos();
