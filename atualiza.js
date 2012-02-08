@@ -603,7 +603,7 @@ function _AtualizaItens(tipo_item) {
 function _AtualizaItem(item, div_item, div_itens) {
   for (var i = 0; i < div_item.childNodes.length; ++i) {
     var filho = div_item.childNodes[i];
-    if (filho.name == 'anel') {
+    if (filho.name == 'item') {
       SelecionaValor(item.chave, filho);
     } else if (filho.name == 'em_uso') {
       filho.checked = item.em_uso;
