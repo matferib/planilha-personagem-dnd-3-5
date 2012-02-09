@@ -105,6 +105,10 @@ function _GeraArmas(tabela_geracao_classe_por_nivel) {
 
 // @param tipo_item o tipo do item sendo gerado (aneis, amuletos etc).
 function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
+  if (tabela_geracao_classe_por_nivel[tipo_item] == null) {
+    // Sem itens do tipo.
+    return;
+  }
   for (var i = 0; i < tabela_geracao_classe_por_nivel[tipo_item].length; ++i) {
     var item = tabela_geracao_classe_por_nivel[tipo_item][i];
     var item_entrada = { 
@@ -118,17 +122,29 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
 // Gera um personagem a partir das classes e niveis.
 // @param modo 'elite' ou 'comum'.
 function GeraPersonagem(modo) {
+  if (tabelas_geracao[personagem.classes[0].classe] == null) {
+    alert('Geração de ' + personagem.classes[0].classe + ' não disponível');
+    return;
+  }
   _GeraAtributos(modo);
   _GeraPontosDeVida(modo);
 
+  var tabelas_geracao_classe = tabelas_geracao[personagem.classes[0].classe];
+  if (tabelas_geracao_classe.por_nivel == null ||
+      tabelas_geracao_classe.por_nivel[personagem.classes[0].nivel] == null) {
+    AtualizaGeralSemConverterEntradas();
+    alert('Geração avançada de ' + personagem.classes[0].classe + ' não disponível');
+    return;
+  }
   var tabela_geracao_classe_por_nivel =
-      tabelas_geracao[personagem.classes[0].classe].por_nivel[personagem.classes[0].nivel];
+      tabelas_geracao_classe.por_nivel[personagem.classes[0].nivel];
+
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
   _GeraArmas(tabela_geracao_classe_por_nivel);
-  var tipo_items = [ 'aneis', 'amuletos' ];
-  for (var i = 0; i < tipo_items.length; ++i ) {
-    _GeraItens(tipo_items[i], tabela_geracao_classe_por_nivel);
+  var tipos_items = [ 'aneis', 'amuletos' ];
+  for (var i = 0; i < tipos_items.length; ++i ) {
+    _GeraItens(tipos_items[i], tabela_geracao_classe_por_nivel);
   }
   /*
   _GeraEstilosDeLuta();
