@@ -1,5 +1,6 @@
 // Gera os atributos do personagem usando as tabelas do modo.
-function _GeraAtributos(modo) {
+// @todo submodo.
+function _GeraAtributos(modo, submodo) {
   var valores = null;
   if (modo == 'elite') {
     valores = [ 15, 14, 13, 12, 10, 8 ];
@@ -33,7 +34,8 @@ function _GeraAtributos(modo) {
 
 // Gera os pontos de vida do personagem de acordo com as classes.
 // @param modo pode ser elite, comum, personagem.
-function _GeraPontosDeVida(modo) {
+// @param submodo 'tabelado' ou 'aleatorio'.
+function _GeraPontosDeVida(modo, submodo) {
   if (modo != 'personagem' && modo != 'elite' && modo != 'comum') {
     alert('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
     return;
@@ -56,11 +58,16 @@ function _GeraPontosDeVida(modo) {
               personagem.atributos['constituicao'].valor -  
               personagem.atributos['constituicao'].modificador;
         } else {
-          pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida);
+          pontos_vida_nivel = submodo == 'tabelado' ?
+              tabelas_classes[info_classe.classe].dados_vida / 2 :
+              Rola(1, tabelas_classes[info_classe.classe].dados_vida);
         }
         primeiro = false;
       } else {
-        pontos_vida_nivel = Rola(1, tabelas_classes[info_classe.classe].dados_vida);
+        pontos_vida_nivel = submodo == 'tabelado' ?
+            tabelas_classes[info_classe.classe].dados_vida / 2 :
+            Rola(1, tabelas_classes[info_classe.classe].dados_vida);
+
       }
       // Nunca pode ganhar menos de 1 ponto por nivel.
       if (pontos_vida_nivel < 1) {
@@ -69,7 +76,7 @@ function _GeraPontosDeVida(modo) {
       total_pontos_vida += pontos_vida_nivel;
     }
   }
-  personagem.pontos_vida.total_dados = total_pontos_vida;
+  personagem.pontos_vida.total_dados = Math.floor(total_pontos_vida);
 }
 
 // Gera os equipamentos que nao afetam outras coisas (ou ainda nao implementados)
@@ -121,13 +128,17 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
 
 // Gera um personagem a partir das classes e niveis.
 // @param modo 'elite' ou 'comum'.
-function GeraPersonagem(modo) {
+// @param submodo opcional 'tabelado' ou 'aleatorio'.
+function GeraPersonagem(modo, submodo) {
+  if (!submodo) {
+    submodo = 'tabelado';
+  }
   if (tabelas_geracao[personagem.classes[0].classe] == null) {
     alert('Geração de ' + personagem.classes[0].classe + ' não disponível');
     return;
   }
-  _GeraAtributos(modo);
-  _GeraPontosDeVida(modo);
+  _GeraAtributos(modo, submodo);
+  _GeraPontosDeVida(modo, submodo);
 
   var tabelas_geracao_classe = tabelas_geracao[personagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
@@ -153,4 +164,22 @@ function GeraPersonagem(modo) {
   _GeraFeiticos();
   */
   AtualizaGeralSemConverterEntradas();
+}
+
+// @return a string com o resumo do personagem.
+function GeraResumo() {
+  // TODO(terminar resumo)
+  var resumo = personagem.nome + '; ' + personagem.raca + '; ' + personagem.alinhamento + '; ';
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var info_classe = personagem.classes[i];
+    resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
+  }
+  resumo += '; ';
+
+  for (var atributo in tabelas_atributos) {
+    resumo += tabelas_atributos[atributo] + ': ' + personagem.atributos[atributo].valor + ', ';
+  }
+  resumo += '; ';
+
+  return resumo;
 }
