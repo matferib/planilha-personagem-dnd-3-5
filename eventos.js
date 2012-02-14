@@ -88,13 +88,7 @@ function ClickLink() {
 // Gera o resumo do personagem para utilizacao em aventuras. 
 function ClickGerarResumo() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
-  // TODO(terminar resumo)
-  var resumo = personagem.nome + '; ' + personagem.raca + '; ';
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    var info_classe = personagem.classes[i];
-    resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
-  }
-  Dom("resumo-personagem").innerHTML = resumo; 
+  Dom("resumo-personagem").innerHTML = GeraResumo(); 
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
