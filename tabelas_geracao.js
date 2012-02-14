@@ -314,7 +314,7 @@ var tabelas_geracao = {
 	},
   // Esse ta muito ruim...
   aristocrata: { 
-		atributos: [ 'destreza', 'inteligencia', 'forca', 'carisma', 'constituicao', 'sabedoria' ],
+		atributos: [ 'destreza', 'constituicao', 'carisma', 'forca', 'inteligencia', 'sabedoria' ],
 	},
   plebeu: { 
 		atributos: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
