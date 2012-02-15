@@ -14,6 +14,12 @@ function AtualizaGeral() {
   _AtualizaGeral();
 }
 
+// AVISO:
+// Essa funcao eh bem perigosa. Varios botoes atualizam o personagem mas nao os objetos de entradas.
+// Portanto, se essa funcao for chamada nesse intervalo onde personagem e entradas ficam fora de 
+// sincronismo, o personagem sera revertido para a versao das entradas (por exemplo, apos gerar um
+// personagem, tentar adicionar algo em entradas e chamar essa funcao vai zerar o personagem).
+//
 // Sempre que for necessaria uma atualizacao sem leitura de entradas, essa funcao sera chamada.
 // Eh o caso de elementos criados de forma independente (armas, estilos) que devem ser adicionados
 // manualmente a entrada e em seguida chamam essa funcao. As funcoes de carregamento tambem
