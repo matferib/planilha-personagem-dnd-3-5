@@ -279,3 +279,11 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
   }
   return true;
 }
+
+// Adiciona ferimentos ao personagem.
+function PersonagemAdicionarFerimentos(valor) {
+  personagem.pontos_vida.ferimentos += valor;
+  if (personagem.pontos_vida.ferimentos < 0) {
+    personagem.pontos_vida.ferimentos = 0;
+  }
+}
