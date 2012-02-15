@@ -166,6 +166,17 @@ function GeraPersonagem(modo, submodo) {
   AtualizaGeralSemConverterEntradas();
 }
 
+// TODO ataque ta sem sinal quando zero e dano ta sem o dado de dano.
+function GeraResumoArma(arma_estilo) {
+  var resumo = arma_estilo.nome + ' ';
+  for (var categoria in arma_estilo.bonus_por_categoria) {
+    var bonus_categoria = arma_estilo.bonus_por_categoria[categoria];
+    resumo += categoria + ': ';
+    resumo += bonus_categoria.ataque + ' ' + bonus_categoria.dano;
+  }
+  return resumo;
+}
+
 // @return a string com o resumo do personagem.
 function GeraResumo() {
   // TODO(terminar resumo)
@@ -180,6 +191,21 @@ function GeraResumo() {
     resumo += tabelas_atributos[atributo] + ': ' + personagem.atributos[atributo].valor + ', ';
   }
   resumo += '; ';
+  
+  // combate:
+  resumo += 'Iniciativa: ' + personagem.iniciativa.Total() + '; ';
+  resumo += 'Estilos: ';
+  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
+    var estilo = personagem.estilos_luta[i];
+    resumo += estilo.nome + ': (';
+    resumo += GeraResumoArma(estilo.arma_primaria);
+    if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
+      resumo += ', ' + GeraResumoArma(estilo.arma_secundaria);
+    }
+    resumo += '), ';
+  }
+  resumo += '; ';
+
 
   return resumo;
 }
