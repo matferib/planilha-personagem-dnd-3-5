@@ -51,14 +51,14 @@ function ClickAdicionarClasse() {
     alert('Impossível criar nova classe');
     return;
   }
-  entradas.classes.push({ classe: nova_classe, nivel: 1 });
-  AtualizaGeralSemLerEntradas();
+  personagem.classes.push({ classe: nova_classe, nivel: 1 });
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Botao de remover classe apertado.
 function ClickRemoveClasse() {
-  entradas.classes.pop();
-  AtualizaGeralSemLerEntradas();
+  personagem.classes.pop();
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Salva entrada do personagem no historico local.
@@ -71,6 +71,7 @@ function ClickSalvar() {
 // Carrega o personagem do historico local.
 function ClickAbrir() {
   entradas = goog.json.parse(localStorage.getItem('saved_entradas'));
+  // Esse caso eh valido, porque a gente salva as entradas.
   AtualizaGeralSemLerEntradas();
 }
 
@@ -124,14 +125,26 @@ function ClickGerarComum() {
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma() {
-  entradas.armas.push({ chave: 'adaga', obra_prima: false, bonus: 0 });
-  AtualizaGeralSemLerEntradas();
+  var arma_entrada = { entrada: { chave: 'adaga', obra_prima: false, bonus: 0 } };
+  personagem.armas.push(arma_entrada);
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
-  entradas.estilos_luta.push({ nome: 'uma_arma', arma_primaria: 'desarmado'});
-  AtualizaGeralSemLerEntradas();
+  var estilo_entrada = { 
+    nome: 'uma_arma', 
+    arma_primaria: { 
+      nome: 'desarmado',
+      bonus_por_categoria: {}
+    },
+    arma_secundaria: {  
+      nome: 'desarmado',
+      bonus_por_categoria: {}
+    }
+  };
+  personagem.estilos_luta.push(estilo_entrada);
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Remove uma arma especifica da lista de equipamentos. 
@@ -196,15 +209,15 @@ function ClickFeitico(classe_nivel_slot, incremento) {
 
 // Trata o click de adicionar bonus a um atributo, colocando-o no final da fila.
 function ClickBotaoAtributoMais(chave_atributo) {
-  entradas.bonus_atributos.push(chave_atributo);
-  AtualizaGeralSemLerEntradas();
+  personagem.atributos.pontos.gastos.push(chave_atributo);
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Trata o click de remover bonus de um atributo. 
 // Retira o ultimo bonus colocado (se houver).
 function ClickBotaoAtributoMenos() {
-  entradas.bonus_atributos.pop();
-  AtualizaGeralSemLerEntradas();
+  personagem.atributos.pontos.gastos.pop();
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
