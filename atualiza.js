@@ -1,6 +1,6 @@
-// Todas as funcoes de atualizacao.
+// Todas as funcoes de atualizacao dos campos da interface.
 // Idealmente, nao deve haver nenhuma referencia a entradas neste arquivo,
-// exceto a chamada AtualizaGeral.
+// exceto na chamada AtualizaGeral.
 
 // Quase sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
 // os dados da planilha. Ela lera as entradas, convertendo-nas e em seguida atualizara
@@ -574,7 +574,6 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
     div_slots.appendChild(div_nivel);
   }
   div_classe.appendChild(div_slots);
-  div_classe.appendChild(CriaBotao('Descansar', 'descansar', null, ClickRecuperaMagias));
 }
 
 function _AtualizaEquipamentos() {
