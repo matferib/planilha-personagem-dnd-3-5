@@ -64,6 +64,7 @@ function _AtualizaGeral() {
 
 function _AtualizaNomeRacaAlinhamentoXp() {
   Dom('nome').value = personagem.nome;
+  document.title = personagem.nome.length > 0 ? personagem.nome : 'anonimo';
   SelecionaValor(personagem.raca, Dom('raca'));
   SelecionaValor(personagem.alinhamento, Dom('alinhamento'));
   Dom('pontos-experiencia').value = personagem.experiencia;
