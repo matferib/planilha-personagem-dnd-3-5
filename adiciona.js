@@ -101,6 +101,75 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   div_armas.appendChild(div);
 }
 
+// Adiciona uma nova armadura a lista de equipamentos. Todos parametros sao opcionais.
+// @param chave_arma opcional chave da arma sendo adicionada.
+// @param obra_prima indica se a arma eh obra_prima.
+// @param bonus da arma.
+function AdicionaArmadura(chave_arma, obra_prima, bonus) {
+  /*
+  var id_div_equipamentos_armaduras = "div-equipamentos-armaduras";
+  var div_armaduras = Dom(id_div_equipamentos_armaduras);
+  var id_gerado = GeraId('div-armadura', div_armaduras);
+  var select = CriaSelect();
+  select.setAttribute('name', 'armadura');
+  select.setAttribute('onchange', 'AtualizaGeral()');
+  var tabelas = [ 
+      tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
+  var rotulos_tabelas = [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ];
+  for (var i = 0; i < tabelas.length; ++i) {
+    var optgroup = CriaOptGroup(rotulos_tabelas[i]);
+    for (var arma_corrente in tabelas[i]) {
+      if (arma_corrente == 'desarmado') {
+        // Desarmado eh um caso especial.
+        continue;
+      }
+      var option = CriaOption(tabelas[i][arma_corrente].nome, arma_corrente);
+      option.setAttribute('name', arma_corrente);
+      option.selected = (arma_corrente == chave_arma);
+      optgroup.appendChild(option);
+    }
+    select.appendChild(optgroup);
+  }
+  var span_obra_prima = CriaSpan(' OP');
+
+  var input_obra_prima = document.createElement('input');
+  input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
+  input_obra_prima.setAttribute('type', "checkbox");
+  input_obra_prima.checked = obra_prima;
+
+  var input_bonus = document.createElement('input');
+  input_bonus.setAttribute('onchange', 'AtualizaGeral()');
+  input_bonus.setAttribute('type', "text");
+  input_bonus.setAttribute('maxlength', 2);
+  input_bonus.setAttribute('size', 2);
+  input_bonus.value = bonus || 0;
+ 
+  //  Criado para impedir que uma arma OP tenha bônus mágico. FC.
+  if (input_obra_prima.checked == true) {
+  input_bonus.value = 0;
+  input_bonus.readOnly = true;
+  }
+
+  // Se obra prima estiver selecionada, ignora o bonus da arma.
+  if (input_obra_prima.checked == true) {
+    input_bonus.value = 0;
+    input_bonus.readOnly = true;
+  }
+
+  var button_remover = CriaBotao('-');
+  button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
+        id_gerado + '", "' + id_div_equipamentos_armas + '")');
+
+  var div = CriaDiv(id_gerado);
+  div.appendChild(select);
+  div.appendChild(span_obra_prima);
+  div.appendChild(input_obra_prima);
+  div.appendChild(input_bonus);
+  div.appendChild(button_remover);
+  div_armas.appendChild(div);
+  */
+}
+
 // Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
 // @param nome_estilo: uma_arma, arma_escudo, duas_armas, arma_dupla.
 // @param arma_principal nome da arma principal.
