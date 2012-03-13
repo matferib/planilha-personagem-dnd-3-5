@@ -130,6 +130,13 @@ function ClickAdicionarArma() {
   AtualizaGeralSemConverterEntradas();
 }
 
+// Adiciona uma armadura a lista de equipamentos.
+function ClickAdicionarArmadura() {
+  var armadura_entrada = { entrada: { chave: 'nenhuma', obra_prima: false, bonus: 0 } };
+  personagem.armaduras.push(armadura_entrada);
+  AtualizaGeralSemConverterEntradas();
+}
+
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
   var estilo_entrada = { 

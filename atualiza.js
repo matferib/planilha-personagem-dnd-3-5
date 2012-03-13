@@ -630,6 +630,19 @@ function _AtualizaListaArmas() {
   }
 }
 
+function _AtualizaListaArmaduras() {
+  var div_armas = Dom('div-equipamentos-armaduras');
+  RemoveFilhos(div_armas);
+  // Ignoramos a primeira arma, desarmado.
+  for (var i = 1; i < personagem.armas.length; ++i) {
+    var arma_personagem_entrada = personagem.armas[i].entrada;
+    AdicionaArmadura(
+        arma_personagem_entrada.chave, 
+        arma_personagem_entrada.obra_prima, 
+        arma_personagem_entrada.bonus);
+  }
+}
+
 function _AtualizaNotas() {
   Dom('text-area-notas').value = personagem.notas;
 }
