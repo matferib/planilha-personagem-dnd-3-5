@@ -338,8 +338,7 @@ var tabelas_tamanho = {
   colossal: { nome: 'Colossal', ataque_defesa: -8, },
 };
 
-// Tabelas de armaduras.
-var tabelas_armaduras = {
+var tabelas_armaduras_leves = {
   nenhuma: {
     nome: 'Nenhuma', bonus: 0, },
   acolchoada: {
@@ -350,6 +349,9 @@ var tabelas_armaduras = {
     nome: 'Couro Batido', bonus: 3, maximo_bonus_destreza: 5 },
   camisao_cota_de_malha: {
     nome: 'Camisão de Cota de Malha', bonus: 4, maximo_bonus_destreza: 4 },
+};
+
+var tabelas_armaduras_medias = {
   gibao_de_peles: {
     nome: 'Gibão de Peles', bonus: 3, maximo_bonus_destreza: 4 },
   brunea: {
@@ -358,6 +360,9 @@ var tabelas_armaduras = {
     nome: 'Cota de Malha', bonus: 5, maximo_bonus_destreza: 2 },
   peitoral_de_aco: {
     nome: 'Peitoral de Aço', bonus: 5, maximo_bonus_destreza: 3 },
+};
+
+var tabelas_armaduras_pesadas = {
   cota_de_talas: {
     nome: 'Cota de Talas', bonus: 6, maximo_bonus_destreza: 0 },
   loriga_segmentada: {
@@ -366,6 +371,15 @@ var tabelas_armaduras = {
     nome: 'Meia Armadura', bonus: 7, maximo_bonus_destreza: 0 },
   armadura_de_batalha: {
     nome: 'Armadura de Batalha', bonus: 8, maximo_bonus_destreza: 1 },
+};
+
+// Tabelas de armaduras, construida atraves das tabelas_armaduras_*.
+var tabelas_armaduras = {
+};
+
+// Mapeia o nome para a chave.
+var tabelas_armaduras_invertida = {
+  // Cada entrada: nome_completo: chave_entrada.
 };
 
 // Tabelas de escudos (TODO terminar outros atributos).
