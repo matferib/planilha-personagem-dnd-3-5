@@ -56,6 +56,7 @@ function _AtualizaGeral() {
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
   _AtualizaListaArmas();
+  _AtualizaListaArmaduras();
   _AtualizaEquipamentos();
   _AtualizaFeiticos();
   _AtualizaNotas();
@@ -631,15 +632,15 @@ function _AtualizaListaArmas() {
 }
 
 function _AtualizaListaArmaduras() {
-  var div_armas = Dom('div-equipamentos-armaduras');
-  RemoveFilhos(div_armas);
+  var div_armaduras = Dom('div-equipamentos-armaduras');
+  RemoveFilhos(div_armaduras);
   // Ignoramos a primeira arma, desarmado.
-  for (var i = 1; i < personagem.armas.length; ++i) {
-    var arma_personagem_entrada = personagem.armas[i].entrada;
+  for (var i = 1; i < personagem.armaduras.length; ++i) {
+    var armadura_personagem_entrada = personagem.armaduras[i].entrada;
     AdicionaArmadura(
-        arma_personagem_entrada.chave, 
-        arma_personagem_entrada.obra_prima, 
-        arma_personagem_entrada.bonus);
+        armadura_personagem_entrada.chave, 
+        armadura_personagem_entrada.obra_prima, 
+        armadura_personagem_entrada.bonus);
   }
 }
 
