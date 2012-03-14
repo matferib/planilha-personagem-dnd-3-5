@@ -130,6 +130,7 @@ var personagem = {
   armadura: { nome: 'nenhuma', obra_prima: false, bonus_magico: 0 },
   // Cada entrada:
   //      entrada: { chave, obra_prima, bonus }
+  // Sempre havera uma entrada 'nenhuma' aqui.
   armaduras: [],
   escudo: { nome: 'nenhum' , obra_prima: false, bonus_magico: 0 },
   elmo: '',

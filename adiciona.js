@@ -76,12 +76,6 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   input_bonus.setAttribute('size', 2);
   input_bonus.value = bonus || 0;
  
-  //  Criado para impedir que uma arma OP tenha bônus mágico. FC.
-  if (input_obra_prima.checked == true) {
-  input_bonus.value = 0;
-  input_bonus.readOnly = true;
-  }
-
   // Se obra prima estiver selecionada, ignora o bonus da arma.
   if (input_obra_prima.checked == true) {
     input_bonus.value = 0;
@@ -102,11 +96,10 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
 }
 
 // Adiciona uma nova armadura a lista de equipamentos. Todos parametros sao opcionais.
-// @param chave_arma opcional chave da arma sendo adicionada.
+// @param chave_armadura opcional chave da armadura sendo adicionada.
 // @param obra_prima indica se a arma eh obra_prima.
 // @param bonus da arma.
-function AdicionaArmadura(chave_arma, obra_prima, bonus) {
-  /*
+function AdicionaArmadura(chave_armadura, obra_prima, bonus) {
   var id_div_equipamentos_armaduras = "div-equipamentos-armaduras";
   var div_armaduras = Dom(id_div_equipamentos_armaduras);
   var id_gerado = GeraId('div-armadura', div_armaduras);
@@ -114,18 +107,18 @@ function AdicionaArmadura(chave_arma, obra_prima, bonus) {
   select.setAttribute('name', 'armadura');
   select.setAttribute('onchange', 'AtualizaGeral()');
   var tabelas = [ 
-      tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
-  var rotulos_tabelas = [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ];
+      tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ];
+  var rotulos_tabelas = [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ];
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
-    for (var arma_corrente in tabelas[i]) {
-      if (arma_corrente == 'desarmado') {
-        // Desarmado eh um caso especial.
+    for (var armadura_corrente in tabelas[i]) {
+      if (armadura_corrente == 'nenhuma') {
+        // Nenhuma eh um caso especial.
         continue;
       }
-      var option = CriaOption(tabelas[i][arma_corrente].nome, arma_corrente);
-      option.setAttribute('name', arma_corrente);
-      option.selected = (arma_corrente == chave_arma);
+      var option = CriaOption(tabelas[i][armadura_corrente].nome, armadura_corrente);
+      option.setAttribute('name', armadura_corrente);
+      option.selected = (armadura_corrente == chave_armadura);
       optgroup.appendChild(option);
     }
     select.appendChild(optgroup);
@@ -144,12 +137,6 @@ function AdicionaArmadura(chave_arma, obra_prima, bonus) {
   input_bonus.setAttribute('size', 2);
   input_bonus.value = bonus || 0;
  
-  //  Criado para impedir que uma arma OP tenha bônus mágico. FC.
-  if (input_obra_prima.checked == true) {
-  input_bonus.value = 0;
-  input_bonus.readOnly = true;
-  }
-
   // Se obra prima estiver selecionada, ignora o bonus da arma.
   if (input_obra_prima.checked == true) {
     input_bonus.value = 0;
@@ -158,7 +145,7 @@ function AdicionaArmadura(chave_arma, obra_prima, bonus) {
 
   var button_remover = CriaBotao('-');
   button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
-        id_gerado + '", "' + id_div_equipamentos_armas + '")');
+        id_gerado + '", "' + id_div_equipamentos_armaduras + '")');
 
   var div = CriaDiv(id_gerado);
   div.appendChild(select);
@@ -166,8 +153,7 @@ function AdicionaArmadura(chave_arma, obra_prima, bonus) {
   div.appendChild(input_obra_prima);
   div.appendChild(input_bonus);
   div.appendChild(button_remover);
-  div_armas.appendChild(div);
-  */
+  div_armaduras.appendChild(div);
 }
 
 // Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
