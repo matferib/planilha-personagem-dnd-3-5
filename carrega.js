@@ -9,7 +9,7 @@ function CarregamentoInicial() {
   _CarregaTalentos();
 
   // Monta a tabela de armas e cria as opcoes dinamicamente.
-  _CarregaTabelaArmas();
+  _CarregaTabelaArmasArmaduras();
   _CarregaPericias();
   _CarregaFeiticos();
 
@@ -125,23 +125,44 @@ function _CarregaTalentos() {
 
 // Preenche os nomes faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
-function _CarregaTabelaArmas() {
-  var tabelas_armas_especificas = [ 
+function _CarregaTabelaArmasArmaduras() {
+  var tabelas_especificas_armas = [ 
       tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
-  var talento_relacionado = [
+  var talentos_relacionados_armas = [
       'usar_armas_simples', 'usar_arma_comum', 'usar_arma_exotica' ];
-  for (var i = 0; i < tabelas_armas_especificas.length; ++i) {
-    var tabela_especifica = tabelas_armas_especificas[i];
-    for (var arma in tabela_especifica) {
-      // Primeiro, preenche o nome da arma.
-      if (tabela_especifica[arma].nome == null) {
-        tabela_especifica[arma].nome = arma;
+  _CarregaTabelasCompostas(
+      tabelas_especificas_armas, talentos_relacionados_armas, 
+      tabelas_armas, tabelas_armas_invertida);
+  var tabelas_especificas_armaduras = [ 
+      tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ];
+  var talentos_relacionados_armaduras = [
+      'usar_armaduras_leves', 'usar_armaduras_medias', 'usar_armaduras_pesadas' ];
+  _CarregaTabelasCompostas(
+      tabelas_especificas_armaduras, talentos_relacionados_armaduras, 
+      tabelas_armaduras, tabelas_armaduras_invertida);
+}
+
+// Util para criar uma tabela a partir de outras, em especial armaduras e armas.
+// 'tabelas_especificas' e 'talentos_relacionados' sao vetores de mesmo tamanho
+// onde cada entrada do de tabelas_especificas aponta para um subtipo da tabela composta
+// (por exemplo, arma_leve). O mesmo indice em 'talentos_relacionados' aponta para o 
+// talento relevante aquele tipo (por exemplo, usar_armaduras_leves).
+// O parametro 'tabela_composta' eh a tabela a ser montada e 'tabela_invertida' eh a tabela
+// invertida a ser montada (onde a chave eh o nome).
+function _CarregaTabelasCompostas(
+    tabelas_especificas, talentos_relacionados, tabela_composta, tabela_invertida) {
+  for (var i = 0; i < tabelas_especificas.length; ++i) {
+    var tabela_especifica = tabelas_especificas[i];
+    for (var entrada in tabela_especifica) {
+      // Primeiro, preenche o nome da entrada se nao houver.
+      if (tabela_especifica[entrada].nome == null) {
+        tabela_especifica[entrada].nome = entrada;
       }
-      tabela_especifica[arma].talento_relacionado = talento_relacionado[i];
+      tabela_especifica[entrada].talento_relacionado = talentos_relacionados[i];
       // Compoe a tabela principal.
-      tabelas_armas[arma] = tabela_especifica[arma];
+      tabela_composta[entrada] = tabela_especifica[entrada];
       // Compoe a tabela invertida.
-      tabelas_armas_invertida[tabela_especifica[arma].nome] = arma;
+      tabela_invertida[tabela_especifica[entrada].nome] = entrada;
     }
   }
 }
