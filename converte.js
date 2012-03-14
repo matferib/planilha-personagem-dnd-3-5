@@ -37,6 +37,7 @@ function ConverteEntradasParaPersonagem() {
 
   _ConverteArmadurasEscudos();
   _ConverteListaArmas();
+  _ConverteListaArmaduras();
 
   // Estilos tem que vir apos a atualizacao das armas do personagem, talentos e lista de armas.
   _ConverteEstilos();
@@ -129,6 +130,36 @@ function _ConvertePericias() {
     personagem.pericias.lista[entradas.pericias[i].chave].pontos =
         entradas.pericias[i].pontos;
   }
+}
+
+// TODO tirar duplicacao de armas e armaduras.
+// Converte a lista de armaduras do personagem.
+function _ConverteListaArmaduras() {
+  personagem.armaduras = [];
+  // entrada fake para nenhuma.
+  var entrada_nenhuma = {
+    chave: 'nenhuma', 
+    nome_gerado: 'nenhuma', 
+    obra_prima: false, 
+    bonus: 0
+  };
+  personagem.armaduras.push(_ConverteArmadura(entrada_nenhuma));
+  for (var i = 0; i < entradas.armaduras.length; ++i) {
+    personagem.armaduras.push(_ConverteArmadura(entradas.armaduras[i]));
+  }
+}
+
+// Converte uma armadura.
+function _ConverteArmadura(armadura_entrada) {
+  var armadura_tabela = tabelas_armaduras[armadura_entrada.chave];
+  var armadura_personagem = {};
+  // O nome da entrada eh apenas um indice na tabela de armas.
+  armadura_personagem.entrada = {
+    chave: armadura_entrada.chave, 
+    bonus: armadura_entrada.bonus, 
+    obra_prima: armadura_entrada.obra_prima
+  };
+  return armadura_personagem;
 }
 
 // Converte a lista de armas do personagem.

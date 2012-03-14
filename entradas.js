@@ -33,7 +33,10 @@ var entradas = {
   // equipamentos.
   // Cada entrada eh do tipo: { chave, obra_prima, bonus }
   armas: [],
+  // TODO remover.
   armadura: { nome: 'nenhuma', bonus_magico: 0 },
+  // Cada entrada eh do tipo: { chave, obra_prima, bonus }
+  armaduras: [],
   escudo: { nome: 'nenhum', bonus_magico: 0 },
   elmo: '',
   // cada entrada: { chave, em_uso }
@@ -196,25 +199,6 @@ function _LeFeiticos() {
   }
 }
 
-// Le uma arma de seu div.
-// @return a arma lida.
-function _LeEntradaArma(div_arma) {
-  var arma_lida = {};
-  for (var i = 0; i < div_arma.childNodes.length; ++i) {
-    var filho = div_arma.childNodes[i];
-    if (filho.tagName == 'SELECT') {
-      arma_lida.chave = ValorSelecionado(filho);
-    } else if (filho.tagName == 'INPUT') {
-      if (filho.type == 'checkbox') {
-        arma_lida.obra_prima = filho.checked;
-      } else {
-        arma_lida.bonus = parseInt(filho.value) || 0;
-      }
-    }
-  }
-  return arma_lida;
-}
-
 // Le um div de estilo de luta.
 // @return o estilo lido. 
 function _LeEntradaEstiloLuta(div_estilo_luta) {
@@ -255,16 +239,42 @@ function _LeEquipamentos() {
   entradas.cobre = parseInt(Dom('moedas-cobre').value);
 
   // Equipamentos.
-  // Armas: Este div possui divs filhos com select, checkbox, input
-  entradas.armas = [];
-  var div_armas = Dom('div-equipamentos-armas');
-  for (var i = 0; i < div_armas.childNodes.length; ++i) {
-    entradas.armas.push(_LeEntradaArma(div_armas.childNodes[i]));
-  }
+  // Armas e armaduras: estes divs possuem divs filhos com select, checkbox, input
+  _LeArmaArmadura(entradas.armas, Dom('div-equipamentos-armas'));
+  _LeArmaArmadura(entradas.armaduras, Dom('div-equipamentos-armaduras'));
 
   var tipos_itens = [ 'aneis', 'amuletos' ];
   for (var i = 0; i < tipos_itens.length; ++i) {
     _LeItens(tipos_itens[i]);
+  }
+}
+
+// Le uma arma ou armadura de seu div.
+// @return o que foi lido.
+function _LeEntradaArmaArmadura(div) {
+  var lido = {};
+  for (var i = 0; i < div.childNodes.length; ++i) {
+    var filho = div.childNodes[i];
+    if (filho.tagName == 'SELECT') {
+      lido.chave = ValorSelecionado(filho);
+    } else if (filho.tagName == 'INPUT') {
+      if (filho.type == 'checkbox') {
+        lido.obra_prima = filho.checked;
+      } else {
+        lido.bonus = parseInt(filho.value) || 0;
+      }
+    }
+  }
+  return lido;
+}
+
+// Le armas e armaduras. 
+// @param array_entrada o array na entrada. Pode ser entradas.armas ou armaduras.
+// @param div que contem os elementos.
+function _LeArmaArmadura(array_entrada, div) {
+  array_entrada.length = 0;
+  for (var i = 0; i < div.childNodes.length; ++i) {
+    array_entrada.push(_LeEntradaArmaArmadura(div.childNodes[i]));
   }
 }
 
