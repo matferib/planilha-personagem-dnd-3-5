@@ -34,30 +34,29 @@ function RemoveClasse() {
   div_classes.removeChild(div_classes.lastChild);
 }
 
-// Adiciona uma nova arma a lista de equipamentos. Todos parametros sao opcionais.
-// @param chave_arma opcional chave da arma sendo adicionada.
+// Adiciona uma nova arma ou armadura a lista de equipamentos. 
+// @param chave opcional chave da arma ou armadura sendo adicionada.
 // @param obra_prima indica se a arma eh obra_prima.
 // @param bonus da arma.
-function AdicionaArma(chave_arma, obra_prima, bonus) {
-  var id_div_equipamentos_armas = "div-equipamentos-armas";
-  var div_armas = Dom(id_div_equipamentos_armas);
-  var id_gerado = GeraId('div-arma', div_armas);
+// @param nome do select, 'armadura' ou 'arma'.
+// @param div_pai onde a nova arma ou armadura sera adicionada.
+function _AdicionaArmaArmadura(
+    chave, obra_prima, bonus, nome, tabelas, rotulos_tabelas, div_pai) {
+  var id_div_equipamentos = 'div-equipamentos-' + nome;
+  var id_gerado = GeraId('div-' + nome, div_pai);
   var select = CriaSelect();
-  select.setAttribute('name', 'arma');
+  select.setAttribute('name', nome);
   select.setAttribute('onchange', 'AtualizaGeral()');
-  var tabelas = [ 
-      tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
-  var rotulos_tabelas = [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ];
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
-    for (var arma_corrente in tabelas[i]) {
-      if (arma_corrente == 'desarmado') {
-        // Desarmado eh um caso especial.
+    for (var corrente in tabelas[i]) {
+      if (corrente == 'nenhuma') {
+        // Nenhuma eh um caso especial.
         continue;
       }
-      var option = CriaOption(tabelas[i][arma_corrente].nome, arma_corrente);
-      option.setAttribute('name', arma_corrente);
-      option.selected = (arma_corrente == chave_arma);
+      var option = CriaOption(tabelas[i][corrente].nome, corrente);
+      option.setAttribute('name', corrente);
+      option.selected = (corrente == chave);
       optgroup.appendChild(option);
     }
     select.appendChild(optgroup);
@@ -76,7 +75,7 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   input_bonus.setAttribute('size', 2);
   input_bonus.value = bonus || 0;
  
-  // Se obra prima estiver selecionada, ignora o bonus da arma.
+  // Se obra prima estiver selecionada, ignora o bonus.
   if (input_obra_prima.checked == true) {
     input_bonus.value = 0;
     input_bonus.readOnly = true;
@@ -84,7 +83,7 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
 
   var button_remover = CriaBotao('-');
   button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
-        id_gerado + '", "' + id_div_equipamentos_armas + '")');
+        id_gerado + '", "' + id_div_equipamentos + '")');
 
   var div = CriaDiv(id_gerado);
   div.appendChild(select);
@@ -92,7 +91,21 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
   div.appendChild(input_obra_prima);
   div.appendChild(input_bonus);
   div.appendChild(button_remover);
-  div_armas.appendChild(div);
+  div_pai.appendChild(div);
+}
+
+// Adiciona uma nova arma a lista de equipamentos. Todos parametros sao opcionais.
+// @param chave_arma opcional chave da arma sendo adicionada.
+// @param obra_prima indica se a arma eh obra_prima.
+// @param bonus da arma.
+function AdicionaArma(chave_arma, obra_prima, bonus) {
+  _AdicionaArmaArmadura(chave_arma, 
+                        obra_prima, 
+                        bonus, 
+                        'arma', 
+                        [ tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ], 
+                        [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ], 
+                        Dom('div-equipamentos-armas'));
 }
 
 // Adiciona uma nova armadura a lista de equipamentos. Todos parametros sao opcionais.
@@ -100,60 +113,13 @@ function AdicionaArma(chave_arma, obra_prima, bonus) {
 // @param obra_prima indica se a arma eh obra_prima.
 // @param bonus da arma.
 function AdicionaArmadura(chave_armadura, obra_prima, bonus) {
-  var id_div_equipamentos_armaduras = "div-equipamentos-armaduras";
-  var div_armaduras = Dom(id_div_equipamentos_armaduras);
-  var id_gerado = GeraId('div-armadura', div_armaduras);
-  var select = CriaSelect();
-  select.setAttribute('name', 'armadura');
-  select.setAttribute('onchange', 'AtualizaGeral()');
-  var tabelas = [ 
-      tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ];
-  var rotulos_tabelas = [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ];
-  for (var i = 0; i < tabelas.length; ++i) {
-    var optgroup = CriaOptGroup(rotulos_tabelas[i]);
-    for (var armadura_corrente in tabelas[i]) {
-      if (armadura_corrente == 'nenhuma') {
-        // Nenhuma eh um caso especial.
-        continue;
-      }
-      var option = CriaOption(tabelas[i][armadura_corrente].nome, armadura_corrente);
-      option.setAttribute('name', armadura_corrente);
-      option.selected = (armadura_corrente == chave_armadura);
-      optgroup.appendChild(option);
-    }
-    select.appendChild(optgroup);
-  }
-  var span_obra_prima = CriaSpan(' OP');
-
-  var input_obra_prima = document.createElement('input');
-  input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
-  input_obra_prima.setAttribute('type', "checkbox");
-  input_obra_prima.checked = obra_prima;
-
-  var input_bonus = document.createElement('input');
-  input_bonus.setAttribute('onchange', 'AtualizaGeral()');
-  input_bonus.setAttribute('type', "text");
-  input_bonus.setAttribute('maxlength', 2);
-  input_bonus.setAttribute('size', 2);
-  input_bonus.value = bonus || 0;
- 
-  // Se obra prima estiver selecionada, ignora o bonus da arma.
-  if (input_obra_prima.checked == true) {
-    input_bonus.value = 0;
-    input_bonus.readOnly = true;
-  }
-
-  var button_remover = CriaBotao('-');
-  button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
-        id_gerado + '", "' + id_div_equipamentos_armaduras + '")');
-
-  var div = CriaDiv(id_gerado);
-  div.appendChild(select);
-  div.appendChild(span_obra_prima);
-  div.appendChild(input_obra_prima);
-  div.appendChild(input_bonus);
-  div.appendChild(button_remover);
-  div_armaduras.appendChild(div);
+  _AdicionaArmaArmadura(chave_armadura, 
+                        obra_prima, 
+                        bonus, 
+                        'armadura', 
+                        [ tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ],
+                        [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ],
+                        Dom('div-equipamentos-armaduras'));
 }
 
 // Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
