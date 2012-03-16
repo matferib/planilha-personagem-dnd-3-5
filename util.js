@@ -127,3 +127,22 @@ function GeraId(prefixo, elemento) {
     }
   }
 }
+
+// Recebe uma string de preço e retorna um objeto contendo as moedas.
+// @return objeto de moedas ou null em caso de erro.
+function LePreco(preco) {
+  var moedas = { platina: 0, ouro: 0, prata: 0, cobre: 0 };
+  var sufixos = { platina: 'pl', ouro: 'po', prata: 'pp', cobre: 'pc' };
+  var preco_minusculo = preco.toLowerCase();
+  for (var tipo_moeda in moedas) {
+    var indice_tipo = preco_minusculo.indexOf(sufixos[tipo_moeda]);
+    if (indice_tipo != -1) {
+      var string_val = preco_minusculo.substr(0, indice_tipo);
+      var val = parseInt(string_val);
+      if (val != NaN) {
+        moedas[tipo_moeda] = parseInt(string_val);
+      }
+    }
+  }
+  return moedas;
+}
