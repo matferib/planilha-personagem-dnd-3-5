@@ -292,3 +292,21 @@ function PersonagemAdicionarFerimentos(valor) {
     personagem.pontos_vida.ferimentos = 0;
   }
 }
+
+// @TODO fazer a conversao de um tipo para outro.
+// Adiciona moedas ao personagem. Valores podem ser negativos.
+// O personagem nunca pode ficar com moedas negativas, neste caso
+// a funcao nao fara nada.
+// @param moedas um objeto contendo { ouro, platina, prata, cobre}
+function PersonagemAdicionarMoedas(moedas) {
+  // verifica fundos.
+  for (var tipo_moeda in moedas) {
+    if (personagem.moedas[tipo_moeda] + moedas[tipo_moeda] < 0) {
+      return;
+    }
+  }
+
+  for (var tipo_moeda in moedas) {
+    personagem.moedas[tipo_moeda] += moedas[tipo_moeda];
+  }
+}

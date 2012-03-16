@@ -1,5 +1,20 @@
 // Arquivos de testes da planilha.
 
+// Funcoes auxiliares.
+
+// @param moedas{1,2} objeto contendo { platina, ouro, prata, cobre}
+// @return true se as moedas forem iguais.
+function _ComparaMoedas(moedas1, moedas2) {
+  for (var tipo_moeda in moedas1) {
+    if (moedas1[tipo_moeda] != moedas2[tipo_moeda]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Testes.
+
 // Cria um novo template de testes a ser adicionado no dom.
 // @param nome_teste o nome do teste.
 // @param handler_teste deve possuir nome, a funcao 'Testa' para realizar o teste, 
@@ -62,4 +77,69 @@ function CarregaTestes() {
       }
     }, 
   }, body);
+
+  LimpaGeral();
+  personagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 }; 
+  TemplateTeste({
+    nome: 'PersonagemAdicionarMoedas', 
+    Testa: function() {
+      this.resultado = false;
+      var resultado_moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 };
+      PersonagemAdicionarMoedas({ platina: 0, ouro: 0, prata: 0, cobre: 0 });
+      if (!_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+        this.detalhes = 'Valores nao deveriam ter mudado';
+        this.resultado = false;
+        return;
+      }
+      PersonagemAdicionarMoedas({ platina: -1, ouro: -3, prata: 0, cobre: 0 });
+      if (!_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+        this.detalhes = 'Valores nao deveriam ter mudado, ouro ficaria negativo';
+        this.resultado = false;
+        return;
+      }
+      resultado_moedas = { platina: 0, ouro: 5, prata: 6, cobre: 7 };
+      PersonagemAdicionarMoedas({ platina: -1, ouro: 3, prata: 3, cobre: 3 });
+      if (!_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+        this.detalhes = 'Adição errada';
+        this.resultado = false;
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'UtilLePreco', 
+    Testa: function() {
+      this.resultado = false;
+      var preco_esperado = { platina: 0, ouro: 10, prata: 0, cobre: 0 };
+      if (!_ComparaMoedas(preco_esperado, LePreco("10PO"))) {
+        this.detalhes = 'Falha lendo preco 10PO';
+        this.resultado = false;
+        return;
+      }
+      preco_esperado = { platina: 0, ouro: 0, prata: 10, cobre: 0 };
+      if (!_ComparaMoedas(preco_esperado, LePreco("10 PP"))) {
+        this.detalhes = 'Falha lendo preco 10 PP';
+        this.resultado = false;
+        return;
+      }
+      preco_esperado = { platina: 5, ouro: 0, prata: 0, cobre: 0 };
+      if (!_ComparaMoedas(preco_esperado, LePreco(" 5 Pl"))) {
+        this.detalhes = 'Falha lendo preco 10 PP';
+        this.resultado = false;
+        return;
+      }
+      preco_esperado = { platina: 0, ouro: 0, prata: 0, cobre: 1 };
+      if (!_ComparaMoedas(preco_esperado, LePreco(" 1 pC "))) {
+        this.detalhes = 'Falha lendo preco 1 pC';
+        this.resultado = false;
+        return;
+      }
+
+      this.resultado = true;
+    }, 
+  }, body);
+
 }
