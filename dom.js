@@ -68,10 +68,13 @@ function CriaSpan(texto, id, classe) {
 }
 
 // @param marcado true se o checkbox estiver marcado.
-function CriaInputCheckbox(marcado, id, classe) {
+function CriaInputCheckbox(marcado, id, classe, funcao) {
   var input = CriaDom('input', id, classe);
   input.type = 'checkbox';
   input.checked = marcado;
+  if (funcao) {
+    input.addEventListener('input', funcao, false);
+  }
   return input;
 }
 

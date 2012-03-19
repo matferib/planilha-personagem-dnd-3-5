@@ -255,14 +255,15 @@ function _LeEntradaArmaArmadura(div) {
   var lido = {};
   for (var i = 0; i < div.childNodes.length; ++i) {
     var filho = div.childNodes[i];
-    if (filho.tagName == 'SELECT') {
+    if (filho.name == null) {
+      continue;
+    }
+    if (filho.name.indexOf('select') != -1) {
       lido.chave = ValorSelecionado(filho);
-    } else if (filho.tagName == 'INPUT') {
-      if (filho.type == 'checkbox') {
-        lido.obra_prima = filho.checked;
-      } else {
-        lido.bonus = parseInt(filho.value) || 0;
-      }
+    } else if (filho.name.indexOf('obra-prima') != -1) {
+      lido.obra_prima = filho.checked;
+    } else if (filho.name.indexOf('bonus-magico') != -1) {
+      lido.bonus = parseInt(filho.value) || 0;
     }
   }
   return lido;

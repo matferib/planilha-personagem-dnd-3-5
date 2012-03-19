@@ -294,3 +294,10 @@ function ClickDescansar(valor) {
   AtualizaGeralSemConverterEntradas();
 }
 
+// Vende o item contido no dom.
+function ClickVender(dom) {
+}
+
+// Vende o item contido no dom.
+function ClickComprar(dom) {
+}

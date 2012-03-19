@@ -618,30 +618,67 @@ function _AtualizaItem(item, div_item, div_itens) {
   }
 }
 
-function _AtualizaListaArmas() {
-  var div_armas = Dom('div-equipamentos-armas');
-  RemoveFilhos(div_armas);
-  // Ignoramos a primeira arma, desarmado.
-  for (var i = 1; i < personagem.armas.length; ++i) {
-    var arma_personagem_entrada = personagem.armas[i].entrada;
-    AdicionaArma(
-        arma_personagem_entrada.chave, 
-        arma_personagem_entrada.obra_prima, 
-        arma_personagem_entrada.bonus);
+// Atualiza o div que contem uma arma ou armadura.
+// @param chave opcional chave da arma ou armadura sendo adicionada.
+// @param obra_prima indica se a arma eh obra_prima.
+// @param bonus da arma.
+function _AtualizaArmaArmadura(chave, obra_prima, bonus, div) {
+  var lido = {};
+  for (var i = 0; i < div.childNodes.length; ++i) {
+    var filho = div.childNodes.item(i);
+    if (filho.name == null) {
+      continue;
+    }
+    if (filho.name.indexOf('select') != -1) {
+      SelecionaValor(chave, filho);
+    } else if (filho.name.indexOf('obra-prima') != -1) {
+      filho.checked = obra_prima;
+    } else if (filho.name.indexOf('bonus-magico') != -1) {
+      if (obra_prima) {
+        // Se obra prima estiver selecionada, ignora o bonus.
+        filho.value = 0;
+        filho.readOnly = true;
+      } else {
+        filho.bonus = bonus;
+      }
+    }
   }
 }
 
-function _AtualizaListaArmaduras() {
-  var div_armaduras = Dom('div-equipamentos-armaduras');
-  RemoveFilhos(div_armaduras);
+// Atualiza uma lista de armas ou armaduras.
+// @param div pai das armas ou armaduras.
+// @param array_personagem array de armas ou armaduras do personagem.
+// @param funcao_adicao caso seja necessario adicionar um div novo.
+function _AtualizaListaArmasArmaduras(div, array_personagem, funcao_adicao) {
+  var filho = div.firstChild;
   // Ignoramos a primeira arma, desarmado.
-  for (var i = 1; i < personagem.armaduras.length; ++i) {
-    var armadura_personagem_entrada = personagem.armaduras[i].entrada;
-    AdicionaArmadura(
-        armadura_personagem_entrada.chave, 
-        armadura_personagem_entrada.obra_prima, 
-        armadura_personagem_entrada.bonus);
+  for (var i = 1; i < array_personagem.length; ++i) {
+    var personagem_entrada = array_personagem[i].entrada;
+    if (filho == null) {
+      // O div nao existe, chama a funcao.
+      filho = funcao_adicao();
+    }
+    // Atualiza o div.
+    _AtualizaArmaArmadura(
+        personagem_entrada.chave,
+        personagem_entrada.obra_prima,
+        personagem_entrada.bonus,
+        filho);
+    filho = filho.nextSibling;
   }
+}
+
+// Atualiza a lista de armas.
+function _AtualizaListaArmas() {
+  var div = Dom('div-equipamentos-armas');
+  _AtualizaListaArmasArmaduras(
+      Dom('div-equipamentos-armas'), personagem.armas, AdicionaArma);
+}
+
+// Atualiza a lista de armaduras.
+function _AtualizaListaArmaduras() {
+  _AtualizaListaArmasArmaduras(
+      Dom('div-equipamentos-armaduras'), personagem.armaduras, AdicionaArmadura);
 }
 
 function _AtualizaNotas() {
