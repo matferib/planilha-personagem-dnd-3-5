@@ -35,17 +35,14 @@ function RemoveClasse() {
 }
 
 // Adiciona uma nova arma ou armadura a lista de equipamentos. 
-// @param chave opcional chave da arma ou armadura sendo adicionada.
-// @param obra_prima indica se a arma eh obra_prima.
-// @param bonus da arma.
 // @param nome do select, 'armadura' ou 'arma'.
 // @param div_pai onde a nova arma ou armadura sera adicionada.
-function _AdicionaArmaArmadura(
-    chave, obra_prima, bonus, nome, tabelas, rotulos_tabelas, div_pai) {
-  var id_div_equipamentos = 'div-equipamentos-' + nome;
+// @return o div adicionado.
+function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
+  var id_div_equipamentos = div_pai.id;
   var id_gerado = GeraId('div-' + nome, div_pai);
   var select = CriaSelect();
-  select.setAttribute('name', nome);
+  select.setAttribute('name', 'select-' + nome);
   select.setAttribute('onchange', 'AtualizaGeral()');
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
@@ -56,34 +53,29 @@ function _AdicionaArmaArmadura(
       }
       var option = CriaOption(tabelas[i][corrente].nome, corrente);
       option.setAttribute('name', corrente);
-      option.selected = (corrente == chave);
+      option.selected = false;
       optgroup.appendChild(option);
     }
     select.appendChild(optgroup);
   }
   var span_obra_prima = CriaSpan(' OP');
 
-  var input_obra_prima = document.createElement('input');
-  input_obra_prima.setAttribute('onchange', 'AtualizaGeral()');
-  input_obra_prima.setAttribute('type', "checkbox");
-  input_obra_prima.checked = obra_prima;
+  var input_obra_prima = CriaInputCheckbox(false, null, null, AtualizaGeral);
+  input_obra_prima.setAttribute('name', 'obra-prima');
 
-  var input_bonus = document.createElement('input');
-  input_bonus.setAttribute('onchange', 'AtualizaGeral()');
-  input_bonus.setAttribute('type', "text");
+  var input_bonus = CriaInputNumerico(null, null, null, AtualizaGeral);
+  input_bonus.setAttribute('name', 'bonus-magico');
   input_bonus.setAttribute('maxlength', 2);
   input_bonus.setAttribute('size', 2);
-  input_bonus.value = bonus || 0;
+  input_bonus.value = 0;
  
-  // Se obra prima estiver selecionada, ignora o bonus.
-  if (input_obra_prima.checked == true) {
-    input_bonus.value = 0;
-    input_bonus.readOnly = true;
-  }
-
-  var button_remover = CriaBotao('-');
-  button_remover.setAttribute('onclick', 'ClickRemoverFilho("' + 
-        id_gerado + '", "' + id_div_equipamentos + '")');
+  var button_remover = CriaBotao('-', null, null, {
+      id:  id_gerado,
+      id_div_equipamentos: id_div_equipamentos,
+      handleEvent: function(evt) {
+        ClickRemoverFilho(this.id, this.id_div_equipamentos);
+      }
+  });
 
   var div = CriaDiv(id_gerado);
   div.appendChild(select);
@@ -91,35 +83,45 @@ function _AdicionaArmaArmadura(
   div.appendChild(input_obra_prima);
   div.appendChild(input_bonus);
   div.appendChild(button_remover);
+
+  // Tem que ser depois por causa do div.
+  var button_vender = CriaBotao('Vender', null, 'venda', {
+      div:  div,
+      handleEvent: function(evt) {
+        ClickVender(this.div);
+      }
+  });
+  var button_comprar = CriaBotao('Comprar', null, 'compra', {
+      div:  div,
+      handleEvent: function(evt) {
+        ClickComprar(this.div);
+      }
+  });
+
+  div.appendChild(button_vender);
+  div.appendChild(button_comprar);
   div_pai.appendChild(div);
+  return div;
 }
 
-// Adiciona uma nova arma a lista de equipamentos. Todos parametros sao opcionais.
-// @param chave_arma opcional chave da arma sendo adicionada.
-// @param obra_prima indica se a arma eh obra_prima.
-// @param bonus da arma.
-function AdicionaArma(chave_arma, obra_prima, bonus) {
-  _AdicionaArmaArmadura(chave_arma, 
-                        obra_prima, 
-                        bonus, 
-                        'arma', 
-                        [ tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ], 
-                        [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ], 
-                        Dom('div-equipamentos-armas'));
+// Adiciona uma nova arma a lista de equipamentos.
+// @return o div adicionado.
+function AdicionaArma() {
+  return _AdicionaArmaArmadura(
+      'arma', 
+      [ tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ], 
+      [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ], 
+      Dom('div-equipamentos-armas'));
 }
 
 // Adiciona uma nova armadura a lista de equipamentos. Todos parametros sao opcionais.
-// @param chave_armadura opcional chave da armadura sendo adicionada.
-// @param obra_prima indica se a arma eh obra_prima.
-// @param bonus da arma.
-function AdicionaArmadura(chave_armadura, obra_prima, bonus) {
-  _AdicionaArmaArmadura(chave_armadura, 
-                        obra_prima, 
-                        bonus, 
-                        'armadura', 
-                        [ tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ],
-                        [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ],
-                        Dom('div-equipamentos-armaduras'));
+// @return o div adicionado.
+function AdicionaArmadura() {
+  return _AdicionaArmaArmadura(
+      'armadura', 
+      [ tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ],
+      [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ],
+      Dom('div-equipamentos-armaduras'));
 }
 
 // Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
