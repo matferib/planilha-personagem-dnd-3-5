@@ -249,9 +249,10 @@ function _LeEquipamentos() {
   }
 }
 
-// Le uma arma ou armadura de seu div.
+// Le uma arma ou armadura de seu div. Usada tambem no tratamento de compra e venda
+// de armas.
 // @return o que foi lido.
-function _LeEntradaArmaArmadura(div) {
+function LeEntradaArmaArmadura(div) {
   var lido = {};
   for (var i = 0; i < div.childNodes.length; ++i) {
     var filho = div.childNodes[i];
@@ -275,7 +276,7 @@ function _LeEntradaArmaArmadura(div) {
 function _LeArmaArmadura(array_entrada, div) {
   array_entrada.length = 0;
   for (var i = 0; i < div.childNodes.length; ++i) {
-    array_entrada.push(_LeEntradaArmaArmadura(div.childNodes[i]));
+    array_entrada.push(LeEntradaArmaArmadura(div.childNodes[i]));
   }
 }
 

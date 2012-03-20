@@ -130,7 +130,8 @@ function GeraId(prefixo, elemento) {
 
 // Recebe uma string de preço e retorna um objeto contendo as moedas.
 // @return objeto de moedas ou null em caso de erro.
-function LePreco(preco) {
+// @param invertido (default false) se true, os valores sao invertidos (para realizar compras por exemplo).
+function LePreco(preco, invertido) {
   var moedas = { platina: 0, ouro: 0, prata: 0, cobre: 0 };
   var sufixos = { platina: 'pl', ouro: 'po', prata: 'pp', cobre: 'pc' };
   var preco_minusculo = preco.toLowerCase();
@@ -140,7 +141,7 @@ function LePreco(preco) {
       var string_val = preco_minusculo.substr(0, indice_tipo);
       var val = parseInt(string_val);
       if (val != NaN) {
-        moedas[tipo_moeda] = parseInt(string_val);
+        moedas[tipo_moeda] = invertido ? -parseInt(string_val) : parseInt(string_val);
       }
     }
   }
