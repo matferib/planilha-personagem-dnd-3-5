@@ -340,37 +340,37 @@ var tabelas_tamanho = {
 
 var tabelas_armaduras_leves = {
   nenhuma: {
-    nome: 'Nenhuma', bonus: 0, },
+    nome: 'Nenhuma', bonus: 0, preco: '0 PO' },
   acolchoada: {
-    nome: 'Acolchoada', bonus: 1, maximo_bonus_destreza: 8 },
+    nome: 'Acolchoada', bonus: 1, maximo_bonus_destreza: 8, preco: '5 PO' },
   couro: {
-    nome: 'Couro', bonus: 2,  maximo_bonus_destreza: 6 },
+    nome: 'Couro', bonus: 2,  maximo_bonus_destreza: 6, preco: '10 PO' },
   couro_batido: {
-    nome: 'Couro Batido', bonus: 3, maximo_bonus_destreza: 5 },
+    nome: 'Couro Batido', bonus: 3, maximo_bonus_destreza: 5, preco: '25 PO' },
   camisao_cota_de_malha: {
-    nome: 'Camisão de Cota de Malha', bonus: 4, maximo_bonus_destreza: 4 },
+    nome: 'Camisão de Cota de Malha', bonus: 4, maximo_bonus_destreza: 4, preco: '100 PO' },
 };
 
 var tabelas_armaduras_medias = {
   gibao_de_peles: {
-    nome: 'Gibão de Peles', bonus: 3, maximo_bonus_destreza: 4 },
+    nome: 'Gibão de Peles', bonus: 3, maximo_bonus_destreza: 4, preco: '15 PO' },
   brunea: {
-    nome: 'Brunea', bonus: 4, maximo_bonus_destreza: 3 },
+    nome: 'Brunea', bonus: 4, maximo_bonus_destreza: 3, preco: '50 PO' },
   cota_de_malha: {
-    nome: 'Cota de Malha', bonus: 5, maximo_bonus_destreza: 2 },
+    nome: 'Cota de Malha', bonus: 5, maximo_bonus_destreza: 2, preco: '150 PO' },
   peitoral_de_aco: {
-    nome: 'Peitoral de Aço', bonus: 5, maximo_bonus_destreza: 3 },
+    nome: 'Peitoral de Aço', bonus: 5, maximo_bonus_destreza: 3, preco: '200 PO' },
 };
 
 var tabelas_armaduras_pesadas = {
   cota_de_talas: {
-    nome: 'Cota de Talas', bonus: 6, maximo_bonus_destreza: 0 },
+    nome: 'Cota de Talas', bonus: 6, maximo_bonus_destreza: 0, preco: '200 PO' },
   loriga_segmentada: {
-    nome: 'Loriga Segmentada', bonus: 6, maximo_bonus_destreza: 1 },
+    nome: 'Loriga Segmentada', bonus: 6, maximo_bonus_destreza: 1, preco: '250 PO' },
   meia_armadura: {
-    nome: 'Meia Armadura', bonus: 7, maximo_bonus_destreza: 0 },
+    nome: 'Meia Armadura', bonus: 7, maximo_bonus_destreza: 0, preco: '600 PO' },
   armadura_de_batalha: {
-    nome: 'Armadura de Batalha', bonus: 8, maximo_bonus_destreza: 1 },
+    nome: 'Armadura de Batalha', bonus: 8, maximo_bonus_destreza: 1, preco: '1500 PO' },
 };
 
 // Tabelas de armaduras, construida atraves das tabelas_armaduras_*.
