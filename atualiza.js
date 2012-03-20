@@ -670,7 +670,6 @@ function _AtualizaListaArmasArmaduras(div, array_personagem, funcao_adicao) {
 
 // Atualiza a lista de armas.
 function _AtualizaListaArmas() {
-  var div = Dom('div-equipamentos-armas');
   _AtualizaListaArmasArmaduras(
       Dom('div-equipamentos-armas'), personagem.armas, AdicionaArma);
 }

@@ -73,7 +73,7 @@ function CriaInputCheckbox(marcado, id, classe, funcao) {
   input.type = 'checkbox';
   input.checked = marcado;
   if (funcao) {
-    input.addEventListener('input', funcao, false);
+    input.addEventListener('change', funcao, false);
   }
   return input;
 }

@@ -36,6 +36,7 @@ function RemoveClasse() {
 
 // Adiciona uma nova arma ou armadura a lista de equipamentos. 
 // @param nome do select, 'armadura' ou 'arma'.
+// @param tabelas que compoe a tabela completa de armas ou armaduras.
 // @param div_pai onde a nova arma ou armadura sera adicionada.
 // @return o div adicionado.
 function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
@@ -47,10 +48,6 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
     for (var corrente in tabelas[i]) {
-      if (corrente == 'nenhuma') {
-        // Nenhuma eh um caso especial.
-        continue;
-      }
       var option = CriaOption(tabelas[i][corrente].nome, corrente);
       option.setAttribute('name', corrente);
       option.selected = false;
