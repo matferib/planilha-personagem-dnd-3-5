@@ -84,14 +84,16 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   // Tem que ser depois por causa do div.
   var button_vender = CriaBotao('Vender', null, 'venda', {
       div:  div,
+      tabelas: tabelas,
       handleEvent: function(evt) {
-        ClickVender(this.div);
+        ClickVenderArmaArmadura(this.div, nome);
       }
   });
   var button_comprar = CriaBotao('Comprar', null, 'compra', {
       div:  div,
+      tabelas: tabelas,
       handleEvent: function(evt) {
-        ClickComprar(this.div);
+        ClickComprarArmaArmadura(this.div, nome);
       }
   });
 

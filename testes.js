@@ -85,21 +85,24 @@ function CarregaTestes() {
     Testa: function() {
       this.resultado = false;
       var resultado_moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 };
-      PersonagemAdicionarMoedas({ platina: 0, ouro: 0, prata: 0, cobre: 0 });
-      if (!_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+      // Aqui a funcao PersonagemAdicionarMoedas tem que retornar true.
+      if (!PersonagemAdicionarMoedas({ platina: 0, ouro: 0, prata: 0, cobre: 0 }) ||
+          !_ComparaMoedas(resultado_moedas, personagem.moedas)) {
         this.detalhes = 'Valores nao deveriam ter mudado';
         this.resultado = false;
         return;
       }
-      PersonagemAdicionarMoedas({ platina: -1, ouro: -3, prata: 0, cobre: 0 });
-      if (!_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+      // Aqui a funcao PersonagemAdicionarMoedas tem que retornar false.
+      if (PersonagemAdicionarMoedas({ platina: -1, ouro: -3, prata: 0, cobre: 0 }) ||
+          !_ComparaMoedas(resultado_moedas, personagem.moedas)) {
         this.detalhes = 'Valores nao deveriam ter mudado, ouro ficaria negativo';
         this.resultado = false;
         return;
       }
       resultado_moedas = { platina: 0, ouro: 5, prata: 6, cobre: 7 };
-      PersonagemAdicionarMoedas({ platina: -1, ouro: 3, prata: 3, cobre: 3 });
-      if (!_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+      // Aqui a funcao PersonagemAdicionarMoedas tem que retornar true.
+      if (!PersonagemAdicionarMoedas({ platina: -1, ouro: 3, prata: 3, cobre: 3 }) ||
+          !_ComparaMoedas(resultado_moedas, personagem.moedas)) {
         this.detalhes = 'Adição errada';
         this.resultado = false;
         return;

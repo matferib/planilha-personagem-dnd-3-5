@@ -298,15 +298,17 @@ function PersonagemAdicionarFerimentos(valor) {
 // O personagem nunca pode ficar com moedas negativas, neste caso
 // a funcao nao fara nada.
 // @param moedas um objeto contendo { ouro, platina, prata, cobre}
+// @return true se foi possivel adicionar as moedas.
 function PersonagemAdicionarMoedas(moedas) {
   // verifica fundos.
   for (var tipo_moeda in moedas) {
     if (personagem.moedas[tipo_moeda] + moedas[tipo_moeda] < 0) {
-      return;
+      return false;
     }
   }
 
   for (var tipo_moeda in moedas) {
     personagem.moedas[tipo_moeda] += moedas[tipo_moeda];
   }
+  return true;
 }

@@ -294,10 +294,56 @@ function ClickDescansar(valor) {
   AtualizaGeralSemConverterEntradas();
 }
 
-// Vende o item contido no dom.
-function ClickVender(dom) {
+// Encontra a arma ou armadura no dom.
+function _AchaArmaArmadura(dom) {
+  var lido = LeEntradaArmaArmadura(dom); 
 }
 
-// Vende o item contido no dom.
-function ClickComprar(dom) {
+// Vende a arma/armadura contida no dom.
+// @param dom contendo a arma ou armadura.
+// @param tipo do que esta sendo vendido (arma, armadura).
+function ClickVenderArmaArmadura(dom, tipo) {
+  var tabela;
+  if (tipo == 'arma') {
+    tabela = tabelas_armas;
+  } else if (tipo == 'armadura') {
+    tabela = tabelas_armaduras;
+  } else {
+    alert('Tipo invalido para compra');
+    return null;
+  }
+  var lido = LeEntradaArmaArmadura(dom);
+  var entrada_tabela = tabela[lido.chave];
+  if (entrada_tabela == null || entrada_tabela.preco == null) {
+    alert('Item inválido ou sem preço');
+    return;
+  }
+  PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco));
+  AtualizaGeralSemConverterEntradas();
+}
+
+// Compra a arma/armadura contida no dom.
+// @param dom contendo a arma ou armadura.
+// @param tipo do que esta sendo vendido (arma, armadura).
+function ClickComprarArmaArmadura(dom, tipo) {
+  var tabela;
+  if (tipo == 'arma') {
+    tabela = tabelas_armas;
+  } else if (tipo == 'armadura') {
+    tabela = tabelas_armaduras;
+  } else {
+    alert('Tipo invalido para compra');
+    return null;
+  }
+  var lido = LeEntradaArmaArmadura(dom);
+  var entrada_tabela = tabela[lido.chave];
+  if (entrada_tabela == null || entrada_tabela.preco == null) {
+    alert('Item inválido ou sem preço');
+    return;
+  }
+  if (!PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco, true))) {
+    alert('Não há fundos para compra do item');
+    return;
+  }
+  AtualizaGeralSemConverterEntradas();
 }
