@@ -40,6 +40,17 @@ function RemoveClasse() {
 // @param div_pai onde a nova arma ou armadura sera adicionada.
 // @return o div adicionado.
 function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
+  // Tabela sera usada na compra e venda.
+  var tabela;
+  if (nome == 'arma') {
+    tabela = tabelas_armas;
+  } else if (nome == 'armadura') {
+    tabela = tabelas_armaduras;
+  } else {
+    alert('Nome invalido, esperando arma ou armadura.');
+    return null;
+  }
+
   var id_div_equipamentos = div_pai.id;
   var id_gerado = GeraId('div-' + nome, div_pai);
   var select = CriaSelect();
@@ -81,19 +92,20 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   div.appendChild(input_bonus);
   div.appendChild(button_remover);
 
-  // Tem que ser depois por causa do div.
   var button_vender = CriaBotao('Vender', null, 'venda', {
       div:  div,
-      tabelas: tabelas,
+      tipo: nome,
+      tabela: tabela,
       handleEvent: function(evt) {
-        ClickVenderArmaArmadura(this.div, nome);
+        ClickVenderArmaArmadura(this.div, this.tipo, this.tabela);
       }
   });
   var button_comprar = CriaBotao('Comprar', null, 'compra', {
       div:  div,
-      tabelas: tabelas,
+      nome: nome,
+      tabela: tabela,
       handleEvent: function(evt) {
-        ClickComprarArmaArmadura(this.div, nome);
+        ClickComprarArmaArmadura(this.div, this.nome, this.tabela);
       }
   });
 
@@ -266,5 +278,23 @@ function AdicionaItem(tipo_item, div, div_pai) {
         e.stopPropagation();
       } });
   div.appendChild(botao_remover);
+
+  var button_vender = CriaBotao('Vender', null, 'venda', {
+      div:  div,
+      tabela: tabelas_itens[tipo_item],
+      handleEvent: function(evt) {
+        ClickVenderItem(this.div, this.tabela);
+      }
+  });
+  var button_comprar = CriaBotao('Comprar', null, 'compra', {
+      div:  div,
+      tabela: tabelas_itens[tipo_item],
+      handleEvent: function(evt) {
+        ClickComprarItem(this.div, this.tabela);
+      }
+  });
+  div.appendChild(button_vender);
+  div.appendChild(button_comprar);
+
   div_pai.appendChild(div);
 }

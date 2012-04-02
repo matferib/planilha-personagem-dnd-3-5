@@ -301,17 +301,10 @@ function _AchaArmaArmadura(dom) {
 
 // Vende a arma/armadura contida no dom.
 // @param dom contendo a arma ou armadura.
-// @param tipo do que esta sendo vendido (arma, armadura).
-function ClickVenderArmaArmadura(dom, tipo) {
-  var tabela;
-  if (tipo == 'arma') {
-    tabela = tabelas_armas;
-  } else if (tipo == 'armadura') {
-    tabela = tabelas_armaduras;
-  } else {
-    alert('Tipo invalido para compra');
-    return null;
-  }
+// @oaram tipo que esta sendo vendido.
+// @param tabela que contem o item sendo vendido.
+// TODO obra prima
+function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
   var entrada_tabela = tabela[lido.chave];
   if (entrada_tabela == null || entrada_tabela.preco == null) {
@@ -325,16 +318,8 @@ function ClickVenderArmaArmadura(dom, tipo) {
 // Compra a arma/armadura contida no dom.
 // @param dom contendo a arma ou armadura.
 // @param tipo do que esta sendo vendido (arma, armadura).
-function ClickComprarArmaArmadura(dom, tipo) {
-  var tabela;
-  if (tipo == 'arma') {
-    tabela = tabelas_armas;
-  } else if (tipo == 'armadura') {
-    tabela = tabelas_armaduras;
-  } else {
-    alert('Tipo invalido para compra');
-    return null;
-  }
+// @param tabela do que esta sendo comprado.
+function ClickComprarArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
   var entrada_tabela = tabela[lido.chave];
   if (entrada_tabela == null || entrada_tabela.preco == null) {
@@ -345,5 +330,36 @@ function ClickComprarArmaArmadura(dom, tipo) {
     alert('Não há fundos para compra do item');
     return;
   }
+  AtualizaGeralSemConverterEntradas();
+}
+
+// Compra o item contido no dom.
+// @param dom contendo o item. 
+// @param tabela do que esta sendo comprado.
+function ClickComprarItem(dom, tabela) {
+  var lido = LeItem(dom);
+  var entrada_tabela = tabela[lido.chave];
+  if (entrada_tabela == null || entrada_tabela.preco == null) {
+    alert('Item inválido ou sem preço');
+    return;
+  }
+  if (!PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco, true))) {
+    alert('Não há fundos para compra do item');
+    return;
+  }
+  AtualizaGeralSemConverterEntradas();
+}
+
+// Vende o item contido no dom.
+// @param dom contendo o item. 
+// @param tabela do que esta sendo comprado.
+function ClickVenderItem(dom, tabela) {
+  var lido = LeItem(dom);
+  var entrada_tabela = tabela[lido.chave];
+  if (entrada_tabela == null || entrada_tabela.preco == null) {
+    alert('Item inválido ou sem preço');
+    return;
+  }
+  PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco));
   AtualizaGeralSemConverterEntradas();
 }
