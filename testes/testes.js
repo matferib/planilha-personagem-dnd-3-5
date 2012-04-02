@@ -145,4 +145,30 @@ function CarregaTestes() {
     }, 
   }, body);
 
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'LeItem', 
+    Testa: function() {
+      var item_esperado = {
+        chave: 'queda_suave',
+        em_uso: true 
+      };
+      var dom = {
+        childNodes: [
+          { name: 'item',  
+            selectedIndex: 1, 
+            length: 2, 
+            options: [ {}, { value: 'queda_suave' } ] },
+          { name: 'em_uso', checked: true },
+        ],
+      };
+      var item_lido = LeItem(dom);
+      this.resultado = item_lido.chave == item_esperado.chave && 
+                       item_lido.em_uso == item_esperado.em_uso;
+      if (!this.resultado) {
+        this.detalhes = 'Item lido diferente do esperado.';
+      }
+    }, 
+  }, body);
+
 }
