@@ -284,12 +284,13 @@ function _LeItens(tipo_item) {
   entradas[tipo_item] = [];
   var dom = goog.dom.getElementsByClass('div-' + tipo_item);
   for (var i = 0; i < dom.length; ++i) {
-    entradas[tipo_item].push(_LeItem(dom[i]));
+    entradas[tipo_item].push(LeItem(dom[i]));
   }
 }
 
+// Usado tambem na compra e venda de itens.
 // @return o item lido do dom.
-function _LeItem(dom) {
+function LeItem(dom) {
   var item = {
       chave: '',
       em_uso: false, 
