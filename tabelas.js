@@ -1270,141 +1270,141 @@ var tabelas_atributos_invertidos = {
 
 var tabelas_aneis = {
   protecao_1: { 
-      nome: 'Proteção +1', valor: '2000 PO', 
+      nome: 'Proteção +1', preco: '2000 PO', 
       propriedades: { ca: { deflexao: 1 } },  },
-  queda_suave: { nome: 'Queda suave', valor: '2200 PO', },
-  sustento: { nome: 'Sustento', valor: '2500 PO', },
-  escalada: { nome: 'Escalada', valor: '2500 PO',
+  queda_suave: { nome: 'Queda suave', preco: '2200 PO', },
+  sustento: { nome: 'Sustento', preco: '2500 PO', },
+  escalada: { nome: 'Escalada', preco: '2500 PO',
       propriedades: { pericias: { escalar: { competencia: 5 } } }, },
-  salto: { nome: 'Salto', valor: '2500 PO',
+  salto: { nome: 'Salto', preco: '2500 PO',
       propriedades: { pericias: { saltar: { competencia: 5 } } }, },
-  natacao: { nome: 'Natação', valor: '2500 PO',
+  natacao: { nome: 'Natação', preco: '2500 PO',
       propriedades: { pericias: { natacao: { competencia: 5 } } }, },
-  contramagica: { nome: 'Contramágica', valor: '4000 PO', },
-  escudo_mental: { nome: 'Escudo mental', valor: '8000 PO', },
-  protecao_2: { nome: 'Proteção +2', valor: '8000 PO',
+  contramagica: { nome: 'Contramágica', preco: '4000 PO', },
+  escudo_mental: { nome: 'Escudo mental', preco: '8000 PO', },
+  protecao_2: { nome: 'Proteção +2', preco: '8000 PO',
       propriedades: { ca: { deflexao: 2 } }, },
-  escudo_energia: { nome: 'Escudo de energia', valor: '8500 PO', },
-  ariete: { nome: 'Aríete', valor: '8600 PO', },
-  escalada_aprimorada: { nome: 'Escalada aprimorada', valor: '10000 PO',
+  escudo_energia: { nome: 'Escudo de energia', preco: '8500 PO', },
+  ariete: { nome: 'Aríete', preco: '8600 PO', },
+  escalada_aprimorada: { nome: 'Escalada aprimorada', preco: '10000 PO',
       propriedades: { pericias: { escalar: { competencia: 10 } } }, },
-  salto_aprimorado: { nome: 'Salto aprimorado', valor: '10000 PO', 
+  salto_aprimorado: { nome: 'Salto aprimorado', preco: '10000 PO', 
       propriedades: { pericias: { saltar: { competencia: 10 } } }, },
-  natacao_aprimorada: { nome: 'Natação aprimorada', valor: '10000 PO',
+  natacao_aprimorada: { nome: 'Natação aprimorada', preco: '10000 PO',
       propriedades: { pericias: { natacao: { competencia: 10 } } }, },
-  cativar_animais: { nome: 'Cativar animais', valor: '10800 PO', },
-  resistencia_elementos_menor: { nome: 'Resistência a elementos (menor)', valor: '12000 PO', },
-  poder_camaleao: { nome: 'Poder do camaleão', valor: '12700 PO', },
-  caminhar_agua: { nome: 'Caminhar na água', valor: '15000 PO', },
-  protecao_3: { nome: 'Proteção +3', valor: '18000 PO',
+  cativar_animais: { nome: 'Cativar animais', preco: '10800 PO', },
+  resistencia_elementos_menor: { nome: 'Resistência a elementos (menor)', preco: '12000 PO', },
+  poder_camaleao: { nome: 'Poder do camaleão', preco: '12700 PO', },
+  caminhar_agua: { nome: 'Caminhar na água', preco: '15000 PO', },
+  protecao_3: { nome: 'Proteção +3', preco: '18000 PO',
       propriedades: { ca: { deflexao: 3 } },  },
-  armazenar_magia_menor: { nome: 'Armazenar magias (menor)', valor: '18000 PO', },
-  invisibilidade: { nome: 'Invisibilidade', valor: '20000 PO', },
-  arcano_i: { nome: 'Arcano (I)', valor: '20000 PO', },
-  evasao: { nome: 'Evasão', valor: '25000 PO', },
-  visao_continua: { nome: 'Visão contínua', valor: '25000 PO', },
-  movimento_subito: { nome: 'Movimento súbito', valor: '27000 PO', },
-  resistencia_elementos_maior: { nome: 'Resistência a elementos (maior)', valor: '28000 PO', },
-  protecao_4: { nome: 'Proteção +4', valor: '32000 PO',
+  armazenar_magia_menor: { nome: 'Armazenar magias (menor)', preco: '18000 PO', },
+  invisibilidade: { nome: 'Invisibilidade', preco: '20000 PO', },
+  arcano_i: { nome: 'Arcano (I)', preco: '20000 PO', },
+  evasao: { nome: 'Evasão', preco: '25000 PO', },
+  visao_continua: { nome: 'Visão contínua', preco: '25000 PO', },
+  movimento_subito: { nome: 'Movimento súbito', preco: '27000 PO', },
+  resistencia_elementos_maior: { nome: 'Resistência a elementos (maior)', preco: '28000 PO', },
+  protecao_4: { nome: 'Proteção +4', preco: '32000 PO',
       propriedades: { ca: { deflexao: 4 } },  },
-  arcano_ii: { nome: 'Arcano (II)', valor: '40000 PO', },
-  movimentacao_livre: { nome: 'Movimentação livre', valor: '40000 PO', },
-  resistencia_elementos_superior: { nome: 'Resistência a elementos (superior)', valor: '44000 PO', },
-  escudo_aliado_par: { nome: 'Escudo alidado (par)', valor: '50000 PO', },
-  protecao_5: { nome: 'Proteção +5', valor: '50000 PO',
+  arcano_ii: { nome: 'Arcano (II)', preco: '40000 PO', },
+  movimentacao_livre: { nome: 'Movimentação livre', preco: '40000 PO', },
+  resistencia_elementos_superior: { nome: 'Resistência a elementos (superior)', preco: '44000 PO', },
+  escudo_aliado_par: { nome: 'Escudo alidado (par)', preco: '50000 PO', },
+  protecao_5: { nome: 'Proteção +5', preco: '50000 PO',
       propriedades: { ca: { deflexao: 5 } },  },
-  estrelas_cadentes: { nome: 'Estrelas cadentes', valor: '50000 PO', },
-  armazenar_magias: { nome: 'Armazenar magias', valor: '50000 PO', },
-  arcano_iii: { nome: 'Arcano (III)', valor: '70000 PO', },
-  telecinesia: { nome: 'Telecinésia', valor: '75000 PO', },
-  regeneracao: { nome: 'Regeneração', valor: '90000 PO', },
-  tres_desejos: { nome: 'Três desejos', valor: '97950 PO', },
-  refletir_magias: { nome: 'Refletir magias', valor: '98280 PO', },
-  arcano_iv: { nome: 'Arcano (IV)', valor: '100000 PO', },
-  convocar_djinn: { nome: 'Convocar djinn', valor: '125000 PO', },
-  comandar_elemental_ar: { nome: 'Comandar elemental (ar)', valor: '200000 PO', },
-  comandar_elemental_terra: { nome: 'Comandar elemental (terra)', valor: '200000 PO', },
-  comandar_elemental_fogo: { nome: 'Comandar elemental (fogo)', valor: '200000 PO', },
-  comandar_elemental_agua: { nome: 'Comandar elemental (água)', valor: '200000 PO', },
-  armazenar_magias_maior: { nome: 'Armazenar magias (maior)', valor: '200000 PO', },
+  estrelas_cadentes: { nome: 'Estrelas cadentes', preco: '50000 PO', },
+  armazenar_magias: { nome: 'Armazenar magias', preco: '50000 PO', },
+  arcano_iii: { nome: 'Arcano (III)', preco: '70000 PO', },
+  telecinesia: { nome: 'Telecinésia', preco: '75000 PO', },
+  regeneracao: { nome: 'Regeneração', preco: '90000 PO', },
+  tres_desejos: { nome: 'Três desejos', preco: '97950 PO', },
+  refletir_magias: { nome: 'Refletir magias', preco: '98280 PO', },
+  arcano_iv: { nome: 'Arcano (IV)', preco: '100000 PO', },
+  convocar_djinn: { nome: 'Convocar djinn', preco: '125000 PO', },
+  comandar_elemental_ar: { nome: 'Comandar elemental (ar)', preco: '200000 PO', },
+  comandar_elemental_terra: { nome: 'Comandar elemental (terra)', preco: '200000 PO', },
+  comandar_elemental_fogo: { nome: 'Comandar elemental (fogo)', preco: '200000 PO', },
+  comandar_elemental_agua: { nome: 'Comandar elemental (água)', preco: '200000 PO', },
+  armazenar_magias_maior: { nome: 'Armazenar magias (maior)', preco: '200000 PO', },
 };
 
 var tabelas_amuletos = {
   armadura_natural_1: { 
-    nome: 'Armadura Natural +1', valor: '2000 PO', 
+    nome: 'Armadura Natural +1', preco: '2000 PO', 
     propriedades: { ca: { armadura_natural: 1 } },  },
   armadura_natural_2: { 
-    nome: 'Armadura Natural +2', valor: '8000 PO', 
+    nome: 'Armadura Natural +2', preco: '8000 PO', 
     propriedades: { ca: { armadura_natural: 2 } },  },
   armadura_natural_3: { 
-    nome: 'Armadura Natural +3', valor: '18000 PO', 
+    nome: 'Armadura Natural +3', preco: '18000 PO', 
     propriedades: { ca: { armadura_natural: 3 } },  },
   armadura_natural_4: { 
-    nome: 'Armadura Natural +4', valor: '32000 PO', 
+    nome: 'Armadura Natural +4', preco: '32000 PO', 
     propriedades: { ca: { armadura_natural: 4 } },  },
   armadura_natural_5: { 
-    nome: 'Armadura Natural +5', valor: '50000 PO', 
+    nome: 'Armadura Natural +5', preco: '50000 PO', 
     propriedades: { ca: { armadura_natural: 5 } },  },
   punhos_poderosos_1: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +1', valor: '6000 PO', 
+    nome: 'Punhos Poderosos +1', preco: '6000 PO', 
     propriedades: {} },
   punhos_poderosos_2: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +2', valor: '24000 PO', 
+    nome: 'Punhos Poderosos +2', preco: '24000 PO', 
     propriedades: {} },
   punhos_poderosos_3: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +3', valor: '54000 PO', 
+    nome: 'Punhos Poderosos +3', preco: '54000 PO', 
     propriedades: {} },
   punhos_poderosos_4: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +4', valor: '96000 PO', 
+    nome: 'Punhos Poderosos +4', preco: '96000 PO', 
     propriedades: {} },
   punhos_poderosos_5: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +5', valor: '150000 PO', 
+    nome: 'Punhos Poderosos +5', preco: '150000 PO', 
     propriedades: {} },
   saude_2: {
-    nome: 'Saúde +2', valor: '4000 PO', 
+    nome: 'Saúde +2', preco: '4000 PO', 
     propriedades: { atributos: { constituicao: 2 } } },
   saude_4: {
-    nome: 'Saúde +4', valor: '16000 PO', 
+    nome: 'Saúde +4', preco: '16000 PO', 
     propriedades: { atributos: { constituicao: 4 } } },
   saude_6: {
-    nome: 'Saúde +6', valor: '36000 PO', 
+    nome: 'Saúde +6', preco: '36000 PO', 
     propriedades: { atributos: { constituicao: 6 } } },
   planos: {
     // permite usar magia viagem planar...
-    nome: 'Planos', valor: '120000 PO', 
+    nome: 'Planos', preco: '120000 PO', 
     propriedades: {} },
   protecao_deteccao: {
     // como se estivesse sob efeito de dificultar detecção...
-    nome: 'Proteção contra Localização e Detecção', valor: '35000 PO', 
+    nome: 'Proteção contra Localização e Detecção', preco: '35000 PO', 
     propriedades: {} },
   quaal_ancora: {
     // Prender embarcações.
-    nome: 'Quaal Âncora', valor: '50 PO', 
+    nome: 'Quaal Âncora', preco: '50 PO', 
     propriedades: {} },
   quaal_passaro: {
     // Pombo correio para entregar mensagem.
-    nome: 'Quaal Pássaro', valor: '300 PO', 
+    nome: 'Quaal Pássaro', preco: '300 PO', 
     propriedades: {} },
   quaal_leque: {
     // Gerar vento.
-    nome: 'Quaal Leque', valor: '200 PO', 
+    nome: 'Quaal Leque', preco: '200 PO', 
     propriedades: {} },
   quaal_barco_cisne: {
     // Transforma-se em um barco.
-    nome: 'Quaal Barco de Cisnes', valor: '450 PO', 
+    nome: 'Quaal Barco de Cisnes', preco: '450 PO', 
     propriedades: {} },
   quaal_arvore: {
     // Cria um grande carvalho.
-    nome: 'Quaal Árvore', valor: '400 PO', 
+    nome: 'Quaal Árvore', preco: '400 PO', 
     propriedades: {} },
   quaal_chicote: {
     // Cria um chicote que ataca sozinho como arma dancarina.
-    nome: 'Quaal Chicote', valor: '500 PO', 
+    nome: 'Quaal Chicote', preco: '500 PO', 
     propriedades: {} },
 };
 
