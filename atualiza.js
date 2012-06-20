@@ -73,23 +73,9 @@ function _AtualizaNomeRacaAlinhamentoXp() {
 
 // Atualiza os dados de vida do personagem de acordo com as classes.
 function _AtualizaDadosVida() {
-  var primeiro = true;  // primeira classe nao eh sinalizada.
-  var string_dados_vida = '';
-  for (var i = 0; i < personagem.classes.length; ++i) {
-      if (primeiro) {
-        primeiro = false;
-      } else {
-        string_dados_vida += ' +';
-      }
-      string_dados_vida += 
-        personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
-  }
-  if (personagem.atributos.constituicao.modificador > 0) {
-    string_dados_vida += 
-      ' +' + (personagem.atributos.constituicao.modificador * personagem.dados_vida.nivel_personagem);
-  }
   var span_dados = Dom('dados-vida-classes');
-  span_dados.textContent = personagem.dados_vida.nivel_personagem + ' = ' + string_dados_vida;
+  span_dados.textContent = 
+      personagem.dados_vida.nivel_personagem + ' = ' + PersonagemStringDadosVida();
 }
 
 // Atualiza as informacoes referentes a pontos de vida do personagem.
