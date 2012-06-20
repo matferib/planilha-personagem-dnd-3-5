@@ -94,7 +94,7 @@ var personagem = {
     // Quantos ele ja gastou.
     pontos_gastos: 0,
     // Cada entrada:
-    // chave_pericia: { pontos, graduacoes, bonus, de_classe }.
+    // chave_pericia: { pontos, graduacoes, bonus, de_classe, total }.
     // pontos sao os pontos gastos, graduacoes sao os pontos modificados
     // de acordo com a pericia ser de classe ou nao.
     lista: {},
