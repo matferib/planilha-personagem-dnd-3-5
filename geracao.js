@@ -180,18 +180,22 @@ function GeraResumoArma(arma_estilo) {
 // @return a string com o resumo do personagem.
 function GeraResumo() {
   // TODO(terminar resumo)
-  var resumo = personagem.nome + '; ' + personagem.raca + '; ' + personagem.alinhamento + '; ';
+  var resumo =
+    personagem.nome + '; ' + personagem.raca + '; ' + 
+    'tend: ' + personagem.alinhamento.toUpperCase() + ', ' +
+    'tam: ' + personagem.tamanho.categoria +
+    '; ';
+  // Dados de vida e pontos de vida.
+  resumo += 
+    'DV: ' + PersonagemStringDadosVida() + 
+    ', pv: ' + personagem.pontos_vida.total + '; ';
+
   for (var i = 0; i < personagem.classes.length; ++i) {
     var info_classe = personagem.classes[i];
     resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
   }
-  resumo += '; ';
+  resumo = resumo.slice(0, -2) + '; ';
 
-  for (var atributo in tabelas_atributos) {
-    resumo += tabelas_atributos[atributo] + ': ' + personagem.atributos[atributo].valor + ', ';
-  }
-  resumo += '; ';
-  
   // combate:
   resumo += 'Iniciativa: ' + personagem.iniciativa.Total() + '; ';
   resumo += 'Estilos: ';
@@ -205,6 +209,44 @@ function GeraResumo() {
     resumo += '), ';
   }
   resumo += '; ';
+
+  // Pericias: apenas as rankeadas.
+  resumo += 'Perícias (total ' + personagem.pericias.total_pontos + '): ';
+  if (personagem.pericias.pontos_gastos < personagem.pericias.total_pontos) {
+    resumo += 'INCOMPLETO! ';
+  }
+  for (var chave_pericia in personagem.pericias.lista) {
+    var pericia_personagem = personagem.pericias.lista[chave_pericia];
+    if (pericia_personagem.pontos > 0) {
+      resumo += 
+          tabelas_pericias[chave_pericia].nome + ' ' + 
+          StringSinalizada(pericia_personagem.graduacoes, true) +
+          ', ';
+    }
+  }
+  resumo = resumo.slice(0, -2) + '; ';
+  // Talentos.
+  resumo += 'Talentos: '
+  for (var categoria in personagem.talentos) {
+    var talentos_categoria = personagem.talentos[categoria];
+    for (var i = 0; i < talentos_categoria.length; ++i) {
+      var talento = talentos_categoria[i];
+      resumo += tabelas_talentos[talento.chave].nome;
+      if (talento.complemento != null) {
+        resumo += ' (' + talento.complemento + ')';
+      }
+      resumo += ', ';
+    }
+  }
+  resumo = resumo.slice(0, -2) + '; ';
+
+
+  // Atributos.
+  for (var atributo in tabelas_atributos) {
+    resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + personagem.atributos[atributo].valor + ', ';
+  }
+  resumo = resumo.slice(0, -2) + '; ';
+  
 
 
   return resumo;
