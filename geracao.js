@@ -220,7 +220,7 @@ function GeraResumo() {
     if (pericia_personagem.pontos > 0) {
       resumo += 
           tabelas_pericias[chave_pericia].nome + ' ' + 
-          StringSinalizada(pericia_personagem.graduacoes, true) +
+          StringSinalizada(pericia_personagem.total, true) +
           ', ';
     }
   }
@@ -239,6 +239,9 @@ function GeraResumo() {
     }
   }
   resumo = resumo.slice(0, -2) + '; ';
+
+  // Salvacoes.
+
 
 
   // Atributos.
