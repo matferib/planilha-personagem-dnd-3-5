@@ -182,8 +182,8 @@ function GeraResumo() {
   // TODO(terminar resumo)
   var resumo =
     personagem.nome + '; ' + personagem.raca + '; ' + 
-    'tend: ' + personagem.alinhamento.toUpperCase() + ', ' +
-    'tam: ' + personagem.tamanho.categoria +
+    'Tend: ' + personagem.alinhamento.toUpperCase() + ', ' +
+    'Tam: ' + personagem.tamanho.categoria +
     '; ';
   // Dados de vida e pontos de vida.
   resumo += 
@@ -241,8 +241,14 @@ function GeraResumo() {
   resumo = resumo.slice(0, -2) + '; ';
 
   // Salvacoes.
-
-
+  resumo += 'Testes de Resistência: '
+  for (var tipo_salvacao in personagem.salvacoes) {
+    var salvacao = personagem.salvacoes[tipo_salvacao];
+    var nome_salvacao = tipo_salvacao in tabelas_nome_salvacao ?
+        tipo_salvacao.substr(0, 3) : tipo_salvacao;
+    resumo += nome_salvacao + ': ' + StringSinalizada(salvacao.total, true) + ', ';
+  }
+  resumo = resumo.slice(0, -2) + '; ';
 
   // Atributos.
   for (var atributo in tabelas_atributos) {

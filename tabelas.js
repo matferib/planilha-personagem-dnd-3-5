@@ -295,6 +295,12 @@ function salvacao_fraca(nivel) {
   return (nivel > 0) ? Math.floor(nivel / 3) : 0;
 }
 
+var tabelas_nome_salvacao = {
+  fortitude: 'Fortitude',
+  reflexos: 'Reflexos',
+  vontade: 'Vontade',
+};
+
 // TODO passar para tabela de classes.
 // Tabelas de salvacao.
 var tabelas_salvacao = {
