@@ -7,7 +7,8 @@ var tabelas_raca = {
       movimento: { terrestre: 4, aereo: 18 },
       atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
       proficiencia_armas: [ 'azagaia' ], // Javelin em ingles.
-      bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 }, //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
+      //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
+      bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
       arma_natural: { garra: { nome: 'Garra', dano: '1d4' } }, 
     },
   anao: {
@@ -18,6 +19,13 @@ var tabelas_raca = {
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
       outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 }, 
                           magias: { base: ['fortitude', 'reflexo', 'vontade' ], bonus: 2, } },
+  },
+  goblin: {
+      nome: 'Goblin',
+      origem: { livro: 'Monster Manual', pagina: '133' },
+      movimento: { terrestre: 6 },
+      atributos: { forca: -2, destreza: 2, carisma: -2 }, tamanho: 'pequeno',
+      bonus_pericias: { furtividade: 4, cavalgar: 4 },
   },
   halfling: {
       nome: 'Halfling',
