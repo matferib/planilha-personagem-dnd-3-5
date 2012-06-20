@@ -95,6 +95,8 @@ var personagem = {
     pontos_gastos: 0,
     // Cada entrada:
     // chave_pericia: { pontos, graduacoes, bonus, de_classe }.
+    // pontos sao os pontos gastos, graduacoes sao os pontos modificados
+    // de acordo com a pericia ser de classe ou nao.
     lista: {},
   },
   // Cada entrada: { nome, 
@@ -311,4 +313,24 @@ function PersonagemAdicionarMoedas(moedas) {
     personagem.moedas[tipo_moeda] += moedas[tipo_moeda];
   }
   return true;
+}
+
+// @return a string de dados de vida do personagem.
+function PersonagemStringDadosVida() {
+  var primeiro = true;  // primeira classe nao eh sinalizada.
+  var string_dados_vida = '';
+  for (var i = 0; i < personagem.classes.length; ++i) {
+      if (primeiro) {
+        primeiro = false;
+      } else {
+        string_dados_vida += ' +';
+      }
+      string_dados_vida += 
+        personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
+  }
+  if (personagem.atributos.constituicao.modificador > 0) {
+    string_dados_vida += 
+      ' +' + (personagem.atributos.constituicao.modificador * personagem.dados_vida.nivel_personagem);
+  }
+  return string_dados_vida;
 }
