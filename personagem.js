@@ -109,6 +109,10 @@ var personagem = {
       normal: 10, surpreso: 10, toque: 10,
       bonus: new Bonus(),
   },
+  // As habilidades do personagem. Cada entrada:
+  // chave_habilidade: { complemento }
+  habilidades: {
+  },
   salvacoes : {
     fortitude: { base: 0, racial: 0, total: 0 },
     reflexo: { base: 0, racial: 0, total: 0 },

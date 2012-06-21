@@ -12,6 +12,7 @@ function DependenciasGerais() {
   _DependenciasIniciativa();
   _DependenciasBba();
   _DependenciasProficienciaArmas();
+  _DependenciasHabilidades();
 
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
@@ -266,6 +267,28 @@ function _DependenciasProficienciaArmas() {
           }
         }
         personagem.proficiencia_armas[chave_arma] = true;
+      }
+    }
+  }
+}
+
+function _DependenciasHabilidades() {
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    var entrada_classe = personagem.classes[i];
+    if (tabelas_classes[entrada_classe.classe].habilidades == null) {
+      continue;
+    }
+    var habilidades_classe = tabelas_classes[entrada_classe.classe].habilidades;
+    for (var nivel = 1; nivel < entrada_classe.nivel; ++nivel) {
+      var habilidades_nivel = habilidades_classe[nivel];
+      if (habilidades_nivel == null) {
+        continue;
+      }
+      for (var j = 0; j < habilidades_nivel.length; ++j) {
+        var habilidade = habilidades_nivel[j];
+        if (!(habilidade in personagem.habilidades)) {
+          personagem.habilidades[habilidade] = true;
+        }
       }
     }
   }
