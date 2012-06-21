@@ -77,7 +77,13 @@ var tabelas_classes = {
   druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
   guerreiro: { nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
   feiticeiro: { nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
-  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio, },
+  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio, 
+    habilidades: {
+      1: [ 'ataque_furtivo', 'encontrar_armadilha' ],
+      2: [ 'evasao' ],
+      3: [ 'ataque_furtivo', 'sentir_armadilha' ],
+    },
+  },
   mago: { nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
   monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
   paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
@@ -297,7 +303,7 @@ function salvacao_fraca(nivel) {
 
 var tabelas_nome_salvacao = {
   fortitude: 'Fortitude',
-  reflexos: 'Reflexos',
+  reflexo: 'Reflexo',
   vontade: 'Vontade',
 };
 

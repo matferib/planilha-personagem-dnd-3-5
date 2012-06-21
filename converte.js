@@ -42,6 +42,8 @@ function ConverteEntradasParaPersonagem() {
   // Estilos tem que vir apos a atualizacao das armas do personagem, talentos e lista de armas.
   _ConverteEstilos();
 
+  _ConverteHabilidades();
+
   // Feiticos.
   _ConverteFeiticos();
 
@@ -66,6 +68,7 @@ function LimpaGeral() {
     }
   }
   personagem.estilos_luta.length = 0;
+  personagem.habilidades = {};
 }
 
 function _ConverteDadosVida() {
@@ -196,6 +199,9 @@ function _ConverteEstilos() {
   for (var i = 0; i < entradas.estilos_luta.length; ++i) {
     personagem.estilos_luta.push(_ConverteEstilo(entradas.estilos_luta[i]));
   }
+}
+
+function _ConverteHabilidades() {
 }
 
 // Converte um estilo da entrada para o personagem.
