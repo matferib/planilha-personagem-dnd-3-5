@@ -241,12 +241,19 @@ function GeraResumo() {
   resumo = resumo.slice(0, -2) + '; ';
 
   // Salvacoes.
-  resumo += 'Testes de Resistência: '
+  resumo += 'Testes de Resistência: ';
   for (var tipo_salvacao in personagem.salvacoes) {
     var salvacao = personagem.salvacoes[tipo_salvacao];
     var nome_salvacao = tipo_salvacao in tabelas_nome_salvacao ?
         tipo_salvacao.substr(0, 3) : tipo_salvacao;
     resumo += nome_salvacao + ': ' + StringSinalizada(salvacao.total, true) + ', ';
+  }
+  resumo = resumo.slice(0, -2) + '; ';
+
+  // Habilidades especiais.
+  resumo += 'Habilidades especiais: ';
+  for (var chave in personagem.habilidades) {
+    resumo += tabelas_habilidades[chave].nome + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
 
