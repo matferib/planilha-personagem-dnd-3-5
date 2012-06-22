@@ -626,6 +626,7 @@ function _AtualizaArmaArmadura(chave, obra_prima, bonus, div) {
         filho.readOnly = true;
       } else {
         filho.bonus = bonus;
+        filho.readOnly = false;
       }
     }
   }
