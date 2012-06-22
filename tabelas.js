@@ -925,10 +925,6 @@ Duro de Matar Tolerância Permanece consciente entre -1 e -9 PV
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
-Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
-Ataque com Escudo Aprimorado¹
-Usar Escudo Conserva o bônus do escudo na CA quando ataca com ele
-Usar Escudo de Corpo Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
 Vontade de Ferro - +2 de bônus nos testes de resistência de Vontade
 Talentos de Criação de Item Pré-requisitos Benefícios
 Criar Armaduras e Armas Mágicas 5° nível de conjurador Criar armas, armaduras e escudos mágicos
@@ -1021,6 +1017,17 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Usar arma exótica', complemento: 'arma_exotica',
       requisitos: { bba: 1 },
       guerreiro: true },
+
+  // TODO implementar efeitos de nao ter o feat.
+  //Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
+  usar_escudo: {
+      nome: 'Usar Escudo', },
+  // Ataque com Escudo Aprimorado¹ Usar Escudo Conserva o bônus do escudo na CA quando ataca com ele
+  usar_escudo_aprimorado: {
+      nome: 'Usar Escudo Aprimorado', },
+  // Usar Escudo de Corpo Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
+  usar_escudo_corpo: {
+      nome: 'Usar Escudo de Corpo', },
 
   // Reduz penalidade ao usar duas maos em 2.
   combater_duas_armas: { 
