@@ -303,15 +303,15 @@ function _AchaArmaArmadura(dom) {
 // @param dom contendo a arma ou armadura.
 // @oaram tipo que esta sendo vendido.
 // @param tabela que contem o item sendo vendido.
-// TODO obra prima
 function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
-  var entrada_tabela = tabela[lido.chave];
-  if (entrada_tabela == null || entrada_tabela.preco == null) {
-    alert('Item inválido ou sem preço');
+  var preco = PrecoArmaArmadura(
+      tipo, tabela, lido.chave, lido.obra_prima, lido.bonus, false);
+  if (preco == null) {
+    alert("Arma ou armadura magica invalida");
     return;
   }
-  PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco));
+  PersonagemAdicionarMoedas(preco);
   AtualizaGeralSemConverterEntradas();
 }
 
@@ -321,12 +321,13 @@ function ClickVenderArmaArmadura(dom, tipo, tabela) {
 // @param tabela do que esta sendo comprado.
 function ClickComprarArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
-  var entrada_tabela = tabela[lido.chave];
-  if (entrada_tabela == null || entrada_tabela.preco == null) {
-    alert('Item inválido ou sem preço');
+  var preco = PrecoArmaArmadura(
+      tipo, tabela, lido.chave, lido.obra_prima, lido.bonus, true);
+  if (preco == null) {
+    alert("Arma ou armadura magica invalida");
     return;
   }
-  if (!PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco, true))) {
+  if (!PersonagemAdicionarMoedas(preco)) {
     alert('Não há fundos para compra do item');
     return;
   }
@@ -343,7 +344,8 @@ function ClickComprarItem(dom, tabela) {
     alert('Item inválido ou sem preço');
     return;
   }
-  if (!PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco, true))) {
+  var preco = LePreco(entrada_tabela.preco, true);
+  if (!PersonagemAdicionarMoedas(preco)) {
     alert('Não há fundos para compra do item');
     return;
   }
