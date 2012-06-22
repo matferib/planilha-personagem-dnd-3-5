@@ -147,3 +147,45 @@ function LePreco(preco, invertido) {
   }
   return moedas;
 }
+
+// @return o preco de uma arma ou armadura ou null em caso de erro.
+// @param obra_prima se a arma for obra-prima (mas nao magica).
+// @param bonus se a arma for magica (e o bonus). Sera computado o
+//        valor da obra prima.
+// @param invertido inverter os valores para negativo.
+function PrecoArmaArmadura(tipo, tabela, chave, obra_prima, bonus, invertido) {
+  var entrada_tabela = tabela[chave];
+  if (entrada_tabela == null || entrada_tabela.preco == null) {
+    return null;
+  }
+  // Nao pode usar invertido aqui, pq la embaixo inverte tudo.
+  var preco = LePreco(entrada_tabela.preco);
+  var preco_adicional = { platina: 0, ouro: 0, prata: 0, cobre: 0 };
+  if (obra_prima) {
+    // Como a leitura eh invertida, deve-se subtrair.
+    // Armas op custam 300 a mais, armaduras 150.
+    preco_adicional.ouro += tipo == 'arma' ? 300 : 150; 
+  } else if (bonus != null) {
+    preco.ouro += tipo == 'arma' ? 300 : 150; 
+    switch (bonus) {
+      case 1: preco.ouro += tipo == 'arma' ? 2000 : 1000; break; 
+      case 2: preco.ouro += tipo == 'arma' ? 8000 : 4000; break; 
+      case 3: preco.ouro += tipo == 'arma' ? 18000 : 9000; break; 
+      case 4: preco.ouro += tipo == 'arma' ? 32000 : 16000; break; 
+      case 5: preco.ouro += tipo == 'arma' ? 50000 : 25000; break; 
+      default:
+          return null;
+    }
+  }
+  // Soma e se necessario, inverte.
+  for (var tipo_moeda in preco) {
+    preco[tipo_moeda] += preco_adicional[tipo_moeda];
+    if (invertido) {
+      preco[tipo_moeda] = -preco[tipo_moeda];
+    }
+  }
+  return preco;
+}
+
+
+
