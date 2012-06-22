@@ -303,6 +303,7 @@ function _AchaArmaArmadura(dom) {
 // @param dom contendo a arma ou armadura.
 // @oaram tipo que esta sendo vendido.
 // @param tabela que contem o item sendo vendido.
+// TODO unit test.
 function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
   var preco = PrecoArmaArmadura(
