@@ -545,7 +545,7 @@ function _DependenciasBonusPorCategoria(
         personagem.bba_distancia + arma_personagem.bonus_ataque;
     bonus_por_categoria.dano += 
         personagem.atributos.forca.modificador + arma_personagem.bonus_dano;
-  } else if (categoria.indexOf('distancia')) {
+  } else if (categoria.indexOf('distancia') != -1) {
     bonus_por_categoria.ataque += 
         personagem.bba_distancia + arma_personagem.bonus_ataque;
     bonus_por_categoria.dano += arma_personagem.bonus_dano;

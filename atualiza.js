@@ -313,19 +313,7 @@ function _AtualizaEstilo(div_estilo, estilo) {
 // @param estilo de luta cuja arma esta sendo atualizada.
 // @param span_arma o dom da arma, que eh um span.
 function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
-  span_arma.textContent = '';
-  var arma_estilo = primaria ? estilo.arma_primaria : estilo.arma_secundaria;
-  for (var categoria in arma_estilo.bonus_por_categoria) {
-    var bonus = arma_estilo.bonus_por_categoria[categoria];
-    span_arma.textContent += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
-    var arma_tabela = arma.arma_tabela;
-    if (estilo.nome == 'arma_dupla' && !primaria) {
-      span_arma.textContent += arma_tabela.dano_secundario[personagem.tamanho.categoria];
-    } else {
-      span_arma.textContent += arma_tabela.dano[personagem.tamanho.categoria];
-    }
-    span_arma.textContent += StringSinalizada(bonus.dano, false) + '; ';
-  }
+  span_arma.textContent = GeraResumoArmaEstilo(arma, primaria, estilo);
 }
 
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
