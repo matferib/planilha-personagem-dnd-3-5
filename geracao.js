@@ -166,16 +166,37 @@ function GeraPersonagem(modo, submodo) {
   AtualizaGeralSemConverterEntradas();
 }
 
-// TODO ta sem o dado de dano.
-function GeraResumoArma(arma_estilo) {
-  var resumo = arma_estilo.nome + ' ';
+// Gera o resumo para uma arma do estilo.
+function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
+  var resumo = '';
+  var arma_estilo = primaria ? estilo.arma_primaria : estilo.arma_secundaria;
   for (var categoria in arma_estilo.bonus_por_categoria) {
-    var bonus_categoria = arma_estilo.bonus_por_categoria[categoria];
-    resumo += categoria + ': ';
-    resumo += StringSinalizada(bonus_categoria.ataque, true) + ', ' + 
-      StringSinalizada(bonus_categoria.dano) + '; ';
+    var bonus = arma_estilo.bonus_por_categoria[categoria];
+    resumo += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
+    var arma_tabela = arma_personagem.arma_tabela;
+    if (estilo.nome == 'arma_dupla' && !primaria) {
+      resumo += arma_tabela.dano_secundario[personagem.tamanho.categoria];
+    } else {
+      resumo += arma_tabela.dano[personagem.tamanho.categoria];
+    }
+    resumo += StringSinalizada(bonus.dano, false) + '; ';
   }
   return resumo.slice(0, -2);
+}
+
+// String de resumo para um estilo de luta.
+function _GeraResumoEstilo(estilo) {
+  var resumo = estilo.nome + ': (';
+  resumo += estilo.arma_primaria.nome + ': [' + 
+      GeraResumoArmaEstilo(
+        ArmaPersonagem(estilo.arma_primaria.nome), true, estilo) + ']';
+  if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
+    resumo += ', ' + estilo.arma_secundaria.nome + ': [' + 
+        GeraResumoArmaEstilo(
+            ArmaPersonagem(estilo.arma_secundaria.nome), false, estilo) + ']';
+  }
+  resumo += ')';
+  return resumo;
 }
 
 // @return a string com o resumo do personagem.
@@ -201,15 +222,9 @@ function GeraResumo() {
   resumo += 'Iniciativa: ' + personagem.iniciativa.Total() + '; ';
   resumo += 'Estilos: ';
   for (var i = 0; i < personagem.estilos_luta.length; ++i) {
-    var estilo = personagem.estilos_luta[i];
-    resumo += estilo.nome + ': (';
-    resumo += GeraResumoArma(estilo.arma_primaria);
-    if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
-      resumo += ', ' + GeraResumoArma(estilo.arma_secundaria);
-    }
-    resumo += '), ';
+    resumo += _GeraResumoEstilo(personagem.estilos_luta[i]) + ', ';
   }
-  resumo += '; ';
+  resumo = resumo.slice(0, -2) + '; ';
 
   // Pericias: apenas as rankeadas.
   resumo += 'Perícias (total ' + personagem.pericias.total_pontos + '): ';
