@@ -166,15 +166,16 @@ function GeraPersonagem(modo, submodo) {
   AtualizaGeralSemConverterEntradas();
 }
 
-// TODO ataque ta sem sinal quando zero e dano ta sem o dado de dano.
+// TODO ta sem o dado de dano.
 function GeraResumoArma(arma_estilo) {
   var resumo = arma_estilo.nome + ' ';
   for (var categoria in arma_estilo.bonus_por_categoria) {
     var bonus_categoria = arma_estilo.bonus_por_categoria[categoria];
     resumo += categoria + ': ';
-    resumo += bonus_categoria.ataque + ' ' + bonus_categoria.dano;
+    resumo += StringSinalizada(bonus_categoria.ataque, true) + ', ' + 
+      StringSinalizada(bonus_categoria.dano) + '; ';
   }
-  return resumo;
+  return resumo.slice(0, -2);
 }
 
 // @return a string com o resumo do personagem.
