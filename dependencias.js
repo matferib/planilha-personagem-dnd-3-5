@@ -508,10 +508,18 @@ function _DependenciasEstilo(estilo_personagem) {
 // @param primaria se true, indica se a arma eh primaria.
 function _DependenciasBonusPorCategoria(
     categoria, arma_personagem, estilo, primaria, secundaria_leve) {
+  // TODO arrumar a arma leve na tabela. Aqui eh um hack.
+  var arma_leve = false;
+  for (var categoria in arma_personagem.arma_tabela.categorias) {
+    if (categoria.indexOf('leve') != -1) {
+      arma_leve = true;
+      break;
+    }
+  }
   var bonus_por_categoria = { ataque: 0, dano: 0 };
   var multiplicador_dano_forca = 0;
   if (estilo.nome == 'uma_arma') {
-    multiplicador_dano_forca = categoria.indexOf('leve') != -1 ? 1.0 : 1.5;
+    multiplicador_dano_forca = arma_leve ? 1.0 : 1.5;
   } else if (estilo.nome == 'arma_escudo') {
     multiplicador_dano_forca = 1.0;
   } else if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
@@ -531,8 +539,8 @@ function _DependenciasBonusPorCategoria(
 
   if (categoria.indexOf('cac') != -1) {
     // Quando tem acuidade, usa destreza.
-    if (arma_personagem.acuidade && personagem.bba_cac < personagem.bba_cac_acuidade) {
-      bonus_por_categoria.ataque +=  personagem.bba_cac_acuidade;
+    if (arma_leve && arma_personagem.acuidade && personagem.bba_cac < personagem.bba_cac_acuidade) {
+      bonus_por_categoria.ataque += personagem.bba_cac_acuidade;
     } else {
       bonus_por_categoria.ataque += personagem.bba_cac;
     }
