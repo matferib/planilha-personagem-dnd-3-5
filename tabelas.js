@@ -406,11 +406,11 @@ var tabelas_armaduras_invertida = {
 var tabelas_escudos = {
   nenhum: { nome: 'Nenhum', bonus: 0 },
   broquel: { nome: 'Broquel', bonus: 1 },
-  escudo_leve_de_madeira: { nome: 'Escudo Leve de Madeira', bonus: 1 },
-  escudo_leve_de_aco: { nome: 'Escudo Leve de Aço', bonus: 1 },
-  escudo_pesado_de_aco: { nome: 'Escudo Pesado de Madeira', bonus: 2 },
-  escudo_pesado_de_aco: { nome: 'Escudo Pesado de Aço', bonus: 2 },
-  escudo_de_corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2 },
+  leve_madeira: { nome: 'Escudo Leve de Madeira', bonus: 1 },
+  leve_aco: { nome: 'Escudo Leve de Aço', bonus: 1 },
+  pesado_aco: { nome: 'Escudo Pesado de Madeira', bonus: 2 },
+  pesado_aco: { nome: 'Escudo Pesado de Aço', bonus: 2 },
+  corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2 },
 };
 
 // Mapeia o nome para a chave. Necessario para computar proficiencias.
@@ -894,10 +894,6 @@ Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
 Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
 Liderança 6° nível de personagem Atrai parceiros e seguidores
 Lutar às Cegas¹ - Jogar novamente chance de falha por camuflagem
-Magia Natural Sab 13, Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
-Magia Penetrante - +2 de bônus nos testes de conjurador contra Resistência à Magia
-Magia Penetrante Maior Magia Penetrante +4 de bônus nos testes de conjurador contra Resistência à Magia
-Magia em Combate - +4 de bônus nos teste de Concentração para conjurar na defensiva
 Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
@@ -995,6 +991,21 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   investigador: {
       nome: 'Investigador',
       bonus_pericias: { obter_informacao: 2, procurar: 2 } },
+  // Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
+  magia_natural: {
+      nome: 'Magia Natural',
+      requisitos: { atributos: { sabedoria: 13 } } },
+  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
+  magia_penetrante: {
+      nome: 'Magia Penetrante',
+  },
+  // Magia Penetrante TODO +4 de bônus nos testes de conjurador contra Resistência à Magia
+  magia_penetrante_maior: {
+      nome: 'Magia Penetrante Maior',
+      requisitos: { talentos: [ 'magia_penetrante' ] } },
+  // Combat casting: +4 de bônus nos teste de Concentração para conjurar na defensiva
+  magia_combate: {
+      nome: 'Magia em Combate', },
   maos_levels: {
       nome: 'Mãos Leves',
       bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
