@@ -153,6 +153,15 @@ var tabelas_geracao = {
 	},
   clerigo: { 
 		atributos: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
+    por_nivel: {
+      6: { moedas: {  ouro: 3600 }, 
+           armadura: { nome: 'armadura_de_batalha', bonus: 1 }, 
+           escudo: { nome: 'pesado_aco', obra_prima: false },
+           armas: [ { chave: 'maca_estrela', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+           aneis: [],
+      },
+    },
 	},
   druida: { 
 		atributos: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
@@ -317,7 +326,7 @@ var tabelas_geracao = {
                     { chave: 'arco_curto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
-      5: { moedas: {  ouro: 4600 }, 
+      6: { moedas: {  ouro: 4600 }, 
            armadura: { nome: 'couro_batido', obra_prima: true }, 
            escudo: { nome: 'broquel', obra_prima: true },
            armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
