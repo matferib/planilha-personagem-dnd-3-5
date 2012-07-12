@@ -676,7 +676,9 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
       }
     }
     // Dominio, apenas para niveis acima do zero.
-    if (possui_dominio && (nivel_inicial == 1 || indice > 0)) {
+    if (possui_dominio && 
+        (nivel_inicial == 1 || indice > 0) && 
+        personagem_slots_nivel.feitico_dominio == null) {
       personagem_slots_nivel.feitico_dominio = { nome: '', gasto: false };
     }
   }
