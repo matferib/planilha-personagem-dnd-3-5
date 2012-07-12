@@ -287,14 +287,16 @@ function GeraResumo() {
       continue;
     }
 
+    var slots_classe = personagem.feiticos[chave_classe].slots;
     resumo += '(' + tabelas_classes[chave_classe].nome + ': ';
-    for (var nivel_slot in personagem.feiticos.slots) {
+    for (var nivel_slot in slots_classe) {
+      var slots_nivel = slots_classe[nivel_slot];
       resumo += nivel_slot + '- ';
-      for (var i = 0; i < personagem.feiticos.slots[nivel_slot].feiticos; ++i) {
-        resumo += personagem.feiticos.slots[nivel_slot].feiticos[i] + ', ';
+      for (var i = 0; i < slots_nivel.feiticos.length; ++i) {
+        resumo += slots_nivel.feiticos[i].nome + ', ';
       }
-      if (personagem.feiticos.slots[nivel_slot].feitico_dominio) {
-        resumo += personagem.feiticos.slots[nivel_slot].feitico_dominio + '*, ';
+      if (slots_nivel.feitico_dominio) {
+        resumo += slots_nivel.feitico_dominio.nome + '*, ';
       }
       resumo = resumo.slice(0, -2) + '; ';
     }
