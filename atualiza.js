@@ -672,11 +672,3 @@ function _AtualizaModoVisao() {
   }
 }
 
-function AtualizaFerimentos(valor) {
-  personagem.pontos_vida.ferimentos += valor;
-  if (personagem.pontos_vida.ferimentos < 0) {
-    personagem.pontos_vida.ferimentos = 0;
-  }
-  AtualizaGeralSemConverterEntradas();
-}
-
