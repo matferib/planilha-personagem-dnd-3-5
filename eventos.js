@@ -230,7 +230,8 @@ function ClickBotaoAtributoMenos() {
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
 function ClickAjustarFerimentos(valor) {
-  AtualizaFerimentos(valor);
+  PersonagemAdicionarFerimentos(valor);
+  AtualizaGeralSemConverterEntradas();
 }
 
 // Esconde/mostra os botoes de geracao (class="botao-geracao)".
