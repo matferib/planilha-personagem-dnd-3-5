@@ -88,11 +88,12 @@ function LeEntradas() {
   // atributos
   var span_bonus_atributos = Dom('pontos-atributos-gastos');
   var array_bonus = span_bonus_atributos.textContent.split(',');
-  for (var i = 0; i < array_bonus; ++i) {
+  for (var i = 0; i < array_bonus.length; ++i) {
     // Trim direita.
     array_bonus[i] = tabelas_atributos_invertidos[
         array_bonus[i].replace(/\s*$/, "")];
   }
+  entradas.bonus_atributos = array_bonus;
   var atributos = [ 
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {

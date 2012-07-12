@@ -671,3 +671,12 @@ function _AtualizaModoVisao() {
     botoes_geracao[i].style.display = personagem.modo_mestre ? 'inline' : 'none';
   }
 }
+
+function AtualizaFerimentos(valor) {
+  personagem.pontos_vida.ferimentos += valor;
+  if (personagem.pontos_vida.ferimentos < 0) {
+    personagem.pontos_vida.ferimentos = 0;
+  }
+  AtualizaGeralSemConverterEntradas();
+}
+

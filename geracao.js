@@ -279,6 +279,27 @@ function GeraResumo() {
   }
   resumo = resumo.slice(0, -2) + '; ';
   
+  // TODO: classe de dificuldade, conhecidos.
+  // Feiticos: por classe, por nivel.
+  resumo += 'Feitiços por classe: ';
+  for (var chave_classe in personagem.feiticos) {
+    if (!personagem.feiticos[chave_classe].em_uso) {
+      continue;
+    }
+
+    resumo += '(' + tabelas_classes[chave_classe].nome + ': ';
+    for (var nivel_slot in personagem.feiticos.slots) {
+      resumo += nivel_slot + '- ';
+      for (var i = 0; i < personagem.feiticos.slots[nivel_slot].feiticos; ++i) {
+        resumo += personagem.feiticos.slots[nivel_slot].feiticos[i] + ', ';
+      }
+      if (personagem.feiticos.slots[nivel_slot].feitico_dominio) {
+        resumo += personagem.feiticos.slots[nivel_slot].feitico_dominio + '*, ';
+      }
+      resumo = resumo.slice(0, -2) + '; ';
+    }
+    resumo += ')';
+  }
 
 
   return resumo;
