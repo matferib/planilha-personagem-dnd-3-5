@@ -87,13 +87,17 @@ function LeEntradas() {
   entradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
   // atributos
   var span_bonus_atributos = Dom('pontos-atributos-gastos');
-  var array_bonus = span_bonus_atributos.textContent.split(',');
-  for (var i = 0; i < array_bonus.length; ++i) {
-    // Trim direita.
-    array_bonus[i] = tabelas_atributos_invertidos[
-        array_bonus[i].replace(/\s*$/, "")];
+  if (span_bonus_atributos.textContent.length > 0) {
+    var array_bonus = span_bonus_atributos.textContent.split(',');
+    for (var i = 0; i < array_bonus.length; ++i) {
+      // Trim direita.
+      array_bonus[i] = tabelas_atributos_invertidos[
+          array_bonus[i].replace(/\s*$/, "")];
+    }
+    entradas.bonus_atributos = array_bonus;
+  } else {
+    entradas.bonus_atributos = [];
   }
-  entradas.bonus_atributos = array_bonus;
   var atributos = [ 
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
