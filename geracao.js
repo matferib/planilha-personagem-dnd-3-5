@@ -291,6 +291,9 @@ function GeraResumo() {
     resumo += '(' + tabelas_classes[chave_classe].nome + ': ';
     for (var nivel_slot in slots_classe) {
       var slots_nivel = slots_classe[nivel_slot];
+      if (slots_nivel.feiticos.length == 0) {
+        break;
+      }
       resumo += nivel_slot + '- ';
       for (var i = 0; i < slots_nivel.feiticos.length; ++i) {
         resumo += slots_nivel.feiticos[i].nome + ', ';
@@ -300,9 +303,12 @@ function GeraResumo() {
       }
       resumo = resumo.slice(0, -2) + '; ';
     }
-    resumo += ')';
+    resumo = resumo.slice(0, -2) + ')';
   }
+  resumo += '; ';
 
+  // Notas.
+  resumo += personagem.notas + '; ';
 
   return resumo;
 }
