@@ -264,7 +264,9 @@ function AdicionaItem(tipo_item, div, div_pai) {
 
   var select = CriaSelect();
   for (var chave in tabelas_itens[tipo_item]) {
-    select.appendChild(CriaOption(tabelas_itens[tipo_item][chave].nome, chave));
+    var item = tabelas_itens[tipo_item][chave];
+    select.appendChild(
+        CriaOption(item.nome + ' (' + item.preco + ')', chave));
   }
   select.addEventListener('change', AtualizaGeral);
   select.name = 'item';

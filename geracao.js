@@ -282,6 +282,18 @@ function GeraResumo() {
   }
   resumo = resumo.slice(0, -2) + '; ';
   
+  // Itens. TODO nome correto.
+  for (var tipo_item in tabelas_itens) {
+    if (personagem[tipo_item].length > 0) {
+      resumo += tabelas_nomes_itens[tipo_item] + ': ';
+      for (var i = 0; i < personagem[tipo_item].length; ++i) {
+        var item = tabelas_itens[tipo_item][personagem[tipo_item][i].chave];
+        resumo += item.nome + ', ';
+      }
+      resumo = resumo.slice(0, -2) + '; ';
+    }
+  }
+
   // TODO: classe de dificuldade, conhecidos.
   // Feiticos: por classe, por nivel.
   resumo += 'Feitiços por classe: ';
