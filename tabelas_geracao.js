@@ -196,6 +196,7 @@ var tabelas_geracao = {
            armas: [ { chave: 'cimitarra', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true}, ],
       },
+    },
 	},
   guerreiro: { 
 		atributos: [ 'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
@@ -556,5 +557,5 @@ var tabelas_geracao = {
             aneis: [ { chave: '', em_uso: true } ],
       },
     },
-	},
+  },
 };
