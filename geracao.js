@@ -96,6 +96,7 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
 }
 
 function _GeraArmas(tabela_geracao_classe_por_nivel) {
+  personagem.armas.length = 0;
   with (tabela_geracao_classe_por_nivel) {
     for (var i = 0; i < armas.length; ++i) {
       var arma_entrada = { 
@@ -112,6 +113,7 @@ function _GeraArmas(tabela_geracao_classe_por_nivel) {
 
 // @param tipo_item o tipo do item sendo gerado (aneis, amuletos etc).
 function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
+  personagem[tipo_item].length = 0;
   if (tabela_geracao_classe_por_nivel[tipo_item] == null) {
     // Sem itens do tipo.
     return;
