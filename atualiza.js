@@ -388,6 +388,10 @@ function _AtualizaTalentos() {
             (chave_classe == 'gerais') ? null : chave_classe,
             div_selects);
       }
+      // Se tinha mais talentos, tira os que estavam a mais.
+      for (var i = 0; div_selects.childNodes.length > lista_classe.length; ++i) {
+        RemoveUltimoFilho(div_selects);
+      }
       div_talentos_classe.style.display = 'block';
     } else {
       div_talentos_classe.style.display = 'none';
