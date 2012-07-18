@@ -245,6 +245,8 @@ function _AtualizaIniciativa() {
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
 function _AtualizaAtaque() {
   ImprimeSinalizado(personagem.bba, goog.dom.getElementsByClass('bba'));
+  ImprimeNaoSinalizado(personagem.numero_ataques, 
+                       goog.dom.getElementsByClass('numero-ataques'));
   // Corpo a corpo.
   ImprimeSinalizado(
       personagem.bba_cac,

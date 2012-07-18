@@ -190,6 +190,7 @@ function _DependenciasBba() {
       personagem.tamanho.modificador_ataque_defesa;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   personagem.bba_distancia = personagem.bba_cac_acuidade;
+  personagem.numero_ataques = Math.floor((personagem.bba - 1) / 5) + 1
 }
 
 // Converte a proficiencia em armas do personagem.
