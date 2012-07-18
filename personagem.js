@@ -145,6 +145,7 @@ var personagem = {
   // Cada entrada { chave, em_uso }
   aneis: [],
   amuletos: [],
+  pocoes: [],
   capa: '',
   botas: '',
 

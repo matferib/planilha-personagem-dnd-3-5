@@ -1446,12 +1446,6 @@ var tabelas_amuletos = {
     propriedades: {} },
 };
 
-// Tabelas de itens, por tipo.
-var tabelas_itens = {
-  aneis: tabelas_aneis,
-  amuletos: tabelas_amuletos,
-};
-
 // Var traduzir.
 var tabelas_pocoes = {
   cure_light_wounds: { nome: 'Cure light wounds', tipo: 'pocao'  , preco: '50 PO' },
@@ -1540,3 +1534,19 @@ var tabelas_pocoes = {
   greater_magic_weapon_5: { nome: 'Greater magic weapon +5', tipo: 'oleo' , preco: '3000 PO' },
   magic_vestment_5: { nome: 'Magic vestment +5', tipo: 'oleo' , preco: '3000 PO' },
 };
+
+// Tabelas de itens, por tipo.
+var tabelas_itens = {
+  aneis: tabelas_aneis,
+  amuletos: tabelas_amuletos,
+  pocoes: tabelas_pocoes,
+};
+
+// Nomes dos itens, por tipo.
+var tabelas_nomes_itens = {
+  aneis: 'Anéis',
+  amuletos: 'Amuletos',
+  pocoes: 'Poções',
+};
+
+

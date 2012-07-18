@@ -42,6 +42,7 @@ var entradas = {
   // cada entrada: { chave, em_uso }
   aneis: [],
   amuletos: [],
+  pocoes: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [] },
@@ -248,9 +249,8 @@ function _LeEquipamentos() {
   _LeArmaArmadura(entradas.armas, Dom('div-equipamentos-armas'));
   _LeArmaArmadura(entradas.armaduras, Dom('div-equipamentos-armaduras'));
 
-  var tipos_itens = [ 'aneis', 'amuletos' ];
-  for (var i = 0; i < tipos_itens.length; ++i) {
-    _LeItens(tipos_itens[i]);
+  for (var tipo_item in tabelas_itens) {
+    _LeItens(tipo_item);
   }
 }
 

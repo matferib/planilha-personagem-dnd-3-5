@@ -562,9 +562,8 @@ function _AtualizaEquipamentos() {
   for (var tipo_moeda in personagem.moedas) {
     Dom('moedas-' + tipo_moeda).value = personagem.moedas[tipo_moeda];
   }
-  var tipos_itens = [ 'aneis', 'amuletos' ];
-  for (var i = 0; i < tipos_itens.length; ++i) {
-    _AtualizaItens(tipos_itens[i]);
+  for (var tipo_item in tabelas_itens) {
+    _AtualizaItens(tipo_item);
   }
   Dom('text-area-outros-equipamentos').value =
       personagem.outros_equipamentos;;
