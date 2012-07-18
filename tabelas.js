@@ -408,7 +408,7 @@ var tabelas_escudos = {
   broquel: { nome: 'Broquel', bonus: 1 },
   leve_madeira: { nome: 'Escudo Leve de Madeira', bonus: 1 },
   leve_aco: { nome: 'Escudo Leve de Aço', bonus: 1 },
-  pesado_aco: { nome: 'Escudo Pesado de Madeira', bonus: 2 },
+  pesado_madeira: { nome: 'Escudo Pesado de Madeira', bonus: 2 },
   pesado_aco: { nome: 'Escudo Pesado de Aço', bonus: 2 },
   corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2 },
 };
