@@ -96,7 +96,8 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
 }
 
 function _GeraArmas(tabela_geracao_classe_por_nivel) {
-  personagem.armas.length = 0;
+  // Mantem desarmado.
+  personagem.armas.length = 1;
   with (tabela_geracao_classe_por_nivel) {
     for (var i = 0; i < armas.length; ++i) {
       var arma_entrada = { 
