@@ -76,6 +76,7 @@ var personagem = {
   bba_cac: 1,  // inclui tamanho e forca.
   bba_cac_acuidade: 1,  // inclui tamanho e destreza.
   bba_distancia: 1,  // inclui tamanho e destreza.
+  numero_ataques: 1,
   // talentos
   talentos: {  
     // Algumas classes ganham talentos especificos.
