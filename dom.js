@@ -157,6 +157,11 @@ function RemoveFilhos(dom) {
   goog.dom.removeChildren(dom);
 }
 
+// Remove o ultimo filho de um pai.
+function RemoveUltimoFilho(pai) {
+  pai.removeChild(pai.lastChild);
+}
+
 // Remove o atributo onchange do elemento e seus filhos.
 // @param dom que tera onchange removido e de seus filhos.
 function _RemoveOnChange(dom) {
