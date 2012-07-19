@@ -516,7 +516,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
     }
     var div_nivel = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
     div_nivel.appendChild(
-        CriaSpan('Nível ' + nivel + ':'));
+        CriaSpan('Nível ' + nivel + ' (CD ' + feiticos_classe.slots[nivel].cd + '):'));
     div_nivel.appendChild(CriaBr());
     for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
       // Adiciona os inputs de indices.
