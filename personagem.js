@@ -157,7 +157,7 @@ var personagem = {
   //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9 },
   //   slots: { 
-  //       0: { base, bonus_atributo, 
+  //       0: { base, bonus_atributo, cd, 
   //            feiticos: [ { nome, gasto} ], 
   //            feitico_dominio: {nome, gasto}  }, 
   //       1: ...} }

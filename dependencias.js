@@ -520,7 +520,10 @@ function _DependenciasBonusPorCategoria(
   var bonus_por_categoria = { ataque: 0, dano: 0 };
   var multiplicador_dano_forca = 0;
   if (estilo.nome == 'uma_arma') {
-    multiplicador_dano_forca = arma_leve ? 1.0 : 1.5;
+    multiplicador_dano_forca = 1.0;
+    if (personagem.atributos.forca.modificador > 0 && !arma_leve) {
+      multiplicador_dano_forca = 1.5;
+    }
   } else if (estilo.nome == 'arma_escudo') {
     multiplicador_dano_forca = 1.0;
   } else if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
@@ -639,6 +642,7 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   var chave_classe = classe_personagem.classe;
   var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
   var valor_atributo_chave = personagem.atributos[atributo_chave].valor;
+  var bonus_atributo_chave = personagem.atributos[atributo_chave].modificador;
   var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
   var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
@@ -667,6 +671,7 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
     var personagem_slots_nivel = personagem.feiticos[chave_classe].slots[nivel_feitico];
     personagem_slots_nivel.base = parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0;
     personagem_slots_nivel.bonus_atributo = array_bonus_feiticos_atributo[nivel_feitico];
+    personagem_slots_nivel.cd = 10 + nivel_feitico + bonus_atributo_chave; 
 
     var slots_por_dia = personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
     personagem_slots_nivel.feiticos.length = slots_por_dia;
