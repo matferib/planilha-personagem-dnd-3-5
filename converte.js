@@ -8,10 +8,6 @@ function ConverteEntradasParaPersonagem() {
   personagem.modo_mestre = entradas.modo_mestre;
   personagem.nome = entradas.nome;
   personagem.raca = entradas.raca;
-  personagem.tamanho.categoria =
-      tabelas_raca[personagem.raca].tamanho;
-  personagem.tamanho.modificador_ataque_defesa =
-      tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
 
   personagem.alinhamento = entradas.alinhamento;
   personagem.classes = entradas.classes;

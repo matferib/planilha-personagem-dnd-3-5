@@ -10,6 +10,7 @@ function DependenciasGerais() {
   _DependenciasTalentos();
   _DependenciasPontosVida();
   _DependenciasIniciativa();
+  _DependenciasTamanho();
   _DependenciasBba();
   _DependenciasProficienciaArmas();
   _DependenciasHabilidades();
@@ -176,6 +177,15 @@ function _DependenciasIniciativa() {
       'atributo', 'destreza', personagem.atributos['destreza'].modificador);
 }
 
+function _DependenciasTamanho() {
+  personagem.tamanho.categoria =
+      tabelas_raca[personagem.raca].tamanho;
+  personagem.tamanho.modificador_ataque_defesa =
+      tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
+  personagem.tamanho.modificador_agarrar =
+      tabelas_tamanho[personagem.tamanho.categoria].agarrar;
+}
+
 function _DependenciasBba() {
   personagem.bba = 0;
   for (var i = 0; i < personagem.classes.length; ++i) {
@@ -190,7 +200,11 @@ function _DependenciasBba() {
       personagem.tamanho.modificador_ataque_defesa;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   personagem.bba_distancia = personagem.bba_cac_acuidade;
-  personagem.numero_ataques = Math.floor((personagem.bba - 1) / 5) + 1
+  personagem.numero_ataques = Math.floor((personagem.bba - 1) / 5) + 1;
+  personagem.agarrar =
+      personagem.bba + 
+      personagem.atributos['forca'].modificador + 
+      personagem.tamanho.modificador_agarrar;
 }
 
 // Converte a proficiencia em armas do personagem.
@@ -198,7 +212,7 @@ function _DependenciasProficienciaArmas() {
   var todas_simples = false;
   var todas_comuns = false;
   personagem.proficiencia_armas = {};
-  for (var i = 0; i < personagem.classes.length; ++i) {
+  for (var i = 0; i < personagem.classes.length; ++i) { 
     var nome_classe = personagem.classes[i].classe;
     var armas_classe = tabelas_proficiencia_arma_por_classe[nome_classe].armas;
     for (var j = 0; armas_classe != null && j < armas_classe.length; ++j) {
