@@ -198,6 +198,9 @@ function _AtualizaTamanho() {
   ImprimeSinalizado(
       personagem.tamanho.modificador_ataque_defesa,
       goog.dom.getElementsByClass('tamanho-mod-ataque-defesa'));
+  ImprimeSinalizado(
+      personagem.tamanho.modificador_agarrar,
+      goog.dom.getElementsByClass('tamanho-mod-agarrar'));
   Dom('tamanho').textContent =
       tabelas_tamanho[personagem.tamanho.categoria].nome;
 }
@@ -256,6 +259,11 @@ function _AtualizaAtaque() {
   ImprimeSinalizado(
       personagem.bba_distancia,
       goog.dom.getElementsByClass('bba-distancia'));
+
+  // Agarrar
+  ImprimeSinalizado(
+      personagem.agarrar,
+      goog.dom.getElementByClass('agarrar'));
 }
 
 // Atualiza a lista de armas de cada estilo.

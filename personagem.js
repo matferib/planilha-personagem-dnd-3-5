@@ -4,7 +4,7 @@ var personagem = {
   modo_mestre: false,
   nome: '',
   raca: 'humano',
-  tamanho: { categoria: 'medio', modificador_ataque_defesa: 0 }, 
+  tamanho: { categoria: 'medio', modificador_ataque_defesa: 0, modificador_agarrar: 0 }, 
   alinhamento: "",
   experiencia: 0,
   // Cada entrada: { classe, nivel }.
@@ -76,6 +76,7 @@ var personagem = {
   bba_cac: 1,  // inclui tamanho e forca.
   bba_cac_acuidade: 1,  // inclui tamanho e destreza.
   bba_distancia: 1,  // inclui tamanho e destreza.
+  agarrar: 1,
   numero_ataques: 1,
   // talentos
   talentos: {  

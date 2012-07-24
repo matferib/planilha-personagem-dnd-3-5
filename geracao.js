@@ -223,11 +223,21 @@ function GeraResumo() {
 
   // combate:
   resumo += 'Iniciativa: ' + personagem.iniciativa.Total() + '; ';
+  resumo += 'BBA: ' + StringSinalizada(personagem.bba) + '; ';
+  resumo += 'Número de Ataques: ' + personagem.numero_ataques + '; ';
+  resumo += 'BBA cac: ' + StringSinalizada(personagem.bba_cac) + '/';
+  resumo += 'Agarrar: ' + StringSinalizada(personagem.agarrar) + '; ';
+  resumo += 'BBA distância: ' + StringSinalizada(personagem.bba_distancia) + '; ';
   resumo += 'Estilos: ';
   for (var i = 0; i < personagem.estilos_luta.length; ++i) {
     resumo += _GeraResumoEstilo(personagem.estilos_luta[i]) + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
+  resumo += 'Classe de Armadura: total ' + (10 + personagem.ca.bonus.Total()) + ', ';
+  resumo += 'surpreso ' + (10 + personagem.ca.bonus.Total(['atributo'])) + ', ';
+  resumo += 'toque ' + 
+      (10 + personagem.ca.bonus.Total(
+          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural'])) + '; ';
 
   // Pericias: apenas as rankeadas.
   resumo += 'Perícias (total ' + personagem.pericias.total_pontos + '): ';
