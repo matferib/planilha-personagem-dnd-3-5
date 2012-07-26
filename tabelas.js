@@ -73,15 +73,29 @@ var tabelas_raca = {
 var tabelas_classes = {
   barbaro: { nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte, },
   bardo: { nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
-  clerigo: { nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio, },
-  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+  clerigo: { nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio,
+    especiais: {
+      1: [ 'expulsar_fascinar_mortos_vivos' ],
+    },
+  },
+  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio,
+    especiais: {
+      1: [ 'companheiro_animal', 'senso_natureza', 'empatia_natureza' ],
+      2: [ 'caminho_floresta' ],
+      3: [ 'ratros_invisivel' ],
+      4: [ 'resistir_tentacao_natureza' ],
+      5: [ 'forma_selvagem' ],
+    },
+  },
   guerreiro: { nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
   feiticeiro: { nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
   ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio, 
-    habilidades: {
+    especiais: {
       1: [ 'ataque_furtivo', 'encontrar_armadilha' ],
       2: [ 'evasao' ],
       3: [ 'ataque_furtivo', 'sentir_armadilha' ],
+      4: [ 'esquiva_sobrenatural' ],
+      5: [ 'ataque_furtivo' ],
     },
   },
   mago: { nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
@@ -94,6 +108,22 @@ var tabelas_classes = {
   plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
   expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
   combatente: { nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
+};
+
+var tabelas_especiais = {
+  expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
+  companheiro_animal: { nome: 'Companheiro animal', },
+  senso_natureza: { nome: 'Senso da natureza', },
+  empatia_natureza: { nome: 'Empatia com a natureza', },
+  caminho_floresta: { nome: 'Caminho da floresta', },
+  ratros_invisivel: { nome: 'Rastro invisível', },
+  resistir_tentacao_natureza: { nome: 'Resistir tentação da natureza', },
+  forma_selvagem: { nome: 'Forma selvagem', },
+  ataque_furtivo: { nome: 'Ataque furtivo', },
+  encontrar_armadilha: { nome: 'Encontrar armadilha', },
+  evasao: { nome: 'Evasão', },
+  sentir_armadilha: { nome: 'Sentir armadilha', },
+  esquiva_sobrenatural: { nome: 'Esquiva sobrenatural', },
 };
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.

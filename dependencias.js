@@ -13,7 +13,7 @@ function DependenciasGerais() {
   _DependenciasTamanho();
   _DependenciasBba();
   _DependenciasProficienciaArmas();
-  _DependenciasHabilidades();
+  _DependenciasEspeciais();
 
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
@@ -287,22 +287,25 @@ function _DependenciasProficienciaArmas() {
   }
 }
 
-function _DependenciasHabilidades() {
+function _DependenciasEspeciais() {
+  personagem.especiais = {};
   for (var i = 0; i < personagem.classes.length; ++i) {
     var entrada_classe = personagem.classes[i];
-    if (tabelas_classes[entrada_classe.classe].habilidades == null) {
+    if (tabelas_classes[entrada_classe.classe].especiais == null) {
       continue;
     }
-    var habilidades_classe = tabelas_classes[entrada_classe.classe].habilidades;
+    var especiais_classe = tabelas_classes[entrada_classe.classe].especiais;
     for (var nivel = 1; nivel < entrada_classe.nivel; ++nivel) {
-      var habilidades_nivel = habilidades_classe[nivel];
-      if (habilidades_nivel == null) {
+      var especiais_nivel = especiais_classe[nivel];
+      if (especiais_nivel == null) {
         continue;
       }
-      for (var j = 0; j < habilidades_nivel.length; ++j) {
-        var habilidade = habilidades_nivel[j];
-        if (!(habilidade in personagem.habilidades)) {
-          personagem.habilidades[habilidade] = true;
+      for (var j = 0; j < especiais_nivel.length; ++j) {
+        var especial = especiais_nivel[j];
+        if (!(especial in personagem.especiais)) {
+          personagem.especiais[especial] = { vezes: 1};
+        } else {
+          ++personagem.especiais[especial].vezes;
         }
       }
     }
