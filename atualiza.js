@@ -52,6 +52,7 @@ function _AtualizaGeral() {
   _AtualizaEstilosLuta();
   _AtualizaDefesa();
   _AtualizaSalvacoes();
+  _AtualizaEspeciais();
   _AtualizaTalentos();
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
@@ -377,6 +378,23 @@ function _AtualizaSalvacoes() {
                       null, div_salvacao);
     div_salvacoes.appendChild(div_salvacao);
   }
+}
+
+// Atualiza as habilidades especiais, vindas de classe e raca.
+function _AtualizaEspeciais() {
+  var string_especiais = '';
+  for (especial in personagem.especiais) {
+    string_especiais += tabelas_especiais[especial].nome;
+    var especial_personagem = personagem.especiais[especial];
+    if (especial_personagem.vezes > 1) {
+      string_especiais += ' (' + especial_personagem.vezes + ')';
+    }
+    string_especiais += ', ';
+  }
+  if (string_especiais.length > 0) {
+    string_especiais = string_especiais.slice(0, -2);
+  }
+  Dom('habilidades-especiais').textContent = string_especiais;
 }
 
 // Atualiza os numeros e listas relacionados a talentos.
