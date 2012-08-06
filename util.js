@@ -62,10 +62,11 @@ function ImprimeNaoSinalizado(valor, dom, imprime_zero) {
   }
 }
 
-// Adiciona um elemento span ao div
+// Adiciona um elemento span ao div e o retorna.
 function AdicionaSpanAoDiv(texto, id_span, div) {
   var span = CriaSpan(texto, id_span);
   div.appendChild(span);
+  return span;
 }
 
 // Busca o valor selecionado de um select.
@@ -187,5 +188,20 @@ function PrecoArmaArmadura(tipo, tabela, chave, obra_prima, bonus, invertido) {
   return preco;
 }
 
-
+// Gera o titulo de um elemento HTML (o texto que aparece no mouseover).
+// @param pares um array de par: texto valor.
+// Dom o objeto que recebera o titulo.
+function Titulo(pares, dom) {
+  var titulo = '';
+  for (var i = 0; i < pares.length; ++i) {
+    var parcial = pares[i];
+    for (var chave in parcial) {
+      titulo += chave + ': ' + StringSinalizada(parcial[chave]) + '\n';
+    }
+  }
+  if (titulo.length > 0) {
+    titulo = titulo.slice(0, -1);
+  }
+  dom.title = titulo;
+}
 
