@@ -252,19 +252,32 @@ function _AtualizaAtaque() {
   ImprimeNaoSinalizado(personagem.numero_ataques, 
                        goog.dom.getElementsByClass('numero-ataques'));
   // Corpo a corpo.
-  ImprimeSinalizado(
-      personagem.bba_cac,
-      goog.dom.getElementsByClass('bba-corpo-a-corpo'));
+  var span_bba_cac = Dom('bba-corpo-a-corpo');
+  ImprimeSinalizado(personagem.bba_cac, span_bba_cac);
+  Titulo(
+      [{'bba': personagem.bba}, 
+       {'força': personagem.atributos['forca'].modificador}, 
+       {'tamanho': personagem.tamanho.modificador_ataque_defesa}], 
+      span_bba_cac);
 
   // Distancia.
-  ImprimeSinalizado(
-      personagem.bba_distancia,
-      goog.dom.getElementsByClass('bba-distancia'));
+  var span_bba_distancia = Dom('bba-distancia');
+  ImprimeSinalizado(personagem.bba_distancia, span_bba_distancia);
+  Titulo(
+      [{'bba': personagem.bba},
+       {'destreza': personagem.atributos['destreza'].modificador},
+       {'tamanho': personagem.tamanho.modificador_ataque_defesa}],
+      span_bba_distancia);
 
   // Agarrar
-  ImprimeSinalizado(
-      personagem.agarrar,
-      goog.dom.getElementByClass('agarrar'));
+  var span_bba_agarrar = Dom('bba-agarrar');
+  ImprimeSinalizado(personagem.agarrar, span_bba_agarrar);
+  Titulo(
+      [{'bba': personagem.bba},
+       {'força': personagem.atributos['forca'].modificador}, 
+       {'tamanho especial': personagem.tamanho.modificador_agarrar}],
+      span_bba_agarrar);
+
 }
 
 // Atualiza a lista de armas de cada estilo.
@@ -370,12 +383,13 @@ function _AtualizaSalvacoes() {
   for (var tipo_salvacao in personagem.salvacoes) {
     var div_salvacao = CriaDiv();
     AdicionaSpanAoDiv(tipo_salvacao + ': ', null, div_salvacao);
-    AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].base, true) + ' ', 
-                      null, div_salvacao);
-    AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].racial) + ' ', 
-                      null, div_salvacao);
-    AdicionaSpanAoDiv('= ' + StringSinalizada(personagem.salvacoes[tipo_salvacao].total), 
-                      null, div_salvacao);
+    var span_salvacao = 
+      AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].total), 
+                        null, div_salvacao);
+    Titulo(
+        [{'base': personagem.salvacoes[tipo_salvacao].base}, 
+         {'racial': personagem.salvacoes[tipo_salvacao].racial}], 
+          span_salvacao);
     div_salvacoes.appendChild(div_salvacao);
   }
 }
