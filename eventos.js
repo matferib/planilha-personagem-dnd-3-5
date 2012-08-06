@@ -367,3 +367,8 @@ function ClickVenderItem(dom, tabela) {
   PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco));
   AtualizaGeralSemConverterEntradas();
 }
+
+// Evento que trata o click no checkbox de feitico.
+function ClickGastarFeitico() {
+  AtualizaGeral();
+}
