@@ -555,7 +555,8 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
       div_nivel.appendChild(CriaInputCheckbox(
           feiticos_classe.slots[nivel].feiticos[indice].gasto,
           'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice, 
-          'feiticos-slots-gastos'));
+          'feiticos-slots-gastos',
+          ClickGastarFeitico));
       if (!precisa_conhecer) {
         // Um br apos cada feitico.
         div_nivel.appendChild(CriaBr());
