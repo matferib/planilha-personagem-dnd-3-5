@@ -372,3 +372,8 @@ function ClickVenderItem(dom, tabela) {
 function ClickGastarFeitico() {
   AtualizaGeral();
 }
+
+// Trata o evento de change no campo de notas.
+function ChangeNotas() {
+  AtualizaGeral();
+}
