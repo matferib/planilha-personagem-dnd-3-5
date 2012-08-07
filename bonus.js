@@ -7,29 +7,29 @@
 // Construtor, chamar com new Bonus.
 function Bonus() {
   this.por_chave = {};
-  this.por_chave.alquimico = { cumulativo: false, por_origem: {}, };
-  this.por_chave.armadura = { cumulativo: false, por_origem: {}, };
-  this.por_chave.armadura_melhoria = { cumulativo: false, por_origem: {}, };
-  this.por_chave.armadura_natural = { cumulativo: false, por_origem: {}, };
-  this.por_chave.atributo = { cumulativo: true, por_origem: {}, };
-  this.por_chave.circunstancia = { cumulativo: true, por_origem: {}, };
-  this.por_chave.competencia = { cumulativo: false, por_origem: {}, };
-  this.por_chave.deflexao = { cumulativo: false, por_origem: {}, };
-  this.por_chave.escudo = { cumulativo: false, por_origem: {}, };
-  this.por_chave.escudo_melhoria = { cumulativo: false, por_origem: {}, };
-  this.por_chave.esquiva = { cumulativo: true, por_origem: {}, };
-  this.por_chave.inerente = { cumulativo: false, por_origem: {}, };
-  this.por_chave.intuicao = { cumulativo: false, por_origem: {}, };
-  this.por_chave.melhoria = { cumulativo: false, por_origem: {}, };
-  this.por_chave.moral = { cumulativo: false, por_origem: {}, };
-  this.por_chave.profano = { cumulativo: false, por_origem: {}, };
-  this.por_chave.racial = { cumulativo: false, por_origem: {}, };
-  this.por_chave.resistencia = { cumulativo: false, por_origem: {}, };
-  this.por_chave.sagrado = { cumulativo: false, por_origem: {}, };
-  this.por_chave.sinergia = { cumulativo: false, por_origem: {}, };
-  this.por_chave.sorte = { cumulativo: false, por_origem: {}, };
-  this.por_chave.talento = { cumulativo: true, por_origem: {}, };
-  this.por_chave.tamanho = { cumulativo: false, por_origem: {}, };
+  this.por_chave.alquimico = { nome: 'Alquímico', cumulativo: false, por_origem: {}, };
+  this.por_chave.armadura = { nome: 'Armadura', cumulativo: false, por_origem: {}, };
+  this.por_chave.armadura_melhoria = { nome: 'Armadura (melhoria)', cumulativo: false, por_origem: {}, };
+  this.por_chave.armadura_natural = { nome: 'Amadura Natural', cumulativo: false, por_origem: {}, };
+  this.por_chave.atributo = { nome: 'Atributo', cumulativo: true, por_origem: {}, };
+  this.por_chave.circunstancia = { nome: 'Circusntância', cumulativo: true, por_origem: {}, };
+  this.por_chave.competencia = { nome: 'Competência', cumulativo: false, por_origem: {}, };
+  this.por_chave.deflexao = { nome: 'Deflexão', cumulativo: false, por_origem: {}, };
+  this.por_chave.escudo = { nome: 'Escudo', cumulativo: false, por_origem: {}, };
+  this.por_chave.escudo_melhoria = { nome: 'Escudo (melhoria)', cumulativo: false, por_origem: {}, };
+  this.por_chave.esquiva = { nome: 'Esquiva', cumulativo: true, por_origem: {}, };
+  this.por_chave.inerente = { nome: 'Inerente', cumulativo: false, por_origem: {}, };
+  this.por_chave.intuicao = { nome: 'Intuição', cumulativo: false, por_origem: {}, };
+  this.por_chave.melhoria = { nome: 'Melhoria', cumulativo: false, por_origem: {}, };
+  this.por_chave.moral = { nome: 'Moral', cumulativo: false, por_origem: {}, };
+  this.por_chave.profano = { nome: 'Profano', cumulativo: false, por_origem: {}, };
+  this.por_chave.racial = { nome: 'Racial', cumulativo: false, por_origem: {}, };
+  this.por_chave.resistencia = { nome: 'Resitência', cumulativo: false, por_origem: {}, };
+  this.por_chave.sagrado = { nome: 'Sagrado', cumulativo: false, por_origem: {}, };
+  this.por_chave.sinergia = { nome: 'Sinergia', cumulativo: false, por_origem: {}, };
+  this.por_chave.sorte = { nome: 'Sorte', cumulativo: false, por_origem: {}, };
+  this.por_chave.talento = { nome: 'Talento', cumulativo: true, por_origem: {}, };
+  this.por_chave.tamanho = { nome: 'Tamanho', cumulativo: false, por_origem: {}, };
 }
 
 // Limpa os bonus.
@@ -90,3 +90,29 @@ Bonus.prototype.Le = function(chave_bonus, subchave) {
   }
   return bonus.por_origem[subchave];
 }
+
+// @return um array onde cada entrada eh um mapa nome: valor.
+// Util para ser usado com a funcao Titulo.
+Bonus.prototype.Exporta = function() {
+  var array_retorno = [];
+  for (var chave_bonus in this.por_chave) {
+    var total_chave = 0;
+    var bonus = this.por_chave[chave_bonus];
+    for (var subchave in bonus.por_origem) {
+      if (bonus.cumulativo) {
+        total_chave += bonus.por_origem[subchave];
+      } else {
+        if (bonus.por_origem[subchave] > total_chave) {
+          total_chave = bonus.por_origem[subchave];
+        }
+      }
+    }
+    if (total_chave > 0) {
+      var entrada_chave = {};
+      entrada_chave[bonus.nome] = total_chave;
+      array_retorno.push(entrada_chave);
+    }
+  }
+  return array_retorno;
+}
+
