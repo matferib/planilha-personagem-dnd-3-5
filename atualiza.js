@@ -243,7 +243,9 @@ function _AtualizaModificadoresAtributos() {
 }
 
 function _AtualizaIniciativa() {
-  ImprimeSinalizado(personagem.iniciativa.Total(), Dom('iniciativa'));
+  var span_iniciativa = Dom('iniciativa');
+  ImprimeSinalizado(personagem.iniciativa.Total(), span_iniciativa);
+  Titulo(personagem.iniciativa.Exporta(), span_iniciativa);
 }
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
