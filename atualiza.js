@@ -347,33 +347,29 @@ function _AtualizaDefesa() {
   // Armadura e escudo.
   SelecionaValor(personagem.armadura.nome, 
                  Dom('armadura')); 
-  Dom('bonus-armadura').value =
-      personagem.ca.bonus.Le('armadura_melhoria', 'armadura');
-  SelecionaValor(personagem.escudo.nome, 
-                 Dom('escudo'));
-  Dom('bonus-escudo').value =
-      personagem.ca.bonus.Le('escudo_melhoria', 'escudo');
-
-  ImprimeSinalizado(personagem.ca.bonus.Le('armadura', 'armadura') +
-                    personagem.ca.bonus.Le('armadura_melhoria', 'armadura'),
-                    goog.dom.getElementsByClass('ca-armadura'));
-  ImprimeSinalizado(personagem.ca.bonus.Le('escudo', 'escudo') + 
-                    personagem.ca.bonus.Le('escudo_melhoria', 'escudo'),
-                    goog.dom.getElementsByClass('ca-escudo'));
 
   // AC normal.
+  var span_ca_normal = Dom('ca-normal');
   ImprimeNaoSinalizado(
       10 + personagem.ca.bonus.Total(),
-      goog.dom.getElementsByClass('ca-normal'));
+      span_ca_normal);
+  Titulo(personagem.ca.bonus.Exporta(), span_ca_normal);
   // AC surpreso.
+  var span_ca_surpreso = Dom('ca-surpreso');
   ImprimeNaoSinalizado(
       10 + personagem.ca.bonus.Total(['atributo']),
-      goog.dom.getElementsByClass('ca-surpreso'));
+      span_ca_surpreso);
+  Titulo(personagem.ca.bonus.Exporta(['atributo']), span_ca_surpreso);
   // AC toque.
+  var span_ca_toque = Dom('ca-toque');
   ImprimeNaoSinalizado(
       10 + personagem.ca.bonus.Total(
           ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']),
-      goog.dom.getElementsByClass('ca-toque'));
+      span_ca_toque);
+  Titulo(
+      personagem.ca.bonus.Exporta(
+          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']), 
+      span_ca_toque);
 }
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e

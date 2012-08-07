@@ -91,11 +91,24 @@ Bonus.prototype.Le = function(chave_bonus, subchave) {
   return bonus.por_origem[subchave];
 }
 
-// @return um array onde cada entrada eh um mapa nome: valor.
+
+// Exporta os bonus diferentes de zero. 
 // Util para ser usado com a funcao Titulo.
-Bonus.prototype.Exporta = function() {
+// @param opt excluir arra com os tipos de bonus a excluir (nao serao exportados).
+// @return um array onde cada entrada eh um mapa nome: valor.
+Bonus.prototype.Exporta = function(excluir) {
   var array_retorno = [];
   for (var chave_bonus in this.por_chave) {
+    var nao_usar_bonus = false;
+    for (var i = 0; excluir && i < excluir.length; ++i) {
+      if (excluir[i] == chave_bonus) {
+        nao_usar_bonus = true;
+      }
+    }
+    if (nao_usar_bonus) {
+      continue;
+    }
+
     var total_chave = 0;
     var bonus = this.por_chave[chave_bonus];
     for (var subchave in bonus.por_origem) {
