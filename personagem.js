@@ -133,14 +133,18 @@ var personagem = {
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
-  // TODO remover e deixar so armaduras
-  // Armadura: { nome, bonus_magico }
-  armadura: { nome: 'nenhuma', obra_prima: false, bonus_magico: 0 },
+  // Armadura: aponta para uma das armaduras.
+  armadura: null, 
   // Cada entrada:
-  //      entrada: { chave, obra_prima, bonus }
+  //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado.
   // Sempre havera uma entrada 'nenhuma' aqui.
   armaduras: [],
-  escudo: { nome: 'nenhum' , obra_prima: false, bonus_magico: 0 },
+  // Aponta para um dos escudos.
+  escudo: null, 
+  // Cada entrada:
+  //      entrada: { chave, obra_prima, bonus }, nome_gerado.
+  // Sempre havera uma entrada 'nenhum' aqui.
+  escudos: [],
   elmo: '',
   // TODO: passar pra dentro de itens?
   // Cada entrada { chave, em_uso }

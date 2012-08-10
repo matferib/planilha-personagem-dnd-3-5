@@ -50,13 +50,13 @@ function _AtualizaGeral() {
   _AtualizaIniciativa();
   _AtualizaAtaque();
   _AtualizaEstilosLuta();
-  _AtualizaDefesa();
   _AtualizaSalvacoes();
   _AtualizaEspeciais();
   _AtualizaTalentos();
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
   _AtualizaListaArmas();
+  _AtualizaDefesa();
   _AtualizaListaArmaduras();
   _AtualizaEquipamentos();
   _AtualizaFeiticos();
@@ -283,6 +283,7 @@ function _AtualizaAtaque() {
 }
 
 // Atualiza a lista de armas de cada estilo.
+// TODO melhorar isso, so criar se necessario.
 function _AtualizaEstilosLuta() {
   // Recria os elementos do estilos. 
   RemoveFilhos(Dom('div-estilos-luta'));
@@ -312,6 +313,8 @@ function _AtualizaEstilo(div_estilo, estilo) {
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
   var id_select_primario = 
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
+  var id_span_classe_armadura =
+      id_estilo.replace('id-estilo', 'id-span-classe-armadura');
   var arma_primaria = ArmaPersonagem(estilo.arma_primaria.nome);
   AdicionaArmasAoEstilo(Dom(id_select_primario), 
                         estilo.arma_primaria.nome);
@@ -331,6 +334,7 @@ function _AtualizaEstilo(div_estilo, estilo) {
   } else {
     Dom(id_span_secundario).textContent = '';
   }
+  _AtualizaClasseArmaduraEstilo(estilo.nome, Dom(id_span_classe_armadura));
 }
 
 // Atualiza o span de uma arma no estilo de luta com seus valores de ataque e defesa
@@ -342,11 +346,54 @@ function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
   span_arma.textContent = GeraResumoArmaEstilo(arma, primaria, estilo);
 }
 
+// Atualiza o span de classe de armadura do estilo.
+function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
+  var usar_escudo = (nome_estilo == 'arma_escudo');
+  RemoveFilhos(span_classe_armadura);
+  // AC normal.
+  var span_ca_normal = CriaSpan();
+  var array_exclusao = usar_escudo ? null : ['escudo'];
+  ImprimeNaoSinalizado(
+      10 + personagem.ca.bonus.Total(array_exclusao),
+      span_ca_normal);
+  Titulo(personagem.ca.bonus.Exporta(array_exclusao), span_ca_normal);
+  span_classe_armadura.appendChild(span_ca_normal);
+  span_ca_normal.textContent += ', ';
+  // AC surpreso.
+  var span_ca_surpreso = CriaSpan();
+  array_exclusao = ['atributo'];
+  if (!usar_escudo) {
+    array_exclusao.push('escudo');
+  }
+  ImprimeNaoSinalizado(
+      10 + personagem.ca.bonus.Total(array_exclusao),
+      span_ca_surpreso);
+  Titulo(personagem.ca.bonus.Exporta(array_exclusao), span_ca_surpreso);
+  span_classe_armadura.appendChild(span_ca_surpreso);
+  span_ca_surpreso.textContent = 'S: ' + span_ca_surpreso.textContent + ', ';
+  // AC toque.
+  var span_ca_toque = CriaSpan();
+  ImprimeNaoSinalizado(
+      10 + personagem.ca.bonus.Total(
+          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']),
+      span_ca_toque);
+  Titulo(
+      personagem.ca.bonus.Exporta(
+          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']), 
+      span_ca_toque);
+  span_ca_toque.textContent = 'T: ' + span_ca_toque.textContent;
+  span_classe_armadura.appendChild(span_ca_toque);
+}
+
 // Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
+// TODO remover
 function _AtualizaDefesa() {
-  // Armadura e escudo.
-  SelecionaValor(personagem.armadura.nome, 
-                 Dom('armadura')); 
+  /*
+  // Armadura e escudo. Popula os selects e depois seleciona o valor.
+  var select_armadura = Dom('armadura');
+  SelecionaValor(personagem.armadura.nome, select_armadura); 
+  var select_escudo = Dom('escudo');
+  SelecionaValor(personagem.escudo.nome, select_escudo); 
 
   // AC normal.
   var span_ca_normal = Dom('ca-normal');
@@ -370,6 +417,7 @@ function _AtualizaDefesa() {
       personagem.ca.bonus.Exporta(
           ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']), 
       span_ca_toque);
+      */
 }
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e
@@ -647,7 +695,9 @@ function _AtualizaArmaArmadura(chave, obra_prima, bonus, div) {
     if (filho.name == null) {
       continue;
     }
-    if (filho.name.indexOf('select') != -1) {
+    if (filho.name.indexOf('em-uso') != -1) {
+      filho.checked = true;
+    } else if (filho.name.indexOf('select') != -1) {
       SelecionaValor(chave, filho);
     } else if (filho.name.indexOf('obra-prima') != -1) {
       filho.checked = obra_prima;
@@ -670,8 +720,7 @@ function _AtualizaArmaArmadura(chave, obra_prima, bonus, div) {
 // @param funcao_adicao caso seja necessario adicionar um div novo.
 function _AtualizaListaArmasArmaduras(div, array_personagem, funcao_adicao) {
   var filho = div.firstChild;
-  // Ignoramos a primeira arma, desarmado.
-  for (var i = 1; i < array_personagem.length; ++i) {
+  for (var i = 0; i < array_personagem.length; ++i) {
     var personagem_entrada = array_personagem[i].entrada;
     if (filho == null) {
       // O div nao existe, chama a funcao.

@@ -34,10 +34,10 @@ var entradas = {
   // Cada entrada eh do tipo: { chave, obra_prima, bonus }
   armas: [],
   // TODO remover.
-  armadura: { nome: 'nenhuma', bonus_magico: 0 },
-  // Cada entrada eh do tipo: { chave, obra_prima, bonus }
+  // Cada entrada eh do tipo: { em_uso, chave, obra_prima, bonus }
   armaduras: [],
-  escudo: { nome: 'nenhum', bonus_magico: 0 },
+  // Cada entrada { em_uso, chave, obra_primra, bonus },
+  escudos: [],
   elmo: '',
   // cada entrada: { chave, em_uso }
   aneis: [],
@@ -110,7 +110,8 @@ function LeEntradas() {
   entradas.estilos_luta = [];
   var div_estilos_luta = Dom('div-estilos-luta');
   for (var i = 0; i < div_estilos_luta.childNodes.length; ++i) {
-    entradas.estilos_luta.push(_LeEntradaEstiloLuta(div_estilos_luta.childNodes[i]));
+    entradas.estilos_luta.push(
+        _LeEntradaEstiloLuta(div_estilos_luta.childNodes[i]));
   }
 
   _LeEquipamentos();
@@ -206,20 +207,27 @@ function _LeFeiticos() {
 }
 
 // Le um div de estilo de luta.
+// Como existem spans aninhados, tem que empilhar spans.
 // @return o estilo lido. 
 function _LeEntradaEstiloLuta(div_estilo_luta) {
   var estilo = {};
-  for (var i = 0; i < div_estilo_luta.childNodes.length; ++i) {
-    var filho = div_estilo_luta.childNodes[i];
-    if (filho.tagName == 'INPUT') {
-      if (filho.checked) {
-        estilo.nome = filho.value; 
-      }
-    } else if (filho.tagName == 'SELECT') {
-      if (filho.id.indexOf('primario') != -1) {
-        estilo.arma_primaria = ValorSelecionado(filho);
-      } else {
-        estilo.arma_secundaria = ValorSelecionado(filho);
+  var proximos_elementos = [ div_estilo_luta ];
+  while (proximos_elementos.length > 0) {
+    var elemento_corrente = proximos_elementos.pop();
+    for (var i = 0; i < elemento_corrente.childNodes.length; ++i) {
+      var filho = elemento_corrente.childNodes[i];
+      if (filho.tagName == 'INPUT') {
+        if (filho.checked) {
+          estilo.nome = filho.value; 
+        }
+      } else if (filho.tagName == 'SELECT') {
+        if (filho.id.indexOf('primario') != -1) {
+          estilo.arma_primaria = ValorSelecionado(filho);
+        } else {
+          estilo.arma_secundaria = ValorSelecionado(filho);
+        }
+      } else if (filho.tagName == 'SPAN') {
+        proximos_elementos.push(filho);
       }
     }
   }
@@ -228,14 +236,14 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
 
 function _LeEquipamentos() {
   // Armadura e escudo.
-  entradas.armadura.nome = 
-      ValorSelecionado(Dom('armadura')); 
-  entradas.armadura.bonus_magico = 
-      parseInt(Dom('bonus-armadura').value) || 0; 
-  entradas.escudo.nome = 
-      ValorSelecionado(Dom('escudo'));
-  entradas.escudo.bonus_magico = 
-      parseInt(Dom('bonus-escudo').value) || 0;
+  //entradas.armadura.nome = 
+  //    ValorSelecionado(Dom('armadura')); 
+  //entradas.armadura.bonus_magico = 
+  //    parseInt(Dom('bonus-armadura').value) || 0; 
+  //entradas.escudo.nome = 
+  //    ValorSelecionado(Dom('escudo'));
+  //entradas.escudo.bonus_magico = 
+  //    parseInt(Dom('bonus-escudo').value) || 0;
   entradas.outros_equipamentos = Dom('text-area-outros-equipamentos').value;
 
   // Moedas
@@ -264,7 +272,9 @@ function LeEntradaArmaArmadura(div) {
     if (filho.name == null) {
       continue;
     }
-    if (filho.name.indexOf('select') != -1) {
+    if (filho.name.indexOf('em-uso') != -1) {
+      lido.em_uso = true;
+    } else if (filho.name.indexOf('select') != -1) {
       lido.chave = ValorSelecionado(filho);
     } else if (filho.name.indexOf('obra-prima') != -1) {
       lido.obra_prima = filho.checked;

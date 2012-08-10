@@ -429,9 +429,9 @@ function _DependenciasFocoArmas() {
 
 function _DependenciasArmadurasEscudos() {
   with (personagem.ca.bonus) {
-    Adiciona('armadura', 'armadura', tabelas_armaduras[personagem.armadura.nome].bonus);
+    Adiciona('armadura', 'armadura', tabelas_armaduras[personagem.armadura.chave].bonus);
     Adiciona('armadura_melhoria', 'armadura', personagem.armadura.bonus_magico);
-    Adiciona('escudo', 'escudo', tabelas_escudos[personagem.escudo.nome].bonus);
+    Adiciona('escudo', 'escudo', tabelas_escudos[personagem.escudo.chave].bonus);
     Adiciona('escudo_melhoria', 'escudo', personagem.escudo.bonus_magico);
     Adiciona('atributo', 'destreza', personagem.atributos.destreza.modificador);
     Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);

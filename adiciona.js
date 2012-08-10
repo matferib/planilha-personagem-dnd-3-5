@@ -53,6 +53,11 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
 
   var id_div_equipamentos = div_pai.id;
   var id_gerado = GeraId('div-' + nome, div_pai);
+  var input_em_uso = null;
+  if (nome == 'armadura') {
+    input_em_uso = CriaRadio(null, null, null, 'armaduras', AtualizaGeral);
+    input_em_uso.setAttribute('name', 'em-uso');
+  }
   var select = CriaSelect();
   select.setAttribute('name', 'select-' + nome);
   select.setAttribute('onchange', 'AtualizaGeral()');
@@ -86,6 +91,9 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   });
 
   var div = CriaDiv(id_gerado);
+  if (input_em_uso) {
+    div.appendChild(input_em_uso);
+  }
   div.appendChild(select);
   div.appendChild(span_obra_prima);
   div.appendChild(input_obra_prima);
@@ -135,6 +143,33 @@ function AdicionaArmadura() {
       Dom('div-equipamentos-armaduras'));
 }
 
+// @return o radio do estilo.
+function _CriaRadioEstilo(texto_estilo, id, nome_grupo, valor, id_select_secundario) {
+  var span = CriaSpan();
+  var radio = CriaRadio(texto_estilo, id, null, nome_grupo, null);
+  radio.setAttribute('value', valor);
+  radio.addEventListener('click', {
+      valor: valor,
+      id_select_secundario: id_select_secundario,
+      handleEvent: function(e) {
+         ClickEstilo(this.valor, this.id_select_secundario);
+      }});
+  span.appendChild(radio);
+  span.appendChild(CriaSpan(texto_estilo));
+  return span;
+}
+
+function _CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta) {
+  var botao_remover = CriaBotao('-');
+  botao_remover.addEventListener('click', {
+      id_estilo: id_estilo,
+      id_div_estilos_luta: id_div_estilos_luta,
+      handleEvent: function(e) {
+        ClickRemoverFilho(this.id_estilo, this.id_div_estilos_luta);
+      }});
+  return botao_remover;
+}
+
 // Adiciona um novo estilo de luta a planilha. Todos os parametros sao opcionais.
 // @param nome_estilo: uma_arma, arma_escudo, duas_armas, arma_dupla.
 // @param arma_principal nome da arma principal.
@@ -160,30 +195,30 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
   var id_span_secundario =
       id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
+  var id_span_classe_armadura =
+      id_estilo.replace('id-estilo', 'id-span-classe-armadura');
 
-  div_novo_estilo.innerHTML = 
-      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_uma_arma + 
-          '" value="uma_arma" onclick="ClickEstilo(\'uma_arma\', \'' + 
-          id_select_secundario + '\')" ' + 
-          (nome_estilo == null || nome_estilo == 'uma_arma' ? 'checked' : '') + '>Uma arma</input>' +
-      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_arma_escudo + 
-          '" value="arma_escudo" onclick="ClickEstilo(\'arma_escudo\', \'' + 
-          id_select_secundario + '\')" ' + 
-          (nome_estilo == 'arma_escudo' ? 'checked' : '') + '>Arma + escudo</input>' +
-      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_duas_armas +
-          '" value="duas_armas" onclick="ClickEstilo(\'duas_armas\', \'' + 
-          id_select_secundario +'\')" ' + 
-          (nome_estilo == 'duas_armas' ? 'checked' : '') + '>Duas armas</input>' +
-      '<input type="radio" name="' + id_estilo + '" id="' + id_estilo_arma_dupla +
-          '" value="arma_dupla" onclick="ClickEstilo(\'arma_dupla\', \'' + 
-          id_select_secundario +'\')" ' + 
-          (nome_estilo == 'arma_dupla' ? 'checked' : '') + '>Arma dupla</input>' +
-      '<button type="button" onclick="ClickRemoverFilho(\'' + 
-          id_estilo + '\',\'' + id_div_estilos_luta + '\')">-</button><br>' +
-      'Principal: <select id="' + id_select_primario + '" onchange="AtualizaGeral()"></select> ' +
-      '<span id="' + id_span_primario + '"></span><br> ' +
-      'Secundária: <select id="' + id_select_secundario + '" onchange="AtualizaGeral()"></select> ' +
-      '<span id="' + id_span_secundario + '"></span><br>';
+  div_novo_estilo.appendChild(_CriaRadioEstilo(
+      'Uma arma', id_estilo_uma_arma, id_estilo, 'uma_arma', id_select_secundario));
+  div_novo_estilo.appendChild(_CriaRadioEstilo(
+      'Arma + escudo', id_estilo_arma_escudo, id_estilo, 'arma_escudo', id_select_secundario));
+  div_novo_estilo.appendChild(_CriaRadioEstilo(
+      'Duas armas', id_estilo_duas_armas, id_estilo, 'duas_armas', id_select_secundario));
+  div_novo_estilo.appendChild(_CriaRadioEstilo(
+      'Arma dupla', id_estilo_arma_dupla, id_estilo, 'arma_dupla', id_select_secundario));
+  div_novo_estilo.appendChild(_CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta));
+  div_novo_estilo.appendChild(CriaBr());
+  div_novo_estilo.appendChild(CriaSpan('Principal: '));
+  div_novo_estilo.appendChild(CriaSelect(id_select_primario, AtualizaGeral));
+  div_novo_estilo.appendChild(CriaSpan(null, id_span_primario));
+  div_novo_estilo.appendChild(CriaBr());
+  div_novo_estilo.appendChild(CriaSpan('Secundária: '));
+  div_novo_estilo.appendChild(CriaSelect(id_select_secundario, AtualizaGeral));
+  div_novo_estilo.appendChild(CriaSpan(null, id_span_secundario));
+  div_novo_estilo.appendChild(CriaBr());
+  div_novo_estilo.appendChild(CriaSpan('Classe de Armadura: '));
+  div_novo_estilo.appendChild(CriaSpan(null, id_span_classe_armadura));
+
   // Popula os selects.
   for (var i = 0; i < div_novo_estilo.childNodes.length; ++i) {
     var filho = div_novo_estilo.childNodes[i];
