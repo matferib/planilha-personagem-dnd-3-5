@@ -96,8 +96,8 @@ function _ConverteEquipamentos() {
 }
 
 function _ConverteArmadurasEscudos() {
-  personagem.armadura = entradas.armadura;
-  personagem.escudo = entradas.escudo;
+  //personagem.armadura = entradas.armadura;
+  //personagem.escudo = entradas.escudo;
 }
 
 function _ConverteAtributos() {
@@ -133,21 +133,33 @@ function _ConvertePericias() {
   }
 }
 
-// TODO tirar duplicacao de armas e armaduras.
 // Converte a lista de armaduras do personagem.
 function _ConverteListaArmaduras() {
   personagem.armaduras = [];
   // entrada fake para nenhuma.
-  var entrada_nenhuma = {
-    chave: 'nenhuma', 
-    nome_gerado: 'nenhuma', 
-    obra_prima: false, 
-    bonus: 0
-  };
-  personagem.armaduras.push(_ConverteArmadura(entrada_nenhuma));
+  //var entrada_nenhuma = {
+  //  chave: 'nenhuma', 
+  //  nome_gerado: 'nenhuma', 
+  //  obra_prima: false, 
+  //  bonus: 0
+  //};
+  //personagem.armaduras.push(_ConverteArmadura(entrada_nenhuma));
   for (var i = 0; i < entradas.armaduras.length; ++i) {
-    personagem.armaduras.push(_ConverteArmadura(entradas.armaduras[i]));
+    var armadura_personagem = _ConverteArmadura(entradas.armaduras[i]);
+    if (armadura_personagem.entrada.em_uso) {
+      personagem.armadura = armadura_personagem;
+    }
+    personagem.armaduras.push(armadura_personagem);
   }
+  personagem.escudos = [];
+  for (var i = 0; i < entradas.escudos.length; ++i) {
+    var escudo_personagem = _ConverteArmadura(entradas.escudos[i]);
+    if (escudo_personagem.entrada.em_uso) {
+      personagem.escudo = escudo_personagem;
+    }
+    personagem.escudos.push(escudo_personagem);
+  }
+
 }
 
 // Converte uma armadura.
@@ -158,7 +170,8 @@ function _ConverteArmadura(armadura_entrada) {
   armadura_personagem.entrada = {
     chave: armadura_entrada.chave, 
     bonus: armadura_entrada.bonus, 
-    obra_prima: armadura_entrada.obra_prima
+    obra_prima: armadura_entrada.obra_prima,
+    em_uso: armadura_entrada.em_uso,
   };
   return armadura_personagem;
 }
@@ -167,13 +180,13 @@ function _ConverteArmadura(armadura_entrada) {
 function _ConverteListaArmas() {
   personagem.armas = [];
   // entrada fake para desarmado.
-  var entrada_desarmado = {
-    chave: 'desarmado', 
-    nome_gerado: 'desarmado', 
-    obra_prima: false, 
-    bonus: 0
-  };
-  personagem.armas.push(_ConverteArma(entrada_desarmado));
+  //var entrada_desarmado = {
+  //  chave: 'desarmado', 
+  //  nome_gerado: 'desarmado', 
+  //  obra_prima: false, 
+  //  bonus: 0
+  //};
+  //personagem.armas.push(_ConverteArma(entrada_desarmado));
   for (var i = 0; i < entradas.armas.length; ++i) {
     personagem.armas.push(_ConverteArma(entradas.armas[i]));
   }

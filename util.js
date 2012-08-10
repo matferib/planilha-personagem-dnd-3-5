@@ -97,6 +97,18 @@ function SelecionaValor(valor_selecionado, dom_select) {
   } 
 }
 
+// Popula o select com os valores passados.
+// @param valores a serem colocados no select.
+//   [ {valor: texto} ]
+function PopulaSelect(valores, dom_select) {
+  dom_select.options.length = 0;
+  for (var i = 0; i < valores.length; ++i) {
+    for (var chave in valores[i]) {
+      dom_select.options.add(CriaOption(valores[i][chave], chave));
+    }
+  }
+}
+
 // Retorna numero * [1, limite].
 function Rola(numero, limite) {
   var resultado = 0;
