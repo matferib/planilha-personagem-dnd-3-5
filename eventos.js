@@ -125,7 +125,7 @@ function ClickGerarComum() {
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma() {
-  var arma_entrada = { entrada: { chave: 'adaga', obra_prima: false, bonus: 0 } };
+  var arma_entrada = { entrada: { chave: 'desarmado', obra_prima: false, bonus: 0 } };
   personagem.armas.push(arma_entrada);
   AtualizaGeralSemConverterEntradas();
 }
@@ -137,8 +137,20 @@ function ClickAdicionarArmadura() {
   AtualizaGeralSemConverterEntradas();
 }
 
+// Adiciona um escudo a lista de equipamentos.
+function ClickAdicionarEscudo() {
+  var escudo_entrada = { entrada: { chave: 'nenhum', obra_prima: false, bonus: 0 } };
+  personagem.escudos.push(escudo_entrada);
+  AtualizaGeralSemConverterEntradas();
+}
+
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
+  if (personagem.armas.length == 0) {
+    // TODO remover isso quando resolver a questao do desarmado.
+    alert('É necessário ter pelo menos uma arma para adicionar o estilo');
+    return;
+  }
   var estilo_entrada = { 
     nome: 'uma_arma', 
     arma_primaria: { 
@@ -240,7 +252,7 @@ function ClickVisualizacaoModoMestre() {
   AtualizaGeralSemConverterEntradas();
 }
 
-// Trata o evento de adicionar aneis. Se a estrutura for alterada aqui,
+// Trata o evento de adicionar items. Se a estrutura for alterada aqui,
 // mudar tambem a leitura das entradas que depende da ordem dos doms.
 function ClickAdicionarItem(tipo_item) {
   personagem[tipo_item].push({ nome: 'nome', caracteristicas: 'caracteristicas'});
@@ -250,6 +262,7 @@ function ClickAdicionarItem(tipo_item) {
 // Trata o click de uso de um item.
 // @param tipo_item.
 // @param checkbox que causou a mudanca (null em caso de remocao).
+// TODO arrumar isso aqui para tratar anel em separado.
 function ClickUsarItem(tipo_item, checkbox) {
   if (checkbox.checked) {
     var total_em_uso = 0;

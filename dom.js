@@ -48,7 +48,7 @@ function CriaRadio(texto, id, classe, nome_grupo, funcao) {
   var botao = CriaDom('input', id, classe);
   botao.setAttribute('type', 'radio');
   botao.name = nome_grupo;
-  // botao.textContent = texto;
+  //botao.textContent = texto;
   if (funcao) {
     botao.addEventListener('click', funcao, false);
   }
@@ -109,8 +109,11 @@ function CriaInputNumerico(numero, id, classe, funcao) {
   return input;
 }
 
-function CriaSelect(id, classe) {
+function CriaSelect(id, classe, funcao) {
   var select = CriaDom('select', id, classe);
+  if (funcao) {
+    select.addEventListener('change', funcao, false);
+  }
   return select;
 }
 
