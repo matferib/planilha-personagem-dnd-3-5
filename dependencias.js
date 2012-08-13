@@ -428,15 +428,51 @@ function _DependenciasFocoArmas() {
 }
 
 function _DependenciasArmadurasEscudos() {
-  with (personagem.ca.bonus) {
-    Adiciona('armadura', 'armadura', tabelas_armaduras[personagem.armadura.chave].bonus);
-    Adiciona('armadura_melhoria', 'armadura', personagem.armadura.bonus_magico);
-    Adiciona('escudo', 'escudo', tabelas_escudos[personagem.escudo.chave].bonus);
-    Adiciona('escudo_melhoria', 'escudo', personagem.escudo.bonus_magico);
-    Adiciona('atributo', 'destreza', personagem.atributos.destreza.modificador);
-    Adiciona('tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
-    Adiciona('armadura_natural', 'racial', tabelas_raca[personagem.raca].armadura_natural || 0);
+  // Tenta achar uma armadura, se nao usa nenhuma.
+  var nenhuma_armadura = ConverteArmadura({
+    chave: 'nenhuma', 
+    nome_gerado: 'nenhuma', 
+    obra_prima: false, 
+    bonus: 0
+  });
+  personagem.armadura = nenhuma_armadura;
+  for (var i = 0; i < personagem.armaduras.length; ++i) {
+    if (personagem.armaduras[i].entrada.em_uso) {
+      personagem.armadura = personagem.armaduras[i];
+      break;
+    }
   }
+
+  // Faz o mesmo com escudo.
+  var nenhum_escudo = ConverteEscudo({
+    chave: 'nenhum', 
+    nome_gerado: 'nenhum', 
+    obra_prima: false, 
+    bonus: 0
+  });
+  personagem.escudo = nenhum_escudo;
+  for (var i = 0; i < personagem.escudos.length; ++i) {
+    if (personagem.escudos[i].entrada.em_uso) {
+      personagem.escudo = personagem.escudos[i];
+      break;
+    }
+  }
+
+  var bonus_ca = personagem.ca.bonus;
+  bonus_ca.Adiciona(
+      'armadura', 'armadura', tabelas_armaduras[personagem.armadura.entrada.chave].bonus);
+  bonus_ca.Adiciona(
+      'armadura_melhoria', 'armadura', personagem.armadura.entrada.bonus);
+  bonus_ca.Adiciona(
+      'escudo', 'escudo', tabelas_escudos[personagem.escudo.entrada.chave].bonus);
+  bonus_ca.Adiciona(
+      'escudo_melhoria', 'escudo', personagem.escudo.entrada.bonus);
+  bonus_ca.Adiciona(
+      'atributo', 'destreza', personagem.atributos.destreza.modificador);
+  bonus_ca.Adiciona(
+      'tamanho', 'tamanho', personagem.tamanho.modificador_ataque_defesa);
+  bonus_ca.Adiciona(
+      'armadura_natural', 'racial', tabelas_raca[personagem.raca].armadura_natural || 0);
 }
 
 function _DependenciasArmas() {
