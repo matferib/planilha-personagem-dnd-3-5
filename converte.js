@@ -127,16 +127,17 @@ function _ConvertePericias() {
   }
 }
 
-// Converte a lista de armaduras do personagem.
+// Converte a lista de armaduras do personagem. Nunca se deve apagar
+// a primeira entrada (nenhuma armadura e nenhum escudo).
 function _ConverteListaArmaduras() {
-  personagem.armaduras = [];
+  personagem.armaduras.length = 1;
   for (var i = 0; i < entradas.armaduras.length; ++i) {
     var armadura_personagem = ConverteArmadura(entradas.armaduras[i]);
     personagem.armaduras.push(armadura_personagem);
   }
-  personagem.escudos = [];
+  personagem.escudos.length = 1;
   for (var i = 0; i < entradas.escudos.length; ++i) {
-    var escudo_personagem = ConverteArmadura(entradas.escudos[i]);
+    var escudo_personagem = ConverteEscudo(entradas.escudos[i]);
     personagem.escudos.push(escudo_personagem);
   }
 

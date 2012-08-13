@@ -170,4 +170,19 @@ function CarregaTestes() {
       }
     }, 
   }, body);
+
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'PrecoArmaArmaduraEscudo', 
+    Testa: function() {
+      var preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_escudos, 'broquel', true, 0, false);
+      var esperado = { ouro: tabelas_escudos['broquel'].preco };
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preco de arma armadura ou escudo.';
+      }
+    }, 
+  }, body);
+
 }

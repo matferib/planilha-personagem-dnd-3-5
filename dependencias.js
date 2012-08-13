@@ -427,16 +427,11 @@ function _DependenciasFocoArmas() {
   }
 }
 
+// Dependencias de armaduras: se nao tiver nenhuma, vai escolher 
+// a primeira armadura (desarmado).
 function _DependenciasArmadurasEscudos() {
-  // Tenta achar uma armadura, se nao usa nenhuma.
-  var nenhuma_armadura = ConverteArmadura({
-    chave: 'nenhuma', 
-    nome_gerado: 'nenhuma', 
-    obra_prima: false, 
-    bonus: 0
-  });
-  personagem.armadura = nenhuma_armadura;
-  for (var i = 0; i < personagem.armaduras.length; ++i) {
+  personagem.armadura = personagem.armaduras[0];
+  for (var i = 1; i < personagem.armaduras.length; ++i) {
     if (personagem.armaduras[i].entrada.em_uso) {
       personagem.armadura = personagem.armaduras[i];
       break;
@@ -444,13 +439,7 @@ function _DependenciasArmadurasEscudos() {
   }
 
   // Faz o mesmo com escudo.
-  var nenhum_escudo = ConverteEscudo({
-    chave: 'nenhum', 
-    nome_gerado: 'nenhum', 
-    obra_prima: false, 
-    bonus: 0
-  });
-  personagem.escudo = nenhum_escudo;
+  personagem.escudo = personagem.escudos[0];
   for (var i = 0; i < personagem.escudos.length; ++i) {
     if (personagem.escudos[i].entrada.em_uso) {
       personagem.escudo = personagem.escudos[i];

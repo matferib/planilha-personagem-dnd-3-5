@@ -161,12 +161,16 @@ function LePreco(preco, invertido) {
   return moedas;
 }
 
-// @return o preco de uma arma ou armadura ou null em caso de erro.
+// Armaduras e escudos tem o mesmo preco, so arma que muda.
+// @param tipo arma, armadura, escudo.
+// @param tabela onde o item sera consultado.
+// @param chave do item na tabela.
 // @param obra_prima se a arma for obra-prima (mas nao magica).
 // @param bonus se a arma for magica (e o bonus). Sera computado o
 //        valor da obra prima.
 // @param invertido inverter os valores para negativo.
-function PrecoArmaArmadura(tipo, tabela, chave, obra_prima, bonus, invertido) {
+// @return o preco de uma arma, armadura ou escudo. null em caso de erro.
+function PrecoArmaArmaduraEscudo(tipo, tabela, chave, obra_prima, bonus, invertido) {
   var entrada_tabela = tabela[chave];
   if (entrada_tabela == null || entrada_tabela.preco == null) {
     return null;
@@ -174,12 +178,7 @@ function PrecoArmaArmadura(tipo, tabela, chave, obra_prima, bonus, invertido) {
   // Nao pode usar invertido aqui, pq la embaixo inverte tudo.
   var preco = LePreco(entrada_tabela.preco);
   var preco_adicional = { platina: 0, ouro: 0, prata: 0, cobre: 0 };
-  if (obra_prima) {
-    // Como a leitura eh invertida, deve-se subtrair.
-    // Armas op custam 300 a mais, armaduras 150.
-    preco_adicional.ouro += tipo == 'arma' ? 300 : 150; 
-  } else if (bonus != null) {
-    preco.ouro += tipo == 'arma' ? 300 : 150; 
+  if (bonus && bonus > 0) {
     switch (bonus) {
       case 1: preco.ouro += tipo == 'arma' ? 2000 : 1000; break; 
       case 2: preco.ouro += tipo == 'arma' ? 8000 : 4000; break; 
@@ -189,6 +188,11 @@ function PrecoArmaArmadura(tipo, tabela, chave, obra_prima, bonus, invertido) {
       default:
           return null;
     }
+  }
+  // Fazer os ifs independentes ajuda a evitar a duplicacao da obra prima. 
+  if (obra_prima) {
+    // Armas op custam 300 a mais, armaduras 150.
+    preco_adicional.ouro += tipo == 'arma' ? 300 : 150; 
   }
   // Soma e se necessario, inverte.
   for (var tipo_moeda in preco) {

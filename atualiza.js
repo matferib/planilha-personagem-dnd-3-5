@@ -56,8 +56,8 @@ function _AtualizaGeral() {
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
   _AtualizaListaArmas();
-  _AtualizaDefesa();
   _AtualizaListaArmaduras();
+  _AtualizaListaEscudos();
   _AtualizaEquipamentos();
   _AtualizaFeiticos();
   _AtualizaNotas();
@@ -352,7 +352,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   RemoveFilhos(span_classe_armadura);
   // AC normal.
   var span_ca_normal = CriaSpan();
-  var array_exclusao = usar_escudo ? null : ['escudo'];
+  var array_exclusao = usar_escudo ? null : ['escudo', 'escudo_melhoria'];
   ImprimeNaoSinalizado(
       10 + personagem.ca.bonus.Total(array_exclusao),
       span_ca_normal);
@@ -364,60 +364,26 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   array_exclusao = ['atributo'];
   if (!usar_escudo) {
     array_exclusao.push('escudo');
+    array_exclusao.push('escudo_melhoria');
   }
   ImprimeNaoSinalizado(
       10 + personagem.ca.bonus.Total(array_exclusao),
       span_ca_surpreso);
   Titulo(personagem.ca.bonus.Exporta(array_exclusao), span_ca_surpreso);
   span_classe_armadura.appendChild(span_ca_surpreso);
-  span_ca_surpreso.textContent = 'S: ' + span_ca_surpreso.textContent + ', ';
+  span_ca_surpreso.textContent = 'Surpresa: ' + span_ca_surpreso.textContent + ', ';
   // AC toque.
   var span_ca_toque = CriaSpan();
+  array_exclusao = 
+    ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural'];
   ImprimeNaoSinalizado(
-      10 + personagem.ca.bonus.Total(
-          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']),
+      10 + personagem.ca.bonus.Total(array_exclusao),
       span_ca_toque);
   Titulo(
-      personagem.ca.bonus.Exporta(
-          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']), 
+      personagem.ca.bonus.Exporta(array_exclusao),
       span_ca_toque);
-  span_ca_toque.textContent = 'T: ' + span_ca_toque.textContent;
+  span_ca_toque.textContent = 'Toque: ' + span_ca_toque.textContent;
   span_classe_armadura.appendChild(span_ca_toque);
-}
-
-// Atualiza os varios tipos de defesa lendo tamanho, armadura e modificadores relevantes.
-// TODO remover
-function _AtualizaDefesa() {
-  /*
-  // Armadura e escudo. Popula os selects e depois seleciona o valor.
-  var select_armadura = Dom('armadura');
-  SelecionaValor(personagem.armadura.nome, select_armadura); 
-  var select_escudo = Dom('escudo');
-  SelecionaValor(personagem.escudo.nome, select_escudo); 
-
-  // AC normal.
-  var span_ca_normal = Dom('ca-normal');
-  ImprimeNaoSinalizado(
-      10 + personagem.ca.bonus.Total(),
-      span_ca_normal);
-  Titulo(personagem.ca.bonus.Exporta(), span_ca_normal);
-  // AC surpreso.
-  var span_ca_surpreso = Dom('ca-surpreso');
-  ImprimeNaoSinalizado(
-      10 + personagem.ca.bonus.Total(['atributo']),
-      span_ca_surpreso);
-  Titulo(personagem.ca.bonus.Exporta(['atributo']), span_ca_surpreso);
-  // AC toque.
-  var span_ca_toque = Dom('ca-toque');
-  ImprimeNaoSinalizado(
-      10 + personagem.ca.bonus.Total(
-          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']),
-      span_ca_toque);
-  Titulo(
-      personagem.ca.bonus.Exporta(
-          ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural']), 
-      span_ca_toque);
-      */
 }
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e
@@ -684,60 +650,6 @@ function _AtualizaItem(item, div_item, div_itens) {
   }
 }
 
-// Atualiza o div que contem uma arma ou armadura.
-// @param chave opcional chave da arma ou armadura sendo adicionada.
-// @param obra_prima indica se a arma eh obra_prima.
-// @param bonus da arma.
-function _AtualizaArmaArmadura(chave, obra_prima, bonus, div) {
-  var lido = {};
-  for (var i = 0; i < div.childNodes.length; ++i) {
-    var filho = div.childNodes.item(i);
-    if (filho.name == null) {
-      continue;
-    }
-    if (filho.name.indexOf('em-uso') != -1) {
-      filho.checked = true;
-    } else if (filho.name.indexOf('select') != -1) {
-      SelecionaValor(chave, filho);
-    } else if (filho.name.indexOf('obra-prima') != -1) {
-      filho.checked = obra_prima;
-    } else if (filho.name.indexOf('bonus-magico') != -1) {
-      if (obra_prima) {
-        // Se obra prima estiver selecionada, ignora o bonus.
-        filho.value = 0;
-        filho.readOnly = true;
-      } else {
-        filho.bonus = bonus;
-        filho.readOnly = false;
-      }
-    }
-  }
-}
-
-// Atualiza uma lista de armas ou armaduras.
-// @param nome armas ou armaduras, para algumas diferencas.
-// @param div pai das armas ou armaduras.
-// @param array_personagem array de armas ou armaduras do personagem.
-// @param funcao_adicao caso seja necessario adicionar um div novo.
-function _AtualizaListaArmasArmaduras(nome, div, array_personagem, funcao_adicao) {
-  var filho = div.firstChild;
-  // Se for arma, ignora a primeira (nao deve ser mostrada para evitar
-  // problemas de consistencia.
-  for (var i = (nome == 'armas') ? 1 : 0; i < array_personagem.length; ++i) {
-    var personagem_entrada = array_personagem[i].entrada;
-    if (filho == null) {
-      // O div nao existe, chama a funcao.
-      filho = funcao_adicao();
-    }
-    _AtualizaArmaArmadura(
-        personagem_entrada.chave,
-        personagem_entrada.obra_prima,
-        personagem_entrada.bonus,
-        filho);
-    filho = filho.nextSibling;
-  }
-}
-
 // Atualiza a lista de armas.
 function _AtualizaListaArmas() {
   _AtualizaListaArmasArmaduras(
@@ -748,6 +660,60 @@ function _AtualizaListaArmas() {
 function _AtualizaListaArmaduras() {
   _AtualizaListaArmasArmaduras(
       'armaduras', Dom('div-equipamentos-armaduras'), personagem.armaduras, AdicionaArmadura);
+}
+
+// Atualiza a lista de escudos.
+function _AtualizaListaEscudos() {
+  _AtualizaListaArmasArmaduras(
+      'escudos', Dom('div-equipamentos-escudos'), personagem.escudos, AdicionaEscudo);
+}
+
+// Atualiza uma lista de armas ou armaduras.
+// @param nome armas ou armaduras, para algumas diferencas.
+// @param div pai das armas ou armaduras.
+// @param array_personagem array de armas ou armaduras do personagem.
+// @param funcao_adicao caso seja necessario adicionar um div novo.
+function _AtualizaListaArmasArmaduras(nome, div, array_personagem, funcao_adicao) {
+  var filho = div.firstChild;
+  // Ignora a primeira (nao deve ser mostrada para evitar problemas de consistencia.
+  for (var i = 1; i < array_personagem.length; ++i) {
+    var personagem_entrada = array_personagem[i].entrada;
+    if (filho == null) {
+      // O div nao existe, chama a funcao.
+      filho = funcao_adicao();
+    }
+    _AtualizaArmaArmadura(
+        personagem_entrada.chave,
+        // Armas nao tem o checkbox, mas em uso eh null.
+        personagem_entrada.em_uso,
+        personagem_entrada.obra_prima,
+        personagem_entrada.bonus,
+        filho);
+    filho = filho.nextSibling;
+  }
+}
+
+// Atualiza o div que contem uma arma ou armadura.
+// @param chave opcional chave da arma ou armadura sendo adicionada.
+// @param obra_prima indica se a arma eh obra_prima.
+// @param bonus da arma.
+function _AtualizaArmaArmadura(chave, em_uso, obra_prima, bonus, div) {
+  var lido = {};
+  for (var i = 0; i < div.childNodes.length; ++i) {
+    var filho = div.childNodes.item(i);
+    if (filho.name == null) {
+      continue;
+    }
+    if (filho.name.indexOf('em-uso') != -1) {
+      filho.checked = em_uso;
+    } else if (filho.name.indexOf('select') != -1) {
+      SelecionaValor(chave, filho);
+    } else if (filho.name.indexOf('obra-prima') != -1) {
+      filho.checked = obra_prima;
+    } else if (filho.name.indexOf('bonus-magico') != -1) {
+      filho.bonus = bonus;
+    }
+  }
 }
 
 function _AtualizaNotas() {
