@@ -194,7 +194,7 @@ function _CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta) {
 // @param nome_estilo: uma_arma, arma_escudo, duas_armas, arma_dupla.
 // @param arma_principal nome da arma principal.
 // @param arma_secundaria nome da arma secundaria.
-function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
+function AdicionaEstiloLuta() {
   var id_div_estilos_luta = 'div-estilos-luta';
   var div_estilos_luta = Dom(id_div_estilos_luta);
   var div_novo_estilo = CriaDiv();
@@ -244,10 +244,10 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
     var filho = div_novo_estilo.childNodes[i];
     if (filho.tagName == 'SELECT') {
       if (filho.id == id_select_primario) {
-        AdicionaArmasAoEstilo(filho, arma_principal);
+        AdicionaArmasAoEstilo(filho, 'desarmado');
       } else {
-        AdicionaArmasAoEstilo(filho, arma_secundaria);
-        filho.disabled = (nome_estilo != 'duas_armas');
+        AdicionaArmasAoEstilo(filho, 'desarmado');
+        filho.disabled = true;
       }
     }
   }

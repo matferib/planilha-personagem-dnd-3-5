@@ -283,13 +283,15 @@ function _AtualizaAtaque() {
 }
 
 // Atualiza a lista de armas de cada estilo.
-// TODO melhorar isso, so criar se necessario.
 function _AtualizaEstilosLuta() {
   // Recria os elementos do estilos. 
-  RemoveFilhos(Dom('div-estilos-luta'));
-  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
+  //RemoveFilhos(Dom('div-estilos-luta'));
+  var doms_estilos = Dom('div-estilos-luta').childNodes;
+  // Se remover, fica do tamanho dos estilos do personagem.
+  doms_estilos.length = personagem.estilos_luta.length;
+  for (var i = doms_estilos.length; i < personagem.estilos_luta.length; ++i) {
     var estilo = personagem.estilos_luta[i];
-    AdicionaEstiloLuta(estilo.nome, estilo.arma_primaria, estilo.arma_secundaria);
+    AdicionaEstiloLuta(estilo.nome);
   }
 
   // Atualiza os valores dos estilos.
