@@ -146,11 +146,6 @@ function ClickAdicionarEscudo() {
 
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
-  if (personagem.armas.length == 0) {
-    // TODO remover isso quando resolver a questao do desarmado.
-    alert('É necessário ter pelo menos uma arma para adicionar o estilo');
-    return;
-  }
   var estilo_entrada = { 
     nome: 'uma_arma', 
     arma_primaria: { 
