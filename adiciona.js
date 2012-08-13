@@ -81,14 +81,13 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   input_bonus.setAttribute('maxlength', 2);
   input_bonus.setAttribute('size', 2);
   input_bonus.value = 0;
- 
   var button_remover = CriaBotao('-', null, null, {
-      id:  id_gerado,
-      id_div_equipamentos: id_div_equipamentos,
-      handleEvent: function(evt) {
-        ClickRemoverFilho(this.id, this.id_div_equipamentos);
-      }
-  });
+        id:  id_gerado,
+        id_div_equipamentos: id_div_equipamentos,
+        handleEvent: function(evt) {
+          ClickRemoverFilho(this.id, this.id_div_equipamentos);
+        }
+    });
 
   var div = CriaDiv(id_gerado);
   if (input_em_uso) {
@@ -124,6 +123,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
 }
 
 // Adiciona uma nova arma a lista de equipamentos.
+// @param botao_remover se o botao remover deve ser colocado.
 // @return o div adicionado.
 function AdicionaArma() {
   return _AdicionaArmaArmadura(
@@ -209,7 +209,7 @@ function AdicionaEstiloLuta(nome_estilo, arma_principal, arma_secundaria) {
   div_novo_estilo.appendChild(_CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta));
   div_novo_estilo.appendChild(CriaBr());
   div_novo_estilo.appendChild(CriaSpan('Principal: '));
-  div_novo_estilo.appendChild(CriaSelect(id_select_primario, AtualizaGeral));
+  div_novo_estilo.appendChild(CriaSelect(id_select_primario, null, AtualizaGeral));
   div_novo_estilo.appendChild(CriaSpan(null, id_span_primario));
   div_novo_estilo.appendChild(CriaBr());
   div_novo_estilo.appendChild(CriaSpan('Secundária: '));

@@ -715,18 +715,20 @@ function _AtualizaArmaArmadura(chave, obra_prima, bonus, div) {
 }
 
 // Atualiza uma lista de armas ou armaduras.
+// @param nome armas ou armaduras, para algumas diferencas.
 // @param div pai das armas ou armaduras.
 // @param array_personagem array de armas ou armaduras do personagem.
 // @param funcao_adicao caso seja necessario adicionar um div novo.
-function _AtualizaListaArmasArmaduras(div, array_personagem, funcao_adicao) {
+function _AtualizaListaArmasArmaduras(nome, div, array_personagem, funcao_adicao) {
   var filho = div.firstChild;
-  for (var i = 0; i < array_personagem.length; ++i) {
+  // Se for arma, ignora a primeira (nao deve ser mostrada para evitar
+  // problemas de consistencia.
+  for (var i = (nome == 'armas') ? 1 : 0; i < array_personagem.length; ++i) {
     var personagem_entrada = array_personagem[i].entrada;
     if (filho == null) {
       // O div nao existe, chama a funcao.
       filho = funcao_adicao();
     }
-    // Atualiza o div.
     _AtualizaArmaArmadura(
         personagem_entrada.chave,
         personagem_entrada.obra_prima,
@@ -739,13 +741,13 @@ function _AtualizaListaArmasArmaduras(div, array_personagem, funcao_adicao) {
 // Atualiza a lista de armas.
 function _AtualizaListaArmas() {
   _AtualizaListaArmasArmaduras(
-      Dom('div-equipamentos-armas'), personagem.armas, AdicionaArma);
+      'armas', Dom('div-equipamentos-armas'), personagem.armas, AdicionaArma);
 }
 
 // Atualiza a lista de armaduras.
 function _AtualizaListaArmaduras() {
   _AtualizaListaArmasArmaduras(
-      Dom('div-equipamentos-armaduras'), personagem.armaduras, AdicionaArmadura);
+      'armaduras', Dom('div-equipamentos-armaduras'), personagem.armaduras, AdicionaArmadura);
 }
 
 function _AtualizaNotas() {

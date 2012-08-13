@@ -172,6 +172,17 @@ var personagem = {
   notas: '',
 };
 
+// Qualquer inicializacao do personagem eh feita aqui.
+function IniciaPersonagem() {
+  // entrada fake para desarmado.
+  personagem.armas.push(ConverteArma({
+    chave: 'desarmado',
+    nome_gerado: 'desarmado',
+    obra_prima: false,
+    bonus: 0
+  }));
+}
+
 // Encontra uma arma do personagem pelo nome gerado.
 // @return a arma do personagem.
 function ArmaPersonagem(nome_gerado) {

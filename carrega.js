@@ -13,6 +13,9 @@ function CarregamentoInicial() {
   _CarregaPericias();
   _CarregaFeiticos();
 
+  // Inicia o objeto de personagem.
+  IniciaPersonagem();
+
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual != -1) {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
