@@ -6,6 +6,9 @@
 // @return true se as moedas forem iguais.
 function _ComparaMoedas(moedas1, moedas2) {
   for (var tipo_moeda in moedas1) {
+    if (moedas1[tipo_moeda] == 0 && !(tipo_moeda in moedas2)) {
+      continue;
+    }
     if (moedas1[tipo_moeda] != moedas2[tipo_moeda]) {
       return false;
     }
@@ -176,12 +179,32 @@ function CarregaTestes() {
     nome: 'PrecoArmaArmaduraEscudo', 
     Testa: function() {
       var preco = PrecoArmaArmaduraEscudo(
-          'arma', tabelas_escudos, 'broquel', true, 0, false);
-      var esperado = { ouro: tabelas_escudos['broquel'].preco };
+          'escudo', tabelas_escudos, 'broquel', false, 0, false);
+      var esperado = { ouro: 15 };
       this.resultado = _ComparaMoedas(preco, esperado);
       if (!this.resultado) {
-        this.detalhes = 'Erro lendo preco de arma armadura ou escudo.';
+        this.detalhes = 'Erro lendo preco de broquel.';
+        return;
       }
+
+      // Obra prima + 150 para escudos.
+      preco = PrecoArmaArmaduraEscudo(
+          'escudo', tabelas_escudos, 'broquel', true, 0, false);
+      esperado.ouro += 150;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preco de broquel obra prima.';
+      }
+
+      // Magico + 1000 para escudos +1.
+      preco = PrecoArmaArmaduraEscudo(
+          'escudo', tabelas_escudos, 'broquel', true, 1, false);
+      esperado.ouro += 1000;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preco de broquel +1.';
+      }
+
     }, 
   }, body);
 
