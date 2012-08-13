@@ -31,7 +31,6 @@ function ConverteEntradasParaPersonagem() {
   // Tem que ser depois de conferir pre requisitos.
   _ConvertePericias();
 
-  _ConverteArmadurasEscudos();
   _ConverteListaArmas();
   _ConverteListaArmaduras();
 
@@ -95,11 +94,6 @@ function _ConverteEquipamentos() {
   personagem.outros_equipamentos = entradas.outros_equipamentos;
 }
 
-function _ConverteArmadurasEscudos() {
-  //personagem.armadura = entradas.armadura;
-  //personagem.escudo = entradas.escudo;
-}
-
 function _ConverteAtributos() {
   for (var i = 0; i < entradas.bonus_atributos.length; ++i) {
     personagem.atributos.pontos.gastos.push(entradas.bonus_atributos[i]);
@@ -136,44 +130,49 @@ function _ConvertePericias() {
 // Converte a lista de armaduras do personagem.
 function _ConverteListaArmaduras() {
   personagem.armaduras = [];
-  // entrada fake para nenhuma.
-  //var entrada_nenhuma = {
-  //  chave: 'nenhuma', 
-  //  nome_gerado: 'nenhuma', 
-  //  obra_prima: false, 
-  //  bonus: 0
-  //};
-  //personagem.armaduras.push(_ConverteArmadura(entrada_nenhuma));
   for (var i = 0; i < entradas.armaduras.length; ++i) {
-    var armadura_personagem = _ConverteArmadura(entradas.armaduras[i]);
-    if (armadura_personagem.entrada.em_uso) {
-      personagem.armadura = armadura_personagem;
-    }
+    var armadura_personagem = ConverteArmadura(entradas.armaduras[i]);
     personagem.armaduras.push(armadura_personagem);
   }
   personagem.escudos = [];
   for (var i = 0; i < entradas.escudos.length; ++i) {
-    var escudo_personagem = _ConverteArmadura(entradas.escudos[i]);
-    if (escudo_personagem.entrada.em_uso) {
-      personagem.escudo = escudo_personagem;
-    }
+    var escudo_personagem = ConverteArmadura(entradas.escudos[i]);
     personagem.escudos.push(escudo_personagem);
   }
 
 }
 
-// Converte uma armadura.
-function _ConverteArmadura(armadura_entrada) {
+// Converte uma armadura. Exportada porque dependencias usa para criar as 
+// armaduras fake.
+function ConverteArmadura(armadura_entrada) {
   var armadura_tabela = tabelas_armaduras[armadura_entrada.chave];
   var armadura_personagem = {};
   // O nome da entrada eh apenas um indice na tabela de armas.
   armadura_personagem.entrada = {
     chave: armadura_entrada.chave, 
     bonus: armadura_entrada.bonus, 
-    obra_prima: armadura_entrada.obra_prima,
+    // Se é magica, também é obra prima.
+    obra_prima: armadura_entrada.bonus > 0 ? 
+        true : armadura_entrada.obra_prima,
     em_uso: armadura_entrada.em_uso,
   };
   return armadura_personagem;
+}
+
+// Converte um escudo. Usada nas dependencias.
+function ConverteEscudo(escudo_entrada) {
+  var escudo_tabela = tabelas_escudos[escudo_entrada.chave];
+  var escudo_personagem = {};
+  // O nome da entrada eh apenas um indice na tabela de armas.
+  escudo_personagem.entrada = {
+    chave: escudo_entrada.chave, 
+    bonus: escudo_entrada.bonus, 
+    // Se é magico, também é obra prima.
+    obra_prima: escudo_entrada.bonus > 0 ? 
+        true : escudo_entrada.obra_prima,
+    em_uso: escudo_entrada.em_uso,
+  };
+  return escudo_personagem;
 }
 
 // Converte a lista de armas do personagem.

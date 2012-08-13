@@ -133,7 +133,7 @@ var personagem = {
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
-  // Armadura: aponta para uma das armaduras.
+  // Armadura: aponta para a armadura que estiver sendo usada.
   armadura: null, 
   // Cada entrada:
   //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado.
