@@ -256,11 +256,36 @@ function _LeEquipamentos() {
 
   // Equipamentos.
   // Armas e armaduras: estes divs possuem divs filhos com select, checkbox, input
-  _LeArmaArmadura(entradas.armas, Dom('div-equipamentos-armas'));
-  _LeArmaArmadura(entradas.armaduras, Dom('div-equipamentos-armaduras'));
+  _LeArmas();
+  _LeArmaduras();
+  _LeEscudos();
 
   for (var tipo_item in tabelas_itens) {
     _LeItens(tipo_item);
+  }
+}
+
+// Funcoes iguais que chamam apenas LeArmasArmadurasEscudos com parametros corretos.
+function _LeArmas() {
+  _LeArmasArmadurasEscudos(entradas.armas, Dom('div-equipamentos-armas'));
+}
+
+function _LeArmaduras() {
+  _LeArmasArmadurasEscudos(entradas.armaduras, Dom('div-equipamentos-armaduras'));
+}
+
+function _LeEscudos() {
+  _LeArmasArmadurasEscudos(entradas.escudos, Dom('div-equipamentos-escudos'));
+}
+// Fim funcoes iguais.
+
+// Le armas e armaduras. 
+// @param array_entrada o array na entrada. Pode ser entradas.armas ou armaduras.
+// @param div que contem os elementos.
+function _LeArmasArmadurasEscudos(array_entrada, div) {
+  array_entrada.length = 0;
+  for (var i = 0; i < div.childNodes.length; ++i) {
+    array_entrada.push(LeEntradaArmaArmadura(div.childNodes[i]));
   }
 }
 
@@ -275,7 +300,7 @@ function LeEntradaArmaArmadura(div) {
       continue;
     }
     if (filho.name.indexOf('em-uso') != -1) {
-      lido.em_uso = true;
+      lido.em_uso = filho.checked;
     } else if (filho.name.indexOf('select') != -1) {
       lido.chave = ValorSelecionado(filho);
     } else if (filho.name.indexOf('obra-prima') != -1) {
@@ -287,15 +312,7 @@ function LeEntradaArmaArmadura(div) {
   return lido;
 }
 
-// Le armas e armaduras. 
-// @param array_entrada o array na entrada. Pode ser entradas.armas ou armaduras.
-// @param div que contem os elementos.
-function _LeArmaArmadura(array_entrada, div) {
-  array_entrada.length = 0;
-  for (var i = 0; i < div.childNodes.length; ++i) {
-    array_entrada.push(LeEntradaArmaArmadura(div.childNodes[i]));
-  }
-}
+
 
 function _LeItens(tipo_item) {
   entradas[tipo_item] = [];

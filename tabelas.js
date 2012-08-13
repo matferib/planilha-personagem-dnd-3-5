@@ -434,13 +434,13 @@ var tabelas_armaduras_invertida = {
 
 // Tabelas de escudos (TODO terminar outros atributos).
 var tabelas_escudos = {
-  nenhum: { nome: 'Nenhum', bonus: 0 },
-  broquel: { nome: 'Broquel', bonus: 1 },
-  leve_madeira: { nome: 'Escudo Leve de Madeira', bonus: 1 },
-  leve_aco: { nome: 'Escudo Leve de Aço', bonus: 1 },
-  pesado_madeira: { nome: 'Escudo Pesado de Madeira', bonus: 2 },
-  pesado_aco: { nome: 'Escudo Pesado de Aço', bonus: 2 },
-  corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2 },
+  nenhum: { nome: 'Nenhum', bonus: 0, preco: '0 PO' },
+  broquel: { nome: 'Broquel', bonus: 1, preco: '15 PO' },
+  leve_madeira: { nome: 'Escudo Leve de Madeira', bonus: 1, preco: '3 PO' },
+  leve_aco: { nome: 'Escudo Leve de Aço', bonus: 1, preco: '9 PO' },
+  pesado_madeira: { nome: 'Escudo Pesado de Madeira', bonus: 2, preco: '7 PO' },
+  pesado_aco: { nome: 'Escudo Pesado de Aço', bonus: 2, preco: '20 PO' },
+  corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2, preco: '30 PO' },
 };
 
 // Mapeia o nome para a chave. Necessario para computar proficiencias.
