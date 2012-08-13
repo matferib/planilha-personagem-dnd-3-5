@@ -277,6 +277,18 @@ function ClickUsarItem(tipo_item, checkbox) {
   AtualizaGeral();
 }
 
+// Trata o click de uso de uma armadura ou escudo.
+// Usado apenas para permitir que nenhuma armadura ou escudo seja
+// selecionado ja que o radio nao permite isso apos ser selecionado.
+// @param radio que causou a mudanca.
+function ClickUsarArmaduraEscudo(radio) {
+  // TODO isso nao funciona, o botao ja vem checked.
+  //if (radio.checked) {
+  //  radio.checked = false;
+  //}
+  AtualizaGeral();
+}
+
 // Trata os botoes de personagem.
 // @param modo 'elite' ou 'comum'.
 function ClickGerarPersonagem(modo) {
@@ -310,12 +322,12 @@ function _AchaArmaArmadura(dom) {
 
 // Vende a arma/armadura contida no dom.
 // @param dom contendo a arma ou armadura.
-// @oaram tipo que esta sendo vendido.
+// @oaram tipo que esta sendo vendido (arma, armadura, escudo).
 // @param tabela que contem o item sendo vendido.
 // TODO unit test.
 function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
-  var preco = PrecoArmaArmadura(
+  var preco = PrecoArmaArmaduraEscudo(
       tipo, tabela, lido.chave, lido.obra_prima, lido.bonus, false);
   if (preco == null) {
     alert("Arma ou armadura magica invalida");
@@ -327,11 +339,11 @@ function ClickVenderArmaArmadura(dom, tipo, tabela) {
 
 // Compra a arma/armadura contida no dom.
 // @param dom contendo a arma ou armadura.
-// @param tipo do que esta sendo vendido (arma, armadura).
+// @param tipo do que esta sendo vendido (arma, armadura, escudo).
 // @param tabela do que esta sendo comprado.
 function ClickComprarArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
-  var preco = PrecoArmaArmadura(
+  var preco = PrecoArmaArmaduraEscudo(
       tipo, tabela, lido.chave, lido.obra_prima, lido.bonus, true);
   if (preco == null) {
     alert("Arma ou armadura magica invalida");

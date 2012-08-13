@@ -174,10 +174,22 @@ var personagem = {
 
 // Qualquer inicializacao do personagem eh feita aqui.
 function IniciaPersonagem() {
-  // entrada fake para desarmado.
+  // entradas padroes para armas, armaduras e escudos.
   personagem.armas.push(ConverteArma({
     chave: 'desarmado',
     nome_gerado: 'desarmado',
+    obra_prima: false,
+    bonus: 0
+  }));
+  personagem.armaduras.push(ConverteArmadura({
+    chave: 'nenhuma', 
+    nome_gerado: 'nenhuma', 
+    obra_prima: false, 
+    bonus: 0
+  }));
+  personagem.escudos.push(ConverteEscudo({
+    chave: 'nenhum', 
+    nome_gerado: 'nenhum',
     obra_prima: false,
     bonus: 0
   }));

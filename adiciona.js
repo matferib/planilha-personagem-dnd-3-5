@@ -35,7 +35,7 @@ function RemoveClasse() {
 }
 
 // Adiciona uma nova arma ou armadura a lista de equipamentos. 
-// @param nome do select, 'armadura' ou 'arma'.
+// @param nome do select, 'armadura' ou 'arma' ou 'escudo'.
 // @param tabelas que compoe a tabela completa de armas ou armaduras.
 // @param div_pai onde a nova arma ou armadura sera adicionada.
 // @return o div adicionado.
@@ -46,6 +46,8 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
     tabela = tabelas_armas;
   } else if (nome == 'armadura') {
     tabela = tabelas_armaduras;
+  } else if (nome == 'escudo') {
+    tabela = tabelas_escudos;
   } else {
     alert('Nome invalido, esperando arma ou armadura.');
     return null;
@@ -54,9 +56,17 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   var id_div_equipamentos = div_pai.id;
   var id_gerado = GeraId('div-' + nome, div_pai);
   var input_em_uso = null;
-  if (nome == 'armadura') {
-    input_em_uso = CriaRadio(null, null, null, 'armaduras', AtualizaGeral);
-    input_em_uso.setAttribute('name', 'em-uso');
+  if (nome == 'armadura' || nome == 'escudo') {
+    input_em_uso = CriaRadio(null, null, null, nome + '-em-uso', null);
+    input_em_uso.addEventListener(
+        'click', 
+        {
+          input: input_em_uso,
+          handleEvent: function(evt) {
+            ClickUsarArmaduraEscudo(this.input);
+          }
+        }, 
+        false);
   }
   var select = CriaSelect();
   select.setAttribute('name', 'select-' + nome);
@@ -109,10 +119,10 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   });
   var button_comprar = CriaBotao('Comprar', null, 'compra', {
       div:  div,
-      nome: nome,
+      tipo: nome,
       tabela: tabela,
       handleEvent: function(evt) {
-        ClickComprarArmaArmadura(this.div, this.nome, this.tabela);
+        ClickComprarArmaArmadura(this.div, this.tipo, this.tabela);
       }
   });
 
@@ -133,7 +143,7 @@ function AdicionaArma() {
       Dom('div-equipamentos-armas'));
 }
 
-// Adiciona uma nova armadura a lista de equipamentos. Todos parametros sao opcionais.
+// Adiciona uma nova armadura a lista de equipamentos.
 // @return o div adicionado.
 function AdicionaArmadura() {
   return _AdicionaArmaArmadura(
@@ -141,6 +151,16 @@ function AdicionaArmadura() {
       [ tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ],
       [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ],
       Dom('div-equipamentos-armaduras'));
+}
+
+// Adiciona um novo escudo a lista de equipamentos.
+// @return o div adicionado.
+function AdicionaEscudo() {
+  return _AdicionaArmaArmadura(
+      'escudo', 
+      [ tabelas_escudos ],
+      [ 'Escudos' ],
+      Dom('div-equipamentos-escudos'));
 }
 
 // @return o radio do estilo.
