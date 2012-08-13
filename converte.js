@@ -176,24 +176,21 @@ function ConverteEscudo(escudo_entrada) {
 }
 
 // Converte a lista de armas do personagem.
+// 
 function _ConverteListaArmas() {
-  personagem.armas = [];
-  // entrada fake para desarmado.
-  //var entrada_desarmado = {
-  //  chave: 'desarmado', 
-  //  nome_gerado: 'desarmado', 
-  //  obra_prima: false, 
-  //  bonus: 0
-  //};
-  //personagem.armas.push(_ConverteArma(entrada_desarmado));
+  // Tem que manter sempre a primeira arma imutavel (desarmado).
+  // A mesma coisa ocorre no atualiza, a arma nao eh mostrada para
+  // evitar inconsistencias.
+  personagem.armas.length = 1;
   for (var i = 0; i < entradas.armas.length; ++i) {
-    personagem.armas.push(_ConverteArma(entradas.armas[i]));
+    personagem.armas.push(ConverteArma(entradas.armas[i]));
   }
 }
 
-// Converte uma arma da entrada para personagem.
+// Converte uma arma da entrada para personagem. 
+// Exportada para gerar a entrada desarmado.
 // @return a arma convertida.
-function _ConverteArma(arma_entrada) {
+function ConverteArma(arma_entrada) {
   var arma_tabela = tabelas_armas[arma_entrada.chave];
   var arma_personagem = {};
   // O nome da entrada eh apenas um indice na tabela de armas.
