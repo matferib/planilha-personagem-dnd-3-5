@@ -72,10 +72,14 @@ function ClickSalvar() {
 // Carrega o personagem do historico local.
 function ClickAbrir() {
   var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
-  entradas = goog.json.parse(localStorage.getItem(nome));
-  // Esse caso eh valido, porque a gente salva as entradas.
-  AtualizaGeralSemLerEntradas();
-  alert('Personagem "' + nome + '" carregado com sucesso');
+  if (nome in localStorage) {
+    entradas = goog.json.parse(localStorage.getItem(nome));
+    // Esse caso eh valido, porque a gente salva as entradas.
+    AtualizaGeralSemLerEntradas();
+    alert('Personagem "' + nome + '" carregado com sucesso');
+  } else {
+    alert('Não encontrei personagem com nome "' + nome + '"');
+  }
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
