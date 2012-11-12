@@ -89,9 +89,26 @@ function _GeraEquipamentos(tabela_geracao_classe_por_nivel) {
 
 function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
   with (tabela_geracao_classe_por_nivel) {
-    personagem.armadura.nome = armadura.nome;
-    personagem.armadura.obra_prima = armadura.obra_prima || false;
-    personagem.armadura.bonus_magico = armadura.bonus_magico || 0;
+    // Mantem sem armadura.
+    personagem.armaduras.length = 1;
+    var entrada_armadura = {
+      entrada: {
+        chave: armadura.nome,
+        obra_prima: armadura.obra_prima || false,
+        bonus: armadura.bonus || 0,
+      },
+    };
+    personagem.armaduras.push(entrada_armadura);
+    // Mantem sem escudo.
+    personagem.escudos.length = 1;
+    var entrada_escudo = {
+      entrada: {
+        chave: escudo.nome,
+        obra_prima: escudo.obra_prima || false,
+        bonus: escudo.bonus || 0,
+      },
+    };
+    personagem.escudos.push(entrada_escudo);
   }
 }
 
