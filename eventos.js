@@ -66,7 +66,7 @@ function ClickSalvar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
   localStorage.setItem(nome, goog.json.serialize(entradas));
-  alert('Personagem ' + nome + ' salvo com sucesso');
+  alert('Personagem "' + nome + '" salvo com sucesso');
 }
 
 // Carrega o personagem do historico local.
@@ -75,7 +75,7 @@ function ClickAbrir() {
   entradas = goog.json.parse(localStorage.getItem(nome));
   // Esse caso eh valido, porque a gente salva as entradas.
   AtualizaGeralSemLerEntradas();
-  alert('Personagem ' + nome + ' carregado com sucesso');
+  alert('Personagem "' + nome + '" carregado com sucesso');
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
