@@ -427,19 +427,17 @@ function _DependenciasFocoArmas() {
   }
 }
 
-// Dependencias de armaduras: se nao tiver nenhuma, vai escolher 
-// a primeira armadura (desarmado).
+// Dependencias de armaduras e escudos.
 function _DependenciasArmadurasEscudos() {
-  personagem.armadura = personagem.armaduras[0];
-  for (var i = 1; i < personagem.armaduras.length; ++i) {
+  personagem.armadura = null;
+  for (var i = 0; i < personagem.armaduras.length; ++i) {
     if (personagem.armaduras[i].entrada.em_uso) {
       personagem.armadura = personagem.armaduras[i];
       break;
     }
   }
 
-  // Faz o mesmo com escudo.
-  personagem.escudo = personagem.escudos[0];
+  personagem.escudo = null;
   for (var i = 0; i < personagem.escudos.length; ++i) {
     if (personagem.escudos[i].entrada.em_uso) {
       personagem.escudo = personagem.escudos[i];
@@ -448,14 +446,19 @@ function _DependenciasArmadurasEscudos() {
   }
 
   var bonus_ca = personagem.ca.bonus;
-  bonus_ca.Adiciona(
-      'armadura', 'armadura', tabelas_armaduras[personagem.armadura.entrada.chave].bonus);
-  bonus_ca.Adiciona(
-      'armadura_melhoria', 'armadura', personagem.armadura.entrada.bonus);
-  bonus_ca.Adiciona(
-      'escudo', 'escudo', tabelas_escudos[personagem.escudo.entrada.chave].bonus);
-  bonus_ca.Adiciona(
-      'escudo_melhoria', 'escudo', personagem.escudo.entrada.bonus);
+  bonus_ca.Limpa();
+  if (personagem.armadura != null) {
+    bonus_ca.Adiciona(
+        'armadura', 'armadura', tabelas_armaduras[personagem.armadura.entrada.chave].bonus);
+    bonus_ca.Adiciona(
+        'armadura_melhoria', 'armadura', personagem.armadura.entrada.bonus);
+  }
+  if (personagem.escudo != null) {
+    bonus_ca.Adiciona(
+        'escudo', 'escudo', tabelas_escudos[personagem.escudo.entrada.chave].bonus);
+    bonus_ca.Adiciona(
+        'escudo_melhoria', 'escudo', personagem.escudo.entrada.bonus);
+  }
   bonus_ca.Adiciona(
       'atributo', 'destreza', personagem.atributos.destreza.modificador);
   bonus_ca.Adiciona(
