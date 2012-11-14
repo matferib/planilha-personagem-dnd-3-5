@@ -137,13 +137,11 @@ var personagem = {
   armadura: null, 
   // Cada entrada:
   //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado.
-  // Sempre havera uma entrada 'nenhuma' aqui.
   armaduras: [],
   // Aponta para um dos escudos.
   escudo: null, 
   // Cada entrada:
   //      entrada: { chave, obra_prima, bonus }, nome_gerado.
-  // Sempre havera uma entrada 'nenhum' aqui.
   escudos: [],
   elmo: '',
   // TODO: passar pra dentro de itens?
@@ -178,18 +176,6 @@ function IniciaPersonagem() {
   personagem.armas.push(ConverteArma({
     chave: 'desarmado',
     nome_gerado: 'desarmado',
-    obra_prima: false,
-    bonus: 0
-  }));
-  personagem.armaduras.push(ConverteArmadura({
-    chave: 'nenhuma', 
-    nome_gerado: 'nenhuma', 
-    obra_prima: false, 
-    bonus: 0
-  }));
-  personagem.escudos.push(ConverteEscudo({
-    chave: 'nenhum', 
-    nome_gerado: 'nenhum',
     obra_prima: false,
     bonus: 0
   }));
