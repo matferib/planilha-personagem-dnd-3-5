@@ -37,7 +37,11 @@
 </div> <!--div-visoes-->
 
 <div id="div-geral" class="divs-principais">
-Nome: <input type="text" id="nome" onchange="AtualizaGeral()"/><br>
+Nome: <input type="text" id="nome" onchange="AtualizaGeral()"/>
+<button type="button" onclick="ClickSalvar()">Salvar</button>
+<button type="button" onclick="ClickAbrir()">Abrir</button>
+<br>
+
 Raça: 
 <select id="raca" onchange="AtualizaGeral()">
 </select>&nbsp;
@@ -216,11 +220,6 @@ Total: <span id="pericias-total-pontos"></span>, gastos: <span id="pericias-pont
 Notas:<br>
 <textarea rows="5" cols="40" id="text-area-notas" onchange="ChangeNotas()"></textarea>
 </div> <!-- div-notas -->
-
-<div id="div-salvar">
-<button type="button" onclick="ClickSalvar()">Salvar</button>
-<button type="button" onclick="ClickAbrir()">Abrir</button>
-</div> <!-- div-salvar -->
 
 <div id="div-link">
 <button type="button" onclick="ClickLink()">Link</button>
