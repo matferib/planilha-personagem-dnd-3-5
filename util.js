@@ -221,3 +221,9 @@ function Titulo(pares, dom) {
   dom.title = titulo;
 }
 
+// Realiza o trim da string (remove espacos antes e depois).
+function AjustaString(str) {
+  str = str.replace(/\s*$/, "");  // direita.
+  str = str.replace(/^\s*/, "");  // esquerda.
+  return str;
+}

@@ -94,8 +94,8 @@ function LeEntradas() {
     var array_bonus = span_bonus_atributos.textContent.split(',');
     for (var i = 0; i < array_bonus.length; ++i) {
       // Trim direita.
-      array_bonus[i] = tabelas_atributos_invertidos[
-          array_bonus[i].replace(/\s*$/, "")];
+      var nome_atributo = AjustaString(array_bonus[i]);
+      array_bonus[i] = tabelas_atributos_invertidos[nome_atributo];
     }
     entradas.bonus_atributos = array_bonus;
   } else {
