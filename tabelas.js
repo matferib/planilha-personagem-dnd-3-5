@@ -910,7 +910,6 @@ Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, At
 Esquiva¹ Des 13 +1 de bônus de esquiva na CA contra um adversário à sua escolha
 Mobilidade¹ Esquiva +4 de bônus de esquiva na CA contra ataques de oportunidade
 Ataque em Movimento¹ Mobilidade, bônus base de ataque +4 Capaz de deslocar antes e depois do ataque
-Expulsão Adicional³ Habilidade de expulsar ou fascinar criaturas 4 tentativas diárias adicionais de Expulsar/Fascinar
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de
 guerreiro
@@ -1010,6 +1009,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   diligente: {
       nome: 'Diligente',
       bonus_pericias: { avaliacao: 2, decifrar_escrita: 2 } },
+  // Nao da pra modelar automatico porque as dependencias de especiais vem
+  // depois dos talentos. Da mais 4 expulsoes.
+  expulsao_adicional: {
+      nome: 'Expulsão Adicional',
+  },
   fraudulento: {
       nome: 'Fraudulento',
       bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
