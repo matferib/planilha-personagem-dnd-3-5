@@ -287,6 +287,7 @@ function _DependenciasProficienciaArmas() {
   }
 }
 
+// Habilidades especiais do personagem.
 function _DependenciasEspeciais() {
   personagem.especiais = {};
   for (var i = 0; i < personagem.classes.length; ++i) {
@@ -302,10 +303,17 @@ function _DependenciasEspeciais() {
       }
       for (var j = 0; j < especiais_nivel.length; ++j) {
         var especial = especiais_nivel[j];
-        if (!(especial in personagem.especiais)) {
-          personagem.especiais[especial] = { vezes: 1};
+        // Alguns especiais sao tratados de forma diferente.
+        if (especial == 'expulsar_fascinar_mortos_vivos') {
+          var num_expulsoes = 3 + personagem.atributos['carisma'].modificador +
+            (PersonagemPossuiTalento('expulsao_adicional') ? 4 : 0);
+          personagem.especiais[especial] = { vezes: num_expulsoes };
         } else {
-          ++personagem.especiais[especial].vezes;
+          if (!(especial in personagem.especiais)) {
+            personagem.especiais[especial] = { vezes: 1 };
+          } else {
+            ++personagem.especiais[especial].vezes;
+          }
         }
       }
     }
