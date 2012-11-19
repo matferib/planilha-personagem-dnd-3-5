@@ -5,6 +5,7 @@ var tabelas_geracao = {
   // Peguei do livro do mestre.
   barbaro: { 
 		atributos: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+    pericias: [],
     por_nivel: {
       1: { moedas: { ouro: 200 }, 
            armadura: { nome: 'brunea', obra_prima: true }, 
@@ -153,6 +154,9 @@ var tabelas_geracao = {
 	},
   clerigo: { 
 		atributos: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
+    ordem_pericias: [ 
+      'concentracao', 'cura', 'diplomacia', 'conhecimento_religiao', 'conhecimento_historia', 
+      'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios' ],
     por_nivel: {
       6: { moedas: {  ouro: 3600 }, 
            armadura: { nome: 'armadura_de_batalha', bonus: 1 }, 

@@ -70,6 +70,7 @@ function _AtualizaNomeRacaAlinhamentoXp() {
   SelecionaValor(personagem.raca, Dom('raca'));
   SelecionaValor(personagem.alinhamento, Dom('alinhamento'));
   Dom('pontos-experiencia').value = personagem.experiencia;
+  Dom('divindade-patrona').value = personagem.divindade;
 }
 
 // Atualiza os dados de vida do personagem de acordo com as classes.

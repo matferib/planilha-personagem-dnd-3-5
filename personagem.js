@@ -5,8 +5,9 @@ var personagem = {
   nome: '',
   raca: 'humano',
   tamanho: { categoria: 'medio', modificador_ataque_defesa: 0, modificador_agarrar: 0 }, 
-  alinhamento: "",
+  alinhamento: '',
   experiencia: 0,
+  divindade: '',
   // Cada entrada: { classe, nivel }.
   classes: [
       { classe: 'guerreiro', nivel: 1 },
