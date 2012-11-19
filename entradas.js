@@ -5,9 +5,10 @@
 var entradas = {
   modo_mestre: '',
   // geral
-  nome: "",
-  raca: "humano",
-  alinhamento: "LB",
+  nome: '',
+  raca: 'humano',
+  alinhamento: 'LB',
+  divindade: '',
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
   // pontos de vida.
@@ -70,6 +71,8 @@ function LeEntradas() {
   entradas.raca = ValorSelecionado(Dom('raca'));
   // alinhamento
   entradas.alinhamento = ValorSelecionado(Dom('alinhamento'));
+  // divindade
+  entradas.divindade = Dom('divindade-patrona').value;
   // classes.
   entradas.classes.length = 0;
   var div_classes = Dom('classes');

@@ -10,6 +10,7 @@ function ConverteEntradasParaPersonagem() {
   personagem.raca = entradas.raca;
 
   personagem.alinhamento = entradas.alinhamento;
+  personagem.divindade = entradas.divindade;
   personagem.classes = entradas.classes;
 
   personagem.experiencia = entradas.experiencia;

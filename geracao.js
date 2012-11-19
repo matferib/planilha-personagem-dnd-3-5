@@ -154,6 +154,7 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
 // @param modo 'elite' ou 'comum'.
 // @param submodo opcional 'tabelado' ou 'aleatorio'.
 function GeraPersonagem(modo, submodo) {
+  LimpaGeral();
   if (!submodo) {
     submodo = 'tabelado';
   }
@@ -164,10 +165,12 @@ function GeraPersonagem(modo, submodo) {
   _GeraAtributos(modo, submodo);
   _GeraPontosDeVida(modo, submodo);
 
+  // Atualiza aqui para ja ter alguns numeros usados abaixo.
+  AtualizaGeralSemConverterEntradas();
+
   var tabelas_geracao_classe = tabelas_geracao[personagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
       tabelas_geracao_classe.por_nivel[personagem.classes[0].nivel] == null) {
-    AtualizaGeralSemConverterEntradas();
     alert('Geração avançada de ' + personagem.classes[0].classe + ' não disponível');
     return;
   }
@@ -184,10 +187,28 @@ function GeraPersonagem(modo, submodo) {
   /*
   _GeraEstilosDeLuta();
   _GeraTalentos();
-  _GeraPericias();
+  */
+  _GeraPericias(tabelas_classes[personagem.classes[0].classe], 
+                tabelas_geracao_classe, 
+                personagem.classes[0].nivel);
+  /*
   _GeraFeiticos();
   */
   AtualizaGeralSemConverterEntradas();
+}
+
+// Gera as pericias do personagem de forma tabelada.
+function _GeraPericias(tabela_classe, tabela_geracao_classe, nivel) {
+  if (tabela_geracao_classe.ordem_pericias == null) {
+    // Nao possui ordem das pericias.
+    return;
+  }
+  // Pra simplificar, usa so o basico + inteligencia.
+  var num_pericias = tabela_classe.pontos_pericia + personagem.atributos['inteligencia'].modificador;
+  var max_pontos = nivel + 3;
+  for (var i = 0; i < num_pericias && i < tabela_geracao_classe.ordem_pericias.length; ++i) {
+    personagem.pericias.lista[tabela_geracao_classe.ordem_pericias[i]].pontos = max_pontos;
+  }
 }
 
 // Gera o resumo para uma arma do estilo.
