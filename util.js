@@ -205,6 +205,13 @@ function PrecoArmaArmaduraEscudo(tipo, tabela, chave, obra_prima, bonus, inverti
 }
 
 // Gera o titulo de um elemento HTML (o texto que aparece no mouseover).
+// @param titulo que apareceea.
+// Dom o objeto que recebera o titulo.
+function TituloSimples(titulo, dom) {
+  dom.title = titulo;
+}
+
+// Gera o titulo de um elemento HTML (o texto que aparece no mouseover).
 // @param pares um array de par: texto valor.
 // Dom o objeto que recebera o titulo.
 function Titulo(pares, dom) {

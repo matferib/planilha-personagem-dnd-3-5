@@ -1055,7 +1055,7 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   lideranca: {
       nome: 'Liderança',
       requisitos: { nivel: 6, },
-      descricao: 'Personagem Atrai parceiros e seguidores.', },
+      descricao: 'Personagem atrai parceiros e seguidores.', },
   // Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
   magia_natural: {
       nome: 'Magia Natural',
