@@ -465,7 +465,8 @@ function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai
   if (div_talento == null) {
     div_talento = AdicionaTalento(chave_classe, div_pai);
   }
-  if (talento_personagem.chave.length == 0) {
+  // A verificacao de pre-requisitos de talento pode gerar um talento null.
+  if (talento_personagem.chave == null || talento_personagem.chave.length == 0) {
     return;
   }
   for (var i = 0; i < div_talento.childNodes.length; ++i) {

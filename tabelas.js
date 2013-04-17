@@ -108,6 +108,24 @@ var tabelas_classes = {
   plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
   expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
   combatente: { nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
+  // Prestigio.
+  dragao_purpura: { nome: 'Dragão Púrpura', prestigio: true, dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
+    especiais: {
+      1: [ 'escudo_heroico', 'grito_guerra' ],
+      2: [ 'inspirar_coragem' ],
+      3: [ 'medo' ],
+      4: [ 'inspirar_coragem', 'juramento_furia', ],
+      5: [ 'resistencia_final' ],
+    },
+    requisitos: {
+      tendencia: [ 'NB', 'N', 'LB'],
+      regiao: [ 'Cormyr'],
+      bba: 4,
+      pericias: { diplomacia: 1, ouvir: 2, cavalgar: 2, observar: 2, },
+      talentos: [ 'lideranca', 'combate_montado' ],
+      outros: 'Deve ser membro dos Dragões Púrpura',
+    },
+  },
 };
 
 var tabelas_especiais = {
@@ -124,6 +142,12 @@ var tabelas_especiais = {
   evasao: { nome: 'Evasão', },
   sentir_armadilha: { nome: 'Sentir armadilha', },
   esquiva_sobrenatural: { nome: 'Esquiva sobrenatural', },
+  escudo_heroico: { nome: 'Escudo Heróico', },
+  grito_guerra: { nome: 'Grito de Guerra', },
+  inspirar_coragem: { nome: 'Inspirar Coragem', },
+  medo: { nome: 'Medo', },
+  juramento_furia: { nome: 'Juramento de Fúria', },
+  resistencia_final: {nome: 'Resistência Final', },
 };
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
@@ -372,6 +396,9 @@ var tabelas_salvacao = {
   expert: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
   combatente: {
+    fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+  // Prestigio.
+  dragao_purpura: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
 };
 
@@ -800,6 +827,7 @@ var tabelas_armas_exoticas = {
 };
 
 // Talento das classes.
+// TODO mover para a tabela de classes.
 var tabelas_proficiencia_arma_por_classe = {
   barbaro: { 
       talentos: [ 'usar_armas_simples', 'usar_armas_comuns' ]
@@ -921,7 +949,6 @@ Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de r
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
 Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
-Liderança 6° nível de personagem Atrai parceiros e seguidores
 Lutar às Cegas¹ - Jogar novamente chance de falha por camuflagem
 Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
@@ -1025,6 +1052,10 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   investigador: {
       nome: 'Investigador',
       bonus_pericias: { obter_informacao: 2, procurar: 2 } },
+  lideranca: {
+      nome: 'Liderança',
+      requisitos: { nivel: 6, },
+      descricao: 'Personagem Atrai parceiros e seguidores.', },
   // Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
   magia_natural: {
       nome: 'Magia Natural',

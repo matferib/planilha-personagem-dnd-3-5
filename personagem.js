@@ -266,7 +266,10 @@ function PersonagemNivelClasse(classe) {
   return 0;
 }
 
+// Verifica se o personagem atende aos requisitos do talento. Caso não atenda, 
+// alertará uma mensagem.
 // @return true se o personagem atender todos os requisitos do talento.
+// TODO: escrever teste desta funcao.
 function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
   var requisitos = tabelas_talentos[chave_talento].requisitos;
   var prefixo_erro = tabelas_talentos[chave_talento].nome + ' requer ';
@@ -278,6 +281,11 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
       alert(prefixo_erro + 'BBA >= ' + requisitos.bba);
       return false;
     }
+  }
+  if (requisitos.nivel && 
+      personagem.dados_vida.nivel_personagem < requisitos.nivel) {
+    alert(prefixo_erro + 'nível >= ' + requisitos.nivel);
+    return false;
   }
   for (var atributo in requisitos.atributos) {
     if (personagem.atributos[atributo].valor < requisitos.atributos[atributo]) {
