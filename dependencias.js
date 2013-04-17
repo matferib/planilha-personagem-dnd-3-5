@@ -322,9 +322,9 @@ function _DependenciasEspeciais() {
 
 function _VerificaPrerequisitosTalento() {
   for (var chave_classe in personagem.talentos) {
-    var lista_classe = personagem.talentos[chave_classe];
-    for (var i = 0; i < lista_classe.length; ++i) {
-      var talento = lista_classe[i];
+    var lista_talentos_classe = personagem.talentos[chave_classe];
+    for (var i = 0; i < lista_talentos_classe.length; ++i) {
+      var talento = lista_talentos_classe[i];
       if (tabelas_talentos[talento.chave] == null) {
         continue;
       }
@@ -337,7 +337,7 @@ function _VerificaPrerequisitosTalento() {
         // Se tiver complemento so limpa o complemento
         talento.complemento = null;
         if (!tabelas_talentos[talento.chave].complemento) {
-          talento.chave = null;
+          talento.chave = 'usar_armas_simples';
         }
       }
     }
