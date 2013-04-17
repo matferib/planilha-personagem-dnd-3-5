@@ -469,14 +469,18 @@ function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai
   if (talento_personagem.chave == null || talento_personagem.chave.length == 0) {
     return;
   }
+  var talento = tabelas_talentos[talento_personagem.chave];
   for (var i = 0; i < div_talento.childNodes.length; ++i) {
     var filho = div_talento.childNodes[i];
     if (filho.name == 'chave-talento') {
       SelecionaValor(talento_personagem.chave, filho);
     } else if (filho.name == 'complemento-talento') {
-      filho.disabled = !('complemento' in tabelas_talentos[talento_personagem.chave]);
+      filho.disabled = !('complemento' in talento);
       filho.value = talento_personagem.complemento;
     }
+  }
+  if (talento.descricao != null && talento.descricao.length > 0) {
+    TituloSimples(talento.descricao, div_talento);
   }
 }
 
