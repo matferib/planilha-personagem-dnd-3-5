@@ -913,7 +913,6 @@ Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distâ
 Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
 Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado
 Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
-Ataque Poderoso¹ For 13 Substitui bônus de ataque por dano (máximo: bônus base de ataque)
 Trespassar¹ Ataque Poderoso Desfere um ataque corporal extra depois de imobilizar um oponente
 Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base de ataque +4
 Trespassar sem limite de ataques por rodada
@@ -939,9 +938,7 @@ Esquiva¹ Des 13 +1 de bônus de esquiva na CA contra um adversário à sua esco
 Mobilidade¹ Esquiva +4 de bônus de esquiva na CA contra ataques de oportunidade
 Ataque em Movimento¹ Mobilidade, bônus base de ataque +4 Capaz de deslocar antes e depois do ataque
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
-Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de
-guerreiro
-+2 de bônus no dano com a arma escolhida
+Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de guerreiro +2 de bônus no dano com a arma escolhida
 Especialização em Arma Maior¹² Usar a arma, Foco em Arma Maior, Foco em Arma, Especialização em Arma, 12° nível de guerreiro
 +4 de bônus no dano com a arma escolhida
 Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
@@ -949,7 +946,6 @@ Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de r
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
 Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
-Lutar às Cegas¹ - Jogar novamente chance de falha por camuflagem
 Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
@@ -1014,6 +1010,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   aptidao_magica: {
       nome: 'Aptidão Mágica',
       bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
+  ataque_poderoso: {
+      nome: 'Ataque Poderoso',
+      requisitos: { atributos: { forca: 13 } },
+      guerreiro: true,
+      descricao: 'Substitui bônus de ataque por dano (máximo: bônus base de ataque).' },
   atletico: { 
       nome: 'Atlético',
       bonus_pericias: { escalar: 2, natacao: 2 } },
@@ -1051,6 +1052,10 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Liderança',
       requisitos: { nivel: 6, },
       descricao: 'Personagem atrai parceiros e seguidores.', },
+  lutar_as_cegas: {
+      nome: 'Lutar as Cegas',
+      guerreiro: true,
+      descricao: 'Joga novamente a chance de falha por camuflagem.', },
   // Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
   magia_natural: {
       nome: 'Magia Natural',
@@ -1058,7 +1063,7 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
   magia_penetrante: {
       nome: 'Magia Penetrante',
-  },
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia', },
   // Magia Penetrante TODO +4 de bônus nos testes de conjurador contra Resistência à Magia
   magia_penetrante_maior: {
       nome: 'Magia Penetrante Maior',
@@ -1110,18 +1115,18 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Combater com duas armas aprimorado',
       requisitos: { atributos: { destreza: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
       guerreiro: true, },
-  // +1 de bônus nas jogadas de ataque com a arma escolhida.
   foco_em_arma: {
       nome: 'Foco em arma',
       complemento: 'arma',
       requisitos: { bba: 1, proficiencia_arma: true },
-      guerreiro: true, },
-  // +2 de bônus nas jogadas de ataque com a arma escolhida
+      guerreiro: true, 
+      descricao: '+1 de bônus nas jogadas de ataque com a arma escolhida.' },
   foco_em_arma_maior: {
       nome: 'Foco em arma maior',
       complemento: 'arma',
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
-      guerreiro: true },
+      guerreiro: true,
+      descricao: '+2 de bônus nas jogadas de ataque com a arma escolhida.' },
   // toughness em ingles, ³ - +3 pontos de vida
   vitalidade: {
       nome: 'Vitalidade',
