@@ -46,7 +46,7 @@ function ConverteEntradasParaPersonagem() {
   personagem.notas = entradas.notas;
 }
 
-// Limpa tudo antes de comecar a conversao. 
+// Limpa tudo antes de comecar a conversao das entradas para o personagem. 
 function LimpaGeral() {
   personagem.pontos_vida.total = 0;
   personagem.pontos_vida.bonus.Limpa();
