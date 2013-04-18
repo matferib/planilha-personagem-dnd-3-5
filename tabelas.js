@@ -963,14 +963,9 @@ Tiro Preciso¹ Tiro Certeiro Anula a penalidade por disparar contra um adversár
 aliado (-4)
 Tiro Rápido¹ Des 13, Tiro Certeiro Um ataque à distância adicional por rodada
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
-Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro,
-bônus base de ataque +4
-Pode se deslocar antes e depois de um ataque à distância
-Tiro Múltiplo¹ Des 17, Tiro Certeiro, Tiro Rápido, bônus
-base de ataque +6
-Dispara duas ou mais flechas simultaneamente
-Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus
-base de ataque +11
+Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
+Tiro Múltiplo¹ Des 17, Tiro Certeiro, Tiro Rápido, bônus base de ataque +6 Dispara duas ou mais flechas simultaneamente
+Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11
 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
 Tolerância - +4 de bônus nos testes para resistir ao dano por contusão
 Duro de Matar Tolerância Permanece consciente entre -1 e -9 PV
@@ -1004,12 +999,12 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Acrobático',
       bonus_pericias: { saltar: 2, acrobacias: 2 } },
 
-  // ² Usar arma, bônus base de ataque +1 Aplica o modificador de Des (em vez de For) 
-  // para ataques corporais com armas leves
   acuidade_arma: {
       nome: 'Acuidade com Arma', complemento: 'arma_leve',
       guerreiro: true,
-      requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true }, },
+      requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true }, 
+      descricao: 'Aplica o modificador de Des (em vez de For) nas jogadas ' +
+                 'de ataque corporal com armas leves.' },
   afinidade_com_animais: {
       nome: 'Afinidade com Animais',
       bonus_pericias: { cavalgar: 2, adestrar_animais: 2 } },

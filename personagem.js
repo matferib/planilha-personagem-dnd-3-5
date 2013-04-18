@@ -24,6 +24,8 @@ var personagem = {
     ferimentos: 0,  // ferimentos do personagem TODO(transformar em array)
     temporarios: 0,  // pontos de vida temporarios
   },
+  // O valor do atributo é o valor final dados todos os modificadores. O modificador
+  // é computado sobre esse valor.
   atributos: {
     pontos: {
       disponiveis: 0,

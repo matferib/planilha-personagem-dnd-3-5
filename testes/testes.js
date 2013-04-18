@@ -204,7 +204,50 @@ function CarregaTestes() {
       if (!this.resultado) {
         this.detalhes = 'Erro lendo preco de broquel +1.';
       }
+    }, 
+  }, body);
 
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'RequisitosTalentos', 
+    Testa: function() {
+      r = PersonagemVerificaPrerequisitosTalento('usar_armas_simples');
+      if (r == false) {
+        this.resultado = false;
+        this.detalhes = 'Erro com verificação do talento "usar_armas_simples"';
+        return;
+      }
+
+      r = PersonagemVerificaPrerequisitosTalento('lideranca');
+      if (r == true) {
+        this.resultado = false;
+        this.detalhes = 'Talento "liderança" deveria requerer personagem de 6o nível';
+        return;
+      }
+      personagem.dados_vida.nivel_personagem = 6;
+      r = PersonagemVerificaPrerequisitosTalento('lideranca');
+      if (r == false) {
+        this.resultado = false;
+        this.detalhes = 'Talento "liderança" deveria funcionar para personagem de 6o nivel';
+        return;
+      }
+
+      r = PersonagemVerificaPrerequisitosTalento('magia_natural');
+      if (r == true) {
+        this.resultado = false;
+        this.detalhes = 'Talento "magia_natural" deveria requerer sabedoria 13';
+        return;
+      }
+      personagem.atributos.sabedoria.valor = 13;
+      r = PersonagemVerificaPrerequisitosTalento('magia_natural');
+      if (r == false) {
+        this.resultado = false;
+        this.detalhes = 'Talento "magia_natural" deveria funcionar para personagem com sabedoria 13';
+        return;
+      }
+    
+
+      this.resultado = true;
     }, 
   }, body);
 
