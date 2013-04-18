@@ -211,41 +211,60 @@ function CarregaTestes() {
   TemplateTeste({
     nome: 'RequisitosTalentos', 
     Testa: function() {
+      // teste simples.
       r = PersonagemVerificaPrerequisitosTalento('usar_armas_simples');
-      if (r == false) {
+      if (r != null) {
         this.resultado = false;
-        this.detalhes = 'Erro com verificação do talento "usar_armas_simples"';
+        this.detalhes = 'Erro com verificação do talento "usar_armas_simples"' + r;
         return;
       }
 
+      // Requisito de nivel.
       r = PersonagemVerificaPrerequisitosTalento('lideranca');
-      if (r == true) {
+      if (r == null) {
         this.resultado = false;
         this.detalhes = 'Talento "liderança" deveria requerer personagem de 6o nível';
         return;
       }
       personagem.dados_vida.nivel_personagem = 6;
       r = PersonagemVerificaPrerequisitosTalento('lideranca');
-      if (r == false) {
+      if (r != null) {
         this.resultado = false;
         this.detalhes = 'Talento "liderança" deveria funcionar para personagem de 6o nivel';
         return;
       }
 
+      // Requisito de atributo.
       r = PersonagemVerificaPrerequisitosTalento('magia_natural');
-      if (r == true) {
+      if (r == null) {
         this.resultado = false;
         this.detalhes = 'Talento "magia_natural" deveria requerer sabedoria 13';
         return;
       }
       personagem.atributos.sabedoria.valor = 13;
       r = PersonagemVerificaPrerequisitosTalento('magia_natural');
-      if (r == false) {
+      if (r != null) {
         this.resultado = false;
         this.detalhes = 'Talento "magia_natural" deveria funcionar para personagem com sabedoria 13';
         return;
       }
     
+      // Requisito de outros talentos.
+      r = PersonagemVerificaPrerequisitosTalento('magia_penetrante_maior');
+      if (r == null) {
+        this.resultado = false;
+        this.detalhes = 'Talento "magia_penetrante_maior" deveria requerer magia_penetrante';
+        return;
+      }
+      personagem.talentos.gerais.push({ chave: 'magia_penetrante', });
+      r = PersonagemVerificaPrerequisitosTalento('magia_penetrante_maior');
+      if (r != null) {
+        this.resultado = false;
+        this.detalhes = 'Talento "magia_penetrante_maior" deveria funcionar com "magia_penetrante"';
+        return;
+      }
+
+      
 
       this.resultado = true;
     }, 

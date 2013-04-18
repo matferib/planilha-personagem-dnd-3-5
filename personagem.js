@@ -270,52 +270,45 @@ function PersonagemNivelClasse(classe) {
 
 // Verifica se o personagem atende aos requisitos do talento. Caso não atenda, 
 // alertará uma mensagem.
-// @return true se o personagem atender todos os requisitos do talento.
-// TODO: escrever teste desta funcao.
+// @return descricao do erro caso a verificação falhe, null caso contrário.
 function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
   var requisitos = tabelas_talentos[chave_talento].requisitos;
   var prefixo_erro = tabelas_talentos[chave_talento].nome + ' requer ';
   if (requisitos == null) {
-    return true;
+    return null;
   }
   if (requisitos.bba) {
     if (personagem.bba < requisitos.bba) {
-      alert(prefixo_erro + 'BBA >= ' + requisitos.bba);
-      return false;
+      return (prefixo_erro + 'BBA >= ' + requisitos.bba);
     }
   }
   if (requisitos.nivel && 
       personagem.dados_vida.nivel_personagem < requisitos.nivel) {
-    alert(prefixo_erro + 'nível >= ' + requisitos.nivel);
-    return false;
+    return (prefixo_erro + 'nível >= ' + requisitos.nivel);
   }
   for (var atributo in requisitos.atributos) {
     if (personagem.atributos[atributo].valor < requisitos.atributos[atributo]) {
-      alert(prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
-      return false;
+      return (prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
     }
   }
   for (var classe in requisitos.nivel) {
     if (PersonagemNivelClasse(classe) < requisitos.nivel[classe]) {
-      alert(prefixo_erro + 'nivel em ' + classe + ' >= ' + requisitos.nivel[classe]);
-      return false;
+      return (prefixo_erro + 'nivel em ' + classe + ' >= ' + requisitos.nivel[classe]);
     }
   }
   for (var i = 0; requisitos.talentos && i < requisitos.talentos.length; ++i) {
     if (!PersonagemPossuiTalento(requisitos.talentos[i], complemento)) {
-      alert(prefixo_erro + 'talento ' + tabelas_talentos[requisitos.talentos[i]].nome + ' ' +
-          (complemento ? complemento : ''));
-      return false;
+      return (prefixo_erro + 'talento ' + tabelas_talentos[requisitos.talentos[i]].nome + ' ' +
+             (complemento ? complemento : ''));
     }
   }
   if (requisitos.proficiencia_arma && complemento) {
     var chave_arma = tabelas_armas_invertida[complemento];
     if (!PersonagemProficienteComArma(chave_arma)) {
-      alert(prefixo_erro + 'proficiencia com ' + complemento);
-      return false;
+      return (prefixo_erro + 'proficiencia com ' + complemento);
     }
   }
-  return true;
+  return null;
 }
 
 // Adiciona ferimentos ao personagem.
