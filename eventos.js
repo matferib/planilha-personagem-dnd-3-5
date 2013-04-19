@@ -82,6 +82,26 @@ function ClickAbrir() {
   }
 }
 
+// Codifica o objeto personagem como JSON e preenche o campo de texto.
+function ClickExportar() {
+  AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
+  var input = Dom("json-personagem");
+  input.style.display = 'inline';
+  input.value = goog.json.serialize(entradas);
+  input.focus();
+  input.select();
+  alert('Personagem "' + personagem.nome + '" exportado com sucesso. ' +
+        'Copie para a área de transferência.');
+}
+
+// Abre o personagem lendo do campo de texto.
+function ClickImportar() {
+  var input = Dom("json-personagem");
+  entradas = goog.json.parse(input.value);
+  AtualizaGeralSemLerEntradas();
+  alert('Personagem "' + personagem.nome + '" importado com sucesso');
+}
+
 // Codifica o objeto personagem como JSON e gera o link.
 function ClickLink() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
