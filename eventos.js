@@ -103,12 +103,13 @@ function ClickImportar() {
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
+// Não existe o evento inverso, o carregamento ocorrerá pela função 'CarregamentoInicial'.
 function ClickLink() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var indice_interrogacao = document.URL.indexOf('?');
   var url = 
     (indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) + 
-    '?pc=' + encodeURIComponent(goog.json.serialize(personagem));
+    '?pc=' + encodeURIComponent(goog.json.serialize(entradas));
   Dom("link-personagem").innerHTML = 
     '<a href="' + url + '">Link</a>';
 }
