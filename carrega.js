@@ -19,12 +19,10 @@ function CarregamentoInicial() {
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual != -1) {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
-    var json_personagem = decodeURIComponent(document.URL.slice(indice_igual + 1));
-    personagem = goog.json.parse(json_personagem);
-    AtualizaGeralSemConverterEntradas();
-  } else {
-    AtualizaGeralSemLerEntradas();
-  }
+    json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
+    entradas = goog.json.parse(json_entradas);
+  } 
+  AtualizaGeralSemLerEntradas();
 }
 
 // Adiciona racas dinamicamente na planilha
