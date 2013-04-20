@@ -121,6 +121,7 @@ var tabelas_classes = {
       tendencia: [ 'NB', 'N', 'LB'],
       regiao: [ 'Cormyr'],
       bba: 4,
+      // TODO: diplomacia ou intimidar 1.
       pericias: { diplomacia: 1, ouvir: 2, cavalgar: 2, observar: 2, },
       talentos: [ 'lideranca', 'combate_montado' ],
       outros: 'Deve ser membro dos Dragões Púrpura',
@@ -884,7 +885,11 @@ var tabelas_proficiencia_arma_por_classe = {
   },
   combatente: {
       talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
-  }
+  },
+
+  // Prestigio.
+  dragao_purpura: {
+  },
 };
 
 // Cada entrada tem suas dependencias.
@@ -938,9 +943,6 @@ Esquiva¹ Des 13 +1 de bônus de esquiva na CA contra um adversário à sua esco
 Mobilidade¹ Esquiva +4 de bônus de esquiva na CA contra ataques de oportunidade
 Ataque em Movimento¹ Mobilidade, bônus base de ataque +4 Capaz de deslocar antes e depois do ataque
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
-Especialização em Arma¹² Usar a arma, Foco em Arma, 4° nível de guerreiro +2 de bônus no dano com a arma escolhida
-Especialização em Arma Maior¹² Usar a arma, Foco em Arma Maior, Foco em Arma, Especialização em Arma, 12° nível de guerreiro
-+4 de bônus no dano com a arma escolhida
 Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
@@ -1021,11 +1023,22 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   auto_suficiente: {
       nome: 'Auto-Suficiente',
       bonus_pericias: { cura: 2, sobrevivencia: 2 } },
-  // Percorre 5 vezes o deslocamento padrão, +4 de bônus nos testes de Saltar 
-  // no final de uma corrida.
+  combater_duas_armas: { 
+      nome: 'Combater com duas armas',
+      requisitos: { atributos: { destreza: 15 } },
+      guerreiro: true,
+      descricao: 'Reduz penalidade ao usar duas maos em 2.', },
+  combater_duas_armas_aprimorado: {
+      nome: 'Combater com duas armas aprimorado',
+      requisitos: { atributos: { destreza: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
+      guerreiro: true,
+      descricao: 'Ataque adicional com a segunda mao.', },
+  // TODO teoricamente esse bonus eh so se correr...
   corrida: {
       nome: 'Corrida', 
-      bonus_pericias: { saltar: 4 } },  // TODO teoricamente esse bonus eh so se correr...
+      bonus_pericias: { saltar: 4 },
+      descricao: 'Percorre 5 vezes o deslocamento padrão, ' +
+                 '+4 de bônus nos testes de Saltar no final de uma corrida.', },  
   dedos_lepidos: {
       nome: 'Dedos Lépidos',
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },
@@ -1037,6 +1050,31 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   expulsao_adicional: {
       nome: 'Expulsão Adicional',
   },
+  especializacao_arma: {
+    nome: 'Especialização em Arma',
+    guerreiro: true,
+    complemento: 'arma',
+    requisitos: { proficiencia_arma: true, talentos: [ 'foco_em_arma'], nivel: { guerreiro: 4 }},
+    descrição: '+2 de bônus no dano com a arma escolhida.', },
+  especializacao_arma_maior: {
+    nome: 'Especialização em Arma Maior',
+    guerreiro: true,
+    complemento: 'arma',
+    requisitos: { talentos: [ 'foco_em_arma_maior', 'especializacao_arma'], 
+                  nivel: { guerreiro: 12 } },
+    descricao: '+4 de bônus no dano com a arma escolhida (ao invés de 2 da especialização normal).', },
+  foco_em_arma: {
+      nome: 'Foco em arma',
+      complemento: 'arma',
+      requisitos: { bba: 1, proficiencia_arma: true },
+      guerreiro: true, 
+      descricao: '+1 de bônus nas jogadas de ataque com a arma escolhida.' },
+  foco_em_arma_maior: {
+      nome: 'Foco em arma maior',
+      complemento: 'arma',
+      requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
+      guerreiro: true,
+      descricao: '+2 de bônus nas jogadas de ataque com a arma escolhida.' },
   fraudulento: {
       nome: 'Fraudulento',
       bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
@@ -1080,20 +1118,23 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   prontidao: {
       nome: 'Prontidão',
       bonus_pericias: { ouvir: 2, observar: 2 } },
-  // Usar Armas Simples - Não sofre penalidades nos ataques com armas simples
-  usar_armas_simples: { nome: 'Usar armas simples' },
-
-  // Usar Arma Comum² - Não sofre penalidade nos ataques com uma arma comum específica
-  usar_arma_comum: { nome: 'Usar arma comum', complemento: 'arma_comum' }, 
-
-  // Exotic Weapon Proficiency
-  // Usar Arma Exótica¹² Bônus base de ataque +1 Não sofre penalidade nos 
-  // ataques com uma arma exótica específica
+  saque_rapido: {
+      nome: 'Saque rápido',
+      requisitos: { bba: 1 },
+      guerreiro: true, 
+      descricao: 'Saca uma arma branca como ação livre.', },
+  usar_armas_simples: { 
+      nome: 'Usar armas simples',
+      descricao: 'Não sofre penalidades nos ataques com armas simples.', },
+  usar_arma_comum: { 
+      nome: 'Usar arma comum', 
+      complemento: 'arma_comum',
+      descricao: 'Não sofre penalidade nos ataques com uma arma comum específica.', }, 
   usar_arma_exotica: { 
       nome: 'Usar arma exótica', complemento: 'arma_exotica',
       requisitos: { bba: 1 },
-      guerreiro: true },
-
+      guerreiro: true,
+      descricao: 'Não sofre penalidade nos ataques com uma arma exótica específica.', },
   // TODO implementar efeitos de nao ter o feat.
   //Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
   usar_escudo: {
@@ -1104,39 +1145,12 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   // Usar Escudo de Corpo Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
   usar_escudo_corpo: {
       nome: 'Usar Escudo de Corpo', },
-
-  // Reduz penalidade ao usar duas maos em 2.
-  combater_duas_armas: { 
-      nome: 'Combater com duas armas',
-      requisitos: { atributos: { destreza: 15 } },
-      guerreiro: true, },
-  // Ataque adicional com a segunda mao.
-  combater_duas_armas_aprimorado: {
-      nome: 'Combater com duas armas aprimorado',
-      requisitos: { atributos: { destreza: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
-      guerreiro: true, },
-  foco_em_arma: {
-      nome: 'Foco em arma',
-      complemento: 'arma',
-      requisitos: { bba: 1, proficiencia_arma: true },
-      guerreiro: true, 
-      descricao: '+1 de bônus nas jogadas de ataque com a arma escolhida.' },
-  foco_em_arma_maior: {
-      nome: 'Foco em arma maior',
-      complemento: 'arma',
-      requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
-      guerreiro: true,
-      descricao: '+2 de bônus nas jogadas de ataque com a arma escolhida.' },
-  // toughness em ingles, ³ - +3 pontos de vida
+  // toughness em ingles.
   vitalidade: {
       nome: 'Vitalidade',
       bonus_pv: 3,
-      cumulativo: true, },
-  //Saque Rápido¹ Bônus base de ataque +1 Saca uma arma branca como ação livre
-  saque_rapido: {
-      nome: 'Saque rápido',
-      requisitos: { bba: 1 },
-      guerreiro: true, },
+      cumulativo: true, 
+      descricao: '+3 pontos de vida.', },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
