@@ -128,11 +128,13 @@ var personagem = {
   // Cada entrada: { nome: true }, onde nome eh o nome da chave. So a presenca do campo eh
   // suficiente para indicar proficiencia, sem necessidade de um booleano.
   proficiencia_armas: {},
-  // Cada entrada: { nome: 1|2 }.
+  // Cada entrada: { chave_arma: 1|2 }.
   foco_armas: {},
+  // Cada entrada: { chave_arma: 2|4 }.
+  especializacao_armas: {},
   // Cada entrada: 
   //     { entrada: { chave, bonus, obra_prima }, nome_gerado, bonus_ataque, bonus_dano, 
-  //       proficiente, foco: { maior }, especializado: { maior }, acuidade, arma_tabela };
+  //       proficiente, foco, especializado, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
@@ -205,8 +207,15 @@ function PersonagemProficienteComArma(nome_arma) {
 // @return o valor do foco do personagem com a arma (0, 1, 2).
 // @param nome_arma chave da arma.
 // @param maior indica se o foco eh maior.
-function PersonagemFocoComArma(nome_arma) {
-  return personagem.foco_armas[nome_arma];
+function PersonagemFocoComArma(chave_arma) {
+  return personagem.foco_armas[chave_arma];
+}
+
+// @return o valor da especialização do personagem com a arma (0, 2, 4).
+// @param chave_arma chave da arma.
+// @param maior indica se o foco eh maior.
+function PersonagemEspecializacaoComArma(chave_arma) {
+  return personagem.especializacao_armas[chave_arma];
 }
 
 // @param nome_talento nome do talento na tabela ou chave na tabela.

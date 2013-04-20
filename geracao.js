@@ -259,7 +259,7 @@ function GeraResumo() {
 
   for (var i = 0; i < personagem.classes.length; ++i) {
     var info_classe = personagem.classes[i];
-    resumo += info_classe.classe + ': ' + info_classe.nivel + ', ';
+    resumo += tabelas_classes[info_classe.classe].nome + ': ' + info_classe.nivel + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
 
@@ -346,6 +346,7 @@ function GeraResumo() {
     }
   }
 
+  // TODO: so imprimir se tiver feiticos.
   // TODO: classe de dificuldade, conhecidos.
   // Feiticos: por classe, por nivel.
   resumo += 'Feitiços por classe: ';
