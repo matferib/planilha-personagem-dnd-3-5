@@ -22,7 +22,7 @@ function DependenciasGerais() {
 
   _DependenciasPericias();
   _DependenciasFocoArmas();
-  //_DependenciasEspecializacaoArmas();
+  _DependenciasEspecializacaoArmas();
   _DependenciasArmadurasEscudos();
   _DependenciasArmas();
   _DependenciasEstilos();
@@ -437,6 +437,27 @@ function _DependenciasFocoArmas() {
   }
 }
 
+function _DependenciasEspecializacaoArmas() {
+  personagem.especializacao_armas = {};
+  // Talentos. Preciso obter o nome da chave na tabela de armas.
+  for (var chave_classe in personagem.talentos) {
+    var lista_classe = personagem.talentos[chave_classe];
+    for (var i = 0; i < lista_classe.length; ++i) {
+      var talento = lista_classe[i];
+      if (talento.chave && talento.chave.indexOf('especializacao_arma') != -1 && 
+          talento.complemento != null) {
+        var chave_arma = tabelas_armas_invertida[talento.complemento];
+        if (chave_arma == null) {
+          alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+                tabelas_talentos[talento.chave].nome + '"');
+          continue;
+        }
+        personagem.especializacao_armas[chave_arma] = talento.chave.indexOf('_maior') == -1 ? 2 : 4;
+      }
+    }
+  }
+}
+
 // Dependencias de armaduras e escudos.
 function _DependenciasArmadurasEscudos() {
   personagem.armadura = null;
@@ -501,6 +522,7 @@ function _DependenciasArma(arma_personagem) {
   arma_personagem.proficiente = PersonagemProficienteComArma(
       arma_personagem.entrada.chave);
   arma_personagem.foco = PersonagemFocoComArma(arma_personagem.entrada.chave);
+  arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_personagem.entrada.chave);
   arma_personagem.acuidade = PersonagemPossuiTalento(
       'acuidade_arma', arma_personagem.entrada.chave);
 }
@@ -619,11 +641,15 @@ function _DependenciasBonusPorCategoria(
     bonus_por_categoria.dano += arma_personagem.bonus_dano;
   }
 
-  // Proficiencia.
+  // Proficiencia e foco.
   if (!arma_personagem.proficiente) {
     bonus_por_categoria.ataque -= 4;
   } else if (arma_personagem.foco) {
     bonus_por_categoria.ataque += arma_personagem.foco;
+  }
+  // Especialização.
+  if (arma_personagem.especializado) {
+    bonus_por_categoria.dano += arma_personagem.especializado;
   }
 
   // Bonus raciais.
