@@ -1541,7 +1541,7 @@ var tabelas_pocoes = {
   remover_medo: { nome: 'Remover medo', tipo: 'pocao', preco: '50 PO' },
   santuario: { nome: 'Santuário', tipo: 'pocao', preco: '50 PO' },
   escudo_da_fe_2: { nome: 'Escudo da fé +2', tipo: 'pocao', preco: '50 PO' },
-  arma_abencoada: { nome: 'arma_abencoada', tipo: 'oleo', preco: '50 PO' },
+  arma_abencoada: { nome: 'Arma Abençoada (Shillelagh)', tipo: 'oleo', preco: '50 PO' },
   abencoar_arma: { nome: 'Abençoar arma', tipo: 'oleo', preco: '100 PO' },
   aumentar_pessoa: { nome: 'Aumentar pessoa', tipo: 'pocao' , preco: '250 PO' },
   reduzir_pessoa: { nome: 'Reduzir pessoa', tipo: 'pocao'  , preco: '250 PO' },
