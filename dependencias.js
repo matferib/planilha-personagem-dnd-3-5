@@ -504,27 +504,32 @@ function _DependenciasArmas() {
   }
 }
 
+// TODO testar essa funcao.
 function _DependenciasArma(arma_personagem) {
+  var arma_entrada = arma_personagem.entrada;
   var arma_tabela = 
-      arma_personagem.arma_tabela = tabelas_armas[arma_personagem.entrada.chave];
+      arma_personagem.arma_tabela = tabelas_armas[arma_entrada.chave];
   arma_personagem.nome_gerado = arma_tabela.nome;
-  if (arma_personagem.entrada.obra_prima) {
+  if (arma_entrada.material && arma_entrada.material != 'nenhum') {
+    arma_personagem.nome_gerado += 
+        ' (' + tabelas_materiais_especiais[arma_entrada.material].nome + ')';
+  }
+  if (arma_entrada.bonus > 0) {
+    arma_personagem.bonus_ataque = arma_personagem.bonus_dano = arma_entrada.bonus;
+    arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
+  } else if (arma_entrada.obra_prima) {
     arma_personagem.bonus_ataque = 1;
     arma_personagem.bonus_dano = 0;
     arma_personagem.nome_gerado += ' OP';
   } else {
-    arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 
-        arma_personagem.entrada.bonus;
-    if (arma_personagem.entrada.bonus > 0) {
-      arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
-    }
+    arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 0;
   }
   arma_personagem.proficiente = PersonagemProficienteComArma(
-      arma_personagem.entrada.chave);
-  arma_personagem.foco = PersonagemFocoComArma(arma_personagem.entrada.chave);
-  arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_personagem.entrada.chave);
+      arma_entrada.chave);
+  arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
+  arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
   arma_personagem.acuidade = PersonagemPossuiTalento(
-      'acuidade_arma', arma_personagem.entrada.chave);
+      'acuidade_arma', arma_entrada.chave);
 }
 
 function _DependenciasEstilos() {
@@ -533,6 +538,7 @@ function _DependenciasEstilos() {
   }
 }
 
+// TODO merece um teste.
 function _DependenciasEstilo(estilo_personagem) {
   var arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
   if (arma_primaria == null) {
@@ -545,7 +551,13 @@ function _DependenciasEstilo(estilo_personagem) {
 
   if (estilo_personagem.nome == 'arma_dupla' &&
       (arma_primaria == null || !arma_primaria.arma_tabela.arma_dupla)) {
-    alert('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla');
+    alert('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla.');
+    estilo_personagem.nome = 'uma_arma';
+  }
+
+  if ('cac_duas_maos' in arma_primaria.arma_tabela.categorias &&
+      estilo_personagem.nome != 'uma_arma') {
+    alert('Arma "' + estilo_personagem.arma_primaria.nome + '" requer duas mãos.');
     estilo_personagem.nome = 'uma_arma';
   }
 
@@ -563,7 +575,7 @@ function _DependenciasEstilo(estilo_personagem) {
   for (var categoria in arma_secundaria.arma_tabela.categorias) {
     secundaria_leve = 
         (estilo_personagem.nome == 'duas_armas' && categoria.indexOf('leve') != -1) ||
-        estilo_personagem.nome == 'arma_dupla';
+         estilo_personagem.nome == 'arma_dupla';
   }
 
   for (var categoria in arma_primaria.arma_tabela.categorias) {

@@ -108,7 +108,7 @@ var personagem = {
   //                 arma_primaria: {  nome, 
   //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
   //                 arma_secundaria: { idem }, }.
-  // A categoria pode ser cac, cac_leve, distancia, arremesso...
+  // A categoria pode ser cac, cac_leve, cac_duas_maos, distancia, arremesso...
   estilos_luta: [],
   ca: { 
       normal: 10, surpreso: 10, toque: 10,

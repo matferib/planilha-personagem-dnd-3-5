@@ -34,12 +34,12 @@ var entradas = {
   // equipamentos.
   // O ideal era sumir com essa inicializacao, mas infelizmente, depois de carrega
   // Cada entrada eh do tipo: { chave, obra_prima, bonus }
-  //armas: [ { chave: 'desarmado', nome_gerado: 'desarmado', obra_prima: false, bonus: 0} ],
+  //armas: [ { chave: 'desarmado', nome_gerado: 'desarmado', material: 'nenhum', obra_prima: false, bonus: 0} ],
   armas: [],
   // TODO remover.
-  // Cada entrada eh do tipo: { em_uso, chave, obra_prima, bonus }
+  // Cada entrada eh do tipo: { em_uso, chave, material, obra_prima, bonus }
   armaduras: [],
-  // Cada entrada { em_uso, chave, obra_primra, bonus },
+  // Cada entrada { em_uso, chave, material, obra_prima, bonus },
   escudos: [],
   elmo: '',
   // cada entrada: { chave, em_uso }
@@ -304,8 +304,10 @@ function LeEntradaArmaArmadura(div) {
     }
     if (filho.name.indexOf('em-uso') != -1) {
       lido.em_uso = filho.checked;
-    } else if (filho.name.indexOf('select') != -1) {
+    } else if (filho.name.indexOf('select-principal') != -1) {
       lido.chave = ValorSelecionado(filho);
+    } else if (filho.name.indexOf('select-material') != -1) {
+      lido.material = ValorSelecionado(filho);
     } else if (filho.name.indexOf('obra-prima') != -1) {
       lido.obra_prima = filho.checked;
     } else if (filho.name.indexOf('bonus-magico') != -1) {

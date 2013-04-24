@@ -151,6 +151,7 @@ function ConverteArmadura(armadura_entrada) {
   // O nome da entrada eh apenas um indice na tabela de armas.
   armadura_personagem.entrada = {
     chave: armadura_entrada.chave, 
+    material: armadura_entrada.material,
     bonus: armadura_entrada.bonus, 
     // Se é magica, também é obra prima.
     obra_prima: armadura_entrada.bonus > 0 ? 
@@ -167,6 +168,7 @@ function ConverteEscudo(escudo_entrada) {
   // O nome da entrada eh apenas um indice na tabela de armas.
   escudo_personagem.entrada = {
     chave: escudo_entrada.chave, 
+    material: escudo_entrada.material,
     bonus: escudo_entrada.bonus, 
     // Se é magico, também é obra prima.
     obra_prima: escudo_entrada.bonus > 0 ? 
@@ -197,6 +199,7 @@ function ConverteArma(arma_entrada) {
   // O nome da entrada eh apenas um indice na tabela de armas.
   arma_personagem.entrada = {
     chave: arma_entrada.chave, 
+    material: arma_entrada.material,
     bonus: arma_entrada.bonus, 
     obra_prima: arma_entrada.obra_prima
   };
