@@ -762,7 +762,7 @@ var tabelas_armas_exoticas = {
 
 
   corrente_com_cravos: { nome: 'corrente com cravos', preco: '25 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
-                         categorias: { cac: true },
+                         categorias: { cac_duas_maos: true },
                          critico: '×2', peso: '10kg', tipo: 'perfurante', },
 
   espada_de_duas_laminas: { nome: 'espada de duas lâminas', preco: '100 PO',
