@@ -13,6 +13,15 @@ function _ComparaMoedas(moedas1, moedas2) {
       return false;
     }
   }
+  // Comparação inversa, pois moedas2 pode ter algum campo não presente em moedas1.
+  for (var tipo_moeda in moedas2) {
+    if (moedas2[tipo_moeda] == 0 && !(tipo_moeda in moedas1)) {
+      continue;
+    }
+    if (moedas2[tipo_moeda] != moedas1[tipo_moeda]) {
+      return false;
+    }
+  }
   return true;
 }
 
@@ -57,6 +66,7 @@ function TemplateTeste(handler_teste, dom) {
 } 
 
 function CarregaTestes() {
+  _CarregaTabelaArmasArmaduras();
   var body = document.getElementsByTagName('body')[0];
 
   LimpaGeral();
@@ -80,6 +90,74 @@ function CarregaTestes() {
       }
     }, 
   }, body);
+
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'LePeso', 
+    Testa: function() {
+      var peso = LePeso(' 500 g');
+      if (peso != 0.5) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 0.5 como resultado de 500g';
+        return;
+      }
+      peso = LePeso('    0,5   KG');
+      if (peso != 0.5) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 0.5 como resultado de 0,5 KG';
+        return;
+      }
+
+      peso = LePeso('    25,3   KG');
+      if (peso != 25.3) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 25,3 como resultado de 25,3 KG';
+        return;
+      }
+
+      peso = LePeso('    25,3   ');
+      if (peso != null) {
+        this.resultado = false;
+        this.detalhes = 'Esperava null para peso sem unidade.';
+        return;
+      }
+
+      this.resultado = true;
+    }, 
+  }, body);
+
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'AjustaString', 
+    Testa: function() {
+      var str = AjustaString(' \taaa bbb    ');
+      if (str != 'aaa bbb') {
+        this.resultado = false;
+        this.detalhes = 'Esperava "aaa bbb" como resultado';
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'UtilSomaPrecos', 
+    Testa: function() {
+      this.resultado = false;
+      var preco1 = { platina: 2, ouro: 4 };
+      var preco2 = { ouro: 5, prata: 0, cobre: 3 };
+      var preco_esperado = { platina: 2, ouro: 9, prata: 0, cobre: 3 };
+      var soma_esperada = _ComparaMoedas(SomaPrecos(preco1, preco2), preco_esperado);
+      if (!soma_esperada) {
+        this.detalhes = 'Esperava { platina: 2, ouro: 9, prata: 0, cobre: 3 }';
+        this.resultado = false;
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
 
   LimpaGeral();
   personagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 }; 
@@ -179,31 +257,148 @@ function CarregaTestes() {
     nome: 'PrecoArmaArmaduraEscudo', 
     Testa: function() {
       var preco = PrecoArmaArmaduraEscudo(
-          'escudo', tabelas_escudos, 'broquel', false, 0, false);
+          'escudo', tabelas_escudos, 'broquel', 'nenhum', false, 0, false);
       var esperado = { ouro: 15 };
       this.resultado = _ComparaMoedas(preco, esperado);
       if (!this.resultado) {
-        this.detalhes = 'Erro lendo preco de broquel.';
+        this.detalhes = 'Erro lendo preço de broquel.';
         return;
       }
 
       // Obra prima + 150 para escudos.
       preco = PrecoArmaArmaduraEscudo(
-          'escudo', tabelas_escudos, 'broquel', true, 0, false);
-      esperado.ouro += 150;
+          'escudo', tabelas_escudos, 'broquel', 'nenhum', true, 0, false);
+      esperado.ouro = 165;
       this.resultado = _ComparaMoedas(preco, esperado);
       if (!this.resultado) {
-        this.detalhes = 'Erro lendo preco de broquel obra prima.';
+        this.detalhes = 'Erro lendo preço de broquel obra prima.';
+        return;
       }
 
-      // Magico + 1000 para escudos +1.
+      // Adamante: + 2000 para escudos (incluindo preco da obra prima).
       preco = PrecoArmaArmaduraEscudo(
-          'escudo', tabelas_escudos, 'broquel', true, 1, false);
-      esperado.ouro += 1000;
+          'escudo', tabelas_escudos, 'broquel', 'adamante', true, 0, false);
+      esperado.ouro = 2015;
       this.resultado = _ComparaMoedas(preco, esperado);
       if (!this.resultado) {
-        this.detalhes = 'Erro lendo preco de broquel +1.';
+        this.detalhes = 'Erro lendo preço de broquel de adamante.';
+        return;
       }
+
+      // Madeira Negra: 20 PO por kg + 300 de arma obra prima.
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'bordao', 'madeira_negra', true, 0, false);
+      esperado.ouro = 340;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de bordão de madeira negra.';
+        return;
+      }
+
+      // Couro de dragao: custo da armadura + obra-prima.
+      preco = PrecoArmaArmaduraEscudo(
+          'armadura', tabelas_armaduras, 'camisao_cota_de_malha', 'couro_dragao', true, 0, false);
+      esperado.ouro = 500;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de cota de malhas de couro de dragão.';
+        return;
+      }
+
+      // Couro de dragao +1: custo da armadura + obra-prima + 1000.
+      preco = PrecoArmaArmaduraEscudo(
+          'armadura', tabelas_armaduras, 'camisao_cota_de_malha', 'couro_dragao', true, 1, false);
+      esperado.ouro = 1500;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de cota de malhas de couro de dragão +1.';
+        return;
+      }
+
+      // Magico + 1000 para escudos +1 + 150 obra prima.
+      preco = PrecoArmaArmaduraEscudo(
+          'escudo', tabelas_escudos, 'broquel', 'nenhum', true, 1, false);
+      esperado.ouro = 1165;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de broquel +1.';
+        return;
+      }
+
+      // Ferro frio: preco da arma normal x2. 
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'espada_longa', 'ferro_frio', false, 0, false);
+      esperado.ouro = 30;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de espada longa de ferro frio.';
+        return;
+      }
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'espada_longa', 'ferro_frio', true, 0, false);
+      esperado.ouro = 330;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de espada longa de ferro frio.';
+        return;
+      }
+      // Ferro frio: +2000 PO por bonus.
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'espada_longa', 'ferro_frio', true, 1, false);
+      esperado.ouro = 4330;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de espada longa de ferro frio.';
+        return;
+      }
+
+      // Armadura de mitral.
+      preco = PrecoArmaArmaduraEscudo(
+          'armadura', tabelas_armaduras, 'peitoral_de_aco', 'mitral', true, 0, false);
+      esperado.ouro = 4200;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de peitoral de aço de mitral.';
+        return;
+      }
+      // Mitral pesada +2.
+      preco = PrecoArmaArmaduraEscudo(
+          'armadura', tabelas_armaduras, 'cota_de_talas', 'mitral', true, 2, false);
+      esperado.ouro = 13200;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de cota de talas de mitral.';
+        return;
+      }
+
+      // Adaga de prata.
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'adaga', 'prata_alquimica', false, 0, false);
+      esperado.ouro = 22;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de adaga de prata alquímica.';
+        return;
+      }
+      // Espada longa de prata.
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'espada_longa', 'prata_alquimica', false, 0, false);
+      esperado.ouro = 105;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de espada longa de prata alquímica.';
+        return;
+      }
+      // Espada larga de prata.
+      preco = PrecoArmaArmaduraEscudo(
+          'arma', tabelas_armas, 'espada_larga', 'prata_alquimica', false, 0, false);
+      esperado.ouro = 230;
+      this.resultado = _ComparaMoedas(preco, esperado);
+      if (!this.resultado) {
+        this.detalhes = 'Erro lendo preço de espada larga de prata alquímica.';
+        return;
+      }
+
     }, 
   }, body);
 
@@ -263,11 +458,7 @@ function CarregaTestes() {
         this.detalhes = 'Talento "magia_penetrante_maior" deveria funcionar com "magia_penetrante"';
         return;
       }
-
-      
-
       this.resultado = true;
     }, 
   }, body);
-
 }

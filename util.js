@@ -141,6 +141,20 @@ function GeraId(prefixo, elemento) {
   }
 }
 
+// @return a soma de dois preços.
+function SomaPrecos(preco1, preco2) {
+  var moedas = { platina: 0, ouro: 0, prata: 0, cobre: 0 };
+  for (tipo_moeda in moedas) {
+    if (tipo_moeda in preco1) {
+      moedas[tipo_moeda] += preco1[tipo_moeda];
+    }
+    if (tipo_moeda in preco2) {
+      moedas[tipo_moeda] += preco2[tipo_moeda];
+    }
+  }
+  return moedas;
+}
+
 // Recebe uma string de preço e retorna um objeto contendo as moedas.
 // @return objeto de moedas ou null em caso de erro.
 // @param invertido (default false) se true, os valores sao invertidos (para realizar compras por exemplo).
@@ -161,16 +175,40 @@ function LePreco(preco, invertido) {
   return moedas;
 }
 
+// Le uma entrada de peso e retorna o valor em Kg.
+// @param peso string com formato [0-9]*[,[0-9]*]\s*[g|kg].
+// @return peso em Kg.
+// TODO implementar.
+function LePeso(peso) {
+  var peso_minusculo = peso.toLowerCase();
+  var indice_unidade = peso_minusculo.indexOf('kg');
+  var unidade_gramas = false;
+  if (indice_unidade == -1) {
+    indice_unidade = peso_minusculo.indexOf('g');
+    unidade_gramas = true;
+  }
+  // Não encontrei a unidade.
+  if (indice_unidade == -1) {
+    return null;
+  }
+
+  var peso_sem_unidade = peso_minusculo.substr(0, indice_unidade).replace(',', '.');
+  var peso = parseFloat(peso_sem_unidade);
+
+  return unidade_gramas ? peso / 1000.0 : peso;
+}
+
 // Armaduras e escudos tem o mesmo preco, so arma que muda.
 // @param tipo arma, armadura, escudo.
 // @param tabela onde o item sera consultado.
 // @param chave do item na tabela.
+// @param material do item (exemplo: nenhum, ou adamante).
 // @param obra_prima se a arma for obra-prima (mas nao magica).
 // @param bonus se a arma for magica (e o bonus). Sera computado o
 //        valor da obra prima.
 // @param invertido inverter os valores para negativo.
 // @return o preco de uma arma, armadura ou escudo. null em caso de erro.
-function PrecoArmaArmaduraEscudo(tipo, tabela, chave, obra_prima, bonus, invertido) {
+function PrecoArmaArmaduraEscudo(tipo, tabela, chave, material, obra_prima, bonus, invertido) {
   var entrada_tabela = tabela[chave];
   if (entrada_tabela == null || entrada_tabela.preco == null) {
     return null;
@@ -189,15 +227,70 @@ function PrecoArmaArmaduraEscudo(tipo, tabela, chave, obra_prima, bonus, inverti
           return null;
     }
   }
-  // Fazer os ifs independentes ajuda a evitar a duplicacao da obra prima. 
   if (obra_prima) {
-    // Armas op custam 300 a mais, armaduras 150.
+    // Armas op custam 300 a mais, armaduras e escudos, 150.
     preco_adicional.ouro += tipo == 'arma' ? 300 : 150; 
   }
+  // Modificadores de materiais.
+  if (material != 'nenhum') {
+    var preco_material = null;
+    var tabela_material = tabelas_materiais_especiais[material];
+    if (tabela_material.custo_por_tipo) {
+      var custo = tabela_material.custo_por_tipo[tipo];
+      if (custo.por_subtipo) {
+        // TODO
+      } else {
+        preco_material = LePreco(custo);
+      }
+    } else if (tabela_material.custo_por_kg) {
+      var peso_kg = LePeso(entrada_tabela.peso);
+      preco_material = LePreco(tabela_material.custo_por_kg);
+      for (var tipo_moeda in preco_material) {
+        preco_material[tipo_moeda] *= peso_kg;
+      }
+    } else if (material == 'couro_dragao') {
+      // Preco da armadura mais obra prima.
+      preco_material = SomaPrecos(LePreco(entrada_tabela.preco), { ouro: 150 });
+    } else if (material == 'ferro_frio') {
+      // Preço da arma normal e cada bonus custa 2000 PO a mais.
+      preco_material = LePreco(entrada_tabela.preco);
+      preco_material['ouro'] += bonus * 2000;
+    } else if (material == 'mitral') {
+      // Preco tabelado de acordo com tipo da armadura ou escudo (excluidindo custo de obra prima).
+      var custo = 0;  // escudo ou leve.
+      if (tipo == 'escudo') {
+        custo = 850;
+      } else {
+        var talento_relacionado = entrada_tabela.talento_relacionado;
+        if (talento_relacionado == 'usar_armaduras_leves') {
+          custo = 850;
+        } else if (talento_relacionado == 'usar_armaduras_medias') {
+          custo = 3850;
+        } else if (talento_relacionado == 'usar_armaduras_pesadas') {
+          custo = 8850;
+        }
+      }
+      preco_material = { ouro: custo };
+    } else if (material == 'prata_alquimica') {
+      var categorias = entrada_tabela.categorias;
+      var custo = 0;
+      if ('cac_leve' in categorias) {
+        custo = 20;
+      } else if ('cac' in categorias) {
+        custo = 90;
+      } else if ('cac_duas_maos' in categorias) {
+        custo = 180;
+      }
+      preco_material = { ouro: custo };
+    }
+    // Adiciona preco do material.
+    preco_adicional = SomaPrecos(preco_adicional, preco_material);
+  }
+
   // Soma e se necessario, inverte.
-  for (var tipo_moeda in preco) {
-    preco[tipo_moeda] += preco_adicional[tipo_moeda];
-    if (invertido) {
+  preco = SomaPrecos(preco, preco_adicional);
+  if (invertido) {
+    for (var tipo_moeda in preco) {
       preco[tipo_moeda] = -preco[tipo_moeda];
     }
   }
@@ -230,7 +323,11 @@ function Titulo(pares, dom) {
 
 // Realiza o trim da string (remove espacos antes e depois).
 function AjustaString(str) {
-  str = str.replace(/\s*$/, "");  // direita.
-  str = str.replace(/^\s*/, "");  // esquerda.
-  return str;
+  if (String.prototype.trim != null) {
+    return str.trim();
+  } else {
+    str = str.replace(/\s*$/, "");  // direita.
+    str = str.replace(/^\s*/, "");  // esquerda.
+    return str;
+  }
 }
