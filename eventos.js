@@ -356,7 +356,7 @@ function _AchaArmaArmadura(dom) {
 function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
   var preco = PrecoArmaArmaduraEscudo(
-      tipo, tabela, lido.chave, lido.obra_prima, lido.bonus, false);
+      tipo, tabela, lido.chave, lido.material, lido.obra_prima, lido.bonus, false);
   if (preco == null) {
     alert("Arma ou armadura magica invalida");
     return;
@@ -372,7 +372,7 @@ function ClickVenderArmaArmadura(dom, tipo, tabela) {
 function ClickComprarArmaArmadura(dom, tipo, tabela) {
   var lido = LeEntradaArmaArmadura(dom);
   var preco = PrecoArmaArmaduraEscudo(
-      tipo, tabela, lido.chave, lido.obra_prima, lido.bonus, true);
+      tipo, tabela, lido.chave, lido.material, lido.obra_prima, lido.bonus, true);
   if (preco == null) {
     alert("Arma ou armadura magica invalida");
     return;

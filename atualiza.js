@@ -715,7 +715,9 @@ function _AtualizaArmaArmadura(chave, em_uso, obra_prima, bonus, div) {
     }
     if (filho.name.indexOf('em-uso') != -1) {
       filho.checked = em_uso;
-    } else if (filho.name.indexOf('select') != -1) {
+    } else if (filho.name.indexOf('select-principal') != -1) {
+      SelecionaValor(chave, filho);
+    } else if (filho.name.indexOf('select-material') != -1) {
       SelecionaValor(chave, filho);
     } else if (filho.name.indexOf('obra-prima') != -1) {
       filho.checked = obra_prima;

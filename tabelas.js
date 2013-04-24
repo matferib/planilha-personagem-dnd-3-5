@@ -451,11 +451,11 @@ var tabelas_armaduras_pesadas = {
     nome: 'Armadura de Batalha', bonus: 8, maximo_bonus_destreza: 1, preco: '1500 PO' },
 };
 
-// Tabelas de armaduras, construida atraves das tabelas_armaduras_*.
+// Tabelas de armaduras, construida dinamicamente atraves das tabelas_armaduras_*.
 var tabelas_armaduras = {
 };
 
-// Mapeia o nome para a chave.
+// Mapeia o nome para a chave. Construida dinamicamente.
 var tabelas_armaduras_invertida = {
   // Cada entrada: nome_completo: chave_entrada.
 };
@@ -500,8 +500,8 @@ var tabelas_armas_simples = {
            tipo: 'cortante/perfurante' },
 
   adaga_de_soco: { nome: 'adaga de soco', preco: '2 PO', dano: { pequeno: '1d3', medio: '1d4'},
-                categorias: { cac_leve: true },
-                  critico: '×3', peso: '0,5kg', tipo: 'perfurante' },
+                   categorias: { cac_leve: true },
+                   critico: '×3', peso: '0,5kg', tipo: 'perfurante' },
   manopla_com_cravos: { nome: 'manopla com cravos', preco: '5 PO', dano: { pequeno: '1d3', medio: '1d4'} ,
                         categorias: { cac_leve: true } ,
                         critico: '×2', peso: '0,5kg', tipo: 'perfurante' },
@@ -652,47 +652,47 @@ var tabelas_armas_comuns = {
 
 // Two-Handed Melee Weapons
   alabarda: { nome: 'alabarda', preco: '10 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
-              categorias: { cac: true } ,
+              categorias: { cac_duas_maos: true } ,
               critico: '×3', peso: '11kg', tipo: 'cortante/perfurante' },
 
   clava_grande: { nome: 'clava grande', preco: '5 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
-                  categorias: { cac: true } ,
+                  categorias: { cac_duas_maos: true } ,
                   critico: '×2', peso: '4Kg', tipo: 'concussão' },
 
   espada_larga: { nome: 'espada larga', preco: '50 PO', dano: { pequeno: '1d10', medio: '2d6'} ,
-                  categorias: { cac: true } ,
+                  categorias: { cac_duas_maos: true } ,
                   critico: '19-20/×2', peso: '4Kg', tipo: 'cortante' },
 
   falcione: { nome: 'falcione', preco: '75 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
-              categorias: { cac: true },
+              categorias: { cac_duas_maos: true },
               critico: '18-20/×2', peso: '4kg', tipo: 'cortante', },
 
   foice_longa: { nome: 'foice longa', preco: '18 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
-                 categorias: { cac: true } ,
+                 categorias: { cac_duas_maos: true } ,
                  critico: '×4', peso: '10kg', tipo: 'cortante/perfurante' },
 
   glaive: { nome: 'glaive', preco: '8 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
-            categorias: { cac: true } ,
+            categorias: { cac_duas_maos: true } ,
             critico: '×3', peso: '10Kg', tipo: 'cortante' },
 
   guisarme: { nome: 'guisarme', preco: '9 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
-              categorias: { cac: true } ,
+              categorias: { cac_duas_maos: true } ,
               critico: '×3', peso: '11kg', tipo: 'cortante' },
 
   lanca_montada: { nome: 'lança montada', preco: '10 PO', dano: { pequeno: '1d6', medio: '1d8'} ,
-                   categorias: { cac: true } ,
+                   categorias: { cac_duas_maos: true } ,
                    critico: '×3', peso: '10kg', tipo: 'perfurante' },
 
   machado_grande: { nome: 'machado grande', preco: '20 PO', dano: { pequeno: '1d10', medio: '1d12'} ,
-                    categorias: { cac: true } ,
+                    categorias: { cac_duas_maos: true } ,
                     critico: 'x3', peso: '11kg', tipo: 'cortante' },
 
   mangual_pesado: { nome: 'mangual pesado', preco: '15 PO', dano: { pequeno: '1d8', medio: '1d10'} ,
-                    categorias: { cac: true } ,
+                    categorias: { cac_duas_maos: true } ,
                     critico: '19-20/x2', peso: '10kg', tipo: 'concussão' },
 
   ranseur: { nome: 'ranseur', preco: '10 PO', dano: { pequeno: '1d6', medio: '2d4'} ,
-             categorias: { cac: true } ,
+             categorias: { cac_duas_maos: true } ,
              critico: 'x3', peso: '11kg', tipo: 'perfurante' },
 
 // Ranged Weapons
@@ -965,8 +965,6 @@ Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de a
 Tiro Múltiplo¹ Des 17, Tiro Certeiro, Tiro Rápido, bônus base de ataque +6 Dispara duas ou mais flechas simultaneamente
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11
 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
-Tolerância - +4 de bônus nos testes para resistir ao dano por contusão
-Duro de Matar Tolerância Permanece consciente entre -1 e -9 PV
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
@@ -1045,6 +1043,10 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   diligente: {
       nome: 'Diligente',
       bonus_pericias: { avaliacao: 2, decifrar_escrita: 2 } },
+  duro_de_matar: {
+      nome: 'Duro de Matar',
+      requisitos: { talentos: [ 'tolerancia' ], },
+      descricao: 'Permanece consciente entre -1 e -9 PV.', },
   // Nao da pra modelar automatico porque as dependencias de especiais vem
   // depois dos talentos. Da mais 4 expulsoes.
   expulsao_adicional: {
@@ -1109,7 +1111,7 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   // Combat casting: +4 de bônus nos teste de Concentração para conjurar na defensiva
   magia_combate: {
       nome: 'Magia em Combate', },
-  maos_levels: {
+  maos_level: {
       nome: 'Mãos Leves',
       bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
   persuasivo: {
@@ -1123,6 +1125,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       requisitos: { bba: 1 },
       guerreiro: true, 
       descricao: 'Saca uma arma branca como ação livre.', },
+  tolerancia: {
+      nome: 'Tolerância',  // Endurance.
+      descricao: '+4 de bônus nos testes para resistir a danos não letais (nadar, correr, marcha ' +
+                 'forçada, respiração, fome e sede, frio, calor e sufocamento. Pode dormir em armadura ' +
+                 'leve ou média sem fatigar.', },
   usar_armas_simples: { 
       nome: 'Usar armas simples',
       descricao: 'Não sofre penalidades nos ataques com armas simples.', },
@@ -1628,4 +1635,42 @@ var tabelas_nomes_itens = {
   pocoes: 'Poções',
 };
 
+// Materiais especiais.
+// TODO terminar de modelar custos.
+// TODO modelar os requisitos.
+var tabelas_materiais_especiais = {
+  nenhum: { nome: 'nenhum', },
+  adamante: { 
+      nome: 'adamante',
+      requisitos: { metal: true, obra_prima: true, },
+      custo_por_tipo: {
+          // Tirei o custo da obra prima.
+          municao: '54 PO',
+          arma: '2700 PO', 
+          armadura: { por_subtipo: { leve: '4850 PO', media: '9850 PO', pesada: '14850 PO' }, }, 
+          escudo: '1850 PO' }, },
+  madeira_negra: { 
+      nome: 'madeira negra', 
+      custo_por_kg: '20 PO',
+      requisito: { madeira: true, obra_prima: true, }, },
+  // O custo adicional do couro do dragão é o da armadura ou escudo obra prima. Fica difícil modelar aqui
+  // de forma genérica, então preferi tratar especificamente no código.
+  couro_dragao: { 
+      nome: 'couro de dragão', 
+      requisitos: { armadura: true, obra_prima: true, }, },
+  // O custo adicional do ferro frio é o da arma normal. Cada bônus mágico adiciona +2000 PO. Assim como 
+  // couro_dragao, modelei no código.
+  ferro_frio: { 
+      nome: 'ferro frio',
+      requisito: { arma: true, }, },
+  // Custo do mitral é tabelado de acordo com tipo de armadura ou escudo.
+  // armadura leve: 1000, media: 4000, pesada: 9000, escudo: 1000. O preco unclui valor da obra prima.
+  mitral: { 
+      nome: 'mitral', 
+      requisitos: { armadura: true, metal: true, obra_prima: true, }, },
+  // Custo da prata alquimica varia com o subtipo de arma.
+  prata_alquimica: { 
+      nome: 'prata Alquímica', 
+      requisitos: { arma: true, metal: true, }, },
+};
 

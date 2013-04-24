@@ -69,7 +69,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
         false);
   }
   var select = CriaSelect();
-  select.setAttribute('name', 'select-' + nome);
+  select.setAttribute('name', 'select-principal');
   select.setAttribute('onchange', 'AtualizaGeral()');
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
@@ -81,6 +81,17 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
     }
     select.appendChild(optgroup);
   }
+
+  var select_material = CriaSelect();
+  select_material.setAttribute('name', 'select-material');
+  select_material.setAttribute('onchange', 'AtualizaGeral()');
+  for (var corrente in tabelas_materiais_especiais) {
+    var option = CriaOption(tabelas_materiais_especiais[corrente].nome, corrente);
+    option.selected = false;
+    select_material.appendChild(option);
+  }
+
+
   var span_obra_prima = CriaSpan(' OP');
 
   var input_obra_prima = CriaInputCheckbox(false, null, null, AtualizaGeral);
@@ -104,6 +115,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
     div.appendChild(input_em_uso);
   }
   div.appendChild(select);
+  div.appendChild(select_material);
   div.appendChild(span_obra_prima);
   div.appendChild(input_obra_prima);
   div.appendChild(input_bonus);
