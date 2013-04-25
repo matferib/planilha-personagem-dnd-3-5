@@ -311,7 +311,7 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
              (complemento ? complemento : ''));
     }
   }
-  if (requisitos.proficiencia_arma && complemento) {
+  if (requisitos.proficiencia_arma && complemento && complemento.length > 0) {
     var chave_arma = tabelas_armas_invertida[complemento];
     if (!PersonagemProficienteComArma(chave_arma)) {
       return (prefixo_erro + 'proficiencia com ' + complemento);

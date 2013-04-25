@@ -56,7 +56,7 @@ function ClickAdicionarClasse() {
 }
 
 // Botao de remover classe apertado.
-function ClickRemoveClasse() {
+function ClickRemoverClasse() {
   personagem.classes.pop();
   AtualizaGeralSemConverterEntradas();
 }
@@ -324,6 +324,7 @@ function ClickGerarPersonagem(modo) {
 }
 
 // Trata o botao de descansar
+// TODO arrumar.
 function ClickDescansar(valor) {
   PersonagemAdicionarFerimentos(valor);
   for (var chave_classe in personagem.feiticos) {
