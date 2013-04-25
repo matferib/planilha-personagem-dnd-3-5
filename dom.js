@@ -103,7 +103,6 @@ function CriaInputNumerico(numero, id, classe, funcao) {
     input.value = numero;
   }
   if (funcao) {
-    //input.addEventListener('onchange', funcao, false);
     input.addEventListener('input', funcao, false);
   }
   return input;
@@ -120,16 +119,14 @@ function CriaSelect(id, classe, funcao) {
 // Cria um span com os botoes mais e menos, retornando-o.
 // @param id do input de texto com o valor do botao.
 // @param classe do input com o valor do botao.
-// @param nome_funcao a ser chamada pelos botoes, que deve ser do tipo
-//        funcao(string, incremento).
-// @param parametro a ser passado para a funcao.
-function CriaBotoesMaisMenos(id, classe, nome_funcao, parametro) {
+// @param handler a ser chamada pelos botoes, que deve receber 1 para +, -1 para menos.
+function CriaBotoesMaisMenos(id, classe, handler) {
   var span = CriaSpan();
   var botao_mais = CriaBotao('+');
-  botao_mais.setAttribute('onclick', nome_funcao + "('" + parametro + "', 1)");
+  botao_mais.addEventListener('click', handler(1));
   span.appendChild(botao_mais);
   var botao_menos = CriaBotao('-');
-  botao_menos.setAttribute('onclick', nome_funcao + "('" + parametro + "', -1)");
+  botao_menos.addEventListener('click', handler(-1));
   span.appendChild(botao_menos);
   var input_pontos = CriaInputTexto('0', id, classe);
   input_pontos.size = 2;
@@ -170,7 +167,7 @@ function RemoveUltimoFilho(pai) {
 function _RemoveOnChange(dom) {
   for (var filho = dom.firstChild; filho != null; filho = filho.nextSibling) {
     if (filho.removeAttribute) {
-      filho.removeAttribute('onchange');
+      filho.removeEventListener('change');
       _RemoveOnChange(filho);
     }
   }

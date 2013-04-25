@@ -3,6 +3,7 @@
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
 // preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
+  _CarregaHandlers();
   _CarregaRacas();
   _CarregaBotoesVisao();
   _CarregaAtributos();
@@ -25,6 +26,63 @@ function CarregamentoInicial() {
   AtualizaGeralSemLerEntradas();
 }
 
+// Adiciona os handlers aos botoes da interface.
+function _CarregaHandlers() {
+  // Mapa de id de botoes para handler de click.
+  var mapa_click = {
+    "botao-salvar": ClickSalvar,
+    "botao-abrir": ClickAbrir,
+    "botao-exportar": ClickExportar,
+    "botao-importar": ClickImportar,
+    "botao-adicionar-classe": ClickAdicionarClasse,
+    "botao-remover-classe": ClickRemoverClasse,
+    "botao-gerar-personagem": function() { ClickGerarPersonagem('comum'); },
+    "botao-gerar-personagem-elite": function() { ClickGerarPersonagem('elite'); },
+    "botao-adicionar-estilo-luta": ClickAdicionarEstiloLuta,
+    "botao-link": ClickLink,
+    "botao-gerar-resumo": ClickGerarResumo,
+    "botao-adicionar-arma": ClickAdicionarArma,
+    "botao-adicionar-armadura": ClickAdicionarArmadura,
+    "botao-adicionar-escudo": ClickAdicionarEscudo,
+    "botao-adicionar-anel": function() { ClickAdicionarItem('aneis'); },
+    "botao-adicionar-amuleto": function() { ClickAdicionarItem('amuletos'); }, 
+    "botao-adicionar-pocao": function() { ClickAdicionarItem('pocoes'); },
+    "json-personagem": function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); },
+    "botao-ferir-1": function() { ClickAjustarFerimentos(1); },
+    "botao-ferir-3": function() { ClickAjustarFerimentos(3); },
+    "botao-ferir-5": function() { ClickAjustarFerimentos(5); },
+    "botao-curar-1": function() { ClickAjustarFerimentos(-1); },
+    "botao-curar-3": function() { ClickAjustarFerimentos(-3); },
+    "botao-curar-5": function() { ClickAjustarFerimentos(-5); },
+    "botao-descansar": function() { ClickDescansar(-1); },
+  };
+
+  for (var id in mapa_click) {
+    Dom(id).addEventListener('click', mapa_click[id]);
+  }
+
+  var mapa_change = {
+    "nome": AtualizaGeral,
+    "raca": AtualizaGeral,
+    "alinhamento": AtualizaGeral,
+    "pontos-vida-dados": AtualizaGeral,
+    "ferimentos": AtualizaGeral,
+    "input-adicionar-ferimentos": function() { 
+        var dom = Dom('input-adicionar-ferimentos');
+        ClickAjustarFerimentos(parseInt(dom.value)); 
+        dom.value = ''; },
+    "input-remover-ferimentos": function() {
+        var dom = Dom('input-remover-ferimentos');
+        ClickAjustarFerimentos(-parseInt(dom.value)); 
+        dom.value = ''; },
+    "text-area-notas": ChangeNotas,
+  };
+  for (var id in mapa_change) {
+    Dom(id).addEventListener('change', mapa_change[id]);
+  }
+
+}
+
 // Adiciona racas dinamicamente na planilha
 function _CarregaRacas() {
   var select_raca = Dom('raca');
@@ -39,11 +97,11 @@ function _CarregaBotoesVisao() {
   var div_visoes = Dom('div-visoes');
   for (var visao in tabelas_visoes) {
     var botao_visao = CriaSpan(tabelas_visoes[visao].nome, 'span-' + visao, null);
-    botao_visao.setAttribute('onclick', "ClickVisao('" + visao + "')");
+    botao_visao.addEventListener('click', function() { ClickVisao(visao); });
     div_visoes.appendChild(botao_visao);
   }
   var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
-  input_modo_mestre.setAttribute('onchange', 'ClickVisualizacaoModoMestre()');
+  input_modo_mestre.addEventListener('change', ClickVisualizacaoModoMestre);
   //input_modo_mestre.textContent = 'modo-mestre';
   var span_input = CriaSpan();
   span_input.appendChild(input_modo_mestre);
@@ -92,7 +150,7 @@ function _CarregaAtributos() {
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
     input_atributo.size = 2;
     input_atributo.maxLength = 2;
-    input_atributo.setAttribute('onchange', 'AtualizaGeral()');
+    input_atributo.addEventListener('change', AtualizaGeral);
     div_atributo.appendChild(input_atributo);
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-racial'));
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-nivel'));
@@ -231,3 +289,8 @@ function _CarregaFeiticos() {
     }
   }
 }
+
+// Aqui é onde tudo começa.
+document.addEventListener('DOMContentLoaded', function() {
+  CarregamentoInicial();
+});

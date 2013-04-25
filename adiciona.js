@@ -7,7 +7,7 @@ function AdicionaClasse(indice, dom) {
   }
   var select_classe = CriaSelect('select-classe-' + indice, 'selects-classes');
   select_classe.setAttribute('name', 'classe');
-  select_classe.setAttribute('onchange', 'AtualizaGeral()');
+  select_classe.addEventListener('change', AtualizaGeral);
   var span_nivel = CriaSpan('Nível: ');
   var input_nivel = CriaInputNumerico(
       1, 'nivel-classe-' + indice, null, 
@@ -70,7 +70,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   }
   var select = CriaSelect();
   select.setAttribute('name', 'select-principal');
-  select.setAttribute('onchange', 'AtualizaGeral()');
+  select.addEventListener('change', AtualizaGeral);
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
     for (var corrente in tabelas[i]) {
@@ -84,7 +84,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
 
   var select_material = CriaSelect();
   select_material.setAttribute('name', 'select-material');
-  select_material.setAttribute('onchange', 'AtualizaGeral()');
+  select_material.addEventListener('change', AtualizaGeral);
   for (var corrente in tabelas_materiais_especiais) {
     var option = CriaOption(tabelas_materiais_especiais[corrente].nome, corrente);
     option.selected = false;
@@ -294,7 +294,7 @@ function AdicionaTalento(chave_classe, div_pai) {
   var div_select_talentos = Dom('div-select-talentos');
   var select_talento = CriaSelect();
   select_talento.name = 'chave-talento';
-  select_talento.setAttribute('onchange', 'AtualizaGeral()');
+  select_talento.addEventListener('change', AtualizaGeral);
   var option_selected;
   for (var talento_tabela in tabelas_talentos) {
     var talento_option = tabelas_talentos[talento_tabela];
@@ -307,7 +307,7 @@ function AdicionaTalento(chave_classe, div_pai) {
   }
   var input_complemento_talento = CriaInputTexto('');
   input_complemento_talento.name = 'complemento-talento';
-  input_complemento_talento.setAttribute('onchange', 'AtualizaGeral()');
+  input_complemento_talento.addEventListener('change', AtualizaGeral);
 
   var div_select_talento = CriaDiv();
   div_select_talento.appendChild(select_talento);
