@@ -335,11 +335,8 @@ function _VerificaPrerequisitosTalento() {
       }
       var erro = PersonagemVerificaPrerequisitosTalento(talento.chave, talento.complemento);
       if (erro != null) {
-        // Se tiver complemento so limpa o complemento
         talento.complemento = null;
-        if (!tabelas_talentos[talento.chave].complemento) {
-          talento.chave = 'usar_armas_simples';
-        }
+        talento.chave = 'usar_armas_simples';
         alert(erro);
       }
     }

@@ -1360,7 +1360,7 @@ var tabelas_visoes = {
       classes: ['divs-principais'], elementos: [] }, 
     mostrar: { 
       classes: [], 
-      elementos:['div-pontos-vida', 'div-ataque', 'div-defesa', 'div-iniciativa'] },
+      elementos:['div-pontos-vida', 'div-ataque', 'div-iniciativa'] },
   },
   pericias: {
     nome: 'Perícias',
