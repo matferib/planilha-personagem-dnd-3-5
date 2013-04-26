@@ -260,7 +260,7 @@ function _DependenciasProficienciaArmas() {
         // TODO remover essa verificacao quando o input dos talentos estiver
         // terminado.
         if (chave_arma == null) {
-          alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' + 
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
@@ -275,7 +275,7 @@ function _DependenciasProficienciaArmas() {
             familiar = true;
           }
           if (!familiar) {
-            alert('Arma "' + talento.complemento + 
+            Mensagem('Arma "' + talento.complemento + 
                   '" inválida para talento "' + 
                   tabelas_talentos[talento.chave].nome + '"');
             continue;
@@ -337,7 +337,7 @@ function _VerificaPrerequisitosTalento() {
       if (erro != null) {
         talento.complemento = null;
         talento.chave = 'usar_armas_simples';
-        alert(erro);
+        Mensagem(erro);
       }
     }
   }
@@ -424,7 +424,7 @@ function _DependenciasFocoArmas() {
           talento.complemento != null) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
         if (chave_arma == null) {
-          alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' + 
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
@@ -445,7 +445,7 @@ function _DependenciasEspecializacaoArmas() {
           talento.complemento != null) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
         if (chave_arma == null) {
-          alert('Arma "' + talento.complemento + '" inválida para talento "' + 
+          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' + 
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
@@ -548,13 +548,13 @@ function _DependenciasEstilo(estilo_personagem) {
 
   if (estilo_personagem.nome == 'arma_dupla' &&
       (arma_primaria == null || !arma_primaria.arma_tabela.arma_dupla)) {
-    alert('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla.');
+    Mensagem('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla.');
     estilo_personagem.nome = 'uma_arma';
   }
 
   if ('cac_duas_maos' in arma_primaria.arma_tabela.categorias &&
       estilo_personagem.nome != 'uma_arma') {
-    alert('Arma "' + estilo_personagem.arma_primaria.nome + '" requer duas mãos.');
+    Mensagem('Arma "' + estilo_personagem.arma_primaria.nome + '" requer duas mãos.');
     estilo_personagem.nome = 'uma_arma';
   }
 
