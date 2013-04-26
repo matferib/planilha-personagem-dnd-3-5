@@ -97,7 +97,11 @@ function _CarregaBotoesVisao() {
   var div_visoes = Dom('div-visoes');
   for (var visao in tabelas_visoes) {
     var botao_visao = CriaSpan(tabelas_visoes[visao].nome, 'span-' + visao, null);
-    botao_visao.addEventListener('click', function() { ClickVisao(visao); });
+    var handler = {
+      visao_handler: visao,
+      handleEvent: function(evt) { ClickVisao(this.visao_handler); }
+    };
+    botao_visao.addEventListener('click', handler);
     div_visoes.appendChild(botao_visao);
   }
   var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
