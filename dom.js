@@ -116,6 +116,11 @@ function CriaSelect(id, classe, funcao) {
   return select;
 }
 
+// Limpa as opções do 'select'.
+function LimpaSelect(select) {
+  select.options.length = 0;
+}
+
 // Cria um span com os botoes mais e menos, retornando-o.
 // @param id do input de texto com o valor do botao.
 // @param classe do input com o valor do botao.
