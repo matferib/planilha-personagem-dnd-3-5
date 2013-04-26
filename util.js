@@ -331,3 +331,47 @@ function AjustaString(str) {
     return str;
   }
 }
+
+// Wrapper do alert.
+function Mensagem(msg) {
+  if (console && console.log) {
+    console.log(msg);
+  } else {
+    alert(msg);
+  }
+}
+
+// Funções de Storage (Armazem). Por causa da API assíncrona do chrome,
+// fiz todas as versões da mesma forma. Uma pena, porque a outra era bem mais simples.
+// @return true se o armazem do chrome estiver presente.
+function _ArmazemChrome() {
+  return chrome && chrome.storage && chrome.storage.sync;
+}
+
+// Salva o 'valor' usando 'nome' como chave. Chama callback quando terminar.
+// @param valor string a ser salva.
+function SalvaNoArmazem(nome, valor, callback) {
+  if (_ArmazemChrome()) {
+    var obj = {};
+    obj[nome] = valor;
+    chrome.storage.sync.set(obj, callback);
+  } else {
+    localStorage.setItem(nome, valor);
+    callback();
+  }
+}
+
+// Le o valor de nome do Armazem. Chama callback({ nome: valor }). O valor será
+// uma string.
+// Caso nao haja valor, chamará callback({ nome: null }).
+function AbreDoArmazem(nome, callback) {
+  if (_ArmazemChrome()) {
+    chrome.storage.sync.get(nome, callback);
+  } else {
+    var obj = {};
+    obj[nome] = nome in localStorage ? localStorage.getItem(nome) : null;
+    callback(obj);
+  }
+}
+
+// Fim das funções de Storage.

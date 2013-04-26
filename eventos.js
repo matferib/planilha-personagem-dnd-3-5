@@ -1,6 +1,3 @@
-// Apenas tratamento de eventos.
-goog.require('goog.json');
-
 // Funcao de CarregamentoInicial no arquivo carrega.js.
 
 //Evento para mudar divs visiveis na planilha.
@@ -48,7 +45,7 @@ function ClickAdicionarClasse() {
     }
   }
   if (nova_classe == null) {
-    alert('Impossível criar nova classe');
+    Mensagem('Impossível criar nova classe');
     return;
   }
   personagem.classes.push({ classe: nova_classe, nivel: 1 });
@@ -65,21 +62,27 @@ function ClickRemoverClasse() {
 function ClickSalvar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
-  localStorage.setItem(nome, goog.json.serialize(entradas));
-  alert('Personagem "' + nome + '" salvo com sucesso');
+  SalvaNoArmazem(nome, JSON.stringify(entradas), function() {
+    Mensagem('Personagem "' + nome + '" salvo com sucesso'); 
+  });
 }
 
 // Carrega o personagem do historico local.
 function ClickAbrir() {
   var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
-  if (nome in localStorage) {
-    entradas = goog.json.parse(localStorage.getItem(nome));
-    // Esse caso eh valido, porque a gente salva as entradas.
-    AtualizaGeralSemLerEntradas();
-    alert('Personagem "' + nome + '" carregado com sucesso');
-  } else {
-    alert('Não encontrei personagem com nome "' + nome + '"');
-  }
+  var handler = {
+    nome: nome,
+    f: function(dado) {
+      if (nome in dado) {
+        entradas = JSON.parse(dado[nome]);
+        AtualizaGeralSemLerEntradas();
+        Mensagem('Personagem "' + nome + '" carregado com sucesso');
+      } else {
+        Mensagem('Não encontrei personagem com nome "' + nome + '"');
+      }
+    },
+  };
+  AbreDoArmazem(nome, handler.f);
 }
 
 // Codifica o objeto personagem como JSON e preenche o campo de texto.
@@ -90,7 +93,7 @@ function ClickExportar() {
   input.value = goog.json.serialize(entradas);
   input.focus();
   input.select();
-  alert('Personagem "' + personagem.nome + '" exportado com sucesso. ' +
+  Mensagem('Personagem "' + personagem.nome + '" exportado com sucesso. ' +
         'Copie para a área de transferência.');
 }
 
@@ -99,7 +102,7 @@ function ClickImportar() {
   var input = Dom("json-personagem");
   entradas = goog.json.parse(input.value);
   AtualizaGeralSemLerEntradas();
-  alert('Personagem "' + personagem.nome + '" importado com sucesso');
+  Mensagem('Personagem "' + personagem.nome + '" importado com sucesso');
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
@@ -205,7 +208,7 @@ function ClickEstilo(nome_estilo, id_select_secundario) {
   } else if (nome_estilo == 'duas_armas')  {
     select_secundario.disabled = false;
   } else {
-    alert('Nome de estilo invalido: ' + nome_estilo);
+    Mensagem('Nome de estilo invalido: ' + nome_estilo);
   }
   AtualizaGeral();
 }
@@ -220,7 +223,7 @@ function ClickPericia(chave_pericia) {
   if (input_pericia_valor - valor_corrente > 
       personagem.pericias.total_pontos - personagem.pericias.pontos_gastos) {
     input_pericia.value = valor_corrente;
-    alert('Não há pontos de perícia disponíveis');
+    Mensagem('Não há pontos de perícia disponíveis');
     return;
   }
   AtualizaGeral();
@@ -233,14 +236,14 @@ function ClickFeitico(classe_nivel_slot, incremento) {
 /*
   var classe_nivel_slot_array = classe_nivel_slot.split('-');
   if (incremento > 0 && personagem.feiticos.total == personagem.feiticos.gastos) {
-    alert('Não há feitiços disponíveis para o nível');
+    Mensagem('Não há feitiços disponíveis para o nível');
     return;
   }
   // pega o input do campo
   var input = Dom('feiticos-' + chave_pericia + '-pontos');
   var input = parseInt(input_pericia.value) || 0;
   if (incremento < 0 && input_pericia_valor == 0) {
-    alert('Feitiço não possui pontos');
+    Mensagem('Feitiço não possui pontos');
     return;
   }
 
@@ -297,7 +300,7 @@ function ClickUsarItem(tipo_item, checkbox) {
     // Maior aqui so pra garantir no caso de algum bisiu louco passar de 2.
     if (total_em_uso >= 2) {
       // Desmarca o anel para nao permitir um terceiro.
-      alert('São permitidos no máximo 2 anéis');
+      Mensagem('São permitidos no máximo 2 anéis');
       checkbox.checked = false;
       return;
     }
@@ -359,7 +362,7 @@ function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var preco = PrecoArmaArmaduraEscudo(
       tipo, tabela, lido.chave, lido.material, lido.obra_prima, lido.bonus, false);
   if (preco == null) {
-    alert("Arma ou armadura magica invalida");
+    Mensagem("Arma ou armadura magica invalida");
     return;
   }
   PersonagemAdicionarMoedas(preco);
@@ -375,11 +378,11 @@ function ClickComprarArmaArmadura(dom, tipo, tabela) {
   var preco = PrecoArmaArmaduraEscudo(
       tipo, tabela, lido.chave, lido.material, lido.obra_prima, lido.bonus, true);
   if (preco == null) {
-    alert("Arma ou armadura magica invalida");
+    Mensagem("Arma ou armadura magica invalida");
     return;
   }
   if (!PersonagemAdicionarMoedas(preco)) {
-    alert('Não há fundos para compra do item');
+    Mensagem('Não há fundos para compra do item');
     return;
   }
   AtualizaGeralSemConverterEntradas();
@@ -392,12 +395,12 @@ function ClickComprarItem(dom, tabela) {
   var lido = LeItem(dom);
   var entrada_tabela = tabela[lido.chave];
   if (entrada_tabela == null || entrada_tabela.preco == null) {
-    alert('Item inválido ou sem preço');
+    Mensagem('Item inválido ou sem preço');
     return;
   }
   var preco = LePreco(entrada_tabela.preco, true);
   if (!PersonagemAdicionarMoedas(preco)) {
-    alert('Não há fundos para compra do item');
+    Mensagem('Não há fundos para compra do item');
     return;
   }
   AtualizaGeralSemConverterEntradas();
@@ -410,7 +413,7 @@ function ClickVenderItem(dom, tabela) {
   var lido = LeItem(dom);
   var entrada_tabela = tabela[lido.chave];
   if (entrada_tabela == null || entrada_tabela.preco == null) {
-    alert('Item inválido ou sem preço');
+    Mensagem('Item inválido ou sem preço');
     return;
   }
   PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco));
