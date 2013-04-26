@@ -9,13 +9,13 @@ function _GeraAtributos(modo, submodo) {
   }
   if (personagem.classes.length == 0) {
     // Nunca deve acontecer.
-    alert('Personagem sem classe');
+    Mensagem('Personagem sem classe');
     return;
   }
 
   var primeira_classe = personagem.classes[0];
   if (primeira_classe.classe == 'aristocrata' || primeira_classe.classe == 'expert') {
-    alert("É recomendado colocar os valores na mão para aristocratas e experts");
+    Mensagem("É recomendado colocar os valores na mão para aristocratas e experts");
   }
 
   var atributos_primeira_classe = tabelas_geracao[primeira_classe.classe].atributos;
@@ -37,7 +37,7 @@ function _GeraAtributos(modo, submodo) {
 // @param submodo 'tabelado' ou 'aleatorio'.
 function _GeraPontosDeVida(modo, submodo) {
   if (modo != 'personagem' && modo != 'elite' && modo != 'comum') {
-    alert('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
+    Mensagem('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
     return;
   }
   // Para cada classe, rolar o dado.
@@ -159,7 +159,7 @@ function GeraPersonagem(modo, submodo) {
     submodo = 'tabelado';
   }
   if (tabelas_geracao[personagem.classes[0].classe] == null) {
-    alert('Geração de ' + personagem.classes[0].classe + ' não disponível');
+    Mensagem('Geração de ' + personagem.classes[0].classe + ' não disponível');
     return;
   }
   _GeraAtributos(modo, submodo);
@@ -171,7 +171,7 @@ function GeraPersonagem(modo, submodo) {
   var tabelas_geracao_classe = tabelas_geracao[personagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
       tabelas_geracao_classe.por_nivel[personagem.classes[0].nivel] == null) {
-    alert('Geração avançada de ' + personagem.classes[0].classe + ' não disponível');
+    Mensagem('Geração avançada de ' + personagem.classes[0].classe + ' não disponível');
     return;
   }
   var tabela_geracao_classe_por_nivel =
