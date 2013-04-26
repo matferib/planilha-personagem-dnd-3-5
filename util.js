@@ -333,6 +333,15 @@ function Mensagem(msg) {
   }
 }
 
+// Converte as chaves de um mapa para um array de chaves.
+function MapaParaLista(mapa) {
+  var lista = [];
+  for (var chave in mapa) {
+    lista.push(chave);
+  }
+  return lista;
+}
+
 // Funções de Storage (Armazem). Por causa da API assíncrona do chrome,
 // fiz todas as versões da mesma forma. Uma pena, porque a outra era bem mais simples.
 // @return true se o armazem do chrome estiver presente.
@@ -369,13 +378,11 @@ function AbreDoArmazem(nome, callback) {
 // @param callback chamado como callback(lista_nomes).
 function ListaDoArmazem(callback) {
   if (_ArmazemChrome()) {
-    // TODO
+    chrome.storage.sync.get(null, function(items) {
+      callback(MapaParaLista(items));
+    });
   } else {
-    var lista_nomes = [];
-    for (var nome in localStorage) {
-      lista_nomes.push(nome);
-    }
-    callback(lista_nomes);
+    callback(MapaParaLista(localStorage));
   }
 }
 
@@ -383,7 +390,7 @@ function ListaDoArmazem(callback) {
 // @param callback chamado quando a operação terminar.
 function ExcluiDoArmazem(nome, callback) {
   if (_ArmazemChrome()) {
-    // TODO
+    chrome.storage.sync.remove(nome, callback);
   } else {
     localStorage.removeItem(nome);
     callback();

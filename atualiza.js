@@ -25,6 +25,7 @@ function AtualizaGeral() {
 // manualmente a entrada e em seguida chamam essa funcao. As funcoes de carregamento tambem
 // devem usar esta funcao, pois a entrada que eh salva.
 function AtualizaGeralSemLerEntradas() {
+  LimpaGeral();
   ConverteEntradasParaPersonagem();
   DependenciasGerais();
   _AtualizaGeral();

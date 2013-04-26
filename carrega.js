@@ -18,6 +18,9 @@ function CarregamentoInicial() {
   // Inicia o objeto de personagem.
   IniciaPersonagem();
 
+  if (document.URL.indexOf('testes.html') != -1) {
+    return;
+  }
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual != -1) {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
@@ -28,67 +31,68 @@ function CarregamentoInicial() {
 }
 
 // Adiciona os handlers aos botoes da interface.
-// TODO fazer um mapa só com os sinais.
 function _CarregaHandlers() {
   // Mapa de id de botoes para handler de click.
-  var mapa_click = {
-    "botao-salvar": ClickSalvar,
-    "botao-abrir": ClickAbrir,
-    "botao-excluir": ClickExcluir,
-    "botao-exportar": ClickExportar,
-    "botao-importar": ClickImportar,
-    "botao-adicionar-classe": ClickAdicionarClasse,
-    "botao-remover-classe": ClickRemoverClasse,
-    "botao-gerar-personagem": function() { ClickGerarPersonagem('comum'); },
-    "botao-gerar-personagem-elite": function() { ClickGerarPersonagem('elite'); },
-    "botao-adicionar-estilo-luta": ClickAdicionarEstiloLuta,
-    "botao-link": ClickLink,
-    "botao-gerar-resumo": ClickGerarResumo,
-    "botao-adicionar-arma": ClickAdicionarArma,
-    "botao-adicionar-armadura": ClickAdicionarArmadura,
-    "botao-adicionar-escudo": ClickAdicionarEscudo,
-    "botao-adicionar-anel": function() { ClickAdicionarItem('aneis'); },
-    "botao-adicionar-amuleto": function() { ClickAdicionarItem('amuletos'); }, 
-    "botao-adicionar-pocao": function() { ClickAdicionarItem('pocoes'); },
-    "json-personagem": function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); },
-    "botao-ferir-1": function() { ClickAjustarFerimentos(1); },
-    "botao-ferir-3": function() { ClickAjustarFerimentos(3); },
-    "botao-ferir-5": function() { ClickAjustarFerimentos(5); },
-    "botao-curar-1": function() { ClickAjustarFerimentos(-1); },
-    "botao-curar-3": function() { ClickAjustarFerimentos(-3); },
-    "botao-curar-5": function() { ClickAjustarFerimentos(-5); },
-    "botao-descansar": function() { ClickDescansar(-1); },
-  };
-
-  for (var id in mapa_click) {
-    Dom(id).addEventListener('click', mapa_click[id]);
-  }
-
-  var mapa_change = {
-    "nome": AtualizaGeral,
-    "raca": AtualizaGeral,
-    "alinhamento": AtualizaGeral,
-    "pontos-vida-dados": AtualizaGeral,
-    "ferimentos": AtualizaGeral,
-    "input-adicionar-ferimentos": function() { 
+  var mapa = {
+    // Clicks.
+    "botao-salvar": { callback:  ClickSalvar, evento: 'click', },
+    "botao-abrir": { callback:  ClickAbrir, evento: 'click', },
+    "botao-excluir": { callback:  ClickExcluir, evento: 'click', },
+    "botao-exportar": { callback:  ClickExportar, evento: 'click', },
+    "botao-importar": { callback:  ClickImportar, evento: 'click', },
+    "botao-adicionar-classe": { callback:  ClickAdicionarClasse, evento: 'click', },
+    "botao-remover-classe": { callback:  ClickRemoverClasse, evento: 'click', },
+    "botao-gerar-personagem": { callback:  function() { ClickGerarPersonagem('comum'); }, evento: 'click', },
+    "botao-gerar-personagem-elite": { callback:  function() { ClickGerarPersonagem('elite'); }, evento: 'click', },
+    "botao-adicionar-estilo-luta": { callback:  ClickAdicionarEstiloLuta, evento: 'click', },
+    "botao-link": { callback:  ClickLink, evento: 'click', },
+    "botao-gerar-resumo": { callback:  ClickGerarResumo, evento: 'click', },
+    "botao-adicionar-arma": { callback:  ClickAdicionarArma, evento: 'click', },
+    "botao-adicionar-armadura": { callback:  ClickAdicionarArmadura, evento: 'click', },
+    "botao-adicionar-escudo": { callback:  ClickAdicionarEscudo, evento: 'click', },
+    "botao-adicionar-anel": { callback:  function() { ClickAdicionarItem('aneis'); }, evento: 'click', },
+    "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', }, 
+    "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
+    "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
+    "botao-ferir-1": { callback: function() { ClickAjustarFerimentos(1); }, evento: 'click', },
+    "botao-ferir-3": { callback: function() { ClickAjustarFerimentos(3); }, evento: 'click', },
+    "botao-ferir-5": { callback: function() { ClickAjustarFerimentos(5); }, evento: 'click', },
+    "botao-curar-1": { callback: function() { ClickAjustarFerimentos(-1); }, evento: 'click', },
+    "botao-curar-3": { callback: function() { ClickAjustarFerimentos(-3); }, evento: 'click', },
+    "botao-curar-5": { callback: function() { ClickAjustarFerimentos(-5); }, evento: 'click', },
+    "botao-descansar": { callback: function() { ClickDescansar(-1); }, evento: 'click', },
+    // Changes.
+    "nome": { callback: AtualizaGeral, evento: 'change', },
+    "raca": { callback: AtualizaGeral, evento: 'change', },
+    "alinhamento": { callback: AtualizaGeral, evento: 'change', },
+    "pontos-vida-dados": { callback: AtualizaGeral, evento: 'change', },
+    "ferimentos": { callback: AtualizaGeral, evento: 'change', },
+    "input-adicionar-ferimentos": { callback:  function() { 
         var dom = Dom('input-adicionar-ferimentos');
         ClickAjustarFerimentos(parseInt(dom.value)); 
-        dom.value = ''; },
-    "input-remover-ferimentos": function() {
+        dom.value = ''; }, evento: 'change', },
+    "input-remover-ferimentos": { callback:  function() {
         var dom = Dom('input-remover-ferimentos');
         ClickAjustarFerimentos(-parseInt(dom.value)); 
-        dom.value = ''; },
-    "text-area-notas": ChangeNotas,
+        dom.value = ''; }, evento: 'change', },
+    "text-area-notas": { callback:  ChangeNotas, evento: 'change', },
   };
-  for (var id in mapa_change) {
-    Dom(id).addEventListener('change', mapa_change[id]);
-  }
 
+  for (var id in mapa) {
+    var dom = Dom(id);
+    if (dom != null) {
+      dom.addEventListener(mapa[id].evento, mapa[id].callback);
+    }
+  }
 }
 
 // Adiciona racas dinamicamente na planilha
 function _CarregaRacas() {
   var select_raca = Dom('raca');
+  if (select_raca == null) {
+    // Testes não tem o select.
+    return;
+  }
   for (var chave_raca in tabelas_raca) {
     select_raca.appendChild(CriaOption(tabelas_raca[chave_raca].nome, chave_raca))
   }
@@ -96,8 +100,13 @@ function _CarregaRacas() {
 
 // Popula o select de personagens. Chamado no início e ao salvar um personagem novo.
 function CarregaPersonagens() {
+  var select_personagens = Dom('select-personagens');
+  if (select_personagens == null) {
+    // Nos testes não existe.
+    return;
+  }
+
   ListaDoArmazem(function(lista_nomes) {
-    var select_personagens = Dom('select-personagens');
     LimpaSelect(select_personagens);
     select_personagens.add(CriaOption('nenhum', '--'));
     for (var i = 0; i < lista_nomes.length; ++i) {
@@ -110,6 +119,10 @@ function CarregaPersonagens() {
 // Adiciona botoes dinamicamente na planilha.
 function _CarregaBotoesVisao() {
   var div_visoes = Dom('div-visoes');
+  if (div_visoes == null) {
+    // Testes nao possuem o div.
+    return;
+  }
   for (var visao in tabelas_visoes) {
     var botao_visao = CriaSpan(tabelas_visoes[visao].nome, 'span-' + visao, null);
     var handler = {
@@ -129,6 +142,10 @@ function _CarregaBotoesVisao() {
 
 function _CarregaAtributos() {
   var div = Dom('div-stats');
+  if (div == null) {
+    // testes.
+    return;
+  }
 
   div.appendChild(CriaSpan('Atributos'));
   div.appendChild(CriaBr());
@@ -185,6 +202,9 @@ function _CarregaAtributos() {
 // Cria os divs com talentos de classe.
 function _CarregaTalentos() {
   var div_talentos = Dom('div-talentos');
+  if (div_talentos == null) {
+    return;
+  }
   for (var chave_classe in personagem.talentos) {
     var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
     if (chave_classe == 'gerais') {
@@ -248,6 +268,10 @@ function _CarregaTabelasCompostas(
 // Popula as pericias iniciais.
 function _CarregaPericias() {
   var div_pericias = Dom('div-pericias');
+  if (div_pericias == null) {
+    // Testes.
+    return;
+  }
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
     var habilidade = pericia.habilidade;
