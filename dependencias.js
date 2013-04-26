@@ -540,10 +540,12 @@ function _DependenciasEstilo(estilo_personagem) {
   var arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
   if (arma_primaria == null) {
     estilo_personagem.arma_primaria.nome = 'desarmado';
+    arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
   }
   var arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
   if (arma_secundaria == null) {
     estilo_personagem.arma_secundaria.nome = 'desarmado';
+    arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
   }
 
   if (estilo_personagem.nome == 'arma_dupla' &&
@@ -561,11 +563,8 @@ function _DependenciasEstilo(estilo_personagem) {
   // Se o estilo eh duplo, forca segunda arma ser igual a primeira.
   if (estilo_personagem.nome == 'arma_dupla') {
     estilo_personagem.arma_secundaria.nome = estilo_personagem.arma_primaria.nome;
+    arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
   }
-
-  // Atualiza as armas de novo, que podem ter virado 'desarmado' acima.
-  arma_primaria = ArmaPersonagem(estilo_personagem.arma_primaria.nome);
-  arma_secundaria = ArmaPersonagem(estilo_personagem.arma_secundaria.nome);
 
   // Atualiza cada categoria da arma no estilo.
   var secundaria_leve = false;

@@ -77,14 +77,6 @@ function ValorSelecionado(dom_select) {
       dom_select.options[dom_select.selectedIndex].value : null;
 }
 
-// Limpa as opcoes de um select.
-// @param dom_select o dom representando o select.
-function LimpaSelect(dom_select) {
-  while (dom_select.length > 0) {
-    dom_select.remove(0);
-  }
-}
-
 // Seleciona um valor de um select.
 // @param valor_selecionado o novo valor selecionado do dom.
 // @param dom_select o dom representando o select.
@@ -369,8 +361,32 @@ function AbreDoArmazem(nome, callback) {
     chrome.storage.sync.get(nome, callback);
   } else {
     var obj = {};
-    obj[nome] = nome in localStorage ? localStorage.getItem(nome) : null;
+    obj[nome] = (nome in localStorage) ? localStorage.getItem(nome) : null;
     callback(obj);
+  }
+}
+
+// @param callback chamado como callback(lista_nomes).
+function ListaDoArmazem(callback) {
+  if (_ArmazemChrome()) {
+    // TODO
+  } else {
+    var lista_nomes = [];
+    for (var nome in localStorage) {
+      lista_nomes.push(nome);
+    }
+    callback(lista_nomes);
+  }
+}
+
+// Excluir um nome do armazem.
+// @param callback chamado quando a operação terminar.
+function ExcluiDoArmazem(nome, callback) {
+  if (_ArmazemChrome()) {
+    // TODO
+  } else {
+    localStorage.removeItem(nome);
+    callback();
   }
 }
 
