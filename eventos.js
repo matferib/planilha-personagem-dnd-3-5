@@ -62,27 +62,53 @@ function ClickRemoverClasse() {
 function ClickSalvar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
+  if (nome == '--') {
+    Mensagem('Nome "--" não é válido.');
+    return;
+  }
   SalvaNoArmazem(nome, JSON.stringify(entradas), function() {
-    Mensagem('Personagem "' + nome + '" salvo com sucesso'); 
+    CarregaPersonagens();
+    Mensagem('Personagem "' + nome + '" salvo com sucesso.'); 
   });
 }
 
 // Carrega o personagem do historico local.
 function ClickAbrir() {
-  var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
+  var nome = ValorSelecionado(Dom('select-personagens'));
+  if (nome == '--') {
+    Mensagem('Nome "--" não é válido.');
+    return;
+  }
   var handler = {
     nome: nome,
     f: function(dado) {
       if (nome in dado) {
         entradas = JSON.parse(dado[nome]);
         AtualizaGeralSemLerEntradas();
-        Mensagem('Personagem "' + nome + '" carregado com sucesso');
+        Mensagem('Personagem "' + nome + '" carregado com sucesso.');
       } else {
         Mensagem('Não encontrei personagem com nome "' + nome + '"');
       }
     },
   };
   AbreDoArmazem(nome, handler.f);
+}
+
+// Exclui um personagem do armazem.
+function ClickExcluir() {
+  var nome = ValorSelecionado(Dom('select-personagens'));
+  if (nome == '--') {
+    Mensagem('Nome "--" não é válido.');
+    return;
+  }
+  var handler = {
+    nome: nome,
+    f: function(dado) {
+      Mensagem('Personagem "' + nome + '" excluído com sucesso.');
+      CarregaPersonagens();
+    },
+  };
+  ExcluiDoArmazem(nome, handler.f);
 }
 
 // Codifica o objeto personagem como JSON e preenche o campo de texto.

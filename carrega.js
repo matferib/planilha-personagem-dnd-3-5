@@ -4,6 +4,7 @@
 // preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
   _CarregaHandlers();
+  CarregaPersonagens();
   _CarregaRacas();
   _CarregaBotoesVisao();
   _CarregaAtributos();
@@ -27,11 +28,13 @@ function CarregamentoInicial() {
 }
 
 // Adiciona os handlers aos botoes da interface.
+// TODO fazer um mapa só com os sinais.
 function _CarregaHandlers() {
   // Mapa de id de botoes para handler de click.
   var mapa_click = {
     "botao-salvar": ClickSalvar,
     "botao-abrir": ClickAbrir,
+    "botao-excluir": ClickExcluir,
     "botao-exportar": ClickExportar,
     "botao-importar": ClickImportar,
     "botao-adicionar-classe": ClickAdicionarClasse,
@@ -90,6 +93,18 @@ function _CarregaRacas() {
     select_raca.appendChild(CriaOption(tabelas_raca[chave_raca].nome, chave_raca))
   }
 }  
+
+// Popula o select de personagens. Chamado no início e ao salvar um personagem novo.
+function CarregaPersonagens() {
+  ListaDoArmazem(function(lista_nomes) {
+    var select_personagens = Dom('select-personagens');
+    LimpaSelect(select_personagens);
+    select_personagens.add(CriaOption('nenhum', '--'));
+    for (var i = 0; i < lista_nomes.length; ++i) {
+      select_personagens.add(CriaOption(lista_nomes[i], lista_nomes[i]));
+    }
+  });
+}
 
 
 // Adiciona botoes dinamicamente na planilha.
