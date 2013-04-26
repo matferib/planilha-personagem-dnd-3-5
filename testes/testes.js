@@ -461,4 +461,28 @@ function CarregaTestes() {
       this.resultado = true;
     }, 
   }, body);
+
+  // Parte assincrona do armazem.
+  LimpaGeral();
+  var nome_chave = 'nome de teste maluco que nunca devera ser usado';
+  SalvaNoArmazem(nome_chave, 'valor de teste', function() {
+    ListaDoArmazem(function(lista_nomes) {
+      TemplateTeste({
+        nome: 'Armazem', 
+        Testa: function() {
+          this.resultado = false;
+          for (var i = 0; i < lista_nomes.length; ++i) {
+            if (lista_nomes[i] == nome_chave) {
+              this.resultado = true;
+              break;
+            }
+          }
+          if (!this.resultado) {
+            this.detalhes = 'Esperava encontrar "' + nome_chave + '" no armazém.';
+          }
+        }, 
+      }, body);
+      ExcluiDoArmazem(nome_chave, function() {});
+    });
+  });
 }

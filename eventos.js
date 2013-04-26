@@ -85,6 +85,7 @@ function ClickAbrir() {
       if (nome in dado) {
         entradas = JSON.parse(dado[nome]);
         AtualizaGeralSemLerEntradas();
+        SelecionaValor('--', Dom('select-personagens'));
         Mensagem('Personagem "' + nome + '" carregado com sucesso.');
       } else {
         Mensagem('Não encontrei personagem com nome "' + nome + '"');
