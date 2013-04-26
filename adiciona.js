@@ -28,7 +28,7 @@ function AdicionaClasse(indice, dom) {
 function RemoveClasse() {
   var div_classes = Dom("classes");
   if (div_classes.childNodes.length == 1) {
-    alert('Personagem deve ter pelo menos uma classe');
+    Mensagem('Personagem deve ter pelo menos uma classe');
     return;
   }
   div_classes.removeChild(div_classes.lastChild);
@@ -49,7 +49,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   } else if (nome == 'escudo') {
     tabela = tabelas_escudos;
   } else {
-    alert('Nome invalido, esperando arma ou armadura.');
+    Mensagem('Nome invalido, esperando arma ou armadura.');
     return null;
   }
 
