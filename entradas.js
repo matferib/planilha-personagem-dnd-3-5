@@ -1,5 +1,7 @@
 // Tudo relacionado a entradas. Isso eh o que devera ser
-// serializado e deserializado.
+// serializado e deserializado. A entrada serve como o mínimo que representa o personagem.
+// É possível salvar apenas as entradas e restaurar o personagem depois chamando a função 
+// AtualizaGeralSemLerEntradas.
 
 // Variavel contendo os valores das entradas. Iniciado com valores padroes da criacao.
 var entradas = {
