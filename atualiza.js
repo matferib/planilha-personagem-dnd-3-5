@@ -286,20 +286,25 @@ function _AtualizaAtaque() {
 
 // Atualiza a lista de armas de cada estilo.
 function _AtualizaEstilosLuta() {
-  // Recria os elementos do estilos. 
-  //RemoveFilhos(Dom('div-estilos-luta'));
-  var doms_estilos = Dom('div-estilos-luta').childNodes;
-  // Se remover, fica do tamanho dos estilos do personagem.
-  doms_estilos.length = personagem.estilos_luta.length;
-  for (var i = doms_estilos.length; i < personagem.estilos_luta.length; ++i) {
-    var estilo = personagem.estilos_luta[i];
-    AdicionaEstiloLuta(estilo.nome);
+  var dom_estilos = Dom('div-estilos-luta');
+  var dom_filhos = dom_estilos.childNodes;
+  // Adiciona doms filhos se houver menos que os estilos do personagem.
+  for (var i = dom_filhos.length; i < personagem.estilos_luta.length; ++i) {
+    AdicionaEstiloLuta(personagem.estilos_luta[i].nome);
+  }
+  // Remove filhos do dom se tiver mais que os estilos do personagem.
+  var filhos_a_remover = [];
+  for (var i = personagem.estilos_luta.length; i < dom_filhos.length; ++i) {
+    filhos_a_remover.push(dom_filhos[i]);
+  }
+  for (var i = 0; i < filhos_a_remover.length; ++i) {
+    RemoveFilho(filhos_a_remover[i], dom_estilos);
   }
 
-  // Atualiza os valores dos estilos.
-  var div_estilos = Dom("div-estilos-luta");
-  for (var i = 0; i < div_estilos.childNodes.length; ++i) {
-    _AtualizaEstilo(div_estilos.childNodes[i], personagem.estilos_luta[i]);
+  // Atualiza os valores dos estilos. Neste ponto, 
+  // dom_filhos.length == personagem.estilos_luta.length.
+  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
+    _AtualizaEstilo(dom_filhos[i], personagem.estilos_luta[i]);
   }
 }
 
