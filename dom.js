@@ -121,6 +121,39 @@ function LimpaSelect(select) {
   select.options.length = 0;
 }
 
+// Busca o valor selecionado de um select.
+// @param dom_select o dom representando o select.
+// @return null se nao houver valor selecionado (select vazio).
+function ValorSelecionado(dom_select) {
+  return dom_select.length > 0 ?
+      dom_select.options[dom_select.selectedIndex].value : null;
+}
+
+// Seleciona um valor de um select.
+// @param valor_selecionado o novo valor selecionado do dom.
+// @param dom_select o dom representando o select.
+function SelecionaValor(valor_selecionado, dom_select) {
+  for (var i = 0; i < dom_select.options.length; ++i) {
+    if (dom_select.options[i].value == valor_selecionado) {
+      dom_select.selectedIndex = i;
+      return;
+    }
+  } 
+}
+
+// Popula o select com os valores passados.
+// @param valores a serem colocados no select.
+//   [ {valor: texto} ]
+function PopulaSelect(valores, dom_select) {
+  dom_select.options.length = 0;
+  for (var i = 0; i < valores.length; ++i) {
+    for (var chave in valores[i]) {
+      dom_select.options.add(CriaOption(valores[i][chave], chave));
+    }
+  }
+}
+
+
 // Cria um span com os botoes mais e menos, retornando-o.
 // @param id do input de texto com o valor do botao.
 // @param classe do input com o valor do botao.
