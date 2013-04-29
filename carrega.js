@@ -24,8 +24,8 @@ function CarregamentoInicial() {
   var indice_igual = document.URL.indexOf('=');
   if (indice_igual != -1) {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
-    json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
-    entradas = goog.json.parse(json_entradas);
+    var json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
+    entradas = JSON.parse(json_entradas);
   } 
   AtualizaGeralSemLerEntradas();
 }

@@ -117,7 +117,7 @@ function ClickExportar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var input = Dom("json-personagem");
   input.style.display = 'inline';
-  input.value = goog.json.serialize(entradas);
+  input.value = JSON.stringify(entradas);
   input.focus();
   input.select();
   Mensagem('Personagem "' + personagem.nome + '" exportado com sucesso. ' +
@@ -127,7 +127,7 @@ function ClickExportar() {
 // Abre o personagem lendo do campo de texto.
 function ClickImportar() {
   var input = Dom("json-personagem");
-  entradas = goog.json.parse(input.value);
+  entradas = JSON.parse(input.value);
   AtualizaGeralSemLerEntradas();
   Mensagem('Personagem "' + personagem.nome + '" importado com sucesso');
 }
@@ -139,7 +139,7 @@ function ClickLink() {
   var indice_interrogacao = document.URL.indexOf('?');
   var url = 
     (indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) + 
-    '?pc=' + encodeURIComponent(goog.json.serialize(entradas));
+    '?pc=' + encodeURIComponent(JSON.stringify(entradas));
   Dom("link-personagem").innerHTML = 
     '<a href="' + url + '">Link</a>';
 }
