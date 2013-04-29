@@ -5,7 +5,7 @@
 function ClickVisao(modo) { 
   // Loop para esconder tudo.
   for (var j = 0; j < tabelas_visoes[modo].esconder.classes.length; ++j) {
-    var divs_esconder = goog.dom.getElementsByClass(tabelas_visoes[modo].esconder.classes[j]);
+    var divs_esconder = DomsPorClasse(tabelas_visoes[modo].esconder.classes[j]);
     for (var i = 0; i < divs_esconder.length; ++i) {
       divs_esconder[i].style.display = 'none';
     }
@@ -16,7 +16,7 @@ function ClickVisao(modo) {
   }
   // Loop para mostrar.
   for (var j = 0; j < tabelas_visoes[modo].mostrar.classes.length; ++j) {
-    var divs_mostrar = goog.dom.getElementsByClass(tabelas_visoes[modo].mostrar.classes[j]);
+    var divs_mostrar = DomsPorClasse(tabelas_visoes[modo].mostrar.classes[j]);
     for (var i = 0; i < divs_mostrar.length; ++i) {
       divs_mostrar[i].style.display = 'block';
     }
@@ -66,8 +66,10 @@ function ClickSalvar() {
     Mensagem('Nome "--" não é válido.');
     return;
   }
+  HabilitaOverlay();
   SalvaNoArmazem(nome, JSON.stringify(entradas), function() {
     CarregaPersonagens();
+    DesabilitaOverlay();
     Mensagem('Personagem "' + nome + '" salvo com sucesso.'); 
   });
 }
@@ -90,8 +92,10 @@ function ClickAbrir() {
       } else {
         Mensagem('Não encontrei personagem com nome "' + nome + '"');
       }
+      DesabilitaOverlay();
     },
   };
+  HabilitaOverlay();
   AbreDoArmazem(nome, handler.f);
 }
 
@@ -102,14 +106,16 @@ function ClickExcluir() {
     Mensagem('Nome "--" não é válido.');
     return;
   }
-  var handler = {
-    nome: nome,
-    f: function(dado) {
-      Mensagem('Personagem "' + nome + '" excluído com sucesso.');
-      CarregaPersonagens();
+  JanelaConfirmacao('Tem certeza que deseja excluir "' + nome + '"?', 
+    // Callback sim.
+    function() {
+      ExcluiDoArmazem(nome, function() { 
+        Mensagem('Personagem "' + nome + '" excluído com sucesso.'); 
+        CarregaPersonagens();
+      });
     },
-  };
-  ExcluiDoArmazem(nome, handler.f);
+    // Callback não.
+    function() {});
 }
 
 // Codifica o objeto personagem como JSON e preenche o campo de texto.

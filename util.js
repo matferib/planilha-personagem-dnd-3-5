@@ -1,7 +1,5 @@
 // Tudo que for util e nao se encaixar em lugar nenhum.
 
-goog.require('goog.dom');
-
 // Retorna uma string do valor de forma sinalizada.
 // @param valor a ser impresso.
 // @param imprime_zero opcional, default true. Se false, retorna vazio quando
@@ -294,11 +292,7 @@ function AjustaString(str) {
 
 // Wrapper do alert.
 function Mensagem(msg) {
-  if (console && console.log) {
-    console.log(msg);
-  } else {
-    alert(msg);
-  }
+  JanelaMensagem(msg);
 }
 
 // Converte as chaves de um mapa para um array de chaves.
@@ -366,3 +360,6 @@ function ExcluiDoArmazem(nome, callback) {
 }
 
 // Fim das funções de Storage.
+
+
+

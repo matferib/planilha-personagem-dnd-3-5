@@ -4,6 +4,33 @@ html {
 overflow-y: scroll;
 }
 
+body {
+margin: 0px;
+}
+
+div#div-overlay {
+padding: 0px;
+border: 0px;
+margin: 0px;
+position: fixed;
+height: 100%;
+width: 100%;
+display: none;
+background-color: #A8A8A8;
+opacity: 0.5;
+}
+
+div#div-janela {
+position: fixed;
+padding: 0px;
+margin: 0px;
+display: none;
+background-color: #A8A8A8;
+top: 50%;
+left: 50%;
+border: 2px solid black;
+}
+
 div#div-visoes {
 padding: 0px;
 border: 0px;

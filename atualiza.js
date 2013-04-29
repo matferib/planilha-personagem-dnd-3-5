@@ -97,7 +97,7 @@ function _AtualizaPontosVida() {
 
 function _AtualizaAtributos() {
   // Botoes de atributos.
-  var botoes_atributos = goog.dom.getElementsByClass('botoes-atributos');
+  var botoes_atributos = DomsPorClasse('botoes-atributos');
   for (var i = 0; i < botoes_atributos.length; ++i) {
     if (personagem.atributos.pontos.gastos.length < 
         personagem.atributos.pontos.disponiveis) {
@@ -141,7 +141,7 @@ function _AtualizaAtributos() {
 function _AtualizaClasses() {
   var classes_desabilitadas = [];
   var div_classes = Dom('classes');
-  var divs_classes = goog.dom.getElementsByClass('classe');
+  var divs_classes = DomsPorClasse('classe');
   var maior_indice = divs_classes.length > personagem.classes.length ?
       divs_classes.length : personagem.classes.length;
   for (var i = 0; i < maior_indice; ++i) {
@@ -159,7 +159,7 @@ function _AtualizaClasses() {
   }
 
   // Desabilita selects.
-  var selects_classes = goog.dom.getElementsByClass('selects-classes'); 
+  var selects_classes = DomsPorClasse('selects-classes'); 
   for (var i = 0; i < selects_classes.length - 1; ++i) {
     selects_classes[i].disabled = true;
   }
@@ -200,10 +200,10 @@ function _AtualizaTamanho() {
   // Busca o modificador de tamanho da raca.
   ImprimeSinalizado(
       personagem.tamanho.modificador_ataque_defesa,
-      goog.dom.getElementsByClass('tamanho-mod-ataque-defesa'));
+      DomsPorClasse('tamanho-mod-ataque-defesa'));
   ImprimeSinalizado(
       personagem.tamanho.modificador_agarrar,
-      goog.dom.getElementsByClass('tamanho-mod-agarrar'));
+      DomsPorClasse('tamanho-mod-agarrar'));
   Dom('tamanho').textContent =
       tabelas_tamanho[personagem.tamanho.categoria].nome;
 }
@@ -240,7 +240,7 @@ function _AtualizaModificadoresAtributos() {
     // Escreve o modificador.
     ImprimeSinalizado(
         personagem.atributos[atributo].modificador,
-        goog.dom.getElementsByClass(atributo + '-mod-total'));
+        DomsPorClasse(atributo + '-mod-total'));
   }
 }
 
@@ -252,9 +252,9 @@ function _AtualizaIniciativa() {
 
 // Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
 function _AtualizaAtaque() {
-  ImprimeSinalizado(personagem.bba, goog.dom.getElementsByClass('bba'));
+  ImprimeSinalizado(personagem.bba, DomsPorClasse('bba'));
   ImprimeNaoSinalizado(personagem.numero_ataques, 
-                       goog.dom.getElementsByClass('numero-ataques'));
+                       DomsPorClasse('numero-ataques'));
   // Corpo a corpo.
   var span_bba_cac = Dom('bba-corpo-a-corpo');
   ImprimeSinalizado(personagem.bba_cac, span_bba_cac);
@@ -633,7 +633,7 @@ function _AtualizaItens(tipo_item) {
     AdicionaItem(tipo_item, div_filho, div_pai);
   });
 
-  var div_filhos = goog.dom.getElementsByClass('div-' + tipo_item);
+  var div_filhos = DomsPorClasse('div-' + tipo_item);
   for (var i = 0; i < personagem[tipo_item].length; ++i) {
     var div_filho = div_filhos[i];
     _AtualizaItem(personagem[tipo_item][i], div_filho, div_pai);
@@ -728,12 +728,12 @@ function _AtualizaNotas() {
 
 function _AtualizaModoVisao() {
   for (var visao in tabelas_visoes) {
-    var span_visao = goog.dom.getElement('span-' + visao);
+    var span_visao = Dom('span-' + visao);
     span_visao.className = personagem.modo_visao == visao ?
         'selecionado': '';
   }
   Dom('input-modo-mestre').checked = personagem.modo_mestre;
-  var botoes_geracao = goog.dom.getElementsByClass('botao-geracao');
+  var botoes_geracao = DomsPorClasse('botao-geracao');
   for (var i = 0; i < botoes_geracao.length; ++i) {
     botoes_geracao[i].style.display = personagem.modo_mestre ? 'inline' : 'none';
   }
