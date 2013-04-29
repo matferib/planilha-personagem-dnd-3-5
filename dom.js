@@ -210,3 +210,19 @@ function _RemoveOnChange(dom) {
     }
   }
 }
+
+// Se 'dom_pai' tiver mais filhos que 'num_filhos', remove os que sobrarem. 
+// Se tiver menos, chama funcao_adicao(indice_filho) para cada filho que houver
+// a menos.
+function AjustaFilhos(dom_pai, num_filhos, funcao_adicao) {
+  var dom_filhos = dom_pai.childNodes;
+  // Remove filhos do dom se tiver mais que os estilos do personagem.
+  var num_filhos_a_remover = dom_filhos.length - num_filhos;
+  for (var i = 0; i < num_filhos_a_remover; ++i) {
+    RemoveUltimoFilho(dom_pai);
+  }
+  // Adiciona doms filhos se houver menos que num_filhos.
+  for (var i = dom_filhos.length; i < num_filhos; ++i) {
+    funcao_adicao(i);
+  }
+}
