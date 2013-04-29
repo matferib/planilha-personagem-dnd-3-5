@@ -462,6 +462,43 @@ function CarregaTestes() {
     }, 
   }, body);
 
+  // AjustaFilhos.
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'AjustaFilhos', 
+    Testa: function() {
+      var dom_pai = CriaDiv();
+      var c = 0;
+      AjustaFilhos(dom_pai, 2, function(indice_filho) {
+        dom_pai.appendChild(CriaDiv());
+        c += indice_filho;
+      });
+      if (c != 1) {
+        this.resultado = false;
+        this.detalhes = 'Soma dos índices 0 e 1 deveria dar 1.';
+        return;
+      }
+      if (dom_pai.childNodes.length != 2) {
+        this.resultado = false;
+        this.detalhes = 'Pai deveria ter 2 filhos.';
+        return;
+      }
+      // Testa remoção.
+      var chamou = false;
+      AjustaFilhos(dom_pai, 1, function(indice_filho) { chamou = true; });
+      if (chamou) {
+        this.resultado = false;
+        this.detalhes = 'Não deveria ter chamado função de adição para o div.';
+      }
+      if (dom_pai.childNodes.length != 1) {
+        this.resultado = false;
+        this.detalhes = 'Pai deveria ter 1 filho.';
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
   // Parte assincrona do armazem.
   LimpaGeral();
   var nome_chave = 'nome de teste maluco que nunca devera ser usado';

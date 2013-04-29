@@ -287,22 +287,12 @@ function _AtualizaAtaque() {
 // Atualiza a lista de armas de cada estilo.
 function _AtualizaEstilosLuta() {
   var dom_estilos = Dom('div-estilos-luta');
-  var dom_filhos = dom_estilos.childNodes;
-  // Adiciona doms filhos se houver menos que os estilos do personagem.
-  for (var i = dom_filhos.length; i < personagem.estilos_luta.length; ++i) {
-    AdicionaEstiloLuta(personagem.estilos_luta[i].nome);
-  }
-  // Remove filhos do dom se tiver mais que os estilos do personagem.
-  var filhos_a_remover = [];
-  for (var i = personagem.estilos_luta.length; i < dom_filhos.length; ++i) {
-    filhos_a_remover.push(dom_filhos[i]);
-  }
-  for (var i = 0; i < filhos_a_remover.length; ++i) {
-    RemoveFilho(filhos_a_remover[i], dom_estilos);
-  }
-
+  AjustaFilhos(dom_estilos, personagem.estilos_luta.length, function(indice_filho) {
+    AdicionaEstiloLuta(personagem.estilos_luta[indice_filho].nome);
+  });
   // Atualiza os valores dos estilos. Neste ponto, 
   // dom_filhos.length == personagem.estilos_luta.length.
+  var dom_filhos = dom_estilos.childNodes;
   for (var i = 0; i < personagem.estilos_luta.length; ++i) {
     _AtualizaEstilo(dom_filhos[i], personagem.estilos_luta[i]);
   }
@@ -638,15 +628,14 @@ function _AtualizaEquipamentos() {
 
 function _AtualizaItens(tipo_item) {
   var div_pai = Dom('div-equipamentos-' + tipo_item);
+  AjustaFilhos(div_pai, personagem[tipo_item].length, function(indice_filho) {
+    var div_filho = CriaDiv(null, 'div-' + tipo_item);
+    AdicionaItem(tipo_item, div_filho, div_pai);
+  });
+
   var div_filhos = goog.dom.getElementsByClass('div-' + tipo_item);
   for (var i = 0; i < personagem[tipo_item].length; ++i) {
-    var div_filho;
-    if (i >= div_filhos.length) {
-      div_filho = CriaDiv(null, 'div-' + tipo_item);
-      AdicionaItem(tipo_item, div_filho, div_pai);
-    } else {
-      div_filho = div_filhos[i];
-    }
+    var div_filho = div_filhos[i];
     _AtualizaItem(personagem[tipo_item][i], div_filho, div_pai);
   }
 }
