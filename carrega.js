@@ -166,8 +166,8 @@ function _CarregaAtributos() {
   var atributos = { 
       forca: 'Força', 
       destreza: 'Destreza', 
-      constituicao: 'Constituicao', 
-      inteligencia: 'Inteligencia',
+      constituicao: 'Constituição', 
+      inteligencia: 'Inteligência',
       sabedoria: 'Sabedoria', 
       carisma: 'Carisma' };
   for (var chave_atributo in atributos) {
@@ -182,7 +182,10 @@ function _CarregaAtributos() {
                           ClickBotaoAtributoMais(this.chave_atributo); 
                           evento.stopPropagation();
                   } }));
-    div_atributo.appendChild(CriaSpan(atributos[chave_atributo]));
+    var span_rotulo = CriaSpan(atributos[chave_atributo]);
+    span_rotulo.style.float = 'left';
+    span_rotulo.style.width = '80px';
+    div_atributo.appendChild(span_rotulo);
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
     input_atributo.size = 2;
     input_atributo.maxLength = 2;
