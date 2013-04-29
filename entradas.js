@@ -168,7 +168,7 @@ function _LeTalento(div_talento) {
 
 function _LeFeiticos() {
   entradas.feiticos.conhecidos = [];
-  var nomes_feiticos = goog.dom.getElementsByClass('feiticos-conhecidos');
+  var nomes_feiticos = DomsPorClasse('feiticos-conhecidos');
   for (var i = 0; i < nomes_feiticos.length; ++i) {
     var classe_nivel_indice = nomes_feiticos[i].id.split('-');
     // remove o prefixo input-feiticos-conhecidos
@@ -185,7 +185,7 @@ function _LeFeiticos() {
 
   // Comecar pelo gasto que esta sempre presente.
   entradas.feiticos.slots = [];
-  var feiticos_gastos = goog.dom.getElementsByClass('feiticos-slots-gastos');
+  var feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
   for (var i = 0; i < feiticos_gastos.length; ++i) {
     var classe_nivel_indice = feiticos_gastos[i].id.split('-');
     // remove o prefixo input-feiticos-slots-gastos.
@@ -202,7 +202,7 @@ function _LeFeiticos() {
     });
   }
 
-  nomes_feiticos = goog.dom.getElementsByClass('feiticos-slots');
+  nomes_feiticos = DomsPorClasse('feiticos-slots');
   for (var i = 0; i < nomes_feiticos.length; ++i) {
     var classe_nivel_indice = nomes_feiticos[i].id.split('-');
     // remove o prefixo input-feiticos-slots
@@ -323,7 +323,7 @@ function LeEntradaArmaArmadura(div) {
 
 function _LeItens(tipo_item) {
   entradas[tipo_item] = [];
-  var dom = goog.dom.getElementsByClass('div-' + tipo_item);
+  var dom = DomsPorClasse('div-' + tipo_item);
   for (var i = 0; i < dom.length; ++i) {
     entradas[tipo_item].push(LeItem(dom[i]));
   }
