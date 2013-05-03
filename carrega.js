@@ -134,6 +134,7 @@ function _CarregaBotoesVisao() {
   }
   var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
   input_modo_mestre.addEventListener('change', ClickVisualizacaoModoMestre);
+  TituloSimples('Modo Mestre', input_modo_mestre);
   //input_modo_mestre.textContent = 'modo-mestre';
   var span_input = CriaSpan();
   span_input.appendChild(input_modo_mestre);

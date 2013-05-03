@@ -912,12 +912,10 @@ var tabelas_proficiencia_arma_por_classe = {
 // },
 var tabelas_talentos = {
 /*
-Ataque Desarmado Aprimorado¹ - Considerado armado quando estiver desarmado
 Agarrar Aprimorado¹ Des 13, Ataque Desarmado Aprimorado +4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade
 Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distância por rodada
 Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
-Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado
-Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
+Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
 Trespassar¹ Ataque Poderoso Desfere um ataque corporal extra depois de imobilizar um oponente
 Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base de ataque +4
 Trespassar sem limite de ataques por rodada
@@ -930,8 +928,7 @@ Investida Montada¹ Combate Montado Pode se deslocar antes e depois de uma inves
 Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas causam dano dobrado
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
-Armas Maior¹ Des 19, Combater com Duas Armas
-Aprimorado, Combater com Duas Armas, bônus base de ataque +11 Adquire um terceiro ataque com a mão inábil
+Armas Maior¹ Des 19, Combater com Duas Armas Aprimorado, Combater com Duas Armas, bônus base de ataque +11 Adquire um terceiro ataque com a mão inábil
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
 Especialização em Combate¹ Int 13 Substitui bônus de ataque por CA (máximo 5 pontos)
@@ -946,12 +943,9 @@ Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efet
 Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
-Fortitude Maior - +2 de bônus nos teste de resistência de Fortitude
-Ignorar Componentes Materiais - Conjura magias ignorando os componentes materiais
 Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
-Rastrear - Utiliza Sobrevivência para rastrear
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
 Reflexos Rápidos - +2 de bônus nos testes de resistência de Reflexos
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
@@ -963,8 +957,7 @@ Tiro Rápido¹ Des 13, Tiro Certeiro Um ataque à distância adicional por rodad
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Múltiplo¹ Des 17, Tiro Certeiro, Tiro Rápido, bônus base de ataque +6 Dispara duas ou mais flechas simultaneamente
-Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11
-Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
+Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
@@ -1010,6 +1003,11 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   aptidao_magica: {
       nome: 'Aptidão Mágica',
       bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
+
+  ataque_desarmado_aprimorado: {
+      nome: 'Ataque Desarmado Aprimorado',
+      guerreiro: true,
+      descricao: 'Considerado armado quando estiver desarmado', },
   ataque_poderoso: {
       nome: 'Ataque Poderoso',
       requisitos: { atributos: { forca: 13 } },
@@ -1077,9 +1075,16 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
       guerreiro: true,
       descricao: '+2 de bônus nas jogadas de ataque com a arma escolhida.' },
+  fortitude_maior: {
+      nome: 'Fortitude Maior',
+      bonus_salvacao: { fortitude: 2, },
+      descricao: '+2 de bônus nos teste de resistência de Fortitude.', },
   fraudulento: {
       nome: 'Fraudulento',
       bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
+  ignorar_componentes_materiais: {
+      nome: 'Ignorar Componentes Materiais',
+      descricao: 'Conjura magias ignorando os componentes materiais.', },
   // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
   iniciativa_aprimorada: {
       nome: 'Iniciativa Aprimorada',
@@ -1120,6 +1125,9 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   prontidao: {
       nome: 'Prontidão',
       bonus_pericias: { ouvir: 2, observar: 2 } },
+  rastrear: {
+      nome: 'Rastrear',
+      descricao: 'Utiliza Sobrevivência para rastrear.', },
   saque_rapido: {
       nome: 'Saque rápido',
       requisitos: { bba: 1 },
