@@ -34,11 +34,8 @@ var entradas = {
   prata: 0,
   cobre: 0,
   // equipamentos.
-  // O ideal era sumir com essa inicializacao, mas infelizmente, depois de carrega
-  // Cada entrada eh do tipo: { chave, obra_prima, bonus }
-  //armas: [ { chave: 'desarmado', nome_gerado: 'desarmado', material: 'nenhum', obra_prima: false, bonus: 0} ],
+  // armas: [ { chave: 'desarmado', nome_gerado: 'desarmado', material: 'nenhum', obra_prima: false, bonus: 0} ],
   armas: [],
-  // TODO remover.
   // Cada entrada eh do tipo: { em_uso, chave, material, obra_prima, bonus }
   armaduras: [],
   // Cada entrada { em_uso, chave, material, obra_prima, bonus },

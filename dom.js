@@ -247,22 +247,17 @@ function DesabilitaOverlay() {
 // configura o div de janela e o retorna. Apenas um deve ficar ativo 
 // em um determinado momento.
 // @param largura da janela, porcentagem em float (por exemplo, 0.5).
-// @param altura da janela, porcentagem em float (por exemplo, 0.5)..
 // @return o dom da janela.
-function AbreJanela(largura, altura) {
+function AbreJanela(largura) {
   if (!largura) {
     largura = .25;
-  }
-  if (!altura) {
-    altura = .25;
   }
 
   var janela = Dom('div-janela');
   RemoveFilhos(janela);
-  janela.style.top = (((1 - altura) / 2.0) * 100) + '%';
+  janela.style.top = (((1 - .25) / 2.0) * 100) + '%';
   janela.style.left = (((1 - largura) / 2.0) * 100) + '%';
   janela.style.width = (largura * 100) + '%';
-  janela.style.height = (altura * 100) + '%';
   HabilitaOverlay();
   janela.style.display = 'block';
   return janela;
@@ -276,17 +271,43 @@ function FechaJanela() {
 
 // Cria uma janela de mensagem (com botão ok).
 function JanelaMensagem(mensagem) {
+  var div_titulo = CriaDiv();
+  var div_msg = CriaDiv();
+  var div_botao = CriaDiv();
+
+  div_titulo.className = 'div-titulo-janela';
+  div_msg.className = 'div-msg-janela';
+  div_botao.className = 'div-botao-janela';
+  div_titulo.appendChild(CriaSpan('Mensagem'));
+  div_msg.appendChild(CriaSpan(mensagem));
+  div_botao.appendChild(CriaBotao('Ok', null, null, function() { FechaJanela(); }));
+
   var j = AbreJanela();
-  j.appendChild(CriaSpan(mensagem));
-  j.appendChild(CriaBotao('Ok', null, null, function() { FechaJanela(); }));
+  var divs = [ div_titulo, div_msg, div_botao ];
+  for (var i = 0; i < divs.length; ++i) {
+    j.appendChild(divs[i]);
+  }
 }
 
 // Cria uma janela de confirmação (sim/não). Chama o respectivo callback.
 function JanelaConfirmacao(mensagem, callback_sim, callback_nao) {
+  var div_titulo = CriaDiv();
+  var div_msg = CriaDiv();
+  var div_botao = CriaDiv();
+
+  div_titulo.className = 'div-titulo-janela';
+  div_msg.className = 'div-msg-janela';
+  div_botao.className = 'div-botao-janela';
+  div_titulo.appendChild(CriaSpan('Pergunta'));
+  div_msg.appendChild(CriaSpan(mensagem));
+  div_botao.appendChild(CriaBotao('Sim', null, null, function() { FechaJanela(); callback_sim(); }));
+  div_botao.appendChild(CriaBotao('Não', null, null, function() { FechaJanela(); callback_nao(); }));
+
   var j = AbreJanela();
-  j.appendChild(CriaSpan(mensagem));
-  j.appendChild(CriaBotao('Sim', null, null, function() { FechaJanela(); callback_sim(); }));
-  j.appendChild(CriaBotao('Não', null, null, function() { FechaJanela(); callback_nao(); }));
+  var divs = [ div_titulo, div_msg, div_botao ];
+  for (var i = 0; i < divs.length; ++i) {
+    j.appendChild(divs[i]);
+  }
 }
 
 
