@@ -395,12 +395,9 @@ function _AtualizaSalvacoes() {
     var div_salvacao = CriaDiv();
     AdicionaSpanAoDiv(tipo_salvacao + ': ', null, div_salvacao);
     var span_salvacao = 
-      AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].total), 
+      AdicionaSpanAoDiv(StringSinalizada(personagem.salvacoes[tipo_salvacao].Total()), 
                         null, div_salvacao);
-    Titulo(
-        [{'base': personagem.salvacoes[tipo_salvacao].base}, 
-         {'racial': personagem.salvacoes[tipo_salvacao].racial}], 
-          span_salvacao);
+    Titulo(personagem.salvacoes[tipo_salvacao].Exporta(), span_salvacao);
     div_salvacoes.appendChild(div_salvacao);
   }
 }

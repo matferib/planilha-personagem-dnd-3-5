@@ -12,6 +12,7 @@ function Bonus() {
   this.por_chave.armadura_melhoria = { nome: 'Armadura (melhoria)', cumulativo: false, por_origem: {}, };
   this.por_chave.armadura_natural = { nome: 'Amadura Natural', cumulativo: false, por_origem: {}, };
   this.por_chave.atributo = { nome: 'Atributo', cumulativo: true, por_origem: {}, };
+  this.por_chave.base = { nome: 'Base', cumulativo: false, por_origem: {}, };
   this.por_chave.circunstancia = { nome: 'Circusntância', cumulativo: true, por_origem: {}, };
   this.por_chave.competencia = { nome: 'Competência', cumulativo: false, por_origem: {}, };
   this.por_chave.deflexao = { nome: 'Deflexão', cumulativo: false, por_origem: {}, };
@@ -39,6 +40,18 @@ Bonus.prototype.Limpa = function(excluir) {
   }
 }
 
+// @return um objeto de bonus com os mesmos valores da instância.
+Bonus.prototype.Clona = function() {
+  var b = new Bonus();
+  for (var chave_bonus in this.por_chave) {
+    for (var origem in this.por_chave[chave_bonus].por_origem) {
+      b.por_chave[chave_bonus].por_origem[origem] = 
+        this.por_chave[chave_bonus].por_origem[origem];
+    }
+  }
+  return b;
+}
+
 // @param excluir array com os tipos de bonus a serem excluidos.
 // @return o valor total do bonus.
 Bonus.prototype.Total = function(excluir) {
@@ -53,44 +66,57 @@ Bonus.prototype.Total = function(excluir) {
     if (nao_usar_bonus) {
       continue;
     }
-    var total_chave = 0;
-    var bonus = this.por_chave[chave_bonus];
-    for (var subchave in bonus.por_origem) {
-      if (bonus.cumulativo) {
-        total_chave += bonus.por_origem[subchave];
-      } else {
-        if (bonus.por_origem[subchave] > total_chave) {
-          total_chave = bonus.por_origem[subchave];
-        }
-      }
-    }
-    total += total_chave;
+    total += this.TotalChave(chave_bonus);
   }
   return total;
 }
 
 // Adiciona um dado tipo de bonus ao personagem.
 // @param chave o tipo de bonus.
-// @param subschave do bonus.
+// @param subschave do bonus. Pode ser null, neste caso '-' será usado.
 Bonus.prototype.Adiciona = function(chave_bonus, subchave, valor) {
   var bonus = this.por_chave[chave_bonus];
   if (bonus == null) {
     Mensagem('Tipo de bonus invalido: ' + chave_bonus);
     return;
   }
+  if (subchave == null) {
+    subchave = '-';
+  }
   bonus.por_origem[subchave] = valor;
 }
 
 // Le um determinado tipo de bonus.
+// @param chave o tipo de bonus.
+// @param subschave do bonus. Pode ser null, neste caso '-' será usado.
+// @return o valor do bonus para a subchave ou 0 se não existir.
 Bonus.prototype.Le = function(chave_bonus, subchave) {
   var bonus = this.por_chave[chave_bonus];
   if (bonus == null) {
     Mensagem('Tipo de bonus invalido: ' + chave_bonus);
     return;
   }
-  return bonus.por_origem[subchave];
+  if (subchave == null) {
+    subchave = '-';
+  }
+  return bonus.por_origem[subchave] ? bonus.por_origem[subchave] : 0;
 }
 
+// @return o total para uma chave.
+Bonus.prototype.TotalChave = function(chave_bonus) {
+  var total_chave = 0;
+  var bonus = this.por_chave[chave_bonus];
+  for (var subchave in bonus.por_origem) {
+    if (bonus.cumulativo) {
+      total_chave += bonus.por_origem[subchave];
+    } else {
+      if (bonus.por_origem[subchave] > total_chave) {
+        total_chave = bonus.por_origem[subchave];
+      }
+    }
+  }
+  return total_chave;
+}
 
 // Exporta os bonus diferentes de zero. 
 // Util para ser usado com a funcao Titulo.
@@ -99,6 +125,7 @@ Bonus.prototype.Le = function(chave_bonus, subchave) {
 Bonus.prototype.Exporta = function(excluir) {
   var array_retorno = [];
   for (var chave_bonus in this.por_chave) {
+    var bonus = this.por_chave[chave_bonus];
     var nao_usar_bonus = false;
     for (var i = 0; excluir && i < excluir.length; ++i) {
       if (excluir[i] == chave_bonus) {
@@ -109,17 +136,7 @@ Bonus.prototype.Exporta = function(excluir) {
       continue;
     }
 
-    var total_chave = 0;
-    var bonus = this.por_chave[chave_bonus];
-    for (var subchave in bonus.por_origem) {
-      if (bonus.cumulativo) {
-        total_chave += bonus.por_origem[subchave];
-      } else {
-        if (bonus.por_origem[subchave] > total_chave) {
-          total_chave = bonus.por_origem[subchave];
-        }
-      }
-    }
+    var total_chave = this.TotalChave(chave_bonus);
     if (total_chave > 0) {
       var entrada_chave = {};
       entrada_chave[bonus.nome] = total_chave;

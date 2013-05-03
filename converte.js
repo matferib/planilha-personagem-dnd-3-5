@@ -65,6 +65,13 @@ function LimpaGeral() {
   }
   personagem.estilos_luta.length = 0;
   personagem.habilidades = {};
+  for (var tipo_salvacao in personagem.salvacoes) {
+    if (tipo_salvacao in { fortitude: '', reflexo: '', vontade: '' }) {
+      personagem.salvacoes[tipo_salvacao].Limpa();
+    } else {
+      delete personagem.salvacoes[tipo_salvacao];
+    }
+  }
 }
 
 function _ConverteDadosVida() {

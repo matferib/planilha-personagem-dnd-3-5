@@ -162,6 +162,12 @@ function _DependenciasTalento(talento_personagem, indice) {
     personagem.pontos_vida.bonus.Adiciona(
         'talento', subchave_bonus, talento.bonus_pv);
   }
+  if ('bonus_salvacao' in talento) {
+    for (var tipo_salvacao in talento['bonus_salvacao']) {
+      personagem.salvacoes[tipo_salvacao].Adiciona(
+          'talento', subchave_bonus, talento.bonus_salvacao[tipo_salvacao]);
+    }
+  }
 }
 
 function _DependenciasPontosVida() {
@@ -673,44 +679,38 @@ function _DependenciasBonusPorCategoria(
 }
 
 function _DependenciasSalvacoes() {
-  personagem.salvacoes = {};
   var habilidades_salvacoes = {
     fortitude: 'constituicao',
     reflexo: 'destreza',
     vontade: 'sabedoria'
   };
   for (var tipo_salvacao in habilidades_salvacoes) {
-    personagem.salvacoes[tipo_salvacao] = {};
     var valor_base = 0;
     for (var i = 0; i < personagem.classes.length; ++i) {
       var classe = personagem.classes[i].classe;
       valor_base += 
           tabelas_salvacao[classe][tipo_salvacao](personagem.classes[i].nivel);
     }
+    personagem.salvacoes[tipo_salvacao].Adiciona('base', '-', valor_base);
     var habilidade_modificadora = habilidades_salvacoes[tipo_salvacao];
-    personagem.salvacoes[tipo_salvacao].base = valor_base;
+    personagem.salvacoes[tipo_salvacao].Adiciona(
+        'atributo', habilidade_modificadora, personagem.atributos[habilidade_modificadora].modificador);
     // modificador racial.
     var salvacoes_raca = tabelas_raca[personagem.raca].salvacoes;
     if (salvacoes_raca && salvacoes_raca[tipo_salvacao]) {
-      personagem.salvacoes[tipo_salvacao].racial = salvacoes_raca[tipo_salvacao];
-    } else {
-      personagem.salvacoes[tipo_salvacao].racial = 0;
+      personagem.salvacoes[tipo_salvacao].Adiciona('racial', null, salvacoes_raca[tipo_salvacao]);
     }
-    personagem.salvacoes[tipo_salvacao].total = 
-        personagem.salvacoes[tipo_salvacao].base +
-        personagem.salvacoes[tipo_salvacao].racial +
-        personagem.atributos[habilidade_modificadora].modificador;
   }
   var outras_salvacoes_raca = tabelas_raca[personagem.raca].outras_salvacoes;
   for (var tipo_salvacao in outras_salvacoes_raca) {
     for (var i = 0; i < outras_salvacoes_raca[tipo_salvacao].base.length; ++i) {
-      var nome_salvacao = tipo_salvacao + ' (' + outras_salvacoes_raca[tipo_salvacao].base[i] + ')';
-      personagem.salvacoes[nome_salvacao] = {};
-      personagem.salvacoes[nome_salvacao].base =
-          personagem.salvacoes[outras_salvacoes_raca[tipo_salvacao].base[i]].total;
-      personagem.salvacoes[nome_salvacao].racial = outras_salvacoes_raca[tipo_salvacao].bonus;
-      personagem.salvacoes[nome_salvacao].total = personagem.salvacoes[nome_salvacao].base  +
-                                                  personagem.salvacoes[nome_salvacao].racial;
+      var salvacao_base = outras_salvacoes_raca[tipo_salvacao].base[i];
+      var nome_salvacao = tipo_salvacao + ' (' + salvacao_base + ')';
+      personagem.salvacoes[nome_salvacao] = personagem.salvacoes[salvacao_base].Clona();
+      // Entra como racial, em adição ao que já possui.
+      personagem.salvacoes[nome_salvacao].Adiciona(
+          'racial', null, 
+          personagem.salvacoes[nome_salvacao].Le('racial', null) + outras_salvacoes_raca[tipo_salvacao].bonus);
     }
   }
 }
