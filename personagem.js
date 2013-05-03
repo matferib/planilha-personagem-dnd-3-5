@@ -118,11 +118,11 @@ var personagem = {
   // chave_habilidade: { vezes, complemento }
   especiais: {
   },
-  salvacoes : {
-    fortitude: { base: 0, racial: 0, total: 0 },
-    reflexo: { base: 0, racial: 0, total: 0 },
-    vontade: { base: 0, racial: 0, total: 0 },
-    // Outras salvacoes derivadas.
+  salvacoes: {
+    fortitude: new Bonus(),
+    reflexo: new Bonus(),
+    vontade: new Bonus(),
+    // Outras salvacoes.
   },
   // Lista de armas que o personagem eh proficiente.
   // Cada entrada: { nome: true }, onde nome eh o nome da chave. So a presenca do campo eh

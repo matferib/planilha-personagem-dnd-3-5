@@ -25,6 +25,17 @@ function _ComparaMoedas(moedas1, moedas2) {
   return true;
 }
 
+// @param salvacoes { chave: valor, ... }
+// @return true se o valor total das salvacoes do personagem for igual aos valores passados.
+function ComparaSalvacoes(salvacoes) {
+  for (var tipo_salvacao in salvacoes) {
+    if (personagem.salvacoes[tipo_salvacao].Total() != salvacoes[tipo_salvacao]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 // Testes.
 
 // Cria um novo template de testes a ser adicionado no dom.
@@ -493,6 +504,49 @@ function CarregaTestes() {
       if (dom_pai.childNodes.length != 1) {
         this.resultado = false;
         this.detalhes = 'Pai deveria ter 1 filho.';
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
+  LimpaGeral();
+  TemplateTeste({
+    nome: 'DependenciasSalvacoes', 
+    Testa: function() {
+      // Guerreiro 1 nivel default.
+      _DependenciasSalvacoes();
+      if (!ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 })) {
+        this.resultado = false;
+        this.detalhes = 'Guerreiro de primeiro nível deveria ter fortitude 2.';
+        return;
+      }
+      // Ladino nivel 1.
+      personagem.classes[0].classe = 'ladino';
+      _DependenciasSalvacoes();
+      if (!ComparaSalvacoes({ fortitude: 0, reflexo: 2, vontade: 0 })) {
+        this.resultado = false;
+        this.detalhes = 'Ladino de primeiro nível deveria ter reflexo 2.';
+        return;
+      }
+      // Clerigo nivel 1.
+      personagem.classes[0].classe = 'clerigo';
+      personagem.raca = 'halfling';
+      _DependenciasSalvacoes();
+      if (!ComparaSalvacoes({ fortitude: 3, reflexo: 1, vontade: 3 })) {
+        this.resultado = false;
+        this.detalhes = 'Clérigo halfling de primeiro nível deveria ser 3 1 3.';
+        return;
+      }
+      this.resultado = true;
+
+      // Fortitude maior.
+      personagem.talentos.gerais.push({ chave: 'fortitude_maior' });
+      _DependenciasTalentos();
+      _DependenciasSalvacoes();
+      if (!ComparaSalvacoes({ fortitude: 5, reflexo: 1, vontade: 3 })) {
+        this.resultado = false;
+        this.detalhes = 'Clérigo halfling de primeiro nível com fortitude maior deveria ser 5 1 3.';
         return;
       }
       this.resultado = true;
