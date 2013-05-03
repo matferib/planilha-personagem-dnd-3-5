@@ -947,7 +947,6 @@ Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
-Reflexos Rápidos - +2 de bônus nos testes de resistência de Reflexos
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Certeiro¹ - +1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros
@@ -961,7 +960,6 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
-Vontade de Ferro - +2 de bônus nos testes de resistência de Vontade
 Talentos de Criação de Item Pré-requisitos Benefícios
 Criar Armaduras e Armas Mágicas 5° nível de conjurador Criar armas, armaduras e escudos mágicos
 Criar Bastão 9° nível de conjurador Criar bastões mágicos
@@ -1128,6 +1126,10 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   rastrear: {
       nome: 'Rastrear',
       descricao: 'Utiliza Sobrevivência para rastrear.', },
+  reflexos_rapidos: {
+      nome: 'Reflexos Rápidos',
+      bonus_salvacao: { reflexo: 2, },
+      descricao: '+2 de bônus nos testes de resistência de Reflexos.', },
   saque_rapido: {
       nome: 'Saque rápido',
       requisitos: { bba: 1 },
@@ -1151,12 +1153,14 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       guerreiro: true,
       descricao: 'Não sofre penalidade nos ataques com uma arma exótica específica.', },
   // TODO implementar efeitos de nao ter o feat.
-  //Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
   usar_escudo: {
-      nome: 'Usar Escudo', },
-  // Ataque com Escudo Aprimorado¹ Usar Escudo Conserva o bônus do escudo na CA quando ataca com ele
+      nome: 'Usar Escudo', 
+      descricao: 'Não sofre penalidade de armadura nas jogadas de ataque.' },
   usar_escudo_aprimorado: {
-      nome: 'Usar Escudo Aprimorado', },
+      nome: 'Usar Escudo Aprimorado', 
+      guerreiro: true,
+      requisitos: { talentos: [ 'usar_escudo', ] },
+      descricao: 'Conserva o bônus do escudo na CA quando ataca com ele.' },
   // Usar Escudo de Corpo Usar Escudo Não sofre penalidade de armadura nas jogadas de ataque
   usar_escudo_corpo: {
       nome: 'Usar Escudo de Corpo', },
@@ -1166,6 +1170,10 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       bonus_pv: 3,
       cumulativo: true, 
       descricao: '+3 pontos de vida.', },
+  vontade_ferro: {
+      nome: 'Vontade de Ferro',
+      bonus_salvacao: { vontade: 2, },
+      descricao: '+2 de bônus nos testes de resistência de Vontade.', },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
