@@ -102,6 +102,29 @@ div.pericia-de-classe {
 background-color: #E8E8E8;
 }
 
+/* Elementos das janelas. */
+div.div-titulo-janela {
+  border-bottom: 2px solid;
+  border-color: black;
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+div.div-msg-janela {
+  padding: 2px;
+  text-align: center;
+}
+div.div-botao-janela {
+  padding: 2px;
+  text-align: center;
+}
+/* fim janelas. */
+
+span.span-item {
+  display: inline-block;
+  width: 75px;
+}
+
 input.venda {
 }
 input.compra {
