@@ -183,7 +183,7 @@ function _CarregaAtributos() {
                           evento.stopPropagation();
                   } }));
     var span_rotulo = CriaSpan(atributos[chave_atributo]);
-    span_rotulo.style.float = 'left';
+    span_rotulo.style.display = 'inline-block';
     span_rotulo.style.width = '80px';
     div_atributo.appendChild(span_rotulo);
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');

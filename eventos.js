@@ -189,9 +189,11 @@ function ClickGerarComum() {
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma() {
-  var arma_entrada = { entrada: { chave: 'desarmado', obra_prima: false, bonus: 0 } };
-  personagem.armas.push(arma_entrada);
-  AtualizaGeralSemConverterEntradas();
+  //var arma_entrada = { entrada: { chave: 'desarmado', obra_prima: false, bonus: 0 } };
+  //personagem.armas.push(arma_entrada);
+  //AtualizaGeralSemConverterEntradas();
+  entradas.armas.push({ chave: 'desarmado', obra_prima: false, bonus: 0 });
+  AtualizaGeralSemLerEntradas();
 }
 
 // Adiciona uma armadura a lista de equipamentos.
