@@ -302,7 +302,7 @@ function _DependenciasEspeciais() {
       continue;
     }
     var especiais_classe = tabelas_classes[entrada_classe.classe].especiais;
-    for (var nivel = 1; nivel < entrada_classe.nivel; ++nivel) {
+    for (var nivel = 1; nivel <= entrada_classe.nivel; ++nivel) {
       var especiais_nivel = especiais_classe[nivel];
       if (especiais_nivel == null) {
         continue;
