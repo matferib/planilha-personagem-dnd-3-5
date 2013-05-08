@@ -1417,7 +1417,7 @@ var tabelas_visoes = {
 var tabelas_atributos = {
   forca: "Força",
   destreza: "Destreza",
-  constituicao: "Constitruição",
+  constituicao: "Constituição",
   inteligencia: "Inteligência",
   sabedoria: "Sabedoria",
   carisma: "Carisma",
@@ -1426,7 +1426,7 @@ var tabelas_atributos = {
 var tabelas_atributos_invertidos = {
   'Força': 'forca',
   'Destreza': 'destreza',
-  'Constitruição': 'constituicao',
+  'Constituição': 'constituicao',
   'Inteligência': 'inteligencia',
   'Sabedoria': 'sabedoria',
   'Carisma': 'carisma',
