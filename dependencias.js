@@ -480,7 +480,7 @@ function _DependenciasArmadurasEscudos() {
   }
 
   var bonus_ca = personagem.ca.bonus;
-  bonus_ca.Limpa();
+  //bonus_ca.Limpa();
   if (personagem.armadura != null) {
     bonus_ca.Adiciona(
         'armadura', 'armadura', tabelas_armaduras[personagem.armadura.entrada.chave].bonus);
