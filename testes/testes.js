@@ -104,6 +104,22 @@ function CarregaTestes() {
 
   LimpaGeral();
   TemplateTeste({
+    nome: 'TestaEfeitoItems', 
+    Testa: function() {
+      personagem.aneis.push({chave: 'protecao_2', em_uso: true});
+      _DependenciasEquipamentos();
+      _DependenciasArmadurasEscudos();
+      if (personagem.ca.bonus.Total() != 2) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 2 de bonus no AC por causa de anel de proteção +2';
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
+  LimpaGeral();
+  TemplateTeste({
     nome: 'LePeso', 
     Testa: function() {
       var peso = LePeso(' 500 g');
