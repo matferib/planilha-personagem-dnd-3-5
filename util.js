@@ -308,7 +308,8 @@ function MapaParaLista(mapa) {
 // fiz todas as versões da mesma forma. Uma pena, porque a outra era bem mais simples.
 // @return true se o armazem do chrome estiver presente.
 function _ArmazemChrome() {
-  return chrome && chrome.storage && chrome.storage.sync;
+  return (typeof chrome !== 'undefined') && 
+         chrome.storage && chrome.storage.sync;
 }
 
 // Salva o 'valor' usando 'nome' como chave. Chama callback quando terminar.
