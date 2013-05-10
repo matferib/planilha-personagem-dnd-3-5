@@ -214,7 +214,7 @@ function RemoveUltimoFilho(pai) {
 function _RemoveOnChange(dom) {
   for (var filho = dom.firstChild; filho != null; filho = filho.nextSibling) {
     if (filho.removeAttribute) {
-      filho.removeEventListener('change');
+      filho.removeEventListener('change', null);
       _RemoveOnChange(filho);
     }
   }
