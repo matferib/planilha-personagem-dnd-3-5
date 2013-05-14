@@ -53,6 +53,7 @@ function _CarregaHandlers() {
     "botao-adicionar-anel": { callback:  function() { ClickAdicionarItem('aneis'); }, evento: 'click', },
     "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', }, 
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
+				"botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
     "botao-ferir-1": { callback: function() { ClickAjustarFerimentos(1); }, evento: 'click', },
     "botao-ferir-3": { callback: function() { ClickAjustarFerimentos(3); }, evento: 'click', },
