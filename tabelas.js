@@ -1661,11 +1661,17 @@ var tabelas_pocoes = {
   roupa_encantada_5: { nome: 'Roupa encantada +5', tipo: 'oleo', preco: '3000 PO' },
 };
 
+var tabelas_capas = {
+		capa_teste: { nome: 'Capa Teste', tipo: 'capa', preco: '500 PO' },
+		
+};
+
 // Tabelas de itens, por tipo.
 var tabelas_itens = {
   aneis: tabelas_aneis,
   amuletos: tabelas_amuletos,
   pocoes: tabelas_pocoes,
+		capas: tabelas_capas,
 };
 
 // Nomes dos itens, por tipo.
@@ -1673,6 +1679,7 @@ var tabelas_nomes_itens = {
   aneis: 'Anéis',
   amuletos: 'Amuletos',
   pocoes: 'Poções',
+		capas: 'Capas',
 };
 
 // Materiais especiais.
