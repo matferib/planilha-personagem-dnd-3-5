@@ -941,8 +941,7 @@ Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distâ
 Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
 Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
 Trespassar¹ Ataque Poderoso Desfere um ataque corporal extra depois de imobilizar um oponente
-Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base de ataque +4
-Trespassar sem limite de ataques por rodada
+Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base de ataque +4 Trespassar sem limite de ataques por rodada
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
 Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e não provoca ataques de oportunidade
@@ -960,9 +959,6 @@ Desarme Aprimorado¹ Especialização em Combate +4 de bônus nas tentativas de 
 Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação de movimento
 Imobilização Aprimorada¹ Especialização em Combate +4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
-Esquiva¹ Des 13 +1 de bônus de esquiva na CA contra um adversário à sua escolha
-Mobilidade¹ Esquiva +4 de bônus de esquiva na CA contra ataques de oportunidade
-Ataque em Movimento¹ Mobilidade, bônus base de ataque +4 Capaz de deslocar antes e depois do ataque
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
@@ -1030,6 +1026,13 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Ataque Desarmado Aprimorado',
       guerreiro: true,
       descricao: 'Considerado armado quando estiver desarmado', },
+
+  ataque_movimento: {
+      nome: 'Ataque em Movimento',
+      descricao: 'Capaz de deslocar antes e depois do ataque',
+      requisitos: { bba: 4, talentos: [ 'mobilidade' ], },
+      guerreiro: true,
+  },
   ataque_poderoso: {
       nome: 'Ataque Poderoso',
       requisitos: { atributos: { forca: 13 } },
@@ -1078,6 +1081,13 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
     complemento: 'arma',
     requisitos: { proficiencia_arma: true, talentos: [ 'foco_em_arma'], nivel: { guerreiro: 4 }},
     descrição: '+2 de bônus no dano com a arma escolhida.', },
+  // TODO implementar/mostrar esse bonus de alguma forma.
+  esquiva: {
+    nome: 'Esquiva',
+    requisitos: { atributos: { destreza: 13 } },
+    descricao: '+1 de bônus de esquiva na CA contra um adversário à sua escolha.',
+    guerreiro: true,
+  },
   especializacao_arma_maior: {
     nome: 'Especialização em Arma Maior',
     guerreiro: true,
@@ -1141,6 +1151,12 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
   maos_level: {
       nome: 'Mãos Leves',
       bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
+  mobilidade: {
+      nome: 'Mobilidade',
+      requisitos: { talentos: [ 'esquiva'], },
+      descricao: '+4 de bônus de esquiva na CA contra ataques de oportunidade.',
+      guerreiro: true,
+  },
   persuasivo: {
       nome: 'Persuasivo',
       bonus_pericias: { blefar: 2, intimidacao: 2 } },
