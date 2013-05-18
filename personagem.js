@@ -170,6 +170,13 @@ var personagem = {
   //            feitico_dominio: {nome, gasto}  }, 
   //       1: ...} }
   feiticos: {},
+  // Feiticos conhecidos pelo personagem, por classe:
+  // chave_classe: {
+  //   0: [ { nome, descricao } ],
+  //   ...
+  //   9: [ { nome, descricao } ],
+  // }
+  grimorio: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
 
   notas: '',
