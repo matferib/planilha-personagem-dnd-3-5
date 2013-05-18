@@ -154,7 +154,7 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
 // @param modo 'elite' ou 'comum'.
 // @param submodo opcional 'tabelado' ou 'aleatorio'.
 function GeraPersonagem(modo, submodo) {
-  LimpaGeral();
+  PersonagemLimpaGeral();
   if (!submodo) {
     submodo = 'tabelado';
   }
