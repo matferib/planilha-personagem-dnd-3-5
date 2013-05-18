@@ -80,7 +80,7 @@ function CarregaTestes() {
   _CarregaTabelaArmasArmaduras();
   var body = document.getElementsByTagName('body')[0];
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   personagem.armas = [ 
       { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' } ];
   TemplateTeste({
@@ -102,7 +102,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'TestaEfeitoItems', 
     Testa: function() {
@@ -118,7 +118,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'LePeso', 
     Testa: function() {
@@ -153,7 +153,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'AjustaString', 
     Testa: function() {
@@ -167,7 +167,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'UtilSomaPrecos', 
     Testa: function() {
@@ -186,7 +186,7 @@ function CarregaTestes() {
   }, body);
 
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   personagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 }; 
   TemplateTeste({
     nome: 'PersonagemAdicionarMoedas', 
@@ -219,7 +219,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'UtilLePreco', 
     Testa: function() {
@@ -253,7 +253,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'LeItem', 
     Testa: function() {
@@ -279,7 +279,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'PrecoArmaArmaduraEscudo', 
     Testa: function() {
@@ -429,7 +429,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'RequisitosTalentos', 
     Testa: function() {
@@ -490,7 +490,7 @@ function CarregaTestes() {
   }, body);
 
   // AjustaFilhos.
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'AjustaFilhos', 
     Testa: function() {
@@ -526,7 +526,7 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  LimpaGeral();
+  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'DependenciasSalvacoes', 
     Testa: function() {
@@ -570,7 +570,7 @@ function CarregaTestes() {
   }, body);
 
   // Parte assincrona do armazem.
-  LimpaGeral();
+  PersonagemLimpaGeral();
   var nome_chave = 'nome de teste maluco que nunca devera ser usado';
   SalvaNoArmazem(nome_chave, 'valor de teste', function() {
     ListaDoArmazem(function(lista_nomes) {

@@ -3,7 +3,7 @@
 // Passa os valoes da entrada para o personagem.
 function ConverteEntradasParaPersonagem() {
   // Limpa tudo antes de comecar.
-  LimpaGeral();
+  PersonagemLimpaGeral();
 
   personagem.modo_mestre = entradas.modo_mestre;
   personagem.nome = entradas.nome;
@@ -44,34 +44,6 @@ function ConverteEntradasParaPersonagem() {
   _ConverteFeiticos();
 
   personagem.notas = entradas.notas;
-}
-
-// Limpa tudo antes de comecar a conversao das entradas para o personagem. 
-function LimpaGeral() {
-  personagem.pontos_vida.total = 0;
-  personagem.pontos_vida.bonus.Limpa();
-  personagem.ca.bonus.Limpa();
-  personagem.iniciativa.Limpa();
-  for (var i = 0; i < personagem.pericias.lista.length; ++i) {
-    personagem.pericias.lista[i].bonus.Limpa();
-  }
-  for (var chave_classe in personagem.feiticos) {
-    personagem.feiticos[chave_classe].em_uso = false;
-    for (var i = 0; i <= 9; ++i) {
-      personagem.feiticos[chave_classe].conhecidos[i].length = 0;
-      personagem.feiticos[chave_classe].slots[i].feiticos.length = 0;
-      personagem.feiticos[chave_classe].slots[i].feitico_dominio = null;
-    }
-  }
-  personagem.estilos_luta.length = 0;
-  personagem.habilidades = {};
-  for (var tipo_salvacao in personagem.salvacoes) {
-    if (tipo_salvacao in { fortitude: '', reflexo: '', vontade: '' }) {
-      personagem.salvacoes[tipo_salvacao].Limpa();
-    } else {
-      delete personagem.salvacoes[tipo_salvacao];
-    }
-  }
 }
 
 function _ConverteDadosVida() {
