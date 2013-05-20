@@ -8,7 +8,8 @@ var tabelas_raca = {
       atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
       proficiencia_armas: [ 'azagaia' ], // Javelin em ingles.
       //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
-      bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
+      //Todo(FC) incluir penalidades de ambientes fechados
+						bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
       arma_natural: { garra: { nome: 'Garra', dano: '1d4' } }, 
     },
   anao: {
@@ -1661,9 +1662,84 @@ var tabelas_pocoes = {
   roupa_encantada_5: { nome: 'Roupa encantada +5', tipo: 'oleo', preco: '3000 PO' },
 };
 
+//Copiei a tabela de aneis apenas para testes. Todo(FC)finalizar capas
 var tabelas_capas = {
-		capa_teste: { nome: 'Capa Teste', tipo: 'capa', preco: '500 PO' },
-		
+  armadura_natural_1: { 
+    nome: 'Armadura Natural +1', preco: '2000 PO', 
+    propriedades: { ca: { armadura_natural: 1 } },  },
+  armadura_natural_2: { 
+    nome: 'Armadura Natural +2', preco: '8000 PO', 
+    propriedades: { ca: { armadura_natural: 2 } },  },
+  armadura_natural_3: { 
+    nome: 'Armadura Natural +3', preco: '18000 PO', 
+    propriedades: { ca: { armadura_natural: 3 } },  },
+  armadura_natural_4: { 
+    nome: 'Armadura Natural +4', preco: '32000 PO', 
+    propriedades: { ca: { armadura_natural: 4 } },  },
+  armadura_natural_5: { 
+    nome: 'Armadura Natural +5', preco: '50000 PO', 
+    propriedades: { ca: { armadura_natural: 5 } },  },
+  punhos_poderosos_1: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +1', preco: '6000 PO', 
+    propriedades: {} },
+  punhos_poderosos_2: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +2', preco: '24000 PO', 
+    propriedades: {} },
+  punhos_poderosos_3: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +3', preco: '54000 PO', 
+    propriedades: {} },
+  punhos_poderosos_4: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +4', preco: '96000 PO', 
+    propriedades: {} },
+  punhos_poderosos_5: {
+    // ataque desarmado e natural ganha bonus de melhoria
+    nome: 'Punhos Poderosos +5', preco: '150000 PO', 
+    propriedades: {} },
+  saude_2: {
+    nome: 'Saúde +2', preco: '4000 PO', 
+    propriedades: { atributos: { constituicao: 2 } } },
+  saude_4: {
+    nome: 'Saúde +4', preco: '16000 PO', 
+    propriedades: { atributos: { constituicao: 4 } } },
+  saude_6: {
+    nome: 'Saúde +6', preco: '36000 PO', 
+    propriedades: { atributos: { constituicao: 6 } } },
+  planos: {
+    // permite usar magia viagem planar...
+    nome: 'Planos', preco: '120000 PO', 
+    propriedades: {} },
+  protecao_deteccao: {
+    // como se estivesse sob efeito de dificultar detecção...
+    nome: 'Proteção contra Localização e Detecção', preco: '35000 PO', 
+    propriedades: {} },
+  quaal_ancora: {
+    // Prender embarcações.
+    nome: 'Quaal Âncora', preco: '50 PO', 
+    propriedades: {} },
+  quaal_passaro: {
+    // Pombo correio para entregar mensagem.
+    nome: 'Quaal Pássaro', preco: '300 PO', 
+    propriedades: {} },
+  quaal_leque: {
+    // Gerar vento.
+    nome: 'Quaal Leque', preco: '200 PO', 
+    propriedades: {} },
+  quaal_barco_cisne: {
+    // Transforma-se em um barco.
+    nome: 'Quaal Barco de Cisnes', preco: '450 PO', 
+    propriedades: {} },
+  quaal_arvore: {
+    // Cria um grande carvalho.
+    nome: 'Quaal Árvore', preco: '400 PO', 
+    propriedades: {} },
+  quaal_chicote: {
+    // Cria um chicote que ataca sozinho como arma dancarina.
+    nome: 'Quaal Chicote', preco: '500 PO', 
+    propriedades: {} },
 };
 
 // Tabelas de itens, por tipo.

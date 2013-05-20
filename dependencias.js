@@ -31,7 +31,7 @@ function DependenciasGerais() {
 }
 
 function _DependenciasEquipamentos() {
-  var tipos_itens = [ 'aneis', 'amuletos' ];
+  var tipos_itens = [ 'aneis', 'amuletos', 'capas' ];
   for (var i = 0; i < tipos_itens.length; ++i) {
     _DependenciasItens(tipos_itens[i]);
   }

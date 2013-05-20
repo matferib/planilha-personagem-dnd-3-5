@@ -45,6 +45,7 @@ var entradas = {
   aneis: [],
   amuletos: [],
   pocoes: [],
+		capas: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [] },
