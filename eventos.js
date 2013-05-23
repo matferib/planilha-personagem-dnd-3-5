@@ -326,16 +326,26 @@ function ClickAdicionarItem(tipo_item) {
 // TODO arrumar isso aqui para tratar anel em separado.
 function ClickUsarItem(tipo_item, checkbox) {
   if (checkbox.checked) {
-    var total_em_uso = 0;
-    for (var i = 0; i < personagem.aneis.length && total_em_uso < 2; ++i) {
+    if (tipo_item == 'pocoes') {
+						AtualizaGeral();
+						return
+				}
+				var total_em_uso = 0;
+				var total_maximo_item = 0
+				if (tipo_item == 'aneis') {
+						total_maximo_item = 2
+				} else	{
+						total_maximo_item = 1
+				}
+    for (var i = 0; i < personagem[tipo_item].length && total_em_uso < total_maximo_item; ++i) {
       if (personagem[tipo_item][i].em_uso) {
         ++total_em_uso;
       }
     }
-    // Maior aqui so pra garantir no caso de algum bisiu louco passar de 2.
-    if (total_em_uso >= 2) {
-      // Desmarca o anel para nao permitir um terceiro.
-      Mensagem('São permitidos no máximo 2 anéis');
+    // Maior aqui so pra garantir no caso de algum bisiu louco passar do numero maximo.
+    if (total_em_uso >= total_maximo_item) {
+      // Desmarca o item para nao permitir que exceda o numero maximo que pode ser equipado.
+      Mensagem('Alerta! Número máximo de items excedido. (Valor máximo: Anéis: 2, Amuletos: 1, Capas: 1)');
       checkbox.checked = false;
       return;
     }
