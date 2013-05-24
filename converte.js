@@ -64,7 +64,7 @@ function _ConverteEquipamentos() {
     personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
   }
   // itens, apenas se estiverem definidos.
-  for (var tipo_item in tabelas_itens_nova) {
+  for (var tipo_item in tabelas_itens) {
     if (entradas[tipo_item] == null) {
       entradas[tipo_item] = [];
     }
