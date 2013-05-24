@@ -180,7 +180,7 @@ function GeraPersonagem(modo, submodo) {
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
   _GeraArmas(tabela_geracao_classe_por_nivel);
-  var tipos_items = [ 'aneis', 'amuletos' ];
+  var tipos_items = [ 'aneis', 'amuletos', 'capas' ];
   for (var i = 0; i < tipos_items.length; ++i ) {
     _GeraItens(tipos_items[i], tabela_geracao_classe_por_nivel);
   }
@@ -335,11 +335,11 @@ function GeraResumo() {
   resumo = resumo.slice(0, -2) + '; ';
   
   // Itens. TODO nome correto.
-  for (var tipo_item in tabelas_itens) {
+  for (var tipo_item in tabelas_itens_nova) {
     if (personagem[tipo_item].length > 0) {
-      resumo += tabelas_nomes_itens[tipo_item] + ': ';
+      resumo += tabelas_itens_nova[tipo_item].nome + ': ';
       for (var i = 0; i < personagem[tipo_item].length; ++i) {
-        var item = tabelas_itens[tipo_item][personagem[tipo_item][i].chave];
+        var item = tabelas_itens_nova[tipo_item].tabela[personagem[tipo_item][i].chave];
         resumo += item.nome + ', ';
       }
       resumo = resumo.slice(0, -2) + '; ';

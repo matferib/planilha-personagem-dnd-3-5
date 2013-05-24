@@ -154,7 +154,7 @@ var personagem = {
   aneis: [],
   amuletos: [],
   pocoes: [],
-  capa: '',
+  capas: [],
   botas: '',
 
   // Valor pode ser qualquer coisa.

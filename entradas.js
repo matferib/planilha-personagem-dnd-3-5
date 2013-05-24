@@ -45,6 +45,7 @@ var entradas = {
   aneis: [],
   amuletos: [],
   pocoes: [],
+  capas: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [] },
@@ -262,7 +263,7 @@ function _LeEquipamentos() {
   _LeArmaduras();
   _LeEscudos();
 
-  for (var tipo_item in tabelas_itens) {
+  for (var tipo_item in tabelas_itens_nova) {
     _LeItens(tipo_item);
   }
 }
