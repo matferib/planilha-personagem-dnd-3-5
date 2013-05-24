@@ -43,7 +43,7 @@ function _DependenciasItens(tipo_item) {
     if (!item.em_uso) {
       continue;
     }
-    _DependenciasItem(item.chave, tabelas_itens_nova[tipo_item].tabela[item.chave]);
+    _DependenciasItem(item.chave, tabelas_itens[tipo_item].tabela[item.chave]);
   }
 }
 

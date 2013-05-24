@@ -1760,7 +1760,7 @@ var tabelas_capas = {
 
 
 // TODO unir essas tres tabelas.
-var tabelas_itens_nova = {
+var tabelas_itens = {
   aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2, },
   amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },

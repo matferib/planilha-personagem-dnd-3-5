@@ -263,7 +263,7 @@ function _LeEquipamentos() {
   _LeArmaduras();
   _LeEscudos();
 
-  for (var tipo_item in tabelas_itens_nova) {
+  for (var tipo_item in tabelas_itens) {
     _LeItens(tipo_item);
   }
 }

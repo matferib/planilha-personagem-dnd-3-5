@@ -331,7 +331,7 @@ function ClickUsarItem(tipo_item, checkbox) {
       return
     }
     var total_em_uso = 0;
-    var total_maximo_item = tabelas_itens_nova[tipo_item].maximo;
+    var total_maximo_item = tabelas_itens[tipo_item].maximo;
     for (var i = 0; i < personagem[tipo_item].length && total_em_uso < total_maximo_item; ++i) {
       if (personagem[tipo_item][i].em_uso) {
         ++total_em_uso;
@@ -342,7 +342,7 @@ function ClickUsarItem(tipo_item, checkbox) {
       // Desmarca o item para nao permitir que exceda o numero maximo que pode ser equipado.
       Mensagem(
           'Alerta! Número máximo de items excedido. Valor máximo para ' + 
-          tabelas_itens_nova[tipo_item].nome + ': ' + tabelas_itens_nova[tipo_item].maximo);
+          tabelas_itens[tipo_item].nome + ': ' + tabelas_itens[tipo_item].maximo);
       checkbox.checked = false;
       return;
     }
