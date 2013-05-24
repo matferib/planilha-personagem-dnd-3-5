@@ -330,8 +330,8 @@ function AdicionaItem(tipo_item, div, div_pai) {
   div.appendChild(input_em_uso);
 
   var select = CriaSelect();
-  for (var chave in tabelas_itens[tipo_item]) {
-    var item = tabelas_itens[tipo_item][chave];
+  for (var chave in tabelas_itens_nova[tipo_item].tabela) {
+    var item = tabelas_itens_nova[tipo_item].tabela[chave];
     select.appendChild(
         CriaOption(item.nome + ' (' + item.preco + ')', chave));
   }
@@ -350,14 +350,14 @@ function AdicionaItem(tipo_item, div, div_pai) {
 
   var button_vender = CriaBotao('Vender', null, 'venda', {
       div:  div,
-      tabela: tabelas_itens[tipo_item],
+      tabela: tabelas_itens_nova[tipo_item].tabela,
       handleEvent: function(evt) {
         ClickVenderItem(this.div, this.tabela);
       }
   });
   var button_comprar = CriaBotao('Comprar', null, 'compra', {
       div:  div,
-      tabela: tabelas_itens[tipo_item],
+      tabela: tabelas_itens_nova[tipo_item].tabela,
       handleEvent: function(evt) {
         ClickComprarItem(this.div, this.tabela);
       }

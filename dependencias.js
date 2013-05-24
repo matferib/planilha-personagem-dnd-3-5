@@ -31,7 +31,7 @@ function DependenciasGerais() {
 }
 
 function _DependenciasEquipamentos() {
-  var tipos_itens = [ 'aneis', 'amuletos' ];
+  var tipos_itens = [ 'aneis', 'amuletos', 'capas' ];
   for (var i = 0; i < tipos_itens.length; ++i) {
     _DependenciasItens(tipos_itens[i]);
   }
@@ -43,10 +43,13 @@ function _DependenciasItens(tipo_item) {
     if (!item.em_uso) {
       continue;
     }
-    _DependenciasItem(item.chave, tabelas_itens[tipo_item][item.chave]);
+    _DependenciasItem(item.chave, tabelas_itens_nova[tipo_item].tabela[item.chave]);
   }
 }
 
+// Calcula as dependencias do item.
+// @param chave_item a chave do item.
+// @param item_tabela o item na tabela apropriada.
 function _DependenciasItem(chave_item, item_tabela) {
   for (var propriedade in item_tabela.propriedades) {
     if (propriedade == 'ca') {
