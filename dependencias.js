@@ -31,6 +31,7 @@ function DependenciasGerais() {
 }
 
 function _DependenciasEquipamentos() {
+  // TODO usar tabelas_itens aqui?
   var tipos_itens = [ 'aneis', 'amuletos', 'capas' ];
   for (var i = 0; i < tipos_itens.length; ++i) {
     _DependenciasItens(tipos_itens[i]);

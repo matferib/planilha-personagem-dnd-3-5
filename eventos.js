@@ -227,7 +227,7 @@ function ClickAdicionarEstiloLuta() {
   AtualizaGeralSemConverterEntradas();
 }
 
-// Remove uma arma especifica da lista de equipamentos. 
+// Remove um filho especifico de um pai.
 function ClickRemoverFilho(id_filho, id_pai) {
   RemoveFilho(id_filho, Dom(id_pai));
   AtualizaGeral();

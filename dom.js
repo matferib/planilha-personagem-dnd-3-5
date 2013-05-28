@@ -88,11 +88,14 @@ function CriaInputCheckbox(marcado, id, classe, funcao) {
 // @param texto o texto mostrado dentro do input.
 // @param id do input.
 // @param classe do input.
-function CriaInputTexto(texto, id, classe) {
+function CriaInputTexto(texto, id, classe, funcao) {
   var input = CriaDom('input', id, classe);
   input.type = 'text';
   if (texto) {
     input.value = texto;
+  }
+  if (funcao) {
+    input.addEventListener('change', funcao, false);
   }
   return input;
 }
