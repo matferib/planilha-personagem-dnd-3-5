@@ -323,7 +323,6 @@ function ClickAdicionarItem(tipo_item) {
 // Trata o click de uso de um item.
 // @param tipo_item.
 // @param checkbox que causou a mudanca (null em caso de remocao).
-// TODO arrumar isso aqui para tratar anel em separado.
 function ClickUsarItem(tipo_item, checkbox) {
   if (checkbox.checked) {
     if (tipo_item == 'pocoes') {
