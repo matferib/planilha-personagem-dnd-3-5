@@ -513,6 +513,7 @@ function _AtualizaPericias() {
   }
 }
 
+// TODO reusar os divs ao inves de apagar tudo e criar de novo.
 function _AtualizaFeiticos() {
   var div_feiticos = Dom('div-feiticos');
   RemoveFilhos(div_feiticos);
@@ -537,79 +538,131 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
   // Por nivel.
   for (var nivel in feiticos_classe.conhecidos) {
-    if (feiticos_classe.conhecidos[nivel].length == 0) {
-      continue;
-    }
-    var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
-    div_nivel.appendChild(
-        CriaSpan('Nível ' + nivel + ':')); 
-    div_nivel.appendChild(CriaBr());
-    for (var indice = 0; indice < feiticos_classe.conhecidos[nivel].length; ++indice) {
-      // Adiciona os inputs.
-      div_nivel.appendChild(CriaInputTexto(
-          feiticos_classe.conhecidos[nivel][indice],
-          'input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice, 
-          'feiticos-conhecidos'));
-      div_nivel.appendChild(CriaBr());
-    }
-    div_conhecidos.appendChild(div_nivel);
+    _AtualizaFeiticosConhecidosParaClassePorNivel(
+        chave_classe, nivel, feiticos_classe.conhecidos[nivel], div_conhecidos);
   }
   div_classe.appendChild(div_conhecidos);
 }
 
-function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
+// Atualiza os feiticos conhecidos para uma classe de um determinado nivel.
+// @param feiticos_conhecidos array de feiticos conhecidos para a chave_classe e nivel.
+// @param div_conhecidos div onde os feiticos conhecidos sao colocados.
+function _AtualizaFeiticosConhecidosParaClassePorNivel(chave_classe, nivel, feiticos_conhecidos, div_conhecidos) {
   var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
+  // Se não precisa conhecer, o jogador pode adicionar feiticos como se fosse um grimório.
+  if (feiticos_conhecidos.length == 0 && precisa_conhecer) {
+    return;
+  }
+  var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
+  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
+  if (!precisa_conhecer) {
+    div_nivel.appendChild(CriaBotao('+', null, null, function() {
+      feiticos_conhecidos.push('');
+      AtualizaGeralSemConverterEntradas();
+    }));
+  }
+
+  div_nivel.appendChild(CriaBr());
+  for (var indice = 0; indice < feiticos_conhecidos.length; ++indice) {
+    // Adiciona os inputs.
+    div_nivel.appendChild(CriaInputTexto(
+        feiticos_conhecidos[indice],
+        'input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice, 
+        'feiticos-conhecidos',
+        AtualizaGeral));
+    if (!precisa_conhecer) {
+      div_nivel.appendChild(CriaBotao('-', null, null, {
+        indice_remocao: indice,
+        feiticos_conhecidos: feiticos_conhecidos,
+        handleEvent: function () {
+          this.feiticos_conhecidos.splice(this.indice_remocao, 1);
+          AtualizaGeralSemConverterEntradas();
+        }
+      }));
+    }
+    div_nivel.appendChild(CriaBr());
+  }
+  div_conhecidos.appendChild(div_nivel);
+}
+
+function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
   div_slots.appendChild(CriaSpan('Feitiços por Dia'));
   // Por nivel.
   var feiticos_classe = personagem.feiticos[chave_classe];
   for (var nivel in feiticos_classe.slots) {
-    if (feiticos_classe.slots[nivel].feiticos.length == 0) {
-      continue;
-    }
-    var div_nivel = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
-    div_nivel.appendChild(
-        CriaSpan('Nível ' + nivel + ' (CD ' + feiticos_classe.slots[nivel].cd + '):'));
-    div_nivel.appendChild(CriaBr());
-    for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
-      // Adiciona os inputs de indices.
-      if (!precisa_conhecer) {
-        div_nivel.appendChild(CriaInputTexto(
-            feiticos_classe.slots[nivel].feiticos[indice].nome,
-            'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
-            'feiticos-slots'));
-      }
-      div_nivel.appendChild(CriaInputCheckbox(
-          feiticos_classe.slots[nivel].feiticos[indice].gasto,
-          'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice, 
-          'feiticos-slots-gastos',
-          ClickGastarFeitico));
-      if (!precisa_conhecer) {
-        // Um br apos cada feitico.
-        div_nivel.appendChild(CriaBr());
-      }
-    }
-    // Todos os checkbox em uma linha so, por o br no final.
-    if (precisa_conhecer) {
-      div_nivel.appendChild(CriaBr());
-    }
-
-    // Adiciona input de dominio se houver.
-    if (feiticos_classe.slots[nivel].feitico_dominio != null) {
-      div_nivel.appendChild(CriaSpan('D:'));
-      div_nivel.appendChild(CriaInputTexto(
-          feiticos_classe.slots[nivel].feitico_dominio.nome,
-          'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom', 
-          'feiticos-slots'));
-      div_nivel.appendChild(CriaInputCheckbox(
-          feiticos_classe.slots[nivel].feitico_dominio.gasto,
-          'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom', 
-          'feiticos-slots-gastos'));
-      div_nivel.appendChild(CriaBr());
-    }
-    div_slots.appendChild(div_nivel);
+    _AtualizaFeiticosSlotsParaClassePorNivel(
+        chave_classe, 
+        nivel, 
+        feiticos_classe.slots[nivel], 
+        feiticos_classe.conhecidos[nivel], 
+        div_slots);
   }
   div_classe.appendChild(div_slots);
+}
+
+// Atualiza os slots de feiticos para a classe por nivel.
+// @param conhecidos array de feiticos conhecidos.
+function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, conhecidos, div_slots) {
+  if (slots.feiticos.length == 0) {
+    return;
+  }
+  var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
+  var div_nivel = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
+  div_nivel.appendChild(
+      CriaSpan('Nível ' + nivel + ' (CD ' + slots.cd + '):'));
+  div_nivel.appendChild(CriaBr());
+  // Popula as possibilidades de feitico para o nivel.
+  // TODO
+  var valores_select = [];
+  conhecidos.forEach(function(nome_feitico, indice) {
+    var entrada = {};
+    entrada[indice] = nome_feitico;
+    valores_select.push(entrada);
+  });
+  for (var indice = 0; indice < slots.feiticos.length; ++indice) {
+    // Adiciona os inputs de indices.
+    if (!precisa_conhecer) {
+      var select = CriaSelect(
+          'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
+          'feiticos-slots',
+          AtualizaGeral);
+      PopulaSelect(valores_select, select);
+      SelecionaValor(slots.feiticos[indice].indice_conhecido, select);
+      div_nivel.appendChild(select);
+    }
+    div_nivel.appendChild(CriaInputCheckbox(
+        slots.feiticos[indice].gasto,
+        'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice, 
+        'feiticos-slots-gastos',
+        ClickGastarFeitico));
+    if (!precisa_conhecer) {
+      // Um br apos cada feitico.
+      div_nivel.appendChild(CriaBr());
+    }
+  }
+  // Todos os checkbox em uma linha so, por o br no final.
+  if (precisa_conhecer) {
+    div_nivel.appendChild(CriaBr());
+  }
+
+  // Adiciona input de dominio se houver.
+  if (slots.feitico_dominio != null) {
+    div_nivel.appendChild(CriaSpan('D:'));
+    var select = CriaSelect(
+        'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom',
+        'feiticos-slots',
+        AtualizaGeral);
+    PopulaSelect(valores_select, select);
+    SelecionaValor(slots.feitico_dominio.indice_conhecido, select);
+    div_nivel.appendChild(select);
+    div_nivel.appendChild(CriaInputCheckbox(
+        slots.feitico_dominio.gasto,
+        'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom', 
+        'feiticos-slots-gastos'));
+    div_nivel.appendChild(CriaBr());
+  }
+  div_slots.appendChild(div_nivel);
 }
 
 function _AtualizaEquipamentos() {

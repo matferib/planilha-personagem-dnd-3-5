@@ -177,6 +177,7 @@ var tabelas_especiais = {
 };
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
+// TODO adicionar uma variavel precisa_memorizar. O precisa conhecer esta sendo sobreusado para este proposito.
 var tabelas_feiticos = {
   bardo: { 
       atributo_chave: 'carisma', 
@@ -1686,76 +1687,6 @@ var tabelas_capas = {
   armadura_natural_2: { 
     nome: 'Armadura Natural +2', preco: '8000 PO', 
     propriedades: { ca: { armadura_natural: 2 } },  },
-  armadura_natural_3: { 
-    nome: 'Armadura Natural +3', preco: '18000 PO', 
-    propriedades: { ca: { armadura_natural: 3 } },  },
-  armadura_natural_4: { 
-    nome: 'Armadura Natural +4', preco: '32000 PO', 
-    propriedades: { ca: { armadura_natural: 4 } },  },
-  armadura_natural_5: { 
-    nome: 'Armadura Natural +5', preco: '50000 PO', 
-    propriedades: { ca: { armadura_natural: 5 } },  },
-  punhos_poderosos_1: {
-    // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +1', preco: '6000 PO', 
-    propriedades: {} },
-  punhos_poderosos_2: {
-    // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +2', preco: '24000 PO', 
-    propriedades: {} },
-  punhos_poderosos_3: {
-    // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +3', preco: '54000 PO', 
-    propriedades: {} },
-  punhos_poderosos_4: {
-    // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +4', preco: '96000 PO', 
-    propriedades: {} },
-  punhos_poderosos_5: {
-    // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +5', preco: '150000 PO', 
-    propriedades: {} },
-  saude_2: {
-    nome: 'Saúde +2', preco: '4000 PO', 
-    propriedades: { atributos: { constituicao: 2 } } },
-  saude_4: {
-    nome: 'Saúde +4', preco: '16000 PO', 
-    propriedades: { atributos: { constituicao: 4 } } },
-  saude_6: {
-    nome: 'Saúde +6', preco: '36000 PO', 
-    propriedades: { atributos: { constituicao: 6 } } },
-  planos: {
-    // permite usar magia viagem planar...
-    nome: 'Planos', preco: '120000 PO', 
-    propriedades: {} },
-  protecao_deteccao: {
-    // como se estivesse sob efeito de dificultar detecção...
-    nome: 'Proteção contra Localização e Detecção', preco: '35000 PO', 
-    propriedades: {} },
-  quaal_ancora: {
-    // Prender embarcações.
-    nome: 'Quaal Âncora', preco: '50 PO', 
-    propriedades: {} },
-  quaal_passaro: {
-    // Pombo correio para entregar mensagem.
-    nome: 'Quaal Pássaro', preco: '300 PO', 
-    propriedades: {} },
-  quaal_leque: {
-    // Gerar vento.
-    nome: 'Quaal Leque', preco: '200 PO', 
-    propriedades: {} },
-  quaal_barco_cisne: {
-    // Transforma-se em um barco.
-    nome: 'Quaal Barco de Cisnes', preco: '450 PO', 
-    propriedades: {} },
-  quaal_arvore: {
-    // Cria um grande carvalho.
-    nome: 'Quaal Árvore', preco: '400 PO', 
-    propriedades: {} },
-  quaal_chicote: {
-    // Cria um chicote que ataca sozinho como arma dancarina.
-    nome: 'Quaal Chicote', preco: '500 PO', 
-    propriedades: {} },
 };
 
 

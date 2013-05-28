@@ -232,7 +232,7 @@ function _ConverteFeiticosSlots() {
     var feiticos_classe = personagem.feiticos[entrada_feitico.classe];
     var slots_classe_nivel = feiticos_classe.slots[entrada_feitico.nivel];
     var feitico_slot = {
-        nome: entrada_feitico.feitico,
+        indice_conhecido: entrada_feitico.indice_conhecido,
         gasto: entrada_feitico.gasto };
 
     if (entrada_feitico.indice == 'dom') {

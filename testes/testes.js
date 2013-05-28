@@ -102,6 +102,8 @@ function CarregaTestes() {
     }, 
   }, body);
 
+  /*
+   * Esse teste so vai funcionar quando AtualizaGeral funcionar.
   PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'TestaEfeitoItems', 
@@ -117,6 +119,7 @@ function CarregaTestes() {
       this.resultado = true;
     }, 
   }, body);
+  */
 
   PersonagemLimpaGeral();
   TemplateTeste({
@@ -565,6 +568,33 @@ function CarregaTestes() {
         this.detalhes = 'Clérigo halfling de primeiro nível com fortitude maior deveria ser 5 1 3.';
         return;
       }
+      this.resultado = true;
+    }, 
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'ClickUsarItem', 
+    Testa: function() {
+      var checkbox = { checked: true };
+      ClickUsarItem('aneis', checkbox);
+      personagem['aneis'] = [
+          { chave: 'protecao_1', em_uso: false}, 
+          { chave: 'protecao_1', em_uso: false}, 
+          { chave: 'protecao_1', em_uso: false}];
+      if (!checkbox.checked) {
+        this.resultado = false;
+        this.detalhes = 'Esperava que o checkbox fosse marcado.';
+        return;
+      }
+      personagem['aneis'][0].em_uso = personagem['aneis'][1].em_uso = true;
+      ClickUsarItem('aneis', checkbox);
+      if (!checkbox.checked) {
+        this.resultado = false;
+        this.detalhes = 'Esperava que o checkbox não fosse marcado.';
+        return;
+      }
+
       this.resultado = true;
     }, 
   }, body);

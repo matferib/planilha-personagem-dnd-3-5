@@ -160,23 +160,17 @@ var personagem = {
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',
   // Feiticos. As chaves sao criadas no carregamento. Cada entrada: 
+  // TODO transformar a CD em Bonus para poder ter mouse over.
   // chave_classe: { 
   //   atributo_chave, 
   //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9 },
   //   slots: { 
   //       0: { base, bonus_atributo, cd, 
-  //            feiticos: [ { nome, gasto} ], 
+  //            feiticos: [ { indice_conhecido, gasto} ], // o indice eh referente aos conhecidos.
   //            feitico_dominio: {nome, gasto}  }, 
   //       1: ...} }
   feiticos: {},
-  // Feiticos conhecidos pelo personagem, por classe:
-  // chave_classe: {
-  //   0: [ { nome, descricao } ],
-  //   ...
-  //   9: [ { nome, descricao } ],
-  // }
-  grimorio: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
 
   notas: '',
