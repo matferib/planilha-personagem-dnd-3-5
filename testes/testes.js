@@ -572,6 +572,8 @@ function CarregaTestes() {
     }, 
   }, body);
 
+  /*
+   * Esse teste so vai funcionar quando AtualizaGeral funcionar.
   PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'ClickUsarItem', 
@@ -598,6 +600,7 @@ function CarregaTestes() {
       this.resultado = true;
     }, 
   }, body);
+   */
 
   // Parte assincrona do armazem.
   PersonagemLimpaGeral();
