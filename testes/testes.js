@@ -102,8 +102,6 @@ function CarregaTestes() {
     }, 
   }, body);
 
-  /*
-   * Esse teste so vai funcionar quando AtualizaGeral funcionar.
   PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'TestaEfeitoItems', 
@@ -119,7 +117,6 @@ function CarregaTestes() {
       this.resultado = true;
     }, 
   }, body);
-  */
 
   PersonagemLimpaGeral();
   TemplateTeste({
