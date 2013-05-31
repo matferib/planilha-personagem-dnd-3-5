@@ -165,10 +165,11 @@ var personagem = {
   //   atributo_chave, 
   //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9 },
+  //   nivel_maximo,  // nivel de feitico mais alto para a classe.
   //   slots: { 
   //       0: { base, bonus_atributo, cd, 
   //            feiticos: [ { indice_conhecido, gasto} ], // o indice eh referente aos conhecidos.
-  //            feitico_dominio: {nome, gasto}  }, 
+  //            feitico_dominio: {nome, gasto} }, 
   //       1: ...} }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
