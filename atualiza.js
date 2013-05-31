@@ -513,35 +513,84 @@ function _AtualizaPericias() {
   }
 }
 
+function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
+  var id_div = 'div-feiticos-' + chave_classe;
+  var div_classe = CriaDiv(id_div, 'div-feiticos-classe');
+  div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
+  // Esqueletos dos conhecidos.
+  var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
+  div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
+  div_classe.appendChild(div_conhecidos);
+  // Esqueleto dos slots.
+  var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
+  div_slots.appendChild(CriaSpan('Feitiços por Dia'));
+  div_classe.appendChild(div_slots);
+
+  // Adiciona a classe no div de feiticos.
+  div_feiticos.appendChild(div_classe);
+}
+
 // TODO reusar os divs ao inves de apagar tudo e criar de novo.
 function _AtualizaFeiticos() {
   var div_feiticos = Dom('div-feiticos');
-  RemoveFilhos(div_feiticos);
+  // Remove os filhos que nao existem mais.
+  var filhos_a_remover = [];
+  for (var i = 0; i < div_feiticos.childNodes.length; ++i) {
+    var filho = div_feiticos.childNodes[i];
+    var remover_filho = true;
+    for (var chave_classe in personagem.feiticos) {
+      if (!personagem.feiticos[chave_classe].em_uso) {
+        continue;
+      }
+      if (filho.id.indexOf(chave_classe) != -1 ) {
+        remover_filho = false;
+        break;
+      }
+    }
+    if (remover_filho) {
+      filhos_a_remover.push(filho);
+    }
+  }
+  filhos_a_remover.forEach(function(filho) {
+    RemoveFilho(filho, div_feiticos);
+  });
+ 
+  // Adiciona o esqueleto dos filhos que nao existem ainda.
+  var filhos_a_adicionar = [];
+  for (var chave_classe in personagem.feiticos) {
+    if (!personagem.feiticos[chave_classe].em_uso) {
+      continue;
+    }
+
+    if (Dom('div-feiticos-' + chave_classe) == null) {
+      AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos);
+    }
+  }
+
+  // Atualiza os esqueletos dos filhos.
   for (var chave_classe in personagem.feiticos) {
     if (!personagem.feiticos[chave_classe].em_uso) {
       continue;
     }
 
     // Da classe.
-    var div_classe = CriaDiv('div-feiticos-' + chave_classe, 'div-feiticos-classe');
-    div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
+    var div_classe = Dom('div-feiticos-' + chave_classe);
     _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe);
     _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe);
-    div_feiticos.appendChild(div_classe);
   }
 }
 
+// Atualiza os feiticos conhecidos para uma determinada classe. 
+// @param novo_div se true, indica que um novo div for criado.
 function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   var feiticos_classe = personagem.feiticos[chave_classe];
-  // Conhecidos.
-  var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
-  div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
+  var div_conhecidos = Dom('div-feiticos-conhecidos-' + chave_classe);
+  RemoveFilhos(div_conhecidos);
   // Por nivel.
   for (var nivel in feiticos_classe.conhecidos) {
     _AtualizaFeiticosConhecidosParaClassePorNivel(
         chave_classe, nivel, feiticos_classe.conhecidos[nivel], div_conhecidos);
   }
-  div_classe.appendChild(div_conhecidos);
 }
 
 // Atualiza os feiticos conhecidos para uma classe de um determinado nivel.
@@ -586,8 +635,8 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(chave_classe, nivel, feit
 }
 
 function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
-  var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
-  div_slots.appendChild(CriaSpan('Feitiços por Dia'));
+  var div_slots = Dom('div-feiticos-slots-' + chave_classe);
+  RemoveFilhos(div_slots);
   // Por nivel.
   var feiticos_classe = personagem.feiticos[chave_classe];
   for (var nivel in feiticos_classe.slots) {
@@ -598,7 +647,6 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
         feiticos_classe.conhecidos[nivel], 
         div_slots);
   }
-  div_classe.appendChild(div_slots);
 }
 
 // Atualiza os slots de feiticos para a classe por nivel.
