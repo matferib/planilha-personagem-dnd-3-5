@@ -734,50 +734,65 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   var chave_classe = classe_personagem.classe;
   var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
   var valor_atributo_chave = personagem.atributos[atributo_chave].valor;
-  var bonus_atributo_chave = personagem.atributos[atributo_chave].modificador;
-  var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
   var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
   personagem.feiticos[chave_classe].em_uso = true;
-  // Feiticos conhecidos (se houver para a classe).
+  // Feiticos conhecidos (se houver para a classe). Se nao houver, vai usar o que vier da entrada.
+  // Por exemplo, magos nao tem limite de conhecidos.
   for (var indice = 0; 
        feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length; 
        ++indice) {
-    var nivel_feitico = nivel_inicial + indice;
-    var personagem_conhecidos_nivel = personagem.feiticos[chave_classe].conhecidos[nivel_feitico];
-    // Feiticos conhecidos.
-    personagem_conhecidos_nivel.length =
-        parseInt(feiticos_por_nivel.conhecidos.charAt(indice)) || 0;
-    // Cria um feitico vazio se nao houver.
-    for (var i = 0; i < personagem_conhecidos_nivel.length; ++i) {
-      if (personagem_conhecidos_nivel[i] == null) {
-        personagem_conhecidos_nivel[i] = '';
-      }
-    }
+    var conhecidos_nivel = parseInt(feiticos_por_nivel.conhecidos.charAt(indice)) || 0;
+    _DependenciasNumeroFeiticosConhecidosParaClassePorNivel(
+        chave_classe, nivel_inicial + indice, conhecidos_nivel, feiticos_por_nivel);
   }
   // Slots de feiticos.
   var array_bonus_feiticos_atributo = feiticos_atributo(valor_atributo_chave);
+  var bonus_atributo_chave = personagem.atributos[atributo_chave].modificador;
+  var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
   for (var indice = 0; indice < feiticos_por_nivel.por_dia.length; ++indice) {
-    var nivel_feitico = nivel_inicial + indice;
-    // Slots de feiticos.
-    var personagem_slots_nivel = personagem.feiticos[chave_classe].slots[nivel_feitico];
-    personagem_slots_nivel.base = parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0;
-    personagem_slots_nivel.bonus_atributo = array_bonus_feiticos_atributo[nivel_feitico];
-    personagem_slots_nivel.cd = 10 + nivel_feitico + bonus_atributo_chave; 
+    var num_slots_nivel = parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0;
+    _DependenciasNumeroSlotsParaClassePorNivel(
+        chave_classe, nivel_inicial + indice, num_slots_nivel, feiticos_por_nivel, 
+        array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio);
+  }
+  personagem.feiticos[chave_classe].nivel_maximo = nivel_inicial + feiticos_por_nivel.por_dia.length - 1;
+}
 
-    var slots_por_dia = personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
-    personagem_slots_nivel.feiticos.length = slots_por_dia;
-    // cria um slot vazio se nao houver.
-    for (var i = 0; i < slots_por_dia; ++i) {
-      if (personagem_slots_nivel.feiticos[i] == null) {
-        personagem_slots_nivel.feiticos[i] = { nome: '', gasto: false };
-      }
+// Computa as dependencias do numero de feiticos conhecidos para uma classe e um determinado nivel.
+function _DependenciasNumeroFeiticosConhecidosParaClassePorNivel(
+    chave_classe, nivel, conhecidos_nivel, feiticos_por_nivel) {
+  var personagem_conhecidos_nivel = personagem.feiticos[chave_classe].conhecidos[nivel];
+  // Ajusta feiticos conhecidos.
+  personagem_conhecidos_nivel.length = conhecidos_nivel;
+  // Cria um feitico vazio se nao houver.
+  for (var i = 0; i < personagem_conhecidos_nivel.length; ++i) {
+    if (personagem_conhecidos_nivel[i] == null) {
+      personagem_conhecidos_nivel[i] = '';
     }
-    // Dominio, apenas para niveis acima do zero.
-    if (possui_dominio && 
-        (nivel_inicial == 1 || indice > 0) && 
-        personagem_slots_nivel.feitico_dominio == null) {
-      personagem_slots_nivel.feitico_dominio = { nome: '', gasto: false };
+  }
+}
+
+// Calcula as dependencias do numero de slots para uma classe por nivel.
+function _DependenciasNumeroSlotsParaClassePorNivel(
+    chave_classe, nivel, num_slots_nivel, feiticos_por_nivel, 
+    array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio) {
+  // Slots de feiticos.
+  var personagem_slots_nivel = personagem.feiticos[chave_classe].slots[nivel];
+  personagem_slots_nivel.base = num_slots_nivel;
+  personagem_slots_nivel.bonus_atributo = array_bonus_feiticos_atributo[nivel];
+  personagem_slots_nivel.cd = 10 + nivel + bonus_atributo_chave; 
+
+  var slots_por_dia = personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
+  personagem_slots_nivel.feiticos.length = slots_por_dia;
+  // cria um slot vazio se nao houver.
+  for (var i = 0; i < slots_por_dia; ++i) {
+    if (personagem_slots_nivel.feiticos[i] == null) {
+      personagem_slots_nivel.feiticos[i] = { nome: '', gasto: false };
     }
+  }
+  // Dominio, apenas para niveis acima do zero.
+  if (possui_dominio && nivel > 0 && personagem_slots_nivel.feitico_dominio == null) {
+    personagem_slots_nivel.feitico_dominio = { nome: '', gasto: false };
   }
 }
