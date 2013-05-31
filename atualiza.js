@@ -588,6 +588,9 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   RemoveFilhos(div_conhecidos);
   // Por nivel.
   for (var nivel in feiticos_classe.conhecidos) {
+    if (parseInt(nivel) > feiticos_classe.nivel_maximo) {
+      break;
+    }
     _AtualizaFeiticosConhecidosParaClassePorNivel(
         chave_classe, nivel, feiticos_classe.conhecidos[nivel], div_conhecidos);
   }
