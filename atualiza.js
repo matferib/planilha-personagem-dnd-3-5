@@ -513,23 +513,6 @@ function _AtualizaPericias() {
   }
 }
 
-function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
-  var id_div = 'div-feiticos-' + chave_classe;
-  var div_classe = CriaDiv(id_div, 'div-feiticos-classe');
-  div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
-  // Esqueletos dos conhecidos.
-  var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
-  div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
-  div_classe.appendChild(div_conhecidos);
-  // Esqueleto dos slots.
-  var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
-  div_slots.appendChild(CriaSpan('Feitiços por Dia'));
-  div_classe.appendChild(div_slots);
-
-  // Adiciona a classe no div de feiticos.
-  div_feiticos.appendChild(div_classe);
-}
-
 // TODO reusar os divs ao inves de apagar tudo e criar de novo.
 function _AtualizaFeiticos() {
   var div_feiticos = Dom('div-feiticos');
