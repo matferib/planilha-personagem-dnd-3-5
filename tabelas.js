@@ -72,14 +72,20 @@ var tabelas_raca = {
 // Dados relacionados a classes. 
 // TODO passar tudo de classes pra ca.
 var tabelas_classes = {
-  barbaro: { nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte, },
-  bardo: { nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
-  clerigo: { nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio,
+  barbaro: { 
+    nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte, },
+  bardo: { 
+    nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, 
+    nivel_conjurador: { modificador: 1.0 }, },
+  clerigo: { 
+    nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio, 
+    nivel_conjurador: { modificador: 1.0, },
     especiais: {
       1: [ 'expulsar_fascinar_mortos_vivos' ],
     },
   },
-  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio,
+  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, 
+    nivel_conjurador: { modificador: 1.0, },
     especiais: {
       1: [ 'companheiro_animal', 'senso_natureza', 'empatia_natureza' ],
       2: [ 'caminho_floresta' ],
@@ -88,9 +94,12 @@ var tabelas_classes = {
       5: [ 'forma_selvagem' ],
     },
   },
-  guerreiro: { nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
-  feiticeiro: { nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
-  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio, 
+  guerreiro: { 
+    nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
+  feiticeiro: { 
+    nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba: 
+    bba_fraco, nivel_conjurador: { modificador: 1.0, }, },
+  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio,
     especiais: {
       1: [ 'ataque_furtivo', 'encontrar_armadilha' ],
       2: [ 'evasao' ],
@@ -99,9 +108,12 @@ var tabelas_classes = {
       5: [ 'ataque_furtivo' ],
     },
   },
-  mago: { nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
+  mago: { 
+    nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, 
+    nivel_conjurador: { modificador: 1.0, }, },
   monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
   paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, 
+    nivel_conjurador: { modificador: 0.5, minimo: 4, }, 
     especiais: {
       1: [ 'aura_bem', 'detectar_mal', 'destruir_mal', ],
       2: [ 'graca_divina', 'cura_pelas_maos', ],
@@ -117,12 +129,16 @@ var tabelas_classes = {
       20: [ 'destruir_mal' ],
     },
   },
-  ranger: { nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte, },
+  ranger: { 
+    nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte, 
+    nivel_conjurador: { modificador: 0.5, minimo: 4, }, },
   // classes NPC
-  adepto: { nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, },
+  adepto: { 
+    nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, 
+    nivel_conjurador: { modificador: 1.0, }, },
   aristocrata: { nome: 'Aristocrata', mestre: true, dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
   plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
-  expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio, },
+  expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio,  },
   combatente: { nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
   // Prestigio.
   dragao_purpura: { nome: 'Dragão Púrpura', prestigio: true, dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
@@ -933,6 +949,7 @@ var tabelas_proficiencia_arma_por_classe = {
 //                 arma_comum)
 //   guerreiro, indica se o talento pode ser usado em bonus de guerreiro 
 //                  (que tambem devera atender aos requisitos)
+//   // A classe do nivel pode ser 'conjurador', 'total' ou uma chave de classe.
 //   requisitos: { bba, talentos: [], atributos: { nome: valor }, 
 //                 nivel: { classe: nivel }, proficiencia_arma, arma_leve, } 
 // },
@@ -983,14 +1000,8 @@ Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
 Talentos de Criação de Item Pré-requisitos Benefícios
-Criar Armaduras e Armas Mágicas 5° nível de conjurador Criar armas, armaduras e escudos mágicos
-Criar Bastão 9° nível de conjurador Criar bastões mágicos
-Criar Cajado 12° nível de conjurador Criar cajados mágicos
-Criar Item Maravilhoso 3° nível de conjurador Criar itens mágicos maravilhosos
-Criar Varinha 5° nível de conjurador Criar varinhas mágicas
 Escrever Pergaminho 1° nível de conjurador Criar pergaminhos mágicos
 Forjar Anel 12° nível de conjurador Criar anéis mágicos
-Preparar Poção 3° nível de conjurador Criar poções mágicas
 Talentos Metamágicos Pré-requisitos Benefícios
 Acelerar Magia - Conjura a magia como ação livre
 Ampliar Magia - Dobre a área da magia
@@ -1129,7 +1140,7 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       bonus_pericias: { obter_informacao: 2, procurar: 2 } },
   lideranca: {
       nome: 'Liderança',
-      requisitos: { nivel: 6, },
+      requisitos: { nivel: { total: 6, }, },
       descricao: 'Personagem atrai parceiros e seguidores.', },
   lutar_as_cegas: {
       nome: 'Lutar as Cegas',
@@ -1216,6 +1227,31 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Vontade de Ferro',
       bonus_salvacao: { vontade: 2, },
       descricao: '+2 de bônus nos testes de resistência de Vontade.', },
+  criar_armaduras_e_armas_magicas: {
+      nome: 'Criar Armaduras e Armas Mágicas',
+      requisitos: { nivel: { conjurador: 5, }, },
+      descricao: 'Permite a criação de armas, armaduras e escudos mágicos.',
+  },
+  criar_bastao: {
+      nome: 'Criar Bastão',
+      requisitos: { nivel: { conjurador: 9 }, },
+      descricao: 'Permite a criação de bastões mágicos.', },
+  criar_cajado: {
+      nome: 'Criar Cajado',
+      requisitos: { nivel: { conjurador: 12 }, },
+      descricao: 'Permite a criação de cajados mágicos', },
+  criar_item_maravilhoso: {
+      nome: 'Criar Item Maravilhoso',
+      requisitos: { nivel: { conjurador: 3 }, },
+      descricao: 'Permite a criação de itens mágicos maravilhosos.', },
+  criar_varinha: {
+      nome: 'Criar Varinha',
+      requisitos: { nivel: { conjurador: 5 }, },
+      descricao: 'Permite a criação de varinhas mágicas .', },
+  preparar_pocao: {
+      nome: 'Preparar Poção',
+      requisitos: { nivel: { conjurador: 3 }, },
+      descricao: 'Permite a criação de poções mágicas.', },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).

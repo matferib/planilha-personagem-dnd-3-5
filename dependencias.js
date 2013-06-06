@@ -4,6 +4,7 @@
 // do arquivo converte.
 
 function DependenciasGerais() {
+  _DependenciasNivelConjurador();
   _DependenciasEquipamentos();
   _DependenciasDadosVida();
   _DependenciasAtributos();
@@ -28,6 +29,24 @@ function DependenciasGerais() {
   _DependenciasEstilos();
   _DependenciasSalvacoes();
   _DependenciasFeiticos();
+}
+
+// Calcula a classe de conjurador para cada classe de personagem.
+function _DependenciasNivelConjurador() {
+  personagem.classes.forEach(function(entrada_classe) {
+    var classe_tabela = tabelas_classes[entrada_classe.classe];
+    if (classe_tabela.nivel_conjurador == null) {
+      entrada_classe.nivel_conjurador = 0;
+      return;
+    }
+    var nivel_minimo = classe_tabela.nivel_conjurador.minimo || 0;
+    if (entrada_classe.nivel < nivel_minimo) {
+      entrada_classe.nivel_conjurador = 0;
+      return;
+    }
+    var modificador_nivel_conjurador = classe_tabela.nivel_conjurador.modificador || 0;
+    entrada_classe.nivel_conjurador = Math.floor(entrada_classe.nivel * modificador_nivel_conjurador);
+  });
 }
 
 function _DependenciasEquipamentos() {
