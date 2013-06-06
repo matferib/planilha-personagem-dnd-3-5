@@ -456,6 +456,24 @@ function CarregaTestes() {
         return;
       }
 
+      // Requisitos de nivel de conjurador.
+      r = PersonagemVerificaPrerequisitosTalento('preparar_pocao');
+      if (r == null) {
+        this.resultado = false;
+        this.detalhes = 'Talento "preparar poção" deveria requerer conjurador de 3o nível.';
+        return;
+      }
+      // Paladino tem nivel = 1/2 nivel classe.
+      personagem.classes[0].classe = 'paladino';
+      personagem.classes[0].nivel= 6;
+      _DependenciasNivelConjurador();
+      r = PersonagemVerificaPrerequisitosTalento('preparar_pocao');
+      if (r != null) {
+        this.resultado = false;
+        this.detalhes = 'Talento "preparar poção" deveria funcionar para paladino de 6o nível.';
+        return;
+      }
+
       // Requisito de atributo.
       r = PersonagemVerificaPrerequisitosTalento('magia_natural');
       if (r == null) {
@@ -531,6 +549,8 @@ function CarregaTestes() {
     nome: 'DependenciasSalvacoes', 
     Testa: function() {
       // Guerreiro 1 nivel default.
+      personagem.classes[0].classe = 'guerreiro';
+      personagem.classes[0].nivel = 1;
       _DependenciasSalvacoes();
       if (!ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 })) {
         this.resultado = false;
