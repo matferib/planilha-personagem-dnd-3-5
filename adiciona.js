@@ -15,11 +15,15 @@ function AdicionaClasse(indice, dom) {
   input_nivel.name = 'nivel';
   input_nivel.min = '1';
   input_nivel.maxLength = input_nivel.size = 2;
+  var span_nivel_conjurador = CriaSpan('Nível de Conjurador: ');
+  var span_nivel_conjurador_valor = CriaSpan('', 'nivel-conjurador-' + indice);
   var br_nivel = document.createElement('br');
   var div = CriaDiv('classe-' + (indice || 0), 'classe');
   div.appendChild(select_classe);
   div.appendChild(span_nivel);
   div.appendChild(input_nivel);
+  div.appendChild(span_nivel_conjurador);
+  div.appendChild(span_nivel_conjurador_valor);
   div.appendChild(br_nivel);
   dom.appendChild(div);
 }

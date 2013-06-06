@@ -150,8 +150,9 @@ function _AtualizaClasses() {
       if (!div_classe) {
         AdicionaClasse(i, div_classes);
       }
-      _AtualizaClasse(classes_desabilitadas, personagem.classes[i].classe, 
-                      personagem.classes[i].nivel, i);
+      _AtualizaClasse(
+          classes_desabilitadas, personagem.classes[i].classe, 
+          personagem.classes[i].nivel, personagem.classes[i].nivel_conjurador, i);
       classes_desabilitadas.push(personagem.classes[i].classe);
     } else {
       RemoveFilho(div_classe.id, div_classes);
@@ -167,7 +168,7 @@ function _AtualizaClasses() {
 }
 
 // Atualiza uma classe.
-function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
+function _AtualizaClasse(classes_desabilitadas, classe, nivel, nivel_conjurador, indice) {
   var select_classe = Dom('select-classe-' + indice);
   select_classe.options.length = 0;
   for (var chave_classe in tabelas_classes) {
@@ -193,6 +194,7 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, indice) {
     select_classe.appendChild(option);
   }
   Dom('nivel-classe-' + indice).value = nivel;
+  Dom('nivel-conjurador-' + indice).textContent = nivel_conjurador;
 }
 
 // Atualiza o tamanho em funcao da raca.

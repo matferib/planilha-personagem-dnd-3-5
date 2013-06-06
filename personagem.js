@@ -8,9 +8,9 @@ var personagem = {
   alinhamento: '',
   experiencia: 0,
   divindade: '',
-  // Cada entrada: { classe, nivel }.
+  // Cada entrada: { classe, nivel, nivel_conjurador }.
   classes: [
-      { classe: 'guerreiro', nivel: 1 },
+      { classe: 'guerreiro', nivel: 1, nivel_conjurador: 0 },
   ],
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {
@@ -308,6 +308,22 @@ function PersonagemNivelClasse(classe) {
   return 0;
 }
 
+// @param classe se null, retorna o maior de todas as classes.
+// @return o nivel de conjurador de uma classe de personagem. 
+function PersonagemNivelConjuradorClasse(classe) {
+  var nivel_conjurador = 0;
+  for (var i = 0; i < personagem.classes.length; ++i) {
+    if (classe == null) {
+      if (personagem.classes[i].nivel_conjurador > nivel_conjurador) {
+        nivel_conjurador = personagem.classes[i].nivel_conjurador;
+      }
+    } else if (personagem.classes[i].classe == classe) {
+      return personagem.classes[i].nivel_conjurador;
+    }
+  }
+  return nivel_conjurador;
+}
+
 // Verifica se o personagem atende aos requisitos do talento. Caso não atenda, 
 // alertará uma mensagem.
 // @return descricao do erro caso a verificação falhe, null caso contrário.
@@ -322,18 +338,24 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
       return (prefixo_erro + 'BBA >= ' + requisitos.bba);
     }
   }
-  if (requisitos.nivel && 
-      personagem.dados_vida.nivel_personagem < requisitos.nivel) {
-    return (prefixo_erro + 'nível >= ' + requisitos.nivel);
-  }
   for (var atributo in requisitos.atributos) {
     if (personagem.atributos[atributo].valor < requisitos.atributos[atributo]) {
       return (prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
     }
   }
   for (var classe in requisitos.nivel) {
-    if (PersonagemNivelClasse(classe) < requisitos.nivel[classe]) {
-      return (prefixo_erro + 'nivel em ' + classe + ' >= ' + requisitos.nivel[classe]);
+    if (classe == 'total') {
+      if (personagem.dados_vida.nivel_personagem < requisitos.nivel['total']) {
+        return  (prefixo_erro + 'nivel de personagem >= ' + requisitos.nivel['total']);
+      }
+    } else if (classe == 'conjurador') {
+      if (PersonagemNivelConjuradorClasse(null) < requisitos.nivel['conjurador']) {
+        return (prefixo_erro + 'nivel de conjurador >= ' + requisitos.nivel[classe]);
+      }
+    } else {
+      if (PersonagemNivelClasse(classe) < requisitos.nivel[classe]) {
+        return (prefixo_erro + 'nivel em ' + classe + ' >= ' + requisitos.nivel[classe]);
+      }
     }
   }
   for (var i = 0; requisitos.talentos && i < requisitos.talentos.length; ++i) {
