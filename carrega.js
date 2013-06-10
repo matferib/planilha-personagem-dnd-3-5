@@ -227,7 +227,7 @@ function _CarregaTalentos() {
   }
 }
 
-// Preenche os nomes faltantes na tabela de armas e chama as funcoes
+// Preenche os nomes e tamanhos faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function _CarregaTabelaArmasArmaduras() {
   var tabelas_especificas_armas = [ 
@@ -258,15 +258,28 @@ function _CarregaTabelasCompostas(
   for (var i = 0; i < tabelas_especificas.length; ++i) {
     var tabela_especifica = tabelas_especificas[i];
     for (var entrada in tabela_especifica) {
+      var entrada_especifica = tabela_especifica[entrada];
       // Primeiro, preenche o nome da entrada se nao houver.
-      if (tabela_especifica[entrada].nome == null) {
-        tabela_especifica[entrada].nome = entrada;
+      if (entrada_especifica.nome == null) {
+        entrada_especifica.nome = entrada;
       }
-      tabela_especifica[entrada].talento_relacionado = talentos_relacionados[i];
+      // Preenche os danos de outros tamanhos.
+      if (entrada_especifica.dano && entrada_especifica.dano.medio) {
+        var dano_medio = entrada_especifica.dano.medio;
+        for (var tamanho in tabelas_tamanho) {
+          if (dano_medio == '-') {
+            entrada_especifica.dano[tamanho] = '-'; 
+          } else {
+            entrada_especifica.dano[tamanho] = tabelas_dado_por_tamanho[dano_medio][tamanho] || 0;
+          }
+        }
+      }
+
+      entrada_especifica.talento_relacionado = talentos_relacionados[i];
       // Compoe a tabela principal.
-      tabela_composta[entrada] = tabela_especifica[entrada];
+      tabela_composta[entrada] = entrada_especifica;
       // Compoe a tabela invertida.
-      tabela_invertida[tabela_especifica[entrada].nome] = entrada;
+      tabela_invertida[entrada_especifica.nome] = entrada;
     }
   }
 }
