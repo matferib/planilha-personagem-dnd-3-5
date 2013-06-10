@@ -207,8 +207,6 @@ function _DependenciasIniciativa() {
 }
 
 function _DependenciasTamanho() {
-  personagem.tamanho.categoria =
-      tabelas_raca[personagem.raca].tamanho;
   personagem.tamanho.modificador_ataque_defesa =
       tabelas_tamanho[personagem.tamanho.categoria].ataque_defesa;
   personagem.tamanho.modificador_agarrar =

@@ -206,8 +206,7 @@ function _AtualizaTamanho() {
   ImprimeSinalizado(
       personagem.tamanho.modificador_agarrar,
       DomsPorClasse('tamanho-mod-agarrar'));
-  Dom('tamanho').textContent =
-      tabelas_tamanho[personagem.tamanho.categoria].nome;
+  SelecionaValor(personagem.tamanho.categoria, Dom('tamanho'));
 }
 
 // Atualiza todos os modificadores dos atributos bases (for, des, con, int, sab, car),

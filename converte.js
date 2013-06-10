@@ -8,6 +8,7 @@ function ConverteEntradasParaPersonagem() {
   personagem.modo_mestre = entradas.modo_mestre;
   personagem.nome = entradas.nome;
   personagem.raca = entradas.raca;
+  personagem.tamanho.categoria = entradas.tamanho;
 
   personagem.alinhamento = entradas.alinhamento;
   personagem.divindade = entradas.divindade;
