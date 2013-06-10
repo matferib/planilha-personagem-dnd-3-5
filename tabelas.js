@@ -106,6 +106,8 @@ var tabelas_classes = {
       3: [ 'ataque_furtivo', 'sentir_armadilha' ],
       4: [ 'esquiva_sobrenatural' ],
       5: [ 'ataque_furtivo' ],
+      6: [ 'sentir_armadilha', ],
+      7: [ 'ataque_furtivo', ],
     },
   },
   mago: { 
@@ -1002,18 +1004,6 @@ Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
 Talentos de Criação de Item Pré-requisitos Benefícios
 Escrever Pergaminho 1° nível de conjurador Criar pergaminhos mágicos
 Forjar Anel 12° nível de conjurador Criar anéis mágicos
-Talentos Metamágicos Pré-requisitos Benefícios
-Acelerar Magia - Conjura a magia como ação livre
-Ampliar Magia - Dobre a área da magia
-Aumentar Magia - Dobra o alcance da magia
-Elevar Magia - Conjura a magia num nível mais elevado
-Estender Magia - Dobra a duração da magia
-Magia Sem Gestos - Ignora os componentes gestuais da magia
-Magia Silenciosa - Ignora os componentes verbais da magia
-Maximizar Magia - Maximiza todas as variáveis numéricas dos efeitos da magia
-Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos da magia
-
-
 */
   acrobatico: { 
       nome: 'Acrobático',
@@ -1252,6 +1242,53 @@ Potencializar Magia - Aumenta em 50% todas as variáveis numéricas dos efeitos 
       nome: 'Preparar Poção',
       requisitos: { nivel: { conjurador: 3 }, },
       descricao: 'Permite a criação de poções mágicas.', },
+  // Talentos Metamágicos Pré-requisitos Benefícios
+  // TODO implementar niveis_adicionais.
+  acelerar_magia: {
+      nome: 'Acelerar Magia',
+      descricao: 'Permite conjurar magia como ação livre, ao custo de três níveis adicionais.',
+      niveis_adicionais: 3,
+  },
+  ampliar_magia: {
+    nome: 'Ampliar Magia',
+    descricao: 'Dobra a área da magia, ao custo de três níveis adicionais',
+    niveis_adicionais: 3,
+  },
+  aumentar_magia: {
+    nome: 'Aumentar Magia',
+    descricao: 'Dobra o alcance da magia, ao custo de um nível adicional',
+    niveis_adicionais: 1,
+  },
+  elevar_magia: {
+    nome: 'Elevar Magia',
+    descricao: 'Conjura a magia num nível mais elevado, alterando sua classe de dificuldade, nível etc.',
+  },
+  estender_magia: {
+    nome: 'Estender Magia',
+    descricao: 'Dobra a duração da magia, ao custo de um nível adicional.',
+    niveis_adicionais: 1,
+  },
+  magia_sem_gestos: {
+    nome: 'Magia sem Gestos',
+    descricao: 'Ignora os componentes gestuais da magia, ao custo de um nível adicional.',
+    niveis_adicionais: 1,
+  },
+  magia_silenciosa: {
+    nome: 'Magia Silenciosa',
+    descricao: 'Ignora os componentes verbais da magia, ao custo de um nível adicional',
+    niveis_adicionais: 1,
+    // TODO feiticos de bardo nao podem.
+  },
+  maximizar_magia: {
+    nome: 'Maximizar Magia',
+    descricao: 'Maximiza todas as variáveis numéricas dos efeitos da magia, ao custo de três níveis adicionais',
+    niveis_adicionais: 3,
+  },
+  potencializar_magia: {
+    nome: 'Potencializar Magia',
+    descricao: 'Aumenta em 50% todas as variáveis numéricas dos efeitos da magia, ao custo de dois níveis adicionais.',
+    niveis_adicionais: 2,
+  },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
