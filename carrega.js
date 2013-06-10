@@ -64,7 +64,8 @@ function _CarregaHandlers() {
     "botao-descansar": { callback: function() { ClickDescansar(-1); }, evento: 'click', },
     // Changes.
     "nome": { callback: AtualizaGeral, evento: 'change', },
-    "raca": { callback: AtualizaGeral, evento: 'change', },
+    "raca": { callback: ChangeRaca, evento: 'change', },
+    "tamanho": { callback: AtualizaGeral, evento: 'change', },
     "alinhamento": { callback: AtualizaGeral, evento: 'change', },
     "pontos-vida-dados": { callback: AtualizaGeral, evento: 'change', },
     "ferimentos": { callback: AtualizaGeral, evento: 'change', },

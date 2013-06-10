@@ -470,3 +470,13 @@ function ClickGastarFeitico() {
 function ChangeNotas() {
   AtualizaGeral();
 }
+
+// A mudanca de raca é quase igual ao atualiza geral, mas deve-se zerar o tamanho 
+// para o padrão da nova raça.
+function ChangeRaca() {
+  entradas.raca = ValorSelecionado(Dom('raca'));
+  entradas.tamanho = tabelas_raca[entradas.raca].tamanho;
+  AtualizaGeralSemLerEntradas();
+}
+
+
