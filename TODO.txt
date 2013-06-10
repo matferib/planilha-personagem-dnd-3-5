@@ -1,0 +1,5 @@
+Tamanho variavel (para simular pocoes do crescimento por exemplo).
+Nas armas, deixar so o dano medio e calcular dados de dano para outros tamanhos.
+Permitir memorizar feiticos de niveis inferiores em slots superiores.
+Permitir memorizar feiticos com talentos metamagicos. E calcular a DC corretamente.
+
