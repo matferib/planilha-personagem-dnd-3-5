@@ -9,6 +9,7 @@ var entradas = {
   // geral
   nome: '',
   raca: 'humano',
+  tamanho: 'medio',  // É possivel ter tamanhos fora do padrao através de magias.
   alinhamento: 'LB',
   divindade: '',
   // Cada entrada possui classe e nivel.
@@ -71,6 +72,8 @@ function LeEntradas() {
   entradas.nome = Dom('nome').value;
   // raca
   entradas.raca = ValorSelecionado(Dom('raca'));
+  // tamanho
+  entradas.tamanho = ValorSelecionado(Dom('tamanho'));
   // alinhamento
   entradas.alinhamento = ValorSelecionado(Dom('alinhamento'));
   // divindade
