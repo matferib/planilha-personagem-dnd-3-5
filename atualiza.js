@@ -665,7 +665,6 @@ function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, co
       CriaSpan('Nível ' + nivel + ' (CD ' + slots.cd + '):'));
   div_nivel.appendChild(CriaBr());
   // Popula as possibilidades de feitico para o nivel.
-  // TODO
   var valores_select = [];
   conhecidos.forEach(function(nome_feitico, indice) {
     var entrada = {};
