@@ -1,3 +1,3 @@
 Permitir memorizar feiticos de niveis inferiores em slots superiores.
 Permitir memorizar feiticos com talentos metamagicos. E calcular a DC corretamente.
-
+Adicionar botao para mostrar a versão da planilha quando em modo mestre.
