@@ -73,7 +73,7 @@ function LeEntradas() {
   // raca
   entradas.raca = ValorSelecionado(Dom('raca'));
   // tamanho
-  entradas.tamanho = ValorSelecionado(Dom('tamanho'));
+  entradas.tamanho = ValorSelecionado(Dom('tamanho')) || tabelas_raca[entradas.raca].tamanho;
   // alinhamento
   entradas.alinhamento = ValorSelecionado(Dom('alinhamento'));
   // divindade
