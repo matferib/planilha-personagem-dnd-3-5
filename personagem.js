@@ -164,7 +164,7 @@ var personagem = {
   // chave_classe: { 
   //   atributo_chave, 
   //   em_uso,  // se o personagem utiliza feiticos da classe.
-  //   conhecidos: { 0: [], ..., 9 },
+  //   conhecidos: { 0: [], ..., 9: [] },
   //   nivel_maximo,  // nivel de feitico mais alto para a classe.
   //   slots: { 
   //       0: { base, bonus_atributo, cd, 
@@ -188,6 +188,7 @@ function PersonagemLimpaGeral() {
   }
   for (var chave_classe in personagem.feiticos) {
     personagem.feiticos[chave_classe].em_uso = false;
+    personagem.feiticos[chave_classe].nivel_maximo = 0;
     for (var i = 0; i <= 9; ++i) {
       personagem.feiticos[chave_classe].conhecidos[i].length = 0;
       personagem.feiticos[chave_classe].slots[i].feiticos.length = 0;

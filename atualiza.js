@@ -571,8 +571,9 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   var div_conhecidos = Dom('div-feiticos-conhecidos-' + chave_classe);
   RemoveFilhos(div_conhecidos);
   // Por nivel.
-  for (var nivel in feiticos_classe.conhecidos) {
-    if (parseInt(nivel) > feiticos_classe.nivel_maximo) {
+  for (var nivel_str in feiticos_classe.conhecidos) {
+    var nivel = parseInt(nivel_str);
+    if (nivel > feiticos_classe.nivel_maximo) {
       break;
     }
     _AtualizaFeiticosConhecidosParaClassePorNivel(
@@ -593,8 +594,13 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(chave_classe, nivel, feit
   div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
   if (!precisa_conhecer) {
     div_nivel.appendChild(CriaBotao('+', null, null, function() {
-      feiticos_conhecidos.push('');
-      AtualizaGeralSemConverterEntradas();
+      entradas.feiticos.conhecidos.push({
+        feitico: '',
+        classe: chave_classe,
+        nivel: nivel,
+        indice: feiticos_conhecidos.length, 
+      });
+      AtualizaGeralSemLerEntradas();
     }));
   }
 
@@ -626,12 +632,23 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   RemoveFilhos(div_slots);
   // Por nivel.
   var feiticos_classe = personagem.feiticos[chave_classe];
-  for (var nivel in feiticos_classe.slots) {
+  for (var nivel_str in feiticos_classe.slots) {
+    var nivel = parseInt(nivel_str);
+    // Pode usar feiticos de qualquer nivel inferior tambem.
+    var feiticos_conhecidos = [];
+    for (var nivel_corrente = nivel; nivel_corrente >= 0; --nivel_corrente) {
+      //feiticos_conhecidos.concat(feiticos_classe.conhecidos[nivel_corrente]);
+      feiticos_classe.conhecidos[nivel_corrente].forEach(function(feitico) {
+        feiticos_conhecidos.push(feitico);
+      });
+    }
+    // TODO: metamagicos.
+
     _AtualizaFeiticosSlotsParaClassePorNivel(
         chave_classe, 
         nivel, 
         feiticos_classe.slots[nivel], 
-        feiticos_classe.conhecidos[nivel], 
+        feiticos_conhecidos,
         div_slots);
   }
 }
