@@ -267,6 +267,9 @@ function _CarregaTabelasCompostas(
       if (entrada_especifica.dano && entrada_especifica.dano.medio) {
         var dano_medio = entrada_especifica.dano.medio;
         for (var tamanho in tabelas_tamanho) {
+          if (tamanho == 'medio') {
+            continue;
+          }
           if (dano_medio == '-') {
             entrada_especifica.dano[tamanho] = '-'; 
           } else {
