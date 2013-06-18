@@ -234,6 +234,7 @@ function _ConverteFeiticosSlots() {
     var slots_classe_nivel = feiticos_classe.slots[entrada_feitico.nivel];
     var feitico_slot = {
         indice_conhecido: entrada_feitico.indice_conhecido,
+        nivel_conhecido: entrada_feitico.nivel_conhecido,
         gasto: entrada_feitico.gasto };
 
     if (entrada_feitico.indice == 'dom') {

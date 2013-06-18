@@ -162,6 +162,23 @@ function PopulaSelect(valores, dom_select) {
   }
 }
 
+// Similar ao PopulaSelect, mas com agrupamentos.
+// @param grupos de valores a serem colocados. Cada entrada é um array
+//        { nome_grupo1: [ { valor, texto }, { valor, texto } ...], 
+//          nome_grupo2: [ ...] }
+//        Os nomes de grupo devem ser diferentes.
+function PopulaSelectComOptGroup(grupos, dom_select) {
+  dom_select.options.length = 0;
+  for (var nome_grupo in grupos) { 
+    var optgroup = CriaOptGroup(nome_grupo);
+    grupos[nome_grupo].forEach(function(entrada) {
+      var option = CriaOption(entrada.texto, entrada.valor);
+      optgroup.appendChild(option);
+    });
+    dom_select.appendChild(optgroup);
+  }
+}
+
 
 // Cria um span com os botoes mais e menos, retornando-o.
 // @param id do input de texto com o valor do botao.
