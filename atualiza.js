@@ -635,12 +635,15 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   for (var nivel_str in feiticos_classe.slots) {
     var nivel = parseInt(nivel_str);
     // Pode usar feiticos de qualquer nivel inferior tambem.
-    var feiticos_conhecidos = [];
+    // Cada entrada: { nivel: [ { valor, texto}, ...] }.
+    var feiticos_conhecidos = {};
     for (var nivel_corrente = nivel; nivel_corrente >= 0; --nivel_corrente) {
-      //feiticos_conhecidos.concat(feiticos_classe.conhecidos[nivel_corrente]);
-      feiticos_classe.conhecidos[nivel_corrente].forEach(function(feitico) {
-        feiticos_conhecidos.push(feitico);
+      var conhecidos_nivel_corrente = [];
+      feiticos_classe.conhecidos[nivel_corrente].forEach(function(texto, indice) {
+        conhecidos_nivel_corrente.push(
+          { valor: nivel_corrente + '-' + indice, texto: texto });
       });
+      feiticos_conhecidos['Nível: ' + nivel_corrente] = conhecidos_nivel_corrente;
     }
     // TODO: metamagicos.
 
@@ -654,7 +657,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
 }
 
 // Atualiza os slots de feiticos para a classe por nivel.
-// @param conhecidos array de feiticos conhecidos.
+// @param conhecidos cada entrada: { nivel: [ { valor, texto}, ...] }..
 function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, conhecidos, div_slots) {
   if (slots.feiticos.length == 0) {
     return;
@@ -664,13 +667,6 @@ function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, co
   div_nivel.appendChild(
       CriaSpan('Nível ' + nivel + ' (CD ' + slots.cd + '):'));
   div_nivel.appendChild(CriaBr());
-  // Popula as possibilidades de feitico para o nivel.
-  var valores_select = [];
-  conhecidos.forEach(function(nome_feitico, indice) {
-    var entrada = {};
-    entrada[indice] = nome_feitico;
-    valores_select.push(entrada);
-  });
   for (var indice = 0; indice < slots.feiticos.length; ++indice) {
     // Adiciona os inputs de indices.
     if (!precisa_conhecer) {
@@ -678,8 +674,11 @@ function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, co
           'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
           'feiticos-slots',
           AtualizaGeral);
-      PopulaSelect(valores_select, select);
-      SelecionaValor(slots.feiticos[indice].indice_conhecido, select);
+      PopulaSelectComOptGroup(conhecidos, select);
+      var slot_feitico = slots.feiticos[indice];
+      SelecionaValor(
+          slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido, 
+          select);
       div_nivel.appendChild(select);
     }
     div_nivel.appendChild(CriaInputCheckbox(
@@ -704,7 +703,7 @@ function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, co
         'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom',
         'feiticos-slots',
         AtualizaGeral);
-    PopulaSelect(valores_select, select);
+    PopulaSelectComOptGroup(conhecidos, select);
     SelecionaValor(slots.feitico_dominio.indice_conhecido, select);
     div_nivel.appendChild(select);
     div_nivel.appendChild(CriaInputCheckbox(
