@@ -168,7 +168,7 @@ var personagem = {
   //   nivel_maximo,  // nivel de feitico mais alto para a classe.
   //   slots: { 
   //       0: { base, bonus_atributo, cd, 
-  //            feiticos: [ { indice_conhecido, gasto} ], // o indice eh referente aos conhecidos.
+  //            feiticos: [ { indice_conhecido, nivel_conhecido, gasto} ], // o indice eh referente aos conhecidos.
   //            feitico_dominio: {nome, gasto} }, 
   //       1: ...} }
   feiticos: {},

@@ -57,8 +57,8 @@ var entradas = {
   // Feiticos. cada entrada:
   // conhecidos: { feitico, classe, nivel, indice, },
   // indice indica a posicao do feitico na sequencia (pode ser dom para dominio).
-  // indice_conhecido eh o ponteiro para o feitico nos conhecidos.
-  // slots: { indice_conhecido, classe, nivel, indice, }, 
+  // slots: { indice_conhecido, nivel_conhecido, classe, nivel, indice, }, 
+  // indice_conhecido eh o ponteiro para o feitico nos conhecidos para o nivel_conhecido.
   feiticos: { conhecidos: [], slots: [] },
 
   notas: '',
@@ -198,17 +198,29 @@ function _LeFeiticos() {
     classe_nivel_indice.shift();
     entradas.feiticos.slots.push({ 
         indice_conhecido: null,
+        nivel_conhecido: classe_nivel_indice[1],  // do feitico.
         classe: classe_nivel_indice[0],
-        nivel: classe_nivel_indice[1],
+        nivel: classe_nivel_indice[1],  // do slot.
         indice: classe_nivel_indice[2],
         gasto: feiticos_gastos[i].checked,
     });
   }
 
   // O restante ja foi preenchido acima. So falta o feitico em si.
+  // O indice_conhecido é formado por nivel_indice. O nível é necessário porque é possível
+  // selecionar um feitiço de nível inferior ao do slot.
   var indices_conhecidos = DomsPorClasse('feiticos-slots');
   for (var i = 0; i < indices_conhecidos.length; ++i) {
-    entradas.feiticos.slots[i].indice_conhecido = ValorSelecionado(indices_conhecidos[i]);
+    var nivel_indice = ValorSelecionado(indices_conhecidos[i]);
+    if (nivel_indice != null) {
+      nivel_indice = nivel_indice.split('-');
+      if (nivel_indice.length == 1) {
+        entradas.feiticos.slots[i].indice_conhecido = nivel_indice[0];
+      } else {
+        entradas.feiticos.slots[i].nivel_conhecido = nivel_indice[0];
+        entradas.feiticos.slots[i].indice_conhecido = nivel_indice[1];
+      }
+    }
   }
 }
 
