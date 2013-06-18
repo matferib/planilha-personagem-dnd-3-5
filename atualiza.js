@@ -833,9 +833,11 @@ function _AtualizaModoVisao() {
         'selecionado': '';
   }
   Dom('input-modo-mestre').checked = personagem.modo_mestre;
+  var modo_str = personagem.modo_mestre ? 'inline' : 'none';
   var botoes_geracao = DomsPorClasse('botao-geracao');
   for (var i = 0; i < botoes_geracao.length; ++i) {
-    botoes_geracao[i].style.display = personagem.modo_mestre ? 'inline' : 'none';
+    botoes_geracao[i].style.display = modo_str;
   }
+  Dom('div-versao').style.display = modo_str;
 }
 
