@@ -76,7 +76,34 @@ function _DependenciasItem(chave_item, item_tabela) {
       _DependenciasItemCa(chave_item, item_tabela);
     } else if (propriedade == 'pericias') {
       _DependenciasItemPericias(chave_item, item_tabela);
+    } else if (propriedade == 'salvacoes') {
+      _DependenciasItemSalvacoes(chave_item, item_tabela);
+    } else if (propriedade == 'atributos') {
+      _DependenciasItemAtributos(chave_item, item_tabela);
     }
+  }
+}
+
+// Item que afeta as salvacoes (resistencias).
+function _DependenciasItemSalvacoes(chave_item, item_tabela) {
+  if ('todas' in item_tabela.propriedades.salvacoes) {
+    for (var chave_personagem in personagem.salvacoes) {
+      personagem.salvacoes[chave_personagem].Adiciona(
+          'resistencia', chave_item, item_tabela.propriedades.salvacoes['todas']);
+    }
+    return;
+  }
+  for (var chave_salvacao in item_tabela.propriedades.salvacoes) {
+    personagem.salvacoes[chave_salvacao].Adiciona(
+        'resistencia', chave_item, item_tabela.propriedades.salvacoes[chave_salvacao]);
+  }
+}
+
+// Item que afeta atributos.
+function _DependenciasItemAtributos(chave_item, item_tabela) {
+  for (var chave_atributo in item_tabela.propriedades.atributos) {
+    //personagem.atributos[chave_atributo].Adiciona(
+    //    'melhoria', chave_item, item_tabela.propriedades.atributos[chave_atributo]);
   }
 }
 

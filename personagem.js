@@ -26,6 +26,7 @@ var personagem = {
   },
   // O valor do atributo é o valor final dados todos os modificadores. O modificador
   // é computado sobre esse valor.
+  // TODO transformar todos atributos em bonus.
   atributos: {
     pontos: {
       disponiveis: 0,

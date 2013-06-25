@@ -1783,18 +1783,36 @@ var tabelas_pocoes = {
   roupa_encantada_5: { nome: 'Roupa encantada +5', tipo: 'oleo', preco: '3000 PO' },
 };
 
-//Copiei a tabela de aneis apenas para testes. Todo(FC)finalizar capas
+// TODO: terminar as propriedades de outras capas.
 var tabelas_capas = {
-  armadura_natural_1: { 
-    nome: 'Armadura Natural +1', preco: '2000 PO', 
-    propriedades: { ca: { armadura_natural: 1 } },  },
-  armadura_natural_2: { 
-    nome: 'Armadura Natural +2', preco: '8000 PO', 
-    propriedades: { ca: { armadura_natural: 2 } },  },
+  manto_resistencia_1: { nome: 'Manto da resistência +1', preco: '1000 PO',
+    propriedades: { salvacoes: { todas: 1} },  },
+  manto_elfico: { nome: 'Manto élfico', preco: '2500 PO' },
+  manto_carisma_2: { nome: 'Manto do carisma +2', preco: '4000 PO',
+    propriedades: { atributos: { carisma: 2 } },  },
+  manto_resistencia_2: { nome: 'Manto da resistência +2', preco: '4000 PO',
+    propriedades: { salvacoes: { todas: 2 } },  },
+  manto_arraia: { nome: 'Manto da arraia', preco: '7200 PO'},
+  manto_resistencia_3: { nome: 'Manto da resistência +3', preco: '9000 PO',
+    propriedades: { salvacoes: { todas: 3 } },  },
+  capa_saltimbanco: { nome: 'Capa do saltimbanco', preco: '10080 PO'},  
+  manto_aranha: { nome: 'Manto da aranha', preco: '14000 PO' },
+  manto_carisma_4: { nome: 'Manto do carisma +4', preco: '16000 PO',
+    propriedades: { atributos: { carisma: 4 } },  },
+  manto_resistencia_4: { nome: 'Manto da resistência +4', preco: '16000 PO',
+    propriedades: { salvacoes: { todas: 4 } },  },
+  manto_deslocamento_menor: { nome: 'Manto do deslocamento (menor)', preco: '24000 PO'},
+  manto_resistencia_5: { nome: 'Manto da resistência +5', preco: '25000 PO',
+    propriedades: { salvacoes: { todas: 5 } },  },
+  manto_morcego: { nome: 'Manto do morcego', preco: '26000 PO'},
+  manto_carisma_6: { nome: 'Manto do carisma +6', preco: '36000 PO',
+    propriedades: { atributos: { carisma: 6 } },  },
+  manto_deslocamento_maior: { nome: 'Manto do deslocamento (maior)', preco: '50000 PO'},
+  manto_forma_eterea: { nome: 'Manto da forma etérea', preco: '55000 PO'},
+  manto_fe: { nome: 'Túnica da fé', preco: '76000 PO'},
+  tunica_resistencia_magia: { nome: 'Túnica de resistência a magia', preco: '90000 PO'}, 
 };
 
-
-// TODO unir essas tres tabelas.
 var tabelas_itens = {
   aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2, },
   amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
