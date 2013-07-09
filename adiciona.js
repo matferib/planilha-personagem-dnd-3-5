@@ -377,9 +377,11 @@ function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
   var div_classe = CriaDiv(id_div, 'div-feiticos-classe');
   div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
   // Esqueletos dos conhecidos.
-  var div_conhecidos = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
-  div_conhecidos.appendChild(CriaSpan('Feitiços conhecidos'));
-  div_classe.appendChild(div_conhecidos);
+  var div_conhecidos_pai = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
+  div_conhecidos_pai.appendChild(CriaSpan('Feitiços conhecidos'));
+  // Aqui serao adicionados os conhecidos.
+  div_conhecidos_pai.appendChild(CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-por-nivel'));
+  div_classe.appendChild(div_conhecidos_pai);
   // Esqueleto dos slots.
   var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
   div_slots.appendChild(CriaSpan('Feitiços por Dia'));
