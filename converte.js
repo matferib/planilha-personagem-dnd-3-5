@@ -220,10 +220,13 @@ function _ConverteFeiticos() {
 // Cada entrada possui classe, nivel, indice e feitico. Esta funcao le todas as entradads
 // e as coloca no personagem se, e somente se, o objeto de feitico possuir todos esses atributos.
 function _ConverteFeiticosConhecidos() {
-  for (var i = 0; i < entradas.feiticos.conhecidos.length; ++i) {
-    var entrada_feitico = entradas.feiticos.conhecidos[i];
-    var feiticos_classe = personagem.feiticos[entrada_feitico.classe];
-    feiticos_classe.conhecidos[entrada_feitico.nivel].push(entrada_feitico.feitico);
+  for (var chave_classe in entradas.feiticos_conhecidos) {
+    var feiticos_classe = personagem.feiticos[chave_classe];
+    for (var nivel in entradas.feiticos_conhecidos[chave_classe]) {
+      entradas.feiticos_conhecidos[chave_classe][nivel].forEach(function(feitico) {
+        feiticos_classe.conhecidos[nivel].push(feitico);
+      });
+    }
   }
 }
 
