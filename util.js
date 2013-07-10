@@ -360,6 +360,16 @@ function ExcluiDoArmazem(nome, callback) {
   }
 }
 
+// Dado um objeto de valores, atualiza o objeto para ter os mesmos valores.
+// Exemplo: valores: { a: { b: 'valor_b' } }
+//          objeto: { o: {} }
+// Após a chamada:
+//          objeto: { o: {}, a: { b: 'valor_b' }  }
+function AtualizaObjeto(valores, objeto) {
+// TODO  
+}
+
+
 // Fim das funções de Storage.
 
 

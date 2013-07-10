@@ -55,11 +55,11 @@ var entradas = {
   pericias: [],
 
   // Feiticos. cada entrada:
-  // conhecidos: { feitico, classe, nivel, indice, },
-  // indice indica a posicao do feitico na sequencia (pode ser dom para dominio).
+  // chave_classe: { 0: { conhecidos: [ feitico, ... ] }, 1: {} ...}
+  feiticos_conhecidos: {},
   // slots: { indice_conhecido, nivel_conhecido, classe, nivel, indice, }, 
   // indice_conhecido eh o ponteiro para o feitico nos conhecidos para o nivel_conhecido.
-  feiticos: { conhecidos: [], slots: [] },
+  feiticos: { slots: [] },
 
   notas: '',
 };
@@ -169,22 +169,32 @@ function _LeTalento(div_talento) {
   return entrada_talento;
 }
 
-function _LeFeiticos() {
-  entradas.feiticos.conhecidos = [];
-  var nomes_feiticos = DomsPorClasse('feiticos-conhecidos');
-  for (var i = 0; i < nomes_feiticos.length; ++i) {
-    var classe_nivel_indice = nomes_feiticos[i].id.split('-');
+function _LeFeiticosConhecidos() {
+  entradas.feiticos_conhecidos = {};
+  // nomes_feiticos eh um NodeList, portanto não possui forEach.
+  var doms_feiticos = DomsPorClasse('feiticos-conhecidos');
+  for (var indice = 0; indice < doms_feiticos.length; ++indice) {
+    var dom_feitico = doms_feiticos[indice];
     // remove o prefixo input-feiticos-conhecidos
+    var classe_nivel_indice = dom_feitico.id.split('-');
     classe_nivel_indice.shift();
     classe_nivel_indice.shift();
     classe_nivel_indice.shift();
-    entradas.feiticos.conhecidos.push({ 
-      feitico: nomes_feiticos[i].value,
-      classe: classe_nivel_indice[0],
-      nivel: classe_nivel_indice[1],
-      indice: classe_nivel_indice[2],
-    });
+    var chave_classe = classe_nivel_indice[0];
+    var nivel = classe_nivel_indice[1];
+    var feitico = dom_feitico.value;
+    if (entradas.feiticos_conhecidos[chave_classe] == null) {
+      entradas.feiticos_conhecidos[chave_classe] = {};
+    }
+    if (entradas.feiticos_conhecidos[chave_classe][nivel] == null) {
+      entradas.feiticos_conhecidos[chave_classe][nivel] = [];
+    }
+    entradas.feiticos_conhecidos[chave_classe][nivel].push(feitico);
   }
+}
+
+function _LeFeiticos() {
+  _LeFeiticosConhecidos();
 
   // Comecar pelo gasto que esta sempre presente.
   entradas.feiticos.slots = [];
