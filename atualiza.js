@@ -574,17 +574,17 @@ function AdicionaNivelFeiticoConhecido(
   if (feiticos_conhecidos.length == 0 && precisa_conhecer) {
     return;
   }
-  //var div_nivel = CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
   var div_nivel = CriaDiv();
   div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
   if (!precisa_conhecer) {
     div_nivel.appendChild(CriaBotao('+', null, null, function() {
-      entradas.feiticos.conhecidos.push({
-        feitico: '',
-        classe: chave_classe,
-        nivel: nivel,
-        indice: feiticos_conhecidos.length, 
-      });
+      if (entradas.feiticos_conhecidos[chave_classe] == null) {
+        entradas.feiticos_conhecidos[chave_classe] = {};
+      }
+      if (entradas.feiticos_conhecidos[chave_classe][nivel] == null) {
+        entradas.feiticos_conhecidos[chave_classe][nivel] = [];
+      }
+      entradas.feiticos_conhecidos[chave_classe][nivel].push('');
       AtualizaGeralSemLerEntradas();
     }));
   }
@@ -622,7 +622,7 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
 }
 
 // TODO mover para adiciona.
-function AdicionaFeiticoConhecido(feiticos_conhecidos, precisa_conhecer, chave_classe, nivel, indice) {
+function AdicionaFeiticoConhecido(precisa_conhecer, chave_classe, nivel, indice) {
   // Adiciona os inputs.
   var div_nivel = Dom('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
   var div_feitico = CriaDiv();
@@ -633,21 +633,12 @@ function AdicionaFeiticoConhecido(feiticos_conhecidos, precisa_conhecer, chave_c
       AtualizaGeral));
   if (!precisa_conhecer) {
     div_feitico.appendChild(CriaBotao('-', null, null, {
-      classe_remocao: chave_classe,
-      nivel_remocao: nivel,
-      indice_remocao: indice,
-      feiticos_conhecidos: feiticos_conhecidos,
+      chave_classe: chave_classe,
+      nivel: nivel,
+      indice: indice,
       handleEvent: function () {
-        // Acha o indice da entrada.
         var indice_a_remover = 0;
-        entradas.feiticos.conhecidos.forEach(function(entrada_feitico, indice) {
-          if (entrada_feitico.classe == this.classe_remocao &&
-              entrada_feitico.nivel == this.nivel_remocao && 
-              entrada_feitico.indice == this.indice_remocao) {
-            indice_a_remover = indice;
-          }
-        });
-        entradas.feiticos.conhecidos.splice(indice_a_remover, 1);
+        entradas.feiticos_conhecidos[this.chave_classe][this.nivel].splice(this.indice, 1);
         AtualizaGeralSemLerEntradas();
       }
     }));
@@ -671,7 +662,6 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(
       // A funcao AjustaFilhos fornecera o indice.
       AdicionaFeiticoConhecido.bind(
           null,  // this
-          feiticos_conhecidos,
           precisa_conhecer,
           chave_classe,
           nivel));
