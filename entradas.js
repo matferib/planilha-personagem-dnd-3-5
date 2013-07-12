@@ -54,12 +54,15 @@ var entradas = {
   // pericias: cada entrada possui { chave, pontos }
   pericias: [],
 
-  // Feiticos. cada entrada:
-  // chave_classe: { 0: { conhecidos: [ feitico, ... ] }, 1: {} ...}
+  // Feitiços conhecidos, cada entrada:
+  // chave_classe: { 0: [ feitico, ... ], 1: [] ...}
   feiticos_conhecidos: {},
-  // slots: { indice_conhecido, nivel_conhecido, classe, nivel, indice, }, 
-  // indice_conhecido eh o ponteiro para o feitico nos conhecidos para o nivel_conhecido.
-  feiticos: { slots: [] },
+  // Slots de feitiços, cada entrada:
+  // chave_classe: { 0: [ { nivel, indice, gasto }, ... ], 1: [] ...}
+  // Nivel é o nível do feitiço, que pode ser diferente do nível do slot.
+  // indice eh o ponteiro para o feitico nos conhecidos para o nível.
+  // gasto indica se o feitico está gasto ou não.
+  slots_feiticos: {},
 
   notas: '',
 };
@@ -193,45 +196,62 @@ function _LeFeiticosConhecidos() {
   }
 }
 
-function _LeFeiticos() {
-  _LeFeiticosConhecidos();
-
+function _LeSlotsFeiticos() {
   // Comecar pelo gasto que esta sempre presente.
-  entradas.feiticos.slots = [];
-  var feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
-  for (var i = 0; i < feiticos_gastos.length; ++i) {
-    var classe_nivel_indice = feiticos_gastos[i].id.split('-');
+  entradas.slots_feiticos = {};
+  var doms_feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
+  for (var i = 0; i < doms_feiticos_gastos.length; ++i) {
+    var classe_nivel_indice = doms_feiticos_gastos[i].id.split('-');
     // remove o prefixo input-feiticos-slots-gastos.
     classe_nivel_indice.shift();
     classe_nivel_indice.shift();
     classe_nivel_indice.shift();
     classe_nivel_indice.shift();
-    entradas.feiticos.slots.push({ 
-        indice_conhecido: null,
-        nivel_conhecido: classe_nivel_indice[1],  // do feitico.
-        classe: classe_nivel_indice[0],
-        nivel: classe_nivel_indice[1],  // do slot.
-        indice: classe_nivel_indice[2],
-        gasto: feiticos_gastos[i].checked,
-    });
+    var chave_classe = classe_nivel_indice[0];
+    var nivel_slot = classe_nivel_indice[1];
+    var gasto = doms_feiticos_gastos[i].checked;
+
+    if (entradas.slots_feiticos[chave_classe] == null) {
+      entradas.slots_feiticos[chave_classe] = {};
+    }
+    if (entradas.slots_feiticos[chave_classe][nivel_slot] == null) {
+      entradas.slots_feiticos[chave_classe][nivel_slot] = [];
+    }
+    entradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
   }
 
   // O restante ja foi preenchido acima. So falta o feitico em si.
   // O indice_conhecido é formado por nivel_indice. O nível é necessário porque é possível
   // selecionar um feitiço de nível inferior ao do slot.
-  var indices_conhecidos = DomsPorClasse('feiticos-slots');
-  for (var i = 0; i < indices_conhecidos.length; ++i) {
-    var nivel_indice = ValorSelecionado(indices_conhecidos[i]);
+  var doms_select_feitico = DomsPorClasse('feiticos-slots');
+  for (var i = 0; i < doms_select_feitico.length; ++i) {
+    var classe_nivel_indice = doms_select_feitico[i].id.split('-');
+    // remove o prefixo input-feiticos-slots.
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    classe_nivel_indice.shift();
+    var chave_classe = classe_nivel_indice[0];
+    var nivel_slot = classe_nivel_indice[1];
+
+    var nivel_indice = ValorSelecionado(doms_select_feitico[i]);
     if (nivel_indice != null) {
       nivel_indice = nivel_indice.split('-');
       if (nivel_indice.length == 1) {
-        entradas.feiticos.slots[i].indice_conhecido = nivel_indice[0];
+        // Compatibilidade... Se só tiver 1, usa de índice do mesmo nível.
+        entradas.slots_feiticos[chave_classe][nivel_slot].nivel = nivel_slot;
+        entradas.slots_feiticos[chave_classe][nivel_slot].indice = nivel_indice[0];
       } else {
-        entradas.feiticos.slots[i].nivel_conhecido = nivel_indice[0];
-        entradas.feiticos.slots[i].indice_conhecido = nivel_indice[1];
+        entradas.slots_feiticos[chave_classe][nivel_slot].nivel = nivel_indice[0];
+        entradas.slots_feiticos[chave_classe][nivel_slot].indice = nivel_indice[1];
       }
     }
   }
+
+}
+
+function _LeFeiticos() {
+  _LeFeiticosConhecidos();
+  _LeSlotsFeiticos();
 }
 
 // Le um div de estilo de luta.
