@@ -679,8 +679,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
   var feiticos_classe = personagem.feiticos[chave_classe];
   for (var nivel_str in feiticos_classe.slots) {
     var nivel = parseInt(nivel_str);
-    // Pode usar feiticos de qualquer nivel inferior tambem.
-    // Cada entrada: { nivel: [ { valor, texto}, ...] }.
+    // Monta os feiticos que poderão ser escolhidos no slot.
     var feiticos_conhecidos = {};
     for (var nivel_corrente = nivel; nivel_corrente >= 0; --nivel_corrente) {
       var conhecidos_nivel_corrente = [];
