@@ -639,6 +639,18 @@ function AdicionaFeiticoConhecido(precisa_conhecer, chave_classe, nivel, indice)
       handleEvent: function () {
         var indice_a_remover = 0;
         entradas.feiticos_conhecidos[this.chave_classe][this.nivel].splice(this.indice, 1);
+        // Arruma todos os slots de nivel maior ou igual.
+        var slots_classe = entradas.slots_feiticos[this.chave_classe];
+        for (var nivel in slots_classe) {
+          if (nivel < this.nivel) {
+            continue;
+          }
+          slots_classe[nivel].forEach(function(slot, indice_slot) {
+            if (slot.nivel == this.nivel && slot.indice >= this.indice && slot.indice > 0) {
+              --slot.indice;
+            }
+          }.bind(this));
+        }
         AtualizaGeralSemLerEntradas();
       }
     }));
