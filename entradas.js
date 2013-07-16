@@ -232,17 +232,19 @@ function _LeSlotsFeiticos() {
     classe_nivel_indice.shift();
     var chave_classe = classe_nivel_indice[0];
     var nivel_slot = classe_nivel_indice[1];
-
+    var indice_slot = classe_nivel_indice[2];
+    var slot = entradas.slots_feiticos[chave_classe][nivel_slot][indice_slot];
     var nivel_indice = ValorSelecionado(doms_select_feitico[i]);
+
     if (nivel_indice != null) {
       nivel_indice = nivel_indice.split('-');
       if (nivel_indice.length == 1) {
         // Compatibilidade... Se só tiver 1, usa de índice do mesmo nível.
-        entradas.slots_feiticos[chave_classe][nivel_slot].nivel = nivel_slot;
-        entradas.slots_feiticos[chave_classe][nivel_slot].indice = nivel_indice[0];
+        slot.nivel = nivel_slot;
+        slot.indice = nivel_indice[0];
       } else {
-        entradas.slots_feiticos[chave_classe][nivel_slot].nivel = nivel_indice[0];
-        entradas.slots_feiticos[chave_classe][nivel_slot].indice = nivel_indice[1];
+        slot.nivel = nivel_indice[0];
+        slot.indice = nivel_indice[1];
       }
     }
   }

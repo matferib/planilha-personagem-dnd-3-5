@@ -234,18 +234,19 @@ function _ConverteFeiticosSlots() {
   for (var chave_classe in entradas.slots_feiticos) {
     var feiticos_classe = personagem.feiticos[chave_classe];
     for (var nivel in entradas.slots_feiticos[chave_classe]) {
-      var entrada_feitico = entradas.slots_feiticos[chave_classe][nivel];
-      var slots_classe_nivel = feiticos_classe.slots[nivel];
-      var slot_feitico = {
-        nivel: nivel,
-        indice: entrada_feitico.indice,
-        gasto: entrada_feitico.gasto };
+      entradas.slots_feiticos[chave_classe][nivel].forEach(function(entrada_feitico, indice) {
+        var slots_classe_nivel = feiticos_classe.slots[nivel];
+        var slot_feitico = {
+            nivel_conhecido: entrada_feitico.nivel,
+            indice_conhecido: entrada_feitico.indice,
+            gasto: entrada_feitico.gasto };
 
-      if (entrada_feitico.indice == 'dom') {
-        slots_classe_nivel.feitico_dominio = slot_feitico;
-      } else {
-        slots_classe_nivel.feiticos.push(slot_feitico);
-      }
+        if (entrada_feitico.indice == 'dom') {
+          slots_classe_nivel.feitico_dominio = slot_feitico;
+        } else {
+          slots_classe_nivel.feiticos.push(slot_feitico);
+        }
+      });
     }
   }
 }
