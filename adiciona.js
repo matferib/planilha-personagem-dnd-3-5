@@ -420,11 +420,15 @@ function AdicionaNivelFeiticoConhecido(
   div_conhecidos.appendChild(div_nivel);
 }
 
-// Adiciona um div com os feiticos conhecidos.
+// Adiciona um div com os feiticos conhecidos. Usada pelo AjustaFilhos, que preenche o indice.
 function AdicionaFeiticoConhecido(chave_classe, nivel, indice) {
-  // Adiciona os inputs.
-  var div_nivel = Dom('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
-  div_nivel.appendChild(CriaDomFeiticoConhecido(chave_classe, nivel, indice));
+  Dom('div-feiticos-conhecidos-' + chave_classe + '-' + nivel).appendChild(
+      CriaDomFeiticoConhecido(chave_classe, nivel, indice));
 }
 
+// Adiciona um dom com o slot de feitico. Usada pelo AjustaFilhos, que preenche o indice.
+function AdicionaSlotFeitico(precisa_memorizar, chave_classe, nivel, conhecidos, slots, indice) {
+  Dom('div-feiticos-slots-' + chave_classe + '-' + nivel).appendChild(
+      CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, conhecidos, slots));
+}
 
