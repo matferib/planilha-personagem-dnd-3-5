@@ -3,3 +3,4 @@ Calcular a DC do feitico por slot.
 Adicionar botao para mostrar a versão da planilha quando em modo mestre.
 Terminar as propriedades de outras capas.
 Transformar todos atributos em bonus.
+Não redesenhar os slots de feitiços sempre (reaproveitar).
