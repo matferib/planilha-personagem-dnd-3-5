@@ -391,4 +391,40 @@ function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
   div_feiticos.appendChild(div_classe);
 }
 
+// Adiciona um nivel de feitico conhecido.
+function AdicionaNivelFeiticoConhecido(
+    chave_classe, precisa_conhecer, div_conhecidos, indice_filho) {
+  var nivel = indice_filho;
+  var feiticos_conhecidos =
+      personagem.feiticos[chave_classe].conhecidos[nivel];
+  // Se não precisa conhecer, o jogador pode adicionar feiticos como se fosse um grimório.
+  if (feiticos_conhecidos.length == 0 && precisa_conhecer) {
+    return;
+  }
+  var div_nivel = CriaDiv();
+  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
+  if (!precisa_conhecer) {
+    div_nivel.appendChild(CriaBotao('+', null, null, function() {
+      if (entradas.feiticos_conhecidos[chave_classe] == null) {
+        entradas.feiticos_conhecidos[chave_classe] = {};
+      }
+      if (entradas.feiticos_conhecidos[chave_classe][nivel] == null) {
+        entradas.feiticos_conhecidos[chave_classe][nivel] = [];
+      }
+      entradas.feiticos_conhecidos[chave_classe][nivel].push('');
+      AtualizaGeralSemLerEntradas();
+    }));
+  }
+  div_nivel.appendChild(CriaBr());
+  div_nivel.appendChild(CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel));
+  div_conhecidos.appendChild(div_nivel);
+}
+
+// Adiciona um div com os feiticos conhecidos.
+function AdicionaFeiticoConhecido(chave_classe, nivel, indice) {
+  // Adiciona os inputs.
+  var div_nivel = Dom('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
+  div_nivel.appendChild(CriaDomFeiticoConhecido(chave_classe, nivel, indice));
+}
+
 

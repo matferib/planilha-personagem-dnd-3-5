@@ -564,35 +564,6 @@ function _AtualizaFeiticos() {
   }
 }
 
-// TODO mover para o adiciona.js.
-function AdicionaNivelFeiticoConhecido(
-    chave_classe, precisa_conhecer, div_conhecidos, indice_filho) {
-  var nivel = indice_filho;
-  var feiticos_conhecidos =
-      personagem.feiticos[chave_classe].conhecidos[nivel];
-  // Se não precisa conhecer, o jogador pode adicionar feiticos como se fosse um grimório.
-  if (feiticos_conhecidos.length == 0 && precisa_conhecer) {
-    return;
-  }
-  var div_nivel = CriaDiv();
-  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
-  if (!precisa_conhecer) {
-    div_nivel.appendChild(CriaBotao('+', null, null, function() {
-      if (entradas.feiticos_conhecidos[chave_classe] == null) {
-        entradas.feiticos_conhecidos[chave_classe] = {};
-      }
-      if (entradas.feiticos_conhecidos[chave_classe][nivel] == null) {
-        entradas.feiticos_conhecidos[chave_classe][nivel] = [];
-      }
-      entradas.feiticos_conhecidos[chave_classe][nivel].push('');
-      AtualizaGeralSemLerEntradas();
-    }));
-  }
-  div_nivel.appendChild(CriaBr());
-  div_nivel.appendChild(CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-' + nivel));
-  div_conhecidos.appendChild(div_nivel);
-}
-
 // Atualiza os feiticos conhecidos para uma determinada classe. 
 // @param novo_div se true, indica que um novo div for criado.
 function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
@@ -616,47 +587,9 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
     _AtualizaFeiticosConhecidosParaClassePorNivel(
         chave_classe, 
         nivel, 
-        tabelas_feiticos[chave_classe].precisa_conhecer, 
+        tabelas_feiticos_classe.precisa_conhecer, 
         feiticos_classe.conhecidos[nivel]);
   }
-}
-
-// TODO mover para adiciona.
-function AdicionaFeiticoConhecido(precisa_conhecer, chave_classe, nivel, indice) {
-  // Adiciona os inputs.
-  var div_nivel = Dom('div-feiticos-conhecidos-' + chave_classe + '-' + nivel);
-  var div_feitico = CriaDiv();
-  div_feitico.appendChild(CriaInputTexto(
-      '',
-      'input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice, 
-      'feiticos-conhecidos',
-      AtualizaGeral));
-  if (!precisa_conhecer) {
-    div_feitico.appendChild(CriaBotao('-', null, null, {
-      chave_classe: chave_classe,
-      nivel: nivel,
-      indice: indice,
-      handleEvent: function () {
-        var indice_a_remover = 0;
-        entradas.feiticos_conhecidos[this.chave_classe][this.nivel].splice(this.indice, 1);
-        // Arruma todos os slots de nivel maior ou igual.
-        var slots_classe = entradas.slots_feiticos[this.chave_classe];
-        for (var nivel in slots_classe) {
-          if (nivel < this.nivel) {
-            continue;
-          }
-          slots_classe[nivel].forEach(function(slot, indice_slot) {
-            if (slot.nivel == this.nivel && slot.indice >= this.indice && slot.indice > 0) {
-              --slot.indice;
-            }
-          }.bind(this));
-        }
-        AtualizaGeralSemLerEntradas();
-      }
-    }));
-  }
-  div_feitico.appendChild(CriaBr());
-  div_nivel.appendChild(div_feitico);
 }
 
 // Atualiza os feiticos conhecidos para uma classe de um determinado nivel.
@@ -674,7 +607,6 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(
       // A funcao AjustaFilhos fornecera o indice.
       AdicionaFeiticoConhecido.bind(
           null,  // this
-          precisa_conhecer,
           chave_classe,
           nivel));
   for (var indice = 0; indice < feiticos_conhecidos.length; ++indice) {
