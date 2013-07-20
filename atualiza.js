@@ -651,34 +651,16 @@ function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, co
     return;
   }
   var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
-  var div_nivel = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
+  var div_nivel = CriaDiv();
   div_nivel.appendChild(
       CriaSpan('Nível ' + nivel + ' (CD ' + slots.cd + '):'));
   div_nivel.appendChild(CriaBr());
+  var div_nivel_slots = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
   for (var indice = 0; indice < slots.feiticos.length; ++indice) {
-    // Adiciona os inputs de indices.
-    if (!precisa_conhecer) {
-      var select = CriaSelect(
-          'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
-          'feiticos-slots',
-          AtualizaGeral);
-      PopulaSelectComOptGroup(conhecidos, select);
-      var slot_feitico = slots.feiticos[indice];
-      SelecionaValor(
-          slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido, 
-          select);
-      div_nivel.appendChild(select);
-    }
-    div_nivel.appendChild(CriaInputCheckbox(
-        slots.feiticos[indice].gasto,
-        'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice, 
-        'feiticos-slots-gastos',
-        ClickGastarFeitico));
-    if (!precisa_conhecer) {
-      // Um br apos cada feitico.
-      div_nivel.appendChild(CriaBr());
-    }
+    div_nivel_slots.appendChild(
+        CriaDomSlotFeitico(!precisa_conhecer, chave_classe, nivel, indice, conhecidos, slots));
   }
+  div_nivel.appendChild(div_nivel_slots);
   // Todos os checkbox em uma linha so, por o br no final.
   if (precisa_conhecer) {
     div_nivel.appendChild(CriaBr());
@@ -686,19 +668,8 @@ function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, co
 
   // Adiciona input de dominio se houver.
   if (slots.feitico_dominio != null) {
-    div_nivel.appendChild(CriaSpan('D:'));
-    var select = CriaSelect(
-        'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom',
-        'feiticos-slots',
-        AtualizaGeral);
-    PopulaSelectComOptGroup(conhecidos, select);
-    SelecionaValor(slots.feitico_dominio.indice_conhecido, select);
-    div_nivel.appendChild(select);
-    div_nivel.appendChild(CriaInputCheckbox(
-        slots.feitico_dominio.gasto,
-        'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom', 
-        'feiticos-slots-gastos'));
-    div_nivel.appendChild(CriaBr());
+    div_nivel.appendChild(
+        CriaDomSlotFeiticoDominio(chave_classe, nivel, indice, conhecidos, slots));
   }
   div_slots.appendChild(div_nivel);
 }
