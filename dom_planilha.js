@@ -36,3 +36,49 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
   div_feitico.appendChild(CriaBr());
   return div_feitico;
 }
+
+// Cria um slot de feitico, que pode conter o select ou não.
+function CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, conhecidos, slots) {
+  var dom_slot = precisa_memorizar ? CriaDiv() : CriaSpan();
+  // Adiciona os inputs de indices.
+  if (precisa_memorizar) {
+    var select = CriaSelect(
+        'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice, 
+        'feiticos-slots',
+        AtualizaGeral);
+    PopulaSelectComOptGroup(conhecidos, select);
+    var slot_feitico = slots.feiticos[indice];
+    SelecionaValor(
+        slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido, 
+        select);
+    dom_slot.appendChild(select);
+  }
+
+  // Cria o input de gasto.
+  dom_slot.appendChild(CriaInputCheckbox(
+      slots.feiticos[indice].gasto,
+      'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice, 
+      'feiticos-slots-gastos',
+      ClickGastarFeitico));
+
+  return dom_slot;
+}
+
+function CriaDomSlotFeiticoDominio(chave_classe, nivel, indice, conhecidos, slots) {
+  var div_slot = CriaDiv();
+  div_slot.appendChild(CriaSpan('D:'));
+  var select = CriaSelect(
+      'input-feiticos-slots-' + chave_classe + '-' + nivel + '-dom',
+      'feiticos-slots',
+      AtualizaGeral);
+  PopulaSelectComOptGroup(conhecidos, select);
+  SelecionaValor(slots.feitico_dominio.indice_conhecido, select);
+  div_slot.appendChild(select);
+  div_slot.appendChild(CriaInputCheckbox(
+      slots.feitico_dominio.gasto,
+      'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom', 
+      'feiticos-slots-gastos'));
+  div_slot.appendChild(CriaBr());
+  return div_slot;
+}
+
