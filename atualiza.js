@@ -560,7 +560,7 @@ function _AtualizaFeiticos() {
     // Da classe.
     var div_classe = Dom('div-feiticos-' + chave_classe);
     _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe);
-    _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe);
+    _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe);
   }
 }
 
@@ -616,7 +616,7 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(
   }
 }
 
-function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
+function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
   var div_slots = Dom('div-feiticos-slots-' + chave_classe);
   RemoveFilhos(div_slots);
   // Por nivel.
@@ -635,7 +635,7 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
     }
     // TODO: metamagicos.
 
-    _AtualizaFeiticosSlotsParaClassePorNivel(
+    _AtualizaSlotsFeiticosParaClassePorNivel(
         chave_classe, 
         nivel, 
         feiticos_classe.slots[nivel], 
@@ -646,32 +646,24 @@ function _AtualizaFeiticosSlotsParaClasse(chave_classe, div_classe) {
 
 // Atualiza os slots de feiticos para a classe por nivel.
 // @param conhecidos cada entrada: { nivel: [ { valor, texto}, ...] }..
-function _AtualizaFeiticosSlotsParaClassePorNivel(chave_classe, nivel, slots, conhecidos, div_slots) {
+function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, conhecidos, div_slots) {
   if (slots.feiticos.length == 0) {
     return;
   }
   var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
-  var div_nivel = CriaDiv();
-  div_nivel.appendChild(
-      CriaSpan('Nível ' + nivel + ' (CD ' + slots.cd + '):'));
-  div_nivel.appendChild(CriaBr());
-  var div_nivel_slots = CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel);
-  for (var indice = 0; indice < slots.feiticos.length; ++indice) {
-    div_nivel_slots.appendChild(
-        CriaDomSlotFeitico(!precisa_conhecer, chave_classe, nivel, indice, conhecidos, slots));
-  }
-  div_nivel.appendChild(div_nivel_slots);
-  // Todos os checkbox em uma linha so, por o br no final.
-  if (precisa_conhecer) {
-    div_nivel.appendChild(CriaBr());
-  }
+  var div_nivel = CriaDomSlotsNivel(chave_classe, nivel, slots);
+  div_slots.appendChild(div_nivel);  // Temporariamente aqui pra funcao Dom funcionar.
+  var div_nivel_slots = Dom('div-feiticos-slots-' + chave_classe + '-' + nivel);
+  AjustaFilhos(
+      div_nivel_slots, 
+      slots.feiticos.length, 
+      AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, conhecidos, slots));
 
   // Adiciona input de dominio se houver.
   if (slots.feitico_dominio != null) {
     div_nivel.appendChild(
-        CriaDomSlotFeiticoDominio(chave_classe, nivel, indice, conhecidos, slots));
+        CriaDomSlotFeiticoDominio(chave_classe, nivel, conhecidos, slots));
   }
-  div_slots.appendChild(div_nivel);
 }
 
 function _AtualizaEquipamentos() {

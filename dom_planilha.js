@@ -1,5 +1,4 @@
 // Este arquivo deve conter funções para criação de elementos Doms específicos para a planilha.
-// Por exemplo: divs contendo feiticos, perícias etc.
 
 // Retorna um Div de feitico conhecido.
 function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
@@ -9,7 +8,7 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
       'input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice, 
       'feiticos-conhecidos',
       AtualizaGeral));
-  if (!tabelas_feiticos[chave_classe].precisa_conhece) {
+  if (!tabelas_feiticos[chave_classe].precisa_conhecer) {
     div_feitico.appendChild(CriaBotao('-', null, null, {
       chave_classe: chave_classe,
       nivel: nivel,
@@ -35,6 +34,18 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
   }
   div_feitico.appendChild(CriaBr());
   return div_feitico;
+}
+
+// Cria o esqueleto de um nível de slots de feitiço.
+function CriaDomSlotsNivel(chave_classe, nivel, slots) {
+  var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
+  var div_nivel = CriaDiv();
+  div_nivel.appendChild(
+      CriaSpan('Nível ' + nivel + ' (CD ' + slots.cd + '):'));
+  div_nivel.appendChild(CriaBr());
+  // Este dom so deve ter os doms slots e mais nada.
+  div_nivel.appendChild(CriaDiv('div-feiticos-slots-' + chave_classe + '-' + nivel));
+  return div_nivel;
 }
 
 // Cria um slot de feitico, que pode conter o select ou não.
@@ -64,7 +75,8 @@ function CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, conh
   return dom_slot;
 }
 
-function CriaDomSlotFeiticoDominio(chave_classe, nivel, indice, conhecidos, slots) {
+// Cria o dom para um slot de feitico de dominio.
+function CriaDomSlotFeiticoDominio(chave_classe, nivel, conhecidos, slots) {
   var div_slot = CriaDiv();
   div_slot.appendChild(CriaSpan('D:'));
   var select = CriaSelect(
