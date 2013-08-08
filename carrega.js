@@ -77,6 +77,12 @@ function _CarregaHandlers() {
         var dom = Dom('input-remover-ferimentos');
         ClickAjustarFerimentos(-parseInt(dom.value)); 
         dom.value = ''; }, evento: 'change', },
+    "moedas-platina": { callback: AtualizaGeral, evento: 'change', },
+    "moedas-ouro": { callback: AtualizaGeral, evento: 'change', },
+    "moedas-prata": { callback: AtualizaGeral, evento: 'change', },
+    "moedas-cobre": { callback: AtualizaGeral, evento: 'change', },
+    "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
+    "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
     "text-area-notas": { callback:  ChangeNotas, evento: 'change', },
   };
 

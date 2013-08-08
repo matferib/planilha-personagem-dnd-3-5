@@ -5,3 +5,4 @@ Terminar as propriedades de outras capas.
 Transformar todos atributos em bonus.
 Não redesenhar os slots de feitiços sempre (reaproveitar).
 Arrumar feiticos de dominio.
+Campo para adicionar XP.
