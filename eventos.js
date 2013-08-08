@@ -479,4 +479,10 @@ function ChangeRaca() {
   AtualizaGeralSemLerEntradas();
 }
 
-
+function ChangePontosExperienciaAdicionais() {
+  var dom = Dom("pontos-experiencia-adicionais");
+  var valor = parseInt(dom.value);
+  entradas.experiencia += valor;
+  dom.value = '';
+  AtualizaGeralSemLerEntradas();
+}

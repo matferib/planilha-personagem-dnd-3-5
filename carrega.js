@@ -69,6 +69,8 @@ function _CarregaHandlers() {
     "alinhamento": { callback: AtualizaGeral, evento: 'change', },
     "pontos-vida-dados": { callback: AtualizaGeral, evento: 'change', },
     "ferimentos": { callback: AtualizaGeral, evento: 'change', },
+    "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
+    "pontos-experiencia-adicionais": { callback: ChangePontosExperienciaAdicionais, evento: 'change', },
     "input-adicionar-ferimentos": { callback:  function() { 
         var dom = Dom('input-adicionar-ferimentos');
         ClickAjustarFerimentos(parseInt(dom.value)); 
