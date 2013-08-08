@@ -621,6 +621,10 @@ function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
   RemoveFilhos(div_slots);
   // Por nivel.
   var feiticos_classe = personagem.feiticos[chave_classe];
+  // TODO criar o array com niveis a serem removidos e outro com niveis a adicionar.
+  // Entao criar uma funcao AdicionarEsqueletoSlotsNivel.
+  // or fim, tirar o RemoveFilhos daqui de cima e la embaixo pegar o Dom direto
+  // ao inves de criar.
   for (var nivel_str in feiticos_classe.slots) {
     var nivel = parseInt(nivel_str);
     // Monta os feiticos que poderão ser escolhidos no slot.
