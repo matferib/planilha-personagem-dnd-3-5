@@ -22,11 +22,20 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
           if (nivel < this.nivel) {
             continue;
           }
+          // Ajusta slots.
           slots_classe[nivel].forEach(function(slot, indice_slot) {
             if (slot.nivel == this.nivel && slot.indice >= this.indice && slot.indice > 0) {
               --slot.indice;
             }
           }.bind(this));
+          // Ajusta slot de dominio (se houver).
+          var slot_dominio = entradas.slots_feiticos_dominio[this.chave_classe][this.nivel];
+          if (slot_dominio != null &&
+              slot_dominio.nivel == this.nivel && 
+              slot_dominio.indice >= this.indice && 
+              slot_dominio.indice > 0) {
+            --slot_dominio.indice;
+          }
         }
         AtualizaGeralSemLerEntradas();
       }
@@ -84,7 +93,9 @@ function CriaDomSlotFeiticoDominio(chave_classe, nivel, conhecidos, slots) {
       'feiticos-slots',
       AtualizaGeral);
   PopulaSelectComOptGroup(conhecidos, select);
-  SelecionaValor(slots.feitico_dominio.indice_conhecido, select);
+  SelecionaValor(//slots.feitico_dominio.indice_conhecido, select);
+      slots.feitico_dominio.nivel_conhecido + '-' + slots.feitico_dominio.indice_conhecido, 
+      select);
   div_slot.appendChild(select);
   div_slot.appendChild(CriaInputCheckbox(
       slots.feitico_dominio.gasto,
