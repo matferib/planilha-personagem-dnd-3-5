@@ -232,6 +232,7 @@ function _ConverteFeiticosConhecidos() {
 
 function _ConverteFeiticosSlots() {
   for (var chave_classe in entradas.slots_feiticos) {
+    // Converte os slots de feitiços normais.
     var feiticos_classe = personagem.feiticos[chave_classe];
     for (var nivel in entradas.slots_feiticos[chave_classe]) {
       entradas.slots_feiticos[chave_classe][nivel].forEach(function(entrada_feitico, indice) {
@@ -240,13 +241,17 @@ function _ConverteFeiticosSlots() {
             nivel_conhecido: entrada_feitico.nivel,
             indice_conhecido: entrada_feitico.indice,
             gasto: entrada_feitico.gasto };
-
-        if (entrada_feitico.indice == 'dom') {
-          slots_classe_nivel.feitico_dominio = slot_feitico;
-        } else {
-          slots_classe_nivel.feiticos.push(slot_feitico);
-        }
+        slots_classe_nivel.feiticos.push(slot_feitico);
       });
+    }
+    // Converte os feitiços de domínio da classe (se houver).
+    for (var nivel in entradas.slots_feiticos_dominio[chave_classe]) {
+      var entrada_feitico = entradas.slots_feiticos_dominio[chave_classe][nivel];
+      var slots_classe_nivel = feiticos_classe.slots[nivel];
+      slots_classe_nivel.feitico_dominio = {
+        nivel_conhecido: entrada_feitico.nivel,
+        indice_conhecido: entrada_feitico.indice,
+        gasto: entrada_feitico.gasto };
     }
   }
 }
