@@ -63,6 +63,10 @@ var entradas = {
   // indice eh o ponteiro para o feitico nos conhecidos para o nível.
   // gasto indica se o feitico está gasto ou não.
   slots_feiticos: {},
+  // Slots de feitiços de domínio, cada entrada:
+  // chave_classe: { 1: { nivel, indice, gasto }, 2: {}, ...}
+  // Parâmetros iguais aos de slots_feiticos.
+  slots_feiticos_dominio: {},
 
   notas: '',
 };
@@ -199,6 +203,7 @@ function _LeFeiticosConhecidos() {
 function _LeSlotsFeiticos() {
   // Comecar pelo gasto que esta sempre presente.
   entradas.slots_feiticos = {};
+  entradas.slots_feiticos_dominio = {};
   var doms_feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
   for (var i = 0; i < doms_feiticos_gastos.length; ++i) {
     var classe_nivel_indice = doms_feiticos_gastos[i].id.split('-');
@@ -209,15 +214,25 @@ function _LeSlotsFeiticos() {
     classe_nivel_indice.shift();
     var chave_classe = classe_nivel_indice[0];
     var nivel_slot = classe_nivel_indice[1];
+    var indice_slot = classe_nivel_indice[2];
     var gasto = doms_feiticos_gastos[i].checked;
-
-    if (entradas.slots_feiticos[chave_classe] == null) {
-      entradas.slots_feiticos[chave_classe] = {};
+    
+    // TODO(matheus): ta horroroso isso aqui. Arrumar uma forma melhor de tratar os
+    // slots de dominio.
+    if (indice_slot != 'dom') {
+      if (entradas.slots_feiticos[chave_classe] == null) {
+        entradas.slots_feiticos[chave_classe] = {};
+      }
+      if (entradas.slots_feiticos[chave_classe][nivel_slot] == null) {
+        entradas.slots_feiticos[chave_classe][nivel_slot] = [];
+      }
+      entradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
+    } else {
+      if (entradas.slots_feiticos_dominio[chave_classe] == null) {
+        entradas.slots_feiticos_dominio[chave_classe] = {};
+      }
+      entradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
     }
-    if (entradas.slots_feiticos[chave_classe][nivel_slot] == null) {
-      entradas.slots_feiticos[chave_classe][nivel_slot] = [];
-    }
-    entradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
   }
 
   // O restante ja foi preenchido acima. So falta o feitico em si.
@@ -233,7 +248,9 @@ function _LeSlotsFeiticos() {
     var chave_classe = classe_nivel_indice[0];
     var nivel_slot = classe_nivel_indice[1];
     var indice_slot = classe_nivel_indice[2];
-    var slot = entradas.slots_feiticos[chave_classe][nivel_slot][indice_slot];
+    var slot = indice_slot != 'dom' ?
+        entradas.slots_feiticos[chave_classe][nivel_slot][indice_slot] :
+        entradas.slots_feiticos_dominio[chave_classe][nivel_slot];
     var nivel_indice = ValorSelecionado(doms_select_feitico[i]);
 
     if (nivel_indice != null) {
