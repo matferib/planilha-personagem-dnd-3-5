@@ -200,39 +200,49 @@ function _LeFeiticosConhecidos() {
   }
 }
 
+// Dado um id no formato p-p-p-p-classe-nivel-indice, retorna [classe, nivel, indice].
+function _LeClasseNivelIndice(id) {
+  var classe_nivel_indice = id.split('-');
+  var num_shifts = classe_nivel_indice.length - 3;
+  for (var i = 0; i < num_shifts; ++i) {
+    classe_nivel_indice.shift();
+  }
+  return classe_nivel_indice;
+}
+
+// Le um slot gasto, criando os valores intermediarios se eles nao existirem.
+function _PreencheSlotGasto(chave_classe, nivel_slot, indice_slot, gasto) {
+  if (indice_slot != 'dom') {
+    if (entradas.slots_feiticos[chave_classe] == null) {
+      entradas.slots_feiticos[chave_classe] = {};
+    }
+    if (entradas.slots_feiticos[chave_classe][nivel_slot] == null) {
+      entradas.slots_feiticos[chave_classe][nivel_slot] = [];
+    }
+    entradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
+  } else {
+    if (entradas.slots_feiticos_dominio[chave_classe] == null) {
+      entradas.slots_feiticos_dominio[chave_classe] = {};
+    }
+    entradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
+  }
+}
+
 function _LeSlotsFeiticos() {
   // Comecar pelo gasto que esta sempre presente.
   entradas.slots_feiticos = {};
   entradas.slots_feiticos_dominio = {};
   var doms_feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
+
+  // Este primeiro loop vai criar todas as entradas com apenas o atributo gasto preenchido.
+  // O proximo loop preencherá o resto.
   for (var i = 0; i < doms_feiticos_gastos.length; ++i) {
-    var classe_nivel_indice = doms_feiticos_gastos[i].id.split('-');
-    // remove o prefixo input-feiticos-slots-gastos.
-    classe_nivel_indice.shift();
-    classe_nivel_indice.shift();
-    classe_nivel_indice.shift();
-    classe_nivel_indice.shift();
-    var chave_classe = classe_nivel_indice[0];
-    var nivel_slot = classe_nivel_indice[1];
-    var indice_slot = classe_nivel_indice[2];
-    var gasto = doms_feiticos_gastos[i].checked;
-    
-    // TODO(matheus): ta horroroso isso aqui. Arrumar uma forma melhor de tratar os
-    // slots de dominio.
-    if (indice_slot != 'dom') {
-      if (entradas.slots_feiticos[chave_classe] == null) {
-        entradas.slots_feiticos[chave_classe] = {};
-      }
-      if (entradas.slots_feiticos[chave_classe][nivel_slot] == null) {
-        entradas.slots_feiticos[chave_classe][nivel_slot] = [];
-      }
-      entradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
-    } else {
-      if (entradas.slots_feiticos_dominio[chave_classe] == null) {
-        entradas.slots_feiticos_dominio[chave_classe] = {};
-      }
-      entradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
-    }
+    var classe_nivel_indice = _LeClasseNivelIndice(doms_feiticos_gastos[i].id);
+    _PreencheSlotGasto(
+        classe_nivel_indice[0], 
+        classe_nivel_indice[1], 
+        classe_nivel_indice[2], 
+        doms_feiticos_gastos[i].checked);
   }
 
   // O restante ja foi preenchido acima. So falta o feitico em si.
@@ -240,11 +250,7 @@ function _LeSlotsFeiticos() {
   // selecionar um feitiço de nível inferior ao do slot.
   var doms_select_feitico = DomsPorClasse('feiticos-slots');
   for (var i = 0; i < doms_select_feitico.length; ++i) {
-    var classe_nivel_indice = doms_select_feitico[i].id.split('-');
-    // remove o prefixo input-feiticos-slots.
-    classe_nivel_indice.shift();
-    classe_nivel_indice.shift();
-    classe_nivel_indice.shift();
+    var classe_nivel_indice = _LeClasseNivelIndice(doms_select_feitico[i].id);
     var chave_classe = classe_nivel_indice[0];
     var nivel_slot = classe_nivel_indice[1];
     var indice_slot = classe_nivel_indice[2];

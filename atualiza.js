@@ -663,6 +663,8 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
       slots.feiticos.length, 
       AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, conhecidos, slots));
 
+  // TODO(matheus): ta completamente hackish adicionar esse div na mao. Ate porque a hora que funcionar
+  // sem recriar tudo de novo, vai dar merda (o ajusta vai contabilizar este div como filho).
   // Adiciona input de dominio se houver.
   if (slots.feitico_dominio != null) {
     div_nivel.appendChild(
