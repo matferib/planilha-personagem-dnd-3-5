@@ -142,13 +142,22 @@ function _CarregaBotoesVisao() {
     botao_visao.addEventListener('click', handler);
     div_visoes.appendChild(botao_visao);
   }
+  // Aba do modo mestre
   var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
   input_modo_mestre.addEventListener('change', ClickVisualizacaoModoMestre);
   TituloSimples('Modo Mestre', input_modo_mestre);
+  input_modo_mestre.style.paddingBottom = '0';
   //input_modo_mestre.textContent = 'modo-mestre';
   var span_input = CriaSpan();
   span_input.appendChild(input_modo_mestre);
   div_visoes.appendChild(span_input);
+  // Aba do Desfazer e Refazer.
+  var botao_desfazer = CriaBotao('Desfazer');
+  botao_desfazer.style.paddingBottom = '0';
+  botao_desfazer.style.marginBottom = '0'
+  botao_desfazer.style.marginLeft = '30px';
+  botao_desfazer.addEventListener('click', ClickDesfazer);
+  div_visoes.appendChild(botao_desfazer);
 }
 
 function _CarregaAtributos() {
