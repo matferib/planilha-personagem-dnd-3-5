@@ -1,5 +1,5 @@
 // Apenas os dados do personagem e funcoes de conversao de entrada para personagem.
-var personagem = {
+var gPersonagem = {
   modo_visao: 'completo',
   modo_mestre: false,
   nome: '',
@@ -178,31 +178,34 @@ var personagem = {
   notas: '',
 };
 
+// TODO remover quando nao houver mais referencia a personagem.
+var personagem = gPersonagem;
+
 // Limpa tudo antes de comecar a conversao das entradas para o personagem. 
 function PersonagemLimpaGeral() {
-  personagem.pontos_vida.total = 0;
-  personagem.pontos_vida.bonus.Limpa();
-  personagem.ca.bonus.Limpa();
-  personagem.iniciativa.Limpa();
-  for (var i = 0; i < personagem.pericias.lista.length; ++i) {
-    personagem.pericias.lista[i].bonus.Limpa();
+  gPersonagem.pontos_vida.total = 0;
+  gPersonagem.pontos_vida.bonus.Limpa();
+  gPersonagem.ca.bonus.Limpa();
+  gPersonagem.iniciativa.Limpa();
+  for (var i = 0; i < gPersonagem.pericias.lista.length; ++i) {
+    gPersonagem.pericias.lista[i].bonus.Limpa();
   }
-  for (var chave_classe in personagem.feiticos) {
-    personagem.feiticos[chave_classe].em_uso = false;
-    personagem.feiticos[chave_classe].nivel_maximo = 0;
+  for (var chave_classe in gPersonagem.feiticos) {
+    gPersonagem.feiticos[chave_classe].em_uso = false;
+    gPersonagem.feiticos[chave_classe].nivel_maximo = 0;
     for (var i = 0; i <= 9; ++i) {
-      personagem.feiticos[chave_classe].conhecidos[i].length = 0;
-      personagem.feiticos[chave_classe].slots[i].feiticos.length = 0;
-      personagem.feiticos[chave_classe].slots[i].feitico_dominio = null;
+      gPersonagem.feiticos[chave_classe].conhecidos[i].length = 0;
+      gPersonagem.feiticos[chave_classe].slots[i].feiticos.length = 0;
+      gPersonagem.feiticos[chave_classe].slots[i].feitico_dominio = null;
     }
   }
-  personagem.estilos_luta.length = 0;
-  personagem.habilidades = {};
-  for (var tipo_salvacao in personagem.salvacoes) {
+  gPersonagem.estilos_luta.length = 0;
+  gPersonagem.habilidades = {};
+  for (var tipo_salvacao in gPersonagem.salvacoes) {
     if (tipo_salvacao in { fortitude: '', reflexo: '', vontade: '' }) {
-      personagem.salvacoes[tipo_salvacao].Limpa();
+      gPersonagem.salvacoes[tipo_salvacao].Limpa();
     } else {
-      delete personagem.salvacoes[tipo_salvacao];
+      delete gPersonagem.salvacoes[tipo_salvacao];
     }
   }
 }
@@ -211,7 +214,7 @@ function PersonagemLimpaGeral() {
 // Qualquer inicializacao do personagem eh feita aqui.
 function IniciaPersonagem() {
   // entradas padroes para armas, armaduras e escudos.
-  personagem.armas.push(ConverteArma({
+  gPersonagem.armas.push(ConverteArma({
     chave: 'desarmado',
     nome_gerado: 'desarmado',
     obra_prima: false,
@@ -222,8 +225,8 @@ function IniciaPersonagem() {
 // Encontra uma arma do personagem pelo nome gerado.
 // @return a arma do personagem.
 function ArmaPersonagem(nome_gerado) {
-  for (var i = 0; i < personagem.armas.length; ++i) {
-    var arma = personagem.armas[i];
+  for (var i = 0; i < gPersonagem.armas.length; ++i) {
+    var arma = gPersonagem.armas[i];
     if (arma.nome_gerado == nome_gerado) {
       return arma;
     }
@@ -234,21 +237,21 @@ function ArmaPersonagem(nome_gerado) {
 // @return true se o personagem for proficiente com uma arma.
 function PersonagemProficienteComArma(nome_arma) {
   // Verifica lista de armas.
-  return personagem.proficiencia_armas[nome_arma] != null;
+  return gPersonagem.proficiencia_armas[nome_arma] != null;
 }
 
 // @return o valor do foco do personagem com a arma (0, 1, 2).
 // @param nome_arma chave da arma.
 // @param maior indica se o foco eh maior.
 function PersonagemFocoComArma(chave_arma) {
-  return personagem.foco_armas[chave_arma];
+  return gPersonagem.foco_armas[chave_arma];
 }
 
 // @return o valor da especialização do personagem com a arma (0, 2, 4).
 // @param chave_arma chave da arma.
 // @param maior indica se o foco eh maior.
 function PersonagemEspecializacaoComArma(chave_arma) {
-  return personagem.especializacao_armas[chave_arma];
+  return gPersonagem.especializacao_armas[chave_arma];
 }
 
 // @param nome_talento nome do talento na tabela ou chave na tabela.
@@ -256,9 +259,9 @@ function PersonagemEspecializacaoComArma(chave_arma) {
 //        conhecimento (complemento), usar_arma_comum (complemento).
 // @return true se o personagem tiver o talento passado.
 function PersonagemPossuiTalento(nome_talento, complemento) {
-  for (var chave_classe in personagem.talentos) {
-    for (var i = 0; i < personagem.talentos[chave_classe].length; ++i) {
-      if (_TalentoIgual(personagem.talentos[chave_classe][i], 
+  for (var chave_classe in gPersonagem.talentos) {
+    for (var i = 0; i < gPersonagem.talentos[chave_classe].length; ++i) {
+      if (_TalentoIgual(gPersonagem.talentos[chave_classe][i], 
                         nome_talento, complemento)) {
         return true;
       }
@@ -290,9 +293,9 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
 // @return true se o personagem possuir uma das classes passadas.
 // @param classes array de classe.
 function PersonagemPossuiUmaDasClasses(classes) {
-  for (var i = 0; i < personagem.classes.length; ++i) {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
     for (var j = 0; j < classes.length; ++j) {
-      if (classes[j] == personagem.classes[i].classe) {
+      if (classes[j] == gPersonagem.classes[i].classe) {
         return true;
       }
     }
@@ -302,9 +305,9 @@ function PersonagemPossuiUmaDasClasses(classes) {
 
 // @return o nivel do personagem na classe passada, zero se nao possuir.
 function PersonagemNivelClasse(classe) {
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    if (personagem.classes[i].classe == classe) {
-      return personagem.classes[i].nivel;
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    if (gPersonagem.classes[i].classe == classe) {
+      return gPersonagem.classes[i].nivel;
     }
   }
   return 0;
@@ -314,13 +317,13 @@ function PersonagemNivelClasse(classe) {
 // @return o nivel de conjurador de uma classe de personagem. 
 function PersonagemNivelConjuradorClasse(classe) {
   var nivel_conjurador = 0;
-  for (var i = 0; i < personagem.classes.length; ++i) {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
     if (classe == null) {
-      if (personagem.classes[i].nivel_conjurador > nivel_conjurador) {
-        nivel_conjurador = personagem.classes[i].nivel_conjurador;
+      if (gPersonagem.classes[i].nivel_conjurador > nivel_conjurador) {
+        nivel_conjurador = gPersonagem.classes[i].nivel_conjurador;
       }
-    } else if (personagem.classes[i].classe == classe) {
-      return personagem.classes[i].nivel_conjurador;
+    } else if (gPersonagem.classes[i].classe == classe) {
+      return gPersonagem.classes[i].nivel_conjurador;
     }
   }
   return nivel_conjurador;
@@ -336,18 +339,18 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
     return null;
   }
   if (requisitos.bba) {
-    if (personagem.bba < requisitos.bba) {
+    if (gPersonagem.bba < requisitos.bba) {
       return (prefixo_erro + 'BBA >= ' + requisitos.bba);
     }
   }
   for (var atributo in requisitos.atributos) {
-    if (personagem.atributos[atributo].valor < requisitos.atributos[atributo]) {
+    if (gPersonagem.atributos[atributo].valor < requisitos.atributos[atributo]) {
       return (prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
     }
   }
   for (var classe in requisitos.nivel) {
     if (classe == 'total') {
-      if (personagem.dados_vida.nivel_personagem < requisitos.nivel['total']) {
+      if (gPersonagem.dados_vida.nivel_personagem < requisitos.nivel['total']) {
         return  (prefixo_erro + 'nivel de personagem >= ' + requisitos.nivel['total']);
       }
     } else if (classe == 'conjurador') {
@@ -377,9 +380,9 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
 
 // Adiciona ferimentos ao personagem.
 function PersonagemAdicionarFerimentos(valor) {
-  personagem.pontos_vida.ferimentos += valor;
-  if (personagem.pontos_vida.ferimentos < 0) {
-    personagem.pontos_vida.ferimentos = 0;
+  gPersonagem.pontos_vida.ferimentos += valor;
+  if (gPersonagem.pontos_vida.ferimentos < 0) {
+    gPersonagem.pontos_vida.ferimentos = 0;
   }
 }
 
@@ -392,13 +395,13 @@ function PersonagemAdicionarFerimentos(valor) {
 function PersonagemAdicionarMoedas(moedas) {
   // verifica fundos.
   for (var tipo_moeda in moedas) {
-    if (personagem.moedas[tipo_moeda] + moedas[tipo_moeda] < 0) {
+    if (gPersonagem.moedas[tipo_moeda] + moedas[tipo_moeda] < 0) {
       return false;
     }
   }
 
   for (var tipo_moeda in moedas) {
-    personagem.moedas[tipo_moeda] += moedas[tipo_moeda];
+    gPersonagem.moedas[tipo_moeda] += moedas[tipo_moeda];
   }
   return true;
 }
@@ -407,18 +410,18 @@ function PersonagemAdicionarMoedas(moedas) {
 function PersonagemStringDadosVida() {
   var primeiro = true;  // primeira classe nao eh sinalizada.
   var string_dados_vida = '';
-  for (var i = 0; i < personagem.classes.length; ++i) {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
       if (primeiro) {
         primeiro = false;
       } else {
         string_dados_vida += ' +';
       }
       string_dados_vida += 
-        personagem.classes[i].nivel + 'd' + tabelas_classes[personagem.classes[i].classe].dados_vida;
+        gPersonagem.classes[i].nivel + 'd' + tabelas_classes[gPersonagem.classes[i].classe].dados_vida;
   }
-  if (personagem.atributos.constituicao.modificador > 0) {
+  if (gPersonagem.atributos.constituicao.modificador > 0) {
     string_dados_vida += 
-      ' +' + (personagem.atributos.constituicao.modificador * personagem.dados_vida.nivel_personagem);
+      ' +' + (gPersonagem.atributos.constituicao.modificador * gPersonagem.dados_vida.nivel_personagem);
   }
   return string_dados_vida;
 }

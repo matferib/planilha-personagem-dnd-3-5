@@ -4,7 +4,6 @@ Adicionar botao para mostrar a versão da planilha quando em modo mestre.
 Terminar as propriedades de outras capas.
 Transformar todos atributos em bonus.
 Não redesenhar os slots de feitiços sempre (reaproveitar).
-Arrumar feiticos de dominio.
 Implementar níveis negativos.
 Renomear entradas para gEntradas e personagem para gPersonagem.
 Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemLerEntradas.
