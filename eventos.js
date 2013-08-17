@@ -486,3 +486,12 @@ function ChangePontosExperienciaAdicionais() {
   dom.value = '';
   AtualizaGeralSemLerEntradas();
 }
+
+// Botao para desfazer ultima acao.
+function ClickDesfazer() {
+  entradas = JSON.parse(gEstado.Restaura());
+  AtualizaGeralSemLerEntradas();
+}
+
+
+
