@@ -12,6 +12,7 @@ function AtualizaGeral() {
   ConverteEntradasParaPersonagem();
   DependenciasGerais();
   _AtualizaGeral();
+  gEstado.Salva(JSON.stringify(entradas));
 }
 
 // AVISO:
@@ -29,6 +30,7 @@ function AtualizaGeralSemLerEntradas() {
   ConverteEntradasParaPersonagem();
   DependenciasGerais();
   _AtualizaGeral();
+  gEstado.Salva(JSON.stringify(entradas));
 }
 
 // Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das 
