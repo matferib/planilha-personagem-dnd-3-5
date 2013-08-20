@@ -83,6 +83,7 @@ function _CarregaHandlers() {
     "moedas-ouro": { callback: AtualizaGeral, evento: 'change', },
     "moedas-prata": { callback: AtualizaGeral, evento: 'change', },
     "moedas-cobre": { callback: AtualizaGeral, evento: 'change', },
+    "moedas-adicionais": { callback: ChangeAdicionarMoedas, evento: 'change', },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
     "text-area-notas": { callback:  ChangeNotas, evento: 'change', },
