@@ -4,7 +4,7 @@
 // AtualizaGeralSemLerEntradas.
 
 // Variavel contendo os valores das entradas. Iniciado com valores padroes da criacao.
-var entradas = {
+var gEntradas = {
   modo_mestre: '',
   // geral
   nome: '',
@@ -71,38 +71,41 @@ var entradas = {
   notas: '',
 };
 
+// TODO: remover quando nao houver mais referencia a entradas.
+var entradas = gEntradas;
+
 // Le todos os inputs da planilha e armazena em 'entradas'. 
 function LeEntradas() {
   // Modo mestre ligado ou nao.
-  entradas.modo_mestre = Dom('input-modo-mestre').checked;
+  gEntradas.modo_mestre = Dom('input-modo-mestre').checked;
   // nome
-  entradas.nome = Dom('nome').value;
+  gEntradas.nome = Dom('nome').value;
   // raca
-  entradas.raca = ValorSelecionado(Dom('raca'));
+  gEntradas.raca = ValorSelecionado(Dom('raca'));
   // tamanho
-  entradas.tamanho = ValorSelecionado(Dom('tamanho')) || tabelas_raca[entradas.raca].tamanho;
+  gEntradas.tamanho = ValorSelecionado(Dom('tamanho')) || tabelas_raca[gEntradas.raca].tamanho;
   // alinhamento
-  entradas.alinhamento = ValorSelecionado(Dom('alinhamento'));
+  gEntradas.alinhamento = ValorSelecionado(Dom('alinhamento'));
   // divindade
-  entradas.divindade = Dom('divindade-patrona').value;
+  gEntradas.divindade = Dom('divindade-patrona').value;
   // classes.
-  entradas.classes.length = 0;
+  gEntradas.classes.length = 0;
   var div_classes = Dom('classes');
   for (var i = 0; i < div_classes.childNodes.length; ++i) {
     var elemento = div_classes.childNodes[i];
     if (elemento.tagName == "DIV") {
       var select = elemento.getElementsByTagName("SELECT")[0];
       var input = elemento.getElementsByTagName("INPUT")[0];
-      entradas.classes.push({ 
+      gEntradas.classes.push({ 
         classe: ValorSelecionado(select),
         nivel: parseInt(input.value)});
     }
   }
   // pontos de vida e ferimentos.
-  entradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
-  entradas.ferimentos = parseInt(Dom('ferimentos').value) || 0;
+  gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
+  gEntradas.ferimentos = parseInt(Dom('ferimentos').value) || 0;
   // Experiencia.
-  entradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
+  gEntradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
   // atributos
   var span_bonus_atributos = Dom('pontos-atributos-gastos');
   if (span_bonus_atributos.textContent.length > 0) {
@@ -112,22 +115,22 @@ function LeEntradas() {
       var nome_atributo = AjustaString(array_bonus[i]);
       array_bonus[i] = tabelas_atributos_invertidos[nome_atributo];
     }
-    entradas.bonus_atributos = array_bonus;
+    gEntradas.bonus_atributos = array_bonus;
   } else {
-    entradas.bonus_atributos = [];
+    gEntradas.bonus_atributos = [];
   }
   var atributos = [ 
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
-    entradas[atributos[i]] = 
+    gEntradas[atributos[i]] = 
         parseInt(Dom(atributos[i] + '-valor-base').value);
   }
 
   // Estilos de luta.
-  entradas.estilos_luta = [];
+  gEntradas.estilos_luta = [];
   var div_estilos_luta = Dom('div-estilos-luta');
   for (var i = 0; i < div_estilos_luta.childNodes.length; ++i) {
-    entradas.estilos_luta.push(
+    gEntradas.estilos_luta.push(
         _LeEntradaEstiloLuta(div_estilos_luta.childNodes[i]));
   }
 
@@ -136,8 +139,8 @@ function LeEntradas() {
   _LeTalentos();
 
   // Pericias.
-  for (var i = 0; i < entradas.pericias.length; ++i) {
-    var entrada_pericia = entradas.pericias[i];
+  for (var i = 0; i < gEntradas.pericias.length; ++i) {
+    var entrada_pericia = gEntradas.pericias[i];
     var input_pontos = Dom('pericia-' + entrada_pericia.chave + '-pontos');
     entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
   }
@@ -145,7 +148,7 @@ function LeEntradas() {
   // Feiticos.
   _LeFeiticos();
   
-  entradas.notas = Dom('text-area-notas').value;
+  gEntradas.notas = Dom('text-area-notas').value;
 }
 
 function _LeTalentos() {
@@ -411,5 +414,24 @@ function LeItem(dom) {
     }
   }
   return item;
+}
+
+// Adiciona moedas as entradas. Valores podem ser negativos.
+// O personagem nunca pode ficar com moedas negativas, neste caso
+// a funcao nao fara nada.
+// @param moedas um objeto contendo { ouro, platina, prata, cobre}
+// @return true se foi possivel adicionar as moedas.
+function EntradasAdicionarMoedas(moedas) {
+  // verifica fundos.
+  for (var tipo_moeda in moedas) {
+    if (gEntradas[tipo_moeda] + moedas[tipo_moeda] < 0) {
+      return false;
+    }
+  }
+
+  for (var tipo_moeda in moedas) {
+    gEntradas[tipo_moeda] += moedas[tipo_moeda];
+  }
+  return true;
 }
 
