@@ -114,23 +114,26 @@ function SomaPrecos(preco1, preco2) {
 }
 
 // Recebe uma string de preço e retorna um objeto contendo as moedas.
-// @return objeto de moedas ou null em caso de erro.
 // @param invertido (default false) se true, os valores sao invertidos (para realizar compras por exemplo).
+// @return objeto de moedas ou null em caso de erro.
 function LePreco(preco, invertido) {
   var moedas = { platina: 0, ouro: 0, prata: 0, cobre: 0 };
   var sufixos = { platina: 'pl', ouro: 'po', prata: 'pp', cobre: 'pc' };
   var preco_minusculo = preco.toLowerCase();
+  var encontrou_tipo = false;
   for (var tipo_moeda in moedas) {
     var indice_tipo = preco_minusculo.indexOf(sufixos[tipo_moeda]);
-    if (indice_tipo != -1) {
-      var string_val = preco_minusculo.substr(0, indice_tipo);
-      var val = parseInt(string_val);
-      if (val != NaN) {
-        moedas[tipo_moeda] = invertido ? -parseInt(string_val) : parseInt(string_val);
-      }
+    if (indice_tipo == -1) {
+      continue;
+    }
+    encontrou_tipo = true;
+    var string_val = preco_minusculo.substr(0, indice_tipo);
+    var val = parseInt(string_val);
+    if (val != NaN) {
+      moedas[tipo_moeda] = invertido ? -parseInt(string_val) : parseInt(string_val);
     }
   }
-  return moedas;
+  return encontrou_tipo ? moedas : null;
 }
 
 // Le uma entrada de peso e retorna o valor em Kg.
