@@ -493,5 +493,18 @@ function ClickDesfazer() {
   AtualizaGeralSemLerEntradas();
 }
 
-
+// Evento para tratar adição e subtração de moedas.
+function ChangeAdicionarMoedas() {
+  var dom = Dom('moedas-adicionais');
+  var valor_texto = dom.value;
+  var valor = LePreco(valor_texto);
+  if (valor == null) {
+    Mensagem('Valor inválido: ' + valor_texto);
+    dom.value = '';
+    return;
+  }
+  EntradasAdicionarMoedas(valor);
+  dom.value = '';
+  AtualizaGeralSemLerEntradas();
+}
 
