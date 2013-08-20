@@ -406,8 +406,8 @@ function ClickVenderArmaArmadura(dom, tipo, tabela) {
     Mensagem("Arma ou armadura magica invalida");
     return;
   }
-  PersonagemAdicionarMoedas(preco);
-  AtualizaGeralSemConverterEntradas();
+  EntradasAdicionarMoedas(preco);
+  AtualizaGeralSemLerEntradas();
 }
 
 // Compra a arma/armadura contida no dom.
@@ -422,11 +422,11 @@ function ClickComprarArmaArmadura(dom, tipo, tabela) {
     Mensagem("Arma ou armadura magica invalida");
     return;
   }
-  if (!PersonagemAdicionarMoedas(preco)) {
+  if (!EntradasAdicionarMoedas(preco)) {
     Mensagem('Não há fundos para compra do item');
     return;
   }
-  AtualizaGeralSemConverterEntradas();
+  AtualizaGeralSemLerEntradas();
 }
 
 // Compra o item contido no dom.
@@ -440,11 +440,11 @@ function ClickComprarItem(dom, tabela) {
     return;
   }
   var preco = LePreco(entrada_tabela.preco, true);
-  if (!PersonagemAdicionarMoedas(preco)) {
+  if (!EntradasAdicionarMoedas(preco)) {
     Mensagem('Não há fundos para compra do item');
     return;
   }
-  AtualizaGeralSemConverterEntradas();
+  AtualizaGeralSemLerEntradas();
 }
 
 // Vende o item contido no dom.
@@ -457,8 +457,8 @@ function ClickVenderItem(dom, tabela) {
     Mensagem('Item inválido ou sem preço');
     return;
   }
-  PersonagemAdicionarMoedas(LePreco(entrada_tabela.preco));
-  AtualizaGeralSemConverterEntradas();
+  EntradasAdicionarMoedas(LePreco(entrada_tabela.preco));
+  AtualizaGeralSemLerEntradas();
 }
 
 // Evento que trata o click no checkbox de feitico.
