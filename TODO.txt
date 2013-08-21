@@ -7,4 +7,3 @@ Não redesenhar os slots de feitiços sempre (reaproveitar).
 Implementar níveis negativos.
 Renomear entradas para gEntradas e personagem para gPersonagem.
 Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemLerEntradas.
-Arrumar o ouro adicionado com vendas e compras, está zerando.
