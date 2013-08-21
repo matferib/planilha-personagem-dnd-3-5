@@ -25,17 +25,13 @@ function ClickVisao(modo) {
     var divs_combate = Dom(tabelas_visoes[modo].mostrar.elementos[i]);
     divs_combate.style.display = 'block';
   }
-  personagem.modo_visao = modo;
-  AtualizaGeralSemConverterEntradas();
+  gEntradas.modo_visao = modo;
+  AtualizaGeralSemLerEntradas();
 }
 
 
 // Botao de adicionar classe apertado.
 function ClickAdicionarClasse() {
-  var classes_desabilitadas = [];
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    classes_desabilitadas.push(personagem.classes[i].classe);
-  }
   // Tenta uma entrada nao esteja desabilidada.
   var nova_classe = null;
   for (var classe in tabelas_classes) {
@@ -48,14 +44,18 @@ function ClickAdicionarClasse() {
     Mensagem('Impossível criar nova classe');
     return;
   }
-  personagem.classes.push({ classe: nova_classe, nivel: 1 });
-  AtualizaGeralSemConverterEntradas();
+  entradas.classes.push({ classe: nova_classe, nivel: 1 });
+  AtualizaGeralSemLerEntradas();
 }
 
 // Botao de remover classe apertado.
 function ClickRemoverClasse() {
-  personagem.classes.pop();
-  AtualizaGeralSemConverterEntradas();
+  if (entradas.classes.length == 1) {
+    Mensagem('Impossível remover classe');
+    return;
+  }
+  entradas.classes.pop();
+  AtualizaGeralSemLerEntradas();
 }
 
 // Salva entrada do personagem no historico local.
@@ -189,18 +189,14 @@ function ClickGerarComum() {
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma() {
-  //var arma_entrada = { entrada: { chave: 'desarmado', obra_prima: false, bonus: 0 } };
-  //personagem.armas.push(arma_entrada);
-  //AtualizaGeralSemConverterEntradas();
   entradas.armas.push({ chave: 'desarmado', obra_prima: false, bonus: 0 });
   AtualizaGeralSemLerEntradas();
 }
 
 // Adiciona uma armadura a lista de equipamentos.
 function ClickAdicionarArmadura() {
-  var armadura_entrada = { entrada: { chave: 'nenhuma', obra_prima: false, bonus: 0 } };
-  personagem.armaduras.push(armadura_entrada);
-  AtualizaGeralSemConverterEntradas();
+  entradas.armaduras.push({ chave: 'nenhuma', obra_prima: false, bonus: 0 });
+  AtualizaGeralSemLerEntradas();
 }
 
 // Adiciona um escudo a lista de equipamentos.
