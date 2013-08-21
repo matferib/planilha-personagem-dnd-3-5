@@ -6,6 +6,7 @@ function ConverteEntradasParaPersonagem() {
   PersonagemLimpaGeral();
 
   personagem.modo_mestre = entradas.modo_mestre;
+  personagem.modo_visao = entradas.modo_visao;
   personagem.nome = entradas.nome;
   personagem.raca = entradas.raca;
   personagem.tamanho.categoria = entradas.tamanho;
