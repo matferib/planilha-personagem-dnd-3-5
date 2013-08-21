@@ -292,21 +292,21 @@ function ClickBotaoAtributoMenos() {
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
 function ClickAjustarFerimentos(valor) {
-  PersonagemAdicionarFerimentos(valor);
-  AtualizaGeralSemConverterEntradas();
+  EntradasAdicionarFerimentos(valor);
+  AtualizaGeralSemLerEntradas();
 }
 
 // Esconde/mostra os botoes de geracao (class="botao-geracao)".
 function ClickVisualizacaoModoMestre() {
-  personagem.modo_mestre = Dom('input-modo-mestre').checked;
-  AtualizaGeralSemConverterEntradas();
+  gEntradas.modo_mestre = Dom('input-modo-mestre').checked;
+  AtualizaGeralSemLerEntradas();
 }
 
 // Trata o evento de adicionar items. Se a estrutura for alterada aqui,
 // mudar tambem a leitura das entradas que depende da ordem dos doms.
 function ClickAdicionarItem(tipo_item) {
-  personagem[tipo_item].push({ nome: 'nome', caracteristicas: 'caracteristicas'});
-  AtualizaGeralSemConverterEntradas();
+  gEntradas[tipo_item].push({ chave: '', em_uso: false });
+  AtualizaGeralSemLerEntradas();
 }
 
 // Trata o click de uso de um item.
@@ -359,7 +359,8 @@ function ClickGerarPersonagem(modo) {
 // Trata o botao de descansar
 // TODO arrumar.
 function ClickDescansar(valor) {
-  PersonagemAdicionarFerimentos(valor);
+  EntradasAdicionarFerimentos(valor);
+  /*
   for (var chave_classe in personagem.feiticos) {
     if (!personagem.feiticos[chave_classe].em_uso) {
       continue;
@@ -374,7 +375,8 @@ function ClickDescansar(valor) {
       }
     }
   }
-  AtualizaGeralSemConverterEntradas();
+  */
+  AtualizaGeralSemLerEntradas();
 }
 
 // Encontra a arma ou armadura no dom.

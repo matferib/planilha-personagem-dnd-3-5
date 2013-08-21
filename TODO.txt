@@ -8,3 +8,6 @@ Implementar níveis negativos.
 Renomear entradas para gEntradas e personagem para gPersonagem.
 Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemLerEntradas.
 Na Mensagem, focar no botao ok.
+Arrumar o botao de descansar.
+Acabar com o campo de ferimentos e transforma-lo em span text, de forma que so seja manipulado por Ferimentos e Cura.
+Reescrever a geracao para manipular apenas os campos da gEntradas sem usar AtualizaGeralSemConverterEntradas.
