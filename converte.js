@@ -78,11 +78,11 @@ function _ConverteEquipamentos() {
 
 function _ConverteAtributos() {
   for (var i = 0; i < entradas.bonus_atributos.length; ++i) {
-    personagem.atributos.pontos.gastos.push(entradas.bonus_atributos[i]);
+    personagem.atributos.pontos.gastos.push(gEntradas.bonus_atributos[i]);
   }
   // Calcula os componentes dos atributos.
   for (var atributo in tabelas_atributos) {
-    personagem.atributos[atributo].base = entradas[atributo];
+    personagem.atributos[atributo].base = gEntradas[atributo];
   }
 }
 

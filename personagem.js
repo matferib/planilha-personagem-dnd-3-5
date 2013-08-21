@@ -187,6 +187,8 @@ function PersonagemLimpaGeral() {
   gPersonagem.pontos_vida.bonus.Limpa();
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
+  gPersonagem.atributos.pontos.gastos.disponiveis = 0;
+  gPersonagem.atributos.pontos.gastos.length = 0;
   for (var i = 0; i < gPersonagem.pericias.lista.length; ++i) {
     gPersonagem.pericias.lista[i].bonus.Limpa();
   }
