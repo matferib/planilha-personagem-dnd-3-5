@@ -380,14 +380,6 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
   return null;
 }
 
-// Adiciona ferimentos ao personagem.
-function PersonagemAdicionarFerimentos(valor) {
-  gPersonagem.pontos_vida.ferimentos += valor;
-  if (gPersonagem.pontos_vida.ferimentos < 0) {
-    gPersonagem.pontos_vida.ferimentos = 0;
-  }
-}
-
 // @TODO fazer a conversao de um tipo para outro.
 // Adiciona moedas ao personagem. Valores podem ser negativos.
 // O personagem nunca pode ficar com moedas negativas, neste caso
