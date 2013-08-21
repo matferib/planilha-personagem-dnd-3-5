@@ -6,6 +6,7 @@
 // Variavel contendo os valores das entradas. Iniciado com valores padroes da criacao.
 var gEntradas = {
   modo_mestre: '',
+  modo_visao: 'completo',
   // geral
   nome: '',
   raca: 'humano',
@@ -78,6 +79,7 @@ var entradas = gEntradas;
 function LeEntradas() {
   // Modo mestre ligado ou nao.
   gEntradas.modo_mestre = Dom('input-modo-mestre').checked;
+
   // nome
   gEntradas.nome = Dom('nome').value;
   // raca
