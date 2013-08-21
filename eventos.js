@@ -201,26 +201,19 @@ function ClickAdicionarArmadura() {
 
 // Adiciona um escudo a lista de equipamentos.
 function ClickAdicionarEscudo() {
-  var escudo_entrada = { entrada: { chave: 'nenhum', obra_prima: false, bonus: 0 } };
-  personagem.escudos.push(escudo_entrada);
-  AtualizaGeralSemConverterEntradas();
+  entradas.escudos.push({ chave: 'nenhum', obra_prima: false, bonus: 0 });
+  AtualizaGeralSemLerEntradas();
 }
 
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
   var estilo_entrada = { 
     nome: 'uma_arma', 
-    arma_primaria: { 
-      nome: 'desarmado',
-      bonus_por_categoria: {}
-    },
-    arma_secundaria: {  
-      nome: 'desarmado',
-      bonus_por_categoria: {}
-    }
+    arma_primaria: 'desarmado',
+    arma_secundaria: 'desarmado',
   };
-  personagem.estilos_luta.push(estilo_entrada);
-  AtualizaGeralSemConverterEntradas();
+  gEntradas.estilos_luta.push(estilo_entrada);
+  AtualizaGeralSemLerEntradas();
 }
 
 // Remove um filho especifico de um pai.
@@ -285,15 +278,15 @@ function ClickFeitico(classe_nivel_slot, incremento) {
 
 // Trata o click de adicionar bonus a um atributo, colocando-o no final da fila.
 function ClickBotaoAtributoMais(chave_atributo) {
-  personagem.atributos.pontos.gastos.push(chave_atributo);
-  AtualizaGeralSemConverterEntradas();
+  gEntradas.bonus_atributos.push(chave_atributo);
+  AtualizaGeralSemLerEntradas();
 }
 
 // Trata o click de remover bonus de um atributo. 
 // Retira o ultimo bonus colocado (se houver).
 function ClickBotaoAtributoMenos() {
-  personagem.atributos.pontos.gastos.pop();
-  AtualizaGeralSemConverterEntradas();
+  gEntradas.bonus_atributos.pop();
+  AtualizaGeralSemLerEntradas();
 }
 
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
