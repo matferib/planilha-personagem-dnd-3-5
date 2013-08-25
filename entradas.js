@@ -1,9 +1,9 @@
-// Tudo relacionado a entradas. Isso eh o que devera ser
+// Tudo relacionado a gEntradas. Isso eh o que devera ser
 // serializado e deserializado. A entrada serve como o mínimo que representa o personagem.
-// É possível salvar apenas as entradas e restaurar o personagem depois chamando a função 
+// É possível salvar apenas as gEntradas e restaurar o personagem depois chamando a função 
 // AtualizaGeralSemLerEntradas.
 
-// Variavel contendo os valores das entradas. Iniciado com valores padroes da criacao.
+// Variavel contendo os valores das gEntradas. Iniciado com valores padroes da criacao.
 var gEntradas = {
   modo_mestre: '',
   modo_visao: 'completo',
@@ -72,10 +72,7 @@ var gEntradas = {
   notas: '',
 };
 
-// TODO: remover quando nao houver mais referencia a entradas.
-var entradas = gEntradas;
-
-// Le todos os inputs da planilha e armazena em 'entradas'. 
+// Le todos os inputs da planilha e armazena em 'gEntradas'. 
 function LeEntradas() {
   // Modo mestre ligado ou nao.
   gEntradas.modo_mestre = Dom('input-modo-mestre').checked;
@@ -154,11 +151,11 @@ function LeEntradas() {
 }
 
 function _LeTalentos() {
-  for (var chave_classe in entradas.talentos) {
-    entradas.talentos[chave_classe].length = 0;
+  for (var chave_classe in gEntradas.talentos) {
+    gEntradas.talentos[chave_classe].length = 0;
     var div_talentos = Dom('div-talentos-' + chave_classe + '-selects');
     for (var i = 0; i < div_talentos.childNodes.length; ++i) {
-      entradas.talentos[chave_classe].push(
+      gEntradas.talentos[chave_classe].push(
           _LeTalento(div_talentos.childNodes[i]));
     }
   }
@@ -182,7 +179,7 @@ function _LeTalento(div_talento) {
 }
 
 function _LeFeiticosConhecidos() {
-  entradas.feiticos_conhecidos = {};
+  gEntradas.feiticos_conhecidos = {};
   // nomes_feiticos eh um NodeList, portanto não possui forEach.
   var doms_feiticos = DomsPorClasse('feiticos-conhecidos');
   for (var indice = 0; indice < doms_feiticos.length; ++indice) {
@@ -195,13 +192,13 @@ function _LeFeiticosConhecidos() {
     var chave_classe = classe_nivel_indice[0];
     var nivel = classe_nivel_indice[1];
     var feitico = dom_feitico.value;
-    if (entradas.feiticos_conhecidos[chave_classe] == null) {
-      entradas.feiticos_conhecidos[chave_classe] = {};
+    if (gEntradas.feiticos_conhecidos[chave_classe] == null) {
+      gEntradas.feiticos_conhecidos[chave_classe] = {};
     }
-    if (entradas.feiticos_conhecidos[chave_classe][nivel] == null) {
-      entradas.feiticos_conhecidos[chave_classe][nivel] = [];
+    if (gEntradas.feiticos_conhecidos[chave_classe][nivel] == null) {
+      gEntradas.feiticos_conhecidos[chave_classe][nivel] = [];
     }
-    entradas.feiticos_conhecidos[chave_classe][nivel].push(feitico);
+    gEntradas.feiticos_conhecidos[chave_classe][nivel].push(feitico);
   }
 }
 
@@ -218,28 +215,28 @@ function _LeClasseNivelIndice(id) {
 // Le um slot gasto, criando os valores intermediarios se eles nao existirem.
 function _PreencheSlotGasto(chave_classe, nivel_slot, indice_slot, gasto) {
   if (indice_slot != 'dom') {
-    if (entradas.slots_feiticos[chave_classe] == null) {
-      entradas.slots_feiticos[chave_classe] = {};
+    if (gEntradas.slots_feiticos[chave_classe] == null) {
+      gEntradas.slots_feiticos[chave_classe] = {};
     }
-    if (entradas.slots_feiticos[chave_classe][nivel_slot] == null) {
-      entradas.slots_feiticos[chave_classe][nivel_slot] = [];
+    if (gEntradas.slots_feiticos[chave_classe][nivel_slot] == null) {
+      gEntradas.slots_feiticos[chave_classe][nivel_slot] = [];
     }
-    entradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
+    gEntradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
   } else {
-    if (entradas.slots_feiticos_dominio[chave_classe] == null) {
-      entradas.slots_feiticos_dominio[chave_classe] = {};
+    if (gEntradas.slots_feiticos_dominio[chave_classe] == null) {
+      gEntradas.slots_feiticos_dominio[chave_classe] = {};
     }
-    entradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
+    gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
   }
 }
 
 function _LeSlotsFeiticos() {
   // Comecar pelo gasto que esta sempre presente.
-  entradas.slots_feiticos = {};
-  entradas.slots_feiticos_dominio = {};
+  gEntradas.slots_feiticos = {};
+  gEntradas.slots_feiticos_dominio = {};
   var doms_feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
 
-  // Este primeiro loop vai criar todas as entradas com apenas o atributo gasto preenchido.
+  // Este primeiro loop vai criar todas as gEntradas com apenas o atributo gasto preenchido.
   // O proximo loop preencherá o resto.
   for (var i = 0; i < doms_feiticos_gastos.length; ++i) {
     var classe_nivel_indice = _LeClasseNivelIndice(doms_feiticos_gastos[i].id);
@@ -260,8 +257,8 @@ function _LeSlotsFeiticos() {
     var nivel_slot = classe_nivel_indice[1];
     var indice_slot = classe_nivel_indice[2];
     var slot = indice_slot != 'dom' ?
-        entradas.slots_feiticos[chave_classe][nivel_slot][indice_slot] :
-        entradas.slots_feiticos_dominio[chave_classe][nivel_slot];
+        gEntradas.slots_feiticos[chave_classe][nivel_slot][indice_slot] :
+        gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot];
     var nivel_indice = ValorSelecionado(doms_select_feitico[i]);
 
     if (nivel_indice != null) {
@@ -314,21 +311,21 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
 
 function _LeEquipamentos() {
   // Armadura e escudo.
-  //entradas.armadura.nome = 
+  //gEntradas.armadura.nome = 
   //    ValorSelecionado(Dom('armadura')); 
-  //entradas.armadura.bonus_magico = 
+  //gEntradas.armadura.bonus_magico = 
   //    parseInt(Dom('bonus-armadura').value) || 0; 
-  //entradas.escudo.nome = 
+  //gEntradas.escudo.nome = 
   //    ValorSelecionado(Dom('escudo'));
-  //entradas.escudo.bonus_magico = 
+  //gEntradas.escudo.bonus_magico = 
   //    parseInt(Dom('bonus-escudo').value) || 0;
-  entradas.outros_equipamentos = Dom('text-area-outros-equipamentos').value;
+  gEntradas.outros_equipamentos = Dom('text-area-outros-equipamentos').value;
 
   // Moedas
-  entradas.platina = parseInt(Dom('moedas-platina').value);
-  entradas.ouro = parseInt(Dom('moedas-ouro').value);
-  entradas.prata = parseInt(Dom('moedas-prata').value);
-  entradas.cobre = parseInt(Dom('moedas-cobre').value);
+  gEntradas.platina = parseInt(Dom('moedas-platina').value);
+  gEntradas.ouro = parseInt(Dom('moedas-ouro').value);
+  gEntradas.prata = parseInt(Dom('moedas-prata').value);
+  gEntradas.cobre = parseInt(Dom('moedas-cobre').value);
 
   // Equipamentos.
   // Armas e armaduras: estes divs possuem divs filhos com select, checkbox, input
@@ -343,20 +340,20 @@ function _LeEquipamentos() {
 
 // Funcoes iguais que chamam apenas LeArmasArmadurasEscudos com parametros corretos.
 function _LeArmas() {
-  _LeArmasArmadurasEscudos(entradas.armas, Dom('div-equipamentos-armas'));
+  _LeArmasArmadurasEscudos(gEntradas.armas, Dom('div-equipamentos-armas'));
 }
 
 function _LeArmaduras() {
-  _LeArmasArmadurasEscudos(entradas.armaduras, Dom('div-equipamentos-armaduras'));
+  _LeArmasArmadurasEscudos(gEntradas.armaduras, Dom('div-equipamentos-armaduras'));
 }
 
 function _LeEscudos() {
-  _LeArmasArmadurasEscudos(entradas.escudos, Dom('div-equipamentos-escudos'));
+  _LeArmasArmadurasEscudos(gEntradas.escudos, Dom('div-equipamentos-escudos'));
 }
 // Fim funcoes iguais.
 
 // Le armas e armaduras. 
-// @param array_entrada o array na entrada. Pode ser entradas.armas ou armaduras.
+// @param array_entrada o array na entrada. Pode ser gEntradas.armas ou armaduras.
 // @param div que contem os elementos.
 function _LeArmasArmadurasEscudos(array_entrada, div) {
   array_entrada.length = 0;
@@ -393,10 +390,10 @@ function LeEntradaArmaArmadura(div) {
 
 
 function _LeItens(tipo_item) {
-  entradas[tipo_item] = [];
+  gEntradas[tipo_item] = [];
   var dom = DomsPorClasse('div-' + tipo_item);
   for (var i = 0; i < dom.length; ++i) {
-    entradas[tipo_item].push(LeItem(dom[i]));
+    gEntradas[tipo_item].push(LeItem(dom[i]));
   }
 }
 
@@ -418,7 +415,7 @@ function LeItem(dom) {
   return item;
 }
 
-// Adiciona moedas as entradas. Valores podem ser negativos.
+// Adiciona moedas as gEntradas. Valores podem ser negativos.
 // O personagem nunca pode ficar com moedas negativas, neste caso
 // a funcao nao fara nada.
 // @param moedas um objeto contendo { ouro, platina, prata, cobre}
@@ -437,7 +434,7 @@ function EntradasAdicionarMoedas(moedas) {
   return true;
 }
 
-// Adiciona ferimentos as entradas.
+// Adiciona ferimentos as gEntradas.
 function EntradasAdicionarFerimentos(valor) {
   gEntradas.ferimentos += valor;
   if (gPersonagem.ferimentos < 0) {

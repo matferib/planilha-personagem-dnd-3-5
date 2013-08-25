@@ -1,27 +1,27 @@
 // Todas as funcoes de atualizacao dos campos da interface.
-// Idealmente, nao deve haver nenhuma referencia a entradas neste arquivo,
+// Idealmente, nao deve haver nenhuma referencia a gEntradas neste arquivo,
 // exceto na chamada AtualizaGeral.
 
 // Quase sempre que uma mudanca ocorrer, esta funcao sera responsavel por atualizar
-// os dados da planilha. Ela lera as entradas, convertendo-nas e em seguida atualizara
+// os dados da planilha. Ela lera as gEntradas, convertendo-nas e em seguida atualizara
 // os diversos elementos da planilha.
 function AtualizaGeral() {
-  // Apenas le as entradas para a estrutura de entradas.
+  // Apenas le as gEntradas para a estrutura de gEntradas.
   LeEntradas(); 
-  // converte a estrutura de entradas para a de personagem.
+  // converte a estrutura de gEntradas para a de personagem.
   ConverteEntradasParaPersonagem();
   DependenciasGerais();
   _AtualizaGeral();
-  gEstado.Salva(JSON.stringify(entradas));
+  gEstado.Salva(JSON.stringify(gEntradas));
 }
 
 // AVISO:
-// Essa funcao eh bem perigosa. Varios botoes atualizam o personagem mas nao os objetos de entradas.
-// Portanto, se essa funcao for chamada nesse intervalo onde personagem e entradas ficam fora de 
-// sincronismo, o personagem sera revertido para a versao das entradas (por exemplo, apos gerar um
-// personagem, tentar adicionar algo em entradas e chamar essa funcao vai zerar o personagem).
+// Essa funcao eh bem perigosa. Varios botoes atualizam o personagem mas nao os objetos de gEntradas.
+// Portanto, se essa funcao for chamada nesse intervalo onde personagem e gEntradas ficam fora de 
+// sincronismo, o personagem sera revertido para a versao das gEntradas (por exemplo, apos gerar um
+// personagem, tentar adicionar algo em gEntradas e chamar essa funcao vai zerar o personagem).
 //
-// Sempre que for necessaria uma atualizacao sem leitura de entradas, essa funcao sera chamada.
+// Sempre que for necessaria uma atualizacao sem leitura de gEntradas, essa funcao sera chamada.
 // Eh o caso de elementos criados de forma independente (armas, estilos) que devem ser adicionados
 // manualmente a entrada e em seguida chamam essa funcao. As funcoes de carregamento tambem
 // devem usar esta funcao, pois a entrada que eh salva.
@@ -30,18 +30,18 @@ function AtualizaGeralSemLerEntradas() {
   ConverteEntradasParaPersonagem();
   DependenciasGerais();
   _AtualizaGeral();
-  gEstado.Salva(JSON.stringify(entradas));
+  gEstado.Salva(JSON.stringify(gEntradas));
 }
 
 // Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das 
-// entradas. Normalmente os tratamentos de eventos alteram algum campo do personagem e chamam
+// gEntradas. Normalmente os tratamentos de eventos alteram algum campo do personagem e chamam
 // esta funcao para atualizar tudo.
 function AtualizaGeralSemConverterEntradas() {
   DependenciasGerais();
   _AtualizaGeral();
 }
 
-// Apenas atualizacoes a planilha a partir do personagem, sem leitura de entradas.
+// Apenas atualizacoes a planilha a partir do personagem, sem leitura de gEntradas.
 function _AtualizaGeral() {
   _AtualizaNomeRacaAlinhamentoXp();
   _AtualizaDadosVida();
