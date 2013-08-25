@@ -15,9 +15,9 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
       indice: indice,
       handleEvent: function () {
         var indice_a_remover = 0;
-        entradas.feiticos_conhecidos[this.chave_classe][this.nivel].splice(this.indice, 1);
+        gEntradas.feiticos_conhecidos[this.chave_classe][this.nivel].splice(this.indice, 1);
         // Arruma todos os slots de nivel maior ou igual.
-        var slots_classe = entradas.slots_feiticos[this.chave_classe];
+        var slots_classe = gEntradas.slots_feiticos[this.chave_classe];
         for (var nivel in slots_classe) {
           if (nivel < this.nivel) {
             continue;
@@ -29,7 +29,7 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
             }
           }.bind(this));
           // Ajusta slot de dominio (se houver).
-          var slot_dominio = entradas.slots_feiticos_dominio[this.chave_classe][this.nivel];
+          var slot_dominio = gEntradas.slots_feiticos_dominio[this.chave_classe][this.nivel];
           if (slot_dominio != null &&
               slot_dominio.nivel == this.nivel && 
               slot_dominio.indice >= this.indice && 

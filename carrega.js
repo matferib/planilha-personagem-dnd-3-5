@@ -25,7 +25,7 @@ function CarregamentoInicial() {
   if (indice_igual != -1) {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
     var json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
-    entradas = JSON.parse(json_entradas);
+    gEntradas = JSON.parse(json_entradas);
   } 
   AtualizaGeralSemLerEntradas();
 }
@@ -343,8 +343,8 @@ function _CarregaPericias() {
     // Adiciona ao div.
     div_pericias.appendChild(div);
 
-    // Adiciona as entradas
-    entradas.pericias.push({ chave: chave_pericia, pontos: 0 });
+    // Adiciona as gEntradas
+    gEntradas.pericias.push({ chave: chave_pericia, pontos: 0 });
     // Adiciona ao personagem.
     personagem.pericias.lista[chave_pericia] = {
         graduacoes: 0, bonus: new Bonus(),

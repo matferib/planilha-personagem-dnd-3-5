@@ -11,3 +11,7 @@ Na Mensagem, focar no botao ok.
 Arrumar o botao de descansar.
 Acabar com o campo de ferimentos e transforma-lo em span text, de forma que so seja manipulado por Ferimentos e Cura.
 Reescrever a geracao para manipular apenas os campos da gEntradas sem usar AtualizaGeralSemConverterEntradas.
+Cura ta passando os pontos de vidas do personagem.
+Desfazer ta dando pau.
+Venda de objetos por metade do preco.
+Pau ao abrir personagem (nada é alterado).

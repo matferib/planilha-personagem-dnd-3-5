@@ -405,13 +405,13 @@ function AdicionaNivelFeiticoConhecido(
   div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
   if (!precisa_conhecer) {
     div_nivel.appendChild(CriaBotao('+', null, null, function() {
-      if (entradas.feiticos_conhecidos[chave_classe] == null) {
-        entradas.feiticos_conhecidos[chave_classe] = {};
+      if (gEntradas.feiticos_conhecidos[chave_classe] == null) {
+        gEntradas.feiticos_conhecidos[chave_classe] = {};
       }
-      if (entradas.feiticos_conhecidos[chave_classe][nivel] == null) {
-        entradas.feiticos_conhecidos[chave_classe][nivel] = [];
+      if (gEntradas.feiticos_conhecidos[chave_classe][nivel] == null) {
+        gEntradas.feiticos_conhecidos[chave_classe][nivel] = [];
       }
-      entradas.feiticos_conhecidos[chave_classe][nivel].push('');
+      gEntradas.feiticos_conhecidos[chave_classe][nivel].push('');
       AtualizaGeralSemLerEntradas();
     }));
   }
