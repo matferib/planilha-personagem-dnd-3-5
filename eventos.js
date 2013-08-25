@@ -44,17 +44,17 @@ function ClickAdicionarClasse() {
     Mensagem('Impossível criar nova classe');
     return;
   }
-  entradas.classes.push({ classe: nova_classe, nivel: 1 });
+  gEntradas.classes.push({ classe: nova_classe, nivel: 1 });
   AtualizaGeralSemLerEntradas();
 }
 
 // Botao de remover classe apertado.
 function ClickRemoverClasse() {
-  if (entradas.classes.length == 1) {
+  if (gEntradas.classes.length == 1) {
     Mensagem('Impossível remover classe');
     return;
   }
-  entradas.classes.pop();
+  gEntradas.classes.pop();
   AtualizaGeralSemLerEntradas();
 }
 
@@ -67,7 +67,7 @@ function ClickSalvar() {
     return;
   }
   HabilitaOverlay();
-  SalvaNoArmazem(nome, JSON.stringify(entradas), function() {
+  SalvaNoArmazem(nome, JSON.stringify(gEntradas), function() {
     CarregaPersonagens();
     DesabilitaOverlay();
     Mensagem('Personagem "' + nome + '" salvo com sucesso.'); 
@@ -85,7 +85,7 @@ function ClickAbrir() {
     nome: nome,
     f: function(dado) {
       if (nome in dado) {
-        entradas = JSON.parse(dado[nome]);
+        gEntradas = JSON.parse(dado[nome]);
         AtualizaGeralSemLerEntradas();
         SelecionaValor('--', Dom('select-personagens'));
         Mensagem('Personagem "' + nome + '" carregado com sucesso.');
@@ -123,7 +123,7 @@ function ClickExportar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var input = Dom("json-personagem");
   input.style.display = 'inline';
-  input.value = JSON.stringify(entradas);
+  input.value = JSON.stringify(gEntradas);
   input.focus();
   input.select();
   Mensagem('Personagem "' + personagem.nome + '" exportado com sucesso. ' +
@@ -133,7 +133,7 @@ function ClickExportar() {
 // Abre o personagem lendo do campo de texto.
 function ClickImportar() {
   var input = Dom("json-personagem");
-  entradas = JSON.parse(input.value);
+  gEntradas = JSON.parse(input.value);
   AtualizaGeralSemLerEntradas();
   Mensagem('Personagem "' + personagem.nome + '" importado com sucesso');
 }
@@ -145,7 +145,7 @@ function ClickLink() {
   var indice_interrogacao = document.URL.indexOf('?');
   var url = 
     (indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) + 
-    '?pc=' + encodeURIComponent(JSON.stringify(entradas));
+    '?pc=' + encodeURIComponent(JSON.stringify(gEntradas));
   Dom("link-personagem").innerHTML = 
     '<a href="' + url + '">Link</a>';
 }
@@ -189,19 +189,19 @@ function ClickGerarComum() {
 
 // Adiciona uma arma a lista de equipamentos.
 function ClickAdicionarArma() {
-  entradas.armas.push({ chave: 'desarmado', obra_prima: false, bonus: 0 });
+  gEntradas.armas.push({ chave: 'desarmado', obra_prima: false, bonus: 0 });
   AtualizaGeralSemLerEntradas();
 }
 
 // Adiciona uma armadura a lista de equipamentos.
 function ClickAdicionarArmadura() {
-  entradas.armaduras.push({ chave: 'nenhuma', obra_prima: false, bonus: 0 });
+  gEntradas.armaduras.push({ chave: 'nenhuma', obra_prima: false, bonus: 0 });
   AtualizaGeralSemLerEntradas();
 }
 
 // Adiciona um escudo a lista de equipamentos.
 function ClickAdicionarEscudo() {
-  entradas.escudos.push({ chave: 'nenhum', obra_prima: false, bonus: 0 });
+  gEntradas.escudos.push({ chave: 'nenhum', obra_prima: false, bonus: 0 });
   AtualizaGeralSemLerEntradas();
 }
 
@@ -303,7 +303,7 @@ function ClickVisualizacaoModoMestre() {
 }
 
 // Trata o evento de adicionar items. Se a estrutura for alterada aqui,
-// mudar tambem a leitura das entradas que depende da ordem dos doms.
+// mudar tambem a leitura das gEntradas que depende da ordem dos doms.
 function ClickAdicionarItem(tipo_item) {
   gEntradas[tipo_item].push({ chave: '', em_uso: false });
   AtualizaGeralSemLerEntradas();
@@ -465,22 +465,22 @@ function ChangeNotas() {
 // A mudanca de raca é quase igual ao atualiza geral, mas deve-se zerar o tamanho 
 // para o padrão da nova raça.
 function ChangeRaca() {
-  entradas.raca = ValorSelecionado(Dom('raca'));
-  entradas.tamanho = tabelas_raca[entradas.raca].tamanho;
+  gEntradas.raca = ValorSelecionado(Dom('raca'));
+  gEntradas.tamanho = tabelas_raca[gEntradas.raca].tamanho;
   AtualizaGeralSemLerEntradas();
 }
 
 function ChangePontosExperienciaAdicionais() {
   var dom = Dom("pontos-experiencia-adicionais");
   var valor = parseInt(dom.value);
-  entradas.experiencia += valor;
+  gEntradas.experiencia += valor;
   dom.value = '';
   AtualizaGeralSemLerEntradas();
 }
 
 // Botao para desfazer ultima acao.
 function ClickDesfazer() {
-  entradas = JSON.parse(gEstado.Restaura());
+  gEntradas = JSON.parse(gEstado.Restaura());
   AtualizaGeralSemLerEntradas();
 }
 

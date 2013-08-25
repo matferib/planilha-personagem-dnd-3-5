@@ -5,17 +5,17 @@ function ConverteEntradasParaPersonagem() {
   // Limpa tudo antes de comecar.
   PersonagemLimpaGeral();
 
-  personagem.modo_mestre = entradas.modo_mestre;
-  personagem.modo_visao = entradas.modo_visao;
-  personagem.nome = entradas.nome;
-  personagem.raca = entradas.raca;
-  personagem.tamanho.categoria = entradas.tamanho;
+  personagem.modo_mestre = gEntradas.modo_mestre;
+  personagem.modo_visao = gEntradas.modo_visao;
+  personagem.nome = gEntradas.nome;
+  personagem.raca = gEntradas.raca;
+  personagem.tamanho.categoria = gEntradas.tamanho;
 
-  personagem.alinhamento = entradas.alinhamento;
-  personagem.divindade = entradas.divindade;
-  personagem.classes = entradas.classes;
+  personagem.alinhamento = gEntradas.alinhamento;
+  personagem.divindade = gEntradas.divindade;
+  personagem.classes = gEntradas.classes;
 
-  personagem.experiencia = entradas.experiencia;
+  personagem.experiencia = gEntradas.experiencia;
 
   // Equipamentos podem afetar todo o resto.
   _ConverteEquipamentos();
@@ -45,7 +45,7 @@ function ConverteEntradasParaPersonagem() {
   // Feiticos.
   _ConverteFeiticos();
 
-  personagem.notas = entradas.notas;
+  personagem.notas = gEntradas.notas;
 }
 
 function _ConverteDadosVida() {
@@ -56,28 +56,28 @@ function _ConverteDadosVida() {
 }
 
 function _ConvertePontosVida() {
-  personagem.pontos_vida.total_dados = entradas.pontos_vida;
-  personagem.pontos_vida.ferimentos = entradas.ferimentos;
+  personagem.pontos_vida.total_dados = gEntradas.pontos_vida;
+  personagem.pontos_vida.ferimentos = gEntradas.ferimentos;
 }
 
 function _ConverteEquipamentos() {
   // moedas.
   for (var tipo_moeda in personagem.moedas) {
-    personagem.moedas[tipo_moeda] = entradas[tipo_moeda];
+    personagem.moedas[tipo_moeda] = gEntradas[tipo_moeda];
   }
   // itens, apenas se estiverem definidos.
   for (var tipo_item in tabelas_itens) {
-    if (entradas[tipo_item] == null) {
-      entradas[tipo_item] = [];
+    if (gEntradas[tipo_item] == null) {
+      gEntradas[tipo_item] = [];
     }
-    personagem[tipo_item] = entradas[tipo_item];
+    personagem[tipo_item] = gEntradas[tipo_item];
   }
   // outros.
-  personagem.outros_equipamentos = entradas.outros_equipamentos;
+  personagem.outros_equipamentos = gEntradas.outros_equipamentos;
 }
 
 function _ConverteAtributos() {
-  for (var i = 0; i < entradas.bonus_atributos.length; ++i) {
+  for (var i = 0; i < gEntradas.bonus_atributos.length; ++i) {
     personagem.atributos.pontos.gastos.push(gEntradas.bonus_atributos[i]);
   }
   // Calcula os componentes dos atributos.
@@ -91,8 +91,8 @@ function _ConverteTalentos() {
   for (var chave_classe in personagem.talentos) {
     var lista = personagem.talentos[chave_classe];
     lista.length = 0;
-    for (var i = 0; i < entradas.talentos[chave_classe].length; ++i) {
-      var talento_entrada = entradas.talentos[chave_classe][i];
+    for (var i = 0; i < gEntradas.talentos[chave_classe].length; ++i) {
+      var talento_entrada = gEntradas.talentos[chave_classe][i];
       lista.push({
           chave: talento_entrada.chave,
           complemento: talento_entrada.complemento });
@@ -100,25 +100,25 @@ function _ConverteTalentos() {
   }
 }
 
-// Converte todas as pericias. Primeiro calcula o total de pontos e depois varre as entradas
+// Converte todas as pericias. Primeiro calcula o total de pontos e depois varre as gEntradas
 // de pericia, computando o valor de cada uma e o numero de pontos disponiveis.
 function _ConvertePericias() {
-  for (var i = 0; i < entradas.pericias.length; ++i) {
-    personagem.pericias.lista[entradas.pericias[i].chave].pontos =
-        entradas.pericias[i].pontos;
+  for (var i = 0; i < gEntradas.pericias.length; ++i) {
+    personagem.pericias.lista[gEntradas.pericias[i].chave].pontos =
+        gEntradas.pericias[i].pontos;
   }
 }
 
 // Converte a lista de armaduras do personagem.
 function _ConverteListaArmaduras() {
   personagem.armaduras.length = 0;
-  for (var i = 0; i < entradas.armaduras.length; ++i) {
-    var armadura_personagem = ConverteArmadura(entradas.armaduras[i]);
+  for (var i = 0; i < gEntradas.armaduras.length; ++i) {
+    var armadura_personagem = ConverteArmadura(gEntradas.armaduras[i]);
     personagem.armaduras.push(armadura_personagem);
   }
   personagem.escudos.length = 0;
-  for (var i = 0; i < entradas.escudos.length; ++i) {
-    var escudo_personagem = ConverteEscudo(entradas.escudos[i]);
+  for (var i = 0; i < gEntradas.escudos.length; ++i) {
+    var escudo_personagem = ConverteEscudo(gEntradas.escudos[i]);
     personagem.escudos.push(escudo_personagem);
   }
 
@@ -166,8 +166,8 @@ function _ConverteListaArmas() {
   // A mesma coisa ocorre no atualiza, a arma nao eh mostrada para
   // evitar inconsistencias.
   personagem.armas.length = 1;
-  for (var i = 0; i < entradas.armas.length; ++i) {
-    personagem.armas.push(ConverteArma(entradas.armas[i]));
+  for (var i = 0; i < gEntradas.armas.length; ++i) {
+    personagem.armas.push(ConverteArma(gEntradas.armas[i]));
   }
 }
 
@@ -188,8 +188,8 @@ function ConverteArma(arma_entrada) {
 }
 
 function _ConverteEstilos() {
-  for (var i = 0; i < entradas.estilos_luta.length; ++i) {
-    personagem.estilos_luta.push(_ConverteEstilo(entradas.estilos_luta[i]));
+  for (var i = 0; i < gEntradas.estilos_luta.length; ++i) {
+    personagem.estilos_luta.push(_ConverteEstilo(gEntradas.estilos_luta[i]));
   }
 }
 
@@ -221,10 +221,10 @@ function _ConverteFeiticos() {
 // Cada entrada possui classe, nivel, indice e feitico. Esta funcao le todas as entradads
 // e as coloca no personagem se, e somente se, o objeto de feitico possuir todos esses atributos.
 function _ConverteFeiticosConhecidos() {
-  for (var chave_classe in entradas.feiticos_conhecidos) {
+  for (var chave_classe in gEntradas.feiticos_conhecidos) {
     var feiticos_classe = personagem.feiticos[chave_classe];
-    for (var nivel in entradas.feiticos_conhecidos[chave_classe]) {
-      entradas.feiticos_conhecidos[chave_classe][nivel].forEach(function(feitico) {
+    for (var nivel in gEntradas.feiticos_conhecidos[chave_classe]) {
+      gEntradas.feiticos_conhecidos[chave_classe][nivel].forEach(function(feitico) {
         feiticos_classe.conhecidos[nivel].push(feitico);
       });
     }
@@ -232,11 +232,11 @@ function _ConverteFeiticosConhecidos() {
 }
 
 function _ConverteFeiticosSlots() {
-  for (var chave_classe in entradas.slots_feiticos) {
+  for (var chave_classe in gEntradas.slots_feiticos) {
     // Converte os slots de feitiços normais.
     var feiticos_classe = personagem.feiticos[chave_classe];
-    for (var nivel in entradas.slots_feiticos[chave_classe]) {
-      entradas.slots_feiticos[chave_classe][nivel].forEach(function(entrada_feitico, indice) {
+    for (var nivel in gEntradas.slots_feiticos[chave_classe]) {
+      gEntradas.slots_feiticos[chave_classe][nivel].forEach(function(entrada_feitico, indice) {
         var slots_classe_nivel = feiticos_classe.slots[nivel];
         var slot_feitico = {
             nivel_conhecido: entrada_feitico.nivel,
@@ -246,8 +246,8 @@ function _ConverteFeiticosSlots() {
       });
     }
     // Converte os feitiços de domínio da classe (se houver).
-    for (var nivel in entradas.slots_feiticos_dominio[chave_classe]) {
-      var entrada_feitico = entradas.slots_feiticos_dominio[chave_classe][nivel];
+    for (var nivel in gEntradas.slots_feiticos_dominio[chave_classe]) {
+      var entrada_feitico = gEntradas.slots_feiticos_dominio[chave_classe][nivel];
       var slots_classe_nivel = feiticos_classe.slots[nivel];
       slots_classe_nivel.feitico_dominio = {
         nivel_conhecido: entrada_feitico.nivel,
