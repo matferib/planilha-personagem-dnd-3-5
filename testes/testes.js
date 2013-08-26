@@ -29,7 +29,7 @@ function _ComparaMoedas(moedas1, moedas2) {
 // @return true se o valor total das salvacoes do personagem for igual aos valores passados.
 function ComparaSalvacoes(salvacoes) {
   for (var tipo_salvacao in salvacoes) {
-    if (personagem.salvacoes[tipo_salvacao].Total() != salvacoes[tipo_salvacao]) {
+    if (gPersonagem.salvacoes[tipo_salvacao].Total() != salvacoes[tipo_salvacao]) {
       return false;
     }
   }
@@ -81,7 +81,7 @@ function CarregaTestes() {
   var body = document.getElementsByTagName('body')[0];
 
   PersonagemLimpaGeral();
-  personagem.armas = [ 
+  gPersonagem.armas = [ 
       { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' } ];
   TemplateTeste({
     nome: 'ArmaPersonagem', 
@@ -106,10 +106,10 @@ function CarregaTestes() {
   TemplateTeste({
     nome: 'TestaEfeitoItems', 
     Testa: function() {
-      personagem.aneis.push({chave: 'protecao_2', em_uso: true});
+      gPersonagem.aneis.push({chave: 'protecao_2', em_uso: true});
       _DependenciasEquipamentos();
       _DependenciasArmadurasEscudos();
-      if (personagem.ca.bonus.Total() != 2) {
+      if (gPersonagem.ca.bonus.Total() != 2) {
         this.resultado = false;
         this.detalhes = 'Esperava 2 de bonus no AC por causa de anel de proteção +2';
         return;
@@ -187,7 +187,7 @@ function CarregaTestes() {
 
 
   PersonagemLimpaGeral();
-  personagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 }; 
+  gPersonagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 }; 
   TemplateTeste({
     nome: 'PersonagemAdicionarMoedas', 
     Testa: function() {
@@ -195,14 +195,14 @@ function CarregaTestes() {
       var resultado_moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 };
       // Aqui a funcao PersonagemAdicionarMoedas tem que retornar true.
       if (!PersonagemAdicionarMoedas({ platina: 0, ouro: 0, prata: 0, cobre: 0 }) ||
-          !_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+          !_ComparaMoedas(resultado_moedas, gPersonagem.moedas)) {
         this.detalhes = 'Valores nao deveriam ter mudado';
         this.resultado = false;
         return;
       }
       // Aqui a funcao PersonagemAdicionarMoedas tem que retornar false.
       if (PersonagemAdicionarMoedas({ platina: -1, ouro: -3, prata: 0, cobre: 0 }) ||
-          !_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+          !_ComparaMoedas(resultado_moedas, gPersonagem.moedas)) {
         this.detalhes = 'Valores nao deveriam ter mudado, ouro ficaria negativo';
         this.resultado = false;
         return;
@@ -210,7 +210,7 @@ function CarregaTestes() {
       resultado_moedas = { platina: 0, ouro: 5, prata: 6, cobre: 7 };
       // Aqui a funcao PersonagemAdicionarMoedas tem que retornar true.
       if (!PersonagemAdicionarMoedas({ platina: -1, ouro: 3, prata: 3, cobre: 3 }) ||
-          !_ComparaMoedas(resultado_moedas, personagem.moedas)) {
+          !_ComparaMoedas(resultado_moedas, gPersonagem.moedas)) {
         this.detalhes = 'Adição errada';
         this.resultado = false;
         return;
@@ -448,7 +448,7 @@ function CarregaTestes() {
         this.detalhes = 'Talento "liderança" deveria requerer personagem de 6o nível';
         return;
       }
-      personagem.dados_vida.nivel_personagem = 6;
+      gPersonagem.dados_vida.nivel_personagem = 6;
       r = PersonagemVerificaPrerequisitosTalento('lideranca');
       if (r != null) {
         this.resultado = false;
@@ -464,8 +464,8 @@ function CarregaTestes() {
         return;
       }
       // Paladino tem nivel = 1/2 nivel classe.
-      personagem.classes[0].classe = 'paladino';
-      personagem.classes[0].nivel= 6;
+      gPersonagem.classes[0].classe = 'paladino';
+      gPersonagem.classes[0].nivel= 6;
       _DependenciasNivelConjurador();
       r = PersonagemVerificaPrerequisitosTalento('preparar_pocao');
       if (r != null) {
@@ -481,7 +481,7 @@ function CarregaTestes() {
         this.detalhes = 'Talento "magia_natural" deveria requerer sabedoria 13';
         return;
       }
-      personagem.atributos.sabedoria.valor = 13;
+      gPersonagem.atributos.sabedoria.valor = 13;
       r = PersonagemVerificaPrerequisitosTalento('magia_natural');
       if (r != null) {
         this.resultado = false;
@@ -496,7 +496,7 @@ function CarregaTestes() {
         this.detalhes = 'Talento "magia_penetrante_maior" deveria requerer magia_penetrante';
         return;
       }
-      personagem.talentos.gerais.push({ chave: 'magia_penetrante', });
+      gPersonagem.talentos.gerais.push({ chave: 'magia_penetrante', });
       r = PersonagemVerificaPrerequisitosTalento('magia_penetrante_maior');
       if (r != null) {
         this.resultado = false;
@@ -549,8 +549,8 @@ function CarregaTestes() {
     nome: 'DependenciasSalvacoes', 
     Testa: function() {
       // Guerreiro 1 nivel default.
-      personagem.classes[0].classe = 'guerreiro';
-      personagem.classes[0].nivel = 1;
+      gPersonagem.classes[0].classe = 'guerreiro';
+      gPersonagem.classes[0].nivel = 1;
       _DependenciasSalvacoes();
       if (!ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 })) {
         this.resultado = false;
@@ -558,7 +558,7 @@ function CarregaTestes() {
         return;
       }
       // Ladino nivel 1.
-      personagem.classes[0].classe = 'ladino';
+      gPersonagem.classes[0].classe = 'ladino';
       _DependenciasSalvacoes();
       if (!ComparaSalvacoes({ fortitude: 0, reflexo: 2, vontade: 0 })) {
         this.resultado = false;
@@ -566,8 +566,8 @@ function CarregaTestes() {
         return;
       }
       // Clerigo nivel 1.
-      personagem.classes[0].classe = 'clerigo';
-      personagem.raca = 'halfling';
+      gPersonagem.classes[0].classe = 'clerigo';
+      gPersonagem.raca = 'halfling';
       _DependenciasSalvacoes();
       if (!ComparaSalvacoes({ fortitude: 3, reflexo: 1, vontade: 3 })) {
         this.resultado = false;
@@ -577,7 +577,7 @@ function CarregaTestes() {
       this.resultado = true;
 
       // Fortitude maior.
-      personagem.talentos.gerais.push({ chave: 'fortitude_maior' });
+      gPersonagem.talentos.gerais.push({ chave: 'fortitude_maior' });
       _DependenciasTalentos();
       _DependenciasSalvacoes();
       if (!ComparaSalvacoes({ fortitude: 5, reflexo: 1, vontade: 3 })) {
@@ -597,7 +597,7 @@ function CarregaTestes() {
     Testa: function() {
       var checkbox = { checked: true };
       ClickUsarItem('aneis', checkbox);
-      personagem['aneis'] = [
+      gPersonagem['aneis'] = [
           { chave: 'protecao_1', em_uso: false}, 
           { chave: 'protecao_1', em_uso: false}, 
           { chave: 'protecao_1', em_uso: false}];
@@ -606,7 +606,7 @@ function CarregaTestes() {
         this.detalhes = 'Esperava que o checkbox fosse marcado.';
         return;
       }
-      personagem['aneis'][0].em_uso = personagem['aneis'][1].em_uso = true;
+      gPersonagem['aneis'][0].em_uso = gPersonagem['aneis'][1].em_uso = true;
       ClickUsarItem('aneis', checkbox);
       if (!checkbox.checked) {
         this.resultado = false;
