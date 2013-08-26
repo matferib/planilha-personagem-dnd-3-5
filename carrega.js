@@ -229,7 +229,7 @@ function _CarregaTalentos() {
   if (div_talentos == null) {
     return;
   }
-  for (var chave_classe in personagem.talentos) {
+  for (var chave_classe in gPersonagem.talentos) {
     var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
@@ -346,7 +346,7 @@ function _CarregaPericias() {
     // Adiciona as gEntradas
     gEntradas.pericias.push({ chave: chave_pericia, pontos: 0 });
     // Adiciona ao personagem.
-    personagem.pericias.lista[chave_pericia] = {
+    gPersonagem.pericias.lista[chave_pericia] = {
         graduacoes: 0, bonus: new Bonus(),
     };
   }
@@ -355,14 +355,14 @@ function _CarregaPericias() {
 // Cria os objetos das classes que possuem feiticos no personagem.
 function _CarregaFeiticos() {
   for (var chave_classe in tabelas_feiticos) {
-    personagem.feiticos[chave_classe] = {
+    gPersonagem.feiticos[chave_classe] = {
       atributo_chave: tabelas_feiticos[chave_classe].atributo_chave,
       conhecidos: {},
       slots: {},
     };
     for (var i = 0; i <= 9; ++i) {
-      personagem.feiticos[chave_classe].conhecidos[i] = [];
-      personagem.feiticos[chave_classe].slots[i] = {
+      gPersonagem.feiticos[chave_classe].conhecidos[i] = [];
+      gPersonagem.feiticos[chave_classe].slots[i] = {
         atributo_chave: tabelas_feiticos[chave_classe].atributo_chave,
         base: 0,
         bonus_atributo: 0,
