@@ -178,9 +178,6 @@ var gPersonagem = {
   notas: '',
 };
 
-// TODO remover quando nao houver mais referencia a personagem.
-var personagem = gPersonagem;
-
 // Limpa tudo antes de comecar a conversao das entradas para o personagem. 
 function PersonagemLimpaGeral() {
   gPersonagem.pontos_vida.total = 0;

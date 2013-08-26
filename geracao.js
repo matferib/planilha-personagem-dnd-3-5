@@ -7,29 +7,29 @@ function _GeraAtributos(modo, submodo) {
   } else {
     valores = [ 13, 12, 11, 10, 9, 8 ];
   }
-  if (personagem.classes.length == 0) {
+  if (gPersonagem.classes.length == 0) {
     // Nunca deve acontecer.
     Mensagem('Personagem sem classe');
     return;
   }
 
-  var primeira_classe = personagem.classes[0];
+  var primeira_classe = gPersonagem.classes[0];
   if (primeira_classe.classe == 'aristocrata' || primeira_classe.classe == 'expert') {
     Mensagem("É recomendado colocar os valores na mão para aristocratas e experts");
   }
 
   var atributos_primeira_classe = tabelas_geracao[primeira_classe.classe].atributos;
   for (var i = 0; i < valores.length; ++i) {
-    personagem.atributos[atributos_primeira_classe[i]].base = valores[i];
+    gPersonagem.atributos[atributos_primeira_classe[i]].base = valores[i];
   }
 
   // Incrementa o atributo mais valioso do personagem
   var atributo_mais_valioso = atributos_primeira_classe[0];
-  for (var i = personagem.atributos.pontos.disponiveis; i > 0; --i) {
-    personagem.atributos.pontos.gastos.push(atributo_mais_valioso);
-    ++personagem.atributos[atributo_mais_valioso].bonus_nivel;
+  for (var i = gPersonagem.atributos.pontos.disponiveis; i > 0; --i) {
+    gPersonagem.atributos.pontos.gastos.push(atributo_mais_valioso);
+    ++gPersonagem.atributos[atributo_mais_valioso].bonus_nivel;
   }
-  personagem.atributos.pontos.disponiveis = 0;
+  gPersonagem.atributos.pontos.disponiveis = 0;
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
@@ -44,8 +44,8 @@ function _GeraPontosDeVida(modo, submodo) {
   var total_pontos_vida = 0;
   // Primeiro eh diferente na elite e personagem.
   var primeiro = (modo == 'comum') ? false : true;
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    var info_classe = personagem.classes[i];
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var info_classe = gPersonagem.classes[i];
     for (var j = 0; j < info_classe.nivel; ++j) {
       var pontos_vida_nivel = 0;
       if (primeiro) {
@@ -55,8 +55,8 @@ function _GeraPontosDeVida(modo, submodo) {
           // O modificador de constituicao eh subtraido aqui pq sera adicionado 
           // no calculo de pontos de vida, nos bonus.
           pontos_vida_nivel = tabelas_classes[info_classe.classe].dados_vida +
-              personagem.atributos['constituicao'].valor -  
-              personagem.atributos['constituicao'].modificador;
+              gPersonagem.atributos['constituicao'].valor -  
+              gPersonagem.atributos['constituicao'].modificador;
         } else {
           pontos_vida_nivel = submodo == 'tabelado' ?
               tabelas_classes[info_classe.classe].dados_vida / 2 :
@@ -76,20 +76,20 @@ function _GeraPontosDeVida(modo, submodo) {
       total_pontos_vida += pontos_vida_nivel;
     }
   }
-  personagem.pontos_vida.total_dados = Math.floor(total_pontos_vida);
+  gPersonagem.pontos_vida.total_dados = Math.floor(total_pontos_vida);
 }
 
 // Gera os equipamentos que nao afetam outras coisas (ou ainda nao implementados)
 // como moedas. Assume um personagem do nivel da primeira classe.
 function _GeraEquipamentos(tabela_geracao_classe_por_nivel) {
   for (var chave_moeda in tabela_geracao_classe_por_nivel.moedas) {
-    personagem.moedas[chave_moeda] = tabela_geracao_classe_por_nivel.moedas[chave_moeda];
+    gPersonagem.moedas[chave_moeda] = tabela_geracao_classe_por_nivel.moedas[chave_moeda];
   }
 }
 
 function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
   var tabela = tabela_geracao_classe_por_nivel;
-  personagem.armaduras.length = 0;
+  gPersonagem.armaduras.length = 0;
   if (tabela.armadura != null) {
     var entrada_armadura = {
       entrada: {
@@ -99,10 +99,10 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
         em_uso: true,
       },
     };
-    personagem.armaduras.push(entrada_armadura);
+    gPersonagem.armaduras.push(entrada_armadura);
   }
 
-  personagem.escudos.length = 0;
+  gPersonagem.escudos.length = 0;
   if (tabela.escudo != null) {
     var entrada_escudo = {
       entrada: {
@@ -112,13 +112,13 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
         em_uso: true,
       },
     };
-    personagem.escudos.push(entrada_escudo);
+    gPersonagem.escudos.push(entrada_escudo);
   }
 }
 
 function _GeraArmas(tabela_geracao_classe_por_nivel) {
   // Mantem desarmado.
-  personagem.armas.length = 1;
+  gPersonagem.armas.length = 1;
   with (tabela_geracao_classe_por_nivel) {
     for (var i = 0; i < armas.length; ++i) {
       var arma_entrada = { 
@@ -128,14 +128,14 @@ function _GeraArmas(tabela_geracao_classe_por_nivel) {
               obra_prima: armas[i].obra_prima 
           } 
       };
-      personagem.armas.push(arma_entrada);
+      gPersonagem.armas.push(arma_entrada);
     }
   }
 }
 
 // @param tipo_item o tipo do item sendo gerado (aneis, amuletos etc).
 function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
-  personagem[tipo_item].length = 0;
+  gPersonagem[tipo_item].length = 0;
   if (tabela_geracao_classe_por_nivel[tipo_item] == null) {
     // Sem itens do tipo.
     return;
@@ -146,7 +146,7 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
         chave: item.chave, 
         em_uso: item.em_uso,
     };
-    personagem[tipo_item].push(item_entrada);
+    gPersonagem[tipo_item].push(item_entrada);
   }
 }
 
@@ -158,8 +158,8 @@ function GeraPersonagem(modo, submodo) {
   if (!submodo) {
     submodo = 'tabelado';
   }
-  if (tabelas_geracao[personagem.classes[0].classe] == null) {
-    Mensagem('Geração de ' + personagem.classes[0].classe + ' não disponível');
+  if (tabelas_geracao[gPersonagem.classes[0].classe] == null) {
+    Mensagem('Geração de ' + gPersonagem.classes[0].classe + ' não disponível');
     return;
   }
   _GeraAtributos(modo, submodo);
@@ -168,14 +168,14 @@ function GeraPersonagem(modo, submodo) {
   // Atualiza aqui para ja ter alguns numeros usados abaixo.
   AtualizaGeralSemConverterEntradas();
 
-  var tabelas_geracao_classe = tabelas_geracao[personagem.classes[0].classe];
+  var tabelas_geracao_classe = tabelas_geracao[gPersonagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
-      tabelas_geracao_classe.por_nivel[personagem.classes[0].nivel] == null) {
-    Mensagem('Geração avançada de ' + personagem.classes[0].classe + ' não disponível');
+      tabelas_geracao_classe.por_nivel[gPersonagem.classes[0].nivel] == null) {
+    Mensagem('Geração avançada de ' + gPersonagem.classes[0].classe + ' não disponível');
     return;
   }
   var tabela_geracao_classe_por_nivel =
-      tabelas_geracao_classe.por_nivel[personagem.classes[0].nivel];
+      tabelas_geracao_classe.por_nivel[gPersonagem.classes[0].nivel];
 
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
@@ -188,9 +188,9 @@ function GeraPersonagem(modo, submodo) {
   _GeraEstilosDeLuta();
   _GeraTalentos();
   */
-  _GeraPericias(tabelas_classes[personagem.classes[0].classe], 
+  _GeraPericias(tabelas_classes[gPersonagem.classes[0].classe], 
                 tabelas_geracao_classe, 
-                personagem.classes[0].nivel);
+                gPersonagem.classes[0].nivel);
   /*
   _GeraFeiticos();
   */
@@ -204,10 +204,10 @@ function _GeraPericias(tabela_classe, tabela_geracao_classe, nivel) {
     return;
   }
   // Pra simplificar, usa so o basico + inteligencia.
-  var num_pericias = tabela_classe.pontos_pericia + personagem.atributos['inteligencia'].modificador;
+  var num_pericias = tabela_classe.pontos_pericia + gPersonagem.atributos['inteligencia'].modificador;
   var max_pontos = nivel + 3;
   for (var i = 0; i < num_pericias && i < tabela_geracao_classe.ordem_pericias.length; ++i) {
-    personagem.pericias.lista[tabela_geracao_classe.ordem_pericias[i]].pontos = max_pontos;
+    gPersonagem.pericias.lista[tabela_geracao_classe.ordem_pericias[i]].pontos = max_pontos;
   }
 }
 
@@ -220,9 +220,9 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
     resumo += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
     var arma_tabela = arma_personagem.arma_tabela;
     if (estilo.nome == 'arma_dupla' && !primaria) {
-      resumo += arma_tabela.dano_secundario[personagem.tamanho.categoria];
+      resumo += arma_tabela.dano_secundario[gPersonagem.tamanho.categoria];
     } else {
-      resumo += arma_tabela.dano[personagem.tamanho.categoria];
+      resumo += arma_tabela.dano[gPersonagem.tamanho.categoria];
     }
     resumo += StringSinalizada(bonus.dano, false) + '; ';
   }
@@ -248,46 +248,46 @@ function _GeraResumoEstilo(estilo) {
 function GeraResumo() {
   // TODO(terminar resumo)
   var resumo =
-    personagem.nome + '; ' + personagem.raca + '; ' + 
-    'Tend: ' + personagem.alinhamento.toUpperCase() + ', ' +
-    'Tam: ' + personagem.tamanho.categoria +
+    gPersonagem.nome + '; ' + gPersonagem.raca + '; ' + 
+    'Tend: ' + gPersonagem.alinhamento.toUpperCase() + ', ' +
+    'Tam: ' + gPersonagem.tamanho.categoria +
     '; ';
   // Dados de vida e pontos de vida.
   resumo += 
     'DV: ' + PersonagemStringDadosVida() + 
-    ', pv: ' + personagem.pontos_vida.total + '; ';
+    ', pv: ' + gPersonagem.pontos_vida.total + '; ';
 
-  for (var i = 0; i < personagem.classes.length; ++i) {
-    var info_classe = personagem.classes[i];
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var info_classe = gPersonagem.classes[i];
     resumo += tabelas_classes[info_classe.classe].nome + ': ' + info_classe.nivel + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
 
   // combate:
-  resumo += 'Iniciativa: ' + personagem.iniciativa.Total() + '; ';
-  resumo += 'BBA: ' + StringSinalizada(personagem.bba) + '; ';
-  resumo += 'Número de Ataques: ' + personagem.numero_ataques + '; ';
-  resumo += 'BBA cac: ' + StringSinalizada(personagem.bba_cac) + '/';
-  resumo += 'Agarrar: ' + StringSinalizada(personagem.agarrar) + '; ';
-  resumo += 'BBA distância: ' + StringSinalizada(personagem.bba_distancia) + '; ';
+  resumo += 'Iniciativa: ' + gPersonagem.iniciativa.Total() + '; ';
+  resumo += 'BBA: ' + StringSinalizada(gPersonagem.bba) + '; ';
+  resumo += 'Número de Ataques: ' + gPersonagem.numero_ataques + '; ';
+  resumo += 'BBA cac: ' + StringSinalizada(gPersonagem.bba_cac) + '/';
+  resumo += 'Agarrar: ' + StringSinalizada(gPersonagem.agarrar) + '; ';
+  resumo += 'BBA distância: ' + StringSinalizada(gPersonagem.bba_distancia) + '; ';
   resumo += 'Estilos: ';
-  for (var i = 0; i < personagem.estilos_luta.length; ++i) {
-    resumo += _GeraResumoEstilo(personagem.estilos_luta[i]) + ', ';
+  for (var i = 0; i < gPersonagem.estilos_luta.length; ++i) {
+    resumo += _GeraResumoEstilo(gPersonagem.estilos_luta[i]) + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
-  resumo += 'Classe de Armadura: total ' + (10 + personagem.ca.bonus.Total()) + ', ';
-  resumo += 'surpreso ' + (10 + personagem.ca.bonus.Total(['atributo'])) + ', ';
+  resumo += 'Classe de Armadura: total ' + (10 + gPersonagem.ca.bonus.Total()) + ', ';
+  resumo += 'surpreso ' + (10 + gPersonagem.ca.bonus.Total(['atributo'])) + ', ';
   resumo += 'toque ' + 
-      (10 + personagem.ca.bonus.Total(
+      (10 + gPersonagem.ca.bonus.Total(
           ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural'])) + '; ';
 
   // Pericias: apenas as rankeadas.
-  resumo += 'Perícias (total ' + personagem.pericias.total_pontos + '): ';
-  if (personagem.pericias.pontos_gastos < personagem.pericias.total_pontos) {
+  resumo += 'Perícias (total ' + gPersonagem.pericias.total_pontos + '): ';
+  if (gPersonagem.pericias.pontos_gastos < gPersonagem.pericias.total_pontos) {
     resumo += 'INCOMPLETO! ';
   }
-  for (var chave_pericia in personagem.pericias.lista) {
-    var pericia_personagem = personagem.pericias.lista[chave_pericia];
+  for (var chave_pericia in gPersonagem.pericias.lista) {
+    var pericia_personagem = gPersonagem.pericias.lista[chave_pericia];
     if (pericia_personagem.pontos > 0) {
       resumo += 
           tabelas_pericias[chave_pericia].nome + ' ' + 
@@ -298,8 +298,8 @@ function GeraResumo() {
   resumo = resumo.slice(0, -2) + '; ';
   // Talentos.
   resumo += 'Talentos: '
-  for (var categoria in personagem.talentos) {
-    var talentos_categoria = personagem.talentos[categoria];
+  for (var categoria in gPersonagem.talentos) {
+    var talentos_categoria = gPersonagem.talentos[categoria];
     for (var i = 0; i < talentos_categoria.length; ++i) {
       var talento = talentos_categoria[i];
       resumo += tabelas_talentos[talento.chave].nome;
@@ -313,8 +313,8 @@ function GeraResumo() {
 
   // Salvacoes.
   resumo += 'Testes de Resistência: ';
-  for (var tipo_salvacao in personagem.salvacoes) {
-    var salvacao = personagem.salvacoes[tipo_salvacao];
+  for (var tipo_salvacao in gPersonagem.salvacoes) {
+    var salvacao = gPersonagem.salvacoes[tipo_salvacao];
     var nome_salvacao = tipo_salvacao in tabelas_nome_salvacao ?
         tipo_salvacao.substr(0, 3) : tipo_salvacao;
     resumo += nome_salvacao + ': ' + StringSinalizada(salvacao.total, true) + ', ';
@@ -323,23 +323,23 @@ function GeraResumo() {
 
   // Habilidades especiais.
   resumo += 'Habilidades especiais: ';
-  for (var chave in personagem.habilidades) {
+  for (var chave in gPersonagem.habilidades) {
     resumo += tabelas_habilidades[chave].nome + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
 
   // Atributos.
   for (var atributo in tabelas_atributos) {
-    resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + personagem.atributos[atributo].valor + ', ';
+    resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + gPersonagem.atributos[atributo].valor + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
   
   // Itens. TODO nome correto.
   for (var tipo_item in tabelas_itens) {
-    if (personagem[tipo_item].length > 0) {
+    if (gPersonagem[tipo_item].length > 0) {
       resumo += tabelas_itens[tipo_item].nome + ': ';
-      for (var i = 0; i < personagem[tipo_item].length; ++i) {
-        var item = tabelas_itens[tipo_item].tabela[personagem[tipo_item][i].chave];
+      for (var i = 0; i < gPersonagem[tipo_item].length; ++i) {
+        var item = tabelas_itens[tipo_item].tabela[gPersonagem[tipo_item][i].chave];
         resumo += item.nome + ', ';
       }
       resumo = resumo.slice(0, -2) + '; ';
@@ -350,12 +350,12 @@ function GeraResumo() {
   // TODO: classe de dificuldade, conhecidos.
   // Feiticos: por classe, por nivel.
   resumo += 'Feitiços por classe: ';
-  for (var chave_classe in personagem.feiticos) {
-    if (!personagem.feiticos[chave_classe].em_uso) {
+  for (var chave_classe in gPersonagem.feiticos) {
+    if (!gPersonagem.feiticos[chave_classe].em_uso) {
       continue;
     }
 
-    var slots_classe = personagem.feiticos[chave_classe].slots;
+    var slots_classe = gPersonagem.feiticos[chave_classe].slots;
     resumo += '(' + tabelas_classes[chave_classe].nome + ': ';
     for (var nivel_slot in slots_classe) {
       var slots_nivel = slots_classe[nivel_slot];
@@ -376,7 +376,7 @@ function GeraResumo() {
   resumo += '; ';
 
   // Notas.
-  resumo += personagem.notas + '; ';
+  resumo += gPersonagem.notas + '; ';
 
   return resumo;
 }
