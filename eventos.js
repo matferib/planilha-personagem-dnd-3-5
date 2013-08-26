@@ -61,7 +61,7 @@ function ClickRemoverClasse() {
 // Salva entrada do personagem no historico local.
 function ClickSalvar() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
-  var nome = personagem.nome.length > 0 ? personagem.nome : 'saved_entradas';
+  var nome = gPersonagem.nome.length > 0 ? gPersonagem.nome : 'saved_entradas';
   if (nome == '--') {
     Mensagem('Nome "--" não é válido.');
     return;
@@ -126,7 +126,7 @@ function ClickExportar() {
   input.value = JSON.stringify(gEntradas);
   input.focus();
   input.select();
-  Mensagem('Personagem "' + personagem.nome + '" exportado com sucesso. ' +
+  Mensagem('Personagem "' + gPersonagem.nome + '" exportado com sucesso. ' +
         'Copie para a área de transferência.');
 }
 
@@ -135,7 +135,7 @@ function ClickImportar() {
   var input = Dom("json-personagem");
   gEntradas = JSON.parse(input.value);
   AtualizaGeralSemLerEntradas();
-  Mensagem('Personagem "' + personagem.nome + '" importado com sucesso');
+  Mensagem('Personagem "' + gPersonagem.nome + '" importado com sucesso');
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
@@ -243,9 +243,9 @@ function ClickPericia(chave_pericia) {
   // pega o input do campo
   var input_pericia = Dom('pericia-' + chave_pericia + '-pontos');
   var input_pericia_valor = parseInt(input_pericia.value) || 0;
-  var valor_corrente = personagem.pericias.lista[chave_pericia].pontos;
+  var valor_corrente = gPersonagem.pericias.lista[chave_pericia].pontos;
   if (input_pericia_valor - valor_corrente > 
-      personagem.pericias.total_pontos - personagem.pericias.pontos_gastos) {
+      gPersonagem.pericias.total_pontos - gPersonagem.pericias.pontos_gastos) {
     input_pericia.value = valor_corrente;
     Mensagem('Não há pontos de perícia disponíveis');
     return;
@@ -320,8 +320,8 @@ function ClickUsarItem(tipo_item, checkbox) {
     }
     var total_em_uso = 0;
     var total_maximo_item = tabelas_itens[tipo_item].maximo;
-    for (var i = 0; i < personagem[tipo_item].length && total_em_uso < total_maximo_item; ++i) {
-      if (personagem[tipo_item][i].em_uso) {
+    for (var i = 0; i < gPersonagem[tipo_item].length && total_em_uso < total_maximo_item; ++i) {
+      if (gPersonagem[tipo_item][i].em_uso) {
         ++total_em_uso;
       }
     }
