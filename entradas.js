@@ -437,8 +437,8 @@ function EntradasAdicionarMoedas(moedas) {
 // Adiciona ferimentos as gEntradas.
 function EntradasAdicionarFerimentos(valor) {
   gEntradas.ferimentos += valor;
-  if (gPersonagem.ferimentos < 0) {
-    gPersonagem.ferimentos = 0;
+  if (gEntradas.ferimentos < 0) {
+    gEntradas.ferimentos = 0;
   }
 }
 
