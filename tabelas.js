@@ -992,8 +992,6 @@ Agarrar Aprimorado¹ Des 13, Ataque Desarmado Aprimorado +4 de bônus nos testes
 Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distância por rodada
 Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
 Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
-Trespassar¹ Ataque Poderoso Desfere um ataque corporal extra depois de imobilizar um oponente
-Trespassar Maior¹ Trespassar, Ataque Poderoso, bônus base de ataque +4 Trespassar sem limite de ataques por rodada
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
 Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e não provoca ataques de oportunidade
@@ -1015,7 +1013,6 @@ Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efet
 Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
-Negociador - +2 de bônus nos teste de Diplomacia e Sentir Motivação
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
@@ -1189,8 +1186,11 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       nome: 'Mobilidade',
       requisitos: { talentos: [ 'esquiva'], },
       descricao: '+4 de bônus de esquiva na CA contra ataques de oportunidade.',
-      guerreiro: true,
-  },
+      guerreiro: true, },
+  negociador: {
+      nome: 'Negociador',
+      descricao: '+2 de bônus nos teste de Diplomacia e Sentir Motivação.',
+      bonus_pericias: { diplomacia: 2, sentir_motivacao: 2, }, },
   persuasivo: {
       nome: 'Persuasivo',
       bonus_pericias: { blefar: 2, intimidacao: 2 } },
@@ -1214,6 +1214,11 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       descricao: '+4 de bônus nos testes para resistir a danos não letais (nadar, correr, marcha ' +
                  'forçada, respiração, fome e sede, frio, calor e sufocamento. Pode dormir em armadura ' +
                  'leve ou média sem fatigar.', },
+  trespassar: {
+      nome: 'Trespassar',  // Cleave
+      descricao: 'Desfere um ataque corporal extra depois de imobilizar um oponente',
+      requisitos: { talentos: [ 'ataque_poderoso' ] },
+      guerreiro: true, },
   usar_armas_simples: { 
       nome: 'Usar armas simples',
       descricao: 'Não sofre penalidades nos ataques com armas simples.', },
