@@ -9,7 +9,7 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.modo_visao = gEntradas.modo_visao;
   gPersonagem.nome = gEntradas.nome;
   gPersonagem.raca = gEntradas.raca;
-  gPersonagem.tamanho.categoria = gEntradas.tamanho;
+  _ConverteTamanho();
 
   gPersonagem.alinhamento = gEntradas.alinhamento;
   gPersonagem.divindade = gEntradas.divindade;
@@ -46,6 +46,15 @@ function ConverteEntradasParaPersonagem() {
   _ConverteFeiticos();
 
   gPersonagem.notas = gEntradas.notas;
+}
+
+// Se o tamanho não estiver definido nas entradas, usa o padrão da raça.
+function _ConverteTamanho() {
+  if (gEntradas.tamanho != null) {
+    gPersonagem.tamanho.categoria = gEntradas.tamanho;
+  } else {
+    gPersonagem.tamanho.categoria = tabelas_raca[gEntradas.raca].tamanho;
+  }
 }
 
 function _ConverteDadosVida() {
