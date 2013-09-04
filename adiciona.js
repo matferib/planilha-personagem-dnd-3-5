@@ -276,8 +276,8 @@ function AdicionaEstiloLuta() {
 // @param arma_selecionada opcional, o nome da arma selecionada.
 function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
   LimpaSelect(select_arma);
-  for (var i = 0; i < personagem.armas.length; ++i) {
-    var arma = personagem.armas[i];
+  for (var i = 0; i < gPersonagem.armas.length; ++i) {
+    var arma = gPersonagem.armas[i];
     var option = document.createElement('option');
     option.setAttribute('name', arma.nome_gerado);
     option.setAttribute('value', arma.nome_gerado);
@@ -396,7 +396,7 @@ function AdicionaNivelFeiticoConhecido(
     chave_classe, precisa_conhecer, div_conhecidos, indice_filho) {
   var nivel = indice_filho;
   var feiticos_conhecidos =
-      personagem.feiticos[chave_classe].conhecidos[nivel];
+      gPersonagem.feiticos[chave_classe].conhecidos[nivel];
   // Se não precisa conhecer, o jogador pode adicionar feiticos como se fosse um grimório.
   if (feiticos_conhecidos.length == 0 && precisa_conhecer) {
     return;
