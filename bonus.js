@@ -23,6 +23,8 @@ function Bonus() {
   this.por_chave.intuicao = { nome: 'Intuição', cumulativo: false, por_origem: {}, };
   this.por_chave.melhoria = { nome: 'Melhoria', cumulativo: false, por_origem: {}, };
   this.por_chave.moral = { nome: 'Moral', cumulativo: false, por_origem: {}, };
+  // cumulativo para poder negativo.
+  this.por_chave.niveis_negativos = { nome: 'Níveis Negativos', cumulativo: true, por_origem: {}, };
   this.por_chave.profano = { nome: 'Profano', cumulativo: false, por_origem: {}, };
   this.por_chave.racial = { nome: 'Racial', cumulativo: false, por_origem: {}, };
   this.por_chave.resistencia = { nome: 'Resitência', cumulativo: false, por_origem: {}, };
@@ -137,7 +139,7 @@ Bonus.prototype.Exporta = function(excluir) {
     }
 
     var total_chave = this.TotalChave(chave_bonus);
-    if (total_chave > 0) {
+    if (total_chave != 0) {
       var entrada_chave = {};
       entrada_chave[bonus.nome] = total_chave;
       array_retorno.push(entrada_chave);

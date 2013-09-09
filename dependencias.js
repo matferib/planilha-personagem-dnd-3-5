@@ -224,6 +224,8 @@ function _DependenciasPontosVida() {
   gPersonagem.pontos_vida.bonus.Adiciona(
       'atributo', 'constituicao', 
       gPersonagem.dados_vida.nivel_personagem * gPersonagem.atributos['constituicao'].modificador);
+  gPersonagem.pontos_vida.bonus.Adiciona(
+      'niveis_negativos', '-', -5 * gPersonagem.niveis_negativos);
   gPersonagem.pontos_vida.total = 
       gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total();
 }
@@ -246,6 +248,7 @@ function _DependenciasBba() {
     gPersonagem.bba += 
         tabelas_classes[gPersonagem.classes[i].classe].bba(gPersonagem.classes[i].nivel);
   }
+  gPersonagem.bba -= gPersonagem.niveis_negativos;
   gPersonagem.bba_cac = 
       gPersonagem.bba + gPersonagem.atributos['forca'].modificador + 
       gPersonagem.tamanho.modificador_ataque_defesa;
@@ -739,6 +742,7 @@ function _DependenciasSalvacoes() {
           tabelas_salvacao[classe][tipo_salvacao](gPersonagem.classes[i].nivel);
     }
     gPersonagem.salvacoes[tipo_salvacao].Adiciona('base', '-', valor_base);
+    gPersonagem.salvacoes[tipo_salvacao].Adiciona('niveis_negativos', '-', -gPersonagem.niveis_negativos);
     var habilidade_modificadora = habilidades_salvacoes[tipo_salvacao];
     gPersonagem.salvacoes[tipo_salvacao].Adiciona(
         'atributo', habilidade_modificadora, gPersonagem.atributos[habilidade_modificadora].modificador);
