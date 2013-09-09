@@ -15,6 +15,7 @@ var gEntradas = {
   divindade: '',
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
+  niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
   ferimentos: 0,
@@ -100,6 +101,7 @@ function LeEntradas() {
         nivel: parseInt(input.value)});
     }
   }
+  gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
   gEntradas.ferimentos = parseInt(Dom('ferimentos').value) || 0;
