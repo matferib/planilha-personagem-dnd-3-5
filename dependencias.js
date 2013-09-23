@@ -464,6 +464,12 @@ function _DependenciasPericias() {
       pericia_personagem.bonus.Adiciona(
           'racial', gPersonagem.raca, raca_personagem.bonus_pericias[chave_pericia]);
     }
+    // Nivel negativo:
+    if (gPersonagem.niveis_negativos > 0) {
+      pericia_personagem.bonus.Adiciona(
+          'niveis_negativos', '-', -gPersonagem.niveis_negativos);
+    }
+
     pericia_personagem.total = 
         pericia_personagem.graduacoes + pericia_personagem.bonus.Total(); 
     gPersonagem.pericias.pontos_gastos += pericia_personagem.pontos;

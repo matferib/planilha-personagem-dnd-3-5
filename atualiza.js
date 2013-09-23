@@ -511,6 +511,7 @@ function _AtualizaPericias() {
     dom_graduacoes.textContent = pericia_personagem.graduacoes;
     var dom_total_bonus = Dom('pericia-' + chave + '-total-bonus');
     dom_total_bonus.textContent = StringSinalizada(pericia_personagem.bonus.Total(), false);
+    Titulo(pericia_personagem.bonus.Exporta(), dom_total_bonus);
     var dom_total = Dom('pericia-' + chave + '-total');
     dom_total.textContent = StringSinalizada(pericia_personagem.total);
   }
