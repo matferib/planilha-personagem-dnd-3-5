@@ -77,12 +77,19 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   select.addEventListener('change', AtualizaGeral);
   for (var i = 0; i < tabelas.length; ++i) {
     var optgroup = CriaOptGroup(rotulos_tabelas[i]);
+    var items_ordenados = [];
     for (var corrente in tabelas[i]) {
+      items_ordenados.push(corrente);
+    }
+    items_ordenados.sort(function(ie, id) {
+      return tabelas[i][ie].nome.localeCompare(tabelas[i][id].nome);
+    });
+    items_ordenados.forEach(function(corrente) {
       var option = CriaOption(tabelas[i][corrente].nome, corrente);
       option.setAttribute('name', corrente);
       option.selected = false;
       optgroup.appendChild(option);
-    }
+    });
     select.appendChild(optgroup);
   }
 
@@ -293,22 +300,27 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 // @param chave_classe se o talento a ser adicionado for de classe.
 // @param div_pai div onde o talento sera adicionado.
 function AdicionaTalento(chave_classe, div_pai) {
-  var chave_talento = 'usar_armas_simples';
-  var talento = tabelas_talentos[chave_talento];
   var div_select_talentos = Dom('div-select-talentos');
   var select_talento = CriaSelect();
   select_talento.name = 'chave-talento';
   select_talento.addEventListener('change', AtualizaGeral);
-  var option_selected;
-  for (var talento_tabela in tabelas_talentos) {
-    var talento_option = tabelas_talentos[talento_tabela];
-    if (chave_classe && !(chave_classe in talento_option)) {
+  var talentos_ordenados = [];
+  for (var chave_talento in tabelas_talentos) {
+    var talento_tabela = tabelas_talentos[chave_talento];
+    if (chave_classe && !(chave_classe in talento_tabela)) {
       continue;
     }
-    var option_talento = CriaOption(talento_option.nome, talento_tabela);
-    option_talento.selected = chave_talento && chave_talento == talento_tabela;
-    select_talento.add(option_talento, null);
+    talentos_ordenados.push(chave_talento);
   }
+  talentos_ordenados.sort(function(te, td) {
+    return tabelas_talentos[te].nome.localeCompare(tabelas_talentos[td].nome);
+  });
+  talentos_ordenados.forEach(function(chave_talento) {
+    var talento_tabela = tabelas_talentos[chave_talento];
+    var option_talento = CriaOption(talento_tabela.nome, chave_talento);
+    option_talento.selected = chave_talento == 'usar_armas_simples';
+    select_talento.add(option_talento, null);
+  });
   var input_complemento_talento = CriaInputTexto('');
   input_complemento_talento.name = 'complemento-talento';
   input_complemento_talento.addEventListener('change', AtualizaGeral);
@@ -334,11 +346,17 @@ function AdicionaItem(tipo_item, div, div_pai) {
   div.appendChild(input_em_uso);
 
   var select = CriaSelect();
+  var items_ordenados = [];
   for (var chave in tabelas_itens[tipo_item].tabela) {
-    var item = tabelas_itens[tipo_item].tabela[chave];
+    items_ordenados.push(tabelas_itens[tipo_item].tabela[chave]);
+  }
+  items_ordenados.sort(function(ie, id) {
+    return ie.nome.localeCompare(id.nome);
+  });
+  items_ordenados.forEach(function(item) {
     select.appendChild(
         CriaOption(item.nome + ' (' + item.preco + ')', chave));
-  }
+  });
   select.addEventListener('change', AtualizaGeral);
   select.name = 'item';
   div.appendChild(select);
