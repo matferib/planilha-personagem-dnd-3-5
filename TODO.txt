@@ -4,7 +4,7 @@ Adicionar botao para mostrar a versão da planilha quando em modo mestre.
 Terminar as propriedades de outras capas.
 Transformar todos atributos em bonus.
 Não redesenhar os slots de feitiços sempre (reaproveitar).
-Implementar níveis negativos (comecei: fiz HP, salvacao e BBA).
+Implementar níveis negativos (comecei: fiz HP, salvacao e BBA, pericias).
 Renomear entradas para gEntradas e personagem para gPersonagem.
 Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemLerEntradas.
 Na Mensagem, focar no botao ok.
