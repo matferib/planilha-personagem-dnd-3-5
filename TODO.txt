@@ -12,4 +12,3 @@ Arrumar o botao de descansar.
 Acabar com o campo de ferimentos e transforma-lo em span text, de forma que so seja manipulado por Ferimentos e Cura.
 Reescrever a geracao para manipular apenas os campos da gEntradas sem usar AtualizaGeralSemConverterEntradas.
 Venda de objetos por metade do preco.
-Ordenar os talentos.
