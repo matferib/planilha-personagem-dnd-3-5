@@ -93,8 +93,8 @@ function _AtualizaPontosVida() {
       gPersonagem.pontos_vida.total_dados : '';
   ImprimeSinalizado(
       gPersonagem.pontos_vida.bonus.Total(), Dom('pontos-vida-bonus'), false);
-  Dom('ferimentos').value = gPersonagem.pontos_vida.ferimentos > 0 ? 
-      gPersonagem.pontos_vida.ferimentos : '';
+  ImprimeSinalizado(
+      -gPersonagem.pontos_vida.ferimentos, Dom('ferimentos'), false);
 }
 
 function _AtualizaAtributos() {

@@ -300,13 +300,15 @@ function JanelaMensagem(mensagem) {
   div_botao.className = 'div-botao-janela';
   div_titulo.appendChild(CriaSpan('Mensagem'));
   div_msg.appendChild(CriaSpan(mensagem));
-  div_botao.appendChild(CriaBotao('Ok', null, null, function() { FechaJanela(); }));
+  var botao = CriaBotao('Ok', null, null, function() { FechaJanela(); });
+  div_botao.appendChild(botao);
 
   var j = AbreJanela();
   var divs = [ div_titulo, div_msg, div_botao ];
   for (var i = 0; i < divs.length; ++i) {
     j.appendChild(divs[i]);
   }
+  botao.focus();
 }
 
 // Cria uma janela de confirmação (sim/não). Chama o respectivo callback.
