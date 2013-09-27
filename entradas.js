@@ -104,7 +104,7 @@ function LeEntradas() {
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
-  gEntradas.ferimentos = parseInt(Dom('ferimentos').value) || 0;
+  gEntradas.ferimentos = parseInt(Dom('ferimentos').textContent) || 0;
   // Experiencia.
   gEntradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
   // atributos
