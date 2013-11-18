@@ -85,6 +85,7 @@ function _AtualizaDadosVida() {
 
 // Atualiza as informacoes referentes a pontos de vida do personagem.
 function _AtualizaPontosVida() {
+  // O valor dos ferimentos deve ser <= 0.
   var pontos_vida_corrente = 
       gPersonagem.pontos_vida.total - gPersonagem.pontos_vida.ferimentos;
   ImprimeNaoSinalizado(

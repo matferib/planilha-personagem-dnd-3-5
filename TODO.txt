@@ -9,3 +9,5 @@ Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemL
 Arrumar o botao de descansar.
 Reescrever a geracao para manipular apenas os campos da gEntradas sem usar AtualizaGeralSemConverterEntradas.
 Venda de objetos por metade do preco.
+Adicionar campos para altura, peso, idade etc.
+Tratar pericias de ofício, conhecimento local, profissão com complemento.

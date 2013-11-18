@@ -589,6 +589,33 @@ function CarregaTestes() {
     }, 
   }, body);
 
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Ferimentos', 
+    Testa: function() {
+      gEntradas.ferimentos = 0;
+      EntradasAdicionarFerimentos(3);
+      if (gEntradas.ferimentos != 3) {
+        this.resultado = false;
+        this.detalhes = 'Esperava ferimentos positivo: 3';
+        return;
+      }
+      _ConvertePontosVida();
+      if (gPersonagem.pontos_vida.ferimentos != gEntradas.ferimentos) {
+        this.resultado = false;
+        this.detalhes = 'Esperava ferimentos personagem igual ao das entradas';
+        return;
+      }
+      EntradasAdicionarFerimentos(-5);
+      if (gEntradas.ferimentos != 0) {
+        this.resultado = false;
+        this.detalhes = 'Esperava zero ferimentos ';
+        return;
+      }
+      this.resultado = true;
+    }, 
+  }, body);
+
   /*
    * Esse teste so vai funcionar quando AtualizaGeral funcionar.
   PersonagemLimpaGeral();
