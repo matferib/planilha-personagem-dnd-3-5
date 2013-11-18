@@ -22,7 +22,7 @@ var gPersonagem = {
     total_dados: 0,  // total dos dados de pontos de vida.
     bonus: new Bonus(), // outros bonus.
     total: 0,  // soma dos dados mais bonus.
-    ferimentos: 0,  // ferimentos do personagem TODO(transformar em array)
+    ferimentos: 0,  // ferimentos do personagem TODO(transformar em array). Valores devem ser >= 0.
     temporarios: 0,  // pontos de vida temporarios
   },
   // O valor do atributo é o valor final dados todos os modificadores. O modificador
