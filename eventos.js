@@ -359,7 +359,6 @@ function ClickGerarPersonagem(modo) {
 // Trata o botao de descansar
 // TODO arrumar.
 function ClickDescansar(valor) {
-  EntradasAdicionarFerimentos(valor);
   /*
   for (var chave_classe in personagem.feiticos) {
     if (!personagem.feiticos[chave_classe].em_uso) {
@@ -376,6 +375,7 @@ function ClickDescansar(valor) {
     }
   }
   */
+  EntradasAdicionarFerimentos(-PersonagemNivel());
   AtualizaGeralSemLerEntradas();
 }
 

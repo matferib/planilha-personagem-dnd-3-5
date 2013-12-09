@@ -303,6 +303,11 @@ function PersonagemPossuiUmaDasClasses(classes) {
   return false;
 }
 
+// @return o nivel total do personagem.
+function PersonagemNivel() {
+  return gPersonagem.dados_vida.nivel_personagem;
+}
+
 // @return o nivel do personagem na classe passada, zero se nao possuir.
 function PersonagemNivelClasse(classe) {
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
