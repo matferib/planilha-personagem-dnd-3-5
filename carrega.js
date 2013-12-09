@@ -61,7 +61,7 @@ function _CarregaHandlers() {
     "botao-curar-1": { callback: function() { ClickAjustarFerimentos(-1); }, evento: 'click', },
     "botao-curar-3": { callback: function() { ClickAjustarFerimentos(-3); }, evento: 'click', },
     "botao-curar-5": { callback: function() { ClickAjustarFerimentos(-5); }, evento: 'click', },
-    "botao-descansar": { callback: function() { ClickDescansar(-1); }, evento: 'click', },
+    "botao-descansar": { callback: function() { ClickDescansar(); }, evento: 'click', },
     // Changes.
     "nome": { callback: AtualizaGeral, evento: 'change', },
     "raca": { callback: ChangeRaca, evento: 'change', },
