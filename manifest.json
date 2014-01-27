@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Planilha de Personagem D&D 3.5",
   "description": "Criador de personagens para D&D 3.5.",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "app": {
     "background": {
       "scripts": ["background.js"]

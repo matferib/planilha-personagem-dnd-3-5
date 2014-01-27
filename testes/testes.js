@@ -546,7 +546,7 @@ function CarregaTestes() {
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'DependenciasSalvacoes', 
+    nome: 'DependenciasSalvacoes',
     Testa: function() {
       // Guerreiro 1 nivel default.
       gPersonagem.classes[0].classe = 'guerreiro';
@@ -586,12 +586,12 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'Ferimentos', 
+    nome: 'Ferimentos',
     Testa: function() {
       gEntradas.ferimentos = 0;
       EntradasAdicionarFerimentos(3);
@@ -613,20 +613,71 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'AdicionaItens',
+    Testa: function() {
+      var div_pai = CriaDiv('pai');
+      var div_filho = CriaDiv('filho');
+      AdicionaItem('capas', div_filho, div_pai);
+      // O div pai deve conter o filho.
+      if (div_pai.firstChild != div_filho) {
+        this.resultado = false;
+        this.detalhes = 'Esperava div_filho como filho unico de div_pai';
+        return false;
+      }
+      // Primeiro filho: input.
+      var input = div_filho.firstChild;
+      if (input.tagName != 'INPUT' || input.name != 'em_uso') {
+        this.resultado = false;
+        this.detalhes = 'Esperava input de uso como primeiro filho';
+        return false;
+      }
+      // Segundo filho: select ordenado.
+      var select = input.nextSibling;
+      if (select.tagName != 'SELECT' || select.name != 'item') {
+        this.resultado = false;
+        this.detalhes = 'Esperava select de item como segundo filho';
+        return false;
+      }
+      var options = select.options;
+      // Como eh ordenado, primeiro item eh a capa saltimbanco.
+      var capa_saltimbanco = tabelas_capas['capa_saltimbanco'];
+      if (options[0].text != 'Capa do saltimbanco (10080 PO)' || options[0].value != 'capa_saltimbanco') {
+        this.resultado = false;
+        this.detalhes =
+            'Esperava capa do saltimbanco como primeiro elemento do select ordenado. Encontrei: ' +
+            'texto: "' + options[0].text + '", valor: "' + options[0].value + '"';
+        return false;
+      }
+      var tunica_resistencia_magia = tabelas_capas['tunica_resistencia_magia'];
+      if (options[options.length - 1].text != 'Túnica de resistência a magia (90000 PO)' ||
+          options[options.length - 1].value != 'tunica_resistencia_magia') {
+        this.resultado = false;
+        this.detalhes = 'Esperava tunica_resistencia_magia como ultimo elemento do select ordenado.';
+        return false;
+      }
+
+      // Outros filhos?
+
+      this.resultado = true;
+    },
   }, body);
 
   /*
    * Esse teste so vai funcionar quando AtualizaGeral funcionar.
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'ClickUsarItem', 
+    nome: 'ClickUsarItem',
     Testa: function() {
       var checkbox = { checked: true };
       ClickUsarItem('aneis', checkbox);
       gPersonagem['aneis'] = [
-          { chave: 'protecao_1', em_uso: false}, 
-          { chave: 'protecao_1', em_uso: false}, 
+          { chave: 'protecao_1', em_uso: false},
+          { chave: 'protecao_1', em_uso: false},
           { chave: 'protecao_1', em_uso: false}];
       if (!checkbox.checked) {
         this.resultado = false;
@@ -642,7 +693,7 @@ function CarregaTestes() {
       }
 
       this.resultado = true;
-    }, 
+    },
   }, body);
    */
 
