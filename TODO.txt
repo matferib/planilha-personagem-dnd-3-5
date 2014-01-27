@@ -1,0 +1,13 @@
+Permitir memorizar feiticos com talentos metamagicos. 
+Calcular a DC do feitico por slot.
+Adicionar botao para mostrar a versão da planilha quando em modo mestre.
+Terminar as propriedades de outras capas.
+Transformar todos atributos em bonus.
+Não redesenhar os slots de feitiços sempre (reaproveitar).
+Implementar níveis negativos para feitiço (perde um slot da classe mais alta de caster).
+Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemLerEntradas.
+Arrumar o botao de descansar.
+Reescrever a geracao para manipular apenas os campos da gEntradas sem usar AtualizaGeralSemConverterEntradas.
+Venda de objetos por metade do preco.
+Adicionar campos para altura, peso, idade etc.
+Tratar pericias de ofício, conhecimento local, profissão com complemento.
