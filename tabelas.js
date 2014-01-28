@@ -1800,7 +1800,7 @@ var tabelas_capas = {
   manto_arraia: { nome: 'Manto da arraia', preco: '7200 PO'},
   manto_resistencia_3: { nome: 'Manto da resistência +3', preco: '9000 PO',
     propriedades: { salvacoes: { todas: 3 } },  },
-  capa_saltimbanco: { nome: 'Capa do saltimbanco', preco: '10080 PO'},  
+  capa_saltimbanco: { nome: 'Capa do saltimbanco', preco: '10080 PO'},
   manto_aranha: { nome: 'Manto da aranha', preco: '14000 PO' },
   manto_carisma_4: { nome: 'Manto do carisma +4', preco: '16000 PO',
     propriedades: { atributos: { carisma: 4 } },  },
@@ -1815,14 +1815,14 @@ var tabelas_capas = {
   manto_deslocamento_maior: { nome: 'Manto do deslocamento (maior)', preco: '50000 PO'},
   manto_forma_eterea: { nome: 'Manto da forma etérea', preco: '55000 PO'},
   manto_fe: { nome: 'Túnica da fé', preco: '76000 PO'},
-  tunica_resistencia_magia: { nome: 'Túnica de resistência a magia', preco: '90000 PO'}, 
+  tunica_resistencia_magia: { nome: 'Túnica de resistência a magia', preco: '90000 PO'},
 };
 
 var tabelas_itens = {
   aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2, },
   amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
-  capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1},
+  capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
 };
 
 // Materiais especiais.
@@ -1830,17 +1830,17 @@ var tabelas_itens = {
 // TODO modelar os requisitos.
 var tabelas_materiais_especiais = {
   nenhum: { nome: 'nenhum', },
-  adamante: { 
+  adamante: {
       nome: 'adamante',
       requisitos: { metal: true, obra_prima: true, },
       custo_por_tipo: {
           // Tirei o custo da obra prima.
           municao: '54 PO',
           arma: '2700 PO', 
-          armadura: { por_subtipo: { leve: '4850 PO', media: '9850 PO', pesada: '14850 PO' }, }, 
+          armadura: { por_subtipo: { leve: '4850 PO', media: '9850 PO', pesada: '14850 PO' }, },
           escudo: '1850 PO' }, },
-  madeira_negra: { 
-      nome: 'madeira negra', 
+  madeira_negra: {
+      nome: 'madeira negra',
       custo_por_kg: '20 PO',
       requisito: { madeira: true, obra_prima: true, }, },
   // O custo adicional do couro do dragão é o da armadura ou escudo obra prima. Fica difícil modelar aqui
@@ -1863,4 +1863,3 @@ var tabelas_materiais_especiais = {
       nome: 'prata Alquímica', 
       requisitos: { arma: true, metal: true, }, },
 };
-
