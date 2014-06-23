@@ -44,7 +44,7 @@
 <div id="div-visoes" >
 </div> <!--div-visoes-->
 
-<div id="div-versao">Versão da Planilha: 0.6.2
+<div id="div-versao">Versão da Planilha: 0.7.0
 </div> <!--div-versao-->
 
 <div id="div-geral" class="divs-principais">
@@ -58,10 +58,15 @@ Nome: <input type="text" id="nome"/>
 <input type="text" id="json-personagem"></input>
 <br>
 
-Raça: 
+Raça:
 <select id="raca">
 </select>&nbsp;
-Tamanho: 
+<span id="span-template">
+Template:
+<select id="template">
+</select>&nbsp;
+</span>
+Tamanho:
 <select id="tamanho">
   <option value="minusculo">Minusculo</option>
   <option value="diminuto">Diminuto</option>
@@ -74,7 +79,7 @@ Tamanho:
   <option value="colossal">Colossal</option>
 </select>
 <br>
-Alinhamento: 
+Alinhamento:
 <select id="alinhamento">
 	<option name="lb" value="lb">LB</option>
 	<option name="ln" value="ln">LN</option>
@@ -98,17 +103,17 @@ Classes:
 <button type="button" id="botao-gerar-personagem-elite" class="botao-geracao">Gerar elite</button>
 </div>
 Níveis Negativos:<input id="niveis-negativos" type="number" size="2" value="0" min="0"/><br>
-Experiência: 
+Experiência:
 <input type="text" id="pontos-experiencia" size="6"/>+
-<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP"/><br> 
-Divindade Patrona: <input type="text" id="divindade-patrona" size="20"/> 
+<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP"/><br>
+Divindade Patrona: <input type="text" id="divindade-patrona" size="20"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
 Dados de Vida: <span id="dados-vida-classes"></span><br>
 
-Pontos de Vida: 
-<span id="pontos-vida-corrente"></span> =  
+Pontos de Vida:
+<span id="pontos-vida-corrente"></span> =
 <input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados"/>
 <span id="pontos-vida-bonus"></span>
 <span id="ferimentos" maxlength="3" size="8"></span><br>
@@ -138,11 +143,11 @@ Iniciativa: <span id="iniciativa">0</span>
 <div id="div-ataque" class="divs-principais">
 Bonus Base de Ataque: <span class="bba"></span><br>
 Número de Ataques: <span class="numero-ataques"></span><br>
-Corpo a corpo: 
+Corpo a corpo:
 <span id="bba-corpo-a-corpo" title=""></span><br>
-Distância: 
+Distância:
 <span id="bba-distancia" title=""></span><br>
-Agarrar: 
+Agarrar:
 <span id="bba-agarrar"></span><br>
 
 Estilos de Luta: <button type="button" id="botao-adicionar-estilo-luta">+</button>

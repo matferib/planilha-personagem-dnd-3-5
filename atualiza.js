@@ -71,6 +71,7 @@ function _AtualizaNomeRacaAlinhamentoXp() {
   Dom('nome').value = gPersonagem.nome;
   document.title = gPersonagem.nome.length > 0 ? gPersonagem.nome : 'anonimo';
   SelecionaValor(gPersonagem.raca, Dom('raca'));
+  SelecionaValor(gPersonagem.template, Dom('template'));
   SelecionaValor(gPersonagem.alinhamento, Dom('alinhamento'));
   Dom('pontos-experiencia').value = gPersonagem.experiencia;
   Dom('divindade-patrona').value = gPersonagem.divindade;
@@ -799,6 +800,7 @@ function _AtualizaModoVisao() {
   for (var i = 0; i < botoes_geracao.length; ++i) {
     botoes_geracao[i].style.display = modo_str;
   }
+  Dom('span-template').style.display = modo_str;
   Dom('div-versao').style.display = modo_str;
 }
 

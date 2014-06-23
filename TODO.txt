@@ -1,3 +1,7 @@
+Mostrar segundo ataque.
+Mostrar hint dos talentos.
+Colapsar armas.
+Caracteristicas de escudos (resitencia feitico).
 Permitir memorizar feiticos com talentos metamagicos. 
 Calcular a DC do feitico por slot.
 Adicionar botao para mostrar a versão da planilha quando em modo mestre.
