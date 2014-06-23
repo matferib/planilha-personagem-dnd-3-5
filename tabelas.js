@@ -9,8 +9,8 @@ var tabelas_raca = {
       proficiencia_armas: [ 'azagaia' ], // Javelin em ingles.
       //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
       //Todo(FC) incluir penalidades de ambientes fechados
-						bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
-      arma_natural: { garra: { nome: 'Garra', dano: '1d4' } }, 
+      bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
+      arma_natural: { garra: { nome: 'Garra', dano: '1d4' } },
     },
   anao: {
       nome: 'Anão',
@@ -18,7 +18,7 @@ var tabelas_raca = {
       movimento: { terrestre: 4 },
       atributos: {constituicao: 2, carisma: -2}, tamanho: 'medio',
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
-      outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 }, 
+      outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 },
                           magias: { base: ['fortitude', 'reflexo', 'vontade' ], bonus: 2, } },
   },
   goblin: {
@@ -46,11 +46,11 @@ var tabelas_raca = {
       origem: { livro: 'Livro do Jogador', pagina: '' },
       movimento: { terrestre: 6 },
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
-      proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto', 
+      proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto',
                             'arco_curto_composto'] },
   gnomo: {
       nome: 'Gnomo',
-      origem: { livro: 'Livro do Jogador', pagina: '' }, 
+      origem: { livro: 'Livro do Jogador', pagina: '' },
       movimento: { terrestre: 4 },
       atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
@@ -61,7 +61,7 @@ var tabelas_raca = {
       origem: { livro: 'Livro do Jogador', pagina: '' },
       movimento: { terrestre: 6 },
       atributos: {}, tamanho: 'medio' },
-  meioorc: { 
+  meioorc: {
       nome: 'Meio-Orc',
       origem: { livro: 'Livro do Jogador', pagina: '' },
       movimento: { terrestre: 6 },
@@ -69,22 +69,39 @@ var tabelas_raca = {
   },
 };
 
-// Dados relacionados a classes. 
+var tabelas_template = {
+  lich: {
+      nome: 'Lich',
+      tipo: 'morto-vivo',
+      origem: { },
+      dados_vida: 12,
+      armadura_natural: 5,
+      arma_natural: { toque: { nome: 'Toque', dano: '1d8+5' } }, // 1 vez rodada energia negativa, paralisia, tem save de von
+      aura: { tipo: 'medo', raio: '12 quadrados' },
+      reducao_dano: { valor: '15', sobrepassar: ['estourante', 'magia']},
+      bonus_pericias: { esconderse: 8, furtividade: 8, ouvir: 8, procurar: 8, sentir_motivacao: 8, observar: 8 },
+      atributos: { inteligencia: 2, sabedoria: 2, carisma: 2 },
+      resistencia_espantar: 4,
+      imunidades: ['frio', 'eletricidade', 'polimorfismo', 'efeitos mentais'],
+    },
+}
+
+// Dados relacionados a classes.
 // TODO passar tudo de classes pra ca.
 var tabelas_classes = {
-  barbaro: { 
+  barbaro: {
     nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte, },
-  bardo: { 
-    nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio, 
+  bardo: {
+    nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio,
     nivel_conjurador: { modificador: 1.0 }, },
-  clerigo: { 
-    nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio, 
+  clerigo: {
+    nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio,
     nivel_conjurador: { modificador: 1.0, },
     especiais: {
       1: [ 'expulsar_fascinar_mortos_vivos' ],
     },
   },
-  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, 
+  druida: { nome: 'Druida', dados_vida: 8, pontos_pericia: 4, bba: bba_medio,
     nivel_conjurador: { modificador: 1.0, },
     especiais: {
       1: [ 'companheiro_animal', 'senso_natureza', 'empatia_natureza' ],
@@ -94,10 +111,10 @@ var tabelas_classes = {
       5: [ 'forma_selvagem' ],
     },
   },
-  guerreiro: { 
+  guerreiro: {
     nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
-  feiticeiro: { 
-    nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba: 
+  feiticeiro: {
+    nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba:
     bba_fraco, nivel_conjurador: { modificador: 1.0, }, },
   ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio,
     especiais: {
@@ -110,12 +127,12 @@ var tabelas_classes = {
       7: [ 'ataque_furtivo', ],
     },
   },
-  mago: { 
-    nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, 
+  mago: {
+    nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
     nivel_conjurador: { modificador: 1.0, }, },
   monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
-  paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, 
-    nivel_conjurador: { modificador: 0.5, minimo: 4, }, 
+  paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
+    nivel_conjurador: { modificador: 0.5, minimo: 4, },
     especiais: {
       1: [ 'aura_bem', 'detectar_mal', 'destruir_mal', ],
       2: [ 'graca_divina', 'cura_pelas_maos', ],
@@ -1018,9 +1035,6 @@ Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Reflexos em Combate¹ - Ataques de oportunidade adicionais
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
-Tiro Certeiro¹ - +1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros
-Tiro Preciso¹ Tiro Certeiro Anula a penalidade por disparar contra um adversário em combate corporal com um
-aliado (-4)
 Tiro Rápido¹ Des 13, Tiro Certeiro Um ataque à distância adicional por rodada
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
@@ -1148,6 +1162,15 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   ignorar_componentes_materiais: {
       nome: 'Ignorar Componentes Materiais',
       descricao: 'Conjura magias ignorando os componentes materiais.', },
+  tiro_certeiro: {
+    nome: 'Tiro Certeiro',
+    guerreiro: true,
+    descricao: '+1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros.', },
+  tiro_preciso: {
+    nome: 'Tiro Preciso',
+    guerreiro: true,
+    requisitos: { talentos: [ 'tiro_certeiro'], },
+    descricao: 'Anula a penalidade por disparar contra um adversário em combate corporal com um aliado (-4)', },
   // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
   iniciativa_aprimorada: {
       nome: 'Iniciativa Aprimorada',

@@ -40,7 +40,7 @@ function ComparaSalvacoes(salvacoes) {
 
 // Cria um novo template de testes a ser adicionado no dom.
 // @param nome_teste o nome do teste.
-// @param handler_teste deve possuir nome, a funcao 'Testa' para realizar o teste, 
+// @param handler_teste deve possuir nome, a funcao 'Testa' para realizar o teste,
 // e apos o teste deve obrigatoriamente possuir o campo 'resultado'. Opcionalmente
 // deve possuir o campo 'detalhes' para detalhar o teste.
 // @param dom onde o teste sera adicionado.
@@ -74,17 +74,17 @@ function TemplateTeste(handler_teste, dom) {
   }
 
   dom.appendChild(div_teste);
-} 
+}
 
 function CarregaTestes() {
   _CarregaTabelaArmasArmaduras();
   var body = document.getElementsByTagName('body')[0];
 
   PersonagemLimpaGeral();
-  gPersonagem.armas = [ 
+  gPersonagem.armas = [
       { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' } ];
   TemplateTeste({
-    nome: 'ArmaPersonagem', 
+    nome: 'ArmaPersonagem',
     Testa: function() {
       var arma_personagem = ArmaPersonagem('TesteArma');
       this.resultado = false;
@@ -99,12 +99,12 @@ function CarregaTestes() {
       } else {
         this.resultado = true;
       }
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'TestaEfeitoItems', 
+    nome: 'TestaEfeitoItems',
     Testa: function() {
       gPersonagem.aneis.push({chave: 'protecao_2', em_uso: true});
       _DependenciasEquipamentos();
@@ -115,12 +115,12 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'LePeso', 
+    nome: 'LePeso',
     Testa: function() {
       var peso = LePeso(' 500 g');
       if (peso != 0.5) {
@@ -150,12 +150,12 @@ function CarregaTestes() {
       }
 
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'AjustaString', 
+    nome: 'AjustaString',
     Testa: function() {
       var str = AjustaString(' \taaa bbb    ');
       if (str != 'aaa bbb') {
@@ -164,12 +164,12 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'UtilSomaPrecos', 
+    nome: 'UtilSomaPrecos',
     Testa: function() {
       this.resultado = false;
       var preco1 = { platina: 2, ouro: 4 };
@@ -182,14 +182,14 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
 
   PersonagemLimpaGeral();
-  gPersonagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 }; 
+  gPersonagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 };
   TemplateTeste({
-    nome: 'PersonagemAdicionarMoedas', 
+    nome: 'PersonagemAdicionarMoedas',
     Testa: function() {
       this.resultado = false;
       var resultado_moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 };
@@ -216,12 +216,12 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'UtilLePreco', 
+    nome: 'UtilLePreco',
     Testa: function() {
       this.resultado = false;
       var preco_esperado = { platina: 0, ouro: 10, prata: 0, cobre: 0 };
@@ -250,38 +250,38 @@ function CarregaTestes() {
       }
 
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'LeItem', 
+    nome: 'LeItem',
     Testa: function() {
       var item_esperado = {
         chave: 'queda_suave',
-        em_uso: true 
+        em_uso: true
       };
       var dom = {
         childNodes: [
-          { name: 'item',  
-            selectedIndex: 1, 
-            length: 2, 
+          { name: 'item',
+            selectedIndex: 1,
+            length: 2,
             options: [ {}, { value: 'queda_suave' } ] },
           { name: 'em_uso', checked: true },
         ],
       };
       var item_lido = LeItem(dom);
-      this.resultado = item_lido.chave == item_esperado.chave && 
+      this.resultado = item_lido.chave == item_esperado.chave &&
                        item_lido.em_uso == item_esperado.em_uso;
       if (!this.resultado) {
         this.detalhes = 'Item lido diferente do esperado.';
       }
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'PrecoArmaArmaduraEscudo', 
+    nome: 'PrecoArmaArmaduraEscudo',
     Testa: function() {
       var preco = PrecoArmaArmaduraEscudo(
           'escudo', tabelas_escudos, 'broquel', 'nenhum', false, 0, false);
@@ -352,7 +352,7 @@ function CarregaTestes() {
         return;
       }
 
-      // Ferro frio: preco da arma normal x2. 
+      // Ferro frio: preco da arma normal x2.
       preco = PrecoArmaArmaduraEscudo(
           'arma', tabelas_armas, 'espada_longa', 'ferro_frio', false, 0, false);
       esperado.ouro = 30;
@@ -426,12 +426,12 @@ function CarregaTestes() {
         return;
       }
 
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'RequisitosTalentos', 
+    nome: 'RequisitosTalentos',
     Testa: function() {
       // teste simples.
       r = PersonagemVerificaPrerequisitosTalento('usar_armas_simples');
@@ -488,7 +488,7 @@ function CarregaTestes() {
         this.detalhes = 'Talento "magia_natural" deveria funcionar para personagem com sabedoria 13';
         return;
       }
-    
+
       // Requisito de outros talentos.
       r = PersonagemVerificaPrerequisitosTalento('magia_penetrante_maior');
       if (r == null) {
@@ -504,13 +504,13 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   // AjustaFilhos.
   PersonagemLimpaGeral();
   TemplateTeste({
-    nome: 'AjustaFilhos', 
+    nome: 'AjustaFilhos',
     Testa: function() {
       var dom_pai = CriaDiv();
       var c = 0;
@@ -541,7 +541,7 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
-    }, 
+    },
   }, body);
 
   PersonagemLimpaGeral();
@@ -667,6 +667,23 @@ function CarregaTestes() {
     },
   }, body);
 
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Template',
+    Testa: function() {
+      gPersonagem.template = 'lich',
+      gPersonagem.classes[0].classe = 'mago';
+      gPersonagem.classes[0].nivel = 1;
+      _GeraPontosDeVida('elite');
+      if (gPersonagem.pontos_vida.total_dados != 12) {
+        this.detalhes = 'Esperava 12 pontos de vida na geracao de um lich de primeiro nivel, obtive: ' + gPersonagem.pontos_vida.total_dados;
+        this.resultado = false;
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
   /*
    * Esse teste so vai funcionar quando AtualizaGeral funcionar.
   PersonagemLimpaGeral();
@@ -703,7 +720,7 @@ function CarregaTestes() {
   SalvaNoArmazem(nome_chave, 'valor de teste', function() {
     ListaDoArmazem(function(lista_nomes) {
       TemplateTeste({
-        nome: 'Armazem', 
+        nome: 'Armazem',
         Testa: function() {
           this.resultado = false;
           for (var i = 0; i < lista_nomes.length; ++i) {
@@ -715,7 +732,7 @@ function CarregaTestes() {
           if (!this.resultado) {
             this.detalhes = 'Esperava encontrar "' + nome_chave + '" no armazém.';
           }
-        }, 
+        },
       }, body);
       ExcluiDoArmazem(nome_chave, function() {});
     });

@@ -9,6 +9,7 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.modo_visao = gEntradas.modo_visao;
   gPersonagem.nome = gEntradas.nome;
   gPersonagem.raca = gEntradas.raca;
+  gPersonagem.template = gEntradas.template;
   _ConverteTamanho();
 
   gPersonagem.alinhamento = gEntradas.alinhamento;
@@ -31,7 +32,7 @@ function ConverteEntradasParaPersonagem() {
   _ConverteTalentos();
 
   _ConvertePontosVida();
-  
+
   // Tem que ser depois de conferir pre requisitos.
   _ConvertePericias();
 

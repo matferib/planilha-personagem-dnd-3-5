@@ -6,6 +6,7 @@ function CarregamentoInicial() {
   _CarregaHandlers();
   CarregaPersonagens();
   _CarregaRacas();
+  _CarregaTemplates();
   _CarregaBotoesVisao();
   _CarregaAtributos();
   _CarregaTalentos();
@@ -26,7 +27,7 @@ function CarregamentoInicial() {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
     var json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
     gEntradas = JSON.parse(json_entradas);
-  } 
+  }
   AtualizaGeralSemLerEntradas();
 }
 
@@ -51,7 +52,7 @@ function _CarregaHandlers() {
     "botao-adicionar-armadura": { callback:  ClickAdicionarArmadura, evento: 'click', },
     "botao-adicionar-escudo": { callback:  ClickAdicionarEscudo, evento: 'click', },
     "botao-adicionar-anel": { callback:  function() { ClickAdicionarItem('aneis'); }, evento: 'click', },
-    "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', }, 
+    "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', },
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
@@ -65,6 +66,7 @@ function _CarregaHandlers() {
     // Changes.
     "nome": { callback: AtualizaGeral, evento: 'change', },
     "raca": { callback: ChangeRaca, evento: 'change', },
+    "template": { callback: ChangeTemplate, evento: 'change', },
     "tamanho": { callback: AtualizaGeral, evento: 'change', },
     "alinhamento": { callback: AtualizaGeral, evento: 'change', },
     "pontos-vida-dados": { callback: AtualizaGeral, evento: 'change', },
@@ -72,13 +74,13 @@ function _CarregaHandlers() {
     "niveis-negativos": { callback: AtualizaGeral, evento: 'change' },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "pontos-experiencia-adicionais": { callback: ChangePontosExperienciaAdicionais, evento: 'change', },
-    "input-adicionar-ferimentos": { callback:  function() { 
+    "input-adicionar-ferimentos": { callback:  function() {
         var dom = Dom('input-adicionar-ferimentos');
-        ClickAjustarFerimentos(parseInt(dom.value)); 
+        ClickAjustarFerimentos(parseInt(dom.value));
         dom.value = ''; }, evento: 'change', },
     "input-remover-ferimentos": { callback:  function() {
         var dom = Dom('input-remover-ferimentos');
-        ClickAjustarFerimentos(-parseInt(dom.value)); 
+        ClickAjustarFerimentos(-parseInt(dom.value));
         dom.value = ''; }, evento: 'change', },
     "moedas-platina": { callback: AtualizaGeral, evento: 'change', },
     "moedas-ouro": { callback: AtualizaGeral, evento: 'change', },
@@ -108,7 +110,20 @@ function _CarregaRacas() {
   for (var chave_raca in tabelas_raca) {
     select_raca.appendChild(CriaOption(tabelas_raca[chave_raca].nome, chave_raca))
   }
-}  
+}
+
+// Adiciona racas dinamicamente na planilha
+function _CarregaTemplates() {
+  var select_template = Dom('template');
+  if (select_template == null) {
+    // Testes não tem o select.
+    return;
+  }
+  select_template.appendChild(CriaOption('Nenhum', ''))
+  for (var chave_template in tabelas_template) {
+    select_template.appendChild(CriaOption(tabelas_template[chave_template].nome, chave_template))
+  }
+}
 
 // Popula o select de personagens. Chamado no início e ao salvar um personagem novo.
 function CarregaPersonagens() {
@@ -177,31 +192,31 @@ function _CarregaAtributos() {
   div.appendChild(CriaSpan('0', 'pontos-atributos-gastos'));
   div.appendChild(CriaSpan(' ]'));
   div.appendChild(
-      CriaBotao('-', 
-                'botao-atributos-menos', 
-                null, 
-                { handleEvent: function (evento) { 
-                    ClickBotaoAtributoMenos(); 
+      CriaBotao('-',
+                'botao-atributos-menos',
+                null,
+                { handleEvent: function (evento) {
+                    ClickBotaoAtributoMenos();
                     evento.stopPropagation();
                 } }));
 
-  var atributos = { 
-      forca: 'Força', 
-      destreza: 'Destreza', 
-      constituicao: 'Constituição', 
+  var atributos = {
+      forca: 'Força',
+      destreza: 'Destreza',
+      constituicao: 'Constituição',
       inteligencia: 'Inteligência',
-      sabedoria: 'Sabedoria', 
+      sabedoria: 'Sabedoria',
       carisma: 'Carisma' };
   for (var chave_atributo in atributos) {
     var div_atributo = CriaDiv();
     div_atributo.appendChild(
-        CriaBotao('+', 
-                  'botao-atributos-mais-' + chave_atributo, 
-                  'botoes-atributos', 
-                  { 
+        CriaBotao('+',
+                  'botao-atributos-mais-' + chave_atributo,
+                  'botoes-atributos',
+                  {
                       chave_atributo: chave_atributo,
-                      handleEvent: function (evento) { 
-                          ClickBotaoAtributoMais(this.chave_atributo); 
+                      handleEvent: function (evento) {
+                          ClickBotaoAtributoMais(this.chave_atributo);
                           evento.stopPropagation();
                   } }));
     var span_rotulo = CriaSpan(atributos[chave_atributo]);
@@ -249,26 +264,26 @@ function _CarregaTalentos() {
 // Preenche os nomes e tamanhos faltantes na tabela de armas e chama as funcoes
 // para preencher os selects de armas corpo a corpo e a distancia.
 function _CarregaTabelaArmasArmaduras() {
-  var tabelas_especificas_armas = [ 
+  var tabelas_especificas_armas = [
       tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ];
   var talentos_relacionados_armas = [
       'usar_armas_simples', 'usar_arma_comum', 'usar_arma_exotica' ];
   _CarregaTabelasCompostas(
-      tabelas_especificas_armas, talentos_relacionados_armas, 
+      tabelas_especificas_armas, talentos_relacionados_armas,
       tabelas_armas, tabelas_armas_invertida);
-  var tabelas_especificas_armaduras = [ 
+  var tabelas_especificas_armaduras = [
       tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ];
   var talentos_relacionados_armaduras = [
       'usar_armaduras_leves', 'usar_armaduras_medias', 'usar_armaduras_pesadas' ];
   _CarregaTabelasCompostas(
-      tabelas_especificas_armaduras, talentos_relacionados_armaduras, 
+      tabelas_especificas_armaduras, talentos_relacionados_armaduras,
       tabelas_armaduras, tabelas_armaduras_invertida);
 }
 
 // Util para criar uma tabela a partir de outras, em especial armaduras e armas.
 // 'tabelas_especificas' e 'talentos_relacionados' sao vetores de mesmo tamanho
 // onde cada entrada do de tabelas_especificas aponta para um subtipo da tabela composta
-// (por exemplo, arma_leve). O mesmo indice em 'talentos_relacionados' aponta para o 
+// (por exemplo, arma_leve). O mesmo indice em 'talentos_relacionados' aponta para o
 // talento relevante aquele tipo (por exemplo, usar_armaduras_leves).
 // O parametro 'tabela_composta' eh a tabela a ser montada e 'tabela_invertida' eh a tabela
 // invertida a ser montada (onde a chave eh o nome).
@@ -290,7 +305,7 @@ function _CarregaTabelasCompostas(
             continue;
           }
           if (dano_medio == '-') {
-            entrada_especifica.dano[tamanho] = '-'; 
+            entrada_especifica.dano[tamanho] = '-';
           } else {
             entrada_especifica.dano[tamanho] = tabelas_dado_por_tamanho[dano_medio][tamanho] || 0;
           }
@@ -321,12 +336,12 @@ function _CarregaPericias() {
     var texto_span = pericia.nome + ' (' + pericia.habilidade + '): ';
     if (tabelas_pericias[chave_pericia].sem_treinamento) {
       texto_span += 'ϛτ';
-    }  
+    }
     div.appendChild(
         CriaSpan(texto_span, null, 'pericias-nome'));
-      
+
     var input_pontos =
-        CriaInputNumerico('0', prefixo_id + '-pontos', null, 
+        CriaInputNumerico('0', prefixo_id + '-pontos', null,
         { chave_pericia: chave_pericia,
           handleEvent: function(evento) {
             ClickPericia(this.chave_pericia);

@@ -1,6 +1,6 @@
 // Tudo relacionado a gEntradas. Isso eh o que devera ser
 // serializado e deserializado. A entrada serve como o mínimo que representa o personagem.
-// É possível salvar apenas as gEntradas e restaurar o personagem depois chamando a função 
+// É possível salvar apenas as gEntradas e restaurar o personagem depois chamando a função
 // AtualizaGeralSemLerEntradas.
 
 // Variavel contendo os valores das gEntradas. Iniciado com valores padroes da criacao.
@@ -10,6 +10,7 @@ var gEntradas = {
   // geral
   nome: '',
   raca: 'humano',
+  template: '',
   tamanho: 'medio',  // É possivel ter tamanhos fora do padrao através de magias.
   alinhamento: 'LB',
   divindade: '',
@@ -73,7 +74,7 @@ var gEntradas = {
   notas: '',
 };
 
-// Le todos os inputs da planilha e armazena em 'gEntradas'. 
+// Le todos os inputs da planilha e armazena em 'gEntradas'.
 function LeEntradas() {
   // Modo mestre ligado ou nao.
   gEntradas.modo_mestre = Dom('input-modo-mestre').checked;
@@ -82,6 +83,8 @@ function LeEntradas() {
   gEntradas.nome = Dom('nome').value;
   // raca
   gEntradas.raca = ValorSelecionado(Dom('raca'));
+  // template
+  gEntradas.template = ValorSelecionado(Dom('template'));
   // tamanho
   gEntradas.tamanho = ValorSelecionado(Dom('tamanho')) || tabelas_raca[gEntradas.raca].tamanho;
   // alinhamento
@@ -96,7 +99,7 @@ function LeEntradas() {
     if (elemento.tagName == "DIV") {
       var select = elemento.getElementsByTagName("SELECT")[0];
       var input = elemento.getElementsByTagName("INPUT")[0];
-      gEntradas.classes.push({ 
+      gEntradas.classes.push({
         classe: ValorSelecionado(select),
         nivel: parseInt(input.value)});
     }
@@ -148,7 +151,7 @@ function LeEntradas() {
 
   // Feiticos.
   _LeFeiticos();
-  
+
   gEntradas.notas = Dom('text-area-notas').value;
 }
 
