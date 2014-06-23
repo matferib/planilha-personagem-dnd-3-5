@@ -470,6 +470,12 @@ function ChangeRaca() {
   AtualizaGeralSemLerEntradas();
 }
 
+// Alteracao de template.
+function ChangeTemplate() {
+  gEntradas.template = ValorSelecionado(Dom('template'));
+  AtualizaGeralSemLerEntradas();
+}
+
 function ChangePontosExperienciaAdicionais() {
   var dom = Dom("pontos-experiencia-adicionais");
   var valor = parseInt(dom.value);

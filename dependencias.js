@@ -131,19 +131,19 @@ function _DependenciasDadosVida() {
 function _DependenciasAtributos() {
   // Bonus de atributos de acordo com nivel total de gPersonagem.
   var nivel_total = gPersonagem.dados_vida.nivel_personagem;
-  gPersonagem.atributos.pontos.disponiveis = 
+  gPersonagem.atributos.pontos.disponiveis =
      Math.floor(nivel_total / 4);
-  if (gPersonagem.atributos.pontos.gastos.length > 
+  if (gPersonagem.atributos.pontos.gastos.length >
       gPersonagem.atributos.pontos.disponiveis) {
     // Pode acontecer com retirada ou diminuicao de niveis.
-    gPersonagem.atributos.pontos.gastos.length = 
+    gPersonagem.atributos.pontos.gastos.length =
         gPersonagem.atributos.pontos.disponiveis;
   }
 
   // Calcula o componentes dos atributos.
   for (var atributo in tabelas_atributos) {
     gPersonagem.atributos[atributo].bonus_nivel = 0;
-    gPersonagem.atributos[atributo].racial = 
+    gPersonagem.atributos[atributo].racial =
         tabelas_raca[gPersonagem.raca].atributos[atributo] || 0;
   }
   // Calcula os bonus de nivel para cada atributo.
@@ -152,7 +152,7 @@ function _DependenciasAtributos() {
   }
   // Valor final e modificador.
   for (var atributo in gPersonagem.atributos) {
-    gPersonagem.atributos[atributo].valor = 
+    gPersonagem.atributos[atributo].valor =
         gPersonagem.atributos[atributo].base +
         gPersonagem.atributos[atributo].bonus_nivel +
         gPersonagem.atributos[atributo].racial;
@@ -163,7 +163,7 @@ function _DependenciasAtributos() {
 
 function _DependenciasTalentos() {
   // Gerais.
-  var talentos_gerais_por_nivel = 
+  var talentos_gerais_por_nivel =
       1 + Math.floor(gPersonagem.dados_vida.nivel_personagem / 3);
   if (tabelas_raca[gPersonagem.raca].talento_extra) {
     ++talentos_gerais_por_nivel;
@@ -222,11 +222,11 @@ function _DependenciasTalento(talento_personagem, indice) {
 
 function _DependenciasPontosVida() {
   gPersonagem.pontos_vida.bonus.Adiciona(
-      'atributo', 'constituicao', 
+      'atributo', 'constituicao',
       gPersonagem.dados_vida.nivel_personagem * gPersonagem.atributos['constituicao'].modificador);
   gPersonagem.pontos_vida.bonus.Adiciona(
       'niveis_negativos', '-', -5 * gPersonagem.niveis_negativos);
-  gPersonagem.pontos_vida.total = 
+  gPersonagem.pontos_vida.total =
       gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total();
 }
 
@@ -245,22 +245,22 @@ function _DependenciasTamanho() {
 function _DependenciasBba() {
   gPersonagem.bba = 0;
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
-    gPersonagem.bba += 
+    gPersonagem.bba +=
         tabelas_classes[gPersonagem.classes[i].classe].bba(gPersonagem.classes[i].nivel);
   }
   gPersonagem.bba -= gPersonagem.niveis_negativos;
-  gPersonagem.bba_cac = 
-      gPersonagem.bba + gPersonagem.atributos['forca'].modificador + 
+  gPersonagem.bba_cac =
+      gPersonagem.bba + gPersonagem.atributos['forca'].modificador +
       gPersonagem.tamanho.modificador_ataque_defesa;
-  gPersonagem.bba_cac_acuidade = 
-      gPersonagem.bba + gPersonagem.atributos['destreza'].modificador + 
+  gPersonagem.bba_cac_acuidade =
+      gPersonagem.bba + gPersonagem.atributos['destreza'].modificador +
       gPersonagem.tamanho.modificador_ataque_defesa;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   gPersonagem.bba_distancia = gPersonagem.bba_cac_acuidade;
   gPersonagem.numero_ataques = Math.floor((gPersonagem.bba - 1) / 5) + 1;
   gPersonagem.agarrar =
-      gPersonagem.bba + 
-      gPersonagem.atributos['forca'].modificador + 
+      gPersonagem.bba +
+      gPersonagem.atributos['forca'].modificador +
       gPersonagem.tamanho.modificador_agarrar;
 }
 
@@ -269,7 +269,7 @@ function _DependenciasProficienciaArmas() {
   var todas_simples = false;
   var todas_comuns = false;
   gPersonagem.proficiencia_armas = {};
-  for (var i = 0; i < gPersonagem.classes.length; ++i) { 
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var nome_classe = gPersonagem.classes[i].classe;
     var armas_classe = tabelas_proficiencia_arma_por_classe[nome_classe].armas;
     for (var j = 0; armas_classe != null && j < armas_classe.length; ++j) {
@@ -309,15 +309,15 @@ function _DependenciasProficienciaArmas() {
     var lista_classe = gPersonagem.talentos[chave_classe];
     for (var i = 0; i < lista_classe.length; ++i) {
       var talento = lista_classe[i];
-      if ((talento.chave == 'usar_arma_comum' || 
-           talento.chave == 'usar_arma_exotica') && 
-          (talento.complemento != null) && 
+      if ((talento.chave == 'usar_arma_comum' ||
+           talento.chave == 'usar_arma_exotica') &&
+          (talento.complemento != null) &&
           talento.complemento.length > 0) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
         // TODO remover essa verificacao quando o input dos talentos estiver
         // terminado.
         if (chave_arma == null) {
-          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' + 
+          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' +
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
@@ -325,15 +325,15 @@ function _DependenciasProficienciaArmas() {
         if (arma_tabela.talento_relacionado != talento.chave) {
           // verifica familiaridade.
           var familiar = false;
-          if (arma_tabela.talento_relacionado == 'usar_arma_exotica' && 
+          if (arma_tabela.talento_relacionado == 'usar_arma_exotica' &&
               tabelas_raca[gPersonagem.raca].familiaridade_arma &&
               tabelas_raca[gPersonagem.raca].familiaridade_arma[chave_arma] &&
               talento.chave == 'usar_arma_comum') {
             familiar = true;
           }
           if (!familiar) {
-            Mensagem('Arma "' + talento.complemento + 
-                  '" inválida para talento "' + 
+            Mensagem('Arma "' + talento.complemento +
+                  '" inválida para talento "' +
                   tabelas_talentos[talento.chave].nome + '"');
             continue;
           }
@@ -399,7 +399,7 @@ function _VerificaPrerequisitosTalento() {
     }
   }
 }
- 
+
 // @return true se o complemento for do tipo correto.
 function _VerificaTipoComplementoTalento(talento) {
   var talento_tabela = tabelas_talentos[talento.chave];
@@ -434,7 +434,7 @@ function _DependenciasPericias() {
       nivel += 3;
       primeiro_nivel = false;
     }
-    gPersonagem.pericias.total_pontos += 
+    gPersonagem.pericias.total_pontos +=
         Math.max(pontos_classe + pontos_raca + pontos_inteligencia, 1) * nivel;
   }
 
@@ -459,19 +459,29 @@ function _DependenciasPericias() {
     var bonus_racial_total = 0;
     gPersonagem.pericias.lista[chave_pericia].bonus_racial = 0;
     var raca_personagem = tabelas_raca[gPersonagem.raca];
-    if (raca_personagem.bonus_pericias && 
+    if (raca_personagem.bonus_pericias &&
         raca_personagem.bonus_pericias[chave_pericia] != null) {
       pericia_personagem.bonus.Adiciona(
           'racial', gPersonagem.raca, raca_personagem.bonus_pericias[chave_pericia]);
     }
+    // template (tambem eh racial).
+    var template_personagem = PersonagemTemplate();
+    if (template_personagem != null) {
+      if (template_personagem.bonus_pericias &&
+          template_personagem.bonus_pericias[chave_pericia] != null) {
+        pericia_personagem.bonus.Adiciona(
+            'racial', gPersonagem.template, template_personagem.bonus_pericias[chave_pericia]);
+      }
+    }
+
     // Nivel negativo:
     if (gPersonagem.niveis_negativos > 0) {
       pericia_personagem.bonus.Adiciona(
           'niveis_negativos', '-', -gPersonagem.niveis_negativos);
     }
 
-    pericia_personagem.total = 
-        pericia_personagem.graduacoes + pericia_personagem.bonus.Total(); 
+    pericia_personagem.total =
+        pericia_personagem.graduacoes + pericia_personagem.bonus.Total();
     gPersonagem.pericias.pontos_gastos += pericia_personagem.pontos;
   }
 }
@@ -483,11 +493,11 @@ function _DependenciasFocoArmas() {
     var lista_classe = gPersonagem.talentos[chave_classe];
     for (var i = 0; i < lista_classe.length; ++i) {
       var talento = lista_classe[i];
-      if (talento.chave && talento.chave.indexOf('foco_em_arma') != -1 && 
+      if (talento.chave && talento.chave.indexOf('foco_em_arma') != -1 &&
           talento.complemento != null) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
         if (chave_arma == null) {
-          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' + 
+          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' +
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
@@ -504,11 +514,11 @@ function _DependenciasEspecializacaoArmas() {
     var lista_classe = gPersonagem.talentos[chave_classe];
     for (var i = 0; i < lista_classe.length; ++i) {
       var talento = lista_classe[i];
-      if (talento.chave && talento.chave.indexOf('especializacao_arma') != -1 && 
+      if (talento.chave && talento.chave.indexOf('especializacao_arma') != -1 &&
           talento.complemento != null) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
         if (chave_arma == null) {
-          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' + 
+          Mensagem('Arma "' + talento.complemento + '" inválida para talento "' +
                 tabelas_talentos[talento.chave].nome + '"');
           continue;
         }
@@ -553,8 +563,14 @@ function _DependenciasArmadurasEscudos() {
       'atributo', 'destreza', gPersonagem.atributos.destreza.modificador);
   bonus_ca.Adiciona(
       'tamanho', 'tamanho', gPersonagem.tamanho.modificador_ataque_defesa);
+  // Pode adicionar as armaduras naturais aqui que elas nao se acumulam.
   bonus_ca.Adiciona(
       'armadura_natural', 'racial', tabelas_raca[gPersonagem.raca].armadura_natural || 0);
+  var template_personagem = PersonagemTemplate();
+  if (template_personagem != null) {
+    bonus_ca.Adiciona(
+        'armadura_natural', 'template', template_personagem.armadura_natural || 0);
+  }
 }
 
 function _DependenciasArmas() {
@@ -566,11 +582,11 @@ function _DependenciasArmas() {
 // TODO testar essa funcao.
 function _DependenciasArma(arma_personagem) {
   var arma_entrada = arma_personagem.entrada;
-  var arma_tabela = 
+  var arma_tabela =
       arma_personagem.arma_tabela = tabelas_armas[arma_entrada.chave];
   arma_personagem.nome_gerado = arma_tabela.nome;
   if (arma_entrada.material && arma_entrada.material != 'nenhum') {
-    arma_personagem.nome_gerado += 
+    arma_personagem.nome_gerado +=
         ' (' + tabelas_materiais_especiais[arma_entrada.material].nome + ')';
   }
   if (arma_entrada.bonus > 0) {
@@ -631,7 +647,7 @@ function _DependenciasEstilo(estilo_personagem) {
   // Atualiza cada categoria da arma no estilo.
   var secundaria_leve = false;
   for (var categoria in arma_secundaria.arma_tabela.categorias) {
-    secundaria_leve = 
+    secundaria_leve =
         (estilo_personagem.nome == 'duas_armas' && categoria.indexOf('leve') != -1) ||
          estilo_personagem.nome == 'arma_dupla';
   }
@@ -677,12 +693,12 @@ function _DependenciasBonusPorCategoria(
     if (primaria) {
       bonus_por_categoria.ataque = secundaria_leve ? -4 : -6;
       if (PersonagemPossuiTalento('combater_duas_armas')) {
-        bonus_por_categoria.ataque += 2; 
+        bonus_por_categoria.ataque += 2;
       }
     } else {
       bonus_por_categoria.ataque = secundaria_leve ? -8 : -10;
       if (PersonagemPossuiTalento('combater_duas_armas')) {
-        bonus_por_categoria.ataque += 6; 
+        bonus_por_categoria.ataque += 6;
       }
     }
     multiplicador_dano_forca = primaria ? 1.0 : 0.5;
@@ -696,17 +712,17 @@ function _DependenciasBonusPorCategoria(
       bonus_por_categoria.ataque += gPersonagem.bba_cac;
     }
     bonus_por_categoria.ataque += arma_personagem.bonus_ataque;
-    bonus_por_categoria.dano += 
-        Math.floor(gPersonagem.atributos.forca.modificador * multiplicador_dano_forca) + 
+    bonus_por_categoria.dano +=
+        Math.floor(gPersonagem.atributos.forca.modificador * multiplicador_dano_forca) +
         arma_personagem.bonus_dano;
   } else if (categoria.indexOf('arremesso') != -1) {
-    bonus_por_categoria.ataque += 
+    bonus_por_categoria.ataque +=
         gPersonagem.bba_distancia + arma_personagem.bonus_ataque;
-    bonus_por_categoria.dano += 
-        Math.floor(gPersonagem.atributos.forca.modificador * multiplicador_dano_forca) + 
+    bonus_por_categoria.dano +=
+        Math.floor(gPersonagem.atributos.forca.modificador * multiplicador_dano_forca) +
         arma_personagem.bonus_dano;
   } else if (categoria.indexOf('distancia') != -1) {
-    bonus_por_categoria.ataque += 
+    bonus_por_categoria.ataque +=
         gPersonagem.bba_distancia + arma_personagem.bonus_ataque;
     bonus_por_categoria.dano += arma_personagem.bonus_dano;
   }
@@ -744,7 +760,7 @@ function _DependenciasSalvacoes() {
     var valor_base = 0;
     for (var i = 0; i < gPersonagem.classes.length; ++i) {
       var classe = gPersonagem.classes[i].classe;
-      valor_base += 
+      valor_base +=
           tabelas_salvacao[classe][tipo_salvacao](gPersonagem.classes[i].nivel);
     }
     gPersonagem.salvacoes[tipo_salvacao].Adiciona('base', '-', valor_base);
@@ -766,7 +782,7 @@ function _DependenciasSalvacoes() {
       gPersonagem.salvacoes[nome_salvacao] = gPersonagem.salvacoes[salvacao_base].Clona();
       // Entra como racial, em adição ao que já possui.
       gPersonagem.salvacoes[nome_salvacao].Adiciona(
-          'racial', null, 
+          'racial', null,
           gPersonagem.salvacoes[nome_salvacao].Le('racial', null) + outras_salvacoes_raca[tipo_salvacao].bonus);
     }
   }
@@ -793,8 +809,8 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   gPersonagem.feiticos[chave_classe].em_uso = true;
   // Feiticos conhecidos (se houver para a classe). Se nao houver, vai usar o que vier da entrada.
   // Por exemplo, magos nao tem limite de conhecidos.
-  for (var indice = 0; 
-       feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length; 
+  for (var indice = 0;
+       feiticos_por_nivel.conhecidos != null && indice < feiticos_por_nivel.conhecidos.length;
        ++indice) {
     var conhecidos_nivel = parseInt(feiticos_por_nivel.conhecidos.charAt(indice)) || 0;
     _DependenciasNumeroFeiticosConhecidosParaClassePorNivel(
@@ -807,7 +823,7 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   for (var indice = 0; indice < feiticos_por_nivel.por_dia.length; ++indice) {
     var num_slots_nivel = parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0;
     _DependenciasNumeroSlotsParaClassePorNivel(
-        chave_classe, nivel_inicial + indice, num_slots_nivel, feiticos_por_nivel, 
+        chave_classe, nivel_inicial + indice, num_slots_nivel, feiticos_por_nivel,
         array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio);
   }
   gPersonagem.feiticos[chave_classe].nivel_maximo = nivel_inicial + feiticos_por_nivel.por_dia.length - 1;
@@ -829,13 +845,13 @@ function _DependenciasNumeroFeiticosConhecidosParaClassePorNivel(
 
 // Calcula as dependencias do numero de slots para uma classe por nivel.
 function _DependenciasNumeroSlotsParaClassePorNivel(
-    chave_classe, nivel, num_slots_nivel, feiticos_por_nivel, 
+    chave_classe, nivel, num_slots_nivel, feiticos_por_nivel,
     array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio) {
   // Slots de feiticos.
   var personagem_slots_nivel = gPersonagem.feiticos[chave_classe].slots[nivel];
   personagem_slots_nivel.base = num_slots_nivel;
   personagem_slots_nivel.bonus_atributo = array_bonus_feiticos_atributo[nivel];
-  personagem_slots_nivel.cd = 10 + nivel + bonus_atributo_chave; 
+  personagem_slots_nivel.cd = 10 + nivel + bonus_atributo_chave;
 
   var slots_por_dia = personagem_slots_nivel.base + personagem_slots_nivel.bonus_atributo;
   personagem_slots_nivel.feiticos.length = slots_por_dia;

@@ -48,25 +48,25 @@ function _GeraPontosDeVida(modo, submodo) {
     var info_classe = gPersonagem.classes[i];
     for (var j = 0; j < info_classe.nivel; ++j) {
       var pontos_vida_nivel = 0;
+      var template_personagem = PersonagemTemplate();
+      var dados_vida = template_personagem != null && 'dados_vida' in template_personagem ?
+          template_personagem.dados_vida :
+          tabelas_classes[info_classe.classe].dados_vida;
       if (primeiro) {
         if (modo == 'elite') {
-          pontos_vida_nivel = tabelas_classes[info_classe.classe].dados_vida;
+          pontos_vida_nivel = dados_vida;
         } else if (modo == 'personagem') {
-          // O modificador de constituicao eh subtraido aqui pq sera adicionado 
+          // O modificador de constituicao eh subtraido aqui pq sera adicionado
           // no calculo de pontos de vida, nos bonus.
-          pontos_vida_nivel = tabelas_classes[info_classe.classe].dados_vida +
-              gPersonagem.atributos['constituicao'].valor -  
+          pontos_vida_nivel = dados_vida +
+              gPersonagem.atributos['constituicao'].valor -
               gPersonagem.atributos['constituicao'].modificador;
         } else {
-          pontos_vida_nivel = submodo == 'tabelado' ?
-              tabelas_classes[info_classe.classe].dados_vida / 2 :
-              Rola(1, tabelas_classes[info_classe.classe].dados_vida);
+          pontos_vida_nivel = submodo == 'tabelado' ? dados_vida / 2 : Rola(1, dados_vida);
         }
         primeiro = false;
       } else {
-        pontos_vida_nivel = submodo == 'tabelado' ?
-            tabelas_classes[info_classe.classe].dados_vida / 2 :
-            Rola(1, tabelas_classes[info_classe.classe].dados_vida);
+        pontos_vida_nivel = submodo == 'tabelado' ? dados_vida / 2 : Rola(1, dados_vida);
 
       }
       // Nunca pode ganhar menos de 1 ponto por nivel.

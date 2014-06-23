@@ -4,7 +4,8 @@ var gPersonagem = {
   modo_mestre: false,
   nome: '',
   raca: 'humano',
-  tamanho: { categoria: 'medio', modificador_ataque_defesa: 0, modificador_agarrar: 0 }, 
+  template: '',
+  tamanho: { categoria: 'medio', modificador_ataque_defesa: 0, modificador_agarrar: 0 },
   alinhamento: '',
   experiencia: 0,
   divindade: '',
@@ -33,43 +34,43 @@ var gPersonagem = {
       disponiveis: 0,
       gastos: [],  // cada entrada, um atributo
     },
-    forca: { 
+    forca: {
       base: 10,
       bonus_nivel: 0,
       racial: 0,
       valor: 10,
       modificador: 0
-    },  
+    },
     destreza: {
-      base: 10, 
+      base: 10,
       bonus_nivel: 0,
       racial: 0,
       valor: 10,
       modificador: 0
-    },  
-    constituicao: { 
-      base: 10, 
+    },
+    constituicao: {
+      base: 10,
       bonus_nivel: 0,
       racial: 0,
       valor: 10,
       modificador: 0
-    },  
-    inteligencia: { 
-      base: 10, 
+    },
+    inteligencia: {
+      base: 10,
       bonus_nivel: 0,
       racial: 0,
       valor: 10,
       modificador: 0
-    },  
-    sabedoria: { 
-      base: 10, 
+    },
+    sabedoria: {
+      base: 10,
       bonus_nivel: 0,
       racial: 0,
       valor: 10,
       modificador: 0
-    },  
-    carisma: { 
-      base: 10, 
+    },
+    carisma: {
+      base: 10,
       bonus_nivel: 0,
       racial: 0,
       valor: 10,
@@ -84,14 +85,14 @@ var gPersonagem = {
   agarrar: 1,
   numero_ataques: 1,
   // talentos
-  talentos: {  
+  talentos: {
     // Algumas classes ganham talentos especificos.
     // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
     // Cada talento: { chave, complemento }
-    gerais: [], 
-    guerreiro: [], 
-    mago: [], 
+    gerais: [],
+    guerreiro: [],
+    mago: [],
     monge: [],
   },
   // pericias.
@@ -106,13 +107,13 @@ var gPersonagem = {
     // de acordo com a pericia ser de classe ou nao.
     lista: {},
   },
-  // Cada entrada: { nome, 
-  //                 arma_primaria: {  nome, 
-  //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] }, 
+  // Cada entrada: { nome,
+  //                 arma_primaria: {  nome,
+  //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] },
   //                 arma_secundaria: { idem }, }.
   // A categoria pode ser cac, cac_leve, cac_duas_maos, distancia, arremesso...
   estilos_luta: [],
-  ca: { 
+  ca: {
       normal: 10, surpreso: 10, toque: 10,
       bonus: new Bonus(),
   },
@@ -134,19 +135,19 @@ var gPersonagem = {
   foco_armas: {},
   // Cada entrada: { chave_arma: 2|4 }.
   especializacao_armas: {},
-  // Cada entrada: 
-  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, bonus_ataque, bonus_dano, 
+  // Cada entrada:
+  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, bonus_ataque, bonus_dano,
   //       proficiente, foco, especializado, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   armas: [],
   // Armadura: aponta para a armadura que estiver sendo usada.
-  armadura: null, 
+  armadura: null,
   // Cada entrada:
   //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado.
   armaduras: [],
   // Aponta para um dos escudos.
-  escudo: null, 
+  escudo: null,
   // Cada entrada:
   //      entrada: { chave, obra_prima, bonus }, nome_gerado.
   escudos: [],
@@ -161,17 +162,17 @@ var gPersonagem = {
 
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',
-  // Feiticos. As chaves sao criadas no carregamento. Cada entrada: 
+  // Feiticos. As chaves sao criadas no carregamento. Cada entrada:
   // TODO transformar a CD em Bonus para poder ter mouse over.
-  // chave_classe: { 
-  //   atributo_chave, 
+  // chave_classe: {
+  //   atributo_chave,
   //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9: [] },
   //   nivel_maximo,  // nivel de feitico mais alto para a classe.
-  //   slots: { 
-  //       0: { base, bonus_atributo, cd, 
+  //   slots: {
+  //       0: { base, bonus_atributo, cd,
   //            feiticos: [ { nivel_conhecido, indice_conhecido, gasto } ], // o indice eh referente aos conhecidos.
-  //            feitico_dominio: {nome, gasto} }, 
+  //            feitico_dominio: {nome, gasto} },
   //       1: ...} }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
@@ -179,7 +180,7 @@ var gPersonagem = {
   notas: '',
 };
 
-// Limpa tudo antes de comecar a conversao das entradas para o personagem. 
+// Limpa dependencias antes de comecar a conversao das entradas para o personagem. Tambem chamada na geracao de personagens.
 function PersonagemLimpaGeral() {
   gPersonagem.pontos_vida.total = 0;
   gPersonagem.pontos_vida.bonus.Limpa();
@@ -261,7 +262,7 @@ function PersonagemEspecializacaoComArma(chave_arma) {
 function PersonagemPossuiTalento(nome_talento, complemento) {
   for (var chave_classe in gPersonagem.talentos) {
     for (var i = 0; i < gPersonagem.talentos[chave_classe].length; ++i) {
-      if (_TalentoIgual(gPersonagem.talentos[chave_classe][i], 
+      if (_TalentoIgual(gPersonagem.talentos[chave_classe][i],
                         nome_talento, complemento)) {
         return true;
       }
@@ -278,7 +279,7 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
   if (nome_talento == chave_talento ||
       nome_talento == tabelas_talentos[chave_talento].nome) {
     // TODO ver essa logica de complemento com calma.
-    if (tabelas_talentos[chave_talento].complemento && 
+    if (tabelas_talentos[chave_talento].complemento &&
         talento_personagem.complemento && complemento) {
       // Trata complemento se houver.
       if (talento_personagem.complemento == complemento) {
@@ -319,7 +320,7 @@ function PersonagemNivelClasse(classe) {
 }
 
 // @param classe se null, retorna o maior de todas as classes.
-// @return o nivel de conjurador de uma classe de personagem. 
+// @return o nivel de conjurador de uma classe de personagem.
 function PersonagemNivelConjuradorClasse(classe) {
   var nivel_conjurador = 0;
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
@@ -334,7 +335,7 @@ function PersonagemNivelConjuradorClasse(classe) {
   return nivel_conjurador;
 }
 
-// Verifica se o personagem atende aos requisitos do talento. Caso não atenda, 
+// Verifica se o personagem atende aos requisitos do talento. Caso não atenda,
 // alertará uma mensagem.
 // @return descricao do erro caso a verificação falhe, null caso contrário.
 function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
@@ -413,12 +414,23 @@ function PersonagemStringDadosVida() {
       } else {
         string_dados_vida += ' +';
       }
-      string_dados_vida += 
+      string_dados_vida +=
         gPersonagem.classes[i].nivel + 'd' + tabelas_classes[gPersonagem.classes[i].classe].dados_vida;
   }
   if (gPersonagem.atributos.constituicao.modificador > 0) {
-    string_dados_vida += 
+    string_dados_vida +=
       ' +' + (gPersonagem.atributos.constituicao.modificador * gPersonagem.dados_vida.nivel_personagem);
   }
   return string_dados_vida;
+}
+
+// @return o template do personagem ou null.
+function PersonagemTemplate() {
+  if (gPersonagem.template.length == 0) {
+    return null;
+  }
+  if (!(gPersonagem.template in tabelas_template)) {
+    return null;
+  }
+  return tabelas_template[gPersonagem.template];
 }
