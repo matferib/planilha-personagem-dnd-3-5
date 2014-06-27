@@ -135,18 +135,18 @@ function _ConverteListaArmaduras() {
 
 }
 
-// Converte uma armadura. Exportada porque dependencias usa para criar as 
+// Converte uma armadura. Exportada porque dependencias usa para criar as
 // armaduras fake.
 function ConverteArmadura(armadura_entrada) {
   var armadura_tabela = tabelas_armaduras[armadura_entrada.chave];
   var armadura_personagem = {};
   // O nome da entrada eh apenas um indice na tabela de armas.
   armadura_personagem.entrada = {
-    chave: armadura_entrada.chave, 
+    chave: armadura_entrada.chave,
     material: armadura_entrada.material,
-    bonus: armadura_entrada.bonus, 
+    bonus: armadura_entrada.bonus,
     // Se é magica, também é obra prima.
-    obra_prima: armadura_entrada.bonus > 0 ? 
+    obra_prima: armadura_entrada.bonus > 0 ?
         true : armadura_entrada.obra_prima,
     em_uso: armadura_entrada.em_uso,
   };
@@ -159,11 +159,11 @@ function ConverteEscudo(escudo_entrada) {
   var escudo_personagem = {};
   // O nome da entrada eh apenas um indice na tabela de armas.
   escudo_personagem.entrada = {
-    chave: escudo_entrada.chave, 
+    chave: escudo_entrada.chave,
     material: escudo_entrada.material,
-    bonus: escudo_entrada.bonus, 
+    bonus: escudo_entrada.bonus,
     // Se é magico, também é obra prima.
-    obra_prima: escudo_entrada.bonus > 0 ? 
+    obra_prima: escudo_entrada.bonus > 0 ?
         true : escudo_entrada.obra_prima,
     em_uso: escudo_entrada.em_uso,
   };
@@ -171,7 +171,7 @@ function ConverteEscudo(escudo_entrada) {
 }
 
 // Converte a lista de armas do personagem.
-// 
+//
 function _ConverteListaArmas() {
   // Tem que manter sempre a primeira arma imutavel (desarmado).
   // A mesma coisa ocorre no atualiza, a arma nao eh mostrada para
@@ -182,7 +182,7 @@ function _ConverteListaArmas() {
   }
 }
 
-// Converte uma arma da entrada para personagem. 
+// Converte uma arma da entrada para personagem.
 // Exportada para gerar a entrada desarmado.
 // @return a arma convertida.
 function ConverteArma(arma_entrada) {
@@ -190,9 +190,9 @@ function ConverteArma(arma_entrada) {
   var arma_personagem = {};
   // O nome da entrada eh apenas um indice na tabela de armas.
   arma_personagem.entrada = {
-    chave: arma_entrada.chave, 
+    chave: arma_entrada.chave,
     material: arma_entrada.material,
-    bonus: arma_entrada.bonus, 
+    bonus: arma_entrada.bonus,
     obra_prima: arma_entrada.obra_prima
   };
   return arma_personagem;
@@ -209,9 +209,9 @@ function _ConverteHabilidades() {
 
 // Converte um estilo da entrada para o personagem.
 function _ConverteEstilo(estilo_entrada) {
-  var estilo_personagem = { 
+  var estilo_personagem = {
     nome: estilo_entrada.nome,
-    arma_primaria: { 
+    arma_primaria: {
       nome: estilo_entrada.arma_primaria,
       bonus_por_categoria: {}
     },
