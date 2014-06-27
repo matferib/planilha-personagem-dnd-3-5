@@ -121,12 +121,12 @@ function _GeraArmas(tabela_geracao_classe_por_nivel) {
   gPersonagem.armas.length = 1;
   with (tabela_geracao_classe_por_nivel) {
     for (var i = 0; i < armas.length; ++i) {
-      var arma_entrada = { 
-          entrada: { 
-              chave: armas[i].chave, 
-              bonus: armas[i].bonus, 
-              obra_prima: armas[i].obra_prima 
-          } 
+      var arma_entrada = {
+          entrada: {
+              chave: armas[i].chave,
+              bonus: armas[i].bonus,
+              obra_prima: armas[i].obra_prima
+          }
       };
       gPersonagem.armas.push(arma_entrada);
     }
@@ -142,8 +142,8 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
   }
   for (var i = 0; i < tabela_geracao_classe_por_nivel[tipo_item].length; ++i) {
     var item = tabela_geracao_classe_por_nivel[tipo_item][i];
-    var item_entrada = { 
-        chave: item.chave, 
+    var item_entrada = {
+        chave: item.chave,
         em_uso: item.em_uso,
     };
     gPersonagem[tipo_item].push(item_entrada);
@@ -188,12 +188,10 @@ function GeraPersonagem(modo, submodo) {
   _GeraEstilosDeLuta();
   _GeraTalentos();
   */
-  _GeraPericias(tabelas_classes[gPersonagem.classes[0].classe], 
-                tabelas_geracao_classe, 
+  _GeraPericias(tabelas_classes[gPersonagem.classes[0].classe],
+                tabelas_geracao_classe,
                 gPersonagem.classes[0].nivel);
-  /*
   _GeraFeiticos();
-  */
   AtualizaGeralSemConverterEntradas();
 }
 
@@ -208,6 +206,71 @@ function _GeraPericias(tabela_classe, tabela_geracao_classe, nivel) {
   var max_pontos = nivel + 3;
   for (var i = 0; i < num_pericias && i < tabela_geracao_classe.ordem_pericias.length; ++i) {
     gPersonagem.pericias.lista[tabela_geracao_classe.ordem_pericias[i]].pontos = max_pontos;
+  }
+}
+
+// Gera os feiticos para as classes do personagem.
+function _GeraFeiticos() {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var classe_personagem = gPersonagem.classes[i];
+    var chave_classe = gPersonagem.classes[i].classe;
+    // Tabela de geracao da classe.
+    if (!(chave_classe in tabelas_geracao)) {
+      continue;
+    }
+    // Tabela de feiticos da classe.
+    if (!(chave_classe in tabelas_feiticos)) {
+      continue;
+    }
+    if (!(chave_classe in gPersonagem.feiticos)) {
+      continue;
+    }
+    _GeraFeiticosClasse(classe_personagem, gPersonagem.feiticos[chave_classe], tabelas_geracao[chave_classe], tabelas_lista_feiticos[chave_classe]);
+  }
+}
+
+// Percorre os niveis de feiticos da classe do personagem.
+// @param classe estrutura do tipo gPersonagem.classes[i].
+// @param feiticos_classe estrutura do tipo gPersonagem.feiticos[chave_classe].
+// @param tabela_geracao_classe a tabela de geracao para a classe passada.
+// @param lista_feiticos_classe a tabela com a lista de feiticos da classe.
+function _GeraFeiticosClasse(classe_personagem, feiticos_classe, tabela_geracao_classe, lista_feiticos_classe) {
+  for (var nivel in feiticos_classe.slots) {
+    if (!(nivel in lista_feiticos_classe)) {
+      continue
+    }
+    if (!('ordem_magias' in tabela_geracao_classe) || !(nivel in tabela_geracao_classe.ordem_magias)) {
+      continue;
+    }
+    _GeraFeiticosClasseNivel(classe_personagem,
+                             nivel,
+                             feiticos_classe.conhecidos[nivel],
+                             feiticos_classe.slots[nivel],
+                             tabela_geracao_classe.ordem_magias[nivel],
+                             lista_feiticos_classe[nivel]);
+  }
+}
+
+// Gera os feiticos de um determinado nivel para a classe.
+// @param classe estrutura do tipo gPersonagem.classes[i].
+// @param conhecidos_nivel array do tipo gPersonagem.feiticos[chave_classe].conhecidos[nivel].
+// @param slots_nivel estrutura do tipo gPersonagem.feiticos[chave_classe].slots[nivel].
+// @param ordem_magias array com a preferencia de ordem das magias para o nivel.
+// @param lista_feiticos_classe_nivel.
+function _GeraFeiticosClasseNivel(classe_personagem, nivel, conhecidos_nivel, slots_nivel, ordem_magias, lista_feiticos_classe_nivel) {
+  // Preenche conhecidos para ter referencia.
+  if (!tabelas_feiticos[classe_personagem.classe].precisa_conhecer) {
+    conhecidos_nivel.length = ordem_magias.length;
+  }
+  for (var i = 0; i < conhecidos_nivel.length && i < ordem_magias.length; ++i) {
+    conhecidos_nivel[i] = ordem_magias[i] in lista_feiticos_classe_nivel ? lista_feiticos_classe_nivel[ordem_magias[i]].nome : ordem_magias[i];
+  }
+  // Preenche os slots, fazendo referencia aos conhecidos.
+  var indice_geracao = 0;
+  for (var i = 0; i < slots_nivel.feiticos.length; ++i) {
+    slots_nivel.feiticos[i].nivel_conhecido = nivel;
+    slots_nivel.feiticos[i].indice_conhecido = indice_geracao++;
+    indice_geracao = indice_geracao % ordem_magias.length;
   }
 }
 
@@ -232,11 +295,11 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
 // String de resumo para um estilo de luta.
 function _GeraResumoEstilo(estilo) {
   var resumo = estilo.nome + ': (';
-  resumo += estilo.arma_primaria.nome + ': [' + 
+  resumo += estilo.arma_primaria.nome + ': [' +
       GeraResumoArmaEstilo(
         ArmaPersonagem(estilo.arma_primaria.nome), true, estilo) + ']';
   if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
-    resumo += ', ' + estilo.arma_secundaria.nome + ': [' + 
+    resumo += ', ' + estilo.arma_secundaria.nome + ': [' +
         GeraResumoArmaEstilo(
             ArmaPersonagem(estilo.arma_secundaria.nome), false, estilo) + ']';
   }
@@ -248,13 +311,13 @@ function _GeraResumoEstilo(estilo) {
 function GeraResumo() {
   // TODO(terminar resumo)
   var resumo =
-    gPersonagem.nome + '; ' + gPersonagem.raca + '; ' + 
+    gPersonagem.nome + '; ' + gPersonagem.raca + '; ' +
     'Tend: ' + gPersonagem.alinhamento.toUpperCase() + ', ' +
     'Tam: ' + gPersonagem.tamanho.categoria +
     '; ';
   // Dados de vida e pontos de vida.
-  resumo += 
-    'DV: ' + PersonagemStringDadosVida() + 
+  resumo +=
+    'DV: ' + PersonagemStringDadosVida() +
     ', pv: ' + gPersonagem.pontos_vida.total + '; ';
 
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
@@ -277,7 +340,7 @@ function GeraResumo() {
   resumo = resumo.slice(0, -2) + '; ';
   resumo += 'Classe de Armadura: total ' + (10 + gPersonagem.ca.bonus.Total()) + ', ';
   resumo += 'surpreso ' + (10 + gPersonagem.ca.bonus.Total(['atributo'])) + ', ';
-  resumo += 'toque ' + 
+  resumo += 'toque ' +
       (10 + gPersonagem.ca.bonus.Total(
           ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural'])) + '; ';
 
@@ -289,8 +352,8 @@ function GeraResumo() {
   for (var chave_pericia in gPersonagem.pericias.lista) {
     var pericia_personagem = gPersonagem.pericias.lista[chave_pericia];
     if (pericia_personagem.pontos > 0) {
-      resumo += 
-          tabelas_pericias[chave_pericia].nome + ' ' + 
+      resumo +=
+          tabelas_pericias[chave_pericia].nome + ' ' +
           StringSinalizada(pericia_personagem.total, true) +
           ', ';
     }
@@ -333,7 +396,7 @@ function GeraResumo() {
     resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + gPersonagem.atributos[atributo].valor + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
-  
+ 
   // Itens. TODO nome correto.
   for (var tipo_item in tabelas_itens) {
     if (gPersonagem[tipo_item].length > 0) {
