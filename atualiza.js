@@ -7,7 +7,7 @@
 // os diversos elementos da planilha.
 function AtualizaGeral() {
   // Apenas le as gEntradas para a estrutura de gEntradas.
-  LeEntradas(); 
+  LeEntradas();
   // converte a estrutura de gEntradas para a de personagem.
   ConverteEntradasParaPersonagem();
   DependenciasGerais();
@@ -17,7 +17,7 @@ function AtualizaGeral() {
 
 // AVISO:
 // Essa funcao eh bem perigosa. Varios botoes atualizam o personagem mas nao os objetos de gEntradas.
-// Portanto, se essa funcao for chamada nesse intervalo onde personagem e gEntradas ficam fora de 
+// Portanto, se essa funcao for chamada nesse intervalo onde personagem e gEntradas ficam fora de
 // sincronismo, o personagem sera revertido para a versao das gEntradas (por exemplo, apos gerar um
 // personagem, tentar adicionar algo em gEntradas e chamar essa funcao vai zerar o personagem).
 //
@@ -33,7 +33,7 @@ function AtualizaGeralSemLerEntradas() {
   gEstado.Salva(JSON.stringify(gEntradas));
 }
 
-// Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das 
+// Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das
 // gEntradas. Normalmente os tratamentos de eventos alteram algum campo do personagem e chamam
 // esta funcao para atualizar tudo.
 function AtualizaGeralSemConverterEntradas() {
@@ -80,14 +80,14 @@ function _AtualizaNomeRacaAlinhamentoXp() {
 // Atualiza os dados de vida do personagem de acordo com as classes.
 function _AtualizaDadosVida() {
   var span_dados = Dom('dados-vida-classes');
-  span_dados.textContent = 
+  span_dados.textContent =
       gPersonagem.dados_vida.nivel_personagem + ' = ' + PersonagemStringDadosVida();
 }
 
 // Atualiza as informacoes referentes a pontos de vida do personagem.
 function _AtualizaPontosVida() {
   // O valor dos ferimentos deve ser <= 0.
-  var pontos_vida_corrente = 
+  var pontos_vida_corrente =
       gPersonagem.pontos_vida.total - gPersonagem.pontos_vida.ferimentos;
   ImprimeNaoSinalizado(
       pontos_vida_corrente, Dom('pontos-vida-corrente'));
@@ -103,7 +103,7 @@ function _AtualizaAtributos() {
   // Botoes de atributos.
   var botoes_atributos = DomsPorClasse('botoes-atributos');
   for (var i = 0; i < botoes_atributos.length; ++i) {
-    if (gPersonagem.atributos.pontos.gastos.length < 
+    if (gPersonagem.atributos.pontos.gastos.length <
         gPersonagem.atributos.pontos.disponiveis) {
       // habilita botoes de atributos.
       botoes_atributos[i].style.display = 'inline';
@@ -131,7 +131,7 @@ function _AtualizaAtributos() {
       gPersonagem.atributos.pontos.disponiveis;
 
   var div_atributos = Dom('div-stats');
-  var atributos = [ 
+  var atributos = [
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
     var atributo = atributos[i];
@@ -140,7 +140,7 @@ function _AtualizaAtributos() {
   }
 }
 
-// Torna todas as classes exceto a ultima desabilitadas. 
+// Torna todas as classes exceto a ultima desabilitadas.
 // Remove classes sobrando e adiciona faltantes.
 function _AtualizaClasses() {
   var classes_desabilitadas = [];
@@ -155,7 +155,7 @@ function _AtualizaClasses() {
         AdicionaClasse(i, div_classes);
       }
       _AtualizaClasse(
-          classes_desabilitadas, gPersonagem.classes[i].classe, 
+          classes_desabilitadas, gPersonagem.classes[i].classe,
           gPersonagem.classes[i].nivel, gPersonagem.classes[i].nivel_conjurador, i);
       classes_desabilitadas.push(gPersonagem.classes[i].classe);
     } else {
@@ -164,7 +164,7 @@ function _AtualizaClasses() {
   }
 
   // Desabilita selects.
-  var selects_classes = DomsPorClasse('selects-classes'); 
+  var selects_classes = DomsPorClasse('selects-classes');
   for (var i = 0; i < selects_classes.length - 1; ++i) {
     selects_classes[i].disabled = true;
   }
@@ -220,7 +220,7 @@ function _AtualizaModificadoresAtributos() {
   var modificadores_raca = tabelas_raca[gPersonagem.raca].atributos;
 
   // Busca cada elemento das estatisticas e atualiza modificadores.
-  var atributos = [ 
+  var atributos = [
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
     var atributo = atributos[i];
@@ -239,7 +239,7 @@ function _AtualizaModificadoresAtributos() {
 
     // Escreve o valor total.
     ImprimeNaoSinalizado(
-        gPersonagem.atributos[atributo].valor, 
+        gPersonagem.atributos[atributo].valor,
         Dom(atributo + '-valor-total'));
 
     // Escreve o modificador.
@@ -255,18 +255,18 @@ function _AtualizaIniciativa() {
   Titulo(gPersonagem.iniciativa.Exporta(), span_iniciativa);
 }
 
-// Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes. 
+// Atualiza os diversos tipos de ataques lendo a classe e os modificadores relevantes.
 function _AtualizaAtaque() {
   ImprimeSinalizado(gPersonagem.bba, DomsPorClasse('bba'));
-  ImprimeNaoSinalizado(gPersonagem.numero_ataques, 
+  ImprimeNaoSinalizado(gPersonagem.numero_ataques,
                        DomsPorClasse('numero-ataques'));
   // Corpo a corpo.
   var span_bba_cac = Dom('bba-corpo-a-corpo');
   ImprimeSinalizado(gPersonagem.bba_cac, span_bba_cac);
   Titulo(
-      [{'bba': gPersonagem.bba}, 
-       {'força': gPersonagem.atributos['forca'].modificador}, 
-       {'tamanho': gPersonagem.tamanho.modificador_ataque_defesa}], 
+      [{'bba': gPersonagem.bba},
+       {'força': gPersonagem.atributos['forca'].modificador},
+       {'tamanho': gPersonagem.tamanho.modificador_ataque_defesa}],
       span_bba_cac);
 
   // Distancia.
@@ -283,7 +283,7 @@ function _AtualizaAtaque() {
   ImprimeSinalizado(gPersonagem.agarrar, span_bba_agarrar);
   Titulo(
       [{'bba': gPersonagem.bba},
-       {'força': gPersonagem.atributos['forca'].modificador}, 
+       {'força': gPersonagem.atributos['forca'].modificador},
        {'tamanho especial': gPersonagem.tamanho.modificador_agarrar}],
       span_bba_agarrar);
 
@@ -295,7 +295,7 @@ function _AtualizaEstilosLuta() {
   AjustaFilhos(dom_estilos, gPersonagem.estilos_luta.length, function(indice_filho) {
     AdicionaEstiloLuta(gPersonagem.estilos_luta[indice_filho].nome);
   });
-  // Atualiza os valores dos estilos. Neste ponto, 
+  // Atualiza os valores dos estilos. Neste ponto,
   // dom_filhos.length == gPersonagem.estilos_luta.length.
   var dom_filhos = dom_estilos.childNodes;
   for (var i = 0; i < gPersonagem.estilos_luta.length; ++i) {
@@ -307,20 +307,20 @@ function _AtualizaEstilosLuta() {
 // @param div_estilo o div do estilo.
 // @param estilo no personagem.
 function _AtualizaEstilo(div_estilo, estilo) {
-  var id_estilo = div_estilo.id; 
+  var id_estilo = div_estilo.id;
 
-  var id_radio = 
+  var id_radio =
     id_estilo.replace('id-estilo', 'id-estilo-' + estilo.nome.replace('_', '-'));
   Dom(id_radio).checked = true;
 
   var id_span_primario =
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
-  var id_select_primario = 
+  var id_select_primario =
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
   var id_span_classe_armadura =
       id_estilo.replace('id-estilo', 'id-span-classe-armadura');
   var arma_primaria = ArmaPersonagem(estilo.arma_primaria.nome);
-  AdicionaArmasAoEstilo(Dom(id_select_primario), 
+  AdicionaArmasAoEstilo(Dom(id_select_primario),
                         estilo.arma_primaria.nome);
   _AtualizaArmaEstilo(arma_primaria, true, estilo,
                       Dom(id_span_primario));
@@ -328,10 +328,10 @@ function _AtualizaEstilo(div_estilo, estilo) {
   var id_span_secundario =
     id_estilo.replace('id-estilo', 'id-span-secundario-estilo');
   if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
-    var id_select_secundario = 
+    var id_select_secundario =
         id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
     var arma_secundaria = ArmaPersonagem(estilo.arma_secundaria.nome);
-    AdicionaArmasAoEstilo(Dom(id_select_secundario), 
+    AdicionaArmasAoEstilo(Dom(id_select_secundario),
                           estilo.arma_secundaria.nome);
     _AtualizaArmaEstilo(arma_secundaria, false, estilo,
                         Dom(id_span_secundario));
@@ -378,7 +378,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   span_ca_surpreso.textContent = 'Surpresa: ' + span_ca_surpreso.textContent + ', ';
   // AC toque.
   var span_ca_toque = CriaSpan();
-  array_exclusao = 
+  array_exclusao =
     ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural'];
   ImprimeNaoSinalizado(
       10 + gPersonagem.ca.bonus.Total(array_exclusao),
@@ -399,8 +399,8 @@ function _AtualizaSalvacoes() {
   for (var tipo_salvacao in gPersonagem.salvacoes) {
     var div_salvacao = CriaDiv();
     AdicionaSpanAoDiv(tipo_salvacao + ': ', null, div_salvacao);
-    var span_salvacao = 
-      AdicionaSpanAoDiv(StringSinalizada(gPersonagem.salvacoes[tipo_salvacao].Total()), 
+    var span_salvacao =
+      AdicionaSpanAoDiv(StringSinalizada(gPersonagem.salvacoes[tipo_salvacao].Total()),
                         null, div_salvacao);
     Titulo(gPersonagem.salvacoes[tipo_salvacao].Exporta(), span_salvacao);
     div_salvacoes.appendChild(div_salvacao);
@@ -433,12 +433,12 @@ function _AtualizaTalentos() {
     var div_selects = Dom('div-talentos-' + chave_classe + '-selects');
     if (lista_classe.length > 0) {
       ImprimeNaoSinalizado(
-          lista_classe.length, 
+          lista_classe.length,
           Dom('talentos-' + chave_classe + '-total'));
       for (var i = 0; i < lista_classe.length; ++i) {
         _AtualizaTalento(
-            lista_classe[i], 
-            i < div_selects.childNodes.length ? 
+            lista_classe[i],
+            i < div_selects.childNodes.length ?
                 div_selects.childNodes[i] : null,
             (chave_classe == 'gerais') ? null : chave_classe,
             div_selects);
@@ -543,7 +543,7 @@ function _AtualizaFeiticos() {
   filhos_a_remover.forEach(function(filho) {
     RemoveFilho(filho, div_feiticos);
   });
- 
+
   // Adiciona o esqueleto dos filhos que nao existem ainda.
   var filhos_a_adicionar = [];
   for (var chave_classe in gPersonagem.feiticos) {
@@ -569,19 +569,19 @@ function _AtualizaFeiticos() {
   }
 }
 
-// Atualiza os feiticos conhecidos para uma determinada classe. 
+// Atualiza os feiticos conhecidos para uma determinada classe.
 // @param novo_div se true, indica que um novo div for criado.
 function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
   var feiticos_classe = gPersonagem.feiticos[chave_classe];
   var tabelas_feiticos_classe = tabelas_feiticos[chave_classe];
   var div_conhecidos = Dom('div-feiticos-conhecidos-' + chave_classe + '-por-nivel');
   AjustaFilhos(
-      div_conhecidos, 
+      div_conhecidos,
       feiticos_classe.nivel_maximo + (tabelas_feiticos_classe.possui_nivel_zero ? 1 : 0),  // num filhos.
       AdicionaNivelFeiticoConhecido.bind(
           null,  // this
           chave_classe,
-          tabelas_feiticos_classe.precisa_conhecer, 
+          tabelas_feiticos_classe.precisa_conhecer,
           div_conhecidos));
   // Por nivel.
   for (var nivel_str in feiticos_classe.conhecidos) {
@@ -590,9 +590,9 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
       break;
     }
     _AtualizaFeiticosConhecidosParaClassePorNivel(
-        chave_classe, 
-        nivel, 
-        tabelas_feiticos_classe.precisa_conhecer, 
+        chave_classe,
+        nivel,
+        tabelas_feiticos_classe.precisa_conhecer,
         feiticos_classe.conhecidos[nivel]);
   }
 }
@@ -645,9 +645,9 @@ function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
     // TODO: metamagicos.
 
     _AtualizaSlotsFeiticosParaClassePorNivel(
-        chave_classe, 
-        nivel, 
-        feiticos_classe.slots[nivel], 
+        chave_classe,
+        nivel,
+        feiticos_classe.slots[nivel],
         feiticos_conhecidos,
         div_slots);
   }
@@ -664,8 +664,8 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
   div_slots.appendChild(div_nivel);  // Temporariamente aqui pra funcao Dom funcionar.
   var div_nivel_slots = Dom('div-feiticos-slots-' + chave_classe + '-' + nivel);
   AjustaFilhos(
-      div_nivel_slots, 
-      slots.feiticos.length, 
+      div_nivel_slots,
+      slots.feiticos.length,
       AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, conhecidos, slots));
 
   // TODO(matheus): ta completamente hackish adicionar esse div na mao. Ate porque a hora que funcionar
