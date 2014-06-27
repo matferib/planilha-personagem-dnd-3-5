@@ -148,12 +148,12 @@ var tabelas_classes = {
       20: [ 'destruir_mal' ],
     },
   },
-  ranger: { 
-    nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte, 
+  ranger: {
+    nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte,
     nivel_conjurador: { modificador: 0.5, minimo: 4, }, },
   // classes NPC
-  adepto: { 
-    nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco, 
+  adepto: {
+    nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco,
     nivel_conjurador: { modificador: 1.0, }, },
   aristocrata: { nome: 'Aristocrata', mestre: true, dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
   plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
@@ -189,7 +189,7 @@ var tabelas_especiais = {
   destruir_mal: { nome: 'Destruir o mal', },
   detectar_mal: { nome: 'Detectar o mal', },
   graca_divina: { nome: 'Graça divina', },
-  montaria_especial: { nome: 'Montaria especial', }, 
+  montaria_especial: { nome: 'Montaria especial', },
   senso_natureza: { nome: 'Senso da natureza', },
   empatia_natureza: { nome: 'Empatia com a natureza', },
   caminho_floresta: { nome: 'Caminho da floresta', },
@@ -199,7 +199,7 @@ var tabelas_especiais = {
   ataque_furtivo: { nome: 'Ataque furtivo', },
   encontrar_armadilha: { nome: 'Encontrar armadilha', },
   evasao: { nome: 'Evasão', },
-  remover_doenca: { nome: 'Remover Doença', }, 
+  remover_doenca: { nome: 'Remover Doença', },
   sentir_armadilha: { nome: 'Sentir armadilha', },
   saude_divina: { nome: 'Saúde divina', },
   esquiva_sobrenatural: { nome: 'Esquiva sobrenatural', },
@@ -209,163 +209,6 @@ var tabelas_especiais = {
   medo: { nome: 'Medo', },
   juramento_furia: { nome: 'Juramento de Fúria', },
   resistencia_final: {nome: 'Resistência Final', },
-};
-
-// Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
-// TODO adicionar uma variavel precisa_memorizar. O precisa conhecer esta sendo sobreusado para este proposito.
-var tabelas_feiticos = {
-  bardo: { 
-      atributo_chave: 'carisma', 
-      precisa_conhecer: true,
-      possui_nivel_zero: true,
-      por_nivel: { 
-          1: { por_dia: '2', conhecidos: '4', }, 
-          2: { por_dia: '30', conhecidos: '52', }, 
-          3: { por_dia: '31', conhecidos: '63', }, 
-          4: { por_dia: '320', conhecidos: '632', }, 
-          5: { por_dia: '331', conhecidos: '643', }, 
-          6: { por_dia: '332', conhecidos: '643', }, 
-          7: { por_dia: '3320', conhecidos: '6442', }, 
-          8: { por_dia: '3331', conhecidos: '6443', }, 
-          9: { por_dia: '3332', conhecidos: '6443', }, 
-          10: { por_dia: '33320', conhecidos: '64442', }, 
-          11: { por_dia: '33331', conhecidos: '64443', }, 
-          12: { por_dia: '33332', conhecidos: '64443', }, 
-          13: { por_dia: '333320', conhecidos: '644442', }, 
-          14: { por_dia: '433331', conhecidos: '644443', }, 
-          15: { por_dia: '443332', conhecidos: '644443', },
-          16: { por_dia: '4443320', conhecidos: '6544442', }, 
-          17: { por_dia: '4444331', conhecidos: '6554443', }, 
-          18: { por_dia: '4444432', conhecidos: '6555443', }, 
-          19: { por_dia: '4444443', conhecidos: '6555544', }, 
-          20: { por_dia: '4444444', conhecidos: '6555554', }, }, },
-  // TODO pensar no dominio.
-  clerigo: {
-      atributo_chave: 'sabedoria', 
-      precisa_conhecer: false,
-      possui_nivel_zero: true,
-      possui_dominio: true,
-      por_nivel: { 
-          1: { por_dia: '31', }, 
-          2: { por_dia: '42', }, 
-          3: { por_dia: '421', }, 
-          4: { por_dia: '532', }, 
-          5: { por_dia: '5321', }, 
-          6: { por_dia: '5332', }, 
-          7: { por_dia: '64321', }, 
-          8: { por_dia: '64332', }, 
-          9: { por_dia: '644321', }, 
-          10: { por_dia: '644332', }, 
-          11: { por_dia: '6544321', }, 
-          12: { por_dia: '6544332', }, 
-          13: { por_dia: '65544321', }, 
-          14: { por_dia: '65544332', }, 
-          15: { por_dia: '655544321', },
-          16: { por_dia: '655544332', }, 
-          17: { por_dia: '6555544321', }, 
-          18: { por_dia: '6555544332', }, 
-          19: { por_dia: '6555554433', }, 
-          20: { por_dia: '6555554444', }, }, },
-  druida: {
-      atributo_chave: 'sabedoria',
-      precisa_conhecer: false,
-      possui_nivel_zero: true,
-      por_nivel: {
-          1: { por_dia: '31' },
-          2: { por_dia: '42' },
-          3: { por_dia: '421' },
-          4: { por_dia: '532' },
-          5: { por_dia: '5321' },
-          6: { por_dia: '5332' },
-          7: { por_dia: '64321' },
-          8: { por_dia: '64332' },
-          9: { por_dia: '644321' },
-          10: { por_dia: '644332' },
-          11: { por_dia: '6544321' },
-          12: { por_dia: '6544332' },
-          13: { por_dia: '65544321' },
-          14: { por_dia: '65544332' },
-          15: { por_dia: '655544321' },
-          16: { por_dia: '655544332' },
-          17: { por_dia: '6555544321' },
-          18: { por_dia: '6555544332' },
-          19: { por_dia: '6555554433' },
-          20: { por_dia: '6555554444' }, }, },
-  feiticeiro: {
-      atributo_chave: 'carisma',
-      precisa_conhecer: true,
-      possui_nivel_zero: true,
-      por_nivel: {
-          1: { por_dia: '53', conhecidos: '42', },
-          2: { por_dia: '64', conhecidos: '52', },
-          3: { por_dia: '65', conhecidos: '53', },
-          4: { por_dia: '663', conhecidos: '631', },
-          5: { por_dia: '664', conhecidos: '642', },
-          6: { por_dia: '6653', conhecidos: '7421', },
-          7: { por_dia: '6664', conhecidos: '7532', },
-          8: { por_dia: '66653', conhecidos: '85321', },
-          9: { por_dia: '66664', conhecidos: '85432', },
-          10: { por_dia: '666653', conhecidos: '954321', },
-          11: { por_dia: '666664', conhecidos: '955432', },
-          12: { por_dia: '6666653', conhecidos: '9554321', },
-          13: { por_dia: '6666664', conhecidos: '9554432', },
-          14: { por_dia: '66666653', conhecidos: '95544321', },
-          15: { por_dia: '66666664', conhecidos: '95544432', },
-          16: { por_dia: '666666653', conhecidos: '955444321', },
-          17: { por_dia: '666666664', conhecidos: '955444332', },
-          18: { por_dia: '6666666653', conhecidos: '9554443321', },
-          19: { por_dia: '6666666664', conhecidos: '9554443332', },
-          20: { por_dia: '6666666666', conhecidos: '9554443333', }, }, },
-  mago: {
-      atributo_chave: 'inteligencia',
-      precisa_conhecer: false,
-      possui_nivel_zero: true,
-      por_nivel: {
-          1:  { por_dia: '31', },
-          2:  { por_dia: '42', },
-          3:  { por_dia: '421', },
-          4:  { por_dia: '432', },
-          5:  { por_dia: '4321', },
-          6:  { por_dia: '4332', },
-          7:  { por_dia: '44321', },
-          8:  { por_dia: '44332', },
-          9:  { por_dia: '444321', },
-          10: { por_dia: '444332', },
-          11: { por_dia: '4444321', },
-          12: { por_dia: '4444332', },
-          13: { por_dia: '44444321', },
-          14: { por_dia: '44444332', },
-          15: { por_dia: '444444321', },
-          16: { por_dia: '444444332', },
-          17: { por_dia: '4444444321', },
-          18: { por_dia: '4444444332', },
-          19: { por_dia: '4444444433', },
-          20: { por_dia: '4444444444', }, }, },
-  paladino: {
-      atributo_chave: 'sabedoria',
-      precisa_conhecer: false,
-      possui_nivel_zero: false,
-      por_nivel: {
-          1: { por_dia: '' },
-          2: { por_dia: '' },
-          3: { por_dia: '' },
-          4: { por_dia: '0' },
-          5: { por_dia: '0' },
-          6: { por_dia: '1' },
-          7: { por_dia: '1' },
-          8: { por_dia: '10' },
-          9: { por_dia: '10' },
-          10: { por_dia: '11' },
-          11: { por_dia: '110' },
-          12: { por_dia: '111' },
-          13: { por_dia: '111' },
-          14: { por_dia: '2110' },
-          15: { por_dia: '2111' },
-          16: { por_dia: '2211' },
-          17: { por_dia: '2221' },
-          18: { por_dia: '3221' },
-          19: { por_dia: '3332' },
-          20: { por_dia: '3333' }, }, },
 };
 
 // Bonus base de ataque.
@@ -479,32 +322,32 @@ var tabelas_tamanho = {
 
 // Conversao de dado de tamanho medio para outros tipos.
 var tabelas_dado_por_tamanho = {
-  '1d2': { 
-    pequeno: '1', 
+  '1d2': {
+    pequeno: '1',
     grande: '1d3', enorme: '1d4', imenso: '1d6', colossal: '1d8' },
-  '1d3': { 
-    miudo: '1', pequeno: '1d2', 
+  '1d3': {
+    miudo: '1', pequeno: '1d2',
     grande: '1d4', enorme: '1d6', imenso: '1d8', colossal: '2d6' },
-  '1d4': { 
-    diminuto: '1', miudo: '1d2', pequeno: '1d3', 
+  '1d4': {
+    diminuto: '1', miudo: '1d2', pequeno: '1d3',
     grande: '1d6', enorme: '1d8', imenso: '2d6', colossal: '3d6' },
-  '1d6': { 
-    minusculo: '1', diminuto: '1d2', miudo: '1d3', pequeno: '1d4', 
+  '1d6': {
+    minusculo: '1', diminuto: '1d2', miudo: '1d3', pequeno: '1d4',
     grande: '1d8', enorme: '2d6', imenso: '3d6', colossal: '4d6' },
-  '2d4': { 
-    minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6', 
+  '2d4': {
+    minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6',
     grande: '2d6', enorme: '3d6', imenso: '4d6', colossal: '6d6' },
-  '1d8': { 
-    minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6', 
+  '1d8': {
+    minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6',
     grande: '2d6', enorme: '3d6', imenso: '4d6', colossal: '6d6' },
-  '1d10': { 
-    minusculo: '1d3', diminuto: '1d4', miudo: '1d6', pequeno: '1d8', 
+  '1d10': {
+    minusculo: '1d3', diminuto: '1d4', miudo: '1d6', pequeno: '1d8',
     grande: '2d8', enorme: '3d8', imenso: '4d8', colossal: '6d8' },
-  '1d12': { 
-    minusculo: '1d4', diminuto: '1d6', miudo: '1d8', pequeno: '1d10', 
+  '1d12': {
+    minusculo: '1d4', diminuto: '1d6', miudo: '1d8', pequeno: '1d10',
     grande: '3d6', enorme: '4d6', imenso: '6d6', colossal: '8d6' },
-  '2d6': { 
-    minusculo: '1d4', diminuto: '1d6', miudo: '1d8', pequeno: '1d10', 
+  '2d6': {
+    minusculo: '1d4', diminuto: '1d6', miudo: '1d8', pequeno: '1d10',
     grande: '3d6', enorme: '4d6', imenso: '6d6', colossal: '8d6' },
 };
 
@@ -571,7 +414,7 @@ var tabelas_armas_invertida = {
 // Esta tabela eh composta pela juncao das tabelas de armas simples, comuns e exoticas.
 var tabelas_armas = {
   // Cada entrada (dano secundario apenas para armas duplas):
-  // chave: { nome, preco, dano: { pequeno, medio, grande etc }, dano_secundario: {pequeno, medio, grande etc }, 
+  // chave: { nome, preco, dano: { pequeno, medio, grande etc }, dano_secundario: {pequeno, medio, grande etc },
   // categorias: { cac, cac_leve, arremesso, distancia},
   //          critico, peso, tipo, incremento_distancia, talento_relacionado, arma_dupla }
 };
@@ -625,13 +468,13 @@ var tabelas_armas_simples = {
   lanca_longa: { nome: 'lança longa', preco: '5 PO', dano: { medio: '1d8' },
                  categorias: { cac: true } ,
                  critico: '×3', peso: '4,5kg', tipo: 'perfurante' },
-  bordao: { nome: 'bordão', preco: '0 PO', dano: { medio: '1d6' }, 
+  bordao: { nome: 'bordão', preco: '0 PO', dano: { medio: '1d6' },
             dano_secundario: { pequeno: '1d4', medio: '1d6' }, categorias: { cac: true } ,
             critico: '×2', peso: '2kg', tipo: 'concussao', arma_dupla: true },
 
 
   // Ranged Weapons
-  besta_pesada: { nome: 'besta pesada', preco: '50 PO', dano: { medio: '1d10'  }, 
+  besta_pesada: { nome: 'besta pesada', preco: '50 PO', dano: { medio: '1d10'  },
                   critico: '19-20/×2', categorias: { distancia: true },
                   incremento_distancia: '24 quadrados', peso: '4kg', tipo: 'perfurante' },
   besta_leve: { nome: 'besta leve', preco: '35 PO', dano: { medio: '1d8'  }, critico: '19-20/×2',
@@ -667,7 +510,7 @@ var tabelas_armas_comuns = {
                     categorias: { cac_leve: true } ,
                     critico: '×2', peso: 'especial', tipo: 'concussão' },
 
-  escudo_pequeno_com_cavos: { nome: 'escudo pequeno com cravos', preco: 'especial', 
+  escudo_pequeno_com_cavos: { nome: 'escudo pequeno com cravos', preco: 'especial',
                               dano: { medio: '1d4'}, categorias: { cac_leve: true  } ,
                               critico: '×2', peso: 'especial', tipo: 'perfurante' },
 
@@ -858,7 +701,7 @@ var tabelas_armas_exoticas = {
                          critico: '×2', peso: '10kg', tipo: 'perfurante', },
 
   espada_de_duas_laminas: { nome: 'espada de duas lâminas', preco: '100 PO',
-                            dano: { medio: '1d8'  }, 
+                            dano: { medio: '1d8'  },
                             dano_secundario: {pequeno: '1d6', medio: '1d8' },
                             categorias: { cac: true }, arma_dupla: true,
                             critico: '19-20/x2', peso: '10Kg', tipo: 'cortante' },
@@ -869,7 +712,7 @@ var tabelas_armas_exoticas = {
                        arma_dupla: true,
                        categorias: { cac: true }, critico: '×3', peso: '12,5kg', tipo: 'cortante' },
 
-  mangual_atroz: { nome: 'mangual atroz', preco: '90 PO', 
+  mangual_atroz: { nome: 'mangual atroz', preco: '90 PO',
                    dano: { medio: '1d8' },
                    dano_secundario: { pequeno: '1d6', medio: '1d8'},
                    categorias: { cac: true }, arma_dupla: true,
@@ -881,7 +724,7 @@ var tabelas_armas_exoticas = {
                               categorias: { cac: true }, arma_dupla: true,
                               critico: '×3/x4', peso: '3kg', tipo: 'concussão e perfurante' },
 
-  urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO', 
+  urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO',
                   dano: { medio: '1d8' },
                   dano_secundario: { pequeno: '1d4', medio: '1d6'},
                   categorias: { cac: true }, arma_dupla: true,
@@ -922,36 +765,36 @@ var tabelas_armas_exoticas = {
 // Talento das classes.
 // TODO mover para a tabela de classes.
 var tabelas_proficiencia_arma_por_classe = {
-  barbaro: { 
+  barbaro: {
       talentos: [ 'usar_armas_simples', 'usar_armas_comuns' ]
-  },  
-  bardo: { 
+  }, 
+  bardo: {
       talentos: [ 'usar_armas_simples' ],
-      armas: [ 'espada_longa', 'sabre', 'porrete',  'espada_curta', 'arco_curto', 'chicote' ] 
+      armas: [ 'espada_longa', 'sabre', 'porrete',  'espada_curta', 'arco_curto', 'chicote' ]
   },
   clerigo: {
       talentos: [ 'usar_armas_simples' ]
   },
-  druida: { 
-      armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice_curta',  
+  druida: {
+      armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice_curta', 
                'lanca_curta', 'funda', 'lanca' ]
   },
-  feiticeiro: { 
+  feiticeiro: {
       talentos: [ 'usar_armas_simples' ]
   },
-  guerreiro: { 
+  guerreiro: {
       talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
   },
-  ladino: { 
+  ladino: {
       talentos: [ 'usar_armas_simples' ],
       armas: [ 'besta_de_mao', 'sabre', 'porrete', 'arco_curto', 'espada_curta' ]
   },
-  mago: { 
-      talentos: ['usar_armas_simples' ], 
-      armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ] 
+  mago: {
+      talentos: ['usar_armas_simples' ],
+      armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ]
   },
   monge: {
-      armas: [ 'clava', 'besta_leve', 'besta_pesada', 'adaga', 'machadinha', 'azagaia', 
+      armas: [ 'clava', 'besta_leve', 'besta_pesada', 'adaga', 'machadinha', 'azagaia',
                'kama', 'nunchaku', 'bordao', 'sai', 'shuriken', 'siangham', 'funda' ],
   },
   paladino: {
@@ -966,7 +809,7 @@ var tabelas_proficiencia_arma_por_classe = {
       talentos: ['usar_armas_simples' ],
   },
   aristocrata: {
-      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ] 
+      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
   },
   plebeu: {
       // na verdade o plebeu eh proficiente com uma arma simples, eu escolhi clava.
@@ -985,23 +828,23 @@ var tabelas_proficiencia_arma_por_classe = {
 };
 
 // Cada entrada tem suas dependencias.
-// { nome, 
+// { nome,
 //   bonus_pericias: { percicia1: valor, pericia2: valor, ... },
 //   bonus_pv, (quantos pontos de vida o talento concede).
 //   bonus_salvacao: { tipo: valor }, (quantos pontos o talento fornece em salvacoes).
 //   bonus_iniciativa,  (bonus que o talento fornece na iniciativa do personagem)
 //   cumulativo, (se o talento puder ser selecionado mais de uma vez e acumular.
 //                eg vitalidade).
-//   multiplas_vezes, (se o talento puder ser selecionado mais de uma vez com 
+//   multiplas_vezes, (se o talento puder ser selecionado mais de uma vez com
 //                     complementos diferentes - eg foco em arma)
-//   complemento, (se o talento precisa de um complemento por exemplo, 
-//                 usar arma exotica. Pode ser arma, arma_leve, arma_exotica, 
+//   complemento, (se o talento precisa de um complemento por exemplo,
+//                 usar arma exotica. Pode ser arma, arma_leve, arma_exotica,
 //                 arma_comum)
-//   guerreiro, indica se o talento pode ser usado em bonus de guerreiro 
+//   guerreiro, indica se o talento pode ser usado em bonus de guerreiro
 //                  (que tambem devera atender aos requisitos)
 //   // A classe do nivel pode ser 'conjurador', 'total' ou uma chave de classe.
-//   requisitos: { bba, talentos: [], atributos: { nome: valor }, 
-//                 nivel: { classe: nivel }, proficiencia_arma, arma_leve, } 
+//   requisitos: { bba, talentos: [], atributos: { nome: valor },
+//                 nivel: { classe: nivel }, proficiencia_arma, arma_leve, }
 // },
 var tabelas_talentos = {
 /*
@@ -1047,14 +890,14 @@ Talentos de Criação de Item Pré-requisitos Benefícios
 Escrever Pergaminho 1° nível de conjurador Criar pergaminhos mágicos
 Forjar Anel 12° nível de conjurador Criar anéis mágicos
 */
-  acrobatico: { 
+  acrobatico: {
       nome: 'Acrobático',
       bonus_pericias: { saltar: 2, acrobacias: 2 } },
 
   acuidade_arma: {
       nome: 'Acuidade com Arma', complemento: 'arma_leve',
       guerreiro: true,
-      requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true }, 
+      requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true },
       descricao: 'Aplica o modificador de Des (em vez de For) nas jogadas ' +
                  'de ataque corporal com armas leves.' },
   afinidade_com_animais: {
@@ -1083,13 +926,13 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       requisitos: { atributos: { forca: 13 } },
       guerreiro: true,
       descricao: 'Substitui bônus de ataque por dano (máximo: bônus base de ataque).' },
-  atletico: { 
+  atletico: {
       nome: 'Atlético',
       bonus_pericias: { escalar: 2, natacao: 2 } },
   auto_suficiente: {
       nome: 'Auto-Suficiente',
       bonus_pericias: { cura: 2, sobrevivencia: 2 } },
-  combater_duas_armas: { 
+  combater_duas_armas: {
       nome: 'Combater com duas armas',
       requisitos: { atributos: { destreza: 15 } },
       guerreiro: true,
@@ -1101,10 +944,10 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       descricao: 'Ataque adicional com a segunda mao.', },
   // TODO teoricamente esse bonus eh so se correr...
   corrida: {
-      nome: 'Corrida', 
+      nome: 'Corrida',
       bonus_pericias: { saltar: 4 },
       descricao: 'Percorre 5 vezes o deslocamento padrão, ' +
-                 '+4 de bônus nos testes de Saltar no final de uma corrida.', },  
+                 '+4 de bônus nos testes de Saltar no final de uma corrida.', }, 
   dedos_lepidos: {
       nome: 'Dedos Lépidos',
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },
@@ -1137,14 +980,14 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
     nome: 'Especialização em Arma Maior',
     guerreiro: true,
     complemento: 'arma',
-    requisitos: { talentos: [ 'foco_em_arma_maior', 'especializacao_arma'], 
+    requisitos: { talentos: [ 'foco_em_arma_maior', 'especializacao_arma'],
                   nivel: { guerreiro: 12 } },
     descricao: '+4 de bônus no dano com a arma escolhida (ao invés de 2 da especialização normal).', },
   foco_em_arma: {
       nome: 'Foco em arma',
       complemento: 'arma',
       requisitos: { bba: 1, proficiencia_arma: true },
-      guerreiro: true, 
+      guerreiro: true,
       descricao: '+1 de bônus nas jogadas de ataque com a arma escolhida.' },
   foco_em_arma_maior: {
       nome: 'Foco em arma maior',
@@ -1158,7 +1001,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       descricao: '+2 de bônus nos teste de resistência de Fortitude.', },
   fraudulento: {
       nome: 'Fraudulento',
-      bonus_pericias: { disfarces: 2, falsificacao: 2 } }, 
+      bonus_pericias: { disfarces: 2, falsificacao: 2 } },
   ignorar_componentes_materiais: {
       nome: 'Ignorar Componentes Materiais',
       descricao: 'Conjura magias ignorando os componentes materiais.', },
@@ -1230,7 +1073,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   saque_rapido: {
       nome: 'Saque rápido',
       requisitos: { bba: 1 },
-      guerreiro: true, 
+      guerreiro: true,
       descricao: 'Saca uma arma branca como ação livre.', },
   tolerancia: {
       nome: 'Tolerância',  // Endurance.
@@ -1242,24 +1085,24 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       descricao: 'Desfere um ataque corporal extra depois de imobilizar um oponente',
       requisitos: { talentos: [ 'ataque_poderoso' ] },
       guerreiro: true, },
-  usar_armas_simples: { 
+  usar_armas_simples: {
       nome: 'Usar armas simples',
       descricao: 'Não sofre penalidades nos ataques com armas simples.', },
-  usar_arma_comum: { 
-      nome: 'Usar arma comum', 
+  usar_arma_comum: {
+      nome: 'Usar arma comum',
       complemento: 'arma_comum',
-      descricao: 'Não sofre penalidade nos ataques com uma arma comum específica.', }, 
-  usar_arma_exotica: { 
+      descricao: 'Não sofre penalidade nos ataques com uma arma comum específica.', },
+  usar_arma_exotica: {
       nome: 'Usar arma exótica', complemento: 'arma_exotica',
       requisitos: { bba: 1 },
       guerreiro: true,
       descricao: 'Não sofre penalidade nos ataques com uma arma exótica específica.', },
   // TODO implementar efeitos de nao ter o feat.
   usar_escudo: {
-      nome: 'Usar Escudo', 
+      nome: 'Usar Escudo',
       descricao: 'Não sofre penalidade de armadura nas jogadas de ataque.' },
   usar_escudo_aprimorado: {
-      nome: 'Usar Escudo Aprimorado', 
+      nome: 'Usar Escudo Aprimorado',
       guerreiro: true,
       requisitos: { talentos: [ 'usar_escudo', ] },
       descricao: 'Conserva o bônus do escudo na CA quando ataca com ele.' },
@@ -1270,7 +1113,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   vitalidade: {
       nome: 'Vitalidade',
       bonus_pv: 3,
-      cumulativo: true, 
+      cumulativo: true,
       descricao: '+3 pontos de vida.', },
   vontade_ferro: {
       nome: 'Vontade de Ferro',
@@ -1352,41 +1195,41 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
 var tabelas_pericias = {
-  abrir_fechaduras: { 
-      nome: 'Abrir Fechaduras', 
-      classes: [ 'ladino', ], 
+  abrir_fechaduras: {
+      nome: 'Abrir Fechaduras',
+      classes: [ 'ladino', ],
       sem_treinamento: false, habilidade: 'destreza' },
   acrobacias: {
-      nome: 'Acrobacias', 
+      nome: 'Acrobacias',
       classes: [ 'bardo', 'monge', 'ladino' ],
       sem_treinamento: false, habilidade: 'destreza', penalidade_armadura: 1 },
   adestrar_animais: {
-      nome: 'Adestrar Animais', 
-      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ], 
+      nome: 'Adestrar Animais',
+      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ],
       sem_treinamento: false, habilidade: 'carisma' },
   arte_da_fuga: {
-      nome: 'Arte da Fuga', 
+      nome: 'Arte da Fuga',
       classes: [ 'bardo', 'monge', 'ladino', ],
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   atuacao: {
-      nome: 'Atuação', 
+      nome: 'Atuação',
       classes: [ 'bardo', 'monge', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   avaliacao: {
-      nome: 'Avaliação', 
+      nome: 'Avaliação',
       classes: [ 'bardo', 'ladino', 'aristocrata' ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   blefar: {
-      nome: 'Blefar', 
-      classes: [  'bardo', 'ladino', 'feiticeiro', 'aristocrata' ], 
+      nome: 'Blefar',
+      classes: [  'bardo', 'ladino', 'feiticeiro', 'aristocrata' ],
       sem_treinamento: true,  habilidade: 'carisma' },
   cavalgar: {
-      nome: 'Cavalgar', 
-      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ], 
+      nome: 'Cavalgar',
+      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ],
       sem_treinamento: true,  habilidade: 'destreza' },
   concentracao: {
-      nome: 'Concentração', 
-      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 'feiticeiro', 'mago' ], 
+      nome: 'Concentração',
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 'feiticeiro', 'mago' ],
       sem_treinamento: true,  habilidade: 'constituicao' },
   conhecimento_arcano: {
       nome: 'Conhecimento (arcano)',
@@ -1490,7 +1333,7 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'carisma' },
   oficios: {
       nome: 'Ofícios',
-      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge', 
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
                   'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
       sem_treinamento: true, habilidade: 'inteligencia' },
   operar_mecanismo: {
@@ -1511,7 +1354,7 @@ var tabelas_pericias = {
        sem_treinamento: true,habilidade: 'inteligencia' },
   profissao: {
       nome: 'Profissão',
-      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger', 
+      classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger',
                   'ladino', 'feiticeiro', 'mago'],
       habilidade: 'sabedoria' },
   saltar: {
@@ -1536,30 +1379,30 @@ var tabelas_pericias = {
       habilidade: 'carisma' },
 };
 
-// Todos os elementos devem pertencer a classe divs-principais e 
+// Todos os elementos devem pertencer a classe divs-principais e
 // nao podem ser filhos de um elemento da classe divs-principais.
 var tabelas_visoes = {
   completo: {
     nome: 'Completo',
-    esconder: { classes: [], elementos: [] }, 
+    esconder: { classes: [], elementos: [] },
     mostrar: { classes: ['divs-principais'], elementos:[] },
   },
   combate: {
     nome: 'Combate',
-    esconder: { 
-      classes: ['divs-principais'], elementos: [] }, 
-    mostrar: { 
-      classes: [], 
+    esconder: {
+      classes: ['divs-principais'], elementos: [] },
+    mostrar: {
+      classes: [],
       elementos:['div-pontos-vida', 'div-ataque', 'div-iniciativa'] },
   },
   pericias: {
     nome: 'Perícias',
-    esconder: { classes: ['divs-principais'], elementos: [] }, 
+    esconder: { classes: ['divs-principais'], elementos: [] },
     mostrar: { classes: [], elementos:[ 'div-pericias' ] },
   },
   feiticos: {
     nome: 'Feitiços',
-    esconder: { classes: ['divs-principais'], elementos: [] }, 
+    esconder: { classes: ['divs-principais'], elementos: [] },
     mostrar: { classes: [], elementos:[ 'div-feiticos' ] },
   },
 };
@@ -1583,8 +1426,8 @@ var tabelas_atributos_invertidos = {
 };
 
 var tabelas_aneis = {
-  protecao_1: { 
-      nome: 'Proteção +1', preco: '2000 PO', 
+  protecao_1: {
+      nome: 'Proteção +1', preco: '2000 PO',
       propriedades: { ca: { deflexao: 1 } },  },
   queda_suave: { nome: 'Queda suave', preco: '2200 PO', },
   sustento: { nome: 'Sustento', preco: '2500 PO', },
@@ -1602,7 +1445,7 @@ var tabelas_aneis = {
   ariete: { nome: 'Aríete', preco: '8600 PO', },
   escalada_aprimorada: { nome: 'Escalada aprimorada', preco: '10000 PO',
       propriedades: { pericias: { escalar: { competencia: 10 } } }, },
-  salto_aprimorado: { nome: 'Salto aprimorado', preco: '10000 PO', 
+  salto_aprimorado: { nome: 'Salto aprimorado', preco: '10000 PO',
       propriedades: { pericias: { saltar: { competencia: 10 } } }, },
   natacao_aprimorada: { nome: 'Natação aprimorada', preco: '10000 PO',
       propriedades: { pericias: { natacao: { competencia: 10 } } }, },
@@ -1644,81 +1487,81 @@ var tabelas_aneis = {
 };
 
 var tabelas_amuletos = {
-  armadura_natural_1: { 
-    nome: 'Armadura Natural +1', preco: '2000 PO', 
+  armadura_natural_1: {
+    nome: 'Armadura Natural +1', preco: '2000 PO',
     propriedades: { ca: { armadura_natural: 1 } },  },
-  armadura_natural_2: { 
-    nome: 'Armadura Natural +2', preco: '8000 PO', 
+  armadura_natural_2: {
+    nome: 'Armadura Natural +2', preco: '8000 PO',
     propriedades: { ca: { armadura_natural: 2 } },  },
-  armadura_natural_3: { 
-    nome: 'Armadura Natural +3', preco: '18000 PO', 
+  armadura_natural_3: {
+    nome: 'Armadura Natural +3', preco: '18000 PO',
     propriedades: { ca: { armadura_natural: 3 } },  },
-  armadura_natural_4: { 
-    nome: 'Armadura Natural +4', preco: '32000 PO', 
+  armadura_natural_4: {
+    nome: 'Armadura Natural +4', preco: '32000 PO',
     propriedades: { ca: { armadura_natural: 4 } },  },
-  armadura_natural_5: { 
-    nome: 'Armadura Natural +5', preco: '50000 PO', 
+  armadura_natural_5: {
+    nome: 'Armadura Natural +5', preco: '50000 PO',
     propriedades: { ca: { armadura_natural: 5 } },  },
   punhos_poderosos_1: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +1', preco: '6000 PO', 
+    nome: 'Punhos Poderosos +1', preco: '6000 PO',
     propriedades: {} },
   punhos_poderosos_2: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +2', preco: '24000 PO', 
+    nome: 'Punhos Poderosos +2', preco: '24000 PO',
     propriedades: {} },
   punhos_poderosos_3: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +3', preco: '54000 PO', 
+    nome: 'Punhos Poderosos +3', preco: '54000 PO',
     propriedades: {} },
   punhos_poderosos_4: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +4', preco: '96000 PO', 
+    nome: 'Punhos Poderosos +4', preco: '96000 PO',
     propriedades: {} },
   punhos_poderosos_5: {
     // ataque desarmado e natural ganha bonus de melhoria
-    nome: 'Punhos Poderosos +5', preco: '150000 PO', 
+    nome: 'Punhos Poderosos +5', preco: '150000 PO',
     propriedades: {} },
   saude_2: {
-    nome: 'Saúde +2', preco: '4000 PO', 
+    nome: 'Saúde +2', preco: '4000 PO',
     propriedades: { atributos: { constituicao: 2 } } },
   saude_4: {
-    nome: 'Saúde +4', preco: '16000 PO', 
+    nome: 'Saúde +4', preco: '16000 PO',
     propriedades: { atributos: { constituicao: 4 } } },
   saude_6: {
-    nome: 'Saúde +6', preco: '36000 PO', 
+    nome: 'Saúde +6', preco: '36000 PO',
     propriedades: { atributos: { constituicao: 6 } } },
   planos: {
     // permite usar magia viagem planar...
-    nome: 'Planos', preco: '120000 PO', 
+    nome: 'Planos', preco: '120000 PO',
     propriedades: {} },
   protecao_deteccao: {
     // como se estivesse sob efeito de dificultar detecção...
-    nome: 'Proteção contra Localização e Detecção', preco: '35000 PO', 
+    nome: 'Proteção contra Localização e Detecção', preco: '35000 PO',
     propriedades: {} },
   quaal_ancora: {
     // Prender embarcações.
-    nome: 'Quaal Âncora', preco: '50 PO', 
+    nome: 'Quaal Âncora', preco: '50 PO',
     propriedades: {} },
   quaal_passaro: {
     // Pombo correio para entregar mensagem.
-    nome: 'Quaal Pássaro', preco: '300 PO', 
+    nome: 'Quaal Pássaro', preco: '300 PO',
     propriedades: {} },
   quaal_leque: {
     // Gerar vento.
-    nome: 'Quaal Leque', preco: '200 PO', 
+    nome: 'Quaal Leque', preco: '200 PO',
     propriedades: {} },
   quaal_barco_cisne: {
     // Transforma-se em um barco.
-    nome: 'Quaal Barco de Cisnes', preco: '450 PO', 
+    nome: 'Quaal Barco de Cisnes', preco: '450 PO',
     propriedades: {} },
   quaal_arvore: {
     // Cria um grande carvalho.
-    nome: 'Quaal Árvore', preco: '400 PO', 
+    nome: 'Quaal Árvore', preco: '400 PO',
     propriedades: {} },
   quaal_chicote: {
     // Cria um chicote que ataca sozinho como arma dancarina.
-    nome: 'Quaal Chicote', preco: '500 PO', 
+    nome: 'Quaal Chicote', preco: '500 PO',
     propriedades: {} },
 };
 
@@ -1859,7 +1702,7 @@ var tabelas_materiais_especiais = {
       custo_por_tipo: {
           // Tirei o custo da obra prima.
           municao: '54 PO',
-          arma: '2700 PO', 
+          arma: '2700 PO',
           armadura: { por_subtipo: { leve: '4850 PO', media: '9850 PO', pesada: '14850 PO' }, },
           escudo: '1850 PO' }, },
   madeira_negra: {
@@ -1868,21 +1711,21 @@ var tabelas_materiais_especiais = {
       requisito: { madeira: true, obra_prima: true, }, },
   // O custo adicional do couro do dragão é o da armadura ou escudo obra prima. Fica difícil modelar aqui
   // de forma genérica, então preferi tratar especificamente no código.
-  couro_dragao: { 
-      nome: 'couro de dragão', 
+  couro_dragao: {
+      nome: 'couro de dragão',
       requisitos: { armadura: true, obra_prima: true, }, },
-  // O custo adicional do ferro frio é o da arma normal. Cada bônus mágico adiciona +2000 PO. Assim como 
+  // O custo adicional do ferro frio é o da arma normal. Cada bônus mágico adiciona +2000 PO. Assim como
   // couro_dragao, modelei no código.
-  ferro_frio: { 
+  ferro_frio: {
       nome: 'ferro frio',
       requisito: { arma: true, }, },
   // Custo do mitral é tabelado de acordo com tipo de armadura ou escudo.
   // armadura leve: 1000, media: 4000, pesada: 9000, escudo: 1000. O preco unclui valor da obra prima.
-  mitral: { 
-      nome: 'mitral', 
+  mitral: {
+      nome: 'mitral',
       requisitos: { armadura: true, metal: true, obra_prima: true, }, },
   // Custo da prata alquimica varia com o subtipo de arma.
-  prata_alquimica: { 
-      nome: 'prata Alquímica', 
+  prata_alquimica: {
+      nome: 'prata Alquímica',
       requisitos: { arma: true, metal: true, }, },
 };
