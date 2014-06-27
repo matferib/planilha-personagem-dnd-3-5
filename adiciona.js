@@ -1,6 +1,6 @@
 // Tudo o que for relacionado a adicionar ou remover na planilha.
 
-// Adiciona um div de classe ao dom passado. 
+// Adiciona um div de classe ao dom passado.
 function AdicionaClasse(indice, dom) {
   if (!indice) {
     indice = 0;
@@ -10,7 +10,7 @@ function AdicionaClasse(indice, dom) {
   select_classe.addEventListener('change', AtualizaGeral);
   var span_nivel = CriaSpan('Nível: ');
   var input_nivel = CriaInputNumerico(
-      1, 'nivel-classe-' + indice, null, 
+      1, 'nivel-classe-' + indice, null,
       { handleEvent: function() { AtualizaGeral() } });
   input_nivel.name = 'nivel';
   input_nivel.min = '1';
@@ -38,7 +38,7 @@ function RemoveClasse() {
   div_classes.removeChild(div_classes.lastChild);
 }
 
-// Adiciona uma nova arma ou armadura a lista de equipamentos. 
+// Adiciona uma nova arma ou armadura a lista de equipamentos.
 // @param nome do select, 'armadura' ou 'arma' ou 'escudo'.
 // @param tabelas que compoe a tabela completa de armas ou armaduras.
 // @param div_pai onde a nova arma ou armadura sera adicionada.
@@ -63,13 +63,13 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   if (nome == 'armadura' || nome == 'escudo') {
     input_em_uso = CriaRadio(null, null, null, nome + '-em-uso', null);
     input_em_uso.addEventListener(
-        'click', 
+        'click',
         {
           input: input_em_uso,
           handleEvent: function(evt) {
             ClickUsarArmaduraEscudo(this.input);
           }
-        }, 
+        },
         false);
   }
   var select = CriaSelect();
@@ -160,9 +160,9 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
 // @return o div adicionado.
 function AdicionaArma() {
   return _AdicionaArmaArmadura(
-      'arma', 
-      [ tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ], 
-      [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ], 
+      'arma',
+      [ tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ],
+      [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ],
       Dom('div-equipamentos-armas'));
 }
 
@@ -170,7 +170,7 @@ function AdicionaArma() {
 // @return o div adicionado.
 function AdicionaArmadura() {
   return _AdicionaArmaArmadura(
-      'armadura', 
+      'armadura',
       [ tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ],
       [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ],
       Dom('div-equipamentos-armaduras'));
@@ -180,7 +180,7 @@ function AdicionaArmadura() {
 // @return o div adicionado.
 function AdicionaEscudo() {
   return _AdicionaArmaArmadura(
-      'escudo', 
+      'escudo',
       [ tabelas_escudos ],
       [ 'Escudos' ],
       Dom('div-equipamentos-escudos'));
@@ -230,9 +230,9 @@ function AdicionaEstiloLuta() {
       id_estilo.replace('id-estilo', 'id-estilo-duas-armas');
   var id_estilo_arma_dupla =
       id_estilo.replace('id-estilo', 'id-estilo-arma-dupla');
-  var id_select_primario = 
+  var id_select_primario =
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
-  var id_select_secundario = 
+  var id_select_secundario =
       id_estilo.replace('id-estilo', 'id-select-secundario-estilo');
   var id_span_primario =
       id_estilo.replace('id-estilo', 'id-span-primario-estilo');
@@ -421,7 +421,7 @@ function AdicionaNivelFeiticoConhecido(
     return;
   }
   var div_nivel = CriaDiv();
-  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':')); 
+  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':'));
   if (!precisa_conhecer) {
     div_nivel.appendChild(CriaBotao('+', null, null, function() {
       if (gEntradas.feiticos_conhecidos[chave_classe] == null) {
