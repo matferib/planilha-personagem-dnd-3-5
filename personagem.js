@@ -118,7 +118,7 @@ var gPersonagem = {
       bonus: new Bonus(),
   },
   // As habilidades especiais do personagem de acordo com a classe e raca. Cada entrada:
-  // chave_habilidade: { vezes, complemento }
+  // chave_habilidade: { vezes, usado, complemento }
   especiais: {
   },
   salvacoes: {
