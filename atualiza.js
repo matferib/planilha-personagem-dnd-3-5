@@ -34,8 +34,7 @@ function AtualizaGeralSemLerEntradas() {
 }
 
 // Esta atualizacao eh usada quando se tem o personagem pronto, sem ser necessaria a leitura das
-// gEntradas. Normalmente os tratamentos de eventos alteram algum campo do personagem e chamam
-// esta funcao para atualizar tudo.
+// gEntradas.
 function AtualizaGeralSemConverterEntradas() {
   DependenciasGerais();
   _AtualizaGeral();
@@ -409,6 +408,7 @@ function _AtualizaSalvacoes() {
 
 // Atualiza as habilidades especiais, vindas de classe e raca.
 function _AtualizaEspeciais() {
+  var dom_especiais = Dom('habilidades-especiais');
   var string_especiais = '';
   for (especial in gPersonagem.especiais) {
     string_especiais += tabelas_especiais[especial].nome;
@@ -421,7 +421,7 @@ function _AtualizaEspeciais() {
   if (string_especiais.length > 0) {
     string_especiais = string_especiais.slice(0, -2);
   }
-  Dom('habilidades-especiais').textContent = string_especiais;
+  dom_especiais.textContent = string_especiais;
 }
 
 // Atualiza os numeros e listas relacionados a talentos.
