@@ -129,13 +129,14 @@ function _AtualizaAtributos() {
   Dom('pontos-atributos-total').textContent =
       gPersonagem.atributos.pontos.disponiveis;
 
+  // Os atributos base.
   var div_atributos = Dom('div-stats');
   var atributos = [
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
     var atributo = atributos[i];
     var input_atributo = Dom(atributo + '-valor-base');
-    input_atributo.value = gPersonagem.atributos[atributo].base;
+    input_atributo.value = gPersonagem.atributos[atributo].bonus.Le('base');
   }
 }
 
@@ -223,23 +224,15 @@ function _AtualizaModificadoresAtributos() {
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
     var atributo = atributos[i];
-    // modificador racial.
-    var modificador_racial = modificadores_raca[atributo] || 0;
-    ImprimeSinalizado(
-        modificador_racial,
-        Dom(atributo + '-mod-racial'),
-        false);
-
-    // bonus nivel;
-    ImprimeSinalizado(
-        gPersonagem.atributos[atributo].bonus_nivel,
-        Dom(atributo + '-mod-nivel'),
-        false);
+    // Valor do bonus sem base.
+    var dom_bonus = Dom(atributo + '-mod-bonus');
+    ImprimeSinalizado(gPersonagem.atributos[atributo].bonus.Total(['base']), dom_bonus, false);
+    Titulo(gPersonagem.atributos[atributo].bonus.Exporta(['base']), dom_bonus);
 
     // Escreve o valor total.
-    ImprimeNaoSinalizado(
-        gPersonagem.atributos[atributo].valor,
-        Dom(atributo + '-valor-total'));
+    var dom_valor = Dom(atributo + '-valor-total');
+    ImprimeNaoSinalizado(gPersonagem.atributos[atributo].bonus.Total(), dom_valor);
+    Titulo(gPersonagem.atributos[atributo].bonus.Exporta(), dom_valor);
 
     // Escreve o modificador.
     ImprimeSinalizado(
@@ -409,19 +402,17 @@ function _AtualizaSalvacoes() {
 // Atualiza as habilidades especiais, vindas de classe e raca.
 function _AtualizaEspeciais() {
   var dom_especiais = Dom('habilidades-especiais');
-  var string_especiais = '';
+  RemoveFilhos(dom_especiais);
   for (especial in gPersonagem.especiais) {
-    string_especiais += tabelas_especiais[especial].nome;
+    var dom_especial = CriaDiv();
+
     var especial_personagem = gPersonagem.especiais[especial];
     if (especial_personagem.vezes > 1) {
-      string_especiais += ' (' + especial_personagem.vezes + ')';
+      //string_especiais += ' (' + especial_personagem.vezes + ')';
     }
-    string_especiais += ', ';
+    dom_especial.textContent = tabelas_especiais[especial].nome;
+    dom_especiais.appendChild(dom_especial);
   }
-  if (string_especiais.length > 0) {
-    string_especiais = string_especiais.slice(0, -2);
-  }
-  dom_especiais.textContent = string_especiais;
 }
 
 // Atualiza os numeros e listas relacionados a talentos.

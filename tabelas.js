@@ -1563,6 +1563,26 @@ var tabelas_amuletos = {
     // Cria um chicote que ataca sozinho como arma dancarina.
     nome: 'Quaal Chicote', preco: '500 PO',
     propriedades: {} },
+  periapto_saude: {
+    // Usuario fica imune a doencas (inclusive sobrenaturais).
+    nome: 'Periapto da Saúde', preco: '7500 PO',
+    propriedades: { imunidades: ['doencas'] } },
+  periapto_resistencia_veneno: {
+    // Usuário fica imune a veneno.
+    nome: 'Periapto da Resistência a Veneno', preco: '27000 PO',
+    propriedades: { imunidades: ['veneno'] } },
+  periapto_sabedoria_2: {
+    // Aumento sabedoria do usuario (bonus melhoria).
+    nome: 'Periapto da Sabedoria +2', preco: '4000 PO',
+    propriedades: { atributos: { sabedoria: 2 } } },
+  periapto_sabedoria_4: {
+    // Aumento sabedoria do usuario (bonus melhoria).
+    nome: 'Periapto da Sabedoria +4', preco: '16000 PO',
+    propriedades: { atributos: { sabedoria: 4 } } },
+  periapto_sabedoria_6: {
+    // Aumento sabedoria do usuario (bonus melhoria).
+    nome: 'Periapto da Sabedoria +6', preco: '36000 PO',
+    propriedades: { atributos: { sabedoria: 6 } } },
 };
 
 // Var traduzir.

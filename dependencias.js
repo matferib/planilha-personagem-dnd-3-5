@@ -141,23 +141,23 @@ function _DependenciasAtributos() {
   }
 
   // Calcula o componentes dos atributos.
+  var bonus_nivel_por_atributo = {};
   for (var atributo in tabelas_atributos) {
-    gPersonagem.atributos[atributo].bonus_nivel = 0;
-    gPersonagem.atributos[atributo].racial =
-        tabelas_raca[gPersonagem.raca].atributos[atributo] || 0;
+    var atributo_personagem = gPersonagem.atributos[atributo];
+    atributo_personagem.bonus.Adiciona('racial', null, tabelas_raca[gPersonagem.raca].atributos[atributo] || 0);
+    bonus_nivel_por_atributo[atributo] = 0;
   }
   // Calcula os bonus de nivel para cada atributo.
   for (var i = 0; i < gPersonagem.atributos.pontos.gastos.length; ++i) {
-    ++gPersonagem.atributos[gPersonagem.atributos.pontos.gastos[i]].bonus_nivel;
+    ++bonus_nivel_por_atributo[gPersonagem.atributos.pontos.gastos[i]];
+  }
+  for (var atributo in bonus_nivel_por_atributo) {
+    gPersonagem.atributos[atributo].bonus.Adiciona('nivel', null, bonus_nivel_por_atributo[atributo]);
   }
   // Valor final e modificador.
-  for (var atributo in gPersonagem.atributos) {
-    gPersonagem.atributos[atributo].valor =
-        gPersonagem.atributos[atributo].base +
-        gPersonagem.atributos[atributo].bonus_nivel +
-        gPersonagem.atributos[atributo].racial;
-    gPersonagem.atributos[atributo].modificador =
-        modificador_atributo(gPersonagem.atributos[atributo].valor);
+  for (var atributo in tabelas_atributos) {
+    var atributo_personagem = gPersonagem.atributos[atributo];
+    atributo_personagem.modificador = modificador_atributo(atributo_personagem.bonus.Total());
   }
 }
 
