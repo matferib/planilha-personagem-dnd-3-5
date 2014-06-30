@@ -20,7 +20,7 @@ function _GeraAtributos(modo, submodo) {
 
   var atributos_primeira_classe = tabelas_geracao[primeira_classe.classe].atributos;
   for (var i = 0; i < valores.length; ++i) {
-    gPersonagem.atributos[atributos_primeira_classe[i]].base = valores[i];
+    gPersonagem.atributos[atributos_primeira_classe[i]].bonus.Adiciona('base', null, valores[i]);
   }
 
   // Incrementa o atributo mais valioso do personagem

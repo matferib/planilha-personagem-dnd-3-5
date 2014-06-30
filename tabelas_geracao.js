@@ -159,7 +159,7 @@ var tabelas_geracao = {
       'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios' ],
     ordem_magias: {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
-      1: [ 'compreender_idioma', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
+      1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
     },
     por_nivel: {
       1: { moedas: { ouro: 300 },
