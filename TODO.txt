@@ -3,11 +3,10 @@ Mostrar segundo ataque.
 Mostrar hint dos talentos.
 Colapsar armas.
 Caracteristicas de escudos (resistencia feitico).
-Permitir memorizar feiticos com talentos metamagicos. 
+Permitir memorizar feiticos com talentos metamagicos.
 Calcular a DC do feitico por slot.
 Adicionar botao para mostrar a versão da planilha quando em modo mestre.
 Terminar as propriedades de outras capas.
-Transformar todos atributos em bonus.
 Não redesenhar os slots de feitiços sempre (reaproveitar).
 Implementar níveis negativos para feitiço (perde um slot da classe mais alta de caster).
 Sumir com a funcao AtualizaGeralSemConverterEntradas e usar apenas a versao SemLerEntradas.
