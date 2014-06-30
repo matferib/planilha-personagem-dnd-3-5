@@ -102,7 +102,7 @@ function _DependenciasItemSalvacoes(chave_item, item_tabela) {
 // Item que afeta atributos.
 function _DependenciasItemAtributos(chave_item, item_tabela) {
   for (var chave_atributo in item_tabela.propriedades.atributos) {
-    gPersonagem.atributos[chave_atributo].Adiciona(
+    gPersonagem.atributos[chave_atributo].bonus.Adiciona(
         'melhoria', chave_item, item_tabela.propriedades.atributos[chave_atributo]);
   }
 }
