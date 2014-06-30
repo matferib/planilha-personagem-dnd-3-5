@@ -28,52 +28,33 @@ var gPersonagem = {
   },
   // O valor do atributo é o valor final dados todos os modificadores. O modificador
   // é computado sobre esse valor.
-  // TODO transformar todos atributos em bonus.
   atributos: {
     pontos: {
       disponiveis: 0,
       gastos: [],  // cada entrada, um atributo
     },
     forca: {
-      base: 10,
-      bonus_nivel: 0,
-      racial: 0,
-      valor: 10,
+      bonus: new Bonus(),
       modificador: 0
     },
     destreza: {
-      base: 10,
-      bonus_nivel: 0,
-      racial: 0,
-      valor: 10,
+      bonus: new Bonus(),
       modificador: 0
     },
     constituicao: {
-      base: 10,
-      bonus_nivel: 0,
-      racial: 0,
-      valor: 10,
+      bonus: new Bonus(),
       modificador: 0
     },
     inteligencia: {
-      base: 10,
-      bonus_nivel: 0,
-      racial: 0,
-      valor: 10,
+      bonus: new Bonus(),
       modificador: 0
     },
     sabedoria: {
-      base: 10,
-      bonus_nivel: 0,
-      racial: 0,
-      valor: 10,
+      bonus: new Bonus(),
       modificador: 0
     },
     carisma: {
-      base: 10,
-      bonus_nivel: 0,
-      racial: 0,
-      valor: 10,
+      bonus: new Bonus(),
       modificador: 0
     }
   },
@@ -188,6 +169,9 @@ function PersonagemLimpaGeral() {
   gPersonagem.iniciativa.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
   gPersonagem.atributos.pontos.gastos.length = 0;
+  for (var atributo in tabelas_atributos) {
+    gPersonagem.atributos[atributo].bonus.Limpa();
+  }
   for (var i = 0; i < gPersonagem.pericias.lista.length; ++i) {
     gPersonagem.pericias.lista[i].bonus.Limpa();
   }
