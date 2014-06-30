@@ -23,10 +23,13 @@ function Bonus() {
   this.por_chave.intuicao = { nome: 'Intuição', cumulativo: false, por_origem: {}, };
   this.por_chave.melhoria = { nome: 'Melhoria', cumulativo: false, por_origem: {}, };
   this.por_chave.moral = { nome: 'Moral', cumulativo: false, por_origem: {}, };
-  // cumulativo para poder negativo.
+  // cumulativo para poder ter valores negativos.
   this.por_chave.niveis_negativos = { nome: 'Níveis Negativos', cumulativo: true, por_origem: {}, };
+  // Bonus de atributos ganhados a cada 4 niveis.
+  this.por_chave.nivel = { nome: 'Nível', cumulativo: true, por_origem: {}, };
   this.por_chave.profano = { nome: 'Profano', cumulativo: false, por_origem: {}, };
-  this.por_chave.racial = { nome: 'Racial', cumulativo: false, por_origem: {}, };
+  // cumulativo para aceitar valores negativos.
+  this.por_chave.racial = { nome: 'Racial', cumulativo: true, por_origem: {}, };
   this.por_chave.resistencia = { nome: 'Resitência', cumulativo: false, por_origem: {}, };
   this.por_chave.sagrado = { nome: 'Sagrado', cumulativo: false, por_origem: {}, };
   this.por_chave.sinergia = { nome: 'Sinergia', cumulativo: false, por_origem: {}, };

@@ -93,7 +93,7 @@ function _ConverteAtributos() {
   }
   // Calcula os componentes dos atributos.
   for (var atributo in tabelas_atributos) {
-    gPersonagem.atributos[atributo].base = gEntradas[atributo];
+    gPersonagem.atributos[atributo].bonus.Adiciona('base', null, gEntradas[atributo]);
   }
 }
 

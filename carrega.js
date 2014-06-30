@@ -228,8 +228,7 @@ function _CarregaAtributos() {
     input_atributo.maxLength = 2;
     input_atributo.addEventListener('change', AtualizaGeral);
     div_atributo.appendChild(input_atributo);
-    div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-racial'));
-    div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-nivel'));
+    div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-bonus'));
     div_atributo.appendChild(CriaSpan(' = '));
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-valor-total'));
     div_atributo.appendChild(CriaSpan(', modificador: '));
