@@ -102,8 +102,8 @@ function _DependenciasItemSalvacoes(chave_item, item_tabela) {
 // Item que afeta atributos.
 function _DependenciasItemAtributos(chave_item, item_tabela) {
   for (var chave_atributo in item_tabela.propriedades.atributos) {
-    //gPersonagem.atributos[chave_atributo].Adiciona(
-    //    'melhoria', chave_item, item_tabela.propriedades.atributos[chave_atributo]);
+    gPersonagem.atributos[chave_atributo].Adiciona(
+        'melhoria', chave_item, item_tabela.propriedades.atributos[chave_atributo]);
   }
 }
 
@@ -803,7 +803,7 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   }
   var chave_classe = classe_personagem.classe;
   var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
-  var valor_atributo_chave = gPersonagem.atributos[atributo_chave].valor;
+  var valor_atributo_chave = gPersonagem.atributos[atributo_chave].bonus.Total();
   var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
   var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
   gPersonagem.feiticos[chave_classe].em_uso = true;
