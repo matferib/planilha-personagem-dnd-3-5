@@ -129,6 +129,11 @@ span.span-item {
   width: 75px;
 }
 
+span.titulo {
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
 input.venda {
 }
 input.compra {

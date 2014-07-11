@@ -32,6 +32,8 @@ var gEntradas = {
   carisma: 10,
   // Cada entrada: { nome, arma_primaria, arma_secundaria}.
   estilos_luta: [],
+  // Cada entrada: chave: [ true/false, ... ]
+  habilidades_especiais: {},
   // moedas
   platina: 0,
   ouro: 0,
@@ -137,6 +139,8 @@ function LeEntradas() {
     gEntradas.estilos_luta.push(
         _LeEntradaEstiloLuta(div_estilos_luta.childNodes[i]));
   }
+
+  _LeHabilidadesEspeciais();
 
   _LeEquipamentos();
 
@@ -312,6 +316,40 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
     }
   }
   return estilo;
+}
+
+function _LeHabilidadesEspeciais() {
+ gEntradas.habilidades_especiais = {};
+ var filhos = Dom('habilidades-especiais').childNodes;
+ for (var i = 0; i < filhos.length; ++i) {
+   var filho = filhos.item(i);
+   if (filho.tagName != "DIV") {
+     continue;
+   }
+   _LeHabilidadeEspecial(filhos.item(i));
+ }
+}
+
+// Recebe o div da habilidade especial, que deve ter o id 'habilidade-especial-' + chave_especial.
+// Caso possua usos, estarao dentro de checkboxes.
+function _LeHabilidadeEspecial(dom_habilidade) {
+  var filhos = dom_habilidade.childNodes;
+  // Tira prefixo habilidade-especial-.
+  var chave_especial = dom_habilidade.id.split('-');
+  chave_especial.shift();
+  chave_especial.shift();
+  chave_especial = chave_especial.shift();
+  var usos = [];  // array de boolean representando cada uso.
+  for (var i = 0; i < filhos.length; ++i) {
+    var filho = filhos.item(i);
+    if (filho.tagName != "INPUT") {
+      continue;
+    }
+    usos.push(filho.checked);
+  }
+  if (usos.length > 0) {
+    gEntradas.habilidades_especiais[chave_especial] = usos;
+  }
 }
 
 function _LeEquipamentos() {
