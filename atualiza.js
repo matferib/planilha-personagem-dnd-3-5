@@ -481,7 +481,7 @@ function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai
 }
 
 function _AtualizaProficienciaArmas() {
-  var span_proficiencia_armas = Dom('div-proficiencia-armas');
+  var span_proficiencia_armas = Dom('span-proficiencia-armas');
   var string_proficiencia = '';
   for (var proficiencia in gPersonagem.proficiencia_armas) {
     string_proficiencia += tabelas_armas[proficiencia].nome + ', ';
