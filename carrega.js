@@ -248,10 +248,10 @@ function _CarregaTalentos() {
     var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
-          CriaSpan('Talentos Gerais: '));
+          CriaSpan('Gerais: '));
     } else {
       div_talentos_classe.appendChild(
-          CriaSpan('Talentos de ' + tabelas_classes[chave_classe].nome + ': '));
+          CriaSpan('De ' + tabelas_classes[chave_classe].nome + ': '));
     }
     div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
     div_talentos_classe.appendChild(CriaBr());
