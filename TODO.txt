@@ -1,3 +1,4 @@
+Feiticos extras de especialistas (necromantes).
 Mostrar espantar mortos vivos.
 Mostrar segundo ataque.
 Mostrar hint dos talentos.

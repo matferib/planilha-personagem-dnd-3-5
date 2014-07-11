@@ -42,7 +42,7 @@ function ConverteEntradasParaPersonagem() {
   // Estilos tem que vir apos a atualizacao das armas do gPersonagem, talentos e lista de armas.
   _ConverteEstilos();
 
-  _ConverteHabilidades();
+  _ConverteHabilidadesEspeciais();
 
   // Feiticos.
   _ConverteFeiticos();
@@ -204,7 +204,19 @@ function _ConverteEstilos() {
   }
 }
 
-function _ConverteHabilidades() {
+function _ConverteHabilidadesEspeciais() {
+  for (var chave_especial in gEntradas.habilidades_especiais) {
+    var entrada_especial = gEntradas.habilidades_especiais[chave_especial];
+    var personagem_especial = gPersonagem.especiais[chave_especial];
+    personagem_especial.vezes = entrada_especial.length;
+    var usados = 0;
+    for (var i = 0; i < entrada_especial.length; ++i) {
+      if (entrada_especial[i]) {
+        ++usados;
+      }
+    }
+    personagem_especial.usado = usados;
+  }
 }
 
 // Converte um estilo da entrada para o personagem.
