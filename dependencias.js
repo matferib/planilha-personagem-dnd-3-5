@@ -14,7 +14,7 @@ function DependenciasGerais() {
   _DependenciasTamanho();
   _DependenciasBba();
   _DependenciasProficienciaArmas();
-  _DependenciasEspeciais();
+  _DependenciasHabilidadesEspeciais();
 
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
@@ -345,7 +345,8 @@ function _DependenciasProficienciaArmas() {
 }
 
 // Habilidades especiais do gPersonagem.
-function _DependenciasEspeciais() {
+function _DependenciasHabilidadesEspeciais() {
+  var especiais_antes = gPersonagem.especiais;
   gPersonagem.especiais = {};
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var entrada_classe = gPersonagem.classes[i];
@@ -373,6 +374,14 @@ function _DependenciasEspeciais() {
           }
         }
       }
+    }
+  }
+  // Atualiza o numero de usos de cada especial.
+  for (var chave_especial in gPersonagem.especiais) {
+    if (chave_especial in especiais_antes) {
+      gPersonagem.especiais[chave_especial].usado = especiais_antes[chave_especial].usado;
+    } else {
+      gPersonagem.especiais[chave_especial].usado = 0;
     }
   }
 }

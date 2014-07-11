@@ -396,7 +396,7 @@ function GeraResumo() {
     resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + gPersonagem.atributos[atributo].valor + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
- 
+
   // Itens. TODO nome correto.
   for (var tipo_item in tabelas_itens) {
     if (gPersonagem[tipo_item].length > 0) {

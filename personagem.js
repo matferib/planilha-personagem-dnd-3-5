@@ -150,10 +150,13 @@ var gPersonagem = {
   //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9: [] },
   //   nivel_maximo,  // nivel de feitico mais alto para a classe.
+  //   escolas_proibidas: [],
+  //   especializacao: 'nome_escola',
   //   slots: {
   //       0: { base, bonus_atributo, cd,
   //            feiticos: [ { nivel_conhecido, indice_conhecido, gasto } ], // o indice eh referente aos conhecidos.
-  //            feitico_dominio: {nome, gasto} },
+  //            feitico_dominio: {nome, gasto},
+  //            feitico_escola: {nome, gasto} },
   //       1: ...} }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
@@ -185,7 +188,6 @@ function PersonagemLimpaGeral() {
     }
   }
   gPersonagem.estilos_luta.length = 0;
-  gPersonagem.habilidades = {};
   for (var tipo_salvacao in gPersonagem.salvacoes) {
     if (tipo_salvacao in { fortitude: '', reflexo: '', vontade: '' }) {
       gPersonagem.salvacoes[tipo_salvacao].Limpa();

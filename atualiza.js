@@ -53,7 +53,7 @@ function _AtualizaGeral() {
   _AtualizaAtaque();
   _AtualizaEstilosLuta();
   _AtualizaSalvacoes();
-  _AtualizaEspeciais();
+  _AtualizaHabilidadesEspeciais();
   _AtualizaTalentos();
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
@@ -400,18 +400,25 @@ function _AtualizaSalvacoes() {
 }
 
 // Atualiza as habilidades especiais, vindas de classe e raca.
-function _AtualizaEspeciais() {
+function _AtualizaHabilidadesEspeciais() {
   var dom_especiais = Dom('habilidades-especiais');
   RemoveFilhos(dom_especiais);
   for (especial in gPersonagem.especiais) {
-    var dom_especial = CriaDiv();
+    _AtualizaHabilidadeEspecial(especial, dom_especiais);
+  }
+}
 
-    var especial_personagem = gPersonagem.especiais[especial];
-    if (especial_personagem.vezes > 1) {
-      //string_especiais += ' (' + especial_personagem.vezes + ')';
+function _AtualizaHabilidadeEspecial(chave_especial, dom_especiais) {
+  // TODO atualizar de verdade e so adicionar quando preciso.
+  var dom_especial = AdicionaHabilidadeEspecial(chave_especial, dom_especiais);
+  var usado = gPersonagem.especiais[chave_especial].usado;
+  for (var i = 0; i < dom_especial.childNodes.length && usado > 0; ++i) {
+    var filho = dom_especial.childNodes[i];
+    if (filho.tagName != 'INPUT') {
+      continue;
     }
-    dom_especial.textContent = tabelas_especiais[especial].nome;
-    dom_especiais.appendChild(dom_especial);
+    filho.checked = true;
+    --usado;
   }
 }
 

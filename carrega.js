@@ -184,7 +184,7 @@ function _CarregaAtributos() {
     return;
   }
 
-  div.appendChild(CriaSpan('Atributos'));
+  div.appendChild(CriaSpan('Atributos', null, 'titulo'));
   div.appendChild(CriaBr());
   div.appendChild(CriaSpan('Total: '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-total'));

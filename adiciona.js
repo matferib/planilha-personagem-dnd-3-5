@@ -450,3 +450,14 @@ function AdicionaSlotFeitico(precisa_memorizar, chave_classe, nivel, conhecidos,
   Dom('div-feiticos-slots-' + chave_classe + '-' + nivel).appendChild(
       CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, conhecidos, slots));
 }
+
+function AdicionaHabilidadeEspecial(chave_especial, dom_especiais) {
+  var dom_especial = CriaDiv('habilidade-especial-' + chave_especial);
+  dom_especial.textContent = tabelas_especiais[chave_especial].nome;
+  var especial_personagem = gPersonagem.especiais[especial];
+  for (var i = 0; i < especial_personagem.vezes; ++i) {
+    dom_especial.appendChild(CriaInputCheckbox(false, null, null, ClickHabilidadeEspecial));
+  }
+  dom_especiais.appendChild(dom_especial);
+  return dom_especial;
+}

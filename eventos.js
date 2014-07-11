@@ -505,3 +505,8 @@ function ChangeAdicionarMoedas() {
   AtualizaGeralSemLerEntradas();
 }
 
+// Evento chamado ao clicar no checkbox de habilidade especial.
+function ClickHabilidadeEspecial() {
+  // TODO da pra melhorar.
+  AtualizaGeral();
+}
