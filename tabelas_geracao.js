@@ -473,7 +473,29 @@ var tabelas_geracao = {
 	},
   mago: {
 		atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
+    ordem_pericias: [
+      'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
+    ordem_magias: {
+      // Essas magias sao para necromantes.
+      0: [ 'detactar_magia', 'ler_magias', 'raio_de_gelo', 'romper_mortos_vidos', 'som_fantasma'],
+      1: [ 'armadura_arcana', 'maos_flamejantes', 'patas_de_aranha', 'raio_do_enfraquecimento', 'toque_macabro', ],
+      2: [ 'invisibilidade', 'invocar_enxames', 'queimadura_de_aganazzar', 'resistir_elementos', 'suportar_elementos',
+           'toque_do_carnical'],
+      3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo'],
+    },
 	},
+  mago_necromante: {
+		atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
+    ordem_pericias: [
+      'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
+    ordem_magias: {
+      0: [ 'detactar_magia', 'ler_magias', 'raio_de_gelo', 'romper_mortos_vidos', 'som_fantasma'],
+      1: [ 'armadura_arcana', 'maos_flamejantes', 'patas_de_aranha', 'raio_do_enfraquecimento', 'toque_macabro', ],
+      2: [ 'invisibilidade', 'invocar_enxames', 'queimadura_de_aganazzar', 'resistir_elementos', 'suportar_elementos',
+           'toque_do_carnical'],
+      3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo'],
+	  },
+  },
   monge: {
 		atributos: [ 'sabedoria', 'forca', 'destreza', 'constituicao', 'inteligencia', 'carisma' ],
 	},

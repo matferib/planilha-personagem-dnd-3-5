@@ -150,7 +150,7 @@ var gPersonagem = {
   //   em_uso,  // se o personagem utiliza feiticos da classe.
   //   conhecidos: { 0: [], ..., 9: [] },
   //   nivel_maximo,  // nivel de feitico mais alto para a classe.
-  //   escolas_proibidas: [],
+  //   escolas_proibidas: ['nome_escola', ...],
   //   especializacao: 'nome_escola',
   //   slots: {
   //       0: { base, bonus_atributo, cd,

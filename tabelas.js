@@ -67,6 +67,13 @@ var tabelas_raca = {
       movimento: { terrestre: 6 },
       atributos: { forca: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio',
   },
+  orc: {
+      nome: 'Orc',
+      origem: { livro: 'Livro dos Monstros', pagina: '' },
+      movimento: { terrestre: 6 },
+      atributos: { forca: 4, inteligencia: -2, sabedoria: -2, carisma: -2 }, tamanho: 'medio',
+      // visao no escuro 60 pes (12 quadrados).
+  },
 };
 
 var tabelas_template = {
@@ -90,13 +97,19 @@ var tabelas_template = {
 // TODO passar tudo de classes pra ca.
 var tabelas_classes = {
   barbaro: {
-    nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte, },
+    nome: 'Bárbaro', dados_vida: 12, pontos_pericia: 4, bba: bba_forte,
+    talentos: [ 'usar_armas_simples', 'usar_armas_comuns' ],
+  },
   bardo: {
     nome: 'Bardo', dados_vida: 6, pontos_pericia: 6, bba: bba_medio,
-    nivel_conjurador: { modificador: 1.0 }, },
+    nivel_conjurador: { modificador: 1.0 },
+    talentos: [ 'usar_armas_simples' ],
+    proficiencia_armas: [ 'espada_longa', 'sabre', 'porrete',  'espada_curta', 'arco_curto', 'chicote' ]
+  },
   clerigo: {
     nome: 'Clérigo', dados_vida: 8, pontos_pericia: 2,  bba: bba_medio,
     nivel_conjurador: { modificador: 1.0, },
+    talentos: [ 'usar_armas_simples' ],
     especiais: {
       1: [ 'expulsar_fascinar_mortos_vivos' ],
     },
@@ -110,13 +123,22 @@ var tabelas_classes = {
       4: [ 'resistir_tentacao_natureza' ],
       5: [ 'forma_selvagem' ],
     },
+    proficiencia_armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice_curta',
+                          'lanca_curta', 'funda', 'lanca' ],
   },
   guerreiro: {
-    nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte, },
+    nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+  },
   feiticeiro: {
     nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba:
-    bba_fraco, nivel_conjurador: { modificador: 1.0, }, },
-  ladino: { nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio,
+    bba_fraco, nivel_conjurador: { modificador: 1.0, },
+    talentos: [ 'usar_armas_simples' ],
+  },
+  ladino: {
+    nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio,
+    talentos: [ 'usar_armas_simples' ],
+    proficiencia_armas: [ 'besta_de_mao', 'sabre', 'porrete', 'arco_curto', 'espada_curta' ],
     especiais: {
       1: [ 'ataque_furtivo', 'encontrar_armadilha' ],
       2: [ 'evasao' ],
@@ -129,10 +151,28 @@ var tabelas_classes = {
   },
   mago: {
     nome: 'Mago', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
-    nivel_conjurador: { modificador: 1.0, }, },
-  monge: { nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
+    nivel_conjurador: { modificador: 1.0, },
+    talentos: ['usar_armas_simples' ],
+    proficiencia_armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ],
+    especiais: {
+      1: ['familiar'],
+    },
+  },
+  mago_necromante: {
+    nome: 'Mago Necromante', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
+    nivel_conjurador: { modificador: 1.0, },
+    especiais: {
+      1: ['familiar'],
+    },
+  },
+  monge: {
+    nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio,
+    proficiencia_armas: [ 'clava', 'besta_leve', 'besta_pesada', 'adaga', 'machadinha', 'azagaia',
+                          'kama', 'nunchaku', 'bordao', 'sai', 'shuriken', 'siangham', 'funda' ],
+  },
   paladino: { nome: 'Paladino', dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
     nivel_conjurador: { modificador: 0.5, minimo: 4, },
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
     especiais: {
       1: [ 'aura_bem', 'detectar_mal', 'destruir_mal', ],
       2: [ 'graca_divina', 'cura_pelas_maos', ],
@@ -150,17 +190,34 @@ var tabelas_classes = {
   },
   ranger: {
     nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte,
-    nivel_conjurador: { modificador: 0.5, minimo: 4, }, },
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+    nivel_conjurador: { modificador: 0.5, minimo: 4, },
+  },
   // classes NPC
   adepto: {
     nome: 'Adepto', mestre: true, dados_vida: 6, pontos_pericia: 2, bba: bba_fraco,
-    nivel_conjurador: { modificador: 1.0, }, },
-  aristocrata: { nome: 'Aristocrata', mestre: true, dados_vida: 8, pontos_pericia: 4, bba: bba_medio, },
-  plebeu: { nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco, },
-  expert: { nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio,  },
-  combatente: { nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte, },
+    nivel_conjurador: { modificador: 1.0, },
+    talentos: ['usar_armas_simples' ],
+  },
+  aristocrata: {
+    nome: 'Aristocrata', mestre: true, dados_vida: 8, pontos_pericia: 4, bba: bba_medio,
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+  },
+  plebeu: {
+    nome: 'Plebeu', mestre: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
+    proficiencia_armas: ['clava'],
+  },
+  expert: {
+    nome: 'Expert', mestre: true, dados_vida: 6, pontos_pericia: 6, bba: bba_medio,
+    talentos: ['usar_armas_simples' ],
+  },
+  combatente: {
+    nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte,
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+  },
   // Prestigio.
-  dragao_purpura: { nome: 'Dragão Púrpura', prestigio: true, dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
+  dragao_purpura: {
+    nome: 'Dragão Púrpura', prestigio: true, dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
     especiais: {
       1: [ 'escudo_heroico', 'grito_guerra' ],
       2: [ 'inspirar_coragem' ],
@@ -181,34 +238,35 @@ var tabelas_classes = {
 };
 
 var tabelas_especiais = {
+  ataque_furtivo: { nome: 'Ataque furtivo', },
   aura_bem: { nome: 'Aura do bem', },
   aura_coragem: { nome: 'Aura de coragem' },
   expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
+  caminho_floresta: { nome: 'Caminho da floresta', },
   companheiro_animal: { nome: 'Companheiro animal', },
   cura_pelas_maos: { nome: 'Cura pelas mãos', },
   destruir_mal: { nome: 'Destruir o mal', },
   detectar_mal: { nome: 'Detectar o mal', },
-  graca_divina: { nome: 'Graça divina', },
-  montaria_especial: { nome: 'Montaria especial', },
-  senso_natureza: { nome: 'Senso da natureza', },
   empatia_natureza: { nome: 'Empatia com a natureza', },
-  caminho_floresta: { nome: 'Caminho da floresta', },
-  ratros_invisivel: { nome: 'Rastro invisível', },
-  resistir_tentacao_natureza: { nome: 'Resistir tentação da natureza', },
-  forma_selvagem: { nome: 'Forma selvagem', },
-  ataque_furtivo: { nome: 'Ataque furtivo', },
   encontrar_armadilha: { nome: 'Encontrar armadilha', },
   evasao: { nome: 'Evasão', },
+  escudo_heroico: { nome: 'Escudo Heróico', },
+  esquiva_sobrenatural: { nome: 'Esquiva sobrenatural', },
+  familiar: { nome: 'Familiar', },
+  forma_selvagem: { nome: 'Forma selvagem', },
+  graca_divina: { nome: 'Graça divina', },
+  grito_guerra: { nome: 'Grito de Guerra', },
+  inspirar_coragem: { nome: 'Inspirar Coragem', },
+  juramento_furia: { nome: 'Juramento de Fúria', },
+  medo: { nome: 'Medo', },
+  montaria_especial: { nome: 'Montaria especial', },
+  senso_natureza: { nome: 'Senso da natureza', },
+  ratros_invisivel: { nome: 'Rastro invisível', },
+  resistencia_final: {nome: 'Resistência Final', },
+  resistir_tentacao_natureza: { nome: 'Resistir tentação da natureza', },
   remover_doenca: { nome: 'Remover Doença', },
   sentir_armadilha: { nome: 'Sentir armadilha', },
   saude_divina: { nome: 'Saúde divina', },
-  esquiva_sobrenatural: { nome: 'Esquiva sobrenatural', },
-  escudo_heroico: { nome: 'Escudo Heróico', },
-  grito_guerra: { nome: 'Grito de Guerra', },
-  inspirar_coragem: { nome: 'Inspirar Coragem', },
-  medo: { nome: 'Medo', },
-  juramento_furia: { nome: 'Juramento de Fúria', },
-  resistencia_final: {nome: 'Resistência Final', },
 };
 
 // Bonus base de ataque.
@@ -1062,7 +1120,8 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       bonus_pericias: { blefar: 2, intimidacao: 2 } },
   prontidao: {
       nome: 'Prontidão',
-      bonus_pericias: { ouvir: 2, observar: 2 } },
+      bonus_pericias: { ouvir: 2, observar: 2 },
+      descricao: 'Bonus de +2 em ouvir e observar.' },
   rastrear: {
       nome: 'Rastrear',
       descricao: 'Utiliza Sobrevivência para rastrear.', },
