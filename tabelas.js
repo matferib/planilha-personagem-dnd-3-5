@@ -6,7 +6,7 @@ var tabelas_raca = {
       ajuste_nivel: 2, armadura_natural: 1,
       movimento: { terrestre: 4, aereo: 18 },
       atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
-      proficiencia_armas: [ 'azagaia' ], // Javelin em ingles.
+      proficiencia_armas: [ 'azagaia' ],  // Javelin em ingles.
       //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
       //Todo(FC) incluir penalidades de ambientes fechados
       bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
@@ -161,6 +161,8 @@ var tabelas_classes = {
   mago_necromante: {
     nome: 'Mago Necromante', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
     nivel_conjurador: { modificador: 1.0, },
+    talentos: ['usar_armas_simples' ],
+    proficiencia_armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ],
     especiais: {
       1: ['familiar'],
     },
@@ -342,6 +344,8 @@ var tabelas_salvacao = {
   ladino: {
     fortitude: salvacao_fraca, reflexo: salvacao_forte, vontade: salvacao_fraca },
   mago: {
+    fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+  mago_necromante: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
   monge: {
     fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_forte },
@@ -818,71 +822,6 @@ var tabelas_armas_exoticas = {
 
 //Bolts (10)  1 gp  — — — — 1 lb. —
 //Bolts (5) 1 gp  — — — — 1 lb. —
-};
-
-// Talento das classes.
-// TODO mover para a tabela de classes.
-var tabelas_proficiencia_arma_por_classe = {
-  barbaro: {
-      talentos: [ 'usar_armas_simples', 'usar_armas_comuns' ]
-  }, 
-  bardo: {
-      talentos: [ 'usar_armas_simples' ],
-      armas: [ 'espada_longa', 'sabre', 'porrete',  'espada_curta', 'arco_curto', 'chicote' ]
-  },
-  clerigo: {
-      talentos: [ 'usar_armas_simples' ]
-  },
-  druida: {
-      armas: [ 'clava', 'adaga', 'dardo', 'bordao', 'cimitarra', 'foice_curta', 
-               'lanca_curta', 'funda', 'lanca' ]
-  },
-  feiticeiro: {
-      talentos: [ 'usar_armas_simples' ]
-  },
-  guerreiro: {
-      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
-  },
-  ladino: {
-      talentos: [ 'usar_armas_simples' ],
-      armas: [ 'besta_de_mao', 'sabre', 'porrete', 'arco_curto', 'espada_curta' ]
-  },
-  mago: {
-      talentos: ['usar_armas_simples' ],
-      armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ]
-  },
-  monge: {
-      armas: [ 'clava', 'besta_leve', 'besta_pesada', 'adaga', 'machadinha', 'azagaia',
-               'kama', 'nunchaku', 'bordao', 'sai', 'shuriken', 'siangham', 'funda' ],
-  },
-  paladino: {
-      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
-  },
-  ranger: {
-      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
-  },
-
-  // NPCs.
-  adepto: {
-      talentos: ['usar_armas_simples' ],
-  },
-  aristocrata: {
-      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
-  },
-  plebeu: {
-      // na verdade o plebeu eh proficiente com uma arma simples, eu escolhi clava.
-      armas: [ 'clava' ]
-  },
-  expert: {
-      talentos: ['usar_armas_simples' ]
-  },
-  combatente: {
-      talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ]
-  },
-
-  // Prestigio.
-  dragao_purpura: {
-  },
 };
 
 // Cada entrada tem suas dependencias.

@@ -270,13 +270,14 @@ function _DependenciasProficienciaArmas() {
   var todas_comuns = false;
   gPersonagem.proficiencia_armas = {};
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
-    var nome_classe = gPersonagem.classes[i].classe;
-    var armas_classe = tabelas_proficiencia_arma_por_classe[nome_classe].armas;
-    for (var j = 0; armas_classe != null && j < armas_classe.length; ++j) {
+    var chave_classe = gPersonagem.classes[i].classe;
+    var tabela_classe = tabelas_classes[chave_classe];
+    var armas_classe = tabela_classe.proficiencia_armas || [];
+    for (var j = 0; j < armas_classe.length; ++j) {
       gPersonagem.proficiencia_armas[armas_classe[j]] = true;
     }
-    var talentos_classe = tabelas_proficiencia_arma_por_classe[nome_classe].talentos;
-    for (var j = 0; talentos_classe != null && j < talentos_classe.length; ++j) {
+    var talentos_classe = tabela_classe.talentos || [];
+    for (var j = 0; j < talentos_classe.length; ++j) {
       if (talentos_classe[j] == 'usar_armas_simples') {
         todas_simples = true;
       } else if (talentos_classe[j] == 'usar_armas_comuns') {
