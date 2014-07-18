@@ -21,7 +21,7 @@ function StringSinalizada(valor, imprime_zero) {
 // Imprime um valor de forma sinalizada ou seja, com +/- na frente).
 // @param dom pode ser um span ou div, ou qualquer elemento que possua textContent.
 // Tambem pode ser um array de dom.
-// @param imprime_zero opcional, default true. Se false, imprime_vazio no dom. 
+// @param imprime_zero opcional, default true. Se false, imprime_vazio no dom.
 function ImprimeSinalizado(valor, dom, imprime_zero) {
   if (imprime_zero == null) {
     imprime_zero = true;
@@ -374,6 +374,3 @@ function AtualizaObjeto(valores, objeto) {
 
 
 // Fim das funções de Storage.
-
-
-

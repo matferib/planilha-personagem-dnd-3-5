@@ -944,7 +944,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       nome: 'Corrida',
       bonus_pericias: { saltar: 4 },
       descricao: 'Percorre 5 vezes o deslocamento padrão, ' +
-                 '+4 de bônus nos testes de Saltar no final de uma corrida.', }, 
+                 '+4 de bônus nos testes de Saltar no final de uma corrida.', },
   dedos_lepidos: {
       nome: 'Dedos Lépidos',
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },

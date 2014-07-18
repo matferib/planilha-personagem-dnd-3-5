@@ -156,7 +156,7 @@ var gPersonagem = {
   //       0: { base, bonus_atributo, cd,
   //            feiticos: [ { nivel_conhecido, indice_conhecido, gasto } ], // o indice eh referente aos conhecidos.
   //            feitico_dominio: {nome, gasto},
-  //            feitico_escola: {nome, gasto} },
+  //            feitico_especializado: {nome, gasto} },
   //       1: ...} }
   feiticos: {},
   moedas: { platina: 0, ouro: 0, prata: 0, cobre: 0 },
