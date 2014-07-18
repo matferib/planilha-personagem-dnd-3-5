@@ -1,5 +1,4 @@
-Feiticos extras de especialistas (necromantes).
-Mostrar espantar mortos vivos.
+Feiticos extras de especialistas (necromantes). Fazer restricoes por escola.
 Mostrar segundo ataque.
 Mostrar hint dos talentos.
 Colapsar armas.

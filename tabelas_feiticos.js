@@ -55,7 +55,7 @@ var tabelas_lista_feiticos = {
 };
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
-// TODO adicionar uma variavel precisa_memorizar. O precisa conhecer esta sendo sobreusado para este proposito.
+// TODO adicionar uma variavel precisa_memorizar. O precisa_conhecer esta sendo sobreusado para este proposito.
 var tabelas_feiticos = {
   bardo: {
       atributo_chave: 'carisma',
@@ -161,6 +161,32 @@ var tabelas_feiticos = {
           20: { por_dia: '6666666666', conhecidos: '9554443333', }, }, },
   mago: {
       atributo_chave: 'inteligencia',
+      precisa_conhecer: false,
+      possui_nivel_zero: true,
+      por_nivel: {
+          1:  { por_dia: '31', },
+          2:  { por_dia: '42', },
+          3:  { por_dia: '421', },
+          4:  { por_dia: '432', },
+          5:  { por_dia: '4321', },
+          6:  { por_dia: '4332', },
+          7:  { por_dia: '44321', },
+          8:  { por_dia: '44332', },
+          9:  { por_dia: '444321', },
+          10: { por_dia: '444332', },
+          11: { por_dia: '4444321', },
+          12: { por_dia: '4444332', },
+          13: { por_dia: '44444321', },
+          14: { por_dia: '44444332', },
+          15: { por_dia: '444444321', },
+          16: { por_dia: '444444332', },
+          17: { por_dia: '4444444321', },
+          18: { por_dia: '4444444332', },
+          19: { por_dia: '4444444433', },
+          20: { por_dia: '4444444444', }, }, },
+  mago_necromante: {
+      atributo_chave: 'inteligencia',
+      escola_especializada: 'necromancia',
       precisa_conhecer: false,
       possui_nivel_zero: true,
       por_nivel: {

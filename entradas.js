@@ -72,6 +72,10 @@ var gEntradas = {
   // chave_classe: { 1: { nivel, indice, gasto }, 2: {}, ...}
   // Parâmetros iguais aos de slots_feiticos.
   slots_feiticos_dominio: {},
+  // slots de feiticos especializados, cada entrada:
+  // chave_classe: { 0: { nivel, indice, gasto }, 1: {}, ...}
+  // Parâmetros iguais aos de slots_feiticos.
+  slots_feiticos_especializados: {},
 
   notas: '',
 };
@@ -125,10 +129,10 @@ function LeEntradas() {
   } else {
     gEntradas.bonus_atributos = [];
   }
-  var atributos = [ 
+  var atributos = [
       'forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma' ];
   for (var i = 0; i < atributos.length; ++i) {
-    gEntradas[atributos[i]] = 
+    gEntradas[atributos[i]] =
         parseInt(Dom(atributos[i] + '-valor-base').value);
   }
 
@@ -223,7 +227,17 @@ function _LeClasseNivelIndice(id) {
 
 // Le um slot gasto, criando os valores intermediarios se eles nao existirem.
 function _PreencheSlotGasto(chave_classe, nivel_slot, indice_slot, gasto) {
-  if (indice_slot != 'dom') {
+  if (indice_slot == 'dom') {
+    if (gEntradas.slots_feiticos_dominio[chave_classe] == null) {
+      gEntradas.slots_feiticos_dominio[chave_classe] = {};
+    }
+    gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
+  } else if (indice_slot == 'esp') {
+    if (gEntradas.slots_feiticos_especializados[chave_classe] == null) {
+      gEntradas.slots_feiticos_especializados[chave_classe] = {};
+    }
+    gEntradas.slots_feiticos_especializados[chave_classe][nivel_slot] = { gasto: gasto };
+  } else {
     if (gEntradas.slots_feiticos[chave_classe] == null) {
       gEntradas.slots_feiticos[chave_classe] = {};
     }
@@ -231,11 +245,6 @@ function _PreencheSlotGasto(chave_classe, nivel_slot, indice_slot, gasto) {
       gEntradas.slots_feiticos[chave_classe][nivel_slot] = [];
     }
     gEntradas.slots_feiticos[chave_classe][nivel_slot].push({ gasto: gasto });
-  } else {
-    if (gEntradas.slots_feiticos_dominio[chave_classe] == null) {
-      gEntradas.slots_feiticos_dominio[chave_classe] = {};
-    }
-    gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot] = { gasto: gasto };
   }
 }
 
@@ -243,6 +252,7 @@ function _LeSlotsFeiticos() {
   // Comecar pelo gasto que esta sempre presente.
   gEntradas.slots_feiticos = {};
   gEntradas.slots_feiticos_dominio = {};
+  gEntradas.slots_feiticos_especializados = {};
   var doms_feiticos_gastos = DomsPorClasse('feiticos-slots-gastos');
 
   // Este primeiro loop vai criar todas as gEntradas com apenas o atributo gasto preenchido.
@@ -250,9 +260,9 @@ function _LeSlotsFeiticos() {
   for (var i = 0; i < doms_feiticos_gastos.length; ++i) {
     var classe_nivel_indice = _LeClasseNivelIndice(doms_feiticos_gastos[i].id);
     _PreencheSlotGasto(
-        classe_nivel_indice[0], 
-        classe_nivel_indice[1], 
-        classe_nivel_indice[2], 
+        classe_nivel_indice[0],
+        classe_nivel_indice[1],
+        classe_nivel_indice[2],
         doms_feiticos_gastos[i].checked);
   }
 
@@ -265,9 +275,14 @@ function _LeSlotsFeiticos() {
     var chave_classe = classe_nivel_indice[0];
     var nivel_slot = classe_nivel_indice[1];
     var indice_slot = classe_nivel_indice[2];
-    var slot = indice_slot != 'dom' ?
-        gEntradas.slots_feiticos[chave_classe][nivel_slot][indice_slot] :
-        gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot];
+    var slot = null;
+    if (indice_slot == 'dom') {
+      slot = gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot];
+    } else if (indice_slot == 'esp') {
+      slot = gEntradas.slots_feiticos_especializados[chave_classe][nivel_slot];
+    } else {
+      slot = gEntradas.slots_feiticos[chave_classe][nivel_slot][indice_slot];
+    }
     var nivel_indice = ValorSelecionado(doms_select_feitico[i]);
 
     if (nivel_indice != null) {
@@ -292,7 +307,7 @@ function _LeFeiticos() {
 
 // Le um div de estilo de luta.
 // Como existem spans aninhados, tem que empilhar spans.
-// @return o estilo lido. 
+// @return o estilo lido.
 function _LeEntradaEstiloLuta(div_estilo_luta) {
   var estilo = {};
   var proximos_elementos = [ div_estilo_luta ];
@@ -302,7 +317,7 @@ function _LeEntradaEstiloLuta(div_estilo_luta) {
       var filho = elemento_corrente.childNodes[i];
       if (filho.tagName == 'INPUT') {
         if (filho.checked) {
-          estilo.nome = filho.value; 
+          estilo.nome = filho.value;
         }
       } else if (filho.tagName == 'SELECT') {
         if (filho.id.indexOf('primario') != -1) {
@@ -354,13 +369,13 @@ function _LeHabilidadeEspecial(dom_habilidade) {
 
 function _LeEquipamentos() {
   // Armadura e escudo.
-  //gEntradas.armadura.nome = 
-  //    ValorSelecionado(Dom('armadura')); 
-  //gEntradas.armadura.bonus_magico = 
-  //    parseInt(Dom('bonus-armadura').value) || 0; 
-  //gEntradas.escudo.nome = 
+  //gEntradas.armadura.nome =
+  //    ValorSelecionado(Dom('armadura'));
+  //gEntradas.armadura.bonus_magico =
+  //    parseInt(Dom('bonus-armadura').value) || 0;
+  //gEntradas.escudo.nome =
   //    ValorSelecionado(Dom('escudo'));
-  //gEntradas.escudo.bonus_magico = 
+  //gEntradas.escudo.bonus_magico =
   //    parseInt(Dom('bonus-escudo').value) || 0;
   gEntradas.outros_equipamentos = Dom('text-area-outros-equipamentos').value;
 
@@ -395,7 +410,7 @@ function _LeEscudos() {
 }
 // Fim funcoes iguais.
 
-// Le armas e armaduras. 
+// Le armas e armaduras.
 // @param array_entrada o array na entrada. Pode ser gEntradas.armas ou armaduras.
 // @param div que contem os elementos.
 function _LeArmasArmadurasEscudos(array_entrada, div) {
@@ -445,7 +460,7 @@ function _LeItens(tipo_item) {
 function LeItem(dom) {
   var item = {
       chave: '',
-      em_uso: false, 
+      em_uso: false,
   };
   for (var i = 0; i < dom.childNodes.length; ++i) {
     var filho = dom.childNodes[i];
@@ -484,5 +499,3 @@ function EntradasAdicionarFerimentos(valor) {
     gEntradas.ferimentos = 0;
   }
 }
-
-

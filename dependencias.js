@@ -807,15 +807,15 @@ function _DependenciasFeiticos() {
 // Limita o numero de feiticos para a classe.
 function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   var chave_classe = classe_personagem.classe;
-  var feiticos_classe = tabelas_feiticos[chave_classe];
-  if (feiticos_classe == null) {
+  var tabela_feiticos_classe = tabelas_feiticos[chave_classe];
+  if (tabela_feiticos_classe == null) {
     return;
   }
   var chave_classe = classe_personagem.classe;
-  var atributo_chave = tabelas_feiticos[chave_classe].atributo_chave;
+  var atributo_chave = tabela_feiticos_classe.atributo_chave;
   var valor_atributo_chave = gPersonagem.atributos[atributo_chave].bonus.Total();
-  var feiticos_por_nivel = feiticos_classe.por_nivel[classe_personagem.nivel];
-  var nivel_inicial = feiticos_classe.possui_nivel_zero ? 0 : 1;
+  var feiticos_por_nivel = tabela_feiticos_classe.por_nivel[classe_personagem.nivel];
+  var nivel_inicial = tabela_feiticos_classe.possui_nivel_zero ? 0 : 1;
   gPersonagem.feiticos[chave_classe].em_uso = true;
   // Feiticos conhecidos (se houver para a classe). Se nao houver, vai usar o que vier da entrada.
   // Por exemplo, magos nao tem limite de conhecidos.
@@ -829,12 +829,13 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   // Slots de feiticos.
   var array_bonus_feiticos_atributo = feiticos_atributo(valor_atributo_chave);
   var bonus_atributo_chave = gPersonagem.atributos[atributo_chave].modificador;
-  var possui_dominio =  tabelas_feiticos[chave_classe].possui_dominio;
+  var possui_dominio =  tabela_feiticos_classe.possui_dominio;
+  var escola_especializada = tabela_feiticos_classe.escola_especializada;
   for (var indice = 0; indice < feiticos_por_nivel.por_dia.length; ++indice) {
     var num_slots_nivel = parseInt(feiticos_por_nivel.por_dia.charAt(indice)) || 0;
     _DependenciasNumeroSlotsParaClassePorNivel(
         chave_classe, nivel_inicial + indice, num_slots_nivel, feiticos_por_nivel,
-        array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio);
+        array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio, escola_especializada);
   }
   gPersonagem.feiticos[chave_classe].nivel_maximo = nivel_inicial + feiticos_por_nivel.por_dia.length - 1;
 }
@@ -856,7 +857,7 @@ function _DependenciasNumeroFeiticosConhecidosParaClassePorNivel(
 // Calcula as dependencias do numero de slots para uma classe por nivel.
 function _DependenciasNumeroSlotsParaClassePorNivel(
     chave_classe, nivel, num_slots_nivel, feiticos_por_nivel,
-    array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio) {
+    array_bonus_feiticos_atributo, bonus_atributo_chave, possui_dominio, escola_especializada) {
   // Slots de feiticos.
   var personagem_slots_nivel = gPersonagem.feiticos[chave_classe].slots[nivel];
   personagem_slots_nivel.base = num_slots_nivel;
@@ -874,5 +875,9 @@ function _DependenciasNumeroSlotsParaClassePorNivel(
   // Dominio, apenas para niveis acima do zero.
   if (possui_dominio && nivel > 0 && personagem_slots_nivel.feitico_dominio == null) {
     personagem_slots_nivel.feitico_dominio = { nome: '', gasto: false };
+  }
+  // Especializacao em escolas.
+  if (escola_especializada != null && personagem_slots_nivel.feitico_especializado == null) {
+    personagem_slots_nivel.feitico_especializado = { nome: '', gasto: false };
   }
 }
