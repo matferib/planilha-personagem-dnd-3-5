@@ -277,5 +277,14 @@ function _ConverteFeiticosSlots() {
         indice_conhecido: entrada_feitico.indice,
         gasto: entrada_feitico.gasto };
     }
+    // Converte os feitiços de especialista (se houver).
+    for (var nivel in gEntradas.slots_feiticos_especializados[chave_classe]) {
+      var entrada_feitico = gEntradas.slots_feiticos_especializados[chave_classe][nivel];
+      var slots_classe_nivel = feiticos_classe.slots[nivel];
+      slots_classe_nivel.feitico_especializado = {
+        nivel_conhecido: entrada_feitico.nivel,
+        indice_conhecido: entrada_feitico.indice,
+        gasto: entrada_feitico.gasto };
+    }
   }
 }

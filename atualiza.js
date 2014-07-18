@@ -673,6 +673,10 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
     div_nivel.appendChild(
         CriaDomSlotFeiticoDominio(chave_classe, nivel, conhecidos, slots));
   }
+  if (slots.feitico_especializado != null) {
+    div_nivel.appendChild(
+        CriaDomSlotFeiticoEspecializado(chave_classe, nivel, conhecidos, slots));
+  }
 }
 
 function _AtualizaEquipamentos() {
@@ -801,4 +805,3 @@ function _AtualizaModoVisao() {
   Dom('span-template').style.display = modo_str;
   Dom('div-versao').style.display = modo_str;
 }
-
