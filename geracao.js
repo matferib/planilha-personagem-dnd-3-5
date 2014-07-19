@@ -180,7 +180,7 @@ function GeraPersonagem(modo, submodo) {
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
   _GeraArmas(tabela_geracao_classe_por_nivel);
-  var tipos_items = [ 'aneis', 'amuletos', 'capas' ];
+  var tipos_items = [ 'aneis', 'amuletos', 'capas', 'bracaduras' ];
   for (var i = 0; i < tipos_items.length; ++i ) {
     _GeraItens(tipos_items[i], tabela_geracao_classe_por_nivel);
   }
@@ -417,8 +417,16 @@ function GeraResumo() {
       continue;
     }
 
-    var slots_classe = gPersonagem.feiticos[chave_classe].slots;
+    var feiticos_classe = gPersonagem.feiticos[chave_classe];
+    var slots_classe = feiticos_classe.slots;
     resumo += '(' + tabelas_classes[chave_classe].nome + ': ';
+    if (feiticos_classe.escolas_proibidas.length > 0) {
+      resumo += 'escolas proibidas: ';
+      for (var i = 0; i < feiticos_classe.escolas_proibidas.length; ++i) {
+        resumo += feiticos_classe.escolas_proibidas[i] + ', ';
+      }
+      resumo = resumo.slice(0, -2) + '; ';
+    }
     for (var nivel_slot in slots_classe) {
       var slots_nivel = slots_classe[nivel_slot];
       if (slots_nivel.feiticos.length == 0) {
