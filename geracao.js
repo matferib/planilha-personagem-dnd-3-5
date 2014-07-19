@@ -409,7 +409,6 @@ function GeraResumo() {
     }
   }
 
-  // TODO: so imprimir se tiver feiticos.
   // TODO: classe de dificuldade, conhecidos.
   // Feiticos: por classe, por nivel.
   resumo += 'Feitiços por classe: ';
@@ -431,6 +430,9 @@ function GeraResumo() {
       }
       if (slots_nivel.feitico_dominio) {
         resumo += slots_nivel.feitico_dominio.nome + '*, ';
+      }
+      if (slots_nivel.feitico_especializado) {
+        resumo += slots_nivel.feitico_especializado.nome + '*, ';
       }
       resumo = resumo.slice(0, -2) + '; ';
     }
