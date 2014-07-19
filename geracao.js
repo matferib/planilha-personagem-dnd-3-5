@@ -225,7 +225,8 @@ function _GeraFeiticos() {
     if (!(chave_classe in gPersonagem.feiticos)) {
       continue;
     }
-    _GeraFeiticosClasse(classe_personagem, gPersonagem.feiticos[chave_classe], tabelas_geracao[chave_classe], tabelas_lista_feiticos[chave_classe]);
+    _GeraFeiticosClasse(
+        classe_personagem, gPersonagem.feiticos[chave_classe], tabelas_geracao[chave_classe], tabelas_lista_feiticos[chave_classe]);
   }
 }
 
@@ -236,9 +237,6 @@ function _GeraFeiticos() {
 // @param lista_feiticos_classe a tabela com a lista de feiticos da classe.
 function _GeraFeiticosClasse(classe_personagem, feiticos_classe, tabela_geracao_classe, lista_feiticos_classe) {
   for (var nivel in feiticos_classe.slots) {
-    if (!(nivel in lista_feiticos_classe)) {
-      continue
-    }
     if (!('ordem_magias' in tabela_geracao_classe) || !(nivel in tabela_geracao_classe.ordem_magias)) {
       continue;
     }
@@ -247,7 +245,7 @@ function _GeraFeiticosClasse(classe_personagem, feiticos_classe, tabela_geracao_
                              feiticos_classe.conhecidos[nivel],
                              feiticos_classe.slots[nivel],
                              tabela_geracao_classe.ordem_magias[nivel],
-                             lista_feiticos_classe[nivel]);
+                             nivel in lista_feiticos_classe ? lista_feiticos_classe[nivel] : {});
   }
 }
 
@@ -380,7 +378,7 @@ function GeraResumo() {
     var salvacao = gPersonagem.salvacoes[tipo_salvacao];
     var nome_salvacao = tipo_salvacao in tabelas_nome_salvacao ?
         tipo_salvacao.substr(0, 3) : tipo_salvacao;
-    resumo += nome_salvacao + ': ' + StringSinalizada(salvacao.total, true) + ', ';
+    resumo += nome_salvacao + ': ' + StringSinalizada(salvacao.Total(), true) + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
 
@@ -392,8 +390,9 @@ function GeraResumo() {
   resumo = resumo.slice(0, -2) + '; ';
 
   // Atributos.
+  resumo += 'Atributos: ';
   for (var atributo in tabelas_atributos) {
-    resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + gPersonagem.atributos[atributo].valor + ', ';
+    resumo += tabelas_atributos[atributo].substr(0, 3) + ': ' + gPersonagem.atributos[atributo].bonus.Total() + ', ';
   }
   resumo = resumo.slice(0, -2) + '; ';
 
@@ -434,15 +433,20 @@ function GeraResumo() {
       }
       resumo += nivel_slot + '- ';
       for (var i = 0; i < slots_nivel.feiticos.length; ++i) {
-        resumo += slots_nivel.feiticos[i].nome + ', ';
-      }
-      if (slots_nivel.feitico_dominio) {
-        resumo += slots_nivel.feitico_dominio.nome + '*, ';
-      }
-      if (slots_nivel.feitico_especializado) {
-        resumo += slots_nivel.feitico_especializado.nome + '*, ';
+        var slot = slots_nivel.feiticos[i];
+        resumo += feiticos_classe.conhecidos[slot.nivel_conhecido][slot.indice_conhecido] + ', ';
       }
       resumo = resumo.slice(0, -2) + '; ';
+      var slot;
+      if (slots_nivel.feitico_dominio) {
+        slot = slots_nivel.feitico_dominio;
+      }
+      if (slots_nivel.feitico_especializado) {
+        slot = slots_nivel.feitico_especializado;
+      }
+      if (slot != null) {
+        resumo = resumo.slice(0, -2) + ', ' + feiticos_classe.conhecidos[slot.nivel_conhecido][slot.indice_conhecido] + '*; ';
+      }
     }
     resumo = resumo.slice(0, -2) + ')';
   }
