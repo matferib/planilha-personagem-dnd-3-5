@@ -562,8 +562,17 @@ function _AtualizaFeiticos() {
 
     // Da classe.
     var div_classe = Dom('div-feiticos-' + chave_classe);
+    _AtualizaEscolasProibidas(chave_classe, div_classe);
     _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe);
     _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe);
+  }
+}
+
+// Atualiza as escolas proibidas da classe.
+function _AtualizaEscolasProibidas(chave_classe, div_classe) {
+  var escolas_proibidas_classe = gPersonagem.feiticos[chave_classe].escolas_proibidas || [];
+  for (var i = 0; i < escolas_proibidas_classe.length; ++i) {
+    Dom('div-escola-proibida-' + chave_classe + '-' + i).value = escolas_proibidas_classe[i];
   }
 }
 

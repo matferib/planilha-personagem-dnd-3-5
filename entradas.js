@@ -50,6 +50,7 @@ var gEntradas = {
   // cada entrada: { chave, em_uso }
   aneis: [],
   amuletos: [],
+  braceletes: [],
   pocoes: [],
   capas: [],
   outros_equipamentos: '',
@@ -59,6 +60,9 @@ var gEntradas = {
   // pericias: cada entrada possui { chave, pontos }
   pericias: [],
 
+  // Para magos especialistas. Cada entrada:
+  // chave_classe: [],
+  escolas_proibidas: {},
   // Feitiços conhecidos, cada entrada:
   // chave_classe: { 0: [ feitico, ... ], 1: [] ...}
   feiticos_conhecidos: {},
@@ -191,6 +195,24 @@ function _LeTalento(div_talento) {
   return entrada_talento;
 }
 
+function _LeEscolasProibidas() {
+  gEntradas.escolas_proibidas = {};
+  // nomes_feiticos eh um NodeList, portanto não possui forEach.
+  var doms_escolas_proibidas = DomsPorClasse('escolas-proibidas');
+  for (var i = 0; i < doms_escolas_proibidas.length; ++i) {
+    var doms_escola_proibida = doms_escolas_proibidas[i];
+    var id = doms_escola_proibida.id.split('-');
+    id.shift();  // tira div.
+    id.shift();  // tira escolas
+    id.shift();  // tira proibidas.
+    var chave_classe = id[0];
+    if (!(chave_classe in gEntradas.escolas_proibidas)) {
+      gEntradas.escolas_proibidas[chave_classe] = [];
+    }
+    gEntradas.escolas_proibidas[chave_classe].push(doms_escolas_proibidas[i].value);
+  }
+}
+
 function _LeFeiticosConhecidos() {
   gEntradas.feiticos_conhecidos = {};
   // nomes_feiticos eh um NodeList, portanto não possui forEach.
@@ -301,6 +323,7 @@ function _LeSlotsFeiticos() {
 }
 
 function _LeFeiticos() {
+  _LeEscolasProibidas();
   _LeFeiticosConhecidos();
   _LeSlotsFeiticos();
 }
