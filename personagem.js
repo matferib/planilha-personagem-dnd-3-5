@@ -137,9 +137,10 @@ var gPersonagem = {
   // Cada entrada { chave, em_uso }
   aneis: [],
   amuletos: [],
-  pocoes: [],
+  botas: [],
+  bracaduras: [],
   capas: [],
-  botas: '',
+  pocoes: [],
 
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',

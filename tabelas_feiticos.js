@@ -53,6 +53,7 @@ var tabelas_lista_feiticos = {
   feiticeiro: {
   },
 };
+tabelas_lista_feiticos['mago_necromante'] = tabelas_lista_feiticos['mago'];
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
 // TODO adicionar uma variavel precisa_memorizar. O precisa_conhecer esta sendo sobreusado para este proposito.

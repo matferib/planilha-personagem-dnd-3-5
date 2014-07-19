@@ -867,8 +867,6 @@ Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação 
 Imobilização Aprimorada¹ Especialização em Combate +4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
-Foco em Magia² - +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
-Foco em Magia Maior² Foco em Magia na escola +1 de bônus na CD dos testes de resistência contra uma escola de magia específica
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
@@ -884,7 +882,6 @@ Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
 Talentos de Criação de Item Pré-requisitos Benefícios
-Escrever Pergaminho 1° nível de conjurador Criar pergaminhos mágicos
 Forjar Anel 12° nível de conjurador Criar anéis mágicos
 */
   acrobatico: {
@@ -960,6 +957,12 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   expulsao_adicional: {
       nome: 'Expulsão Adicional',
   },
+  //Escrever Pergaminho 1° nível de conjurador Criar pergaminhos mágicos
+  escrever_pergaminho: {
+    nome: 'Escrever Pergaminho',
+    descricao: 'Criar pergaminhos mágicos.',
+    requisitos: { nivel: { mago: 1, mago_necromante: 1, clerigo: 1, druida: 1, paladino: 4, ranger: 4, } },
+  },
   especializacao_arma: {
     nome: 'Especialização em Arma',
     guerreiro: true,
@@ -991,7 +994,20 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       complemento: 'arma',
       requisitos: { talentos: [ 'foco_em_arma'], nivel: { guerreiro: 8 } },
       guerreiro: true,
-      descricao: '+2 de bônus nas jogadas de ataque com a arma escolhida.' },
+      descricao: '+2 de bônus nas jogadas de ataque com a arma escolhida.'
+  },
+  // TODO aplicar os bonus de CD.
+  foco_em_magia: {
+    nome: 'Foco em Magia',
+    complemento: 'escola_magia',
+    descricao: '+1 de bônus na CD dos testes de resistência contra uma escola de magia específica.',
+  },
+  foco_em_magia_maior: {
+    nome: 'Foco em Magia Maior',
+    complemento: 'escola_magia',
+    requisitos: { talentos: ['foco_em_magia'] },
+    descricao: '+1 de bônus na CD dos testes de resistência contra uma escola de magia específica.',
+  },
   fortitude_maior: {
       nome: 'Fortitude Maior',
       bonus_salvacao: { fortitude: 2, },
