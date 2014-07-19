@@ -470,11 +470,11 @@ var tabelas_geracao = {
            aneis: [],
       },
     },
-	},
+  },
   mago: {
-		atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
+    atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
     ordem_pericias: [
-      'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
+        'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
     ordem_magias: {
       // Essas magias sao para necromantes.
       0: [ 'detactar_magia', 'ler_magias', 'raio_de_gelo', 'romper_mortos_vidos', 'som_fantasma'],
@@ -483,7 +483,31 @@ var tabelas_geracao = {
            'toque_do_carnical'],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo'],
     },
-	},
+    por_nivel: {
+      7: {
+        moedas: { ouro: 3900 },
+        armas: [ { chave: 'clava', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ 'protecao_1' ],
+        bracaduras: [ 'armadura_1' ],
+      },
+      8: {
+        moedas: { ouro: 6100 },
+        armas: [ { chave: 'clava', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ 'protecao_1' ],
+        bracaduras: [ 'armadura_1' ],
+      },
+      11: {
+        moedas: { ouro: 12700 },
+        armas: [ { chave: 'clava', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ 'armadura_natural_1' ],
+        aneis: [ 'protecao_1' ],
+        bracaduras: [ 'armadura_2' ],
+      },
+    },
+  },
   mago_necromante: {
 		atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
     ordem_pericias: [
@@ -494,23 +518,23 @@ var tabelas_geracao = {
       2: [ 'invisibilidade', 'invocar_enxames', 'queimadura_de_aganazzar', 'resistir_elementos', 'suportar_elementos',
            'toque_do_carnical'],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo'],
-	  },
+    },
   },
   monge: {
-		atributos: [ 'sabedoria', 'forca', 'destreza', 'constituicao', 'inteligencia', 'carisma' ],
-	},
+    atributos: [ 'sabedoria', 'forca', 'destreza', 'constituicao', 'inteligencia', 'carisma' ],
+  },
   paladino: {
-		atributos: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
-	},
+    atributos: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
+  },
   ranger: {
-		atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
-	},
+    atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+  },
   // classes NPC: nao existe uma tabela para esses, coloquei o que achei mais adequado.
   adepto: {
-		atributos: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
-	},
+    atributos: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
+  },
   aristocrata: {
-		atributos: [ 'inteligencia', 'destreza', 'constituicao', 'forca', 'carisma', 'sabedoria' ],
+    atributos: [ 'inteligencia', 'destreza', 'constituicao', 'forca', 'carisma', 'sabedoria' ],
     por_nivel: {
       1: { moedas: {  ouro: 50 },
            armadura: { nome: 'brunea', obra_prima: true },

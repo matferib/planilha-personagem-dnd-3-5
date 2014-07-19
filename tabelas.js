@@ -1234,7 +1234,7 @@ var tabelas_pericias = {
       classes: [  'bardo', 'clerigo', 'monge', 'feiticeiro', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_arquitetura_e_engenharia: {
-      nome: 'Conhecimento(arquitetura_e_engenharia)',
+      nome: 'Conhecimento (arquitetura e engenharia)',
       classes: [  'bardo', 'mago', 'aristocrata' ],
       habilidade: 'inteligencia' },
   conhecimento_geografia: {
@@ -1583,6 +1583,41 @@ var tabelas_amuletos = {
     propriedades: { atributos: { sabedoria: 6 } } },
 };
 
+var tabelas_bracaduras = {
+  armadura_1: {
+    nome: 'Braçadura da Armadura +1', preco: '1000 PO',
+    propriedades: { ca: { armadura: 1 } },
+  },
+  armadura_2: {
+    nome: 'Braçadura da Armadura +2', preco: '4000 PO',
+    propriedades: { ca: { armadura: 2 } },
+  },
+  armadura_3: {
+    nome: 'Braçadura da Armadura +3', preco: '9000 PO',
+    propriedades: { ca: { armadura: 3 } },
+  },
+  armadura_4: {
+    nome: 'Braçadura da Armadura +4', preco: '16000 PO',
+    propriedades: { ca: { armadura: 4 } },
+  },
+  armadura_4: {
+    nome: 'Braçadura da Armadura +5', preco: '25000 PO',
+    propriedades: { ca: { armadura: 5 } },
+  },
+  armadura_6: {
+    nome: 'Braçadura da Armadura +6', preco: '36000 PO',
+    propriedades: { ca: { armadura: 6 } },
+  },
+  armadura_7: {
+    nome: 'Braçadura da Armadura +7', preco: '49000 PO',
+    propriedades: { ca: { armadura: 7 } },
+  },
+  armadura_8: {
+    nome: 'Braçadura da Armadura +8', preco: '64000 PO',
+    propriedades: { ca: { armadura: 8 } },
+  },
+};
+
 // Var traduzir.
 var tabelas_pocoes = {
   curar_ferimentos_leves: { nome: 'Curar ferimentos leves', tipo: 'pocao', preco: '50 PO' },
@@ -1703,8 +1738,9 @@ var tabelas_capas = {
 };
 
 var tabelas_itens = {
-  aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2, },
+  aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2 },
   amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
+  bracaduras: { nome: 'Braçaduras', tabela: tabelas_bracaduras, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
   capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
 };

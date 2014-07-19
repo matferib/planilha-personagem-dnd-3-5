@@ -51,7 +51,7 @@ function _DependenciasNivelConjurador() {
 
 function _DependenciasEquipamentos() {
   // TODO usar tabelas_itens aqui?
-  var tipos_itens = [ 'aneis', 'amuletos', 'capas' ];
+  var tipos_itens = [ 'aneis', 'amuletos', 'bracaduras', 'capas', ];
   for (var i = 0; i < tipos_itens.length; ++i) {
     _DependenciasItens(tipos_itens[i]);
   }
@@ -800,7 +800,27 @@ function _DependenciasSalvacoes() {
 
 function _DependenciasFeiticos() {
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var chave_classe = gPersonagem.classes[i].classe;
+    var tabela_feiticos_classe = tabelas_feiticos[chave_classe];
+    if (tabela_feiticos_classe == null) {
+      continue;
+    }
+    _DependenciasEscolasProibidas(chave_classe);
     _DependenciasNumeroFeiticosParaClasse(gPersonagem.classes[i]);
+  }
+}
+
+function _DependenciasEscolasProibidas(chave_classe) {
+  var tabela_feitico_classe = tabelas_feiticos[chave_classe];
+  var feiticos_classe = gPersonagem.feiticos[chave_classe];
+  if (gPersonagem.feiticos[chave_classe].escolas_proibidas == null) {
+    gPersonagem.feiticos[chave_classe].escolas_proibidas = [];
+  }
+  gPersonagem.feiticos[chave_classe].escolas_proibidas.length = tabela_feitico_classe.num_escolas_proibidas || 0;
+  for (var i = 0; i < tabela_feitico_classe.num_escolas_proibidas; ++i) {
+    if (gPersonagem.feiticos[chave_classe].escolas_proibidas[i] == null) {
+      gPersonagem.feiticos[chave_classe].escolas_proibidas[i] = '';
+    }
   }
 }
 
@@ -811,7 +831,6 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   if (tabela_feiticos_classe == null) {
     return;
   }
-  var chave_classe = classe_personagem.classe;
   var atributo_chave = tabela_feiticos_classe.atributo_chave;
   var valor_atributo_chave = gPersonagem.atributos[atributo_chave].bonus.Total();
   var feiticos_por_nivel = tabela_feiticos_classe.por_nivel[classe_personagem.nivel];

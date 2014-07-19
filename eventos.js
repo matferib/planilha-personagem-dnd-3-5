@@ -2,7 +2,7 @@
 
 //Evento para mudar divs visiveis na planilha.
 
-function ClickVisao(modo) { 
+function ClickVisao(modo) {
   // Loop para esconder tudo.
   for (var j = 0; j < tabelas_visoes[modo].esconder.classes.length; ++j) {
     var divs_esconder = DomsPorClasse(tabelas_visoes[modo].esconder.classes[j]);
@@ -70,7 +70,7 @@ function ClickSalvar() {
   SalvaNoArmazem(nome, JSON.stringify(gEntradas), function() {
     CarregaPersonagens();
     DesabilitaOverlay();
-    Mensagem('Personagem "' + nome + '" salvo com sucesso.'); 
+    Mensagem('Personagem "' + nome + '" salvo com sucesso.');
   });
 }
 
@@ -106,11 +106,11 @@ function ClickExcluir() {
     Mensagem('Nome "--" não é válido.');
     return;
   }
-  JanelaConfirmacao('Tem certeza que deseja excluir "' + nome + '"?', 
+  JanelaConfirmacao('Tem certeza que deseja excluir "' + nome + '"?',
     // Callback sim.
     function() {
-      ExcluiDoArmazem(nome, function() { 
-        Mensagem('Personagem "' + nome + '" excluído com sucesso.'); 
+      ExcluiDoArmazem(nome, function() {
+        Mensagem('Personagem "' + nome + '" excluído com sucesso.');
         CarregaPersonagens();
       });
     },
@@ -143,17 +143,17 @@ function ClickImportar() {
 function ClickLink() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
   var indice_interrogacao = document.URL.indexOf('?');
-  var url = 
-    (indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) + 
+  var url =
+    (indice_interrogacao != -1 ?  document.URL.slice(0, indice_interrogacao) : document.URL) +
     '?pc=' + encodeURIComponent(JSON.stringify(gEntradas));
-  Dom("link-personagem").innerHTML = 
+  Dom("link-personagem").innerHTML =
     '<a href="' + url + '">Link</a>';
 }
 
-// Gera o resumo do personagem para utilizacao em aventuras. 
+// Gera o resumo do personagem para utilizacao em aventuras.
 function ClickGerarResumo() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
-  Dom("resumo-personagem").innerHTML = GeraResumo(); 
+  Dom("resumo-personagem").innerHTML = GeraResumo();
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
@@ -207,8 +207,8 @@ function ClickAdicionarEscudo() {
 
 // Evento para adicionar um novo estilo de luta.
 function ClickAdicionarEstiloLuta() {
-  var estilo_entrada = { 
-    nome: 'uma_arma', 
+  var estilo_entrada = {
+    nome: 'uma_arma',
     arma_primaria: 'desarmado',
     arma_secundaria: 'desarmado',
   };
@@ -244,7 +244,7 @@ function ClickPericia(chave_pericia) {
   var input_pericia = Dom('pericia-' + chave_pericia + '-pontos');
   var input_pericia_valor = parseInt(input_pericia.value) || 0;
   var valor_corrente = gPersonagem.pericias.lista[chave_pericia].pontos;
-  if (input_pericia_valor - valor_corrente > 
+  if (input_pericia_valor - valor_corrente >
       gPersonagem.pericias.total_pontos - gPersonagem.pericias.pontos_gastos) {
     input_pericia.value = valor_corrente;
     Mensagem('Não há pontos de perícia disponíveis');
@@ -253,27 +253,9 @@ function ClickPericia(chave_pericia) {
   AtualizaGeral();
 }
 
-// Trata o click de um feitico.
-// @param classe_nivel_slot a classe, nivel e slot do feitico em questao, separados por -;
-// @param incremento do clique.
-function ClickFeitico(classe_nivel_slot, incremento) {
-/*
-  var classe_nivel_slot_array = classe_nivel_slot.split('-');
-  if (incremento > 0 && personagem.feiticos.total == personagem.feiticos.gastos) {
-    Mensagem('Não há feitiços disponíveis para o nível');
-    return;
-  }
-  // pega o input do campo
-  var input = Dom('feiticos-' + chave_pericia + '-pontos');
-  var input = parseInt(input_pericia.value) || 0;
-  if (incremento < 0 && input_pericia_valor == 0) {
-    Mensagem('Feitiço não possui pontos');
-    return;
-  }
-
-  input.value = input + incremento;
+// Atualiza a entrada de escola proibida.
+function ChangeEscolaProibida(chave_classe, indice, dom) {
   AtualizaGeral();
-  */
 }
 
 // Trata o click de adicionar bonus a um atributo, colocando-o no final da fila.
@@ -282,7 +264,7 @@ function ClickBotaoAtributoMais(chave_atributo) {
   AtualizaGeralSemLerEntradas();
 }
 
-// Trata o click de remover bonus de um atributo. 
+// Trata o click de remover bonus de um atributo.
 // Retira o ultimo bonus colocado (se houver).
 function ClickBotaoAtributoMenos() {
   gEntradas.bonus_atributos.pop();
@@ -329,7 +311,7 @@ function ClickUsarItem(tipo_item, checkbox) {
     if (total_em_uso >= total_maximo_item) {
       // Desmarca o item para nao permitir que exceda o numero maximo que pode ser equipado.
       Mensagem(
-          'Alerta! Número máximo de items excedido. Valor máximo para ' + 
+          'Alerta! Número máximo de items excedido. Valor máximo para ' +
           tabelas_itens[tipo_item].nome + ': ' + tabelas_itens[tipo_item].maximo);
       checkbox.checked = false;
       return;
@@ -381,7 +363,7 @@ function ClickDescansar(valor) {
 
 // Encontra a arma ou armadura no dom.
 function _AchaArmaArmadura(dom) {
-  var lido = LeEntradaArmaArmadura(dom); 
+  var lido = LeEntradaArmaArmadura(dom);
 }
 
 // Vende a arma/armadura contida no dom.
@@ -421,7 +403,7 @@ function ClickComprarArmaArmadura(dom, tipo, tabela) {
 }
 
 // Compra o item contido no dom.
-// @param dom contendo o item. 
+// @param dom contendo o item.
 // @param tabela do que esta sendo comprado.
 function ClickComprarItem(dom, tabela) {
   var lido = LeItem(dom);
@@ -439,7 +421,7 @@ function ClickComprarItem(dom, tabela) {
 }
 
 // Vende o item contido no dom.
-// @param dom contendo o item. 
+// @param dom contendo o item.
 // @param tabela do que esta sendo comprado.
 function ClickVenderItem(dom, tabela) {
   var lido = LeItem(dom);
@@ -462,7 +444,7 @@ function ChangeNotas() {
   AtualizaGeral();
 }
 
-// A mudanca de raca é quase igual ao atualiza geral, mas deve-se zerar o tamanho 
+// A mudanca de raca é quase igual ao atualiza geral, mas deve-se zerar o tamanho
 // para o padrão da nova raça.
 function ChangeRaca() {
   gEntradas.raca = ValorSelecionado(Dom('raca'));
