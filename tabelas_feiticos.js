@@ -187,6 +187,7 @@ var tabelas_feiticos = {
   mago_necromante: {
       atributo_chave: 'inteligencia',
       escola_especializada: 'necromancia',
+      num_escolas_proibidas: 2,
       precisa_conhecer: false,
       possui_nivel_zero: true,
       por_nivel: {

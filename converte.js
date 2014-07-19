@@ -237,8 +237,16 @@ function _ConverteEstilo(estilo_entrada) {
 
 // Converte todos os feiticos do personagem.
 function _ConverteFeiticos() {
+  _ConverteEscolasProibidas();
   _ConverteFeiticosConhecidos();
   _ConverteFeiticosSlots();
+}
+
+function _ConverteEscolasProibidas() {
+  for (var chave_classe in gEntradas.escolas_proibidas) {
+    var feiticos_classe = gPersonagem.feiticos[chave_classe];
+    feiticos_classe.escolas_proibidas = gEntradas.escolas_proibidas[chave_classe].slice(0);
+  }
 }
 
 // Cada entrada possui classe, nivel, indice e feitico. Esta funcao le todas as entradads

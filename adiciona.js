@@ -395,6 +395,20 @@ function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
   var id_div = 'div-feiticos-' + chave_classe;
   var div_classe = CriaDiv(id_div, 'div-feiticos-classe');
   div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
+  // Escolas proibidas.
+  var num_escolas_proibidas = tabelas_feiticos[chave_classe].num_escolas_proibidas;
+  if (num_escolas_proibidas > 0) {
+    var div_escolas_proibidas = CriaDiv('div-escolas-proibidas-' + chave_classe);
+    div_escolas_proibidas.appendChild(CriaSpan('Escolas Proibidas'));
+    div_escolas_proibidas.appendChild(CriaBr());
+    for (var i = 0; i < num_escolas_proibidas; ++i) {
+      var input = CriaInputTexto('', 'div-escola-proibida-' + chave_classe + '-' + i, 'escolas-proibidas');
+      input.addEventListener('change', ChangeEscolaProibida.bind(null, chave_classe, i, input), false);
+      div_escolas_proibidas.appendChild(input);
+      div_escolas_proibidas.appendChild(CriaBr());
+    }
+    div_classe.appendChild(div_escolas_proibidas);
+  }
   // Esqueletos dos conhecidos.
   var div_conhecidos_pai = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
   div_conhecidos_pai.appendChild(CriaSpan('Feitiços conhecidos'));
