@@ -45,6 +45,55 @@ var tabelas_lista_feiticos = {
     },
   },
   mago: {
+    0: {
+      'detectar_magia': {
+        nome: 'Detectar Magia', descricao: 'Detecta magias e itens mágicos a menos de 18m.', escola: 'adivinhacao'
+      },
+      'som_fantasma': {
+        nome: 'Som Fantasma', descricao: 'Imita sons.', escola: 'ilusao',
+      },
+      'toque_fadiga': {
+        nome: 'Toque da Fadiga', descricao: 'Ataque de toque fatiga o alvo', escola: 'necromancia',
+      },
+      'romper_morto_vivo': {
+        nome: 'Romper Morto-Vivo', descricao: 'Romper Morto-Vivo', escola: 'necromancia',
+      },
+      'raio_de_gelo': {
+        nome: 'Raio de Gelo', descricao: 'Raio causa 1d3 de dano de frio', escola: 'evocacao',
+      },
+      'raio_de_acido': {
+        nome: 'Raio de Ácido', descricao: 'Raio causa 1d3 de dano de ácido', escola: 'conjuracao',
+      },
+      'luz': {
+        nome: 'Luz', descricao: 'Um objeto brilha como uma tocha', escola: 'evocacao',
+      },
+    },
+    1: {
+      'raio_enfraquecimento': {
+        nome: 'Raio do Enfraquecimento', descricao: 'Raio reduz For em 1d6+1/2 níveis até 1d6+5.', escola: 'necromancia',
+      },
+      'misseis_magicos': {
+        nome: 'Mísseis Mágicos', descricao: '1d4+1 de dano, 1 Míssil/2 níveis acima do 1º, máximo 5', escola: 'evocacao',
+      },
+    },
+    2: {
+      'queimadura_aganazzar': {
+        nome: 'Queimadura de Aganazzar', descricao: 'Linha de fogo causa 1d8/2 níveis até 5d8.', escola: 'evocacao', fonte: 'FR',
+      },
+      'resistir_elementos': {
+        nome: 'Resistência a Elementos', descricao: 'Criatura ganha resistência 10, 20 no 7º nível ou 30 no 11º nível) a um tipo de elemento', escola: 'abjuracao', duracao: '10 min / nível',
+      },
+    },
+    3: {
+      'relampago': {
+        nome: 'Relâmpago', descricao: 'Eletricidade causa 1d6/nível', escola: 'evocacao',
+      },
+    },
+    4: {
+      'pele_rochosa': {
+        nome: 'Pele Rochosa', descricao: 'Resistência de 10 dano/adamante até 10/nível, max 150.', escola: 'abjuracao',
+      },
+    },
   },
   bardo: {
   },

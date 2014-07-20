@@ -418,6 +418,8 @@ var tabelas_armaduras_leves = {
     nome: 'Nenhuma', bonus: 0, preco: '0 PO' },
   acolchoada: {
     nome: 'Acolchoada', bonus: 1, maximo_bonus_destreza: 8, preco: '5 PO' },
+  armadura_arcana: {
+    nome: 'Armadura Arcana', bonus: 4, maximo_bonus_destreza: 100, preco: '0 PO' },
   couro: {
     nome: 'Couro', bonus: 2,  maximo_bonus_destreza: 6, preco: '10 PO' },
   couro_batido: {
@@ -1050,14 +1052,16 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
   magia_penetrante: {
       nome: 'Magia Penetrante',
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia', },
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia',
+  },
   // Magia Penetrante TODO +4 de bônus nos testes de conjurador contra Resistência à Magia
   magia_penetrante_maior: {
       nome: 'Magia Penetrante Maior',
-      requisitos: { talentos: [ 'magia_penetrante' ] } },
-  // Combat casting: +4 de bônus nos teste de Concentração para conjurar na defensiva
+      requisitos: { talentos: [ 'magia_penetrante' ] }
+  },
   magia_combate: {
-      nome: 'Magia em Combate', },
+      nome: 'Magia em Combate', descricao: '+4 de bônus nos teste de Concentração para conjurar na defensiva.',
+  },
   maos_level: {
       nome: 'Mãos Leves',
       bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
