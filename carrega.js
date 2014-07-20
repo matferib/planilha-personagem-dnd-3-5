@@ -323,6 +323,25 @@ function _CarregaTabelasCompostas(
 
 // Popula as pericias iniciais.
 function _CarregaPericias() {
+  for (var chave_pericia in tabelas_pericias) {
+    var pericia = tabelas_pericias[chave_pericia];
+    var achou = false;
+    for (var i = 0; i < pericia.classes.length; ++i) {
+      if (pericia.classes[i] == 'mago') {
+        achou = true;
+        break;
+      }
+    }
+    if (!achou) {
+      continue;
+    }
+    for (var chave_classe in tabelas_classes) {
+      var mago_especialista = chave_classe.search('mago_') != -1;
+      if (mago_especialista) {
+        pericia.classes.push(chave_classe);
+      }
+    }
+  }
   var div_pericias = Dom('div-pericias');
   if (div_pericias == null) {
     // Testes.

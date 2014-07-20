@@ -28,14 +28,20 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
               --slot.indice;
             }
           }.bind(this));
-          // Ajusta slot de dominio (se houver).
-          var slot_dominio = gEntradas.slots_feiticos_dominio[this.chave_classe][this.nivel];
-          if (slot_dominio != null &&
-              slot_dominio.nivel == this.nivel &&
-              slot_dominio.indice >= this.indice &&
-              slot_dominio.indice > 0) {
-            --slot_dominio.indice;
-          }
+          // Ajusta slot de dominio e especializados (se houver).
+          ['slots_feiticos_dominio', 'slots_feiticos_especializados'].forEach(function(tipo_slot) {
+            var slot_classe = gEntradas[tipo_slot][this.chave_classe];
+            if (slot_classe != null) {
+              var slot = slot_classe[this.nivel];
+              if (slot != null &&
+                  slot.nivel == this.nivel &&
+                  slot.indice >= this.indice &&
+                  slot.indice > 0) {
+                --slot.indice;
+              }
+            }
+          });
+          // Ajusta o slot specializado, se houver.
         }
         AtualizaGeralSemLerEntradas();
       }
