@@ -147,7 +147,7 @@ function SelecionaValor(valor_selecionado, dom_select) {
       dom_select.selectedIndex = i;
       return;
     }
-  } 
+  }
 }
 
 // Popula o select com os valores passados.
@@ -155,6 +155,7 @@ function SelecionaValor(valor_selecionado, dom_select) {
 //   [ {valor: texto} ]
 function PopulaSelect(valores, dom_select) {
   dom_select.options.length = 0;
+  RemoveFilhos(dom_select);
   for (var i = 0; i < valores.length; ++i) {
     for (var chave in valores[i]) {
       dom_select.options.add(CriaOption(valores[i][chave], chave));
@@ -164,12 +165,12 @@ function PopulaSelect(valores, dom_select) {
 
 // Similar ao PopulaSelect, mas com agrupamentos.
 // @param grupos de valores a serem colocados. Cada entrada é um array
-//        { nome_grupo1: [ { valor, texto }, { valor, texto } ...], 
+//        { nome_grupo1: [ { valor, texto }, { valor, texto } ...],
 //          nome_grupo2: [ ...] }
 //        Os nomes de grupo devem ser diferentes.
 function PopulaSelectComOptGroup(grupos, dom_select) {
-  dom_select.options.length = 0;
-  for (var nome_grupo in grupos) { 
+  RemoveFilhos(dom_select);
+  for (var nome_grupo in grupos) {
     var optgroup = CriaOptGroup(nome_grupo);
     grupos[nome_grupo].forEach(function(entrada) {
       var option = CriaOption(entrada.texto, entrada.valor);
@@ -212,7 +213,7 @@ function RemoveFilho(filho, pai) {
 }
 
 // Remove os filhos de um dom. Antes, remove todos os onchange do elemento
-// para evitar chamadas de onchange durante a remocao. 
+// para evitar chamadas de onchange durante a remocao.
 function RemoveFilhos(dom) {
   if (dom == null) {
     return;
@@ -240,7 +241,7 @@ function _RemoveOnChange(dom) {
   }
 }
 
-// Se 'dom_pai' tiver mais filhos que 'num_filhos', remove os que sobrarem. 
+// Se 'dom_pai' tiver mais filhos que 'num_filhos', remove os que sobrarem.
 // Se tiver menos, chama funcao_adicao(indice_filho) para cada filho que houver
 // a menos.
 function AjustaFilhos(dom_pai, num_filhos, funcao_adicao) {
@@ -264,7 +265,7 @@ function DesabilitaOverlay() {
   Dom('div-overlay').style.display = 'none';
 }
 
-// configura o div de janela e o retorna. Apenas um deve ficar ativo 
+// configura o div de janela e o retorna. Apenas um deve ficar ativo
 // em um determinado momento.
 // @param largura da janela, porcentagem em float (por exemplo, 0.5).
 // @return o dom da janela.
@@ -331,6 +332,3 @@ function JanelaConfirmacao(mensagem, callback_sim, callback_nao) {
     j.appendChild(divs[i]);
   }
 }
-
-
-

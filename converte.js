@@ -266,33 +266,26 @@ function _ConverteFeiticosSlots() {
   for (var chave_classe in gEntradas.slots_feiticos) {
     // Converte os slots de feitiços normais.
     var feiticos_classe = gPersonagem.feiticos[chave_classe];
+    var possui_dominio = tabelas_feiticos[chave_classe].possui_dominio;
+    var possui_especializacao = 'escola_especializada' in tabelas_feiticos[chave_classe];
     for (var nivel in gEntradas.slots_feiticos[chave_classe]) {
+      var ultimo = gEntradas.slots_feiticos[chave_classe][nivel].length - 1;
       gEntradas.slots_feiticos[chave_classe][nivel].forEach(function(entrada_feitico, indice) {
         var slots_classe_nivel = feiticos_classe.slots[nivel];
         var slot_feitico = {
             nivel_conhecido: entrada_feitico.nivel,
             indice_conhecido: entrada_feitico.indice,
             gasto: entrada_feitico.gasto };
-        slots_classe_nivel.feiticos.push(slot_feitico);
+        if (indice == ultimo && ((possui_dominio && nivel > 0) || possui_especializacao)) {
+          if (possui_dominio) {
+            slots_classe_nivel.feitico_dominio = slot_feitico;
+          } else if (possui_especializacao) {
+            slots_classe_nivel.feitico_especializado = slot_feitico;
+          }
+        } else {
+          slots_classe_nivel.feiticos.push(slot_feitico);
+        }
       });
-    }
-    // Converte os feitiços de domínio da classe (se houver).
-    for (var nivel in gEntradas.slots_feiticos_dominio[chave_classe]) {
-      var entrada_feitico = gEntradas.slots_feiticos_dominio[chave_classe][nivel];
-      var slots_classe_nivel = feiticos_classe.slots[nivel];
-      slots_classe_nivel.feitico_dominio = {
-        nivel_conhecido: entrada_feitico.nivel,
-        indice_conhecido: entrada_feitico.indice,
-        gasto: entrada_feitico.gasto };
-    }
-    // Converte os feitiços de especialista (se houver).
-    for (var nivel in gEntradas.slots_feiticos_especializados[chave_classe]) {
-      var entrada_feitico = gEntradas.slots_feiticos_especializados[chave_classe][nivel];
-      var slots_classe_nivel = feiticos_classe.slots[nivel];
-      slots_classe_nivel.feitico_especializado = {
-        nivel_conhecido: entrada_feitico.nivel,
-        indice_conhecido: entrada_feitico.indice,
-        gasto: entrada_feitico.gasto };
     }
   }
 }
