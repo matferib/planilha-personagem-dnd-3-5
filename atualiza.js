@@ -517,7 +517,6 @@ function _AtualizaPericias() {
   }
 }
 
-// TODO reusar os divs ao inves de apagar tudo e criar de novo.
 function _AtualizaFeiticos() {
   var div_feiticos = Dom('div-feiticos');
   // Remove os filhos que nao existem mais. Cada classe é um filho.
@@ -629,16 +628,37 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(
 }
 
 function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
-  var div_slots = Dom('div-feiticos-slots-' + chave_classe);
-  RemoveFilhos(div_slots);
-  // Por nivel.
   var feiticos_classe = gPersonagem.feiticos[chave_classe];
+  var div_slots = Dom('div-feiticos-slots-' + chave_classe);
+  // Remove niveis excedentes.
+  var niveis_presentes = { 0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false, 8: false, 9: false };
+  for (var nivel = (tabelas_feiticos[chave_classe].possui_nivel_zero ? 0 : 1) ; nivel <= feiticos_classe.nivel_maximo; ++nivel) {
+    niveis_presentes[nivel] = true;
+  }
+  for (var nivel in niveis_presentes) {
+    var dom = Dom('div-feiticos-slots-' + chave_classe + '-' + nivel);
+    if (niveis_presentes[nivel]) {
+      if (dom == null) {
+        // Adiciona filho.
+        div_slots.appendChild(CriaDomSlotsNivel(chave_classe, nivel, feiticos_classe.slots[nivel]));
+      }
+    } else {
+      if (dom != null) {
+        RemoveFilho(dom_slots, dom);
+      }
+    }
+  }
+
+  // Por nivel.
   // TODO criar o array com niveis a serem removidos e outro com niveis a adicionar.
   // Entao criar uma funcao AdicionarEsqueletoSlotsNivel.
   // or fim, tirar o RemoveFilhos daqui de cima e la embaixo pegar o Dom direto
   // ao inves de criar.
-  for (var nivel_str in feiticos_classe.slots) {
+  for (var nivel_str in niveis_presentes) {
     var nivel = parseInt(nivel_str);
+    if (!niveis_presentes[nivel]) {
+      continue;
+    }
     // Monta os feiticos que poderão ser escolhidos no slot.
     var feiticos_conhecidos = {};
     for (var nivel_corrente = nivel; nivel_corrente >= 0; --nivel_corrente) {
@@ -662,29 +682,51 @@ function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
 
 // Atualiza os slots de feiticos para a classe por nivel.
 // @param conhecidos cada entrada: { nivel: [ { valor, texto}, ...] }..
+// @param slots do nivel para a clase.
 function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, conhecidos, div_slots) {
   if (slots.feiticos.length == 0) {
     return;
   }
   var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
-  var div_nivel = CriaDomSlotsNivel(chave_classe, nivel, slots);
-  div_slots.appendChild(div_nivel);  // Temporariamente aqui pra funcao Dom funcionar.
+  var possui_dominio = tabelas_feiticos[chave_classe].possui_dominio;
+  var possui_especializacao = 'escola_especializada' in tabelas_feiticos[chave_classe];
+  var possui_extra = (nivel > 0 && possui_dominio) || possui_especializacao;
   var div_nivel_slots = Dom('div-feiticos-slots-' + chave_classe + '-' + nivel);
   AjustaFilhos(
       div_nivel_slots,
-      slots.feiticos.length,
+      slots.feiticos.length + (possui_extra ? 1 : 0),
       AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, conhecidos, slots));
 
-  // TODO(matheus): ta completamente hackish adicionar esse div na mao. Ate porque a hora que funcionar
-  // sem recriar tudo de novo, vai dar merda (o ajusta vai contabilizar este div como filho).
-  // Adiciona input de dominio se houver.
-  if (slots.feitico_dominio != null) {
-    div_nivel.appendChild(
-        CriaDomSlotFeiticoDominio(chave_classe, nivel, conhecidos, slots));
+  // Popula os selects.
+  var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);
+  for (var indice = 0; indice < selects_nivel.length; ++indice) {
+    PopulaSelectComOptGroup(conhecidos, selects_nivel[indice]);
   }
-  if (slots.feitico_especializado != null) {
-    div_nivel.appendChild(
-        CriaDomSlotFeiticoEspecializado(chave_classe, nivel, conhecidos, slots));
+  var classe_span = 'span-feiticos-slots-' + chave_classe + '-' + nivel;
+  var spans = DomsPorClasse(classe_span);
+  for (var i = 0; i < spans.length - (possui_extra ? 1 : 0); ++i) {
+    spans[i].textContent = '';
+    var slot_feitico = slots.feiticos[i];
+    SelecionaValor(
+        slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido,
+        selects_nivel[i]);
+    Dom('input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + i).checked = slot_feitico.gasto;
+    // TODO Gasto.
+  }
+  if (possui_extra) {
+    var ultimo = spans.length - 1;
+    var slot_feitico_extra = null;
+    if (nivel > 0 && possui_dominio) {
+      spans[ultimo].textContent = 'D';
+      slot_feitico_extra = slots.feitico_dominio;
+    } else if (possui_especializacao) {
+      spans[ultimo].textContent = 'E';
+      slot_feitico_extra = slots.feitico_especializado;
+    }
+    SelecionaValor(
+        slot_feitico_extra.nivel_conhecido + '-' + slot_feitico_extra.indice_conhecido,
+        selects_nivel[ultimo]);
+    Dom('input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + i).checked = slot_feitico_extra.gasto;
   }
 }
 

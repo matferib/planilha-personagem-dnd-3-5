@@ -68,21 +68,26 @@ function CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, conh
   var dom_slot = precisa_memorizar ? CriaDiv() : CriaSpan();
   // Adiciona os inputs de indices.
   if (precisa_memorizar) {
+    dom_slot.appendChild(CriaSpan(
+        '',
+        'span-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice,
+        'span-feiticos-slots-' + chave_classe + '-' + nivel));
     var select = CriaSelect(
         'input-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice,
-        'feiticos-slots',
+        'feiticos-slots-' + chave_classe + '-' + nivel + ' feiticos-slots',  // Duas classes.
         AtualizaGeral);
-    PopulaSelectComOptGroup(conhecidos, select);
-    var slot_feitico = slots.feiticos[indice];
-    SelecionaValor(
-        slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido,
-        select);
+    //PopulaSelectComOptGroup(conhecidos, select);
+    //var slot_feitico = slots.feiticos[indice];
+    //SelecionaValor(
+    //    slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido,
+    //    select);
     dom_slot.appendChild(select);
   }
 
   // Cria o input de gasto.
   dom_slot.appendChild(CriaInputCheckbox(
-      slots.feiticos[indice].gasto,
+      //slots.feiticos[indice].gasto,
+      false,
       'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + indice,
       'feiticos-slots-gastos',
       ClickGastarFeitico));
@@ -106,7 +111,8 @@ function CriaDomSlotFeiticoDominio(chave_classe, nivel, conhecidos, slots) {
   div_slot.appendChild(CriaInputCheckbox(
       slots.feitico_dominio.gasto,
       'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-dom',
-      'feiticos-slots-gastos'));
+      'feiticos-slots-gastos',
+      ClickGastarFeitico));
   div_slot.appendChild(CriaBr());
   return div_slot;
 }
@@ -127,7 +133,8 @@ function CriaDomSlotFeiticoEspecializado(chave_classe, nivel, conhecidos, slots)
   div_slot.appendChild(CriaInputCheckbox(
       slots.feitico_especializado.gasto,
       'input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-esp',
-      'feiticos-slots-gastos'));
+      'feiticos-slots-gastos',
+      ClickGastarFeitico));
   div_slot.appendChild(CriaBr());
   return div_slot;
 }
