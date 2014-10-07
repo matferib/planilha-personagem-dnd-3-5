@@ -406,6 +406,17 @@ function _CarregaFeiticos() {
       };
     }
   }
+
+  // Tabela invertida de feiticos.
+  for (var classe in tabelas_lista_feiticos) {
+    for (var nivel in tabelas_lista_feiticos[classe]) {
+      for (var chave_feitico in tabelas_lista_feiticos[classe][nivel]) {
+        var feitico = tabelas_lista_feiticos[classe][nivel][chave_feitico];
+        tabelas_lista_feiticos_invertida[feitico.nome] = chave_feitico;
+        tabelas_lista_feiticos_completa[chave_feitico] = feitico;
+      }
+    }
+  }
 }
 
 // Aqui é onde tudo começa.

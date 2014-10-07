@@ -623,8 +623,15 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(
           nivel));
   for (var indice = 0; indice < feiticos_conhecidos.length; ++indice) {
     // Adiciona os inputs.
-    Dom('input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice).value =
-        feiticos_conhecidos[indice];
+    var dom = Dom('input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice);
+    var feitico_str = feiticos_conhecidos[indice];
+    dom.value = feitico_str;
+    if (feitico_str in tabelas_lista_feiticos_invertida) {
+      feitico_str = tabelas_lista_feiticos_invertida[feitico_str];
+    }
+    if ((feitico_str in tabelas_lista_feiticos_completa) && ('descricao' in tabelas_lista_feiticos_completa[feitico_str])) {
+      TituloSimples(tabelas_lista_feiticos_completa[feitico_str].descricao, dom);
+    }
   }
 }
 
