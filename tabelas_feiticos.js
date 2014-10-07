@@ -33,15 +33,15 @@ var tabelas_lista_feiticos = {
     'escudo_entropico': { nome: 'Escudo Entrópico', descricao: 'Ataques à distância contra você possuem 20% de chance de falha.' },
     'inflingir_ferimentos_leves': { nome: 'Infligir Ferimentos Leves', descricao: ' Ataque de toque, 1d8 +1/nível de dano (máx. +5).' },
     'invisibilidade_contra_mortos_vivos': { nome: 'Invisibilidade Contra Mortos-Vivos', descricao: ' Mortos-vivos não podem perceber 1 alvo/nível.' },
-    'invocar_criaturas_i': { nome: 'Invocar Criaturas I', descricao: ' Invoca um ser extra-planar para auxiliar o conjurador' },
-    'maldicao_menor': { nome: 'Maldição Menor', descricao: ' Inimigos recebem -1 em ataques e testes contra medo.' },
-    'nevoa_obscurescente': { nome: 'Névoa Obscurescente', descricao: ' Névoa espessa envolve o conjurador' },
-    'pedra_encantada': { nome: 'Pedra Encantada', descricao: ' Três pedras recebem +1 para ataque e causam 1d6+l de dano.' },
+    'invocar_criaturas_i': { nome: 'Invocar Criaturas I', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador' },
+    'maldicao_menor': { nome: 'Maldição Menor', descricao: 'Inimigos recebem -1 em ataques e testes contra medo.' },
+    'nevoa_obscurescente': { nome: 'Névoa Obscurescente', descricao: 'Névoa espessa envolve o conjurador' },
+    'pedra_encantada': { nome: 'Pedra Encantada', descricao: 'Três pedras recebem +1 para ataque e causam 1d6+l de dano.' },
     'protecao_contra_caos_mal_bem_ordem': { nome: 'Proteção Contra o Caos/Mal/Bem/Ordem', descricao: ' +2 na CA e testes de resistência, impede controle mental, isola elementais e seres extra-planares.' },
-    'remover_medo': { nome: 'Remover Medo', descricao: ' +4 em testes contra medo para 1 alvo/4 níveis.' },
-    'santuario': { nome: 'Santuário', descricao: ' Os oponentes não podem atacar o conjurador e vice-versa.' },
-    'suportar_elementos': { nome: 'Suportar Elementos', descricao: ' Mantém uma criatura confortável dentro de ambientes áridos.' },
-    'visao_da_morte': { nome: 'Visão da Morte', descricao: ' Detecta a situação de criaturas a menos de 9 m.' },
+    'remover_medo': { nome: 'Remover Medo', descricao: '+4 em testes contra medo para 1 alvo/4 níveis.' },
+    'santuario': { nome: 'Santuário', descricao: 'Os oponentes não podem atacar o conjurador e vice-versa.' },
+    'suportar_elementos': { nome: 'Suportar Elementos', descricao: 'Mantém uma criatura confortável dentro de ambientes áridos.' },
+    'visao_da_morte': { nome: 'Visão da Morte', descricao: 'Detecta a situação de criaturas a menos de 9 m.' },
     },
   },
   mago: {
@@ -80,6 +80,9 @@ var tabelas_lista_feiticos = {
       'queimadura_aganazzar': {
         nome: 'Queimadura de Aganazzar', descricao: 'Linha de fogo causa 1d8/2 níveis até 5d8.', escola: 'evocacao', fonte: 'FR',
       },
+      'mao_espectral': {
+        nome: 'Mão Espectral', descricao: 'Mão brilhante realiza ataques de toque, permitindo lançamento de feitiços de 4º nível ou menor com +2 de bônus, como ação de ataque. Ao criar a mão, perde-se 1d4 pontos de vida.', escola: 'evocacao', fonte: 'FR',
+      },
       'resistir_elementos': {
         nome: 'Resistência a Elementos', descricao: 'Criatura ganha resistência 10, 20 no 7º nível ou 30 no 11º nível) a um tipo de elemento', escola: 'abjuracao', duracao: '10 min / nível',
       },
@@ -87,6 +90,9 @@ var tabelas_lista_feiticos = {
     3: {
       'relampago': {
         nome: 'Relâmpago', descricao: 'Eletricidade causa 1d6/nível', escola: 'evocacao',
+      },
+      'toque_vampirico': {
+        nome: 'Toque Vampírico', descricao: 'Toque causa 1d6/2 níveis, conjurador recebe os PV como temporários.', escola: 'necromancia',
       },
     },
     4: {
@@ -103,6 +109,10 @@ var tabelas_lista_feiticos = {
   },
 };
 tabelas_lista_feiticos['mago_necromante'] = tabelas_lista_feiticos['mago'];
+// Todos os feiticos ordenados por chave.
+var tabelas_lista_feiticos_completa = {};
+// Tabela de nome para chave_feitico.
+var tabelas_lista_feiticos_invertida = {};
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
 // TODO adicionar uma variavel precisa_memorizar. O precisa_conhecer esta sendo sobreusado para este proposito.

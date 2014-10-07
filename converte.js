@@ -9,7 +9,7 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.modo_visao = gEntradas.modo_visao;
   gPersonagem.nome = gEntradas.nome;
   gPersonagem.raca = gEntradas.raca;
-  gPersonagem.template = gEntradas.template;
+  gPersonagem.template = gEntradas.template || '';
   _ConverteTamanho();
 
   gPersonagem.alinhamento = gEntradas.alinhamento;
@@ -286,6 +286,28 @@ function _ConverteFeiticosSlots() {
           slots_classe_nivel.feiticos.push(slot_feitico);
         }
       });
+    }
+    // Converte os feitiços de domínio da classe (se houver).
+    if ('slots_feiticos_dominio' in gEntradas) {
+      for (var nivel in gEntradas.slots_feiticos_dominio[chave_classe]) {
+        var entrada_feitico = gEntradas.slots_feiticos_dominio[chave_classe][nivel];
+        var slots_classe_nivel = feiticos_classe.slots[nivel];
+        slots_classe_nivel.feitico_dominio = {
+          nivel_conhecido: entrada_feitico.nivel,
+          indice_conhecido: entrada_feitico.indice,
+          gasto: entrada_feitico.gasto };
+      }
+    }
+    if ('slots_feiticos_especializados' in gEntradas) {
+      // Converte os feitiços de especialista (se houver).
+      for (var nivel in gEntradas.slots_feiticos_especializados[chave_classe]) {
+        var entrada_feitico = gEntradas.slots_feiticos_especializados[chave_classe][nivel];
+        var slots_classe_nivel = feiticos_classe.slots[nivel];
+        slots_classe_nivel.feitico_especializado = {
+          nivel_conhecido: entrada_feitico.nivel,
+          indice_conhecido: entrada_feitico.indice,
+          gasto: entrada_feitico.gasto };
+      }
     }
   }
 }
