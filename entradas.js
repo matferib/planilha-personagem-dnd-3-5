@@ -72,14 +72,6 @@ var gEntradas = {
   // indice eh o ponteiro para o feitico nos conhecidos para o nível.
   // gasto indica se o feitico está gasto ou não.
   slots_feiticos: {},
-  // Slots de feitiços de domínio, cada entrada:
-  // chave_classe: { 1: { nivel, indice, gasto }, 2: {}, ...}
-  // Parâmetros iguais aos de slots_feiticos.
-  slots_feiticos_dominio: {},
-  // slots de feiticos especializados, cada entrada:
-  // chave_classe: { 0: { nivel, indice, gasto }, 1: {}, ...}
-  // Parâmetros iguais aos de slots_feiticos.
-  slots_feiticos_especializados: {},
 
   notas: '',
 };
@@ -297,16 +289,8 @@ function _LeSlotsFeiticos() {
     var chave_classe = classe_nivel_indice[0];
     var nivel_slot = classe_nivel_indice[1];
     var indice_slot = classe_nivel_indice[2];
-    var slot = null;
-    if (indice_slot == 'dom') {
-      slot = gEntradas.slots_feiticos_dominio[chave_classe][nivel_slot];
-    } else if (indice_slot == 'esp') {
-      slot = gEntradas.slots_feiticos_especializados[chave_classe][nivel_slot];
-    } else {
-      slot = gEntradas.slots_feiticos[chave_classe][nivel_slot][indice_slot];
-    }
+    var slot = gEntradas.slots_feiticos[chave_classe][nivel_slot][indice_slot];
     var nivel_indice = ValorSelecionado(doms_select_feitico[i]);
-
     if (nivel_indice != null) {
       nivel_indice = nivel_indice.split('-');
       if (nivel_indice.length == 1) {
