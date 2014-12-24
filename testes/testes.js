@@ -481,7 +481,7 @@ function CarregaTestes() {
         this.detalhes = 'Talento "magia_natural" deveria requerer sabedoria 13';
         return;
       }
-      gPersonagem.atributos.sabedoria.valor = 13;
+      gPersonagem.atributos.sabedoria.bonus.Adiciona('base', null, 13);
       r = PersonagemVerificaPrerequisitosTalento('magia_natural');
       if (r != null) {
         this.resultado = false;
@@ -683,6 +683,38 @@ function CarregaTestes() {
       this.resultado = true;
     },
   }, body);
+
+  /*
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Feiticos',
+    Testa: function() {
+      var DomTeste = function(id) {
+        var doms = {};
+        doms['div-feiticos-slots-feiticeiro-0'] = CriaDiv('div-feiticos-slots-feiticeiro-0');
+        doms['feiticos-slots-feiticeiro-0'] = CriaSelect('feiticos-slots-feiticeiro-0');
+        doms['span-feiticos-slots-feiticeiro-0'] = CriaSpan('span-feiticos-slots-feiticeiro-0');
+        doms['input-feiticos-slots-gastos-feiticeiro-0-0'] = CriaCheckbox('input-feiticos-slots-gastos-feiticeiro-0-0');
+        return doms[id];
+      }
+      var DomOriginal = Dom;
+      var DomsPorClasseOriginal = DomsPorClasse;
+      Dom = DomTeste;
+      DomsPorClasse = DomTeste;
+      _AtualizaSlotsFeiticosParaClassePorNivel(
+          'feiticeiro',
+          0,
+          // slots
+          { feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1} ] },
+          // conhecidos
+          { 0: [ { f0a: 'f0a'}, { f0b: 'f0b'} ]},
+          div_slots);
+      Dom = DomOriginal;
+      DomsPorClasse = DomsPorClasseOriginal;
+      this.resultado = true;
+    },
+  }, body);
+  */
 
   /*
    * Esse teste so vai funcionar quando AtualizaGeral funcionar.
