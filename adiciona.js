@@ -460,9 +460,9 @@ function AdicionaFeiticoConhecido(chave_classe, nivel, indice) {
 }
 
 // Adiciona um dom com o slot de feitico. Usada pelo AjustaFilhos, que preenche o indice.
-function AdicionaSlotFeitico(precisa_memorizar, chave_classe, nivel, conhecidos, slots, indice) {
+function AdicionaSlotFeitico(precisa_memorizar, chave_classe, nivel, slots, indice) {
   Dom('div-feiticos-slots-' + chave_classe + '-' + nivel).appendChild(
-      CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, conhecidos, slots));
+      CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, slots));
 }
 
 function AdicionaHabilidadeEspecial(chave_especial, dom_especiais) {

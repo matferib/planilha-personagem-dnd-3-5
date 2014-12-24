@@ -1,3 +1,4 @@
+Criacao de doms fake nos testes.
 Arrumar a atualizacao de feiticos.
 Bug do feitico extra (mago de 10 com feitico de 6o).
 Feiticos extras de especialistas (necromantes). Fazer restricoes por escola.
