@@ -682,15 +682,14 @@ function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
         chave_classe,
         nivel,
         feiticos_classe.slots[nivel],
-        feiticos_conhecidos,
-        div_slots);
+        feiticos_conhecidos);
   }
 }
 
 // Atualiza os slots de feiticos para a classe por nivel.
 // @param conhecidos cada entrada: { nivel: [ { valor, texto}, ...] }..
 // @param slots do nivel para a clase.
-function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, conhecidos, div_slots) {
+function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, conhecidos) {
   if (slots.feiticos.length == 0) {
     return;
   }
@@ -702,7 +701,7 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
   AjustaFilhos(
       div_nivel_slots,
       slots.feiticos.length + (possui_extra ? 1 : 0),
-      AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, slots));
+      AdicionaSlotFeitico.bind(null, div_nivel_slots, !precisa_conhecer, chave_classe, nivel, slots));
 
   // Popula os selects.
   var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);
