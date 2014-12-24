@@ -702,7 +702,7 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
   AjustaFilhos(
       div_nivel_slots,
       slots.feiticos.length + (possui_extra ? 1 : 0),
-      AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, conhecidos, slots));
+      AdicionaSlotFeitico.bind(null, !precisa_conhecer, chave_classe, nivel, slots));
 
   // Popula os selects.
   var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);
