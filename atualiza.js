@@ -712,14 +712,16 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
   var classe_span = 'span-feiticos-slots-' + chave_classe + '-' + nivel;
   var spans = DomsPorClasse(classe_span);
   for (var i = 0; i < spans.length - (possui_extra ? 1 : 0); ++i) {
-    spans[i].textContent = '';
     var slot_feitico = slots.feiticos[i];
-    SelecionaValor(
-        slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido,
-        selects_nivel[i]);
+    if (selects_nivel.length > 0) {
+      SelecionaValor(
+          slot_feitico.nivel_conhecido + '-' + slot_feitico.indice_conhecido,
+          selects_nivel[i]);
+    }
     Dom('input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + i).checked = slot_feitico.gasto;
     // TODO Gasto.
   }
+
   if (possui_extra) {
     var ultimo = spans.length - 1;
     var slot_feitico_extra = null;
