@@ -45,10 +45,11 @@ function ComparaSalvacoes(salvacoes) {
 // deve possuir o campo 'detalhes' para detalhar o teste.
 // @param dom onde o teste sera adicionado.
 function TemplateTeste(handler_teste, dom) {
-  handler_teste.Testa();
+  // div do teste. Cria de cara para os testes poderem acessar.
+  var div_teste = CriaDiv(handler_teste.nome, 'div_teste');
+  dom.appendChild(div_teste);
 
-  // div do teste.
-  var div_teste = CriaDiv(null, 'div_teste');
+  handler_teste.Testa();
 
   // Nome do teste.
   var span_nome = CriaSpan('Teste: ' + handler_teste.nome);
@@ -72,8 +73,6 @@ function TemplateTeste(handler_teste, dom) {
     div_detalhes.appendChild(span_detalhes);
     div_teste.appendChild(div_detalhes);
   }
-
-  dom.appendChild(div_teste);
 }
 
 function CarregaTestes() {
@@ -684,37 +683,35 @@ function CarregaTestes() {
     },
   }, body);
 
-  /*
   PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Feiticos',
     Testa: function() {
-      var DomTeste = function(id) {
-        var doms = {};
-        doms['div-feiticos-slots-feiticeiro-0'] = CriaDiv('div-feiticos-slots-feiticeiro-0');
-        doms['feiticos-slots-feiticeiro-0'] = CriaSelect('feiticos-slots-feiticeiro-0');
-        doms['span-feiticos-slots-feiticeiro-0'] = CriaSpan('span-feiticos-slots-feiticeiro-0');
-        doms['input-feiticos-slots-gastos-feiticeiro-0-0'] = CriaCheckbox('input-feiticos-slots-gastos-feiticeiro-0-0');
-        return doms[id];
-      }
-      var DomOriginal = Dom;
-      var DomsPorClasseOriginal = DomsPorClasse;
-      Dom = DomTeste;
-      DomsPorClasse = DomTeste;
+      var dom_teste = Dom('Feiticos');
+      var div_slots_0 = CriaDiv('div-feiticos-slots-feiticeiro-0', 'div-feiticos-slots-feiticeiro-0');
+      dom_teste.appendChild(div_slots_0);
       _AtualizaSlotsFeiticosParaClassePorNivel(
           'feiticeiro',
           0,
           // slots
-          { feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1} ] },
+          { feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1, gasto: true } ] },
           // conhecidos
-          { 0: [ { f0a: 'f0a'}, { f0b: 'f0b'} ]},
-          div_slots);
-      Dom = DomOriginal;
-      DomsPorClasse = DomsPorClasseOriginal;
+          { 0: [ { f0a: 'f0a'}, { f0b: 'f0b'} ]});
+      if (Dom('div-feiticos-slots-feiticeiro-0').childNodes.length != 2) {
+        this.resultado = false;
+        this.erro = 'Esperava dois slots de feitico';
+        return;
+      }
+      if (Dom('input-feiticos-slots-gastos-feiticeiro-0-0').checked || !Dom('input-feiticos-slots-gastos-feiticeiro-0-1').checked) {
+        this.resultado = false;
+        this.erro = 'Checkbox de gasto em estado inconsistente. Esperava 0 e 1';
+        return;
+      }
+      // Limpa o dom de teste.
+      RemoveFilhos(dom_teste);
       this.resultado = true;
     },
   }, body);
-  */
 
   /*
    * Esse teste so vai funcionar quando AtualizaGeral funcionar.
