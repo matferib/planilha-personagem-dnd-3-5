@@ -69,6 +69,8 @@ function CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, slot
   var id = classe + '-' + indice;
   var dom_slot = precisa_memorizar ? CriaDiv(id, classe) : CriaSpan('', id, classe);
 
+  // Label para dominio e especialista.
+  dom_slot.appendChild(CriaSpan('', 'label-feiticos-slots-' + chave_classe + '-' + nivel + '-' + indice));
   // Adiciona os inputs de indices.
   if (precisa_memorizar) {
     dom_slot.appendChild(CriaSelect(
