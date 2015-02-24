@@ -724,11 +724,12 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
   if (possui_extra) {
     var ultimo = spans.length - 1;
     var slot_feitico_extra = null;
+    var span_label = Dom('label-feiticos-slots-' + chave_classe + '-' + nivel + '-' + ultimo);
     if (nivel > 0 && possui_dominio) {
-      spans[ultimo].textContent = 'D';
+      span_label.textContent = 'D';
       slot_feitico_extra = slots.feitico_dominio;
     } else if (possui_especializacao) {
-      spans[ultimo].textContent = 'E';
+      span_label.textContent = 'E';
       slot_feitico_extra = slots.feitico_especializado;
     }
     SelecionaValor(
