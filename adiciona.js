@@ -475,3 +475,9 @@ function AdicionaHabilidadeEspecial(chave_especial, dom_especiais) {
   dom_especiais.appendChild(dom_especial);
   return dom_especial;
 }
+
+function AdicionaImunidade(imunidade, dom_imunidades) {
+  var dom_imunidade = CriaDiv('imunidade-' + imunidade);
+  dom_imunidade.textContent = imunidade;
+  dom_imunidades.appendChild(dom_imunidade);
+}

@@ -54,6 +54,7 @@ function _AtualizaGeral() {
   _AtualizaEstilosLuta();
   _AtualizaSalvacoes();
   _AtualizaHabilidadesEspeciais();
+  _AtualizaImunidades();
   _AtualizaTalentos();
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
@@ -403,7 +404,7 @@ function _AtualizaSalvacoes() {
 function _AtualizaHabilidadesEspeciais() {
   var dom_especiais = Dom('habilidades-especiais');
   RemoveFilhos(dom_especiais);
-  for (especial in gPersonagem.especiais) {
+  for (var especial in gPersonagem.especiais) {
     _AtualizaHabilidadeEspecial(especial, dom_especiais);
   }
 }
@@ -420,6 +421,15 @@ function _AtualizaHabilidadeEspecial(chave_especial, dom_especiais) {
     filho.checked = true;
     --usado;
   }
+}
+
+// Atualiza as imunidades do personagem.
+function _AtualizaImunidades() {
+  var dom_imunidades = Dom('imunidades');
+  RemoveFilhos(dom_imunidades);
+  gPersonagem.imunidades.forEach(function(imunidade) {
+    AdicionaImunidade(imunidade, dom_imunidades);
+  });
 }
 
 // Atualiza os numeros e listas relacionados a talentos.

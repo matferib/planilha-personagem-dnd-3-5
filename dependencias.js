@@ -15,6 +15,7 @@ function DependenciasGerais() {
   _DependenciasBba();
   _DependenciasProficienciaArmas();
   _DependenciasHabilidadesEspeciais();
+  _DependenciasImunidades();
 
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
@@ -385,6 +386,18 @@ function _DependenciasHabilidadesEspeciais() {
       gPersonagem.especiais[chave_especial].usado = 0;
     }
   }
+}
+
+function _DependenciasImunidades() {
+  var tabelas = [ tabelas_raca[gPersonagem.raca] ];
+  if (gPersonagem.template.length > 0) {
+    tabelas.push(tabelas_template[gPersonagem.template]);
+  }
+  tabelas.forEach(function(tabela) {
+    if ('imunidades' in tabela) {
+      gPersonagem.imunidades = gPersonagem.imunidades.concat(tabela['imunidades']);
+    }
+  });
 }
 
 function _VerificaPrerequisitosTalento() {

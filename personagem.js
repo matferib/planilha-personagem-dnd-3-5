@@ -102,6 +102,8 @@ var gPersonagem = {
   // chave_habilidade: { vezes, usado, complemento }
   especiais: {
   },
+  // Imunidades do personagem, como frio, fogo etc.
+  imunidades: [],
   salvacoes: {
     fortitude: new Bonus(),
     reflexo: new Bonus(),
@@ -196,6 +198,7 @@ function PersonagemLimpaGeral() {
       delete gPersonagem.salvacoes[tipo_salvacao];
     }
   }
+  gPersonagem.imunidades.length = 0;
 }
 
 
