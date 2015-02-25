@@ -468,7 +468,7 @@ function AdicionaSlotFeitico(div_nivel_slots, precisa_memorizar, chave_classe, n
 function AdicionaHabilidadeEspecial(chave_especial, dom_especiais) {
   var dom_especial = CriaDiv('habilidade-especial-' + chave_especial);
   dom_especial.textContent = tabelas_especiais[chave_especial].nome;
-  var especial_personagem = gPersonagem.especiais[especial];
+  var especial_personagem = gPersonagem.especiais[chave_especial];
   for (var i = 0; i < especial_personagem.vezes; ++i) {
     dom_especial.appendChild(CriaInputCheckbox(false, null, null, ClickHabilidadeEspecial));
   }

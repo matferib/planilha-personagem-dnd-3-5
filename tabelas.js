@@ -78,19 +78,19 @@ var tabelas_raca = {
 
 var tabelas_template = {
   lich: {
-      nome: 'Lich',
-      tipo: 'morto-vivo',
-      origem: { },
-      dados_vida: 12,
-      armadura_natural: 5,
-      arma_natural: { toque: { nome: 'Toque', dano: '1d8+5' } }, // 1 vez rodada energia negativa, paralisia, tem save de von
-      aura: { tipo: 'medo', raio: '12 quadrados' },
-      reducao_dano: { valor: '15', sobrepassar: ['estourante', 'magia']},
-      bonus_pericias: { esconderse: 8, furtividade: 8, ouvir: 8, procurar: 8, sentir_motivacao: 8, observar: 8 },
-      atributos: { inteligencia: 2, sabedoria: 2, carisma: 2 },
-      resistencia_espantar: 4,
-      imunidades: ['frio', 'eletricidade', 'polimorfismo', 'efeitos mentais'],
-    },
+    nome: 'Lich',
+    tipo: 'morto-vivo',
+    origem: { },
+    dados_vida: 12,
+    armadura_natural: 5,
+    arma_natural: { toque: { nome: 'Toque', dano: '1d8+5' } }, // 1 vez rodada energia negativa, paralisia, tem save de von
+    aura: { tipo: 'medo', raio: '12 quadrados' },
+    reducao_dano: { valor: '15', sobrepassar: ['estourante', 'magia']},
+    bonus_pericias: { esconderse: 8, furtividade: 8, ouvir: 8, procurar: 8, sentir_motivacao: 8, observar: 8 },
+    atributos: { inteligencia: 2, sabedoria: 2, carisma: 2 },
+    resistencia_espantar: 4,
+    imunidades: ['frio', 'eletricidade', 'polimorfismo', 'efeitos mentais'],
+  },
 }
 
 // Dados relacionados a classes.
@@ -237,6 +237,16 @@ var tabelas_classes = {
       outros: 'Deve ser membro dos Dragões Púrpura',
     },
   },
+  teurgista_mistico: {
+    nome: 'Teurgista Místico', prestigio: true, dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
+    incremento_nivel_conjurador: ['arcano', 'divino'],
+    especiais: {
+    },
+    requisitos: {
+      // TODO: diplomacia ou intimidar 1.
+      pericias: { conhecimento_arcano: 6, conhecimento_religiao: 6, },
+    },
+  },
 };
 
 var tabelas_especiais = {
@@ -367,6 +377,8 @@ var tabelas_salvacao = {
   // Prestigio.
   dragao_purpura: {
     fortitude: salvacao_forte, reflexo: salvacao_fraca, vontade: salvacao_fraca },
+  teurgista_mistico: {
+    fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
 };
 
 // Tabelas de tamanho.

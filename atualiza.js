@@ -728,6 +728,7 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
           selects_nivel[i]);
     }
     Dom('input-feiticos-slots-gastos-' + chave_classe + '-' + nivel + '-' + i).checked = slot_feitico.gasto;
+    Dom('label-feiticos-slots-' + chave_classe + '-' + nivel + '-' + i).textContent = '';
     // TODO Gasto.
   }
 

@@ -142,7 +142,6 @@ var tabelas_feiticos = {
           18: { por_dia: '4444432', conhecidos: '6555443', },
           19: { por_dia: '4444443', conhecidos: '6555544', },
           20: { por_dia: '4444444', conhecidos: '6555554', }, }, },
-  // TODO pensar no dominio.
   clerigo: {
       atributo_chave: 'sabedoria',
       precisa_conhecer: false,

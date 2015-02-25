@@ -424,3 +424,33 @@ function PersonagemTemplate() {
   }
   return tabelas_template[gPersonagem.template];
 }
+
+// @tipo da classe: 'arcano' ou 'divino'.
+// @return a classe com o maior nivel de conjurador para o tipo passado ou null se nao houver.
+function PersonagemMaiorClasseConjurador(tipo) {
+  var classes_por_tipo = {
+    'arcano': { mago: true, feiticeiro: true, mago_necromante: true },
+    'divino': { clerigo: true, druida: true }, 
+  };
+  var maior = null;
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var classe_personagem = gPersonagem.classes[i];
+    if (tipo != null && !(classe_personagem.classe in classes_por_tipo[tipo])) {
+      continue;
+    }
+    // achou tipo certo.
+    if (maior == null || classe_personagem.nivel_conjurador > maior.nivel_conjurador) {
+      maior = classe_personagem;
+    }
+  }
+  return maior;
+}
+
+
+
+
+
+
+
+
+

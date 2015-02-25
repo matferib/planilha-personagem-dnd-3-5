@@ -34,19 +34,34 @@ function DependenciasGerais() {
 
 // Calcula a classe de conjurador para cada classe de personagem.
 function _DependenciasNivelConjurador() {
+  // Niveis basicos de conjurador.
   gPersonagem.classes.forEach(function(entrada_classe) {
     var classe_tabela = tabelas_classes[entrada_classe.classe];
     if (classe_tabela.nivel_conjurador == null) {
       entrada_classe.nivel_conjurador = 0;
+    } else {
+      var nivel_minimo = classe_tabela.nivel_conjurador.minimo || 0;
+      if (entrada_classe.nivel < nivel_minimo) {
+        entrada_classe.nivel_conjurador = 0;
+        return;
+      }
+      var modificador_nivel_conjurador = classe_tabela.nivel_conjurador.modificador || 0;
+      entrada_classe.nivel_conjurador = Math.floor(entrada_classe.nivel * modificador_nivel_conjurador);
+    }
+  });
+  // Niveis incrementais de conjurador.
+  gPersonagem.classes.forEach(function(classe_personagem_modificadora) {
+    var classe_tabela = tabelas_classes[classe_personagem_modificadora.classe];
+    if (classe_tabela.incremento_nivel_conjurador == null) {
       return;
     }
-    var nivel_minimo = classe_tabela.nivel_conjurador.minimo || 0;
-    if (entrada_classe.nivel < nivel_minimo) {
-      entrada_classe.nivel_conjurador = 0;
-      return;
-    }
-    var modificador_nivel_conjurador = classe_tabela.nivel_conjurador.modificador || 0;
-    entrada_classe.nivel_conjurador = Math.floor(entrada_classe.nivel * modificador_nivel_conjurador);
+    classe_tabela.incremento_nivel_conjurador.forEach(function(tipo) {
+      var classe_personagem = PersonagemMaiorClasseConjurador(tipo);
+      if (classe_personagem == null) {
+        return;
+      }
+      classe_personagem.nivel_conjurador += classe_personagem_modificadora.nivel;
+    });
   });
 }
 
@@ -846,7 +861,7 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   }
   var atributo_chave = tabela_feiticos_classe.atributo_chave;
   var valor_atributo_chave = gPersonagem.atributos[atributo_chave].bonus.Total();
-  var feiticos_por_nivel = tabela_feiticos_classe.por_nivel[classe_personagem.nivel];
+  var feiticos_por_nivel = tabela_feiticos_classe.por_nivel[classe_personagem.nivel_conjurador];
   var nivel_inicial = tabela_feiticos_classe.possui_nivel_zero ? 0 : 1;
   gPersonagem.feiticos[chave_classe].em_uso = true;
   // Feiticos conhecidos (se houver para a classe). Se nao houver, vai usar o que vier da entrada.
