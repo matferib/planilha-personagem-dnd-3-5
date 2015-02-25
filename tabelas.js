@@ -975,7 +975,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   escrever_pergaminho: {
     nome: 'Escrever Pergaminho',
     descricao: 'Criar pergaminhos mágicos.',
-    requisitos: { nivel: { mago: 1, mago_necromante: 1, clerigo: 1, druida: 1, paladino: 4, ranger: 4, } },
+    requisitos: { nivel: { conjurador: 1 } },
   },
   especializacao_arma: {
     nome: 'Especialização em Arma',
@@ -1061,15 +1061,17 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   magia_natural: {
       nome: 'Magia Natural',
       requisitos: { atributos: { sabedoria: 13 } } },
-  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
+  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia 
   magia_penetrante: {
       nome: 'Magia Penetrante',
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola',
   },
-  // Magia Penetrante TODO +4 de bônus nos testes de conjurador contra Resistência à Magia
+  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
+  // (cumulativo com magia penetrante).
   magia_penetrante_maior: {
       nome: 'Magia Penetrante Maior',
-      requisitos: { talentos: [ 'magia_penetrante' ] }
+      requisitos: { talentos: [ 'magia_penetrante' ] },
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola (cumulativo)',
   },
   magia_combate: {
       nome: 'Magia em Combate', descricao: '+4 de bônus nos teste de Concentração para conjurar na defensiva.',
@@ -1084,10 +1086,11 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       guerreiro: true, },
   negociador: {
       nome: 'Negociador',
-      descricao: '+2 de bônus nos teste de Diplomacia e Sentir Motivação.',
+      descricao: '+2 de bônus nos testes de Diplomacia e Sentir Motivação.',
       bonus_pericias: { diplomacia: 2, sentir_motivacao: 2, }, },
   persuasivo: {
       nome: 'Persuasivo',
+      descricao: '+2 de bônus nos testes de blefar e intimidação.',
       bonus_pericias: { blefar: 2, intimidacao: 2 } },
   prontidao: {
       nome: 'Prontidão',
