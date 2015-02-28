@@ -538,7 +538,8 @@ function _AtualizaFeiticos() {
       if (!gPersonagem.feiticos[chave_classe].em_uso) {
         continue;
       }
-      if (filho.id.indexOf(chave_classe) != -1 ) {
+      // Ao carregar por link, o id pode vir null.
+      if ((filho.id == null) || filho.id.indexOf(chave_classe) != -1 ) {
         remover_filho = false;
         break;
       }

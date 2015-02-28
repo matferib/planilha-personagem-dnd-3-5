@@ -27,8 +27,27 @@ function CarregamentoInicial() {
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
     var json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
     gEntradas = JSON.parse(json_entradas);
+    CorrigePericias();
   }
   AtualizaGeralSemLerEntradas();
+}
+
+// Alguns personagens sao salvos em versoes com menos pericias. Essa funcao deve ser chamada apos o carregamento
+// para corrigir as pericias faltantes na entrada do personagem salvo.
+function CorrigePericias() {
+  for (var chave in tabelas_pericias) {
+    var achou = false;
+    for (var i = 0; i < gEntradas.pericias.length; ++i) {
+      var entrada_pericia = gEntradas.pericias[i];
+      if (entrada_pericia.chave == chave) {
+        achou = true;
+        break;
+      }
+    }
+    if (!achou) {
+      gEntradas.pericias.push({ 'chave': chave, pontos: 0 });
+    }
+  }
 }
 
 // Adiciona os handlers aos botoes da interface.
@@ -327,6 +346,7 @@ function _CarregaPericias() {
     var pericia = tabelas_pericias[chave_pericia];
     var achou = false;
     for (var i = 0; i < pericia.classes.length; ++i) {
+      // Aplica as pericias de mago a magos especialistas tambem.
       if (pericia.classes[i] == 'mago') {
         achou = true;
         break;
@@ -360,7 +380,7 @@ function _CarregaPericias() {
         CriaSpan(texto_span, null, 'pericias-nome'));
 
     var input_pontos =
-        CriaInputNumerico('0', prefixo_id + '-pontos', null,
+        CriaInputNumerico('0', prefixo_id + '-pontos', 'input-pericias-pontos',
         { chave_pericia: chave_pericia,
           handleEvent: function(evento) {
             ClickPericia(this.chave_pericia);

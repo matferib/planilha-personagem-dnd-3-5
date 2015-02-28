@@ -1365,10 +1365,41 @@ var tabelas_pericias = {
       classes: [  'bardo', 'ladino', 'aristocrata', ],
       sem_treinamento: true, habilidade: 'carisma' },
   oficios: {
-      nome: 'Ofícios',
+      nome: 'Ofícios (outros)',
       classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
                   'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
-      sem_treinamento: true, habilidade: 'inteligencia' },
+      sem_treinamento: true, habilidade: 'inteligencia'
+  },
+  oficios_alquimia: {
+      nome: 'Ofícios (alquimia)',
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      sem_treinamento: true, habilidade: 'inteligencia'
+  },
+  oficios_armoraria: {
+      nome: 'Ofícios (armoraria)',
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      sem_treinamento: true, habilidade: 'inteligencia'
+  },
+  oficios_arquearia: {
+      nome: 'Ofícios (arquearia)',
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      sem_treinamento: true, habilidade: 'inteligencia'
+  },
+  oficios_armeiro: {
+      nome: 'Ofícios (armeiro)',
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      sem_treinamento: true, habilidade: 'inteligencia'
+  },
+  oficios_armadilharia: {
+      nome: 'Ofícios (armadilharia)',
+      classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+      sem_treinamento: true, habilidade: 'inteligencia'
+  },
   operar_mecanismo: {
       nome: 'Operar Mecanismo',
       classes: [  'ladino'],

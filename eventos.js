@@ -86,6 +86,7 @@ function ClickAbrir() {
     f: function(dado) {
       if (nome in dado) {
         gEntradas = JSON.parse(dado[nome]);
+        CorrigePericias();
         AtualizaGeralSemLerEntradas();
         SelecionaValor('--', Dom('select-personagens'));
         Mensagem('Personagem "' + nome + '" carregado com sucesso.');
@@ -134,6 +135,7 @@ function ClickExportar() {
 function ClickImportar() {
   var input = Dom("json-personagem");
   gEntradas = JSON.parse(input.value);
+  CorrigePericias();
   AtualizaGeralSemLerEntradas();
   Mensagem('Personagem "' + gPersonagem.nome + '" importado com sucesso');
 }

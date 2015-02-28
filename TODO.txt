@@ -1,3 +1,4 @@
+Completar a tabela de pericia com as classes de prestigio.
 Classes que modificam nivel de conjurador deveriam poder escolher de qual classe. Do jeito que ta pega a maior do tipo.
 Coisas de monge.
 Bug do feitico extra (mago de 10 com feitico de 6o).
