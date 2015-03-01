@@ -66,10 +66,8 @@ function _DependenciasNivelConjurador() {
 }
 
 function _DependenciasEquipamentos() {
-  // TODO usar tabelas_itens aqui?
-  var tipos_itens = [ 'aneis', 'amuletos', 'bracaduras', 'capas', ];
-  for (var i = 0; i < tipos_itens.length; ++i) {
-    _DependenciasItens(tipos_itens[i]);
+  for (var chave_item in tabelas_itens) {
+    _DependenciasItens(chave_item);
   }
 }
 

@@ -72,6 +72,7 @@ function _CarregaHandlers() {
     "botao-adicionar-escudo": { callback:  ClickAdicionarEscudo, evento: 'click', },
     "botao-adicionar-anel": { callback:  function() { ClickAdicionarItem('aneis'); }, evento: 'click', },
     "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', },
+    "botao-adicionar-bota": { callback:  function() { ClickAdicionarItem('botas'); }, evento: 'click', },
     "botao-adicionar-bracadura": { callback:  function() { ClickAdicionarItem('bracaduras'); }, evento: 'click', },
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },

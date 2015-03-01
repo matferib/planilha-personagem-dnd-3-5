@@ -1684,6 +1684,43 @@ var tabelas_bracaduras = {
   },
 };
 
+var tabelas_botas = {
+  botas_aladas: {
+    nome: 'Botas Aladas', preco: '16000 PO',
+    descricao: 'magia vôo 3x/dia.',
+    propriedades: { },
+  },
+  botas_caminhar_saltar: {
+    nome: 'Botas de Caminhar e Saltar', preco: '5500 PO',
+    descricao: 'Aumenta deslocamento básico em dois quadrados e +5 de competência em saltar',
+    propriedades: { pericias: { saltar: { competencia: 5 } } }
+  },
+  botas_elficas: {
+    nome: 'Botas Élficas', preco: '2500 PO',
+    propriedades: { pericias: { furtividade: { competencia: 5 } } }
+  },
+  botas_inverno: {
+    nome: 'Botas do Inverno', preco: '2500 PO',
+    descricao: 'Andar na neve com deslocamento normal, sem rastro. Andar no gelo escorregadio deslocamento normal. Suportar elementos.',
+    propriedades: { },
+  },
+  botas_levitacao: {
+    nome: 'Botas da Levitação', preco: '7500 PO',
+    descricao: 'Permite lançar levitar sobre si mesmo',
+    propriedades: {},
+  },
+  botas_teletransporte: {
+    nome: 'Botas do Teletransporte', preco: '49000 PO',
+    descricao: 'Permite lançar teletransportar 3x/dia.',
+    propriedades: {},
+  },
+  botas_velocidade: {
+    nome: 'Botas da velocidade', preco: '12000 PO',
+    descricao: 'Permite usar velocidade por 10 rodadas em um dia (não precisam ser rodadas consecutivas).',
+    propriedades: {},
+  },
+};
+
 // Var traduzir.
 var tabelas_pocoes = {
   curar_ferimentos_leves: { nome: 'Curar ferimentos leves', tipo: 'pocao', preco: '50 PO' },
@@ -1806,6 +1843,7 @@ var tabelas_capas = {
 var tabelas_itens = {
   aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2 },
   amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
+  botas: { nome: 'Botas', tabela: tabelas_botas, maximo: 1 },
   bracaduras: { nome: 'Braçaduras', tabela: tabelas_bracaduras, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
   capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },

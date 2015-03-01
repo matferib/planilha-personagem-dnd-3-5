@@ -160,6 +160,8 @@ var tabelas_geracao = {
     ordem_magias: {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
+      2: [ 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
+      3: [ 'dissipar_magia', 'dissipar_magia', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
     },
     por_nivel: {
       1: { moedas: { ouro: 300 },
