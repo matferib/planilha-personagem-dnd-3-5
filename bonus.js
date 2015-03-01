@@ -30,6 +30,7 @@ function Bonus() {
   this.por_chave.profano = { nome: 'Profano', cumulativo: false, por_origem: {}, };
   // cumulativo para aceitar valores negativos.
   this.por_chave.racial = { nome: 'Racial', cumulativo: true, por_origem: {}, };
+  this.por_chave.template = { nome: 'Template', cumulativo: true, por_origem: {}, };
   this.por_chave.resistencia = { nome: 'Resitência', cumulativo: false, por_origem: {}, };
   this.por_chave.sagrado = { nome: 'Sagrado', cumulativo: false, por_origem: {}, };
   this.por_chave.sinergia = { nome: 'Sinergia', cumulativo: false, por_origem: {}, };

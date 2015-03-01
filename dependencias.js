@@ -160,7 +160,12 @@ function _DependenciasAtributos() {
   var bonus_nivel_por_atributo = {};
   for (var atributo in tabelas_atributos) {
     var atributo_personagem = gPersonagem.atributos[atributo];
+    // racial.
     atributo_personagem.bonus.Adiciona('racial', null, tabelas_raca[gPersonagem.raca].atributos[atributo] || 0);
+    // template.
+    if (gPersonagem.template.length != 0 && ('atributos' in tabelas_template[gPersonagem.template])) {
+      atributo_personagem.bonus.Adiciona('template', null, tabelas_template[gPersonagem.template].atributos[atributo] || 0);
+    }
     bonus_nivel_por_atributo[atributo] = 0;
   }
   // Calcula os bonus de nivel para cada atributo.
