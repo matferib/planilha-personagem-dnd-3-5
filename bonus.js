@@ -14,6 +14,7 @@ function Bonus() {
   this.por_chave.atributo = { nome: 'Atributo', cumulativo: true, por_origem: {}, };
   this.por_chave.base = { nome: 'Base', cumulativo: false, por_origem: {}, };
   this.por_chave.circunstancia = { nome: 'Circusntância', cumulativo: true, por_origem: {}, };
+  this.por_chave.classe = { nome: 'Classe', cumulativo: true, por_origem: {}, };
   this.por_chave.competencia = { nome: 'Competência', cumulativo: false, por_origem: {}, };
   this.por_chave.deflexao = { nome: 'Deflexão', cumulativo: false, por_origem: {}, };
   this.por_chave.escudo = { nome: 'Escudo', cumulativo: false, por_origem: {}, };
@@ -31,7 +32,7 @@ function Bonus() {
   // cumulativo para aceitar valores negativos.
   this.por_chave.racial = { nome: 'Racial', cumulativo: true, por_origem: {}, };
   this.por_chave.template = { nome: 'Template', cumulativo: true, por_origem: {}, };
-  this.por_chave.resistencia = { nome: 'Resitência', cumulativo: false, por_origem: {}, };
+  this.por_chave.resistencia = { nome: 'Resistência', cumulativo: false, por_origem: {}, };
   this.por_chave.sagrado = { nome: 'Sagrado', cumulativo: false, por_origem: {}, };
   this.por_chave.sinergia = { nome: 'Sinergia', cumulativo: false, por_origem: {}, };
   this.por_chave.sorte = { nome: 'Sorte', cumulativo: false, por_origem: {}, };

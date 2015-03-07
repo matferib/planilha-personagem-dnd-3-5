@@ -25,7 +25,7 @@ function DependenciasGerais() {
   _DependenciasPericias();
   _DependenciasFocoArmas();
   _DependenciasEspecializacaoArmas();
-  _DependenciasArmadurasEscudos();
+  _DependenciasClasseArmadura();
   _DependenciasArmas();
   _DependenciasEstilos();
   _DependenciasSalvacoes();
@@ -570,7 +570,7 @@ function _DependenciasEspecializacaoArmas() {
 }
 
 // Dependencias de armaduras e escudos.
-function _DependenciasArmadurasEscudos() {
+function _DependenciasClasseArmadura() {
   gPersonagem.armadura = null;
   for (var i = 0; i < gPersonagem.armaduras.length; ++i) {
     if (gPersonagem.armaduras[i].entrada.em_uso) {
@@ -588,6 +588,25 @@ function _DependenciasArmadurasEscudos() {
   }
 
   var bonus_ca = gPersonagem.ca.bonus;
+  // Por classe.
+  var bonus_classe = 0;
+  for (var i_classe = 0; i_classe < gPersonagem.classes.length; ++i_classe) {
+    var chave_classe = gPersonagem.classes[i_classe].classe;
+    var nivel = gPersonagem.classes[i_classe].nivel;
+    var tabela_classe = tabelas_classes[chave_classe];
+    for (var i = 1; i <= nivel; ++i) {
+      if (tabela_classe.especiais != null && tabela_classe.especiais[i] != null) {
+        var especiais_classe_nivel = tabela_classe.especiais[i];
+        for (var j = 0; j < especiais_classe_nivel.length; ++j) {
+          if (especiais_classe_nivel[j] == 'bonus_ca') {
+            ++bonus_classe;
+          }
+        }
+      }
+    }
+  }
+  bonus_ca.Adiciona('classe', 'monge', bonus_classe);
+
   if (gPersonagem.armadura != null) {
     bonus_ca.Adiciona(
         'armadura', 'armadura', tabelas_armaduras[gPersonagem.armadura.entrada.chave].bonus);
@@ -602,6 +621,11 @@ function _DependenciasArmadurasEscudos() {
   }
   bonus_ca.Adiciona(
       'atributo', 'destreza', gPersonagem.atributos.destreza.modificador);
+  if (PersonagemNivelClasse('monge') > 0) {
+    bonus_ca.Adiciona(
+        'atributo', 'sabedoria', gPersonagem.atributos.sabedoria.modificador);
+  }
+
   bonus_ca.Adiciona(
       'tamanho', 'tamanho', gPersonagem.tamanho.modificador_ataque_defesa);
   // Pode adicionar as armaduras naturais aqui que elas nao se acumulam.

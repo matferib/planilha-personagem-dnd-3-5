@@ -107,10 +107,29 @@ function CarregaTestes() {
     Testa: function() {
       gPersonagem.aneis.push({chave: 'protecao_2', em_uso: true});
       _DependenciasEquipamentos();
-      _DependenciasArmadurasEscudos();
+      _DependenciasClasseArmadura();
       if (gPersonagem.ca.bonus.Total() != 2) {
         this.resultado = false;
         this.detalhes = 'Esperava 2 de bonus no AC por causa de anel de proteção +2';
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'TestaMonge',
+    Testa: function() {
+      gPersonagem.classes[0].classe = 'monge';
+      gPersonagem.classes[0].nivel= 5;
+      gPersonagem.atributos.sabedoria.bonus.Adiciona('base', null, 13);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 15);
+      _DependenciasAtributos();
+      _DependenciasClasseArmadura();
+      if (gPersonagem.ca.bonus.Total() != 4) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 4 de bonus no AC (monge 5o, des 15, sab 13), recebi: ' + gPersonagem.ca.bonus.Total();
         return;
       }
       this.resultado = true;
