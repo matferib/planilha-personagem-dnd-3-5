@@ -445,6 +445,7 @@ function _AtualizaTalentos() {
           Dom('talentos-' + chave_classe + '-total'));
       for (var i = 0; i < lista_classe.length; ++i) {
         _AtualizaTalento(
+            i,  // indice do talento.
             lista_classe[i],
             i < div_selects.childNodes.length ?
                 div_selects.childNodes[i] : null,
@@ -467,9 +468,9 @@ function _AtualizaTalentos() {
 // Caso contrario, cria o div em questao.
 // @param chave_classe chave da classe para talentos de classe, null caso contrario.
 // @param div_pai o div onde o talento sera adicionado, caso nao exista.
-function _AtualizaTalento(talento_personagem, div_talento, chave_classe, div_pai) {
+function _AtualizaTalento(indice_talento, talento_personagem, div_talento, chave_classe, div_pai) {
   if (div_talento == null) {
-    div_talento = AdicionaTalento(chave_classe, div_pai);
+    div_talento = AdicionaTalento(indice_talento, chave_classe, div_pai);
   }
   // A verificacao de pre-requisitos de talento pode gerar um talento null.
   if (talento_personagem.chave == null || talento_personagem.chave.length == 0) {

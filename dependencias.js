@@ -207,7 +207,6 @@ function _DependenciasTalentos() {
     gPersonagem.talentos['monge'].length = 0;
   }
 
-
   // Calcula o impacto dos talentos no resto.
   for (var chave_classe in gPersonagem.talentos) {
     for (var i = 0; i < gPersonagem.talentos[chave_classe].length; ++i) {
@@ -316,6 +315,8 @@ function _DependenciasProficienciaArmas() {
       }
     }
   }
+  gPersonagem.proficiencia_armas['desarmado'] = true;
+  gPersonagem.proficiencia_armas['manopla'] = true;
   if (todas_simples) {
     for (var arma in tabelas_armas_simples) {
       gPersonagem.proficiencia_armas[arma] = true;

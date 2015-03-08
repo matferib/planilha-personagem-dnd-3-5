@@ -297,9 +297,10 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 }
 
 // Adiciona um talento a um div.
+// @param indice_talento o indice do talento. Bom para talentos especificos por nivel (tipo monge).
 // @param chave_classe se o talento a ser adicionado for de classe.
 // @param div_pai div onde o talento sera adicionado.
-function AdicionaTalento(chave_classe, div_pai) {
+function AdicionaTalento(indice_talento, chave_classe, div_pai) {
   var div_select_talentos = Dom('div-select-talentos');
   var select_talento = CriaSelect();
   select_talento.name = 'chave-talento';
@@ -309,6 +310,14 @@ function AdicionaTalento(chave_classe, div_pai) {
     var talento_tabela = tabelas_talentos[chave_talento];
     if (chave_classe && !(chave_classe in talento_tabela)) {
       continue;
+    }
+    // Monge eh limitado por nivel.
+    if (chave_classe == 'monge') {
+      if ((indice_talento == 0 && talento_tabela.monge != 1) ||
+          (indice_talento == 1 && talento_tabela.monge != 2) ||
+          (indice_talento == 2 && talento_tabela.monge != 6)) {
+        continue;
+      }
     }
     talentos_ordenados.push(chave_talento);
   }

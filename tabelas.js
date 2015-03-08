@@ -959,7 +959,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   agarrar_aprimorado: {
       nome: 'Agarrar Aprimorado',
       guerreiro: true,
-      monge: true,
+      monge: 1,
       requisitos: { atributos: { destreza: 13 }, talentos: [ 'ataque_desarmado_aprimorado' ] },
       descricao: '+4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade.',
   },
@@ -971,7 +971,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
   ataque_atordoante: {
       nome: 'Ataque Atordoante',
-      monge: true,
+      monge: 1,
       guerreiro: true,
       descricao: 'Atordoa a vítima com um ataque desarmado.',
       requisitos: { bba: 8, talentos: [ 'ataque_desarmado_aprimorado' ], atributos: { destreza: 13, sabedoria: 13 } },
@@ -1020,13 +1020,13 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   desarme_aprimorado: {
       nome: 'Desarme Aprimorado',
       guerreiro: true,
-      monge: true,
+      monge: 6,
       descricao: '+4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade.',
   },
   desviar_objetos: {
       nome: 'Desviar Objetos',
       requisitos: { atributos: { destreza: 13 } }, talentos: [ 'ataque_desarmado_aprimorado' ],
-      monge: true,
+      monge: 2,
       guerreiro: true,
       descricao: 'Desvia um ataque à distância por rodada',
   },
@@ -1116,13 +1116,12 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       nome: 'Derrubar Aprimorado (Imobilização Aprimorada)',
       requisitos: { talentos: ['especializacao_em_combate'] },
       guerreiro: true,
-      monge: true,
+      monge: 6,
       descricao: '+4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade.',
   },
   especializacao_em_combate: {
       nome: 'Especialização em Combate',
       guerreiro: true,
-      monge: true,
       requisitos: { atributos: { inteligencia: 13 } },
       descricao: 'Substitui bônus de ataque por CA (máximo 5 pontos).',
   },
@@ -1187,7 +1186,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   reflexos_em_combate: {
       nome: 'Reflexos em Combate',
       guerreiro: true,
-      monge: true,
+      monge: 2,
       descricao: 'Permite número de ataques de oportunidade na rodada igual ao bonus de destreza.',
   },
   reflexos_rapidos: {
