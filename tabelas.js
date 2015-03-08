@@ -910,10 +910,7 @@ var tabelas_armas_exoticas = {
 // },
 var tabelas_talentos = {
 /*
-Agarrar Aprimorado¹ Des 13, Ataque Desarmado Aprimorado +4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade
-Desviar Objetos¹ Des 13, Ataque Desarmado Aprimorado Desvia um ataque à distância por rodada
 Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
-Ataque Atordoante¹ Des 13, Sab 13, Ataque Desarmado Aprimorado, bônus base de ataque +8 Atordoa a vítima com um ataque desarmado
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
 Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e não provoca ataques de oportunidade
@@ -926,16 +923,12 @@ Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 
 Armas Maior¹ Des 19, Combater com Duas Armas Aprimorado, Combater com Duas Armas, bônus base de ataque +11 Adquire um terceiro ataque com a mão inábil
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
-Especialização em Combate¹ Int 13 Substitui bônus de ataque por CA (máximo 5 pontos)
-Desarme Aprimorado¹ Especialização em Combate +4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade
 Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação de movimento
-Imobilização Aprimorada¹ Especialização em Combate +4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
-Reflexos em Combate¹ - Ataques de oportunidade adicionais
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Rápido¹ Des 13, Tiro Certeiro Um ataque à distância adicional por rodada
@@ -962,13 +955,27 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   afinidade_com_animais: {
       nome: 'Afinidade com Animais',
       bonus_pericias: { cavalgar: 2, adestrar_animais: 2 } },
+
+  agarrar_aprimorado: {
+      nome: 'Agarrar Aprimorado',
+      guerreiro: true,
+      monge: true,
+      requisitos: { atributos: { destreza: 13 }, talentos: [ 'ataque_desarmado_aprimorado' ] },
+      descricao: '+4 de bônus nos testes de Agarrar e não provoca ataques de oportunidade.',
+  },
   agil: {
       nome: 'Ágil',
       bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 } },
   aptidao_magica: {
       nome: 'Aptidão Mágica',
       bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
-
+  ataque_atordoante: {
+      nome: 'Ataque Atordoante',
+      monge: true,
+      guerreiro: true,
+      descricao: 'Atordoa a vítima com um ataque desarmado.',
+      requisitos: { bba: 8, talentos: [ 'ataque_desarmado_aprimorado' ], atributos: { destreza: 13, sabedoria: 13 } },
+  },
   ataque_desarmado_aprimorado: {
       nome: 'Ataque Desarmado Aprimorado',
       guerreiro: true,
@@ -1010,6 +1017,19 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   dedos_lepidos: {
       nome: 'Dedos Lépidos',
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },
+  desarme_aprimorado: {
+      nome: 'Desarme Aprimorado',
+      guerreiro: true,
+      monge: true,
+      descricao: '+4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade.',
+  },
+  desviar_objetos: {
+      nome: 'Desviar Objetos',
+      requisitos: { atributos: { destreza: 13 } }, talentos: [ 'ataque_desarmado_aprimorado' ],
+      monge: true,
+      guerreiro: true,
+      descricao: 'Desvia um ataque à distância por rodada',
+  },
   diligente: {
       nome: 'Diligente',
       bonus_pericias: { avaliacao: 2, decifrar_escrita: 2 } },
@@ -1092,6 +1112,20 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
     guerreiro: true,
     requisitos: { talentos: [ 'tiro_certeiro'], },
     descricao: 'Anula a penalidade por disparar contra um adversário em combate corporal com um aliado (-4)', },
+  derrubar_aprimorado: {
+      nome: 'Derrubar Aprimorado (Imobilização Aprimorada)',
+      requisitos: { talentos: ['especializacao_em_combate'] },
+      guerreiro: true,
+      monge: true,
+      descricao: '+4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade.',
+  },
+  especializacao_em_combate: {
+      nome: 'Especialização em Combate',
+      guerreiro: true,
+      monge: true,
+      requisitos: { atributos: { inteligencia: 13 } },
+      descricao: 'Substitui bônus de ataque por CA (máximo 5 pontos).',
+  },
   // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
   iniciativa_aprimorada: {
       nome: 'Iniciativa Aprimorada',
@@ -1150,6 +1184,12 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   rastrear: {
       nome: 'Rastrear',
       descricao: 'Utiliza Sobrevivência para rastrear.', },
+  reflexos_em_combate: {
+      nome: 'Reflexos em Combate',
+      guerreiro: true,
+      monge: true,
+      descricao: 'Permite número de ataques de oportunidade na rodada igual ao bonus de destreza.',
+  },
   reflexos_rapidos: {
       nome: 'Reflexos Rápidos',
       bonus_salvacao: { reflexo: 2, },

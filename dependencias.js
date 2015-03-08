@@ -195,6 +195,18 @@ function _DependenciasTalentos() {
   } else {
     gPersonagem.talentos['guerreiro'].length = 0;
   }
+  // Monge.
+  var nivel_monge = PersonagemNivelClasse('monge');
+  if (nivel_monge >= 6) {
+    gPersonagem.talentos['monge'].length = 3;
+  } else if (nivel_monge >= 2) {
+    gPersonagem.talentos['monge'].length = 2;
+  } else if (nivel_monge == 1) {
+    gPersonagem.talentos['monge'].length = 1;
+  } else {
+    gPersonagem.talentos['monge'].length = 0;
+  }
+
 
   // Calcula o impacto dos talentos no resto.
   for (var chave_classe in gPersonagem.talentos) {
@@ -430,6 +442,10 @@ function _VerificaPrerequisitosTalento() {
           talento.complemento &&
           !_VerificaTipoComplementoTalento(talento)) {
         talento.complemento = null;
+      }
+      // Talentos de monge nao precisa do prerequisito.
+      if (chave_classe == 'monge') {
+        continue;
       }
       var erro = PersonagemVerificaPrerequisitosTalento(talento.chave, talento.complemento);
       if (erro != null) {
