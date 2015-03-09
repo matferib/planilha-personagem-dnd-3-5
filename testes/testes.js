@@ -563,6 +563,10 @@ function CarregaTestes() {
   }, body);
 
   PersonagemLimpaGeral();
+  for (var atributo in tabelas_atributos) {
+    gPersonagem.atributos[atributo].bonus.Adiciona('base', null, 10);
+  }
+  _DependenciasAtributos();
   TemplateTeste({
     nome: 'DependenciasSalvacoes',
     Testa: function() {
