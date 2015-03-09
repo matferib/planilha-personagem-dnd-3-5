@@ -298,6 +298,19 @@ function _CarregaTabelaArmasArmaduras() {
   _CarregaTabelasCompostas(
       tabelas_especificas_armaduras, talentos_relacionados_armaduras,
       tabelas_armaduras, tabelas_armaduras_invertida);
+  _CarregaTabelaMongeDesarmado();
+}
+
+function _CarregaTabelaMongeDesarmado() {
+  for (var nivel in tabelas_monge_desarmado) {
+    var entrada = tabelas_monge_desarmado[nivel];
+    for (var chave_tamanho in tabelas_tamanho) {
+      if (chave_tamanho == 'medio') {
+        continue;
+      }
+      entrada.dano[chave_tamanho] = tabelas_dado_por_tamanho[entrada.dano['medio']][chave_tamanho];
+    }
+  }
 }
 
 // Util para criar uma tabela a partir de outras, em especial armaduras e armas.

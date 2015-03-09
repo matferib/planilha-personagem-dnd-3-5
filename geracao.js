@@ -280,8 +280,11 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
     var bonus = arma_estilo.bonus_por_categoria[categoria];
     resumo += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
     var arma_tabela = arma_personagem.arma_tabela;
+    var nivel_monge = PersonagemNivelClasse('monge');
     if (estilo.nome == 'arma_dupla' && !primaria) {
       resumo += arma_tabela.dano_secundario[gPersonagem.tamanho.categoria];
+    } else if (arma_personagem.entrada.chave == 'desarmado' && nivel_monge > 0) {
+      resumo += tabelas_monge_desarmado[nivel_monge].dano[gPersonagem.tamanho.categoria];
     } else {
       resumo += arma_tabela.dano[gPersonagem.tamanho.categoria];
     }

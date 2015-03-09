@@ -459,9 +459,6 @@ var tabelas_dado_por_tamanho = {
   '1d6': {
     minusculo: '1', diminuto: '1d2', miudo: '1d3', pequeno: '1d4',
     grande: '1d8', enorme: '2d6', imenso: '3d6', colossal: '4d6' },
-  '2d4': {
-    minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6',
-    grande: '2d6', enorme: '3d6', imenso: '4d6', colossal: '6d6' },
   '1d8': {
     minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6',
     grande: '2d6', enorme: '3d6', imenso: '4d6', colossal: '6d6' },
@@ -471,9 +468,18 @@ var tabelas_dado_por_tamanho = {
   '1d12': {
     minusculo: '1d4', diminuto: '1d6', miudo: '1d8', pequeno: '1d10',
     grande: '3d6', enorme: '4d6', imenso: '6d6', colossal: '8d6' },
+  '2d4': {
+    minusculo: '1d2', diminuto: '1d3', miudo: '1d4', pequeno: '1d6',
+    grande: '2d6', enorme: '3d6', imenso: '4d6', colossal: '6d6' },
   '2d6': {
     minusculo: '1d4', diminuto: '1d6', miudo: '1d8', pequeno: '1d10',
     grande: '3d6', enorme: '4d6', imenso: '6d6', colossal: '8d6' },
+  '2d8': {
+    minusculo: '1d6', diminuto: '1d8', miudo: '1d10', pequeno: '2d6',
+    grande: '3d8', enorme: '4d8', imenso: '6d8', colossal: '8d8' },
+  '2d10': {
+    minusculo: '1d8', diminuto: '1d10', miudo: '2d6', pequeno: '2d8',
+    grande: '4d8', enorme: '6d8', imenso: '8d8', colossal: '12d8' },
 };
 
 var tabelas_armaduras_leves = {
@@ -531,6 +537,30 @@ var tabelas_escudos = {
   pesado_madeira: { nome: 'Escudo Pesado de Madeira', bonus: 2, preco: '7 PO' },
   pesado_aco: { nome: 'Escudo Pesado de Aço', bonus: 2, preco: '20 PO' },
   corpo: { nome: 'Escudo de Corpo', bonus: 4, maximo_bonus_destreza: 2, preco: '30 PO' },
+};
+
+// Dano do monge por nivel.
+var tabelas_monge_desarmado = {
+  1: { dano: { medio: '1d6' } },
+  2: { dano: { medio: '1d6' } },
+  3: { dano: { medio: '1d6' } },
+  4: { dano: { medio: '1d8' } },
+  5: { dano: { medio: '1d8' } },
+  6: { dano: { medio: '1d8' } },
+  7: { dano: { medio: '1d8' } },
+  8: { dano: { medio: '1d10' } },
+  9: { dano: { medio: '1d10' } },
+  10: { dano: { medio: '1d10' } },
+  11: { dano: { medio: '1d10' } },
+  12: { dano: { medio: '2d6' } },
+  13: { dano: { medio: '2d6' } },
+  14: { dano: { medio: '2d6' } },
+  15: { dano: { medio: '2d6' } },
+  16: { dano: { medio: '2d8' } },
+  17: { dano: { medio: '2d8' } },
+  18: { dano: { medio: '2d8' } },
+  19: { dano: { medio: '2d8' } },
+  20: { dano: { medio: '2d10' } },
 };
 
 // Mapeia o nome para a chave. Necessario para computar proficiencias.
