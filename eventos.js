@@ -229,7 +229,7 @@ function ClickRemoverFilho(id_filho, id_pai) {
 // @param id_select_secundario id do select secundario do estilo sendo modificado.
 function ClickEstilo(nome_estilo, id_select_secundario) {
   var select_secundario = Dom(id_select_secundario);
-  if (nome_estilo == 'uma_arma' || nome_estilo == 'arma_escudo' || nome_estilo == 'arma_dupla') {
+  if (nome_estilo == 'uma_arma' || nome_estilo == 'arma_escudo' || nome_estilo == 'arma_dupla' || nome_estilo == 'rajada') {
     select_secundario.disabled = true;
   } else if (nome_estilo == 'duas_armas')  {
     select_secundario.disabled = false;

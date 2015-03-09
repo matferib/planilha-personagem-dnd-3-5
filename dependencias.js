@@ -784,9 +784,18 @@ function _DependenciasBonusPorCategoria(
       }
     }
     multiplicador_dano_forca = primaria ? 1.0 : 0.5;
+  } else if (estilo.nome == 'rajada') {
+    var nivel_monge = PersonagemNivelClasse('monge');
+    if (nivel_monge >= 9) {
+      bonus_por_categoria.ataque = 0;
+    } else if (nivel_monge >= 5) {
+      bonus_por_categoria.ataque = -1;
+    } else {
+      bonus_por_categoria.ataque = -2;
+    }
   }
 
-  if (categoria.indexOf('cac') != -1) {
+  if (categoria.indexOf('cac') != -1 || categoria == 'rajada') {
     // Quando tem acuidade, usa destreza.
     if (arma_leve && arma_personagem.acuidade && gPersonagem.bba_cac < gPersonagem.bba_cac_acuidade) {
       bonus_por_categoria.ataque += gPersonagem.bba_cac_acuidade;
