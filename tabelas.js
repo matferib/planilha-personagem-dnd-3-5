@@ -77,6 +77,24 @@ var tabelas_raca = {
 };
 
 var tabelas_template = {
+  demoniaco: {
+    nome: 'Demoníaco',
+    tipo: 'extra-planar',
+    origem: { },
+    especiais: {
+      1: ['visao_escuro', 'resistencia_frio_fogo_5'],
+      8: ['resistencia_frio_fogo_10'],
+    },
+    reducao_dano: {
+      por_nivel: {
+        4: { valor: '5', sobrepassar: ['magia'] },
+        12: { valor: '10', sobrepassar: ['magia'] },
+      },
+    },
+    resistencia_magia: [
+      { chave: 'magia', por_nivel: 5 },  // ganha hd +5.
+    ],
+  },
   lich: {
     nome: 'Lich',
     tipo: 'morto-vivo',
@@ -91,6 +109,7 @@ var tabelas_template = {
     resistencia_espantar: 4,
     imunidades: ['frio', 'eletricidade', 'polimorfismo', 'efeitos mentais'],
   },
+
 }
 
 // Dados relacionados a classes.
@@ -324,12 +343,15 @@ var tabelas_especiais = {
   rajada_de_golpes: { nome: 'Rajada de Golpes'},
   rajada_maior: { nome: 'Rajada Maior'},
   ratros_invisivel: { nome: 'Rastro invisível', },
+  resistencia_frio_fogo_5: { nome: 'Resistência a Frio e Fogo (5)'},
+  resistencia_frio_fogo_10: { nome: 'Resistência a Frio e Fogo (10)'},
   resistencia_final: {nome: 'Resistência Final', },
   resistir_tentacao_natureza: { nome: 'Resistir tentação da natureza', },
   remover_doenca: { nome: 'Remover Doença', },
   sentir_armadilha: { nome: 'Sentir armadilha', },
   saude_divina: { nome: 'Saúde divina', },
   talento: { nome: 'Talento' },
+  visao_escuro: { nome: 'Visão no Escuro' },
 };
 
 // Bonus base de ataque.
