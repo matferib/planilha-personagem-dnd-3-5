@@ -494,3 +494,9 @@ function AdicionaImunidade(imunidade, dom_imunidades) {
   dom_imunidade.textContent = imunidade;
   dom_imunidades.appendChild(dom_imunidade);
 }
+
+function AdicionaResistenciaMagia(chave, valor, dom_resistencias) {
+  var dom_rm = CriaDiv('resistencia-magia-' + chave);
+  dom_rm.textContent = chave + ': ' + valor;
+  dom_resistencias.appendChild(dom_rm);
+}
