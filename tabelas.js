@@ -82,7 +82,7 @@ var tabelas_template = {
     tipo: 'extra-planar',
     origem: { },
     especiais: {
-      1: ['visao_escuro', 'resistencia_frio_fogo_5'],
+      1: ['visao_escuro', 'resistencia_frio_fogo_5', 'destruir_bem'],
       8: ['resistencia_frio_fogo_10'],
     },
     reducao_dano: {
@@ -308,6 +308,7 @@ var tabelas_especiais = {
   corpo_atemporal: { nome: 'Corpo Atemporal' },
   corpo_vazio: { nome: 'Corpo Vazio' },
   cura_pelas_maos: { nome: 'Cura pelas mãos', },
+  destruir_bem: { nome: 'Destruir o bem', },
   destruir_mal: { nome: 'Destruir o mal', },
   detectar_mal: { nome: 'Detectar o mal', },
   empatia_natureza: { nome: 'Empatia com a natureza', },

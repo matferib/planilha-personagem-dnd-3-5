@@ -382,19 +382,28 @@ function _DependenciasProficienciaArmas() {
 function _DependenciasHabilidadesEspeciais() {
   var especiais_antes = gPersonagem.especiais;
   gPersonagem.especiais = {};
+  var tabelas_nivel_especiais = [];
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var entrada_classe = gPersonagem.classes[i];
     if (tabelas_classes[entrada_classe.classe].especiais == null) {
       continue;
     }
-    var especiais_classe = tabelas_classes[entrada_classe.classe].especiais;
-    for (var nivel = 1; nivel <= entrada_classe.nivel; ++nivel) {
-      var especiais_nivel = especiais_classe[nivel];
-      if (especiais_nivel == null) {
+    tabelas_nivel_especiais.push(
+        { nivel: PersonagemNivelClasse(entrada_classe.classe), especiais: tabelas_classes[entrada_classe.classe].especiais });
+  }
+  var template_pc = PersonagemTemplate();
+  if (template_pc != null && 'especiais' in template_pc) {
+    tabelas_nivel_especiais.push({ nivel: PersonagemNivel(), especiais: template_pc.especiais });
+  }
+
+  for (var i = 0; i < tabelas_nivel_especiais.length; ++i) {
+    for (var nivel = 1; nivel <= tabelas_nivel_especiais[i].nivel; ++nivel) {
+      var especiais_por_nivel = tabelas_nivel_especiais[i].especiais;
+      if (!(nivel in especiais_por_nivel)) {
         continue;
       }
-      for (var j = 0; j < especiais_nivel.length; ++j) {
-        var especial = especiais_nivel[j];
+      for (var j = 0; j < especiais_por_nivel[nivel].length; ++j) {
+        var especial = especiais_por_nivel[nivel][j];
         // Alguns especiais sao tratados de forma diferente.
         if (especial == 'expulsar_fascinar_mortos_vivos') {
           var num_expulsoes = 3 + gPersonagem.atributos['carisma'].modificador +
