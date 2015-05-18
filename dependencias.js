@@ -16,6 +16,7 @@ function DependenciasGerais() {
   _DependenciasProficienciaArmas();
   _DependenciasHabilidadesEspeciais();
   _DependenciasImunidades();
+  _DependenciasResistenciaMagia();
 
   // So pode fazer aqui, pois os pre requisitos dependem de atributos, classes,
   // talentos, proficiencias...
@@ -427,6 +428,18 @@ function _DependenciasImunidades() {
   tabelas.forEach(function(tabela) {
     if ('imunidades' in tabela) {
       gPersonagem.imunidades = gPersonagem.imunidades.concat(tabela['imunidades']);
+    }
+  });
+}
+
+function _DependenciasResistenciaMagia() {
+  var tabelas = [ tabelas_raca[gPersonagem.raca] ];
+  if (gPersonagem.template.length > 0) {
+    tabelas.push(tabelas_template[gPersonagem.template]);
+  }
+  tabelas.forEach(function(tabela) {
+    if ('resistencia_magia' in tabela) {
+      gPersonagem.resistencia_magia = gPersonagem.resistencia_magia.concat(tabela['resistencia_magia']);
     }
   });
 }
