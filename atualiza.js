@@ -55,6 +55,7 @@ function _AtualizaGeral() {
   _AtualizaSalvacoes();
   _AtualizaHabilidadesEspeciais();
   _AtualizaImunidades();
+  _AtualizaResistenciaMagia();
   _AtualizaTalentos();
   _AtualizaProficienciaArmas();
   _AtualizaPericias();
@@ -429,6 +430,20 @@ function _AtualizaImunidades() {
   RemoveFilhos(dom_imunidades);
   gPersonagem.imunidades.forEach(function(imunidade) {
     AdicionaImunidade(imunidade, dom_imunidades);
+  });
+}
+
+function _AtualizaResistenciaMagia() {
+  var dom_resistencias = Dom('resistencia-magia');
+  RemoveFilhos(dom_resistencias);
+  if (gPersonagem.resistencia_magia.length == 0) {
+    dom_resistencias.style.visibility = false;
+    return;
+  }
+  dom_resistencias.style.visibility = true;
+  gPersonagem.resistencia_magia.forEach(function(rm) {
+    var valor = 'valor' in rm ? rm.valor : PersonagemNivel() + rm.por_nivel;
+    AdicionaResistenciaMagia(rm.chave, valor, dom_resistencias);
   });
 }
 
