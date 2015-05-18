@@ -100,10 +100,11 @@ var gPersonagem = {
   },
   // As habilidades especiais do personagem de acordo com a classe e raca. Cada entrada:
   // chave_habilidade: { vezes, usado, complemento }
-  especiais: {
-  },
-  // Imunidades do personagem, como frio, fogo etc.
+  especiais: {},
+  // Imunidades do personagem, como frio, fogo etc. Cada entrada: chave.
   imunidades: [],
+  // Podem haver diferentes resistencias. Cada entrada: {chave, valor}.
+  resistencia_magia: [],
   salvacoes: {
     fortitude: new Bonus(),
     reflexo: new Bonus(),
@@ -199,6 +200,7 @@ function PersonagemLimpaGeral() {
     }
   }
   gPersonagem.imunidades.length = 0;
+  gPersonagem.resistencia_magia.length = 0;
 }
 
 
