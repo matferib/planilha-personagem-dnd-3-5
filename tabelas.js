@@ -967,9 +967,7 @@ Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha um
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
 Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e não provoca ataques de oportunidade
-Combate Montado¹ 1 graduação em Cavalgar Evita os ataques contra a montaria com um teste de Cavalgar
 Arquearia Montada¹ Combate Montado Sofre metade das penalidades nos ataques à distância realizados sobre montarias
-Investida Montada¹ Combate Montado Pode se deslocar antes e depois de uma investida montada
 Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas causam dano dobrado
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
@@ -1051,6 +1049,12 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   auto_suficiente: {
       nome: 'Auto-Suficiente',
       bonus_pericias: { cura: 2, sobrevivencia: 2 } },
+  combate_montado: {
+      nome: 'Combate Montado',
+      requisitos: { pericias: { cavalgar: 1 } },
+      guerreiro: true,
+      descricao: 'Evita os ataques contra a montaria com um teste de Cavalgar',
+  },
   combater_duas_armas: {
       nome: 'Combater com duas armas',
       requisitos: { atributos: { destreza: 15 } },
@@ -1156,6 +1160,12 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   ignorar_componentes_materiais: {
       nome: 'Ignorar Componentes Materiais',
       descricao: 'Conjura magias ignorando os componentes materiais.', },
+  investida_montada: {
+      nome: 'Investida Montada',
+      guerreiro: true,
+      requisitos: { talentos: ['combate_montado'] },
+      descricao: 'Pode se deslocar antes e depois de uma investida montada',
+  },
   tiro_certeiro: {
     nome: 'Tiro Certeiro',
     guerreiro: true,

@@ -459,6 +459,29 @@ function CarregaTestes() {
         return;
       }
 
+      // Requisito de pericia.
+      gPersonagem.classes[0].classe = 'guerreiro';
+      gPersonagem.classes[0].nivel = 1;
+      r =  PersonagemVerificaPrerequisitosTalento('combate_montado');
+      if (r == null) {
+        this.detalhes = 'Esperava erro no prerequisito de combate montado';
+        this.resultado = false;
+        return;
+      }
+      gPersonagem.pericias.lista['cavalgar'] = { pontos: 1, graduacoes: 1 };
+      r =  PersonagemTemPericia('combate_montado', 2);
+      if (r == true) {
+        this.detalhes = 'Esperava que falhasse por ranks';
+        this.resultado = false;
+        return;
+      }
+      r =  PersonagemVerificaPrerequisitosTalento('combate_montado');
+      if (r != null) {
+        this.detalhes = 'Esperava que combate montado funcionasse com cavalgar';
+        this.resultado = false;
+        return;
+      }
+
       // Requisito de nivel.
       r = PersonagemVerificaPrerequisitosTalento('lideranca');
       if (r == null) {

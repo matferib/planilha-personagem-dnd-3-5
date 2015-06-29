@@ -168,6 +168,20 @@ var gPersonagem = {
   notas: '',
 };
 
+// Retorna true se o personagem tiver a pericia. Se ranks nao for null, verifica o minimo tambem. Por ultimo, verifica complemento.
+function PersonagemTemPericia(chave, ranks, complemento) {
+  if (ranks == null) {
+    ranks = 1;
+  }
+  if (!(chave in gPersonagem.pericias.lista)) {
+    return false;
+  }
+  if (gPersonagem.pericias.lista[chave].graduacoes < ranks) {
+    return false;
+  }
+  return true;
+}
+
 // Limpa dependencias antes de comecar a conversao das entradas para o personagem. Tambem chamada na geracao de personagens.
 function PersonagemLimpaGeral() {
   gPersonagem.pontos_vida.total = 0;
@@ -371,6 +385,11 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
     var chave_arma = tabelas_armas_invertida[complemento];
     if (!PersonagemProficienteComArma(chave_arma)) {
       return (prefixo_erro + 'proficiencia com ' + complemento);
+    }
+  }
+  for (var pericia in requisitos.pericias) {
+    if (!PersonagemTemPericia(pericia, requisitos.pericias[pericia])) {
+      return (prefixo_erro + 'pericia em ' + tabelas_pericias[pericia].nome + ', ' + requisitos.pericias[pericia] + ' ranks');
     }
   }
   return null;
