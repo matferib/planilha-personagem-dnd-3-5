@@ -342,6 +342,18 @@ function PersonagemNivelConjuradorClasse(classe) {
   return nivel_conjurador;
 }
 
+// @param classe 
+// @return indice da linha de feitico a ser usado para a classe. 
+function PersonagemLinhaTabelaFeiticos(classe) {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    if (gPersonagem.classes[i].classe == classe) {
+      return gPersonagem.classes[i].linha_tabela_feiticos;
+    }
+  }
+  // nao deveria chegar aqui.
+  return 0;
+}
+
 // Verifica se o personagem atende aos requisitos do talento. Caso não atenda,
 // alertará uma mensagem.
 // @return descricao do erro caso a verificação falhe, null caso contrário.

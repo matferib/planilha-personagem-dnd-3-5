@@ -731,6 +731,63 @@ function CarregaTestes() {
 
   PersonagemLimpaGeral();
   TemplateTeste({
+    nome: 'Nivel Conjurador',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes[0].classe = 'mago';
+      gPersonagem.classes[0].nivel = 1;
+      _DependenciasNivelConjurador();
+      if (PersonagemNivelConjuradorClasse('mago') != 1) {
+        this.resultado = false;
+        this.detalhes = 'Esperava mago nivel 1';
+        return;
+      }
+      if (PersonagemLinhaTabelaFeiticos('mago') != 1) {
+        this.resultado = false;
+        this.detalhes = 'Esperava mago linha 1';
+        return;
+      }
+      gPersonagem.classes.push({ classe: 'teurgista_mistico', nivel: 1});
+      _DependenciasNivelConjurador();
+      if (PersonagemNivelConjuradorClasse('mago') != 2) {
+        this.resultado = false;
+        this.detalhes = 'Esperava mago nivel 2';
+        return;
+      }
+      if (PersonagemLinhaTabelaFeiticos('mago') != 2) {
+        this.resultado = false;
+        this.detalhes = 'Esperava mago linha 2';
+        return;
+      }
+
+      PersonagemLimpaGeral();
+      gPersonagem.classes[0].classe = 'paladino';
+      gPersonagem.classes[0].nivel = 1;
+      _DependenciasNivelConjurador();
+      if (PersonagemNivelConjuradorClasse('paladino') != 0) {
+        this.resultado = false;
+        this.detalhes = 'Esperava paladino nivel 0';
+        return;
+      }
+      gPersonagem.classes[0].nivel = 4;
+      _DependenciasNivelConjurador();
+      if (PersonagemNivelConjuradorClasse('paladino') != 2) {
+        this.resultado = false;
+        this.detalhes = 'Esperava paladino nivel 2';
+        return;
+      }
+      if (PersonagemLinhaTabelaFeiticos('paladino') != 4) {
+        this.resultado = false;
+        this.detalhes = 'Esperava paladino linha 4';
+        return;
+      }
+
+      this.resultado = true;
+    },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
     nome: 'Feiticos',
     Testa: function() {
       var dom_teste = Dom('Feiticos');
