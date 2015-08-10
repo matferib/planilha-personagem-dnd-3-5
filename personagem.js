@@ -9,9 +9,10 @@ var gPersonagem = {
   alinhamento: '',
   experiencia: 0,
   divindade: '',
-  // Cada entrada: { classe, nivel, nivel_conjurador }.
+  // Cada entrada: { classe, nivel, nivel_conjurador, linha_tabela_feiticos }.
+  // linha_tabela_feiticos indica qual linha ler da tabela de feiticos, que pode ser diferente do nivel da classe e do nivel de conjurador (paladino, por exemplo).
   classes: [
-      { classe: 'guerreiro', nivel: 1, nivel_conjurador: 0 },
+      { classe: 'guerreiro', nivel: 1, nivel_conjurador: 0, linha_tabela_feiticos: 0 },
   ],
   niveis_negativos: 0,
   // TODO remover dados de vida do pontos de vida e usar este.

@@ -40,14 +40,17 @@ function _DependenciasNivelConjurador() {
     var classe_tabela = tabelas_classes[entrada_classe.classe];
     if (classe_tabela.nivel_conjurador == null) {
       entrada_classe.nivel_conjurador = 0;
+      entrada_classe.linha_tabela_feiticos = 0;
     } else {
       var nivel_minimo = classe_tabela.nivel_conjurador.minimo || 0;
       if (entrada_classe.nivel < nivel_minimo) {
         entrada_classe.nivel_conjurador = 0;
+        entrada_classe.linha_tabela_feiticos = 0;
         return;
       }
       var modificador_nivel_conjurador = classe_tabela.nivel_conjurador.modificador || 0;
       entrada_classe.nivel_conjurador = Math.floor(entrada_classe.nivel * modificador_nivel_conjurador);
+      entrada_classe.linha_tabela_feiticos = entrada_classe.nivel;
     }
   });
   // Niveis incrementais de conjurador.
@@ -62,6 +65,7 @@ function _DependenciasNivelConjurador() {
         return;
       }
       classe_personagem.nivel_conjurador += classe_personagem_modificadora.nivel;
+      classe_personagem.linha_tabela_feiticos += classe_personagem_modificadora.nivel;
     });
   });
 }
@@ -934,9 +938,13 @@ function _DependenciasNumeroFeiticosParaClasse(classe_personagem) {
   if (tabela_feiticos_classe == null) {
     return;
   }
+  // Possivel para paladinos e rangers.
+  if (classe_personagem.nivel_conjurador == 0) {
+    return;
+  }
   var atributo_chave = tabela_feiticos_classe.atributo_chave;
   var valor_atributo_chave = gPersonagem.atributos[atributo_chave].bonus.Total();
-  var feiticos_por_nivel = tabela_feiticos_classe.por_nivel[classe_personagem.nivel_conjurador];
+  var feiticos_por_nivel = tabela_feiticos_classe.por_nivel[classe_personagem.linha_tabela_feiticos];
   var nivel_inicial = tabela_feiticos_classe.possui_nivel_zero ? 0 : 1;
   gPersonagem.feiticos[chave_classe].em_uso = true;
   // Feiticos conhecidos (se houver para a classe). Se nao houver, vai usar o que vier da entrada.

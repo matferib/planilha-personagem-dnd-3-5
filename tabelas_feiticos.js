@@ -182,6 +182,8 @@ var tabelas_lista_feiticos_completa = {};
 var tabelas_lista_feiticos_invertida = {};
 
 // Tabelas de feiticos. Todas as entradas de por dia e conhecidos devem ter o mesmo numero de caracteres.
+// ATENCAO: todas as tabelas sao indexadas pelo nivel da classe. Porem, algumas classes alteram esse valor, por exemplo, teurgista mistico.
+// O valor a ser usado da classe eh indice_feiticos.
 // TODO adicionar uma variavel precisa_memorizar. O precisa_conhecer esta sendo sobreusado para este proposito.
 var tabelas_feiticos = {
   bardo: {

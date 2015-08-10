@@ -622,6 +622,9 @@ function _AtualizaFeiticosConhecidosParaClasse(chave_classe, div_classe) {
     if (nivel > feiticos_classe.nivel_maximo) {
       break;
     }
+    if (nivel == 0 && !tabelas_feiticos[chave_classe].possui_nivel_zero) {
+      continue;
+    }
     _AtualizaFeiticosConhecidosParaClassePorNivel(
         chave_classe,
         nivel,

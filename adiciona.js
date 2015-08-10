@@ -440,7 +440,7 @@ function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
 // Adiciona um nivel de feitico conhecido.
 function AdicionaNivelFeiticoConhecido(
     chave_classe, precisa_conhecer, div_conhecidos, indice_filho) {
-  var nivel = indice_filho;
+  var nivel = indice_filho + (tabelas_feiticos[chave_classe].possui_nivel_zero ? 0 : 1);
   var feiticos_conhecidos =
       gPersonagem.feiticos[chave_classe].conhecidos[nivel];
   // Se não precisa conhecer, o jogador pode adicionar feiticos como se fosse um grimório.
