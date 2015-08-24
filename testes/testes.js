@@ -631,6 +631,25 @@ function CarregaTestes() {
         return;
       }
       this.resultado = true;
+
+      // Paladino nivel 2 com graca divina e 1 de bonus carisma.
+      PersonagemLimpaGeral();
+      gPersonagem.classes[0].classe = 'paladino';
+      gPersonagem.classes[0].nivel = 2;
+      gPersonagem.atributos.sabedoria.bonus.Adiciona('base', null, 10);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
+      gPersonagem.atributos.constituicao.bonus.Adiciona('base', null, 10);
+      gPersonagem.atributos.carisma.bonus.Adiciona('base', null, 12);
+      gPersonagem.raca = 'humano';
+      _DependenciasAtributos();
+      _DependenciasHabilidadesEspeciais();
+      _DependenciasSalvacoes();
+      if (!ComparaSalvacoes({ fortitude: 4, reflexo: 1, vontade: 1 })) {
+        this.resultado = false;
+        this.detalhes = 'Clérigo humano de segundo nível deveria ser 4 1 1.';
+        return;
+      }
+      this.resultado = true;
     },
   }, body);
 

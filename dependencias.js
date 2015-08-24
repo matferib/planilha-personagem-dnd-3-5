@@ -873,6 +873,10 @@ function _DependenciasSalvacoes() {
     reflexo: 'destreza',
     vontade: 'sabedoria'
   };
+  var bonus_carisma = gPersonagem.atributos['carisma'].modificador;
+  if (bonus_carisma < 0) {
+    bonus_carisma = 0;
+  }
   for (var tipo_salvacao in habilidades_salvacoes) {
     var valor_base = 0;
     for (var i = 0; i < gPersonagem.classes.length; ++i) {
@@ -889,6 +893,9 @@ function _DependenciasSalvacoes() {
     var salvacoes_raca = tabelas_raca[gPersonagem.raca].salvacoes;
     if (salvacoes_raca && salvacoes_raca[tipo_salvacao]) {
       gPersonagem.salvacoes[tipo_salvacao].Adiciona('racial', null, salvacoes_raca[tipo_salvacao]);
+    }
+    if ('graca_divina' in gPersonagem.especiais) {
+      gPersonagem.salvacoes[tipo_salvacao].Adiciona('atributo', 'carisma', bonus_carisma);
     }
   }
   var outras_salvacoes_raca = tabelas_raca[gPersonagem.raca].outras_salvacoes;
