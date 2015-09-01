@@ -963,7 +963,6 @@ var tabelas_armas_exoticas = {
 // },
 var tabelas_talentos = {
 /*
-Apanhar Objetos¹ Des 15, Desviar Objetos, Ataque Desarmado Aprimorado Apanha uma arma arremessada ou projétil
 Encontrão Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de encontrão e não provoca ataques de oportunidade
 Atropelar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de atropelar e não provoca ataques de oportunidade
 Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e não provoca ataques de oportunidade
@@ -1017,6 +1016,12 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   agil: {
       nome: 'Ágil',
       bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 } },
+
+  apanhar_objetos: {
+      nome: 'Apanhar Objetos',
+      requisitos: { atributos: { destreza: 15 }, talentos: ['desviar_objetos', 'ataque_desarmado_aprimorado'], },
+      descricao: 'Apanha uma arma arremessada ou projétil',
+      guerreiro: true, },
   aptidao_magica: {
       nome: 'Aptidão Mágica',
       bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
