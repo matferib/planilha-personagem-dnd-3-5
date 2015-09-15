@@ -211,6 +211,17 @@ function _DependenciasTalentos() {
   } else {
     gPersonagem.talentos['monge'].length = 0;
   }
+  // Ranger.
+  var nivel_ranger = PersonagemNivelClasse('ranger');
+  if (nivel_ranger >= 11) {
+    gPersonagem.talentos['ranger'].length = 3;
+  } else if (nivel_ranger >= 6) {
+    gPersonagem.talentos['ranger'].length = 2;
+  } else if (nivel_ranger == 2) {
+    gPersonagem.talentos['ranger'].length = 1;
+  } else {
+    gPersonagem.talentos['ranger'].length = 0;
+  }
 
   // Calcula o impacto dos talentos no resto.
   for (var chave_classe in gPersonagem.talentos) {
@@ -470,8 +481,8 @@ function _VerificaPrerequisitosTalento() {
           !_VerificaTipoComplementoTalento(talento)) {
         talento.complemento = null;
       }
-      // Talentos de monge nao precisa do prerequisito.
-      if (chave_classe == 'monge') {
+      // Talentos de monge e ranger nao precisa do prerequisito.
+      if (chave_classe == 'monge' || chave_classe == 'ranger') {
         continue;
       }
       var erro = PersonagemVerificaPrerequisitosTalento(talento.chave, talento.complemento);

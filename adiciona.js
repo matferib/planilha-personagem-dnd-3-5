@@ -323,6 +323,14 @@ function AdicionaTalento(indice_talento, chave_classe, div_pai) {
         continue;
       }
     }
+    // Ranger eh limitado por nivel.
+    if (chave_classe == 'ranger') {
+      if ((indice_talento == 0 && talento_tabela.ranger != 2) ||
+          (indice_talento == 1 && talento_tabela.ranger != 6) ||
+          (indice_talento == 2 && talento_tabela.ranger != 11)) {
+        continue;
+      }
+    }
     talentos_ordenados.push(chave_talento);
   }
   talentos_ordenados.sort(function(te, td) {

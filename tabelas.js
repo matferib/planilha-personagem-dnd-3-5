@@ -235,6 +235,23 @@ var tabelas_classes = {
     nome: 'Ranger', dados_vida: 8, pontos_pericia: 6, bba: bba_forte,
     talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
     nivel_conjurador: { modificador: 0.5, minimo: 4, },
+    especiais: {
+      1: [ 'inimigo_predileto', 'rastrear', 'empatia_natureza', ],
+      2: [ 'estilo_combate', ],
+      3: [ 'tolerancia', ],
+      4: [ 'companheiro_animal', ],
+      5: [ 'inimigo_predileto', ],
+      6: [ 'estilo_combate_aprimorado', ],
+      7: [ 'caminho_floresta', ],
+      8: [ 'rastreador_eficaz', ],
+      9: [ 'evasao' ],
+      10: [ 'inimigo_predileto', ],
+      11: [ 'maestria_estilo_combate', ],
+      13: [ 'camuflagem' ],
+      15: [ 'inimigo_predileto' ],
+      17: [ 'mimetismo'],
+      20: ['inimigo_predileto'],
+    },
   },
   // classes NPC
   adepto: {
@@ -301,8 +318,11 @@ var tabelas_especiais = {
   aura_coragem: { nome: 'Aura de coragem' },
   auto_perfeicao: { nome: 'Auto-Perfeição' },
   bonus_ca: { nome: 'Bonus CA' },
+  caminho_floresta: { nome: 'Caminho da Floresta' },
+  estilo_combate_aprimorado: { nome: 'Estilo de Combate Aprimorado' },
   expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
   caminho_floresta: { nome: 'Caminho da floresta', },
+  camuflagem: { nome: 'Camuflagem', },
   companheiro_animal: { nome: 'Companheiro animal', },
   corpo_diamante: { nome: 'Corpo de Diamante' },
   corpo_atemporal: { nome: 'Corpo Atemporal' },
@@ -316,18 +336,22 @@ var tabelas_especiais = {
   evasao: { nome: 'Evasão', },
   evasao_aprimorada: { nome: 'Evasão Aprimorada', },
   escudo_heroico: { nome: 'Escudo Heróico', },
-  esquiva_sobrenatural: { nome: 'Esquiva sobrenatural', },
+  esquiva_sobrenatural: { nome: 'Esquiva Sobrenatural', },
+  estilo_combate: { nome: 'Estilo de Combate' },
   familiar: { nome: 'Familiar', },
   forma_selvagem: { nome: 'Forma selvagem', },
   graca_divina: { nome: 'Graça divina', },
   grito_guerra: { nome: 'Grito de Guerra', },
   idiomas_sol_lua: { nome: 'Idiomas do Sol e da Lua' },
+  inimigo_predileto: { nome: 'Inimigo Predileto' },
   inspirar_coragem: { nome: 'Inspirar Coragem', },
   integridade_corporal: { nome: 'Integridade Corporal' },
   juramento_furia: { nome: 'Juramento de Fúria', },
+  maestria_estilo_combate: { nome: 'Maestria do Estilo de Combate' },
   mao_vibrante: { nome: 'Mão Vibrante' },
   medo: { nome: 'Medo', },
-  mente_tranquila: { nome: 'Mente Tranquila' }, 
+  mente_tranquila: { nome: 'Mente Tranquila' },
+  mimetismo: { nome: 'Mimetismo' },
   montaria_especial: { nome: 'Montaria especial', },
   passo_etereo: { nome: 'Passo Etéreo' },
   pureza_corporal: { nome: 'Pureza Corporal' },
@@ -343,7 +367,9 @@ var tabelas_especiais = {
   senso_natureza: { nome: 'Senso da natureza', },
   rajada_de_golpes: { nome: 'Rajada de Golpes'},
   rajada_maior: { nome: 'Rajada Maior'},
-  ratros_invisivel: { nome: 'Rastro invisível', },
+  rastrear: { nome: 'Rastrear' },
+  rastreador_eficaz: { nome: 'Rastreador Eficaz' },
+  rastro_invisivel: { nome: 'Rastro invisível', },
   resistencia_frio_fogo_5: { nome: 'Resistência a Frio e Fogo (5)'},
   resistencia_frio_fogo_10: { nome: 'Resistência a Frio e Fogo (10)'},
   resistencia_final: {nome: 'Resistência Final', },
@@ -352,6 +378,7 @@ var tabelas_especiais = {
   sentir_armadilha: { nome: 'Sentir armadilha', },
   saude_divina: { nome: 'Saúde divina', },
   talento: { nome: 'Talento' },
+  tolerancia: { nome: 'Tolerancia' },
   visao_escuro: { nome: 'Visão no Escuro' },
 };
 
@@ -970,7 +997,6 @@ Arquearia Montada¹ Combate Montado Sofre metade das penalidades nos ataques à 
 Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas causam dano dobrado
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
-Armas Maior¹ Des 19, Combater com Duas Armas Aprimorado, Combater com Duas Armas, bônus base de ataque +11 Adquire um terceiro ataque com a mão inábil
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
 Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação de movimento
@@ -981,10 +1007,8 @@ Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas re
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
-Tiro Rápido¹ Des 13, Tiro Certeiro Um ataque à distância adicional por rodada
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
-Tiro Múltiplo¹ Des 17, Tiro Certeiro, Tiro Rápido, bônus base de ataque +6 Dispara duas ou mais flechas simultaneamente
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
@@ -1064,12 +1088,24 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       nome: 'Combater com duas armas',
       requisitos: { atributos: { destreza: 15 } },
       guerreiro: true,
-      descricao: 'Reduz penalidade ao usar duas maos em 2.', },
+      ranger: 2,
+      descricao: 'Reduz penalidade ao usar duas maos em 2.',
+  },
   combater_duas_armas_aprimorado: {
       nome: 'Combater com duas armas aprimorado',
       requisitos: { atributos: { destreza: 17 }, bba: 6, talentos: [ 'combater_duas_armas'] },
       guerreiro: true,
-      descricao: 'Ataque adicional com a segunda mao.', },
+      ranger: 6,
+      descricao: 'Ataque adicional com a segunda mao.',
+  },
+  // TODO regra do terceiro ataque.
+  combater_duas_armas_maior: {
+      nome: 'Combater com Duas Armas Maior',
+      guerreiro: true,
+      ranger: 11,
+      requisitos: { atributos: { destreza: 19 }, talentos: ['combater_duas_armas_aprimorado', ], bba: 11 },
+      descricao: 'Adquire um terceiro ataque com a mão inábil',
+  },
   // TODO teoricamente esse bonus eh so se correr...
   corrida: {
       nome: 'Corrida',
@@ -1171,15 +1207,6 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       requisitos: { talentos: ['combate_montado'] },
       descricao: 'Pode se deslocar antes e depois de uma investida montada',
   },
-  tiro_certeiro: {
-    nome: 'Tiro Certeiro',
-    guerreiro: true,
-    descricao: '+1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros.', },
-  tiro_preciso: {
-    nome: 'Tiro Preciso',
-    guerreiro: true,
-    requisitos: { talentos: [ 'tiro_certeiro'], },
-    descricao: 'Anula a penalidade por disparar contra um adversário em combate corporal com um aliado (-4)', },
   derrubar_aprimorado: {
       nome: 'Derrubar Aprimorado (Imobilização Aprimorada)',
       requisitos: { talentos: ['especializacao_em_combate'] },
@@ -1265,12 +1292,40 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       nome: 'Saque rápido',
       requisitos: { bba: 1 },
       guerreiro: true,
-      descricao: 'Saca uma arma branca como ação livre.', },
+      descricao: 'Saca uma arma branca como ação livre.',
+  },
+  tiro_certeiro: {
+    nome: 'Tiro Certeiro',
+    guerreiro: true,
+    ranger: 2,
+    descricao: '+1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros.',
+  },
+  tiro_multiplo: {
+      nome: 'Tiro Múltiplo',
+      guerreiro: true,
+      ranger: 6,
+      requisitos: { atributos: { destreza: 17 }, talentos: ['tiro_certeiro', 'tiro_rapido'], bba: 6, },
+      descricao: 'Dispara duas ou mais flechas simultaneamente.',
+  },
+  tiro_preciso: {
+    nome: 'Tiro Preciso',
+    guerreiro: true,
+    ranger: 11,
+    requisitos: { talentos: [ 'tiro_certeiro'], },
+    descricao: 'Anula a penalidade por disparar contra um adversário em combate corporal com um aliado (-4)',
+  },
+  tiro_rapido: {
+      nome : 'Tiro Rápido',
+      guerreiro: true,
+      requisitos: { atributos: { destreza: 13 }, talentos: ['tiro_certeiro'], },
+      descricao: 'Um ataque à distância adicional por rodada.',
+  },
   tolerancia: {
       nome: 'Tolerância',  // Endurance.
       descricao: '+4 de bônus nos testes para resistir a danos não letais (nadar, correr, marcha ' +
                  'forçada, respiração, fome e sede, frio, calor e sufocamento. Pode dormir em armadura ' +
-                 'leve ou média sem fatigar.', },
+                 'leve ou média sem fatigar.',
+  },
   trespassar: {
       nome: 'Trespassar',  // Cleave
       descricao: 'Desfere um ataque corporal extra depois de imobilizar um oponente',

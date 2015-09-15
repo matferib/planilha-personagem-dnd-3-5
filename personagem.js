@@ -76,6 +76,7 @@ var gPersonagem = {
     guerreiro: [],
     mago: [],
     monge: [],
+    ranger: [],
   },
   // pericias.
   pericias: {
