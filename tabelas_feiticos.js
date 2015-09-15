@@ -174,6 +174,82 @@ var tabelas_lista_feiticos = {
   },
   feiticeiro: {
   },
+  ranger: {
+    1: {
+      'acalmar_animais': {
+        nome: 'Acalmar Animais', descricao: 'Acalma 2d4+nivel DV de animais', escola: 'encantamento',
+      },
+      'alarme': {
+        nome: 'Alarme', descricao: 'Protege uma área durante 2h/nível', escola: 'abjuracao',
+      },
+      'constricao': {
+        nome: 'Constrição', descricao: 'Plantas enredam todos em um círculo de 12m de raio', escola: 'transmutacao',
+      },
+      'detectar_animais_ou_plantas': {
+        nome: 'Detectar Animais ou Plantas', descricao: 'Detecta espécies de animais ou plantas.', escola: '',
+      },
+      'detectar_armadilhas': {
+        nome: 'Detectar Armadilhas', descricao: 'Revela armadilhas naturais ou primitivas', escola: '',
+      },
+      'detectar_venenos': {
+        nome: 'Detectar Venenos', descricao: 'Detecta veneno em uma criatura ou objeto', escola: '',
+      },
+      'enfeiticar_animal': {
+        nome: 'Torna um animal seu aliado', descricao: '', escola: '',
+      },
+      'falar_com_animais': {
+        nome: 'Falar com Animais', descricao: 'Comunicação com animais naturais', escola: '',
+      },
+      'invisibilidade_contra_animais': {
+        nome: 'Invisibilidade Contra Animais', descricao: 'Animais não percebem 1 alvo/nível.', escola: '',
+      },
+      'invocar_aliado_natureza_i': {
+        nome: 'Invocar Aliado da Natureza I', descricao: 'Invoca animais para auxílio.', escola: 'conjuracao',
+      },
+      'ler_magias': {
+        nome: 'Ler Magias', descricao: 'Decifra pergaminho ou grimórios', escola: '',
+      },
+      'mensageiro_animal': {
+        nome: 'Mensageiro Animal', descricao: 'Envia um animal miúdo para um local específico.', escola: '',
+      },
+      'passos_longos': {
+        nome: 'Passos Longos', descricao: 'Aumenta deslocamento em 3m (dois quadrados)', escola: '',
+      },
+      'passos_sem_pegadas': {
+        nome: 'Passos sem Pegadas', descricao: 'Um alvo/nível não deixa rastro.', escola: '',
+      },
+      'presa_magica': {
+        nome: 'Presa mágica', descricao: 'Uma arma natural do alvo recebe +1 ataque e dano', escola: '',
+      },
+      'resistencia_elementos': {
+        nome: 'Ignora 10 ou mais dano/ataque contra um tipo de energia', descricao: '', escola: '',
+      },
+      'retardar_envenenamento': {
+        nome: 'Retardar Envenenamento', descricao: 'Impede que veneno cause dano ao alvo durante 1 hora/nível', escola: '',
+      },
+      'salto': {
+        nome: 'Salto', descricao: 'Alvo recebe bônus de saltar.', escola: '',
+      },
+      'suportar_elementos': {
+        nome: 'Suportar Elementos', descricao: 'Mantém uma criatura confortável dentro de ambientes áridos.', escola: '',
+      },
+    },
+    2: {
+      '': {
+        nome: '', descricao: '', escola: '',
+      },
+    },
+    3: {
+      '': {
+        nome: '', descricao: '', escola: '',
+      },
+    },
+    4: {
+      '': {
+        nome: '', descricao: '', escola: '',
+      },
+    },
+  },
 };
 tabelas_lista_feiticos['mago_necromante'] = tabelas_lista_feiticos['mago'];
 // Todos os feiticos ordenados por chave.
@@ -340,6 +416,31 @@ var tabelas_feiticos = {
           19: { por_dia: '4444444433', },
           20: { por_dia: '4444444444', }, }, },
   paladino: {
+      atributo_chave: 'sabedoria',
+      precisa_conhecer: false,
+      possui_nivel_zero: false,
+      por_nivel: {
+          1: { por_dia: '' },
+          2: { por_dia: '' },
+          3: { por_dia: '' },
+          4: { por_dia: '0' },
+          5: { por_dia: '0' },
+          6: { por_dia: '1' },
+          7: { por_dia: '1' },
+          8: { por_dia: '10' },
+          9: { por_dia: '10' },
+          10: { por_dia: '11' },
+          11: { por_dia: '110' },
+          12: { por_dia: '111' },
+          13: { por_dia: '111' },
+          14: { por_dia: '2110' },
+          15: { por_dia: '2111' },
+          16: { por_dia: '2211' },
+          17: { por_dia: '2221' },
+          18: { por_dia: '3221' },
+          19: { por_dia: '3332' },
+          20: { por_dia: '3333' }, }, },
+  ranger: {
       atributo_chave: 'sabedoria',
       precisa_conhecer: false,
       possui_nivel_zero: false,
