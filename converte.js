@@ -102,7 +102,9 @@ function _ConverteTalentos() {
   for (var chave_classe in gPersonagem.talentos) {
     var lista = gPersonagem.talentos[chave_classe];
     lista.length = 0;
-    for (var i = 0; i < gEntradas.talentos[chave_classe].length; ++i) {
+    // Personagens antigos nao tem algumas chaves da tabela de talentos. Eh
+    // importante verificar ou vai quebrar.
+    for (var i = 0; (chave_classe in gEntradas.talentos) && (i < gEntradas.talentos[chave_classe].length); ++i) {
       var talento_entrada = gEntradas.talentos[chave_classe][i];
       lista.push({
           chave: talento_entrada.chave,
