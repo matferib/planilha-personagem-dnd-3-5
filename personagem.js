@@ -92,7 +92,7 @@ var gPersonagem = {
   },
   // Cada entrada: { nome,
   //                 arma_primaria: {  nome,
-  //                                   bonus_por_categoria: { categoria: { ataque, dano }, ... } ] },
+  //                                   bonus_por_categoria: { categoria: { ataque: [], dano: valor }, ... } },
   //                 arma_secundaria: { idem }, }.
   // A categoria pode ser cac, cac_leve, cac_duas_maos, distancia, arremesso...
   estilos_luta: [],
@@ -343,8 +343,8 @@ function PersonagemNivelConjuradorClasse(classe) {
   return nivel_conjurador;
 }
 
-// @param classe 
-// @return indice da linha de feitico a ser usado para a classe. 
+// @param classe
+// @return indice da linha de feitico a ser usado para a classe.
 function PersonagemLinhaTabelaFeiticos(classe) {
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     if (gPersonagem.classes[i].classe == classe) {
@@ -465,7 +465,7 @@ function PersonagemTemplate() {
 function PersonagemMaiorClasseConjurador(tipo) {
   var classes_por_tipo = {
     'arcano': { mago: true, feiticeiro: true, mago_necromante: true },
-    'divino': { clerigo: true, druida: true }, 
+    'divino': { clerigo: true, druida: true },
   };
   var maior = null;
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
@@ -480,12 +480,3 @@ function PersonagemMaiorClasseConjurador(tipo) {
   }
   return maior;
 }
-
-
-
-
-
-
-
-
-

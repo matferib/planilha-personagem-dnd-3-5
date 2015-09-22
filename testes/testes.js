@@ -81,7 +81,8 @@ function CarregaTestes() {
 
   PersonagemLimpaGeral();
   gPersonagem.armas = [
-      { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' } ];
+      { entrada: { chave: 'desarmado', bonus: 0, obra_prima: false}, nome_gerado: 'Desarmado' },
+      { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' } ],
   TemplateTeste({
     nome: 'ArmaPersonagem',
     Testa: function() {
@@ -807,6 +808,41 @@ function CarregaTestes() {
 
   PersonagemLimpaGeral();
   TemplateTeste({
+    nome: 'Multiplos ataques',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes[0].classe = 'guerreiro';
+      gPersonagem.classes[0].nivel = 6;
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'espada longa +1', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var bonus_espada = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.cac;
+      if (bonus_espada.ataque.length != 2 || gPersonagem.numero_ataques != 2) {
+        this.detalhes = 'Esperava dois ataques de guerreiro de 6 nivel.';
+        this.resultado = false;
+        return;
+      }
+      if (bonus_espada.ataque[0] != 7) {
+        this.detalhes = 'Esperava +7 primeiro ataque.';
+        this.resultado = false;
+        return;
+      }
+      if (bonus_espada.ataque[1] != 2) {
+        this.detalhes = 'Esperava +2 segundo ataque.';
+        this.resultado = false;
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
     nome: 'Feiticos',
     Testa: function() {
       var dom_teste = Dom('Feiticos');
@@ -821,12 +857,12 @@ function CarregaTestes() {
           { 0: [ { f0a: 'f0a'}, { f0b: 'f0b'} ]});
       if (Dom('div-feiticos-slots-feiticeiro-0').childNodes.length != 2) {
         this.resultado = false;
-        this.erro = 'Esperava dois slots de feitico';
+        this.detalhes = 'Esperava dois slots de feitico';
         return;
       }
       if (Dom('input-feiticos-slots-gastos-feiticeiro-0-0').checked || !Dom('input-feiticos-slots-gastos-feiticeiro-0-1').checked) {
         this.resultado = false;
-        this.erro = 'Checkbox de gasto em estado inconsistente. Esperava 0 e 1';
+        this.detalhes = 'Checkbox de gasto em estado inconsistente. Esperava 0 e 1';
         return;
       }
       // Limpa o dom de teste.

@@ -278,7 +278,12 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
   var arma_estilo = primaria ? estilo.arma_primaria : estilo.arma_secundaria;
   for (var categoria in arma_estilo.bonus_por_categoria) {
     var bonus = arma_estilo.bonus_por_categoria[categoria];
-    resumo += categoria + ': ' + StringSinalizada(bonus.ataque) + ', ';
+    var string_ataque = '';
+    bonus.ataque.forEach(function(at) {
+      string_ataque += StringSinalizada(at) + '/';
+    });
+    string_ataque = string_ataque.slice(0, -1);
+    resumo += categoria + ': ' + string_ataque + ', ';
     var arma_tabela = arma_personagem.arma_tabela;
     var nivel_monge = PersonagemNivelClasse('monge');
     if (estilo.nome == 'arma_dupla' && !primaria) {

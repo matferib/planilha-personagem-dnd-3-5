@@ -799,8 +799,9 @@ function _DependenciasBonusPorCategoria(
       break;
     }
   }
-  var bonus_por_categoria = { ataque: 0, dano: 0 };
+  var bonus_por_categoria = { ataque: [0], dano: 0 };
   var multiplicador_dano_forca = 0;
+  var nivel_monge = PersonagemNivelClasse('monge');
   if (estilo.nome == 'uma_arma') {
     multiplicador_dano_forca = 1.0;
     if (gPersonagem.atributos.forca.modificador > 0 && !arma_leve) {
@@ -810,56 +811,55 @@ function _DependenciasBonusPorCategoria(
     multiplicador_dano_forca = 1.0;
   } else if (estilo.nome == 'duas_armas' || estilo.nome == 'arma_dupla') {
     if (primaria) {
-      bonus_por_categoria.ataque = secundaria_leve ? -4 : -6;
+      bonus_por_categoria.ataque[0] = secundaria_leve ? -4 : -6;
       if (PersonagemPossuiTalento('combater_duas_armas')) {
-        bonus_por_categoria.ataque += 2;
+        bonus_por_categoria.ataque[0] += 2;
       }
     } else {
-      bonus_por_categoria.ataque = secundaria_leve ? -8 : -10;
+      bonus_por_categoria.ataque[0] = secundaria_leve ? -8 : -10;
       if (PersonagemPossuiTalento('combater_duas_armas')) {
-        bonus_por_categoria.ataque += 6;
+        bonus_por_categoria.ataque[0] += 6;
       }
     }
     multiplicador_dano_forca = primaria ? 1.0 : 0.5;
   } else if (estilo.nome == 'rajada') {
-    var nivel_monge = PersonagemNivelClasse('monge');
     if (nivel_monge >= 9) {
-      bonus_por_categoria.ataque = 0;
+      bonus_por_categoria.ataque[0] = 0;
     } else if (nivel_monge >= 5) {
-      bonus_por_categoria.ataque = -1;
+      bonus_por_categoria.ataque[0] = -1;
     } else {
-      bonus_por_categoria.ataque = -2;
+      bonus_por_categoria.ataque[0] = -2;
     }
   }
 
-  if (categoria.indexOf('cac') != -1 || categoria == 'rajada') {
+  if (categoria.indexOf('cac') != -1 || estilo.nome == 'rajada') {
     // Quando tem acuidade, usa destreza.
     if (arma_leve && arma_personagem.acuidade && gPersonagem.bba_cac < gPersonagem.bba_cac_acuidade) {
-      bonus_por_categoria.ataque += gPersonagem.bba_cac_acuidade;
+      bonus_por_categoria.ataque[0] += gPersonagem.bba_cac_acuidade;
     } else {
-      bonus_por_categoria.ataque += gPersonagem.bba_cac;
+      bonus_por_categoria.ataque[0] += gPersonagem.bba_cac;
     }
-    bonus_por_categoria.ataque += arma_personagem.bonus_ataque;
+    bonus_por_categoria.ataque[0] += arma_personagem.bonus_ataque;
     bonus_por_categoria.dano +=
         Math.floor(gPersonagem.atributos.forca.modificador * multiplicador_dano_forca) +
         arma_personagem.bonus_dano;
   } else if (categoria.indexOf('arremesso') != -1) {
-    bonus_por_categoria.ataque +=
+    bonus_por_categoria.ataque[0] +=
         gPersonagem.bba_distancia + arma_personagem.bonus_ataque;
     bonus_por_categoria.dano +=
         Math.floor(gPersonagem.atributos.forca.modificador * multiplicador_dano_forca) +
         arma_personagem.bonus_dano;
   } else if (categoria.indexOf('distancia') != -1) {
-    bonus_por_categoria.ataque +=
+    bonus_por_categoria.ataque[0] +=
         gPersonagem.bba_distancia + arma_personagem.bonus_ataque;
     bonus_por_categoria.dano += arma_personagem.bonus_dano;
   }
 
   // Proficiencia e foco.
   if (!arma_personagem.proficiente) {
-    bonus_por_categoria.ataque -= 4;
+    bonus_por_categoria.ataque[0] -= 4;
   } else if (arma_personagem.foco) {
-    bonus_por_categoria.ataque += arma_personagem.foco;
+    bonus_por_categoria.ataque[0] += arma_personagem.foco;
   }
   // Especialização.
   if (arma_personagem.especializado) {
@@ -870,10 +870,27 @@ function _DependenciasBonusPorCategoria(
   var bonus_racial = tabelas_raca[gPersonagem.raca].bonus_ataque;
   if (bonus_racial) {
     if (bonus_racial.armas[arma_personagem.entrada.chave]) {
-      bonus_por_categoria.ataque += bonus_racial.armas[arma_personagem.entrada.chave];
+      bonus_por_categoria.ataque[0] += bonus_racial.armas[arma_personagem.entrada.chave];
     } else if (bonus_racial.categorias[categoria]) {
-      bonus_por_categoria.ataque += bonus_racial.categorias[categoria];
+      bonus_por_categoria.ataque[0] += bonus_racial.categorias[categoria];
     }
+  }
+  if (estilo.nome == 'rajada' && nivel_monge > 0) {
+    bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
+    if (nivel_monge >= 11) {
+      bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
+    }
+  }
+  if (primaria) {
+    var num_ataques = gPersonagem.numero_ataques - 1;
+    var modificador = -5;
+    while (num_ataques > 0) {
+      bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0] + modificador);
+      --num_ataques;
+      modificador -= 5;
+    }
+  } else if (PersonagemPossuiTalento('combater_duas_armas_aprimorado')) {
+    bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0] - 5);
   }
   return bonus_por_categoria;
 }
