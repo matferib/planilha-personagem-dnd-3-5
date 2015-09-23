@@ -853,6 +853,21 @@ function _DependenciasBonusPorCategoria(
     bonus_por_categoria.ataque[0] +=
         gPersonagem.bba_distancia + arma_personagem.bonus_ataque;
     bonus_por_categoria.dano += arma_personagem.bonus_dano;
+    var bonus_forca = gPersonagem.atributos.forca.modificador;
+    if (bonus_forca < 0) {
+      bonus_por_categoria.dano += bonus_forca;
+    } else {
+      var indice_composto = arma_personagem.entrada.chave.indexOf('composto_');
+      if (indice_composto != -1) {
+        var bonus_arco = parseInt(arma_personagem.entrada.chave.slice(indice_composto + 9)) || 0;
+        if (gPersonagem.atributos.forca.modificador >= bonus_arco) {
+          bonus_por_categoria.dano += bonus_arco;
+        } else {
+          // Nao consegue usar direito.
+          bonus_por_categoria.ataque[0] -= 2;
+        }
+      }
+    }
   }
 
   // Proficiencia e foco.

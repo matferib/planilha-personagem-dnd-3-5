@@ -82,7 +82,9 @@ function CarregaTestes() {
   PersonagemLimpaGeral();
   gPersonagem.armas = [
       { entrada: { chave: 'desarmado', bonus: 0, obra_prima: false}, nome_gerado: 'Desarmado' },
-      { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' } ],
+      { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' },
+      { entrada: { chave: 'arco_curto_composto_1', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto Composto (1)' },
+      { entrada: { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo Composto (2)' } ],
   TemplateTeste({
     nome: 'ArmaPersonagem',
     Testa: function() {
@@ -834,6 +836,58 @@ function CarregaTestes() {
       }
       if (bonus_espada.ataque[1] != 2) {
         this.detalhes = 'Esperava +2 segundo ataque.';
+        this.resultado = false;
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Arcos Compostos',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes[0].classe = 'guerreiro';
+      gPersonagem.classes[0].nivel = 6;
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 15);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco curto composto (1)', arma_secundaria: 'desarmado' }));
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco longo composto (2)', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var dano_arco_curto = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.dano;
+      if (dano_arco_curto != 1) {
+        this.detalhes = 'Esperava 1 de bonus de dano arco composto (1).';
+        this.resultado = false;
+        return;
+      }
+      var dano_arco_longo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.dano;
+      if (dano_arco_longo != 2) {
+        this.detalhes = 'Esperava 2 de bonus de dano arco composto (2).';
+        this.resultado = false;
+        return;
+      }
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      _DependenciasEstilos();
+      var dano_arco_longo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.dano;
+      if (dano_arco_longo != 0) {
+        this.detalhes = 'Esperava 0 de bonus de dano do arco composto (2) sem forca.';
+        this.resultado = false;
+        return;
+      }
+      var bonus_arco_longo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (bonus_arco_longo != 4) {
+        this.detalhes = 'Esperava 4 (6 -2) de bonus de ataque do arco composto (2) sem forca.';
         this.resultado = false;
         return;
       }
