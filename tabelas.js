@@ -1016,7 +1016,7 @@ var tabelas_armas_exoticas = {
           incremento_distancia: '2 quadrados', peso: '3kg', tipo: '-' },
 
   shuriken: { nome: 'shuriken (5)', preco: '1 PO', dano: { medio: '1d2'  }, critico: 'x2',
-              categorias: { distancia: true },
+              categorias: { arremesso: true },
               incremento_distancia: '2 quadrados', peso: '0,25kg', tipo: 'perfurante' },
 
 //Bolts (10)  1 gp  — — — — 1 lb. —
