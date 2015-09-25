@@ -76,7 +76,7 @@ function TemplateTeste(handler_teste, dom) {
 }
 
 function CarregaTestes() {
-  _CarregaTabelaArmasArmaduras();
+  CarregamentoInicial();
   var body = document.getElementsByTagName('body')[0];
 
   PersonagemLimpaGeral();
@@ -448,6 +448,24 @@ function CarregaTestes() {
       }
 
     },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Pericias',
+    Testa: function() {
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
+      _ConvertePericias();
+      _DependenciasAtributos();
+      _DependenciasItem('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
+      _DependenciasPericias();
+      if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 6) {
+        this.resultado = false;
+        this.detalhes = 'Esperava +5 de bonus de competencia em esconderse com manto elfico.';
+        return;
+      }
+      this.resultado = true;
+    }
   }, body);
 
   PersonagemLimpaGeral();

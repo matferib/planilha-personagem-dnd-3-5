@@ -2081,7 +2081,10 @@ var tabelas_pocoes = {
 var tabelas_capas = {
   manto_resistencia_1: { nome: 'Manto da resistência +1', preco: '1000 PO',
     propriedades: { salvacoes: { todas: 1} },  },
-  manto_elfico: { nome: 'Manto élfico', preco: '2500 PO' },
+  manto_elfico: {
+    nome: 'Manto élfico', preco: '2500 PO',
+    propriedades: { pericias: { esconderse: { competencia: 5 } } }
+  },
   manto_carisma_2: { nome: 'Manto do carisma +2', preco: '4000 PO',
     propriedades: { atributos: { carisma: 2 } },  },
   manto_resistencia_2: { nome: 'Manto da resistência +2', preco: '4000 PO',

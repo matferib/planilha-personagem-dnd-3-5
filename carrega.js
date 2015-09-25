@@ -377,10 +377,6 @@ function _CarregaPericias() {
     }
   }
   var div_pericias = Dom('div-pericias');
-  if (div_pericias == null) {
-    // Testes.
-    return;
-  }
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
     var habilidade = pericia.habilidade;
@@ -410,7 +406,10 @@ function _CarregaPericias() {
     div.appendChild(CriaSpan('+0', prefixo_id + '-total'));
 
     // Adiciona ao div.
-    div_pericias.appendChild(div);
+    if (div_pericias != null) {
+      // Testes.
+      div_pericias.appendChild(div);
+    }
 
     // Adiciona as gEntradas
     gEntradas.pericias.push({ chave: chave_pericia, pontos: 0 });

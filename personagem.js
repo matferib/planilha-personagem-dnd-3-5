@@ -219,6 +219,12 @@ function PersonagemLimpaGeral() {
   gPersonagem.resistencia_magia.length = 0;
 }
 
+function PersonagemLimpaPericias() {
+  for (var chave_pericia in gPersonagem.pericias.lista) {
+    var pericia_personagem = gPersonagem.pericias.lista[chave_pericia];
+    pericia_personagem.bonus.Limpa();
+  }
+}
 
 // Qualquer inicializacao do personagem eh feita aqui.
 function IniciaPersonagem() {

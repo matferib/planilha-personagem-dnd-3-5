@@ -10,6 +10,7 @@ function AtualizaGeral() {
   LeEntradas();
   // converte a estrutura de gEntradas para a de personagem.
   ConverteEntradasParaPersonagem();
+  PersonagemLimpaPericias();
   DependenciasGerais();
   _AtualizaGeral();
   gEstado.Salva(JSON.stringify(gEntradas));
