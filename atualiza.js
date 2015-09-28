@@ -654,8 +654,8 @@ function _AtualizaFeiticosConhecidosParaClassePorNivel(
   for (var indice = 0; indice < feiticos_conhecidos.length; ++indice) {
     // Adiciona os inputs.
     var dom = Dom('input-feiticos-conhecidos-' + chave_classe + '-' + nivel + '-' + indice);
-    var feitico_str = feiticos_conhecidos[indice];
-    dom.value = feitico_str;
+    dom.value = feiticos_conhecidos[indice];
+    var feitico_str = StringNormalizada(feiticos_conhecidos[indice]);
     if (feitico_str in tabelas_lista_feiticos_invertida) {
       feitico_str = tabelas_lista_feiticos_invertida[feitico_str];
     }

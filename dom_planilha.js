@@ -65,7 +65,7 @@ function CriaDomSlotsNivel(chave_classe, nivel, slots) {
 
 // Cria um slot de feitico, que pode conter o select ou não.
 function CriaDomSlotFeitico(precisa_memorizar, chave_classe, nivel, indice, slots) {
-  var classe = 'span-feiticos-slots-' + chave_classe + '-' + nivel; 
+  var classe = 'span-feiticos-slots-' + chave_classe + '-' + nivel;
   var id = classe + '-' + indice;
   var dom_slot = precisa_memorizar ? CriaDiv(id, classe) : CriaSpan('', id, classe);
 

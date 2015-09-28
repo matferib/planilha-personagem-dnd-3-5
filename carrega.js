@@ -3,6 +3,7 @@
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
 // preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
+  _CarregaTabelaNormalizacaoStrings();
   _CarregaHandlers();
   CarregaPersonagens();
   _CarregaRacas();
@@ -48,6 +49,10 @@ function CorrigePericias() {
       gEntradas.pericias.push({ 'chave': chave, pontos: 0 });
     }
   }
+}
+
+function _CarregaTabelaNormalizacaoStrings() {
+  PreencheMapaDiacriticals();
 }
 
 // Adiciona os handlers aos botoes da interface.
@@ -445,7 +450,7 @@ function _CarregaFeiticos() {
     for (var nivel in tabelas_lista_feiticos[classe]) {
       for (var chave_feitico in tabelas_lista_feiticos[classe][nivel]) {
         var feitico = tabelas_lista_feiticos[classe][nivel][chave_feitico];
-        tabelas_lista_feiticos_invertida[feitico.nome] = chave_feitico;
+        tabelas_lista_feiticos_invertida[StringNormalizada(feitico.nome)] = chave_feitico;
         tabelas_lista_feiticos_completa[chave_feitico] = feitico;
       }
     }

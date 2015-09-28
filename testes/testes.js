@@ -79,6 +79,19 @@ function CarregaTestes() {
   CarregamentoInicial();
   var body = document.getElementsByTagName('body')[0];
 
+  TemplateTeste({
+    nome: 'TestaNormalizacao',
+    Testa: function() {
+      var s = StringNormalizada("Ćãóś");
+      if (s != "caos") {
+        this.resultado = false;
+        this.detalhes = 'Esperava caos, recebi: ' + s;
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
   PersonagemLimpaGeral();
   gPersonagem.armas = [
       { entrada: { chave: 'desarmado', bonus: 0, obra_prima: false}, nome_gerado: 'Desarmado' },
