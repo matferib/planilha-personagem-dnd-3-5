@@ -1351,7 +1351,6 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   tiro_certeiro: {
     nome: 'Tiro Certeiro',
     guerreiro: true,
-    ranger: 2,
     descricao: '+1 de bônus nos ataques à distância e dano contra alvos num raio de 9 metros.',
   },
   tiro_multiplo: {
@@ -1371,6 +1370,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   tiro_rapido: {
       nome : 'Tiro Rápido',
       guerreiro: true,
+      ranger: 2,
       requisitos: { atributos: { destreza: 13 }, talentos: ['tiro_certeiro'], },
       descricao: 'Um ataque à distância adicional por rodada.',
   },
