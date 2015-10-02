@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CALCDEPS="${CLOSURELIB}/closure/bin/calcdeps.py"
+CALCDEPS="${CLOSURELIB:-../closure-library}/closure/bin/calcdeps.py"
 
 rm -f tudo.js tudo.temp.js
 

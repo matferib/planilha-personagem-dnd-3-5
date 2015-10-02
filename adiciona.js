@@ -232,6 +232,8 @@ function AdicionaEstiloLuta() {
       id_estilo.replace('id-estilo', 'id-estilo-arma-dupla');
   var id_estilo_rajada =
       id_estilo.replace('id-estilo', 'id-estilo-rajada');
+  var id_estilo_tiro_rapido =
+      id_estilo.replace('id-estilo', 'id-estilo-tiro-rapido');
   var id_select_primario =
       id_estilo.replace('id-estilo', 'id-select-primario-estilo');
   var id_select_secundario =
@@ -253,6 +255,9 @@ function AdicionaEstiloLuta() {
       'Arma dupla', id_estilo_arma_dupla, id_estilo, 'arma_dupla', id_select_secundario));
   div_novo_estilo.appendChild(_CriaRadioEstilo(
       'Rajada de Golpes', id_estilo_rajada, id_estilo, 'rajada', id_select_secundario));
+  div_novo_estilo.appendChild(_CriaRadioEstilo(
+      'Tiro Rápido', id_estilo_tiro_rapido, id_estilo, 'tiro_rapido', id_select_secundario));
+
   div_novo_estilo.appendChild(_CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta));
   div_novo_estilo.appendChild(CriaBr());
   div_novo_estilo.appendChild(CriaSpan('Principal: '));
