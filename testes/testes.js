@@ -502,7 +502,8 @@ function CarregaTestes() {
         this.resultado = false;
         return;
       }
-      gPersonagem.pericias.lista['cavalgar'] = { pontos: 1, graduacoes: 1 };
+      gPersonagem.pericias.lista['cavalgar'].pontos = 1;
+      gPersonagem.pericias.lista['cavalgar'].graduacoes = 1;
       r =  PersonagemTemPericia('combate_montado', 2);
       if (r == true) {
         this.detalhes = 'Esperava que falhasse por ranks';

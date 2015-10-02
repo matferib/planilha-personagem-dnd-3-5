@@ -217,6 +217,7 @@ function PersonagemLimpaGeral() {
   }
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
+  PersonagemLimpaPericias();
 }
 
 function PersonagemLimpaPericias() {

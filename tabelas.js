@@ -47,7 +47,10 @@ var tabelas_raca = {
       movimento: { terrestre: 6 },
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto',
-                            'arco_curto_composto'] },
+                            'arco_curto_composto'],
+      bonus_pericias: { ouvir: 2, procurar: 2, observar: 2 },
+      outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
+  },
   gnomo: {
       nome: 'Gnomo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
@@ -60,7 +63,10 @@ var tabelas_raca = {
       nome: 'Meio-Elfo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
       movimento: { terrestre: 6 },
-      atributos: {}, tamanho: 'medio' },
+      atributos: {}, tamanho: 'medio',
+      bonus_pericias: { diplomacia: 2, obter_informacao: 2, ouvir: 1, procurar: 1, observar: 1 },
+      outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
+  },
   meioorc: {
       nome: 'Meio-Orc',
       origem: { livro: 'Livro do Jogador', pagina: '' },
