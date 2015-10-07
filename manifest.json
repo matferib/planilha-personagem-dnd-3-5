@@ -3,6 +3,7 @@
   "name": "Planilha de Personagem D&D 3.5",
   "description": "Criador de personagens para D&D 3.5.",
   "version": "0.7.9",
+  "default_locale": "pt",
   "app": {
     "background": {
       "scripts": ["background.js"]

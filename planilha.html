@@ -45,21 +45,21 @@
 <div id="div-visoes" >
 </div> <!--div-visoes-->
 
-<div id="div-versao">Versão da Planilha: 0.7.9
+<div id="div-versao" class="i18n">Versão da Planilha: 0.7.9
 </div> <!--div-versao-->
 
 <div id="div-geral" class="divs-principais">
-Nome: <input type="text" id="nome"/>
-<button type="button" id="botao-salvar">Salvar</button>
-<button type="button" id="botao-abrir">Abrir</button>
-<button type="button" id="botao-excluir">Excluir</button>
+<span id="span-nome" class="i18n">Nome: </span><input type="text" id="nome"/>
+<button type="button" id="botao-salvar" class="i18n">Salvar</button>
+<button type="button" id="botao-abrir" class="i18n">Abrir</button>
+<button type="button" id="botao-excluir" class="i18n">Excluir</button>
 <select id="select-personagens"></select>
-<button type="button" id="botao-exportar">Exportar</button>
-<button type="button" id="botao-importar">Importar</button>
+<button type="button" id="botao-exportar" class="i18n">Exportar</button>
+<button type="button" id="botao-importar" class="i18n">Importar</button>
 <input type="text" id="json-personagem"></input>
 <br>
 
-Raça:
+<span id="span-raca" class="i18n">Raça:</span>
 <select id="raca">
 </select>&nbsp;
 <span id="span-template">
@@ -67,7 +67,7 @@ Template:
 <select id="template">
 </select>&nbsp;
 </span>
-Tamanho:
+<span id="span-tamanho" class="i18n">Tamanho:</span>
 <select id="tamanho">
   <option value="minusculo">Minusculo</option>
   <option value="diminuto">Diminuto</option>
@@ -80,7 +80,7 @@ Tamanho:
   <option value="colossal">Colossal</option>
 </select>
 <br>
-Alinhamento:
+<span id="span-alinhamento" class="i18n">Alinhamento:</span>
 <select id="alinhamento">
 	<option name="lb" value="lb">LB</option>
 	<option name="ln" value="ln">LN</option>
@@ -93,7 +93,7 @@ Alinhamento:
 	<option name="cm" value="cm">CM</option>
 </select>
 <br>
-Classes:
+<span id="span-classes" class="i18n">Classes:</span>
 <button type="button" id="botao-adicionar-classe">+</button>
 <button type="button" id="botao-remover-classe">-</button>
 <br>
@@ -103,17 +103,18 @@ Classes:
 <button type="button" id="botao-gerar-personagem" class="botao-geracao">Gerar comum</button>
 <button type="button" id="botao-gerar-personagem-elite" class="botao-geracao">Gerar elite</button>
 </div>
-Níveis Negativos:<input id="niveis-negativos" type="number" size="2" value="0" min="0"/><br>
-Experiência:
+<span id="span-niveis-negativos" class="i18n">Níveis Negativos:</span>
+<input id="niveis-negativos" type="number" size="2" value="0" min="0"/><br>
+<span id="span-experiencia" class="i18n">Experiência:</span>
 <input type="text" id="pontos-experiencia" size="6"/>+
 <input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP"/><br>
-Divindade Patrona: <input type="text" id="divindade-patrona" size="20"/>
+<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
-Dados de Vida: <span id="dados-vida-classes"></span><br>
+<span id="span-dados-vida" class="i18n">Dados de Vida:</span> <span id="dados-vida-classes"></span><br>
 
-Pontos de Vida:
+<span id="span-pontos-vida" class="i18n">Pontos de Vida:</span>
 <span id="pontos-vida-corrente"></span> =
 <input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados"/>
 <span id="pontos-vida-bonus"></span>

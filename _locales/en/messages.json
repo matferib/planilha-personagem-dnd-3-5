@@ -1,0 +1,47 @@
+{
+	"div_versao": {
+		"message": "PC Sheet Version: 0.7.9"
+	},
+	"span_nome": {
+		"message": "Name: "
+	},
+	"botao_salvar": {
+		"message": "Save"
+	},
+	"botao_abrir": {
+		"message": "Open"
+	},
+	"botao_excluir": {
+		"message": "Delete"
+	},
+	"botao_exportar": {
+		"message": "Export"
+	},
+	"botao_importar": {
+		"message": "Import"
+	},
+  "span_raca": {
+		"message": "Race"
+	},
+  "span_tamanho": {
+		"message": "Size"
+	},
+  "span_alinhamento": {
+		"message": "Alignment"
+	},
+  "span_classes": {
+		"message": "Classes"
+	},
+  "span_niveis_negativos": {
+		"message": "Negative Levels:"
+	},
+  "span_divindade": {
+		"message": "Patron Deity:"
+	},
+  "span_dados_vida": {
+		"message": "Hid Dice:"
+	},
+  "span_pontos_vida": {
+		"message": "Hit Points:"
+	}
+}

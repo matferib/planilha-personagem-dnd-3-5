@@ -3,6 +3,7 @@
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
 // preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
+  _CarregaTraducoes();
   _CarregaTabelaNormalizacaoStrings();
   _CarregaHandlers();
   CarregaPersonagens();
@@ -31,6 +32,28 @@ function CarregamentoInicial() {
     CorrigePericias();
   }
   AtualizaGeralSemLerEntradas();
+}
+
+// Retorna a traducao de s ou o proprio s se nao houver traducao.
+function _Traduz(s) {
+  var gm = (typeof chrome !== 'undefined') && (typeof chrome.i18n !== 'undefined') ? chrome.i18n.getMessage : null;
+  if (gm == null) {
+    return s;
+  }
+  return gm(s);
+}
+
+// Substitui as traducoes estaticas.
+function _CarregaTraducoes() {
+  var gm = (typeof chrome !== 'undefined') && (typeof chrome.i18n !== 'undefined') ? chrome.i18n.getMessage : null;
+  if (gm == null) {
+    return;
+  }
+  var elements = document.getElementsByClassName("i18n");
+  for (var i = 0; i < elements.length; ++i) {
+    var e = elements[i];
+    document.getElementById(e.id).innerHTML = gm(e.id.replace(/-/g, "_"));
+  }
 }
 
 // Alguns personagens sao salvos em versoes com menos pericias. Essa funcao deve ser chamada apos o carregamento

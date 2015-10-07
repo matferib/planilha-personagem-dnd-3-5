@@ -1,0 +1,47 @@
+{
+	"div_versao": {
+		"message": "Versão da Planilha: 0.7.9"
+	},
+	"span_nome": {
+		"message": "Nome: "
+	},
+	"botao_salvar": {
+		"message": "Salvar"
+	},
+	"botao_abrir": {
+		"message": "Abrir"
+	},
+	"botao_excluir": {
+		"message": "Excluir"
+	},
+	"botao_exportar": {
+		"message": "Exportar"
+	},
+	"botao_importar": {
+		"message": "Importar"
+	},
+  "span_raca": {
+		"message": "Raça"
+	},
+  "span_tamanho": {
+		"message": "Tamanho"
+	},
+  "span_alinhamento": {
+		"message": "Alinhamento"
+	},
+  "span_classes": {
+		"message": "Classes"
+	},
+  "span_niveis_negativos": {
+		"message": "Níveis Negativos:"
+	},
+  "span_divindade": {
+		"message": "Divindade Patrona:"
+	},
+  "span_dados_vida": {
+		"message": "Dados de Vida:"
+	},
+  "span_pontos_vida": {
+		"message": "Pontos de Vida:"
+	}
+}
