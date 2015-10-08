@@ -1,7 +1,7 @@
 // Dados das racas.
 var tabelas_raca = {
   aarakokra: {
-      nome: 'Aarakokra',
+      nome: 'Aarakocra',
       origem: { livro: 'Races of Faerun', pagina: '130' },
       ajuste_nivel: 2, armadura_natural: 1,
       movimento: { terrestre: 4, aereo: 18 },

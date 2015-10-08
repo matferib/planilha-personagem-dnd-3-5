@@ -8,14 +8,14 @@ function AdicionaClasse(indice, dom) {
   var select_classe = CriaSelect('select-classe-' + indice, 'selects-classes');
   select_classe.setAttribute('name', 'classe');
   select_classe.addEventListener('change', AtualizaGeral);
-  var span_nivel = CriaSpan('Nível: ');
+  var span_nivel = CriaSpan(Traduz('Nível') + ': ');
   var input_nivel = CriaInputNumerico(
       1, 'nivel-classe-' + indice, null,
       { handleEvent: function() { AtualizaGeral() } });
   input_nivel.name = 'nivel';
   input_nivel.min = '1';
   input_nivel.maxLength = input_nivel.size = 2;
-  var span_nivel_conjurador = CriaSpan('Nível de Conjurador: ');
+  var span_nivel_conjurador = CriaSpan(Traduz('Nível de Conjurador') + ': ');
   var span_nivel_conjurador_valor = CriaSpan('', 'nivel-conjurador-' + indice);
   var br_nivel = document.createElement('br');
   var div = CriaDiv('classe-' + (indice || 0), 'classe');

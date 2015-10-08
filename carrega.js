@@ -3,8 +3,8 @@
 // Chamado pelo carregamento inicial da pagina. Apesar de ser um tratador de eventos,
 // preferi manter neste arquivo ja que eh chamada apenas uma vez.
 function CarregamentoInicial() {
-  _CarregaTraducoes();
   _CarregaTabelaNormalizacaoStrings();
+  _CarregaTraducoes();
   _CarregaHandlers();
   CarregaPersonagens();
   _CarregaRacas();
@@ -34,13 +34,19 @@ function CarregamentoInicial() {
   AtualizaGeralSemLerEntradas();
 }
 
+// Remove os caracteres invalidos de traducao.
+function _SubstituiTraducao(s) {
+  return s.replace(/[- ()]/g, "_");
+}
+
 // Retorna a traducao de s ou o proprio s se nao houver traducao.
-function _Traduz(s) {
+function Traduz(s) {
   var gm = (typeof chrome !== 'undefined') && (typeof chrome.i18n !== 'undefined') ? chrome.i18n.getMessage : null;
   if (gm == null) {
     return s;
   }
-  return gm(s);
+  var st = gm(_SubstituiTraducao(StringNormalizada(s)));
+  return st.length == 0 ? s : st;
 }
 
 // Substitui as traducoes estaticas.
@@ -52,7 +58,11 @@ function _CarregaTraducoes() {
   var elements = document.getElementsByClassName("i18n");
   for (var i = 0; i < elements.length; ++i) {
     var e = elements[i];
-    document.getElementById(e.id).innerHTML = gm(e.id.replace(/-/g, "_"));
+    var trad = gm(_SubstituiTraducao(e.id));
+    if (trad == null || trad.length == 0) {
+      continue;
+    }
+    document.getElementById(e.id).innerHTML = trad;
   }
 }
 
@@ -157,7 +167,7 @@ function _CarregaRacas() {
     return;
   }
   for (var chave_raca in tabelas_raca) {
-    select_raca.appendChild(CriaOption(tabelas_raca[chave_raca].nome, chave_raca))
+    select_raca.appendChild(CriaOption(Traduz(tabelas_raca[chave_raca].nome), chave_raca))
   }
 }
 
@@ -184,7 +194,7 @@ function CarregaPersonagens() {
 
   ListaDoArmazem(function(lista_nomes) {
     LimpaSelect(select_personagens);
-    select_personagens.add(CriaOption('nenhum', '--'));
+    select_personagens.add(CriaOption(Traduz('nenhum'), '--'));
     for (var i = 0; i < lista_nomes.length; ++i) {
       select_personagens.add(CriaOption(lista_nomes[i], lista_nomes[i]));
     }
@@ -200,7 +210,7 @@ function _CarregaBotoesVisao() {
     return;
   }
   for (var visao in tabelas_visoes) {
-    var botao_visao = CriaSpan(tabelas_visoes[visao].nome, 'span-' + visao, null);
+    var botao_visao = CriaSpan(Traduz(tabelas_visoes[visao].nome), 'span-' + visao, null);
     var handler = {
       visao_handler: visao,
       handleEvent: function(evt) { ClickVisao(this.visao_handler); }
@@ -211,14 +221,14 @@ function _CarregaBotoesVisao() {
   // Aba do modo mestre
   var input_modo_mestre = CriaInputCheckbox(false, 'input-modo-mestre', null);
   input_modo_mestre.addEventListener('change', ClickVisualizacaoModoMestre);
-  TituloSimples('Modo Mestre', input_modo_mestre);
+  TituloSimples(Traduz('Modo Mestre'), input_modo_mestre);
   input_modo_mestre.style.paddingBottom = '0';
   //input_modo_mestre.textContent = 'modo-mestre';
   var span_input = CriaSpan();
   span_input.appendChild(input_modo_mestre);
   div_visoes.appendChild(span_input);
   // Aba do Desfazer e Refazer.
-  var botao_desfazer = CriaBotao('Desfazer');
+  var botao_desfazer = CriaBotao(Traduz('Desfazer'));
   botao_desfazer.style.paddingBottom = '0';
   botao_desfazer.style.marginBottom = '0'
   botao_desfazer.style.marginLeft = '30px';
@@ -268,7 +278,7 @@ function _CarregaAtributos() {
                           ClickBotaoAtributoMais(this.chave_atributo);
                           evento.stopPropagation();
                   } }));
-    var span_rotulo = CriaSpan(atributos[chave_atributo]);
+    var span_rotulo = CriaSpan(Traduz(atributos[chave_atributo]));
     span_rotulo.style.display = 'inline-block';
     span_rotulo.style.width = '80px';
     div_atributo.appendChild(span_rotulo);
@@ -405,12 +415,14 @@ function _CarregaPericias() {
     }
   }
   var div_pericias = Dom('div-pericias');
+  // Ordenacao.
+  var divs_ordenados = [];
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
     var habilidade = pericia.habilidade;
     var prefixo_id = 'pericia-' + chave_pericia;
     var div = CriaDiv(prefixo_id);
-    var texto_span = pericia.nome + ' (' + pericia.habilidade + '): ';
+    var texto_span = Traduz(pericia.nome) + ' (' + Traduz(tabelas_atributos[pericia.habilidade]).toLowerCase() + '): ';
     if (tabelas_pericias[chave_pericia].sem_treinamento) {
       texto_span += 'ϛτ';
     }
@@ -433,19 +445,23 @@ function _CarregaPericias() {
     div.appendChild(CriaSpan(' = '));
     div.appendChild(CriaSpan('+0', prefixo_id + '-total'));
 
-    // Adiciona ao div.
-    if (div_pericias != null) {
-      // Testes.
-      div_pericias.appendChild(div);
-    }
-
     // Adiciona as gEntradas
     gEntradas.pericias.push({ chave: chave_pericia, pontos: 0 });
     // Adiciona ao personagem.
     gPersonagem.pericias.lista[chave_pericia] = {
         graduacoes: 0, bonus: new Bonus(),
     };
+    // Adiciona aos divs.
+    divs_ordenados.push({ traducao: texto_span, div_a_inserir: div});
   }
+  divs_ordenados.sort(function(lhs, rhs) {
+    return (lhs.traducao < rhs.traducao) ? -1 : (lhs.traducao > rhs.traducao) ? 1 : 0;
+  });
+  divs_ordenados.forEach(function(trad_div) {
+    if (div_pericias != null) {
+      div_pericias.appendChild(trad_div.div_a_inserir);
+    }
+  });
 }
 
 // Cria os objetos das classes que possuem feiticos no personagem.

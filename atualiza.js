@@ -194,7 +194,7 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, nivel_conjurador,
       // Nao adiciona classe desabilitada.
       continue;
     }
-    var option = CriaOption(tabelas_classes[chave_classe].nome, chave_classe);
+    var option = CriaOption(Traduz(tabelas_classes[chave_classe].nome), chave_classe);
     option.setAttribute('name', chave_classe);
     option.selected = (chave_classe == classe) && !desabilitar_classe;
     option.disabled = desabilitar_classe;

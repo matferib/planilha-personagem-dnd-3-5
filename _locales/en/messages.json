@@ -35,13 +35,466 @@
   "span_niveis_negativos": {
 		"message": "Negative Levels:"
 	},
+  "span_experiencia": {
+		"message": "Experience:"
+	},
   "span_divindade": {
 		"message": "Patron Deity:"
 	},
   "span_dados_vida": {
-		"message": "Hid Dice:"
+		"message": "Hit Dice:"
 	},
   "span_pontos_vida": {
 		"message": "Hit Points:"
-	}
+	},
+  "span_ferimentos": {
+		"message": "Wounds"
+	},
+  "span_cura": {
+		"message": "Heal"
+	},
+  "botao_descansar": {
+		"message": "Rest"
+	},
+  "span_valores_basicos": {
+		"message": "Base Values"
+	},
+  "span_iniciativa": {
+		"message": "Initiative:"
+	},
+  "span_bba": {
+		"message": "Base Attack Bonus:"
+	},
+  "span_num_ataques": {
+		"message": "Number of Attacks:"
+	},
+  "span_cac": {
+		"message": "Melee:"
+	},
+  "span_distancia": {
+		"message": "Ranged:"
+	},
+  "span_agarrar": {
+		"message": "Grapple:"
+	},
+  "span_estilos_luta": {
+		"message": "Combat Styles:"
+	},
+  "span_habilidades_especiais": {
+		"message": "Special Abilities"
+	},
+	"span_imunidades": {
+		"message": "Immunities"
+	},
+	"span_equipamentos": {
+		"message": "Equipment"
+	},
+	"span_armas": {
+		"message": "Weapons:"
+	},
+	"span_armaduras": {
+		"message": "Armors:"
+	},
+	"span_escudos": {
+		"message": "Shields:"
+	},
+	"span_aneis": {
+		"message": "Rings:"
+	},
+	"span_amuletos": {
+		"message": "Amulets:"
+	},
+	"span_botas": {
+		"message": "Boots:"
+	},
+	"span_bracaduras": {
+		"message": "Bracers:"
+	},
+	"span_pocoes": {
+		"message": "Potions:"
+	},
+	"span_capas": {
+		"message": "Capes:"
+	},
+	"span_outros_equipamentos": {
+		"message": "Other Equipment:"
+	},
+	"span_moedas": {
+		"message": "Coins"
+	},
+	"span_platina": {
+		"message": "Platinum:"
+	},
+	"span_ouro": {
+		"message": "Gold:"
+	},
+	"span_prata": {
+		"message": "Silver:"
+	},
+	"span_cobre": {
+		"message": "Copper:"
+	},
+	"span_adicionar": {
+		"message": "Add:"
+	},
+	"span_resistencia_magia": {
+		"message": "Spell Resistance:"
+	},
+	"span_testes_resistencia": {
+		"message": "Resistance (Saving Throws):"
+	},
+	"span_talentos": {
+		"message": "Feats"
+	},
+	"span_pericias": {
+		"message": "Skills"
+	},
+	"span_pericias_total": {
+		"message": "Total:"
+	},
+	"span_pericias_gastos": {
+		"message": "Used:"
+	},
+	"span_notas": {
+		"message": "Notes"
+	},
+	"span_proficiencia_com_armas": {
+		"message": "Weapon Proficiency"
+	},
+	"botao_gerar_resumo": {
+		"message": "Generate Summary"
+	},
+	"option_lb": {
+		"message": "LG"
+	},
+	"option_ln": {
+		"message": "LN"
+	},
+	"option_lm": {
+		"message": "LE"
+	},
+	"option_nb": {
+		"message": "NG"
+	},
+	"option_n": {
+		"message": "N"
+	},
+	"option_nm": {
+		"message": "NE"
+	},
+	"option_cb": {
+		"message": "CG"
+	},
+	"option_cn": {
+		"message": "CN"
+	},
+	"option_cm": {
+		"message": "CE"
+	},
+	"option_minusculo": {
+		"message": "Fine"
+	},
+	"option_diminuto": {
+		"message": "Diminutive"
+	},
+	"option_miudo": {
+		"message": "Tiny"
+	},
+	"option_pequeno": {
+		"message": "Small"
+	},
+	"option_medio": {
+		"message": "Medium"
+	},
+	"option_grande": {
+		"message": "Large"
+	},
+	"option_enorme": {
+		"message": "Huge"
+	},
+	"option_imenso": {
+		"message": "Gargantuan"
+	},
+	"option_colossal": {
+		"message": "Colossal"
+	},
+	"Elfo": {
+		"message": "Elf"
+	},
+	"Humano": {
+		"message": "Human"
+	},
+	"Meio_Elfo": {
+		"message": "Half-Elf"
+	},
+	"Gnomo": {
+		"message": "Gnome"
+	},
+	"Halfling": {
+		"message": "Halfling"
+	},
+	"Meio_Orc": {
+		"message": "Half-Orc"
+	},
+	"Orc": {
+		"message": "Orc"
+	},
+	"Anao": {
+		"message": "Dwarf"
+	},
+	"Aarakocra": {
+		"message": "Aarakocra"
+	},
+	"nenhum": {
+		"message": "none"
+	},
+	"Desfazer": {
+		"message": "Undo"
+	},
+	"Forca": {
+		"message": "Strength"
+	},
+	"Destreza": {
+		"message": "Dexterity"
+	},
+	"Constituicao": {
+		"message": "Constitution"
+	},
+	"Inteligencia": {
+		"message": "Inteligence"
+	},
+	"Sabedoria": {
+		"message": "Wisdom"
+	},
+	"Carisma": {
+		"message": "Charisma"
+	},
+	"Nivel": {
+		"message": "Level"
+	},
+	"Nivel_de_Conjurador": {
+		"message": "Caster Level"
+	},
+	"Barbaro": {
+		"message": "Barbarian"
+	},
+	"Bardo": {
+		"message": "Bard"
+	},
+	"Clerigo": {
+		"message": "Cleric"
+	},
+	"Druida": {
+		"message": "Druid"
+	},
+	"Guerreiro": {
+		"message": "Fighter"
+	},
+	"Feiticeiro": {
+		"message": "Sorcerer"
+	},
+	"Ladino": {
+		"message": "Rogue"
+	},
+	"Mago": {
+		"message": "Mage"
+	},
+	"Mago_Necromante": {
+		"message": "Necromancer"
+	},
+	"Monge": {
+		"message": "Monk"
+	},
+	"Paladino": {
+		"message": "Paladin"
+	},
+	"Ranger": {
+		"message": "Ranger"
+	},
+	"Adepto": {
+		"message": "Adept"
+	},
+	"Aristocrata": {
+		"message": "Aristocrat"
+	},
+	"Plebeu": {
+		"message": "Commoner"
+	},
+	"Expert": {
+		"message": "Expert"
+	},
+	"Combatente": {
+		"message": "Warrior"
+	},
+	"Dragao_Purpura": {
+		"message": "Purple Dragon"
+	},
+	"Teurgista_Mistico": {
+		"message": "Miystic Theurge"
+	},
+	"Combate": {
+		"message": "Combat"
+	},
+	"Pericias": {
+		"message": "Skills"
+	},
+	"Completo": {
+		"message": "Complete"
+	},
+	"Feiticos": {
+		"message": "Spells"
+	},
+	"Modo_Mestre": {
+		"message": "DM Mode"
+	},
+  "Abrir_Fechaduras": {
+    "message": "Open Locks"
+  },
+  "Acrobacias": {
+    "message": "Tumble"
+  },
+  "Adestrar_Animais": {
+    "message": "Handle Animal"
+  },
+  "Arte_da_Fuga": {
+    "message": "Escape Artist"
+  },
+  "Atuacao": {
+    "message": "Perform"
+  },
+  "Avaliacao": {
+    "message": "Appraise"
+  },
+  "Blefar": {
+    "message": "Bluff"
+  },
+  "Cavalgar": {
+    "message": "Ride"
+  },
+  "Concentracao": {
+    "message": "Concentration"
+  },
+  "Conhecimento__arcano_": {
+    "message": "Knowledge (arcane)"
+  },
+  "Conhecimento__arquitetura_e_engenharia_": {
+    "message": "Knowledge (architecture and engineering)"
+  },
+  "Conhecimento__geografia_": {
+    "message": "Knowledge (geography)"
+  },
+  "Conhecimento__historia_": {
+    "message": "Knowledge (history)"
+  },
+  "Conhecimento__local_": {
+    "message": "Knowledge (local)"
+  },
+  "Conhecimento__masmorras_": {
+    "message": "Knowledge (dungeoneering)"
+  },
+  "Conhecimento__natureza_": {
+    "message": "Knowledge (nature)"
+  },
+  "Conhecimento__nobreza_e_realeza_": {
+    "message": "Knowledge (nobility and royalty)"
+  },
+  "Conhecimento__planos_": {
+    "message": "Knowledge (planes)"
+  },
+  "Conhecimento__religiao_": {
+    "message": "Knowledge (religion)"
+  },
+  "Cura": {
+    "message": "Heal"
+  },
+  "Decifrar_Escrita": {
+    "message": "Decipher Script"
+  },
+  "Diplomacia": {
+    "message": "Diplomacy"
+  },
+  "Disfarces": {
+    "message": "Disguise"
+  },
+  "Equilibrio": {
+    "message": "Balance"
+  },
+  "Escalar": {
+    "message": "Climb"
+  },
+  "Esconder_se": {
+    "message": "Hide"
+  },
+  "Falar_Idioma": {
+    "message": "Speak Language"
+  },
+  "Falsificacao": {
+    "message": "Forgery"
+  },
+  "Furtividade": {
+    "message": "Move Silently"
+  },
+  "Identificar_magia": {
+    "message": "Spellcraft"
+  },
+  "Intimidacao": {
+    "message": "Intimidate"
+  },
+  "Natacao": {
+    "message": "Swim"
+  },
+  "Observar": {
+    "message": "Spot"
+  },
+  "Obter_Informacao": {
+    "message": "Gather Information"
+  },
+  "Oficios__outros_": {
+    "message": "Craft (other)"
+  },
+  "Oficios__alquimia_": {
+    "message": "Craft (alchemy)"
+  },
+  "Oficios__armoraria_": {
+    "message": "Craft (armorsmithing)"
+  },
+  "Oficios__arquearia_": {
+    "message": "Craft (bowmaking)"
+  },
+  "Oficios__armeiro_": {
+    "message": "Craft (weaponsmithing)"
+  },
+  "Oficios__armadilharia_": {
+    "message": "Craft (trapmaking)"
+  },
+  "Operar_Mecanismo": {
+    "message": "Disable Device"
+  },
+  "Ouvir": {
+    "message": "Listen"
+  },
+  "Prestidigitacao": {
+    "message": "Sleight of Hand"
+  },
+  "Procurar": {
+    "message": "Search"
+  },
+  "Profissao": {
+    "message": "Profession"
+  },
+  "Saltar": {
+    "message": "Jump"
+  },
+  "Sentir_Motivacao": {
+    "message": "Sense Motive"
+  },
+  "Sobrevivencia": {
+    "message": "Survival"
+  },
+  "Usar_Cordas": {
+    "message": "Use Rope"
+  },
+  "Usar_Instrumento_Magico": {
+    "message": "Use Magic Device"
+  }
 }

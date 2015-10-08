@@ -43,5 +43,18 @@
 	},
   "span_pontos_vida": {
 		"message": "Pontos de Vida:"
+	},
+  "span_ferimentos": {
+		"message": "Ferimentos"
+	},
+  "span_cura": {
+		"message": "Cura"
+	},
+  "botao_descansar": {
+		"message": "Descansar"
+	},
+  "span_valores_basicos": {
+		"message": "Valores Básicos"
 	}
+
 }
