@@ -2114,12 +2114,12 @@ var tabelas_capas = {
 };
 
 var tabelas_itens = {
-  aneis: { nome: Traduz('Anéis'), tabela: tabelas_aneis, maximo: 2 },
-  amuletos: { nome: Traduz('Amuletos'), tabela: tabelas_amuletos, maximo: 1 },
-  botas: { nome: Traduz('Botas'), tabela: tabelas_botas, maximo: 1 },
-  bracaduras: { nome: Traduz('Braçaduras'), tabela: tabelas_bracaduras, maximo: 1 },
-  pocoes: { nome: Traduz('Poções'), tabela: tabelas_pocoes, maximo: 0, },
-  capas: { nome: Traduz('Capas'), tabela: tabelas_capas, maximo: 1 },
+  aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2 },
+  amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
+  botas: { nome: 'Botas', tabela: tabelas_botas, maximo: 1 },
+  bracaduras: { nome: 'Braçaduras', tabela: tabelas_bracaduras, maximo: 1 },
+  pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
+  capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
 };
 
 // Materiais especiais.

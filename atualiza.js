@@ -511,7 +511,7 @@ function _AtualizaProficienciaArmas() {
   var span_proficiencia_armas = Dom('span-proficiencia-armas');
   var string_proficiencia = '';
   for (var proficiencia in gPersonagem.proficiencia_armas) {
-    string_proficiencia += tabelas_armas[proficiencia].nome + ', ';
+    string_proficiencia += Traduz(tabelas_armas[proficiencia].nome) + ', ';
   }
   string_proficiencia += '.';
   span_proficiencia_armas.textContent = string_proficiencia.replace(', .', '.');

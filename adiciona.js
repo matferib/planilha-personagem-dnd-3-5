@@ -383,7 +383,7 @@ function AdicionaItem(tipo_item, div, div_pai) {
   });
   items_ordenados.forEach(function(item) {
     select.appendChild(
-        CriaOption(item.valor_item.nome + ' (' + item.valor_item.preco + ')', item.chave_item));
+        CriaOption(Traduz(item.valor_item.nome) + ' (' + item.valor_item.preco + ')', item.chave_item));
   });
   select.addEventListener('change', AtualizaGeral);
   select.name = 'item';
