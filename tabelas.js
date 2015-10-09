@@ -1407,8 +1407,9 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   usar_escudo: {
       nome: 'Usar Escudo',
       descricao: 'Não sofre penalidade de armadura nas jogadas de ataque.' },
+  // TODO A chave certa desse aqui eh ataque_escudo_aprimorado.
   usar_escudo_aprimorado: {
-      nome: 'Usar Escudo Aprimorado',
+      nome: 'Ataque com Escudo Aprimorado',
       guerreiro: true,
       requisitos: { talentos: [ 'usar_escudo', ] },
       descricao: 'Conserva o bônus do escudo na CA quando ataca com ele.' },

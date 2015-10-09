@@ -36,7 +36,7 @@ function CarregamentoInicial() {
 
 // Remove os caracteres invalidos de traducao.
 function _SubstituiTraducao(s) {
-  return s.replace(/[- ()]/g, "_");
+  return s.replace(/[+\- /()]/g, "_");
 }
 
 // Retorna a traducao de s ou o proprio s se nao houver traducao.
@@ -59,10 +59,15 @@ function _CarregaTraducoes() {
   for (var i = 0; i < elements.length; ++i) {
     var e = elements[i];
     var trad = gm(_SubstituiTraducao(e.id));
-    if (trad == null || trad.length == 0) {
-      continue;
+    if (trad != null && trad.length > 0 && e.id.length != null && e.id.length > 0) {
+      e.innerHTML = trad;
     }
-    document.getElementById(e.id).innerHTML = trad;
+    if (e.placeholder != null && e.placeholder.length > 0) {
+      var tp = Traduz(e.placeholder);
+      if (tp != null && tp.length > 0) {
+        e.placeholder = tp;
+      }
+    }
   }
 }
 

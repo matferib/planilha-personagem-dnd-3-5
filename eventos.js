@@ -477,10 +477,24 @@ function ClickDesfazer() {
 // Evento para tratar adição e subtração de moedas.
 function ChangeAdicionarMoedas() {
   var dom = Dom('moedas-adicionais');
-  var valor_texto = dom.value;
+  var valor_texto = dom.value.toLowerCase();
+  // Cria a traducao inversa de nativo para canonico.
+  var tipos_moedas = ['pc', 'pp', 'po', 'pl'];
+  var mapa_traduzido_canonico = {};
+  tipos_moedas.forEach(function(tm) {
+    mapa_traduzido_canonico[Traduz(tm)] = tm;
+  });
+  // Converte a moeda do nativo pro canonico.
+  for (var moeda_traduzida in mapa_traduzido_canonico) {
+    if (valor_texto.indexOf(moeda_traduzida) != -1) {
+      valor_texto = valor_texto.replace(moeda_traduzida, mapa_traduzido_canonico[moeda_traduzida]);
+      break;
+    }
+  }
+
   var valor = LePreco(valor_texto);
   if (valor == null) {
-    Mensagem('Valor inválido: ' + valor_texto);
+    Mensagem(Traduz('Valor inválido') + ': ' + valor_texto);
     dom.value = '';
     return;
   }

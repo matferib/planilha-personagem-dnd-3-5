@@ -423,7 +423,7 @@ function AjustaString(str) {
 
 // Wrapper do alert.
 function Mensagem(msg) {
-  JanelaMensagem(msg);
+  JanelaMensagem(Traduz(msg));
 }
 
 // Converte as chaves de um mapa para um array de chaves.

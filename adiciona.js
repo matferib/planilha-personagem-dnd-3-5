@@ -339,11 +339,11 @@ function AdicionaTalento(indice_talento, chave_classe, div_pai) {
     talentos_ordenados.push(chave_talento);
   }
   talentos_ordenados.sort(function(te, td) {
-    return tabelas_talentos[te].nome.localeCompare(tabelas_talentos[td].nome);
+    return Traduz(tabelas_talentos[te].nome).localeCompare(tabelas_talentos[td].nome);
   });
   talentos_ordenados.forEach(function(chave_talento) {
     var talento_tabela = tabelas_talentos[chave_talento];
-    var option_talento = CriaOption(talento_tabela.nome, chave_talento);
+    var option_talento = CriaOption(Traduz(talento_tabela.nome), chave_talento);
     option_talento.selected = chave_talento == 'usar_armas_simples';
     select_talento.add(option_talento, null);
   });

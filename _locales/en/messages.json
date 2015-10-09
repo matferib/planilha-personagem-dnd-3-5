@@ -496,5 +496,284 @@
   },
   "Usar_Instrumento_Magico": {
     "message": "Use Magic Device"
+  },
+	"pc": {
+		"message": "cp"
+	},
+	"pp": {
+		"message": "sp"
+	},
+	"po": {
+		"message": "gp"
+	},
+	"pl": {
+		"message": "pp"
+	},
+	"Valor_invalido": {
+		"message": "Invalid value"
+	},
+	"adicionar_XP": {
+		"message": "Add XP"
+	},
+	"adicionar_XP": {
+		"message": "Add XP"
+	},
+	"dados": {
+		"message": "Dice"
+	},
+	"____qtde_moeda": {
+		"message": "+/- coins"
+	},
+  "Acrobatico": {
+    "message": "Acrobatic"
+  },
+  "Acuidade_com_Arma": {
+    "message": "Weapon Finesse"
+  },
+  "Afinidade_com_Animais": {
+    "message": "Animal Affinity"
+  },
+  "Agarrar_Aprimorado": {
+    "message": "Improved Grapple"
+  },
+  "Agil": {
+    "message": "Agile"
+  },
+  "Apanhar_Objetos": {
+    "message": "Snatch Arrows"
+  },
+  "Aptidao_Magica": {
+    "message": "Magical Aptitude"
+  },
+  "Ataque_Atordoante": {
+    "message": "Stunning Fist"
+  },
+  "Ataque_Desarmado_Aprimorado": {
+    "message": "Improved Unarmed Strike"
+  },
+  "Ataque_em_Movimento": {
+    "message": "Shot on the Run"
+  },
+  "Ataque_Poderoso": {
+    "message": "Power Attack"
+  },
+  "Atletico": {
+    "message": "Athletic"
+  },
+  "Auto_Suficiente": {
+    "message": "Self-Sufficient"
+  },
+  "Combate_Montado": {
+    "message": "Mounted Combat"
+  },
+  "Combater_com_duas_armas": {
+    "message": "Two-Weapon Fighting"
+  },
+  "Combater_com_duas_armas_aprimorado": {
+    "message": "Improved Two-Weapon Fighting"
+  },
+  "Combater_com_Duas_Armas_Maior": {
+    "message": "Greater Two-Weapon Fighting"
+  },
+  "Corrida": {
+    "message": "Run"
+  },
+  "Dedos_Lepidos": {
+    "message": "Nimble Fingers"
+  },
+  "Desarme_Aprimorado": {
+    "message": "Improved Disarm"
+  },
+  "Desviar_Objetos": {
+    "message": "Deflect Arrows"
+  },
+  "Diligente": {
+    "message": "Diligent"
+  },
+  "Duro_de_Matar": {
+    "message": "Diehard"
+  },
+  "Expulsao_Adicional": {
+    "message": "Extra Turning"
+  },
+  "Escrever_Pergaminho": {
+    "message": "Scribe Scroll"
+  },
+  "Especializacao_em_Arma": {
+    "message": "Weapon Specialization"
+  },
+  "Esquiva": {
+    "message": "Dodge"
+  },
+  "Especializacao_em_Arma_Maior": {
+    "message": "Greater Weapon Specialization"
+  },
+  "Foco_em_arma": {
+    "message": "Weapon Focus"
+  },
+  "Foco_em_arma_maior": {
+    "message": "Greaters Weapon Focus"
+  },
+  "Foco_em_Magia": {
+    "message": "Spell Focus"
+  },
+  "Foco_em_Magia_Maior": {
+    "message": "Greater Weapon Focus"
+  },
+  "Fortitude_Maior": {
+    "message": "Greater Fortitude"
+  },
+  "Fraudulento": {
+    "message": "Deceitful"
+  },
+  "Ignorar_Componentes_Materiais": {
+    "message": "Eschew Materials"
+  },
+  "Investida_Montada": {
+    "message": "Spirited Charge"
+  },
+  "Derrubar_Aprimorado__Imobilizacao_Aprimorada_": {
+    "message": "Improved Trip"
+  },
+  "Especializacao_em_Combate": {
+    "message": "Combat Expertise"
+  },
+  "Iniciativa_Aprimorada": {
+    "message": "Improved Initiative"
+  },
+  "Investigador": {
+    "message": "Investigator"
+  },
+  "Lideranca": {
+    "message": "Leadership"
+  },
+  "Lutar_as_Cegas": {
+    "message": "Blind-Fight"
+  },
+  "Magia_Natural": {
+    "message": "Natural Spell"
+  },
+  "Magia_Penetrante": {
+    "message": "Spell Penetration"
+  },
+  "Magia_Penetrante_Maior": {
+    "message": "Greater Spell Penetration"
+  },
+  "Magia_em_Combate": {
+    "message": "Combat Casting"
+  },
+  "Maos_Leves": {
+    "message": "Deft Hands"
+  },
+  "Mobilidade": {
+    "message": "Mobility"
+  },
+  "Negociador": {
+    "message": "Negociator"
+  },
+  "Persuasivo": {
+    "message": "Persuasive"
+  },
+  "Prontidao": {
+    "message": "Alertness"
+  },
+  "Rastrear": {
+    "message": "Track"
+  },
+  "Reflexos_em_Combate": {
+    "message": "Combat Reflexes"
+  },
+  "Reflexos_Rapidos": {
+    "message": "Lightning Reflexes"
+  },
+  "Saque_Rapido": {
+    "message": "Quick Draw"
+  },
+  "Tiro_Certeiro": {
+    "message": "Point Blank Shot"
+  },
+  "Tiro_Multiplo": {
+    "message": "Manyshot"
+  },
+  "Tiro_Preciso": {
+    "message": "Precise Shot"
+  },
+  "Tiro_Rapido": {
+    "message" : "Rapid Shot"
+  },
+  "Tolerancia": {
+    "message": "Endurance"
+  },
+  "Trespassar": {
+    "message": "Cleave"
+  },
+  "Usar_Armas_Simples": {
+    "message": "Simple Weapon Proficiency"
+  },
+  "Usar_Arma_Comum": {
+    "message": "Martial Weapon Proficiency"
+  },
+  "Usar_Arma_Exotica": {
+    "message": "Exotic Weapon Proficiency"
+  },
+  "Usar_Escudo": {
+    "message": "Shield Proficiency"
+  },
+  "Ataque_com_Escudo_Aprimorado": {
+    "message": "Improved Shield Bash"
+  },
+  "Usar_Escudo_de_Corpo": {
+    "message": "Tower Shield Proficiency"
+  },
+  "Vitalidade": {
+    "message": "Toughness"
+  },
+  "Vontade_de_Ferro": {
+    "message": "Iron Will"
+  },
+  "Criar_Armaduras_e_Armas_Magicas": {
+    "message": "Craft Magic Arms And Armor"
+  },
+  "Criar_Bastao": {
+    "message": "Craft Staff"
+  },
+  "Criar_Cajado": {
+    "message": "Craft Rod"
+  },
+  "Criar_Item_Maravilhoso": {
+    "message": "Craft Wondrous Item"
+  },
+  "Criar_Varinha": {
+    "message": "Craft Wand"
+  },
+  "Preparar_Pocao": {
+    "message": "Brew Potion"
+  },
+  "Acelerar_Magia": {
+    "message": "Quicken Spell"
+  },
+  "Ampliar_Magia": {
+    "message": "Widen Spell"
+  },
+  "Aumentar_Magia": {
+    "message": "Enlarge Spell"
+  },
+  "Elevar_Magia": {
+    "message": "Highten Spell"
+  },
+  "Estender_Magia": {
+    "message": "Extend Spell"
+  },
+  "Magia_Sem_Gestos": {
+    "message": "Still Spell"
+  },
+  "Magia_Silenciosa": {
+    "message": "Silent Spell"
+  },
+  "Maximizar_Magia": {
+    "message": "Maximize Spell"
+  },
+  "Potencializar_Magia": {
+    "message": "Empower Spell"
   }
 }
