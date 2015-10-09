@@ -383,7 +383,7 @@ function AdicionaItem(tipo_item, div, div_pai) {
   });
   items_ordenados.forEach(function(item) {
     select.appendChild(
-        CriaOption(Traduz(item.valor_item.nome) + ' (' + item.valor_item.preco + ')', item.chave_item));
+        CriaOption(Traduz(item.valor_item.nome) + ' (' + TraduzDinheiro(item.valor_item.preco) + ')', item.chave_item));
   });
   select.addEventListener('change', AtualizaGeral);
   select.name = 'item';
@@ -398,14 +398,14 @@ function AdicionaItem(tipo_item, div, div_pai) {
       } });
   div.appendChild(botao_remover);
 
-  var button_vender = CriaBotao('Vender', null, 'venda', {
+  var button_vender = CriaBotao(Traduz('Vender'), null, 'venda', {
       div:  div,
       tabela: tabela_item,
       handleEvent: function(evt) {
         ClickVenderItem(this.div, this.tabela);
       }
   });
-  var button_comprar = CriaBotao('Comprar', null, 'compra', {
+  var button_comprar = CriaBotao(Traduz('Comprar'), null, 'compra', {
       div:  div,
       tabela: tabela_item,
       handleEvent: function(evt) {

@@ -509,6 +509,18 @@
 	"pl": {
 		"message": "pp"
 	},
+	"PC": {
+		"message": "CP"
+	},
+	"PP": {
+		"message": "SP"
+	},
+	"PO": {
+		"message": "GP"
+	},
+	"PL": {
+		"message": "PP"
+	},
 	"Valor_invalido": {
 		"message": "Invalid value"
 	},

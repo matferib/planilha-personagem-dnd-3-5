@@ -49,6 +49,26 @@ function Traduz(s) {
   return st.length == 0 ? s : st;
 }
 
+// Substitui apenas as moedas, ignorando os numeros.
+function TraduzDinheiro(s) {
+  var gm = (typeof chrome !== 'undefined') && (typeof chrome.i18n !== 'undefined') ? chrome.i18n.getMessage : null;
+  if (gm == null) {
+    return s;
+  }
+  var tipos_moedas = [ 'pc', 'pp', 'po', 'pl'];
+  var dicionario = {};
+  tipos_moedas.forEach(function(tm) {
+    dicionario[tm] = Traduz(tm);
+    dicionario[tm.toUpperCase()] = dicionario[tm].toUpperCase();
+  });
+  for (var tm in dicionario) {
+    if (s.indexOf(tm) != -1) {
+      return s.replace(tm, dicionario[tm]);
+    }
+  }
+  return s;
+}
+
 // Substitui as traducoes estaticas.
 function _CarregaTraducoes() {
   var gm = (typeof chrome !== 'undefined') && (typeof chrome.i18n !== 'undefined') ? chrome.i18n.getMessage : null;
