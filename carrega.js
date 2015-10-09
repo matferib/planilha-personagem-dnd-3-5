@@ -36,7 +36,7 @@ function CarregamentoInicial() {
 
 // Remove os caracteres invalidos de traducao.
 function _SubstituiTraducao(s) {
-  return s.replace(/[+\- /()]/g, "_");
+  return s.replace(/[+\-: "/().,]/g, "_");
 }
 
 // Retorna a traducao de s ou o proprio s se nao houver traducao.
@@ -250,9 +250,9 @@ function _CarregaAtributos() {
 
   div.appendChild(CriaSpan('Atributos', null, 'titulo'));
   div.appendChild(CriaBr());
-  div.appendChild(CriaSpan('Total: '));
+  div.appendChild(CriaSpan(Traduz('Total:') + ' '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-total'));
-  div.appendChild(CriaSpan(', gastos: [ '));
+  div.appendChild(CriaSpan(', ' + Traduz('gastos:') + ' [ '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-gastos'));
   div.appendChild(CriaSpan(' ]'));
   div.appendChild(
@@ -444,7 +444,7 @@ function _CarregaPericias() {
     input_pontos.maxlength = input_pontos.size = 2;
     div.appendChild(input_pontos);
 
-    div.appendChild(CriaSpan(' pontos; '));
+    div.appendChild(CriaSpan(' ' + Traduz('pontos') + '; '));
     div.appendChild(CriaSpan('0', prefixo_id + '-graduacoes'));
     div.appendChild(CriaSpan('+0', prefixo_id + '-total-bonus'));
     div.appendChild(CriaSpan(' = '));

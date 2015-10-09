@@ -206,21 +206,6 @@ function _ConverteEstilos() {
   }
 }
 
-function _ConverteHabilidadesEspeciais() {
-  for (var chave_especial in gEntradas.habilidades_especiais) {
-    var entrada_especial = gEntradas.habilidades_especiais[chave_especial];
-    var personagem_especial = gPersonagem.especiais[chave_especial] || {};
-    personagem_especial.vezes = entrada_especial.length;
-    var usados = 0;
-    for (var i = 0; i < entrada_especial.length; ++i) {
-      if (entrada_especial[i]) {
-        ++usados;
-      }
-    }
-    personagem_especial.usado = usados;
-  }
-}
-
 // Converte um estilo da entrada para o personagem.
 function _ConverteEstilo(estilo_entrada) {
   var estilo_personagem = {
@@ -235,6 +220,21 @@ function _ConverteEstilo(estilo_entrada) {
     },
   };
   return estilo_personagem;
+}
+
+function _ConverteHabilidadesEspeciais() {
+  for (var chave_especial in gEntradas.habilidades_especiais) {
+    var entrada_especial = gEntradas.habilidades_especiais[chave_especial];
+    var personagem_especial = gPersonagem.especiais[chave_especial] || {};
+    personagem_especial.vezes = entrada_especial.length;
+    var usados = 0;
+    for (var i = 0; i < entrada_especial.length; ++i) {
+      if (entrada_especial[i]) {
+        ++usados;
+      }
+    }
+    personagem_especial.usado = usados;
+  }
 }
 
 // Converte todos os feiticos do personagem.

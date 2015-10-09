@@ -82,10 +82,10 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
       items_ordenados.push(corrente);
     }
     items_ordenados.sort(function(ie, id) {
-      return tabelas[i][ie].nome.localeCompare(tabelas[i][id].nome);
+      return Traduz(tabelas[i][ie].nome).localeCompare(Traduz(tabelas[i][id].nome));
     });
     items_ordenados.forEach(function(corrente) {
-      var option = CriaOption(tabelas[i][corrente].nome, corrente);
+      var option = CriaOption(Traduz(tabelas[i][corrente].nome), corrente);
       option.setAttribute('name', corrente);
       option.selected = false;
       optgroup.appendChild(option);
@@ -97,13 +97,13 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   select_material.setAttribute('name', 'select-material');
   select_material.addEventListener('change', AtualizaGeral);
   for (var corrente in tabelas_materiais_especiais) {
-    var option = CriaOption(tabelas_materiais_especiais[corrente].nome, corrente);
+    var option = CriaOption(Traduz(tabelas_materiais_especiais[corrente].nome), corrente);
     option.selected = false;
     select_material.appendChild(option);
   }
 
 
-  var span_obra_prima = CriaSpan(' OP');
+  var span_obra_prima = CriaSpan(Traduz(' OP'));
 
   var input_obra_prima = CriaInputCheckbox(false, null, null, AtualizaGeral);
   input_obra_prima.setAttribute('name', 'obra-prima');
@@ -113,6 +113,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   input_bonus.setAttribute('maxlength', 2);
   input_bonus.setAttribute('size', 2);
   input_bonus.value = 0;
+  TituloSimples(Traduz('bonus mágico'), input_bonus);
   var button_remover = CriaBotao('-', null, null, {
         id:  id_gerado,
         id_div_equipamentos: id_div_equipamentos,
@@ -132,7 +133,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
   div.appendChild(input_bonus);
   div.appendChild(button_remover);
 
-  var button_vender = CriaBotao('Vender', null, 'venda', {
+  var button_vender = CriaBotao(Traduz('Vender'), null, 'venda', {
       div:  div,
       tipo: nome,
       tabela: tabela,
@@ -140,7 +141,7 @@ function _AdicionaArmaArmadura(nome, tabelas, rotulos_tabelas, div_pai) {
         ClickVenderArmaArmadura(this.div, this.tipo, this.tabela);
       }
   });
-  var button_comprar = CriaBotao('Comprar', null, 'compra', {
+  var button_comprar = CriaBotao(Traduz('Comprar'), null, 'compra', {
       div:  div,
       tipo: nome,
       tabela: tabela,
@@ -162,7 +163,7 @@ function AdicionaArma() {
   return _AdicionaArmaArmadura(
       'arma',
       [ tabelas_armas_simples, tabelas_armas_comuns, tabelas_armas_exoticas ],
-      [ 'Armas Simples', 'Armas Comuns', 'Armas Exóticas' ],
+      [ Traduz('Armas Simples'), Traduz('Armas Comuns'), Traduz('Armas Exóticas') ],
       Dom('div-equipamentos-armas'));
 }
 
@@ -172,7 +173,7 @@ function AdicionaArmadura() {
   return _AdicionaArmaArmadura(
       'armadura',
       [ tabelas_armaduras_leves, tabelas_armaduras_medias, tabelas_armaduras_pesadas ],
-      [ 'Armaduras Leves', 'Armaduras Médias', 'Armaduras Pesadas' ],
+      [ Traduz('Armaduras Leves'), Traduz('Armaduras Médias'), Traduz('Armaduras Pesadas') ],
       Dom('div-equipamentos-armaduras'));
 }
 
@@ -182,7 +183,7 @@ function AdicionaEscudo() {
   return _AdicionaArmaArmadura(
       'escudo',
       [ tabelas_escudos ],
-      [ 'Escudos' ],
+      [ Traduz('Escudos') ],
       Dom('div-equipamentos-escudos'));
 }
 
@@ -246,29 +247,29 @@ function AdicionaEstiloLuta() {
       id_estilo.replace('id-estilo', 'id-span-classe-armadura');
 
   div_novo_estilo.appendChild(_CriaRadioEstilo(
-      'Uma arma', id_estilo_uma_arma, id_estilo, 'uma_arma', id_select_secundario));
+      Traduz('Uma Arma'), id_estilo_uma_arma, id_estilo, 'uma_arma', id_select_secundario));
   div_novo_estilo.appendChild(_CriaRadioEstilo(
-      'Arma + escudo', id_estilo_arma_escudo, id_estilo, 'arma_escudo', id_select_secundario));
+      Traduz('Arma + Escudo'), id_estilo_arma_escudo, id_estilo, 'arma_escudo', id_select_secundario));
   div_novo_estilo.appendChild(_CriaRadioEstilo(
-      'Duas armas', id_estilo_duas_armas, id_estilo, 'duas_armas', id_select_secundario));
+      Traduz('Duas Armas'), id_estilo_duas_armas, id_estilo, 'duas_armas', id_select_secundario));
   div_novo_estilo.appendChild(_CriaRadioEstilo(
-      'Arma dupla', id_estilo_arma_dupla, id_estilo, 'arma_dupla', id_select_secundario));
+      Traduz('Arma Dupla'), id_estilo_arma_dupla, id_estilo, 'arma_dupla', id_select_secundario));
   div_novo_estilo.appendChild(_CriaRadioEstilo(
-      'Rajada de Golpes', id_estilo_rajada, id_estilo, 'rajada', id_select_secundario));
+      Traduz('Rajada de Golpes'), id_estilo_rajada, id_estilo, 'rajada', id_select_secundario));
   div_novo_estilo.appendChild(_CriaRadioEstilo(
-      'Tiro Rápido', id_estilo_tiro_rapido, id_estilo, 'tiro_rapido', id_select_secundario));
+      Traduz('Tiro Rápido'), id_estilo_tiro_rapido, id_estilo, 'tiro_rapido', id_select_secundario));
 
   div_novo_estilo.appendChild(_CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta));
   div_novo_estilo.appendChild(CriaBr());
-  div_novo_estilo.appendChild(CriaSpan('Principal: '));
+  div_novo_estilo.appendChild(CriaSpan(Traduz('Principal') + ': '));
   div_novo_estilo.appendChild(CriaSelect(id_select_primario, null, AtualizaGeral));
   div_novo_estilo.appendChild(CriaSpan(null, id_span_primario));
   div_novo_estilo.appendChild(CriaBr());
-  div_novo_estilo.appendChild(CriaSpan('Secundária: '));
+  div_novo_estilo.appendChild(CriaSpan(Traduz('Secundária') + ': '));
   div_novo_estilo.appendChild(CriaSelect(id_select_secundario, AtualizaGeral));
   div_novo_estilo.appendChild(CriaSpan(null, id_span_secundario));
   div_novo_estilo.appendChild(CriaBr());
-  div_novo_estilo.appendChild(CriaSpan('Classe de Armadura: '));
+  div_novo_estilo.appendChild(CriaSpan(Traduz('Classe de Armadura') + ': '));
   div_novo_estilo.appendChild(CriaSpan(null, id_span_classe_armadura));
 
   // Popula os selects.
@@ -297,7 +298,7 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
     var option = document.createElement('option');
     option.setAttribute('name', arma.nome_gerado);
     option.setAttribute('value', arma.nome_gerado);
-    option.text = arma.nome_gerado;
+    option.text = arma.texto_nome;
     if (arma_selecionada == arma.nome_gerado) {
       option.selected = true;
     }
@@ -339,7 +340,7 @@ function AdicionaTalento(indice_talento, chave_classe, div_pai) {
     talentos_ordenados.push(chave_talento);
   }
   talentos_ordenados.sort(function(te, td) {
-    return Traduz(tabelas_talentos[te].nome).localeCompare(tabelas_talentos[td].nome);
+    return Traduz(tabelas_talentos[te].nome).localeCompare(Traduz(tabelas_talentos[td].nome));
   });
   talentos_ordenados.forEach(function(chave_talento) {
     var talento_tabela = tabelas_talentos[chave_talento];

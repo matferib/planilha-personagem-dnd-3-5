@@ -370,7 +370,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
       span_ca_surpreso);
   Titulo(gPersonagem.ca.bonus.Exporta(array_exclusao), span_ca_surpreso);
   span_classe_armadura.appendChild(span_ca_surpreso);
-  span_ca_surpreso.textContent = 'Surpresa: ' + span_ca_surpreso.textContent + ', ';
+  span_ca_surpreso.textContent = Traduz('Surpresa') + ': ' + span_ca_surpreso.textContent + ', ';
   // AC toque.
   var span_ca_toque = CriaSpan();
   array_exclusao =
@@ -381,7 +381,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   Titulo(
       gPersonagem.ca.bonus.Exporta(array_exclusao),
       span_ca_toque);
-  span_ca_toque.textContent = 'Toque: ' + span_ca_toque.textContent;
+  span_ca_toque.textContent = Traduz('Toque') + ': ' + span_ca_toque.textContent;
   span_classe_armadura.appendChild(span_ca_toque);
 }
 

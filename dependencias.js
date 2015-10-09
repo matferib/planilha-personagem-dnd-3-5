@@ -704,17 +704,23 @@ function _DependenciasArma(arma_personagem) {
   var arma_tabela =
       arma_personagem.arma_tabela = tabelas_armas[arma_entrada.chave];
   arma_personagem.nome_gerado = arma_tabela.nome;
+  arma_personagem.texto_nome = Traduz(arma_tabela.nome);
   if (arma_entrada.material && arma_entrada.material != 'nenhum') {
     arma_personagem.nome_gerado +=
         ' (' + tabelas_materiais_especiais[arma_entrada.material].nome + ')';
+    arma_personagem.texto_nome +=
+        ' (' + Traduz(tabelas_materiais_especiais[arma_entrada.material].nome) + ')';
   }
+
   if (arma_entrada.bonus > 0) {
     arma_personagem.bonus_ataque = arma_personagem.bonus_dano = arma_entrada.bonus;
     arma_personagem.nome_gerado += ' +' + arma_personagem.bonus_ataque;
+    arma_personagem.texto_nome += ' +' + arma_personagem.bonus_ataque;
   } else if (arma_entrada.obra_prima) {
     arma_personagem.bonus_ataque = 1;
     arma_personagem.bonus_dano = 0;
     arma_personagem.nome_gerado += ' OP';
+    arma_personagem.texto_nome += Traduz(' OP');
   } else {
     arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 0;
   }
@@ -748,6 +754,11 @@ function _DependenciasEstilo(estilo_personagem) {
   if (estilo_personagem.nome == 'arma_dupla' &&
       (arma_primaria == null || !arma_primaria.arma_tabela.arma_dupla)) {
     Mensagem('Arma "' + estilo_personagem.arma_primaria.nome + '" não é dupla.');
+    estilo_personagem.nome = 'uma_arma';
+  }
+
+  if (estilo_personagem.nome == 'rajada' && PersonagemNivelClasse('monge') == 0) {
+    Mensagem('Estilo "rajada de golpes" requer nível de monge.');
     estilo_personagem.nome = 'uma_arma';
   }
 

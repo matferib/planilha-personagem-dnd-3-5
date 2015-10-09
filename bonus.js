@@ -52,7 +52,7 @@ Bonus.prototype.Clona = function() {
   var b = new Bonus();
   for (var chave_bonus in this.por_chave) {
     for (var origem in this.por_chave[chave_bonus].por_origem) {
-      b.por_chave[chave_bonus].por_origem[origem] = 
+      b.por_chave[chave_bonus].por_origem[origem] =
         this.por_chave[chave_bonus].por_origem[origem];
     }
   }
@@ -125,7 +125,7 @@ Bonus.prototype.TotalChave = function(chave_bonus) {
   return total_chave;
 }
 
-// Exporta os bonus diferentes de zero. 
+// Exporta os bonus diferentes de zero.
 // Util para ser usado com a funcao Titulo.
 // @param opt excluir arra com os tipos de bonus a excluir (nao serao exportados).
 // @return um array onde cada entrada eh um mapa nome: valor.
@@ -146,10 +146,9 @@ Bonus.prototype.Exporta = function(excluir) {
     var total_chave = this.TotalChave(chave_bonus);
     if (total_chave != 0) {
       var entrada_chave = {};
-      entrada_chave[bonus.nome] = total_chave;
+      entrada_chave[Traduz(bonus.nome)] = total_chave;
       array_retorno.push(entrada_chave);
     }
   }
   return array_retorno;
 }
-

@@ -941,11 +941,6 @@ var tabelas_armas_exoticas = {
               categorias: { cac_leve: true } ,
               critico: '×2', peso: '0,5kg', tipo: 'perfurante' },
 
-  machadinha: { preco: '6 PO', dano: { medio: '1d6' } ,
-                categorias: { cac_leve: true } ,
-                critico: '×3', peso: '1,5kg', tipo: 'cortante' },
-
-
 // One-Handed Melee Weapons
 
   chicote: { nome: 'chicote', preco: '1 PO', dano: { medio: '1d3' } ,
@@ -1799,6 +1794,7 @@ var tabelas_aneis = {
   evasao: { nome: 'Evasão', preco: '25000 PO', },
   visao_continua: { nome: 'Visão contínua', preco: '25000 PO', },
   movimento_subito: { nome: 'Movimento súbito', preco: '27000 PO', },
+  mesclarse_as_pedras: { nome: 'Mesclar-se as pedras', preco: '27000 PO', },
   resistencia_elementos_maior: { nome: 'Resistência a elementos (maior)', preco: '28000 PO', },
   protecao_4: { nome: 'Proteção +4', preco: '32000 PO',
       propriedades: { ca: { deflexao: 4 } },  },
@@ -2118,12 +2114,12 @@ var tabelas_capas = {
 };
 
 var tabelas_itens = {
-  aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2 },
-  amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
-  botas: { nome: 'Botas', tabela: tabelas_botas, maximo: 1 },
-  bracaduras: { nome: 'Braçaduras', tabela: tabelas_bracaduras, maximo: 1 },
-  pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
-  capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
+  aneis: { nome: Traduz('Anéis'), tabela: tabelas_aneis, maximo: 2 },
+  amuletos: { nome: Traduz('Amuletos'), tabela: tabelas_amuletos, maximo: 1 },
+  botas: { nome: Traduz('Botas'), tabela: tabelas_botas, maximo: 1 },
+  bracaduras: { nome: Traduz('Braçaduras'), tabela: tabelas_bracaduras, maximo: 1 },
+  pocoes: { nome: Traduz('Poções'), tabela: tabelas_pocoes, maximo: 0, },
+  capas: { nome: Traduz('Capas'), tabela: tabelas_capas, maximo: 1 },
 };
 
 // Materiais especiais.
@@ -2161,6 +2157,6 @@ var tabelas_materiais_especiais = {
       requisitos: { armadura: true, metal: true, obra_prima: true, }, },
   // Custo da prata alquimica varia com o subtipo de arma.
   prata_alquimica: {
-      nome: 'prata Alquímica',
+      nome: 'prata alquímica',
       requisitos: { arma: true, metal: true, }, },
 };

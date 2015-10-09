@@ -524,6 +524,12 @@
 	"____qtde_moeda": {
 		"message": "+/- coins"
 	},
+	"Total_": {
+		"message": "Total:"
+	},
+	"gastos_": {
+		"message": "used:"
+	},
   "Acrobatico": {
     "message": "Acrobatic"
   },
@@ -775,5 +781,1070 @@
   },
   "Potencializar_Magia": {
     "message": "Empower Spell"
+  },
+	"Uma_Arma": {
+		"message": "One Handed"
+	},
+	"Arma___Escudo": {
+		"message": "Weapon + Shield"
+	},
+	"Duas_Armas": {
+		"message": "Two-Weapon"
+	},
+	"Arma_Dupla": {
+		"message": "Double Weapon"
+	},
+	"Rajada_de_Golpes": {
+		"message": "Flurry of Blows"
+	},
+	"Tiro_Rapido": {
+		"message": "Rapid Shot"
+	},
+	"Principal": {
+		"message": "Main Weapon"
+	},
+	"Secundaria": {
+		"message": "Second Weapon"
+	},
+	"Classe_de_Armadura": {
+		"message": "Armor Class"
+	},
+	"Estilo__rajada_de_golpes__requer_nivel_de_monge": {
+		"message": ""
+	},
+	"desarmado": {
+		"message": "unarmed"
+	},
+  "manopla": {
+    "message": "gauntlet"
+  },
+  "adaga": {
+    "message": "dagger"
+  },
+  "adaga_de_soco": {
+    "message": "dagger, punching"
+  },
+  "manopla_com_cravos": {
+    "message": "gauntlet, spiked"
+  },
+  "maca_leve": {
+    "message": "mace, light"
+  },
+  "foice_curta": {
+    "message": "sickle"
+  },
+  "clava": {
+    "message": "club"
+  },
+  "maca_pesada": {
+    "message": "mace, heavy"
+  },
+  "maca_estrela": {
+    "message": "morningstar"
+  },
+  "lanca_curta": {
+    "message": "shortspear"
+  },
+  "lanca": {
+    "message": "spear"
+  },
+  "lanca_longa": {
+    "message": "longspear"
+  },
+  "bordao": {
+    "message": "quarterstaff"
+  },
+  "besta_pesada": {
+    "message": "crossbow, heavy"
+  },
+  "besta_leve": {
+    "message": "crossbow, light"
+  },
+  "dardo": {
+    "message": "dart"
+  },
+  "azagaia": {
+    "message": "javelin"
+  },
+  "funda": {
+    "message": "sling"
+  },
+  "armadura_com_cravos": {
+    "message": "spiked armor"
+  },
+  "escudo_pequeno": {
+    "message": "shield, light"
+  },
+  "escudo_pequeno_com_cavos": {
+    "message": "spiked shield, light"
+  },
+  "espada_curta": {
+    "message": "sword, short"
+  },
+  "kukri": {
+    "message": "kukri"
+  },
+  "machadinha": {
+    "message": "handaxe"
+  },
+  "machado_de_arremesso": {
+    "message": "axe, throwing"
+  },
+  "martelo_leve": {
+    "message": "hammer, light"
+  },
+  "picareta_leve": {
+    "message": "pick, light"
+  },
+  "porrete": {
+    "message": "sap"
+  },
+  "cimitarra": {
+    "message": "scimitar"
+  },
+  "escudo_grande": {
+    "message": "shield, heavy"
+  },
+  "escudo_grande_com_cravos": {
+    "message": "spiked shield, heavy"
+  },
+  "espada_longa": {
+    "message": "longsword"
+  },
+  "machado_de_batalha": {
+    "message": "battleaxe"
+  },
+  "mangual": {
+    "message": "flail"
+  },
+  "martelo_de_guerra": {
+    "message": "warhammer"
+  },
+  "picareta_pesada": {
+    "message": "pick, heavy"
+  },
+  "sabre": {
+    "message": "rapier"
+  },
+  "tridente": {
+    "message": "trident"
+  },
+  "alabarda": {
+    "message": "halberd"
+  },
+  "clava_grande": {
+    "message": "greatclub"
+  },
+  "espada_larga": {
+    "message": "greatsword"
+  },
+  "falcione": {
+    "message": "falchion"
+  },
+  "foice_longa": {
+    "message": "Scythe"
+  },
+  "glaive": {
+    "message": "glaive"
+  },
+  "guisarme": {
+    "message": "guisarme"
+  },
+  "lanca_montada": {
+    "message": "lance"
+  },
+  "machado_grande": {
+    "message": "greateaxe"
+  },
+  "mangual_pesado": {
+    "message": "flail, heavy"
+  },
+  "ranseur": {
+    "message": "ranseur"
+  },
+  "arco_curto": {
+    "message": "shortbow"
+  },
+  "arco_curto_composto": {
+    "message": "shortbow, composite"
+  },
+  "arco_curto_composto_1": {
+    "message": "shortbow, composite (1)"
+  },
+  "arco_curto_composto_2": {
+    "message": "shortbow, composite (2)"
+  },
+  "arco_curto_composto_3": {
+    "message": "shortbow, composite (3)"
+  },
+  "arco_curto_composto_4": {
+    "message": "shortbow, composite (4)"
+  },
+  "arco_curto_composto_5": {
+    "message": "shortbow, composite (5)"
+  },
+  "arco_curto_composto_6": {
+    "message": "shortbow, composite (6)"
+  },
+  "arco_longo": {
+    "message": "longbow"
+  },
+  "arco_longo_composto": {
+    "message": "longbow, composite"
+  },
+  "arco_longo_composto_1": {
+    "message": "longbow, composite (1)"
+  },
+  "arco_longo_composto_2": {
+    "message": "longbow, composite (2)"
+  },
+  "arco_longo_composto_3": {
+    "message": "longbow, composite (3)"
+  },
+  "arco_longo_composto_4": {
+    "message": "longbow, composite (4)"
+  },
+  "arco_longo_composto_5": {
+    "message": "longbow, composite (5)"
+  },
+  "arco_longo_composto_6": {
+    "message": "longbow, composite (6)"
+  },
+  "kama": {
+    "message": "kama"
+  },
+  "nunchaku": {
+    "message": "nunchaku"
+  },
+  "sai": {
+    "message": "sai"
+  },
+  "siangham": {
+    "message": "siangham"
+  },
+  "chicote": {
+    "message": "whip"
+  },
+  "espada_bastarda": {
+    "message": "sword, bastard"
+  },
+  "machado_de_guerra_anao": {
+    "message": "waraxe, dwarven"
+  },
+  "corrente_com_cravos": {
+    "message": "chain, spiked"
+  },
+  "espada_de_duas_laminas": {
+    "message": "sword, two-bladed"
+  },
+  "machado_orc_duplo": {
+    "message": "axe, orc double"
+  },
+  "mangual_atroz": {
+    "message": "flail, dire"
+  },
+  "martelo_gnomo_com_gancho": {
+    "message": "hammer, gnome hooked"
+  },
+  "urgrosh_anao": {
+    "message": "urgrosh, dwarven"
+  },
+  "besta_leve_de_repeticao": {
+    "message": "crossbow, repeating light"
+  },
+  "besta_pesada_de_repeticao": {
+    "message": "crossbow, repeating heavy"
+  },
+  "besta_de_mao": {
+    "message": "crossbow, hand"
+  },
+  "boleadeira": {
+    "message": "bolas"
+  },
+  "rede": {
+    "message": "net"
+  },
+  "shuriken": {
+    "message": "shuriken"
+  },
+	"Nome_invalido__esperando_arma_ou_armadura_": {
+		"message": "Invalid name, expecting weapon or armor."
+	},
+	"_OP": {
+		"message": " Mwk"
+	},
+	"Comprar": {
+		"message": "Buy"
+	},
+	"Vender": {
+		"message": "Sell"
+	},
+	"adamante": {
+		"message": "adamantine"
+	},
+	"madeira_negra": {
+		"message": "darkwood"
+	},
+	"couro_de_dragao": {
+		"message": "dragonhide"
+	},
+	"ferro_frio": {
+		"message": "iron, cold"
+	},
+	"mitral": {
+		"message": "mithral"
+	},
+	"prata_alquimica": {
+		"message": "silver, alchemical"
+	},
+	"bonus_magico": {
+		"message": "magic bonus"
+	},
+	"Armas_Simples": {
+		"message": "Simple Weapons"
+	},
+	"Armas_Comuns": {
+		"message": "Martial Weapons"
+	},
+	"Armas_Exoticas": {
+		"message": "Exotic Weapons"
+	},
+	"Armaduras_Leves": {
+		"message": "Light Armor"
+	},
+	"Armaduras_Medias": {
+		"message": "Medium Armor"
+	},
+	"Armaduras_Pesadas": {
+		"message": "Heavy Armor"
+	},
+	"Escudos": {
+		"message": "Shields"
+	},
+  "Broquel": {
+		"message": "Buckler"
+	},
+  "Escudo_Leve_de_Madeira": {
+		"message": "Shield, light wood"
+	},
+  "Escudo_Leve_de_Aco": {
+		"message": "Shield, light steel"
+	},
+  "Escudo_Pesado_de_Madeira": {
+		"message": "Shield, heavy wood"
+	},
+  "Escudo_Pesado_de_Aco": {
+		"message": "Shield, heavy steel"
+	},
+  "Escudo_de_Corpo": {
+		"message": "Shield, tower"
+	},
+	"Toque": {
+		"message": "Touch"
+	},
+	"Surpresa": {
+		"message": "Surprised"
+	},
+  "Alquimico": {
+    "message": "Alchemical"
+  },
+  "Armadura": {
+    "message": "Armor"
+  },
+  "Armadura__melhoria_": {
+    "message": "Armor (enhancement)"
+  },
+  "Amadura_Natural": {
+    "message": "Natural Armor"
+  },
+  "Atributo": {
+    "message": "Attribute"
+  },
+  "Base": {
+    "message": "Base"
+  },
+  "Circusntancia": {
+    "message": "Circunstance"
+  },
+  "Classe": {
+    "message": "Class"
+  },
+  "Competencia": {
+    "message": "Competence"
+  },
+  "Deflexao": {
+    "message": "Deflection"
+  },
+  "Escudo": {
+    "message": "Shield"
+  },
+  "Escudo__melhoria_": {
+    "message": "Enhancement"
+  },
+  "Esquiva": {
+    "message": "Dogde"
+  },
+  "Inerente": {
+    "message": "Inherent"
+  },
+  "Intuicao": {
+    "message": "Insight"
+  },
+  "Melhoria": {
+    "message": "Enhancement"
+  },
+  "Moral": {
+    "message": "Morale"
+  },
+  "Niveis_Negativos": {
+    "message": "Negative Levels"
+  },
+  "Nivel": {
+    "message": "Level"
+  },
+  "Profano": {
+    "message": "Profane"
+  },
+  "Racial": {
+    "message": "Racial"
+  },
+  "Template": {
+    "message": "Template"
+  },
+  "Resistencia": {
+    "message": "Resistance"
+  },
+  "Sagrado": {
+    "message": "Sacred"
+  },
+  "Sinergia": {
+    "message": "Synergy"
+  },
+  "Sorte": {
+    "message": "Luck"
+  },
+  "Talento": {
+    "message": "Feat"
+  },
+  "Tamanho": {
+    "message": "Size"
+  },
+  "Nenhuma": {
+		"message": "None"
+	},
+	"Acolchoada": {
+		"message": "Padded"
+	},
+	"Armadura_Arcana": {
+		"message": "Mage Armor"
+	},
+	"Couro": {
+		"message": "Leather"
+	},
+  "Couro_Batido": {
+    "message": "Studded Leather"
+	},
+  "Camisao_de_Cota_de_Malha": {
+    "message": "Chain Shirt"
+  },
+  "Gibao_de_Peles": {
+    "message": "Hide"
+  },
+  "Brunea": {
+    "message": "Scale Mail"
+  },
+  "Cota_de_Malha": {
+    "message": "Chain Mail"
+  },
+  "Peitoral_de_Aco": {
+    "message": "Breatplate"
+  },
+  "Cota_de_Talas": {
+    "message": "Splint Mail"
+  },
+  "Loriga_Segmentada": {
+    "message": "Banded Mail"
+  },
+  "Meia_Armadura": {
+    "message": "Half-Plate"
+  },
+  "Armadura_de_Batalha": {
+    "message": "Full Plate"
+  },
+  "pontos": {
+    "message": "points"
+  },
+  "Protecao__1": {
+    "message": "Protection +1"
+  },
+  "Queda_suave": {
+    "message": "Feather falling"
+  },
+  "Sustento": {
+    "message": "Sustanance"
+  },
+  "Escalada": {
+    "message": "Climbing"
+  },
+  "Salto": {
+    "message": "Jumping"
+  },
+  "Natacao": {
+    "message": "Swimming"
+  },
+  "Contramagica": {
+    "message": "Counterspells"
+  },
+  "Escudo_mental": {
+    "message": "Mind shielding"
+  },
+  "Protecao__2": {
+    "message": "Protection +2"
+  },
+  "Escudo_de_energia": {
+    "message": "Force shield"
+  },
+  "Ariete": {
+    "message": "ram"
+  },
+  "Escalada_aprimorada": {
+    "message": "Climbing, improved"
+  },
+  "Salto_aprimorado": {
+    "message": "Jumping, improved"
+  },
+  "Natacao_aprimorada": {
+    "message": "Swimming, improved"
+  },
+  "Cativar_animais": {
+    "message": "Animal friendship"
+  },
+  "Resistencia_a_elementos__menor_": {
+    "message": "Energy resistance, minor"
+  },
+  "Poder_do_camaleao": {
+    "message": "Chameleon power"
+  },
+  "Caminhar_na_agua": {
+    "message": "Water walking"
+  },
+  "Protecao__3": {
+    "message": "Protection +3"
+  },
+  "Armazenar_magias__menor_": {
+    "message": "Spell storing, minor"
+  },
+  "Invisibilidade": {
+    "message": "Invisibility"
+  },
+  "Arcano__I_": {
+    "message": "Wizardry (I)"
+  },
+  "Evasao": {
+    "message": "Evasion"
+  },
+  "Visao_continua": {
+    "message": "X-ray vision"
+  },
+  "Movimento_subito": {
+    "message": "Blinking"
+  },
+  "Mesclar_se_as_pedras": {
+    "message": "Meld into stone"
+  },
+  "Resistencia_a_elementos__maior_": {
+    "message": "Energy resistance, major"
+  },
+  "Protecao__4": {
+    "message": "Protection +4"
+  },
+  "Arcano__II_": {
+    "message": "Wizardry (II)"
+  },
+  "Movimentacao_livre": {
+    "message": "Freedom of movement"
+  },
+  "Resistencia_a_elementos__superior_": {
+    "message": "Energy resistance, greater"
+  },
+  "Escudo_aliado__par_": {
+    "message": "Friend shield (pair)"
+  },
+  "Protecao__5": {
+    "message": "Protection +5"
+  },
+  "Estrelas_cadentes": {
+    "message": "Shooting stars"
+  },
+  "Armazenar_magias": {
+    "message": "Spell storing"
+  },
+  "Arcano__III_": {
+    "message": "Wizardry (III)"
+  },
+  "Telecinesia": {
+    "message": "Telekinesis"
+  },
+  "Regeneracao": {
+    "message": "Regeneration"
+  },
+  "Tres_desejos": {
+    "message": "Three wishes"
+  },
+  "Refletir_magias": {
+    "message": "Spell turning"
+  },
+  "Arcano__IV_": {
+    "message": "Wizardry (IV)"
+  },
+  "Convocar_djinn": {
+    "message": "Djinni calling"
+  },
+  "Comandar_elemental__ar_": {
+    "message": "Elemental command (air)"
+  },
+  "Comandar_elemental__terra_": {
+    "message": "Elemental command (earth)"
+  },
+  "Comandar_elemental__fogo_": {
+    "message": "Elemental command (fire)"
+  },
+  "Comandar_elemental__agua_": {
+    "message": "Elemental command (water)"
+  },
+  "Armazenar_magias__maior_": {
+    "message": "Spell storing, major"
+  },
+  "Armadura_Natural__1": {
+    "message": "Natural Armor +1"
+  },
+  "Armadura_Natural__2": {
+    "message": "Natural Armor +2"
+  },
+  "Armadura_Natural__3": {
+    "message": "Natural Armor +3"
+  },
+  "Armadura_Natural__4": {
+    "message": "Natural Armor +4"
+  },
+  "Armadura_Natural__5": {
+    "message": "Natural Armor +5"
+  },
+  "Punhos_Poderosos__1": {
+    "message": "Mighty Fists + 1"
+  },
+  "Punhos_Poderosos__2": {
+    "message": "Mighty Fists +2"
+  },
+  "Punhos_Poderosos__3": {
+    "message": "Mighty Fists +3"
+  },
+  "Punhos_Poderosos__4": {
+    "message": "Mighty Fists +4"
+  },
+  "Punhos_Poderosos__5": {
+    "message": "Mighty Fists +5"
+  },
+  "Saude__2": {
+    "message": "Health +2"
+  },
+  "Saude__4": {
+    "message": "Health +4"
+  },
+  "Saude__6": {
+    "message": "Health +6"
+  },
+  "Planos": {
+    "message": "Planes"
+  },
+  "Protecao_contra_Localizacao_e_Deteccao": {
+    "message": "Proof against Detection and Location"
+  },
+  "Quaal_Ancora": {
+    "message": "Feather, Anchor"
+  },
+  "Quaal_Passaro": {
+    "message": "Feather, Bird"
+  },
+  "Quaal_Leque": {
+    "message": "Feather, Fan"
+  },
+  "Quaal_Barco_de_Cisnes": {
+    "message": "Feather, Swan Boat"
+  },
+  "Quaal_Arvore": {
+    "message": "Feather, Tree"
+  },
+  "Quaal_Chicote": {
+    "message": "Feather, Whip"
+  },
+  "Periapto_da_Saude": {
+    "message": "Periapt of Health"
+  },
+  "Periapto_da_Resistencia_a_Veneno": {
+    "message": "Periapt of Proof against Poison"
+  },
+  "Periapto_da_Sabedoria__2": {
+    "message": "Periapt of Wisdom +2"
+  },
+  "Periapto_da_Sabedoria__4": {
+    "message": "Periapt of Wisdom +4"
+  },
+  "Periapto_da_Sabedoria__6": {
+    "message": "Periapt of Wisdom +6"
+  },
+  "Bracadura_da_Armadura__1": {
+    "message": "Bracers of Armor +1"
+  },
+  "Bracadura_da_Armadura__2": {
+    "message": "Bracers of Armor +2"
+  },
+  "Bracadura_da_Armadura__3": {
+    "message": "Bracers of Armor +3"
+  },
+  "Bracadura_da_Armadura__4": {
+    "message": "Bracers of Armor +4"
+  },
+  "Bracadura_da_Armadura__5": {
+    "message": "Bracers of Armor +5"
+  },
+  "Bracadura_da_Armadura__6": {
+    "message": "Bracers of Armor +6"
+  },
+  "Bracadura_da_Armadura__7": {
+    "message": "Bracers of Armor +7"
+  },
+  "Bracadura_da_Armadura__8": {
+    "message": "Bracers of Armor +8"
+  },
+  "Botas_Aladas": {
+    "message": "Winged"
+  },
+  "Botas_de_Caminhar_e_Saltar": {
+    "message": "Striding and Springing"
+  },
+  "Botas_Elficas": {
+    "message": "Elvenkind"
+  },
+  "Botas_do_Inverno": {
+    "message": "Winterlands"
+  },
+  "Botas_da_Levitacao": {
+    "message": "Levitation"
+  },
+  "Botas_do_Teletransporte": {
+    "message": "Teleportation"
+  },
+  "Botas_da_velocidade": {
+    "message": "Speed"
+  },
+  "Curar_ferimentos_leves": {
+    "message": "Cure light wounds"
+  },
+  "Suportar_elementos": {
+    "message": "Endure elements"
+  },
+  "Invisibilidade_contra_animais": {
+    "message": "Hide from animals"
+  },
+  "Invisibilidade_contra_mortos_vivos": {
+    "message": "Hide from undead"
+  },
+  "Salto": {
+    "message": "Jump"
+  },
+  "Armadura_arcana": {
+    "message": "Mage armor"
+  },
+  "Presa_magica": {
+    "message": "Magic fang"
+  },
+  "Pedra_encantada": {
+    "message": "Magic stone"
+  },
+  "Arma_magica": {
+    "message": "Magic weapon"
+  },
+  "Passos_sem_pegadas": {
+    "message": "Pass without trace"
+  },
+  "Protecao_contra__tendencia_": {
+    "message": "Protection from (alignment)"
+  },
+  "Remover_medo": {
+    "message": "Remove fear"
+  },
+  "Santuario": {
+    "message": "Sanctuary"
+  },
+  "Escudo_da_fe__2": {
+    "message": "Shield of faith +2"
+  },
+  "Arma_Abencoada__Shillelagh_": {
+    "message": "Shillelagh"
+  },
+  "Abencoar_arma": {
+    "message": "Bless weapon"
+  },
+  "Aumentar_pessoa": {
+    "message": "Enlarge person"
+  },
+  "Reduzir_pessoa": {
+    "message": "Reduce person"
+  },
+  "Ajuda": {
+    "message": "Aid"
+  },
+  "Pele_de_arvore__2": {
+    "message": "Barkskin +2"
+  },
+  "Vigor_do_urso": {
+    "message": "Bear’s endurance"
+  },
+  "Nublar": {
+    "message": "Blur"
+  },
+  "Forca_do_touro": {
+    "message": "Bull’s strength"
+  },
+  "Agilidade_do_gato": {
+    "message": "Cat’s grace"
+  },
+  "Curar_ferimentos_moderados": {
+    "message": "Cure moderate wounds"
+  },
+  "Escuridao": {
+    "message": "Darkness"
+  },
+  "Visao_no_escuro": {
+    "message": "Darkvision"
+  },
+  "Retardar_envenenamento": {
+    "message": "Delay poison"
+  },
+  "Esplendor_da_aguia": {
+    "message": "Eagle’s splendor"
+  },
+  "Astucia_da_raposa": {
+    "message": "Fox’s cunning"
+  },
+  "Invisibilidade": {
+    "message": "Invisibility"
+  },
+  "Restauracao_menor": {
+    "message": "Lesser restoration"
+  },
+  "Levitacao": {
+    "message": "Levitate"
+  },
+  "Confundir_deteccao": {
+    "message": "Misdirection"
+  },
+  "Sabedoria_da_coruja": {
+    "message": "Owl’s wisdom"
+  },
+  "Protecao_contra_flechas_10_magica": {
+    "message": "Protection from arrows 10/magic"
+  },
+  "Remover_paralisia": {
+    "message": "Remove paralysis"
+  },
+  "Resistencia_a_elementos__tipo__10": {
+    "message": "Resist energy (type) 10"
+  },
+  "Escudo_da_fe__3": {
+    "message": "Shield of faith +3"
+  },
+  "Patas_de_aranha": {
+    "message": "Spider climb"
+  },
+  "Dissimular_tendencia": {
+    "message": "Undetectable alignment"
+  },
+  "Pele_de_arvore__3": {
+    "message": "Barkskin +3"
+  },
+  "Escudo_da_fe__4": {
+    "message": "Shield of faith +4"
+  },
+  "Resistencia_a_elementos__tipo__20": {
+    "message": "Resist energy (type) 20"
+  },
+  "Curar_ferimentos_serios": {
+    "message": "Cure serious wounds"
+  },
+  "Luz_do_dia": {
+    "message": "Daylight"
+  },
+  "Deslocamento": {
+    "message": "Displacement"
+  },
+  "Flecha_de_chamas": {
+    "message": "Flame arrow"
+  },
+  "Voo": {
+    "message": "Fly"
+  },
+  "Forma_gasosa": {
+    "message": "Gaseous form"
+  },
+  "Presa_magica_maior__1": {
+    "message": "Greater magic fang +1"
+  },
+  "Arma_magica__1": {
+    "message": "Greater magic weapon +1"
+  },
+  "Velocidade": {
+    "message": "Haste"
+  },
+  "Heroismo": {
+    "message": "Heroism"
+  },
+  "Lamina_afiada": {
+    "message": "Keen edge"
+  },
+  "Circulo_magico_contra__tendencia_": {
+    "message": "Magic circle against (alignment)"
+  },
+  "Roupa_encantada__1": {
+    "message": "Magic vestment +1"
+  },
+  "Neutralizar_venenos": {
+    "message": "Neutralize poison"
+  },
+  "Dificultar_deteccao": {
+    "message": "Nondetection"
+  },
+  "Protecao_contra_elementos__tipo_": {
+    "message": "Protection from energy (type)"
+  },
+  "Furia": {
+    "message": "Rage"
+  },
+  "Remover_cegueira_surdez": {
+    "message": "Remove blindness/deafness"
+  },
+  "Remover_maldicao": {
+    "message": "Remove curse"
+  },
+  "Remover_doenca": {
+    "message": "Remove disease"
+  },
+  "Idiomas": {
+    "message": "Tongues"
+  },
+  "Respirar_na_agua": {
+    "message": "Water breathing"
+  },
+  "Caminhar_na_agua": {
+    "message": "Water walk"
+  },
+  "Pele_de_arvore__4": {
+    "message": "Barkskin +4"
+  },
+  "Escudo_da_fe__5": {
+    "message": "Shield of faith +5"
+  },
+  "Boa_esperanca": {
+    "message": "Good hope"
+  },
+  "Resistencia_a_elementos__tipo__30": {
+    "message": "Resist energy (type) 30"
+  },
+  "Pele_de_arvore__5": {
+    "message": "Barkskin +5"
+  },
+  "Presa_magica_maior__2": {
+    "message": "Greater magic fang +2"
+  },
+  "Arma_magica_maior__2": {
+    "message": "Greater magic weapon +2"
+  },
+  "Roupa_encantada__2": {
+    "message": "Magic vestment +2"
+  },
+  "Protecao_contra_flechas_15_magica": {
+    "message": "Protection from arrows 15/magic"
+  },
+  "Presa_magica_maior__3": {
+    "message": "Greater magic fang +3"
+  },
+  "Arma_magica_maior__3": {
+    "message": "Greater magic weapon +3"
+  },
+  "Roupa_encantada__3": {
+    "message": "Magic vestment +3"
+  },
+  "Presa_magica_maior__4": {
+    "message": "Greater magic fang +4"
+  },
+  "Arma_magica_maior__4": {
+    "message": "Greater magic weapon +4"
+  },
+  "Roupa_encantada__4": {
+    "message": "Magic vestment +4"
+  },
+  "Presa_magica_maior__5": {
+    "message": "Greater magic fang +5"
+  },
+  "Arma_magica_maior__5": {
+    "message": "Greater magic weapon +5"
+  },
+  "Roupa_encantada__5": {
+    "message": "Magic vestment +5"
+  },
+  "Manto_da_resistencia__1": {
+    "message": "Cloak of Resistance +1"
+  },
+  "Manto_elfico": {
+    "message": "Cloak of Elvenkind"
+  },
+  "Manto_do_carisma__2": {
+    "message": "Cloak of Charisma +2"
+  },
+  "Manto_da_resistencia__2": {
+    "message": "Cloak of Resistance +2"
+  },
+  "Manto_da_arraia": {
+    "message": "Cloak of the Manta Ray"
+  },
+  "Manto_da_resistencia__3": {
+    "message": "Cloak of Resistance +3"
+  },
+  "Capa_do_saltimbanco": {
+    "message": "Cape of the Mountebank"
+  },
+  "Manto_da_aranha": {
+    "message": "Cloak of Arachnida"
+  },
+  "Manto_do_carisma__4": {
+    "message": "Cloak of Charisma +4"
+  },
+  "Manto_da_resistencia__4": {
+    "message": "Cloak of Resistance +4"
+  },
+  "Manto_do_deslocamento__menor_": {
+    "message": "Cloak of Displacement, Minor"
+  },
+  "Manto_da_resistencia__5": {
+    "message": "Cloak of Resistance +5"
+  },
+  "Manto_do_morcego": {
+    "message": "Cloak of the Bat"
+  },
+  "Manto_do_carisma__6": {
+    "message": "Cloak of Charisma +6"
+  },
+  "Manto_do_deslocamento__maior_": {
+    "message": "Cloak of Displacement, Major"
+  },
+  "Manto_da_forma_eterea": {
+    "message": "Cloak of Etherealness"
+  },
+  "Tunica_da_fe": {
+		"message": "Mantle of Faith"
+  },
+  "Tunica_de_resistencia_a_magia": {
+    "message": "Mantle of Spell Resistance"
   }
 }

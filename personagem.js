@@ -122,20 +122,22 @@ var gPersonagem = {
   // Cada entrada: { chave_arma: 2|4 }.
   especializacao_armas: {},
   // Cada entrada:
-  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, bonus_ataque, bonus_dano,
+  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, texto_nome, bonus_ataque, bonus_dano,
   //       proficiente, foco, especializado, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
+  // O texto do nome eh o nome gerado internacionalizado. O nome_gerado eh usado
+  // para ligar entradas com a arma, o texto_nome so eh usado para display.
   armas: [],
   // Armadura: aponta para a armadura que estiver sendo usada.
   armadura: null,
   // Cada entrada:
-  //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado.
+  //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado, texto_nome.
   armaduras: [],
   // Aponta para um dos escudos.
   escudo: null,
   // Cada entrada:
-  //      entrada: { chave, obra_prima, bonus }, nome_gerado.
+  //      entrada: { chave, obra_prima, bonus }, nome_gerado, texto_nome.
   escudos: [],
   elmo: '',
   // TODO: passar pra dentro de itens?
@@ -233,6 +235,7 @@ function IniciaPersonagem() {
   gPersonagem.armas.push(ConverteArma({
     chave: 'desarmado',
     nome_gerado: 'desarmado',
+    texto_nome: Traduz('desarmado'),
     obra_prima: false,
     bonus: 0
   }));
