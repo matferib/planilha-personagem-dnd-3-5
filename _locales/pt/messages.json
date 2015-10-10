@@ -1,0 +1,1865 @@
+{
+  "manifesto_nome": {
+    "message": "Planilha de Personagem D&D 3.5"
+  },
+  "manifesto_descricao": {
+    "message": "Criador de personagens para D&D 3.5."
+  },
+	"span_versao_planilha": {
+		"message": "Versão da Planilha"
+	},
+	"span_nome": {
+		"message": "Nome: "
+	},
+	"botao_salvar": {
+		"message": "Salvar"
+	},
+	"botao_abrir": {
+		"message": "Abrir"
+	},
+	"botao_excluir": {
+		"message": "Excluir"
+	},
+	"botao_exportar": {
+		"message": "Exportar"
+	},
+	"botao_importar": {
+		"message": "Importar"
+	},
+  "span_raca": {
+		"message": "Raça"
+	},
+  "span_tamanho": {
+		"message": "Tamanho"
+	},
+  "span_alinhamento": {
+		"message": "Alinhamento"
+	},
+  "span_classes": {
+		"message": "Classes"
+	},
+  "span_niveis_negativos": {
+		"message": "Níveis Negativos:"
+	},
+  "span_divindade": {
+		"message": "Divindade Patrona:"
+	},
+  "span_dados_vida": {
+		"message": "Dados de Vida:"
+	},
+  "span_pontos_vida": {
+		"message": "Pontos de Vida:"
+	},
+  "span_ferimentos": {
+		"message": "Ferimentos"
+	},
+  "span_cura": {
+		"message": "Cura"
+	},
+  "botao_descansar": {
+		"message": "Descansar"
+	},
+  "span_valores_basicos": {
+		"message": "Valores Básicos"
+	},
+  "span_iniciativa": {
+		"message": ""
+	},
+  "span_bba": {
+		"message": ""
+	},
+  "span_num_ataques": {
+		"message": ""
+	},
+  "span_cac": {
+		"message": ""
+	},
+  "span_distancia": {
+		"message": ""
+	},
+  "span_agarrar": {
+		"message": ""
+	},
+  "span_estilos_luta": {
+		"message": ""
+	},
+  "span_habilidades_especiais": {
+		"message": ""
+	},
+	"span_imunidades": {
+		"message": ""
+	},
+	"span_equipamentos": {
+		"message": ""
+	},
+	"span_armas": {
+		"message": ""
+	},
+	"span_armaduras": {
+		"message": ""
+	},
+	"span_escudos": {
+		"message": ""
+	},
+	"span_aneis": {
+		"message": ""
+	},
+	"span_amuletos": {
+		"message": ""
+	},
+	"span_botas": {
+		"message": ""
+	},
+	"span_bracaduras": {
+		"message": ""
+	},
+	"span_pocoes": {
+		"message": ""
+	},
+	"span_capas": {
+		"message": ""
+	},
+	"span_outros_equipamentos": {
+		"message": ""
+	},
+	"span_moedas": {
+		"message": ""
+	},
+	"span_platina": {
+		"message": ""
+	},
+	"span_ouro": {
+		"message": ""
+	},
+	"span_prata": {
+		"message": ""
+	},
+	"span_cobre": {
+		"message": ""
+	},
+	"span_adicionar": {
+		"message": ""
+	},
+	"span_resistencia_magia": {
+		"message": ""
+	},
+	"span_testes_resistencia": {
+		"message": ""
+	},
+	"span_talentos": {
+		"message": ""
+	},
+	"span_pericias": {
+		"message": ""
+	},
+	"span_pericias_total": {
+		"message": ""
+	},
+	"span_pericias_gastos": {
+		"message": ""
+	},
+	"span_notas": {
+		"message": ""
+	},
+	"span_proficiencia_com_armas": {
+		"message": ""
+	},
+	"botao_gerar_resumo": {
+		"message": ""
+	},
+	"option_lb": {
+		"message": ""
+	},
+	"option_ln": {
+		"message": ""
+	},
+	"option_lm": {
+		"message": ""
+	},
+	"option_nb": {
+		"message": ""
+	},
+	"option_n": {
+		"message": ""
+	},
+	"option_nm": {
+		"message": ""
+	},
+	"option_cb": {
+		"message": ""
+	},
+	"option_cn": {
+		"message": ""
+	},
+	"option_cm": {
+		"message": ""
+	},
+	"option_minusculo": {
+		"message": ""
+	},
+	"option_diminuto": {
+		"message": ""
+	},
+	"option_miudo": {
+		"message": ""
+	},
+	"option_pequeno": {
+		"message": ""
+	},
+	"option_medio": {
+		"message": ""
+	},
+	"option_grande": {
+		"message": ""
+	},
+	"option_enorme": {
+		"message": ""
+	},
+	"option_imenso": {
+		"message": ""
+	},
+	"option_colossal": {
+		"message": ""
+	},
+	"Elfo": {
+		"message": ""
+	},
+	"Humano": {
+		"message": ""
+	},
+	"Meio_Elfo": {
+		"message": ""
+	},
+	"Gnomo": {
+		"message": ""
+	},
+	"Halfling": {
+		"message": ""
+	},
+	"Meio_Orc": {
+		"message": ""
+	},
+	"Orc": {
+		"message": ""
+	},
+	"Anao": {
+		"message": ""
+	},
+	"Aarakocra": {
+		"message": ""
+	},
+	"nenhum": {
+		"message": ""
+	},
+	"Desfazer": {
+		"message": ""
+	},
+	"Forca": {
+		"message": ""
+	},
+	"Destreza": {
+		"message": ""
+	},
+	"Constituicao": {
+		"message": ""
+	},
+	"Inteligencia": {
+		"message": ""
+	},
+	"Sabedoria": {
+		"message": ""
+	},
+	"Carisma": {
+		"message": ""
+	},
+	"Nivel": {
+		"message": ""
+	},
+	"Nivel_de_Conjurador": {
+		"message": ""
+	},
+	"Barbaro": {
+		"message": ""
+	},
+	"Bardo": {
+		"message": ""
+	},
+	"Clerigo": {
+		"message": ""
+	},
+	"Druida": {
+		"message": ""
+	},
+	"Guerreiro": {
+		"message": ""
+	},
+	"Feiticeiro": {
+		"message": ""
+	},
+	"Ladino": {
+		"message": ""
+	},
+	"Mago": {
+		"message": ""
+	},
+	"Mago_Necromante": {
+		"message": ""
+	},
+	"Monge": {
+		"message": ""
+	},
+	"Paladino": {
+		"message": ""
+	},
+	"Ranger": {
+		"message": ""
+	},
+	"Adepto": {
+		"message": ""
+	},
+	"Aristocrata": {
+		"message": ""
+	},
+	"Plebeu": {
+		"message": ""
+	},
+	"Expert": {
+		"message": ""
+	},
+	"Combatente": {
+		"message": ""
+	},
+	"Dragao_Purpura": {
+		"message": ""
+	},
+	"Teurgista_Mistico": {
+		"message": ""
+	},
+	"Combate": {
+		"message": ""
+	},
+	"Pericias": {
+		"message": ""
+	},
+	"Completo": {
+		"message": ""
+	},
+	"Feiticos": {
+		"message": ""
+	},
+	"Modo_Mestre": {
+		"message": ""
+	},
+  "Abrir_Fechaduras": {
+    "message": ""
+  },
+  "Acrobacias": {
+    "message": ""
+  },
+  "Adestrar_Animais": {
+    "message": ""
+  },
+  "Arte_da_Fuga": {
+    "message": ""
+  },
+  "Atuacao": {
+    "message": ""
+  },
+  "Avaliacao": {
+    "message": ""
+  },
+  "Blefar": {
+    "message": ""
+  },
+  "Cavalgar": {
+    "message": ""
+  },
+  "Concentracao": {
+    "message": ""
+  },
+  "Conhecimento__arcano_": {
+    "message": ""
+  },
+  "Conhecimento__arquitetura_e_engenharia_": {
+    "message": ""
+  },
+  "Conhecimento__geografia_": {
+    "message": ""
+  },
+  "Conhecimento__historia_": {
+    "message": ""
+  },
+  "Conhecimento__local_": {
+    "message": ""
+  },
+  "Conhecimento__masmorras_": {
+    "message": ""
+  },
+  "Conhecimento__natureza_": {
+    "message": ""
+  },
+  "Conhecimento__nobreza_e_realeza_": {
+    "message": ""
+  },
+  "Conhecimento__planos_": {
+    "message": ""
+  },
+  "Conhecimento__religiao_": {
+    "message": ""
+  },
+  "Cura": {
+    "message": ""
+  },
+  "Decifrar_Escrita": {
+    "message": ""
+  },
+  "Diplomacia": {
+    "message": ""
+  },
+  "Disfarces": {
+    "message": ""
+  },
+  "Equilibrio": {
+    "message": ""
+  },
+  "Escalar": {
+    "message": ""
+  },
+  "Esconder_se": {
+    "message": ""
+  },
+  "Falar_Idioma": {
+    "message": ""
+  },
+  "Falsificacao": {
+    "message": ""
+  },
+  "Furtividade": {
+    "message": ""
+  },
+  "Identificar_magia": {
+    "message": ""
+  },
+  "Intimidacao": {
+    "message": ""
+  },
+  "Natacao": {
+    "message": ""
+  },
+  "Observar": {
+    "message": ""
+  },
+  "Obter_Informacao": {
+    "message": ""
+  },
+  "Oficios__outros_": {
+    "message": ""
+  },
+  "Oficios__alquimia_": {
+    "message": ""
+  },
+  "Oficios__armoraria_": {
+    "message": ""
+  },
+  "Oficios__arquearia_": {
+    "message": ""
+  },
+  "Oficios__armeiro_": {
+    "message": ""
+  },
+  "Oficios__armadilharia_": {
+    "message": ""
+  },
+  "Operar_Mecanismo": {
+    "message": ""
+  },
+  "Ouvir": {
+    "message": ""
+  },
+  "Prestidigitacao": {
+    "message": ""
+  },
+  "Procurar": {
+    "message": ""
+  },
+  "Profissao": {
+    "message": ""
+  },
+  "Saltar": {
+    "message": ""
+  },
+  "Sentir_Motivacao": {
+    "message": ""
+  },
+  "Sobrevivencia": {
+    "message": ""
+  },
+  "Usar_Cordas": {
+    "message": ""
+  },
+  "Usar_Instrumento_Magico": {
+    "message": ""
+  },
+	"pc": {
+		"message": ""
+	},
+	"pp": {
+		"message": ""
+	},
+	"po": {
+		"message": ""
+	},
+	"pl": {
+		"message": ""
+	},
+	"PC": {
+		"message": ""
+	},
+	"PP": {
+		"message": ""
+	},
+	"PO": {
+		"message": ""
+	},
+	"PL": {
+		"message": ""
+	},
+	"Valor_invalido": {
+		"message": ""
+	},
+	"adicionar_XP": {
+		"message": ""
+	},
+	"adicionar_XP": {
+		"message": ""
+	},
+	"dados": {
+		"message": ""
+	},
+	"____qtde_moeda": {
+		"message": ""
+	},
+	"Total_": {
+		"message": ""
+	},
+	"gastos_": {
+		"message": ""
+	},
+  "Acrobatico": {
+    "message": ""
+  },
+  "Acuidade_com_Arma": {
+    "message": ""
+  },
+  "Afinidade_com_Animais": {
+    "message": ""
+  },
+  "Agarrar_Aprimorado": {
+    "message": ""
+  },
+  "Agil": {
+    "message": ""
+  },
+  "Apanhar_Objetos": {
+    "message": ""
+  },
+  "Aptidao_Magica": {
+    "message": ""
+  },
+  "Ataque_Atordoante": {
+    "message": ""
+  },
+  "Ataque_Desarmado_Aprimorado": {
+    "message": ""
+  },
+  "Ataque_em_Movimento": {
+    "message": ""
+  },
+  "Ataque_Poderoso": {
+    "message": ""
+  },
+  "Atletico": {
+    "message": ""
+  },
+  "Auto_Suficiente": {
+    "message": ""
+  },
+  "Combate_Montado": {
+    "message": ""
+  },
+  "Combater_com_duas_armas": {
+    "message": ""
+  },
+  "Combater_com_duas_armas_aprimorado": {
+    "message": ""
+  },
+  "Combater_com_Duas_Armas_Maior": {
+    "message": ""
+  },
+  "Corrida": {
+    "message": ""
+  },
+  "Dedos_Lepidos": {
+    "message": ""
+  },
+  "Desarme_Aprimorado": {
+    "message": ""
+  },
+  "Desviar_Objetos": {
+    "message": ""
+  },
+  "Diligente": {
+    "message": ""
+  },
+  "Duro_de_Matar": {
+    "message": ""
+  },
+  "Expulsao_Adicional": {
+    "message": ""
+  },
+  "Escrever_Pergaminho": {
+    "message": ""
+  },
+  "Especializacao_em_Arma": {
+    "message": ""
+  },
+  "Esquiva": {
+    "message": ""
+  },
+  "Especializacao_em_Arma_Maior": {
+    "message": ""
+  },
+  "Foco_em_arma": {
+    "message": ""
+  },
+  "Foco_em_arma_maior": {
+    "message": ""
+  },
+  "Foco_em_Magia": {
+    "message": ""
+  },
+  "Foco_em_Magia_Maior": {
+    "message": ""
+  },
+  "Fortitude_Maior": {
+    "message": ""
+  },
+  "Fraudulento": {
+    "message": ""
+  },
+  "Ignorar_Componentes_Materiais": {
+    "message": ""
+  },
+  "Investida_Montada": {
+    "message": ""
+  },
+  "Derrubar_Aprimorado__Imobilizacao_Aprimorada_": {
+    "message": ""
+  },
+  "Especializacao_em_Combate": {
+    "message": ""
+  },
+  "Iniciativa_Aprimorada": {
+    "message": ""
+  },
+  "Investigador": {
+    "message": ""
+  },
+  "Lideranca": {
+    "message": ""
+  },
+  "Lutar_as_Cegas": {
+    "message": ""
+  },
+  "Magia_Natural": {
+    "message": ""
+  },
+  "Magia_Penetrante": {
+    "message": ""
+  },
+  "Magia_Penetrante_Maior": {
+    "message": ""
+  },
+  "Magia_em_Combate": {
+    "message": ""
+  },
+  "Maos_Leves": {
+    "message": ""
+  },
+  "Mobilidade": {
+    "message": ""
+  },
+  "Negociador": {
+    "message": ""
+  },
+  "Persuasivo": {
+    "message": ""
+  },
+  "Prontidao": {
+    "message": ""
+  },
+  "Rastrear": {
+    "message": ""
+  },
+  "Reflexos_em_Combate": {
+    "message": ""
+  },
+  "Reflexos_Rapidos": {
+    "message": ""
+  },
+  "Saque_Rapido": {
+    "message": ""
+  },
+  "Tiro_Certeiro": {
+    "message": ""
+  },
+  "Tiro_Multiplo": {
+    "message": ""
+  },
+  "Tiro_Preciso": {
+    "message": ""
+  },
+  "Tiro_Rapido": {
+    "message" : "Rapid Shot"
+  },
+  "Tolerancia": {
+    "message": ""
+  },
+  "Trespassar": {
+    "message": ""
+  },
+  "Usar_Armas_Simples": {
+    "message": ""
+  },
+  "Usar_Arma_Comum": {
+    "message": ""
+  },
+  "Usar_Arma_Exotica": {
+    "message": ""
+  },
+  "Usar_Escudo": {
+    "message": ""
+  },
+  "Ataque_com_Escudo_Aprimorado": {
+    "message": ""
+  },
+  "Usar_Escudo_de_Corpo": {
+    "message": ""
+  },
+  "Vitalidade": {
+    "message": ""
+  },
+  "Vontade_de_Ferro": {
+    "message": ""
+  },
+  "Criar_Armaduras_e_Armas_Magicas": {
+    "message": ""
+  },
+  "Criar_Bastao": {
+    "message": ""
+  },
+  "Criar_Cajado": {
+    "message": ""
+  },
+  "Criar_Item_Maravilhoso": {
+    "message": ""
+  },
+  "Criar_Varinha": {
+    "message": ""
+  },
+  "Preparar_Pocao": {
+    "message": ""
+  },
+  "Acelerar_Magia": {
+    "message": ""
+  },
+  "Ampliar_Magia": {
+    "message": ""
+  },
+  "Aumentar_Magia": {
+    "message": ""
+  },
+  "Elevar_Magia": {
+    "message": ""
+  },
+  "Estender_Magia": {
+    "message": ""
+  },
+  "Magia_Sem_Gestos": {
+    "message": ""
+  },
+  "Magia_Silenciosa": {
+    "message": ""
+  },
+  "Maximizar_Magia": {
+    "message": ""
+  },
+  "Potencializar_Magia": {
+    "message": ""
+  },
+	"Uma_Arma": {
+		"message": ""
+	},
+	"Arma___Escudo": {
+		"message": ""
+	},
+	"Duas_Armas": {
+		"message": ""
+	},
+	"Arma_Dupla": {
+		"message": ""
+	},
+	"Rajada_de_Golpes": {
+		"message": ""
+	},
+	"Tiro_Rapido": {
+		"message": ""
+	},
+	"Principal": {
+		"message": ""
+	},
+	"Secundaria": {
+		"message": ""
+	},
+	"Classe_de_Armadura": {
+		"message": ""
+	},
+	"Estilo__rajada_de_golpes__requer_nivel_de_monge": {
+		"message": ""
+	},
+	"desarmado": {
+		"message": ""
+	},
+  "manopla": {
+    "message": ""
+  },
+  "adaga": {
+    "message": ""
+  },
+  "adaga_de_soco": {
+    "message": ""
+  },
+  "manopla_com_cravos": {
+    "message": ""
+  },
+  "maca_leve": {
+    "message": ""
+  },
+  "foice_curta": {
+    "message": ""
+  },
+  "clava": {
+    "message": ""
+  },
+  "maca_pesada": {
+    "message": ""
+  },
+  "maca_estrela": {
+    "message": ""
+  },
+  "lanca_curta": {
+    "message": ""
+  },
+  "lanca": {
+    "message": ""
+  },
+  "lanca_longa": {
+    "message": ""
+  },
+  "bordao": {
+    "message": ""
+  },
+  "besta_pesada": {
+    "message": ""
+  },
+  "besta_leve": {
+    "message": ""
+  },
+  "dardo": {
+    "message": ""
+  },
+  "azagaia": {
+    "message": ""
+  },
+  "funda": {
+    "message": ""
+  },
+  "armadura_com_cravos": {
+    "message": ""
+  },
+  "escudo_pequeno": {
+    "message": ""
+  },
+  "escudo_pequeno_com_cavos": {
+    "message": ""
+  },
+  "espada_curta": {
+    "message": ""
+  },
+  "kukri": {
+    "message": ""
+  },
+  "machadinha": {
+    "message": ""
+  },
+  "machado_de_arremesso": {
+    "message": ""
+  },
+  "martelo_leve": {
+    "message": ""
+  },
+  "picareta_leve": {
+    "message": ""
+  },
+  "porrete": {
+    "message": ""
+  },
+  "cimitarra": {
+    "message": ""
+  },
+  "escudo_grande": {
+    "message": ""
+  },
+  "escudo_grande_com_cravos": {
+    "message": ""
+  },
+  "espada_longa": {
+    "message": ""
+  },
+  "machado_de_batalha": {
+    "message": ""
+  },
+  "mangual": {
+    "message": ""
+  },
+  "martelo_de_guerra": {
+    "message": ""
+  },
+  "picareta_pesada": {
+    "message": ""
+  },
+  "sabre": {
+    "message": ""
+  },
+  "tridente": {
+    "message": ""
+  },
+  "alabarda": {
+    "message": ""
+  },
+  "clava_grande": {
+    "message": ""
+  },
+  "espada_larga": {
+    "message": ""
+  },
+  "falcione": {
+    "message": ""
+  },
+  "foice_longa": {
+    "message": ""
+  },
+  "glaive": {
+    "message": ""
+  },
+  "guisarme": {
+    "message": ""
+  },
+  "lanca_montada": {
+    "message": ""
+  },
+  "machado_grande": {
+    "message": ""
+  },
+  "mangual_pesado": {
+    "message": ""
+  },
+  "ranseur": {
+    "message": ""
+  },
+  "arco_curto": {
+    "message": ""
+  },
+  "arco_curto_composto": {
+    "message": ""
+  },
+  "arco_curto_composto__1_": {
+    "message": ""
+  },
+  "arco_curto_composto__2_": {
+    "message": ""
+  },
+  "arco_curto_composto__3_": {
+    "message": ""
+  },
+  "arco_curto_composto__4_": {
+    "message": ""
+  },
+  "arco_curto_composto__5_": {
+    "message": ""
+  },
+  "arco_curto_composto__6_": {
+    "message": ""
+  },
+  "arco_longo": {
+    "message": ""
+  },
+  "arco_longo_composto": {
+    "message": ""
+  },
+  "arco_longo_composto__1_": {
+    "message": ""
+  },
+  "arco_longo_composto__2_": {
+    "message": ""
+  },
+  "arco_longo_composto__3_": {
+    "message": ""
+  },
+  "arco_longo_composto__4_": {
+    "message": ""
+  },
+  "arco_longo_composto__5_": {
+    "message": ""
+  },
+  "arco_longo_composto__6_": {
+    "message": ""
+  },
+  "kama": {
+    "message": ""
+  },
+  "nunchaku": {
+    "message": ""
+  },
+  "sai": {
+    "message": ""
+  },
+  "siangham": {
+    "message": ""
+  },
+  "chicote": {
+    "message": ""
+  },
+  "espada_bastarda": {
+    "message": ""
+  },
+  "machado_de_guerra_anao": {
+    "message": ""
+  },
+  "corrente_com_cravos": {
+    "message": ""
+  },
+  "espada_de_duas_laminas": {
+    "message": ""
+  },
+  "machado_orc_duplo": {
+    "message": ""
+  },
+  "mangual_atroz": {
+    "message": ""
+  },
+  "martelo_gnomo_com_gancho": {
+    "message": ""
+  },
+  "urgrosh_anao": {
+    "message": ""
+  },
+  "besta_leve_de_repeticao": {
+    "message": ""
+  },
+  "besta_pesada_de_repeticao": {
+    "message": ""
+  },
+  "besta_de_mao": {
+    "message": ""
+  },
+  "boleadeira": {
+    "message": ""
+  },
+  "rede": {
+    "message": ""
+  },
+  "shuriken": {
+    "message": ""
+  },
+	"Nome_invalido__esperando_arma_ou_armadura_": {
+		"message": ""
+	},
+	"_OP": {
+		"message": ""
+	},
+	"Comprar": {
+		"message": ""
+	},
+	"Vender": {
+		"message": ""
+	},
+	"adamante": {
+		"message": ""
+	},
+	"madeira_negra": {
+		"message": ""
+	},
+	"couro_de_dragao": {
+		"message": ""
+	},
+	"ferro_frio": {
+		"message": ""
+	},
+	"mitral": {
+		"message": ""
+	},
+	"prata_alquimica": {
+		"message": ""
+	},
+	"bonus_magico": {
+		"message": ""
+	},
+	"Armas_Simples": {
+		"message": ""
+	},
+	"Armas_Comuns": {
+		"message": ""
+	},
+	"Armas_Exoticas": {
+		"message": ""
+	},
+	"Armaduras_Leves": {
+		"message": ""
+	},
+	"Armaduras_Medias": {
+		"message": ""
+	},
+	"Armaduras_Pesadas": {
+		"message": ""
+	},
+	"Escudos": {
+		"message": ""
+	},
+  "Broquel": {
+		"message": ""
+	},
+  "Escudo_Leve_de_Madeira": {
+		"message": ""
+	},
+  "Escudo_Leve_de_Aco": {
+		"message": ""
+	},
+  "Escudo_Pesado_de_Madeira": {
+		"message": ""
+	},
+  "Escudo_Pesado_de_Aco": {
+		"message": ""
+	},
+  "Escudo_de_Corpo": {
+		"message": ""
+	},
+	"Toque": {
+		"message": ""
+	},
+	"Surpresa": {
+		"message": ""
+	},
+  "Alquimico": {
+    "message": ""
+  },
+  "Armadura": {
+    "message": ""
+  },
+  "Armadura__melhoria_": {
+    "message": ""
+  },
+  "Amadura_Natural": {
+    "message": ""
+  },
+  "Atributo": {
+    "message": ""
+  },
+  "Base": {
+    "message": ""
+  },
+  "Circusntancia": {
+    "message": ""
+  },
+  "Classe": {
+    "message": ""
+  },
+  "Competencia": {
+    "message": ""
+  },
+  "Deflexao": {
+    "message": ""
+  },
+  "Escudo": {
+    "message": ""
+  },
+  "Escudo__melhoria_": {
+    "message": ""
+  },
+  "Esquiva": {
+    "message": ""
+  },
+  "Inerente": {
+    "message": ""
+  },
+  "Intuicao": {
+    "message": ""
+  },
+  "Melhoria": {
+    "message": ""
+  },
+  "Moral": {
+    "message": ""
+  },
+  "Niveis_Negativos": {
+    "message": ""
+  },
+  "Nivel": {
+    "message": ""
+  },
+  "Profano": {
+    "message": ""
+  },
+  "Racial": {
+    "message": ""
+  },
+  "Template": {
+    "message": ""
+  },
+  "Resistencia": {
+    "message": ""
+  },
+  "Sagrado": {
+    "message": ""
+  },
+  "Sinergia": {
+    "message": ""
+  },
+  "Sorte": {
+    "message": ""
+  },
+  "Talento": {
+    "message": ""
+  },
+  "Tamanho": {
+    "message": ""
+  },
+  "Nenhuma": {
+		"message": ""
+	},
+	"Acolchoada": {
+		"message": ""
+	},
+	"Armadura_Arcana": {
+		"message": ""
+	},
+	"Couro": {
+		"message": ""
+	},
+  "Couro_Batido": {
+    "message": ""
+	},
+  "Camisao_de_Cota_de_Malha": {
+    "message": ""
+  },
+  "Gibao_de_Peles": {
+    "message": ""
+  },
+  "Brunea": {
+    "message": ""
+  },
+  "Cota_de_Malha": {
+    "message": ""
+  },
+  "Peitoral_de_Aco": {
+    "message": ""
+  },
+  "Cota_de_Talas": {
+    "message": ""
+  },
+  "Loriga_Segmentada": {
+    "message": ""
+  },
+  "Meia_Armadura": {
+    "message": ""
+  },
+  "Armadura_de_Batalha": {
+    "message": ""
+  },
+  "pontos": {
+    "message": ""
+  },
+  "Protecao__1": {
+    "message": ""
+  },
+  "Queda_suave": {
+    "message": ""
+  },
+  "Sustento": {
+    "message": ""
+  },
+  "Escalada": {
+    "message": ""
+  },
+  "Salto": {
+    "message": ""
+  },
+  "Natacao": {
+    "message": ""
+  },
+  "Contramagica": {
+    "message": ""
+  },
+  "Escudo_mental": {
+    "message": ""
+  },
+  "Protecao__2": {
+    "message": ""
+  },
+  "Escudo_de_energia": {
+    "message": ""
+  },
+  "Ariete": {
+    "message": ""
+  },
+  "Escalada_aprimorada": {
+    "message": ""
+  },
+  "Salto_aprimorado": {
+    "message": ""
+  },
+  "Natacao_aprimorada": {
+    "message": ""
+  },
+  "Cativar_animais": {
+    "message": ""
+  },
+  "Resistencia_a_elementos__menor_": {
+    "message": ""
+  },
+  "Poder_do_camaleao": {
+    "message": ""
+  },
+  "Caminhar_na_agua": {
+    "message": ""
+  },
+  "Protecao__3": {
+    "message": ""
+  },
+  "Armazenar_magias__menor_": {
+    "message": ""
+  },
+  "Invisibilidade": {
+    "message": ""
+  },
+  "Arcano__I_": {
+    "message": ""
+  },
+  "Evasao": {
+    "message": ""
+  },
+  "Visao_continua": {
+    "message": ""
+  },
+  "Movimento_subito": {
+    "message": ""
+  },
+  "Mesclar_se_as_pedras": {
+    "message": ""
+  },
+  "Resistencia_a_elementos__maior_": {
+    "message": ""
+  },
+  "Protecao__4": {
+    "message": ""
+  },
+  "Arcano__II_": {
+    "message": ""
+  },
+  "Movimentacao_livre": {
+    "message": ""
+  },
+  "Resistencia_a_elementos__superior_": {
+    "message": ""
+  },
+  "Escudo_aliado__par_": {
+    "message": ""
+  },
+  "Protecao__5": {
+    "message": ""
+  },
+  "Estrelas_cadentes": {
+    "message": ""
+  },
+  "Armazenar_magias": {
+    "message": ""
+  },
+  "Arcano__III_": {
+    "message": ""
+  },
+  "Telecinesia": {
+    "message": ""
+  },
+  "Regeneracao": {
+    "message": ""
+  },
+  "Tres_desejos": {
+    "message": ""
+  },
+  "Refletir_magias": {
+    "message": ""
+  },
+  "Arcano__IV_": {
+    "message": ""
+  },
+  "Convocar_djinn": {
+    "message": ""
+  },
+  "Comandar_elemental__ar_": {
+    "message": ""
+  },
+  "Comandar_elemental__terra_": {
+    "message": ""
+  },
+  "Comandar_elemental__fogo_": {
+    "message": ""
+  },
+  "Comandar_elemental__agua_": {
+    "message": ""
+  },
+  "Armazenar_magias__maior_": {
+    "message": ""
+  },
+  "Armadura_Natural__1": {
+    "message": ""
+  },
+  "Armadura_Natural__2": {
+    "message": ""
+  },
+  "Armadura_Natural__3": {
+    "message": ""
+  },
+  "Armadura_Natural__4": {
+    "message": ""
+  },
+  "Armadura_Natural__5": {
+    "message": ""
+  },
+  "Punhos_Poderosos__1": {
+    "message": ""
+  },
+  "Punhos_Poderosos__2": {
+    "message": ""
+  },
+  "Punhos_Poderosos__3": {
+    "message": ""
+  },
+  "Punhos_Poderosos__4": {
+    "message": ""
+  },
+  "Punhos_Poderosos__5": {
+    "message": ""
+  },
+  "Saude__2": {
+    "message": ""
+  },
+  "Saude__4": {
+    "message": ""
+  },
+  "Saude__6": {
+    "message": ""
+  },
+  "Planos": {
+    "message": ""
+  },
+  "Protecao_contra_Localizacao_e_Deteccao": {
+    "message": ""
+  },
+  "Quaal_Ancora": {
+    "message": ""
+  },
+  "Quaal_Passaro": {
+    "message": ""
+  },
+  "Quaal_Leque": {
+    "message": ""
+  },
+  "Quaal_Barco_de_Cisnes": {
+    "message": ""
+  },
+  "Quaal_Arvore": {
+    "message": ""
+  },
+  "Quaal_Chicote": {
+    "message": ""
+  },
+  "Periapto_da_Saude": {
+    "message": ""
+  },
+  "Periapto_da_Resistencia_a_Veneno": {
+    "message": ""
+  },
+  "Periapto_da_Sabedoria__2": {
+    "message": ""
+  },
+  "Periapto_da_Sabedoria__4": {
+    "message": ""
+  },
+  "Periapto_da_Sabedoria__6": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__1": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__2": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__3": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__4": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__5": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__6": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__7": {
+    "message": ""
+  },
+  "Bracadura_da_Armadura__8": {
+    "message": ""
+  },
+  "Botas_Aladas": {
+    "message": ""
+  },
+  "Botas_de_Caminhar_e_Saltar": {
+    "message": ""
+  },
+  "Botas_Elficas": {
+    "message": ""
+  },
+  "Botas_do_Inverno": {
+    "message": ""
+  },
+  "Botas_da_Levitacao": {
+    "message": ""
+  },
+  "Botas_do_Teletransporte": {
+    "message": ""
+  },
+  "Botas_da_velocidade": {
+    "message": ""
+  },
+  "Curar_ferimentos_leves": {
+    "message": ""
+  },
+  "Suportar_elementos": {
+    "message": ""
+  },
+  "Invisibilidade_contra_animais": {
+    "message": ""
+  },
+  "Invisibilidade_contra_mortos_vivos": {
+    "message": ""
+  },
+  "Salto": {
+    "message": ""
+  },
+  "Armadura_arcana": {
+    "message": ""
+  },
+  "Presa_magica": {
+    "message": ""
+  },
+  "Pedra_encantada": {
+    "message": ""
+  },
+  "Arma_magica": {
+    "message": ""
+  },
+  "Passos_sem_pegadas": {
+    "message": ""
+  },
+  "Protecao_contra__tendencia_": {
+    "message": ""
+  },
+  "Remover_medo": {
+    "message": ""
+  },
+  "Santuario": {
+    "message": ""
+  },
+  "Escudo_da_fe__2": {
+    "message": ""
+  },
+  "Arma_Abencoada__Shillelagh_": {
+    "message": ""
+  },
+  "Abencoar_arma": {
+    "message": ""
+  },
+  "Aumentar_pessoa": {
+    "message": ""
+  },
+  "Reduzir_pessoa": {
+    "message": ""
+  },
+  "Ajuda": {
+    "message": ""
+  },
+  "Pele_de_arvore__2": {
+    "message": ""
+  },
+  "Vigor_do_urso": {
+    "message": ""
+  },
+  "Nublar": {
+    "message": ""
+  },
+  "Forca_do_touro": {
+    "message": ""
+  },
+  "Agilidade_do_gato": {
+    "message": ""
+  },
+  "Curar_ferimentos_moderados": {
+    "message": ""
+  },
+  "Escuridao": {
+    "message": ""
+  },
+  "Visao_no_escuro": {
+    "message": ""
+  },
+  "Retardar_envenenamento": {
+    "message": ""
+  },
+  "Esplendor_da_aguia": {
+    "message": ""
+  },
+  "Astucia_da_raposa": {
+    "message": ""
+  },
+  "Invisibilidade": {
+    "message": ""
+  },
+  "Restauracao_menor": {
+    "message": ""
+  },
+  "Levitacao": {
+    "message": ""
+  },
+  "Confundir_deteccao": {
+    "message": ""
+  },
+  "Sabedoria_da_coruja": {
+    "message": ""
+  },
+  "Protecao_contra_flechas_10_magica": {
+    "message": ""
+  },
+  "Remover_paralisia": {
+    "message": ""
+  },
+  "Resistencia_a_elementos__tipo__10": {
+    "message": ""
+  },
+  "Escudo_da_fe__3": {
+    "message": ""
+  },
+  "Patas_de_aranha": {
+    "message": ""
+  },
+  "Dissimular_tendencia": {
+    "message": ""
+  },
+  "Pele_de_arvore__3": {
+    "message": ""
+  },
+  "Escudo_da_fe__4": {
+    "message": ""
+  },
+  "Resistencia_a_elementos__tipo__20": {
+    "message": ""
+  },
+  "Curar_ferimentos_serios": {
+    "message": ""
+  },
+  "Luz_do_dia": {
+    "message": ""
+  },
+  "Deslocamento": {
+    "message": ""
+  },
+  "Flecha_de_chamas": {
+    "message": ""
+  },
+  "Voo": {
+    "message": ""
+  },
+  "Forma_gasosa": {
+    "message": ""
+  },
+  "Presa_magica_maior__1": {
+    "message": ""
+  },
+  "Arma_magica__1": {
+    "message": ""
+  },
+  "Velocidade": {
+    "message": ""
+  },
+  "Heroismo": {
+    "message": ""
+  },
+  "Lamina_afiada": {
+    "message": ""
+  },
+  "Circulo_magico_contra__tendencia_": {
+    "message": ""
+  },
+  "Roupa_encantada__1": {
+    "message": ""
+  },
+  "Neutralizar_venenos": {
+    "message": ""
+  },
+  "Dificultar_deteccao": {
+    "message": ""
+  },
+  "Protecao_contra_elementos__tipo_": {
+    "message": ""
+  },
+  "Furia": {
+    "message": ""
+  },
+  "Remover_cegueira_surdez": {
+    "message": ""
+  },
+  "Remover_maldicao": {
+    "message": ""
+  },
+  "Remover_doenca": {
+    "message": ""
+  },
+  "Idiomas": {
+    "message": ""
+  },
+  "Respirar_na_agua": {
+    "message": ""
+  },
+  "Caminhar_na_agua": {
+    "message": ""
+  },
+  "Pele_de_arvore__4": {
+    "message": ""
+  },
+  "Escudo_da_fe__5": {
+    "message": ""
+  },
+  "Boa_esperanca": {
+    "message": ""
+  },
+  "Resistencia_a_elementos__tipo__30": {
+    "message": ""
+  },
+  "Pele_de_arvore__5": {
+    "message": ""
+  },
+  "Presa_magica_maior__2": {
+    "message": ""
+  },
+  "Arma_magica_maior__2": {
+    "message": ""
+  },
+  "Roupa_encantada__2": {
+    "message": ""
+  },
+  "Protecao_contra_flechas_15_magica": {
+    "message": ""
+  },
+  "Presa_magica_maior__3": {
+    "message": ""
+  },
+  "Arma_magica_maior__3": {
+    "message": ""
+  },
+  "Roupa_encantada__3": {
+    "message": ""
+  },
+  "Presa_magica_maior__4": {
+    "message": ""
+  },
+  "Arma_magica_maior__4": {
+    "message": ""
+  },
+  "Roupa_encantada__4": {
+    "message": ""
+  },
+  "Presa_magica_maior__5": {
+    "message": ""
+  },
+  "Arma_magica_maior__5": {
+    "message": ""
+  },
+  "Roupa_encantada__5": {
+    "message": ""
+  },
+  "Manto_da_resistencia__1": {
+    "message": ""
+  },
+  "Manto_elfico": {
+    "message": ""
+  },
+  "Manto_do_carisma__2": {
+    "message": ""
+  },
+  "Manto_da_resistencia__2": {
+    "message": ""
+  },
+  "Manto_da_arraia": {
+    "message": ""
+  },
+  "Manto_da_resistencia__3": {
+    "message": ""
+  },
+  "Capa_do_saltimbanco": {
+    "message": ""
+  },
+  "Manto_da_aranha": {
+    "message": ""
+  },
+  "Manto_do_carisma__4": {
+    "message": ""
+  },
+  "Manto_da_resistencia__4": {
+    "message": ""
+  },
+  "Manto_do_deslocamento__menor_": {
+    "message": ""
+  },
+  "Manto_da_resistencia__5": {
+    "message": ""
+  },
+  "Manto_do_morcego": {
+    "message": ""
+  },
+  "Manto_do_carisma__6": {
+    "message": ""
+  },
+  "Manto_do_deslocamento__maior_": {
+    "message": ""
+  },
+  "Manto_da_forma_eterea": {
+    "message": ""
+  },
+  "Tunica_da_fe": {
+		"message": ""
+  },
+  "Tunica_de_resistencia_a_magia": {
+    "message": ""
+  }
+}

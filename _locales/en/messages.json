@@ -1,6 +1,12 @@
 {
-	"div_versao": {
-		"message": "PC Sheet Version: 0.7.9"
+  "manifesto_nome": {
+    "message": "D&D 3.5 Character Sheet"
+  },
+  "manifesto_descricao": {
+    "message": "Character generator for D&D 3.5."
+  },
+	"span_versao_planilha": {
+		"message": "PC Sheet Version"
 	},
 	"span_nome": {
 		"message": "Name: "
