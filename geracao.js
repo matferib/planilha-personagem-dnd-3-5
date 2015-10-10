@@ -37,7 +37,7 @@ function _GeraAtributos(modo, submodo) {
 // @param submodo 'tabelado' ou 'aleatorio'.
 function _GeraPontosDeVida(modo, submodo) {
   if (modo != 'personagem' && modo != 'elite' && modo != 'comum') {
-    Mensagem('Modo ' + modo + ' invalido. Deve ser elite, comum ou personagem.');
+    Mensagem(Traduz('Modo') + ' ' + modo + ' ' + Traduz('invalido') + '. ' + Traduz('Deve ser elite, comum ou personagem.'));
     return;
   }
   // Para cada classe, rolar o dado.
@@ -159,7 +159,7 @@ function GeraPersonagem(modo, submodo) {
     submodo = 'tabelado';
   }
   if (tabelas_geracao[gPersonagem.classes[0].classe] == null) {
-    Mensagem('Geração de ' + gPersonagem.classes[0].classe + ' não disponível');
+    Mensagem(Traduz('Geração de ') + Traduz(tabelas_classe[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
     return;
   }
   _GeraAtributos(modo, submodo);
@@ -171,7 +171,7 @@ function GeraPersonagem(modo, submodo) {
   var tabelas_geracao_classe = tabelas_geracao[gPersonagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
       tabelas_geracao_classe.por_nivel[gPersonagem.classes[0].nivel] == null) {
-    Mensagem('Geração avançada de ' + gPersonagem.classes[0].classe + ' não disponível');
+    Mensagem(Traduz('Geração avançada de ') + Traduz(tabelas_classe[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
     return;
   }
   var tabela_geracao_classe_por_nivel =
@@ -283,7 +283,7 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
       string_ataque += StringSinalizada(at) + '/';
     });
     string_ataque = string_ataque.slice(0, -1);
-    resumo += categoria + ': ' + string_ataque + ', ';
+    resumo += Traduz(categoria) + ': ' + string_ataque + ', ';
     var arma_tabela = arma_personagem.arma_tabela;
     var nivel_monge = PersonagemNivelClasse('monge');
     if (estilo.nome == 'arma_dupla' && !primaria) {

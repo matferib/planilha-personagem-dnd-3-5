@@ -84,7 +84,7 @@ Bonus.prototype.Total = function(excluir) {
 Bonus.prototype.Adiciona = function(chave_bonus, subchave, valor) {
   var bonus = this.por_chave[chave_bonus];
   if (bonus == null) {
-    Mensagem('Tipo de bonus invalido: ' + chave_bonus);
+    Mensagem(Traduz('Tipo de bonus invalido') + ': ' + chave_bonus);
     return;
   }
   if (subchave == null) {
@@ -100,7 +100,7 @@ Bonus.prototype.Adiciona = function(chave_bonus, subchave, valor) {
 Bonus.prototype.Le = function(chave_bonus, subchave) {
   var bonus = this.por_chave[chave_bonus];
   if (bonus == null) {
-    Mensagem('Tipo de bonus invalido: ' + chave_bonus);
+    Mensagem(Traduz('Tipo de bonus invalido') + ': ' + chave_bonus);
     return;
   }
   if (subchave == null) {

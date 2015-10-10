@@ -370,50 +370,50 @@ function PersonagemLinhaTabelaFeiticos(classe) {
 // @return descricao do erro caso a verificação falhe, null caso contrário.
 function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
   var requisitos = tabelas_talentos[chave_talento].requisitos;
-  var prefixo_erro = tabelas_talentos[chave_talento].nome + ' requer ';
+  var prefixo_erro = Traduz(tabelas_talentos[chave_talento].nome) + ' ' + Traduz('requer') + ' ';
   if (requisitos == null) {
     return null;
   }
   if (requisitos.bba) {
     if (gPersonagem.bba < requisitos.bba) {
-      return (prefixo_erro + 'BBA >= ' + requisitos.bba);
+      return (prefixo_erro + Traduz('BBA') + ' >= ' + requisitos.bba);
     }
   }
   for (var atributo in requisitos.atributos) {
     if (gPersonagem.atributos[atributo].bonus.Total() < requisitos.atributos[atributo]) {
-      return (prefixo_erro + atributo + ' >= ' + requisitos.atributos[atributo]);
+      return (prefixo_erro + Traduz(tabelas_atributos[atributo]) + ' >= ' + requisitos.atributos[atributo]);
     }
   }
   for (var classe in requisitos.nivel) {
     if (classe == 'total') {
       if (gPersonagem.dados_vida.nivel_personagem < requisitos.nivel['total']) {
-        return  (prefixo_erro + 'nivel de personagem >= ' + requisitos.nivel['total']);
+        return  (prefixo_erro + Traduz('nivel de personagem') + ' >= ' + requisitos.nivel['total']);
       }
     } else if (classe == 'conjurador') {
       if (PersonagemNivelConjuradorClasse(null) < requisitos.nivel['conjurador']) {
-        return (prefixo_erro + 'nivel de conjurador >= ' + requisitos.nivel[classe]);
+        return (prefixo_erro + Traduz('nivel de conjurador') + ' >= ' + requisitos.nivel[classe]);
       }
     } else {
       if (PersonagemNivelClasse(classe) < requisitos.nivel[classe]) {
-        return (prefixo_erro + 'nivel em ' + classe + ' >= ' + requisitos.nivel[classe]);
+        return (prefixo_erro + Traduz('nivel em ') + Traduz(tabelas_classes[classe].nome) + ' >= ' + requisitos.nivel[classe]);
       }
     }
   }
   for (var i = 0; requisitos.talentos && i < requisitos.talentos.length; ++i) {
     if (!PersonagemPossuiTalento(requisitos.talentos[i], complemento)) {
-      return (prefixo_erro + 'talento ' + tabelas_talentos[requisitos.talentos[i]].nome + ' ' +
+      return (prefixo_erro + Traduz('talento') + ' ' + Traduz(tabelas_talentos[requisitos.talentos[i]].nome) + ' ' +
              (complemento ? complemento : ''));
     }
   }
   if (requisitos.proficiencia_arma && complemento && complemento.length > 0) {
     var chave_arma = tabelas_armas_invertida[complemento];
     if (!PersonagemProficienteComArma(chave_arma)) {
-      return (prefixo_erro + 'proficiencia com ' + complemento);
+      return (prefixo_erro + Traduz('proficiencia com ') + complemento);
     }
   }
   for (var pericia in requisitos.pericias) {
     if (!PersonagemTemPericia(pericia, requisitos.pericias[pericia])) {
-      return (prefixo_erro + 'pericia em ' + tabelas_pericias[pericia].nome + ', ' + requisitos.pericias[pericia] + ' ranks');
+      return (prefixo_erro + Traduz('pericia em ') + Traduz(tabelas_pericias[pericia].nome) + ', ' + requisitos.pericias[pericia] + ' ranks');
     }
   }
   return null;

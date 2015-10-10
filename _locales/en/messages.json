@@ -827,9 +827,6 @@
 	"Classe_de_Armadura": {
 		"message": "Armor Class"
 	},
-	"Estilo__rajada_de_golpes__requer_nivel_de_monge": {
-		"message": ""
-	},
 	"desarmado": {
 		"message": "unarmed"
 	},
@@ -1864,5 +1861,137 @@
   },
   "Tunica_de_resistencia_a_magia": {
     "message": "Mantle of Spell Resistance"
+  },
+  "cac": {
+    "message": "melee"
+  },
+  "cac_leve": {
+    "message": "melee light"
+  },
+  "arremesso": {
+    "message": "thrown"
+  },
+  "distancia": {
+    "message": "ranged"
+  },
+  "Personagem_deve_ter_pelo_menos_uma_classe": {
+    "message": "Character must have at least one class"
+  },
+  "Nome_invalido__esperando_arma_ou_armadura_": {
+    "message": "Invalid name, expecting weapon or armor."
+  },
+  "Tipo_de_bonus_invalido": {
+    "message": "Invalid bonus type"
+  },
+  "Arma": {
+    "message": "Weapon"
+  },
+  "invalida_para_talento": {
+    "message": "is invalid for feat"
+  },
+  "nao_e_dupla_": {
+    "message": "is not a double weapon."
+  },
+  "Estilo__rajada_de_golpes__requer_nivel_de_monge_": {
+    "message": "Flurry of blows requires monk level."
+  },
+  "requer_duas_maos_": {
+    "message": "requires two hands."
+  },
+  "Impossivel_criar_nova_classe": {
+    "message": "Failed to create new class"
+  },
+  "Impossivel_remover_classe": {
+    "message": "Failed to remove class"
+  },
+  "Nome______nao_e_valido_": {
+    "message": "Invalid name: '--'."
+  },
+  "Personagem": {
+    "message": "Character"
+  },
+  "salvo_com_sucesso_": {
+    "message": "saved successfully."
+  },
+  "carregado_com_sucesso_": {
+    "message": "loaded successfully."
+  },
+  "Nao_encontrei_personagem_com_nome": {
+    "message": "Could not find character named"
+  },
+  "excluido_com_sucesso_": {
+    "message": "successfully deleted."
+  },
+  "exportado_com_sucesso": {
+    "message": "successfully exported"
+  },
+  "Copie_para_a_area_de_transferencia_": {
+    "message": "Please, make sure to copy it to clipboard."
+  },
+  "importado_com_sucesso": {
+    "message": "successfully imported"
+  },
+  "Nome_de_estilo_invalido": {
+    "message": "Invalid style name"
+  },
+  "Nao_ha_pontos_de_pericia_disponiveis": {
+    "message": "No more skill points available"
+  },
+  "Arma_ou_armadura_magica_invalida": {
+    "message": "Invalid magic weapon/armor"
+  },
+  "Nao_ha_fundos_para_compra_do_item": {
+    "message": "Not enough funds"
+  },
+  "Item_invalido_ou_sem_preco": {
+    "message": "Invalid or unpriced item"
+  },
+  "Personagem_sem_classe": {
+    "message": "Character has no class"
+  },
+  "E_recomendado_colocar_os_valores_na_mao_para_aristocratas_e_experts": {
+    "message": "It is recommended to manually tune aristocrats and experts"
+  },
+  "Modo": {
+    "message": "Mode"
+  },
+  "invalido" : {
+    "message": "invalid"
+  },
+  "Deve_ser_elite__comum_ou_personagem_": {
+    "message": "Must be elite, common or character."
+  },
+  "Geracao_de": {
+    "message": "Auto generation of"
+  },
+  "nao_disponivel": {
+    "message": "not available"
+  },
+  "Geracao_avancada_de": {
+    "message": "Advanced auto generation of"
+  },
+  "requer": {
+    "message": "requires"
+  },
+  "BBA": {
+    "message": "BAB"
+  },
+  "nivel_de_personagem": {
+    "message": "character level"
+  },
+  "nivel_de_conjurador": {
+    "message": "caster level"
+  },
+  "nivel_em_": {
+    "message": "levels in "
+  },
+  "talento": {
+    "message": "feat"
+  },
+  "proficiencia_com": {
+    "message": "weapon proficiency in "
+  },
+  "pericia_em_": {
+    "message": "skills with "
   }
 }

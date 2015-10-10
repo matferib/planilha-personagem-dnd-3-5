@@ -70,7 +70,7 @@ function ClickSalvar() {
   SalvaNoArmazem(nome, JSON.stringify(gEntradas), function() {
     CarregaPersonagens();
     DesabilitaOverlay();
-    Mensagem('Personagem "' + nome + '" salvo com sucesso.');
+    Mensagem(Traduz('Personagem') + ' "' + nome + '" ' + Traduz('salvo com sucesso.'));
   });
 }
 
@@ -89,9 +89,9 @@ function ClickAbrir() {
         CorrigePericias();
         AtualizaGeralSemLerEntradas();
         SelecionaValor('--', Dom('select-personagens'));
-        Mensagem('Personagem "' + nome + '" carregado com sucesso.');
+        Mensagem(Traduz('Personagem') + ' "' + nome + '" ' + Traduz('carregado com sucesso.'));
       } else {
-        Mensagem('Não encontrei personagem com nome "' + nome + '"');
+        Mensagem(Traduz('Não encontrei personagem com nome') + ' "' + nome + '"');
       }
       DesabilitaOverlay();
     },
@@ -111,7 +111,7 @@ function ClickExcluir() {
     // Callback sim.
     function() {
       ExcluiDoArmazem(nome, function() {
-        Mensagem('Personagem "' + nome + '" excluído com sucesso.');
+        Mensagem(Traduz('Personagem') + ' "' + nome + '" ' + Traduz('excluído com sucesso.'));
         CarregaPersonagens();
       });
     },
@@ -127,8 +127,8 @@ function ClickExportar() {
   input.value = JSON.stringify(gEntradas);
   input.focus();
   input.select();
-  Mensagem('Personagem "' + gPersonagem.nome + '" exportado com sucesso. ' +
-        'Copie para a área de transferência.');
+  Mensagem(Traduz('Personagem') + ' "' + gPersonagem.nome + '" ' + Traduz('exportado com sucesso') + '. ' +
+           Traduz('Copie para a área de transferência.'));
 }
 
 // Abre o personagem lendo do campo de texto.
@@ -137,7 +137,7 @@ function ClickImportar() {
   gEntradas = JSON.parse(input.value);
   CorrigePericias();
   AtualizaGeralSemLerEntradas();
-  Mensagem('Personagem "' + gPersonagem.nome + '" importado com sucesso');
+  Mensagem(Traduz('Personagem') + ' "' + gPersonagem.nome + '" ' + Traduz('importado com sucesso') + '.');
 }
 
 // Codifica o objeto personagem como JSON e gera o link.
@@ -234,7 +234,7 @@ function ClickEstilo(nome_estilo, id_select_secundario) {
   } else if (nome_estilo == 'duas_armas')  {
     select_secundario.disabled = false;
   } else {
-    Mensagem('Nome de estilo invalido: ' + nome_estilo);
+    Mensagem(Traduz('Nome de estilo invalido') + ': ' + Traduz(nome_estilo));
   }
   AtualizaGeral();
 }
@@ -378,7 +378,7 @@ function ClickVenderArmaArmadura(dom, tipo, tabela) {
   var preco = PrecoArmaArmaduraEscudo(
       tipo, tabela, lido.chave, lido.material, lido.obra_prima, lido.bonus, false);
   if (preco == null) {
-    Mensagem("Arma ou armadura magica invalida");
+    Mensagem("Arma ou armadura mágica inválida");
     return;
   }
   EntradasAdicionarMoedas(preco);
@@ -394,7 +394,7 @@ function ClickComprarArmaArmadura(dom, tipo, tabela) {
   var preco = PrecoArmaArmaduraEscudo(
       tipo, tabela, lido.chave, lido.material, lido.obra_prima, lido.bonus, true);
   if (preco == null) {
-    Mensagem("Arma ou armadura magica invalida");
+    Mensagem("Arma ou armadura mágica inválida");
     return;
   }
   if (!EntradasAdicionarMoedas(preco)) {

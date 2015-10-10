@@ -3,7 +3,7 @@
   "name": "__MSG_manifesto_nome__",
   "description": "__MSG_manifesto_descricao__",
   "version": "0.8.0",
-  "default_locale": "en",
+  "default_locale": "pt",
   "app": {
     "background": {
       "scripts": ["background.js"]

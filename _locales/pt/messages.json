@@ -1861,5 +1861,17 @@
   },
   "Tunica_de_resistencia_a_magia": {
     "message": ""
+  },
+  "cac": {
+    "message": "cac"
+  },
+  "cac_leve": {
+    "message": "cac leve"
+  },
+  "arremesso": {
+    "message": "arremesso"
+  },
+  "distancia": {
+    "message": "distância"
   }
 }
