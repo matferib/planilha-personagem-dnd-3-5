@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "__MSG_manifesto_nome__",
-  "description": "__MSG_manifesto_descricao__",
   "version": "0.8.0",
-  "default_locale": "pt",
+  "default_locale": "en",
+  "description": "__MSG_manifesto_descricao__",
   "app": {
     "background": {
       "scripts": ["background.js"]

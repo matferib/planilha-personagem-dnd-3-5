@@ -1873,5 +1873,125 @@
   },
   "distancia": {
     "message": "distância"
+  },
+  "Personagem_deve_ter_pelo_menos_uma_classe": {
+    "message": ""
+  },
+  "Nome_invalido__esperando_arma_ou_armadura_": {
+    "message": ""
+  },
+  "Tipo_de_bonus_invalido": {
+    "message": ""
+  },
+  "Arma": {
+    "message": ""
+  },
+  "invalida_para_talento": {
+    "message": ""
+  },
+  "nao_e_dupla_": {
+    "message": ""
+  },
+  "Estilo__rajada_de_golpes__requer_nivel_de_monge_": {
+    "message": ""
+  },
+  "requer_duas_maos_": {
+    "message": ""
+  },
+  "Impossivel_criar_nova_classe": {
+    "message": ""
+  },
+  "Impossivel_remover_classe": {
+    "message": ""
+  },
+  "Nome______nao_e_valido_": {
+    "message": ""
+  },
+  "Personagem": {
+    "message": ""
+  },
+  "salvo_com_sucesso_": {
+    "message": ""
+  },
+  "carregado_com_sucesso_": {
+    "message": ""
+  },
+  "Nao_encontrei_personagem_com_nome": {
+    "message": ""
+  },
+  "excluido_com_sucesso_": {
+    "message": ""
+  },
+  "exportado_com_sucesso": {
+    "message": ""
+  },
+  "Copie_para_a_area_de_transferencia_": {
+    "message": ""
+  },
+  "importado_com_sucesso": {
+    "message": ""
+  },
+  "Nome_de_estilo_invalido": {
+    "message": ""
+  },
+  "Nao_ha_pontos_de_pericia_disponiveis": {
+    "message": ""
+  },
+  "Arma_ou_armadura_magica_invalida": {
+    "message": ""
+  },
+  "Nao_ha_fundos_para_compra_do_item": {
+    "message": ""
+  },
+  "Item_invalido_ou_sem_preco": {
+    "message": ""
+  },
+  "Personagem_sem_classe": {
+    "message": ""
+  },
+  "E_recomendado_colocar_os_valores_na_mao_para_aristocratas_e_experts": {
+    "message": ""
+  },
+  "Modo": {
+    "message": ""
+  },
+  "invalido" : {
+    "message": ""
+  },
+  "Deve_ser_elite__comum_ou_personagem_": {
+    "message": ""
+  },
+  "Geracao_de": {
+    "message": ""
+  },
+  "nao_disponivel": {
+    "message": ""
+  },
+  "Geracao_avancada_de": {
+    "message": ""
+  },
+  "requer": {
+    "message": ""
+  },
+  "BBA": {
+    "message": ""
+  },
+  "nivel_de_personagem": {
+    "message": ""
+  },
+  "nivel_de_conjurador": {
+    "message": ""
+  },
+  "nivel_em_": {
+    "message": ""
+  },
+  "talento": {
+    "message": ""
+  },
+  "proficiencia_com": {
+    "message": ""
+  },
+  "pericia_em_": {
+    "message": ""
   }
 }
