@@ -1238,13 +1238,13 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
   foco_em_magia: {
     nome: 'Foco em Magia',
     complemento: 'escola_magia',
-    descricao: '+1 de bônus na CD dos testes de resistência contra uma escola de magia específica.',
+    descricao: '+1 de bônus na CD dos testes de resistência de uma escola de magia específica.',
   },
   foco_em_magia_maior: {
     nome: 'Foco em Magia Maior',
     complemento: 'escola_magia',
     requisitos: { talentos: ['foco_em_magia'] },
-    descricao: '+1 de bônus na CD dos testes de resistência contra uma escola de magia específica.',
+    descricao: '+1 de bônus na CD dos testes de resistência de uma escola de magia específica.',
   },
   fortitude_maior: {
       nome: 'Fortitude Maior',
@@ -1267,7 +1267,7 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
       requisitos: { talentos: ['especializacao_em_combate'] },
       guerreiro: true,
       monge: 6,
-      descricao: '+4 de bônus nas tentativas de imobilização e não provoca ataques de oportunidade.',
+      descricao: '+4 de bônus nas tentativas de derrubar e não provoca ataques de oportunidade.',
   },
   especializacao_em_combate: {
       nome: 'Especialização em Combate',
