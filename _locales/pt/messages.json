@@ -1196,9 +1196,6 @@
   "Escudo__melhoria_": {
     "message": ""
   },
-  "Esquiva": {
-    "message": ""
-  },
   "Inerente": {
     "message": ""
   },
@@ -1304,9 +1301,6 @@
   "Salto": {
     "message": ""
   },
-  "Natacao": {
-    "message": ""
-  },
   "Contramagica": {
     "message": ""
   },
@@ -1340,16 +1334,10 @@
   "Poder_do_camaleao": {
     "message": ""
   },
-  "Caminhar_na_agua": {
-    "message": ""
-  },
   "Protecao__3": {
     "message": ""
   },
   "Armazenar_magias__menor_": {
-    "message": ""
-  },
-  "Invisibilidade": {
     "message": ""
   },
   "Arcano__I_": {
@@ -1563,9 +1551,6 @@
     "message": ""
   },
   "Invisibilidade_contra_mortos_vivos": {
-    "message": ""
-  },
-  "Salto": {
     "message": ""
   },
   "Armadura_arcana": {
