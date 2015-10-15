@@ -2194,5 +2194,11 @@
   },
   "Permite_usar_velocidade_por_10_rodadas_em_um_dia__nao_precisam_ser_rodadas_consecutivas__": {
     "message": "Haste 10 rounds per day, durantion can be split along the day."
-  }
+  },
+	"modificador": {
+		"message": "Modifier"
+	},
+	"De": {
+		"message": "From"
+	}
 }
