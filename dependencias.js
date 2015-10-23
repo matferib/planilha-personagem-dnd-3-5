@@ -761,6 +761,12 @@ function _DependenciasEstilo(estilo_personagem) {
     estilo_personagem.nome = 'uma_arma';
   }
 
+  if (estilo_personagem.nome == 'tiro_rapido' &&
+      (!PersonagemPossuiTalento('tiro_rapido') || (!('distancia' in arma_primaria.arma_tabela.categorias) && !('arremesso' in arma_primaria.arma_tabela.categorias)))) {
+    Mensagem('Estilo "tiro_rapido" requer talento tiro rapido e arma de distância.');
+    estilo_personagem.nome = 'uma_arma';
+  }
+
   if ('cac_duas_maos' in arma_primaria.arma_tabela.categorias &&
       estilo_personagem.nome != 'uma_arma') {
     Mensagem(Traduz('Arma') + ' "' + Traduz(estilo_personagem.arma_primaria.nome) + '" ' + Traduz('requer duas mãos.'));
@@ -840,6 +846,8 @@ function _DependenciasBonusPorCategoria(
     } else {
       bonus_por_categoria.ataque[0] = -2;
     }
+  } else if (estilo.nome == 'tiro_rapido') {
+    bonus_por_categoria.ataque[0] = -2;
   }
 
   if (categoria.indexOf('cac') != -1 || estilo.nome == 'rajada') {
@@ -900,12 +908,17 @@ function _DependenciasBonusPorCategoria(
       bonus_por_categoria.ataque[0] += bonus_racial.categorias[categoria];
     }
   }
+
+  // Ataques adicionais.
   if (estilo.nome == 'rajada' && nivel_monge > 0) {
     bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
     if (nivel_monge >= 11) {
       bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
     }
+  } else if (estilo.nome == 'tiro_rapido') {
+    bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
   }
+  // Por nivel.
   if (primaria) {
     var num_ataques = gPersonagem.numero_ataques - 1;
     var modificador = -5;
