@@ -1921,36 +1921,46 @@ var tabelas_amuletos = {
 
 var tabelas_bracaduras = {
   armadura_1: {
-    nome: 'Braçadura da Armadura +1', preco: '1000 PO',
+    nome: 'Braçadeira da Armadura +1', preco: '1000 PO',
     propriedades: { ca: { armadura: 1 } },
   },
   armadura_2: {
-    nome: 'Braçadura da Armadura +2', preco: '4000 PO',
+    nome: 'Braçadeira da Armadura +2', preco: '4000 PO',
     propriedades: { ca: { armadura: 2 } },
   },
   armadura_3: {
-    nome: 'Braçadura da Armadura +3', preco: '9000 PO',
+    nome: 'Braçadeira da Armadura +3', preco: '9000 PO',
     propriedades: { ca: { armadura: 3 } },
   },
   armadura_4: {
-    nome: 'Braçadura da Armadura +4', preco: '16000 PO',
+    nome: 'Braçadeira da Armadura +4', preco: '16000 PO',
     propriedades: { ca: { armadura: 4 } },
   },
   armadura_4: {
-    nome: 'Braçadura da Armadura +5', preco: '25000 PO',
+    nome: 'Braçadeira da Armadura +5', preco: '25000 PO',
     propriedades: { ca: { armadura: 5 } },
   },
   armadura_6: {
-    nome: 'Braçadura da Armadura +6', preco: '36000 PO',
+    nome: 'Braçadeira da Armadura +6', preco: '36000 PO',
     propriedades: { ca: { armadura: 6 } },
   },
   armadura_7: {
-    nome: 'Braçadura da Armadura +7', preco: '49000 PO',
+    nome: 'Braçadeira da Armadura +7', preco: '49000 PO',
     propriedades: { ca: { armadura: 7 } },
   },
   armadura_8: {
-    nome: 'Braçadura da Armadura +8', preco: '64000 PO',
+    nome: 'Braçadeira da Armadura +8', preco: '64000 PO',
     propriedades: { ca: { armadura: 8 } },
+  },
+  arqueiro_menor: {
+    nome: 'Braçadeira de Arqueiro (Menor)', preco: '5000 PO',
+    propriedades: {  },
+    // Da pericia em arcos (exceto bestas). Se ja tiver, da +2 ataque, +1 dano.
+  },
+  arqueiro_maior: {
+    nome: 'Braçadeira de Arqueiro (Maior)', preco: '25000 PO',
+    propriedades: { },
+    // Da pericia em arcos (exceto bestas). Se ja tiver, da +1 ataque.
   },
 };
 
@@ -2117,7 +2127,7 @@ var tabelas_itens = {
   aneis: { nome: 'Anéis', tabela: tabelas_aneis, maximo: 2 },
   amuletos: { nome: 'Amuletos', tabela: tabelas_amuletos, maximo: 1 },
   botas: { nome: 'Botas', tabela: tabelas_botas, maximo: 1 },
-  bracaduras: { nome: 'Braçaduras', tabela: tabelas_bracaduras, maximo: 1 },
+  bracaduras: { nome: 'Braçadeiras', tabela: tabelas_bracaduras, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
   capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
 };

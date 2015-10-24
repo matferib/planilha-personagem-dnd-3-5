@@ -289,6 +289,26 @@ function PersonagemPossuiTalento(nome_talento, complemento) {
   return false;
 }
 
+// Retorna true se o personagem possuir o item magico passado.
+function PersonagemPossuiItem(tipo_item, chave_item) {
+  for (var i = 0; i < gPersonagem[tipo_item].length; ++i) {
+    if (gPersonagem[tipo_item][i].chave == chave_item) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function PersonagemUsandoItem(tipo_item, chave_item) {
+  for (var i = 0; i < gPersonagem[tipo_item].length; ++i) {
+    var item = gPersonagem[tipo_item][i];
+    if (item.chave == chave_item && item.em_uso) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function _TalentoIgual(talento_personagem, nome_talento, complemento) {
   var chave_talento = talento_personagem.chave;
   if (tabelas_talentos[chave_talento] == null) {

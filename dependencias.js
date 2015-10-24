@@ -725,6 +725,10 @@ function _DependenciasArma(arma_personagem) {
   }
   arma_personagem.proficiente = PersonagemProficienteComArma(
       arma_entrada.chave);
+  if (!arma_personagem.proficiente && arma_entrada.chave.indexOf('arco_') != -1 &&
+      (PersonagemUsandoItem('bracaduras', 'arqueiro_menor') || PersonagemUsandoItem('bracaduras', 'arqueiro_maior'))) {
+    arma_personagem.proficiente = true;
+  }
   arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
   arma_personagem.acuidade = PersonagemPossuiTalento(
@@ -897,6 +901,20 @@ function _DependenciasBonusPorCategoria(
   // Especialização.
   if (arma_personagem.especializado) {
     bonus_por_categoria.dano += arma_personagem.especializado;
+  }
+  // Alguns itens magicos especificos.
+  if (arma_personagem.entrada.chave.indexOf('arco') != -1) {
+    // Tem que pegar direto das proficiencias aqui, porque a arma ja foi marcada como proficiente nas DependenciasProficienciasArmas.
+    var proficiente = PersonagemProficienteComArma(arma_personagem.entrada.chave);
+    if (proficiente) {
+      // TODO os bonus sao de competencia.
+      if (PersonagemUsandoItem('bracaduras', 'arqueiro_menor')) {
+        bonus_por_categoria.ataque[0] += 1;
+      } else if (PersonagemUsandoItem('bracaduras', 'arqueiro_maior')) {
+        bonus_por_categoria.ataque[0] += 2;
+        bonus_por_categoria.dano += 1;
+      }
+    }
   }
 
   // Bonus raciais.

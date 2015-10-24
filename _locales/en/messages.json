@@ -1490,29 +1490,35 @@
   "Periapto_da_Sabedoria__6": {
     "message": "Periapt of Wisdom +6"
   },
-  "Bracadura_da_Armadura__1": {
+  "Bracadeira_da_Armadura__1": {
     "message": "Bracers of Armor +1"
   },
-  "Bracadura_da_Armadura__2": {
+  "Bracadeira_da_Armadura__2": {
     "message": "Bracers of Armor +2"
   },
-  "Bracadura_da_Armadura__3": {
+  "Bracadeira_da_Armadura__3": {
     "message": "Bracers of Armor +3"
   },
-  "Bracadura_da_Armadura__4": {
+  "Bracadeira_da_Armadura__4": {
     "message": "Bracers of Armor +4"
   },
-  "Bracadura_da_Armadura__5": {
+  "Bracadeira_da_Armadura__5": {
     "message": "Bracers of Armor +5"
   },
-  "Bracadura_da_Armadura__6": {
+  "Bracadeira_da_Armadura__6": {
     "message": "Bracers of Armor +6"
   },
-  "Bracadura_da_Armadura__7": {
+  "Bracadeira_da_Armadura__7": {
     "message": "Bracers of Armor +7"
   },
-  "Bracadura_da_Armadura__8": {
+  "Bracadeira_da_Armadura__8": {
     "message": "Bracers of Armor +8"
+  },
+  "Bracadeira_de_Arqueiro__Menor_": {
+    "message": "Bracers of Archery (lesser)"
+  },
+  "Bracadeira_de_Arqueiro__Maior_": {
+    "message": "Bracers of Archery (greater)"
   },
   "Botas_Aladas": {
     "message": "Winged"
