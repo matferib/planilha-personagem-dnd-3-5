@@ -217,6 +217,9 @@ function PersonagemLimpaGeral() {
       delete gPersonagem.salvacoes[tipo_salvacao];
     }
   }
+  for (var tipo_item in tabelas_itens) {
+    gPersonagem[tipo_item].length = 0;
+  }
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();

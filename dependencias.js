@@ -303,7 +303,7 @@ function _DependenciasBba() {
       gPersonagem.tamanho.modificador_ataque_defesa;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   gPersonagem.bba_distancia = gPersonagem.bba_cac_acuidade;
-  gPersonagem.numero_ataques = Math.floor((gPersonagem.bba - 1) / 5) + 1;
+  gPersonagem.numero_ataques = (gPersonagem.bba == 0) ? 1 : Math.floor((gPersonagem.bba - 1) / 5) + 1;
   gPersonagem.agarrar =
       gPersonagem.bba +
       gPersonagem.atributos['forca'].modificador +
