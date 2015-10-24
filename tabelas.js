@@ -327,7 +327,6 @@ var tabelas_especiais = {
   caminho_floresta: { nome: 'Caminho da Floresta' },
   estilo_combate_aprimorado: { nome: 'Estilo de Combate Aprimorado' },
   expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
-  caminho_floresta: { nome: 'Caminho da floresta', },
   camuflagem: { nome: 'Camuflagem', },
   companheiro_animal: { nome: 'Companheiro animal', },
   corpo_diamante: { nome: 'Corpo de Diamante' },
