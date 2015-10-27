@@ -2129,7 +2129,7 @@
   "_3_pontos_de_vida_": {
     "message": "+3 HP."
   },
-  "_2_de_bonus_nos_testes_de_resistência_de_Vontade_": {
+  "_2_de_bonus_nos_testes_de_resistencia_de_Vontade_": {
     "message": "+2 bonus on will saves."
   },
   "Permite_a_criacao_de_armas__armaduras_e_escudos_magicos_": {
@@ -2153,7 +2153,7 @@
   "Permite_conjurar_magia_como_acao_livre__ao_custo_de_tres_niveis_adicionais_": {
     "message": "Cast spell as free action, costs three levels higher."
   },
-  "Dobra_a_area_da_magia__ao_custo_de_três_niveis_adicionais": {
+  "Dobra_a_area_da_magia__ao_custo_de_tres_niveis_adicionais": {
     "message": "Doubles spell area, costs three levels higher."
   },
   "Dobra_o_alcance_da_magia__ao_custo_de_um_nivel_adicional": {
