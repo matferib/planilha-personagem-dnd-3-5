@@ -96,6 +96,8 @@ function CarregaTestes() {
   gPersonagem.armas = [
       { entrada: { chave: 'desarmado', bonus: 0, obra_prima: false}, nome_gerado: 'Desarmado' },
       { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' },
+      { entrada: { chave: 'arco_curto', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto' },
+      { entrada: { chave: 'arco_longo', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo' },
       { entrada: { chave: 'arco_curto_composto_1', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto Composto (1)' },
       { entrada: { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo Composto (2)' } ],
   TemplateTeste({
@@ -871,6 +873,64 @@ function CarregaTestes() {
         this.resultado = false;
         return;
       }
+      this.resultado = true;
+    },
+  }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Braçadeiras de Arqueiro',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes[0].classe = 'ladino';
+      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
+      gPersonagem.bracaduras.push({ chave: 'arqueiro_maior', em_uso: true });
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco curto', arma_secundaria: 'desarmado' }));
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco longo', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var bonus_arco_curto = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia;
+      if (bonus_arco_curto.ataque.length != 1 || gPersonagem.numero_ataques != 1) {
+        this.detalhes = 'Esperava 1 ataque de ladino primeiro nivel.';
+        this.resultado = false;
+        return;
+      }
+      // Com pericia, ganha 2.
+      if (bonus_arco_curto.ataque[0] != 2) {
+        this.detalhes = 'Esperava bonus de ataque 2 com arco curto e bracedeira arqueiro maior.';
+        this.resultado = false;
+        return;
+      }
+      if (bonus_arco_curto.dano != 1) {
+        this.detalhes = 'Esperava bonus de dano 1 com arco curto e bracedeira arqueiro maior.';
+        this.resultado = false;
+        return;
+      }
+
+      var bonus_arco_longo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia;
+      if (bonus_arco_longo.ataque.length != 1 || gPersonagem.numero_ataques != 1) {
+        this.detalhes = 'Esperava 1 ataque de ladino primeiro nivel.';
+        this.resultado = false;
+        return;
+      }
+      // Sem pericia, passa a ter.
+      if (bonus_arco_longo.ataque[0] != 0) {
+        this.detalhes = 'Esperava bonus de ataque 0 com arco longo e bracadeira arqueiro maior.';
+        this.resultado = false;
+        return;
+      }
+      if (bonus_arco_longo.dano != 0) {
+        this.detalhes = 'Esperava bonus de dano 0 com arco longo e bracadeira arqueiro maior.';
+        this.resultado = false;
+        return;
+      }
+
       this.resultado = true;
     },
   }, body);

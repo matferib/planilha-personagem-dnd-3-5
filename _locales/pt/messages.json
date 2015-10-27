@@ -1978,5 +1978,432 @@
   },
   "pericia_em_": {
     "message": ""
+  },
+  "Aplica_o_modificador_de_Des__em_vez_de_For__nas_jogadas_de_ataque_corporal_com_armas_leves_": {
+    "message": ""
+  },
+  "_4_de_bonus_nos_testes_de_Agarrar_e_nao_provoca_ataques_de_oportunidade_": {
+    "message": ""
+  },
+  "Apanha_uma_arma_arremessada_ou_projetil_": {
+    "message": ""
+  },
+  "Atordoa_a_vitima_com_um_ataque_desarmado_": {
+    "message": ""
+  },
+  "Considerado_armado_quando_estiver_desarmado_": {
+    "message": ""
+  },
+  "Capaz_de_deslocar_antes_e_depois_do_ataque_": {
+    "message": ""
+  },
+  "Substitui_bonus_de_ataque_por_dano__maximo__bonus_base_de_ataque__": {
+    "message": ""
+  },
+  "Evita_os_ataques_contra_a_montaria_com_um_teste_de_Cavalgar": {
+    "message": ""
+  },
+  "Reduz_penalidade_ao_usar_duas_maos_em_2_": {
+    "message": ""
+  },
+  "Ataque_adicional_com_a_segunda_mao_": {
+    "message": ""
+  },
+  "Adquire_um_terceiro_ataque_com_a_mao_inabil": {
+    "message": ""
+  },
+  "Percorre_5_vezes_o_deslocamento_padrao___4_de_bonus_nos_testes_de_Saltar_no_final_de_uma_corrida_": {
+    "message": ""
+  },
+  "_4_de_bonus_nas_tentativas_de_desarme_e_nao_provoca_ataques_de_oportunidade_": {
+    "message": ""
+  },
+  "Desvia_um_ataque_a_distancia_por_rodada_": {
+    "message": ""
+  },
+  "Permanece_consciente_entre__1_e__9_PV_": {
+    "message": ""
+  },
+  "Criar_pergaminhos_magicos_": {
+    "message": ""
+  },
+  "_1_de_bonus_de_esquiva_na_CA_contra_um_adversario_a_sua_escolha_": {
+    "message": ""
+  },
+  "_4_de_bonus_no_dano_com_a_arma_escolhida__ao_inves_de_2_da_especializacao_normal__": {
+    "message": ""
+  },
+  "_1_de_bonus_nas_jogadas_de_ataque_com_a_arma_escolhida_": {
+    "message": ""
+  },
+  "_2_de_bonus_nas_jogadas_de_ataque_com_a_arma_escolhida_": {
+    "message": ""
+  },
+  "_1_de_bonus_na_CD_dos_testes_de_resistencia_de_uma_escola_de_magia_especifica_": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_teste_de_resistencia_de_Fortitude_": {
+    "message": ""
+  },
+  "Conjura_magias_ignorando_os_componentes_materiais_": {
+    "message": ""
+  },
+  "Pode_se_deslocar_antes_e_depois_de_uma_investida_montada": {
+    "message": ""
+  },
+  "_4_de_bonus_nas_tentativas_de_derrubar_e_nao_provoca_ataques_de_oportunidade_": {
+    "message": ""
+  },
+  "Substitui_bonus_de_ataque_por_CA__maximo_5_pontos__": {
+    "message": ""
+  },
+  "Personagem_atrai_parceiros_e_seguidores_": {
+    "message": ""
+  },
+  "Joga_novamente_a_chance_de_falha_por_camuflagem_": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_para_uma_escola": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_para_uma_escola__cumulativo_": {
+    "message": ""
+  },
+  "_4_de_bonus_nos_teste_de_Concentracao_para_conjurar_na_defensiva_": {
+    "message": ""
+  },
+  "_4_de_bonus_de_esquiva_na_CA_contra_ataques_de_oportunidade_": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_testes_de_Diplomacia_e_Sentir_Motivacao_": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_testes_de_blefar_e_intimidacao_": {
+    "message": ""
+  },
+  "Bonus_de__2_em_ouvir_e_observar_": {
+    "message": ""
+  },
+  "Utiliza_Sobrevivencia_para_rastrear_": {
+    "message": ""
+  },
+  "Permite_numero_de_ataques_de_oportunidade_na_rodada_igual_ao_bonus_de_destreza_": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_testes_de_resistencia_de_Reflexos_": {
+    "message": ""
+  },
+  "Saca_uma_arma_branca_como_acao_livre_": {
+    "message": ""
+  },
+  "_1_de_bonus_nos_ataques_a_distancia_e_dano_contra_alvos_num_raio_de_9_metros_": {
+    "message": ""
+  },
+  "Dispara_duas_ou_mais_flechas_simultaneamente_": {
+    "message": ""
+  },
+  "Anula_a_penalidade_por_disparar_contra_um_adversario_em_combate_corporal_com_um_aliado___4_": {
+    "message": ""
+  },
+  "Um_ataque_a_distancia_adicional_por_rodada_": {
+    "message": ""
+  },
+  "_4_de_bonus_nos_testes_para_resistir_a_danos_nao_letais__nadar__correr__marcha_forcada__respiracao__fome_e_sede__frio__calor_e_sufocamento__Pode_dormir_em_armadura_leve_ou_media_sem_fatigar__": {
+    "message": ""
+  },
+  "Desfere_um_ataque_corporal_extra_depois_de_imobilizar_um_oponente": {
+    "message": ""
+  },
+  "Nao_sofre_penalidades_nos_ataques_com_armas_simples_": {
+    "message": ""
+  },
+  "Nao_sofre_penalidade_nos_ataques_com_uma_arma_comum_especifica_": {
+    "message": ""
+  },
+  "Nao_sofre_penalidade_nos_ataques_com_uma_arma_exotica_especifica_": {
+    "message": ""
+  },
+  "Nao_sofre_penalidade_de_armadura_nas_jogadas_de_ataque_": {
+    "message": ""
+  },
+  "Conserva_o_bonus_do_escudo_na_CA_quando_ataca_com_ele_": {
+    "message": ""
+  },
+  "_3_pontos_de_vida_": {
+    "message": ""
+  },
+  "_2_de_bonus_nos_testes_de_resistencia_de_Vontade_": {
+    "message": ""
+  },
+  "Permite_a_criacao_de_armas__armaduras_e_escudos_magicos_": {
+    "message": ""
+  },
+  "Permite_a_criacao_de_bastoes_magicos_": {
+    "message": ""
+  },
+  "Permite_a_criacao_de_cajados_magicos": {
+    "message": ""
+  },
+  "Permite_a_criacao_de_itens_magicos_maravilhosos_": {
+    "message": ""
+  },
+  "Permite_a_criacao_de_varinhas_magicas__": {
+    "message": ""
+  },
+  "Permite_a_criacao_de_pocoes_magicas_": {
+    "message": ""
+  },
+  "Permite_conjurar_magia_como_acao_livre__ao_custo_de_tres_niveis_adicionais_": {
+    "message": ""
+  },
+  "Dobra_a_area_da_magia__ao_custo_de_tres_niveis_adicionais": {
+    "message": ""
+  },
+  "Dobra_o_alcance_da_magia__ao_custo_de_um_nivel_adicional": {
+    "message": ""
+  },
+  "Conjura_a_magia_num_nivel_mais_elevado__alterando_sua_classe_de_dificuldade__nivel_etc_": {
+    "message": ""
+  },
+  "Dobra_a_duracao_da_magia__ao_custo_de_um_nivel_adicional_": {
+    "message": ""
+  },
+  "Ignora_os_componentes_gestuais_da_magia__ao_custo_de_um_nivel_adicional_": {
+    "message": ""
+  },
+  "Ignora_os_componentes_verbais_da_magia__ao_custo_de_um_nivel_adicional": {
+    "message": ""
+  },
+  "Maximiza_todas_as_variaveis_numericas_dos_efeitos_da_magia__ao_custo_de_tres_niveis_adicionais": {
+    "message": ""
+  },
+  "Aumenta_em_50__todas_as_variaveis_numericas_dos_efeitos_da_magia__ao_custo_de_dois_niveis_adicionais_": {
+    "message": ""
+  },
+  "magia_voo_3x_dia_": {
+    "message": ""
+  },
+  "Aumenta_deslocamento_basico_em_dois_quadrados_e__5_de_competencia_em_saltar": {
+    "message": ""
+  },
+  "Andar_na_neve_com_deslocamento_normal__sem_rastro__Andar_no_gelo_escorregadio_deslocamento_normal__Suportar_elementos_": {
+    "message": ""
+  },
+  "Permite_lancar_levitar_sobre_si_mesmo": {
+    "message": ""
+  },
+  "Permite_lancar_teletransportar_3x_dia_": {
+    "message": ""
+  },
+  "Permite_usar_velocidade_por_10_rodadas_em_um_dia__nao_precisam_ser_rodadas_consecutivas__": {
+    "message": ""
+  },
+  "Alma_Diamante": {
+    "message": ""
+  },
+  "Ataque_Chi__Magico_": {
+    "message": ""
+  },
+  "Ataque_Chi__Ordem_": {
+    "message": ""
+  },
+  "Ataque_Chi__Adamante_": {
+    "message": ""
+  },
+  "Ataque_Desarmado": {
+    "message": ""
+  },
+  "Ataque_furtivo": {
+    "message": ""
+  },
+  "Aura_do_bem": {
+    "message": ""
+  },
+  "Aura_de_coragem": {
+    "message": ""
+  },
+  "Auto_Perfeicao": {
+    "message": ""
+  },
+  "Bonus_CA": {
+    "message": ""
+  },
+  "Caminho_da_Floresta": {
+    "message": ""
+  },
+  "Estilo_de_Combate_Aprimorado": {
+    "message": ""
+  },
+  "Expulsar_fascinar_morto_vivos": {
+    "message": ""
+  },
+  "Camuflagem": {
+    "message": ""
+  },
+  "Companheiro_animal": {
+    "message": ""
+  },
+  "Corpo_de_Diamante": {
+    "message": ""
+  },
+  "Corpo_Atemporal": {
+    "message": ""
+  },
+  "Corpo_Vazio": {
+    "message": ""
+  },
+  "Cura_pelas_maos": {
+    "message": ""
+  },
+  "Destruir_o_bem": {
+    "message": ""
+  },
+  "Destruir_o_mal": {
+    "message": ""
+  },
+  "Detectar_o_mal": {
+    "message": ""
+  },
+  "Empatia_com_a_natureza": {
+    "message": ""
+  },
+  "Encontrar_armadilha": {
+    "message": ""
+  },
+  "Evasao_Aprimorada": {
+    "message": ""
+  },
+  "Escudo_Heroico": {
+    "message": ""
+  },
+  "Esquiva_Sobrenatural": {
+    "message": ""
+  },
+  "Estilo_de_Combate": {
+    "message": ""
+  },
+  "Familiar": {
+    "message": ""
+  },
+  "Forma_selvagem": {
+    "message": ""
+  },
+  "Graca_divina": {
+    "message": ""
+  },
+  "Grito_de_Guerra": {
+    "message": ""
+  },
+  "Idiomas_do_Sol_e_da_Lua": {
+    "message": ""
+  },
+  "Inimigo_Predileto": {
+    "message": ""
+  },
+  "Inspirar_Coragem": {
+    "message": ""
+  },
+  "Integridade_Corporal": {
+    "message": ""
+  },
+  "Juramento_de_Furia": {
+    "message": ""
+  },
+  "Maestria_do_Estilo_de_Combate": {
+    "message": ""
+  },
+  "Mao_Vibrante": {
+    "message": ""
+  },
+  "Medo": {
+    "message": ""
+  },
+  "Mente_Tranquila": {
+    "message": ""
+  },
+  "Mimetismo": {
+    "message": ""
+  },
+  "Montaria_especial": {
+    "message": ""
+  },
+  "Passo_Etereo": {
+    "message": ""
+  },
+  "Pureza_Corporal": {
+    "message": ""
+  },
+  "Queda_Suave__6m_": {
+    "message": ""
+  },
+  "Queda_Suave__9m_": {
+    "message": ""
+  },
+  "Queda_Suave__12m_": {
+    "message": ""
+  },
+  "Queda_Suave__15m_": {
+    "message": ""
+  },
+  "Queda_Suave__18m_": {
+    "message": ""
+  },
+  "Queda_Suave__21m_": {
+    "message": ""
+  },
+  "Queda_Suave__24m_": {
+    "message": ""
+  },
+  "Queda_Suave__27m_": {
+    "message": ""
+  },
+  "Queda_Suave__sem_limite_": {
+    "message": ""
+  },
+  "Senso_da_natureza": {
+    "message": ""
+  },
+  "Rajada_de_Golpes": {
+    "message": ""
+  },
+  "Rajada_Maior": {
+    "message": ""
+  },
+  "Rastrear": {
+    "message": ""
+  },
+  "Rastreador_Eficaz": {
+    "message": ""
+  },
+  "Rastro_invisivel": {
+    "message": ""
+  },
+  "Resistencia_a_Frio_e_Fogo__5_": {
+    "message": ""
+  },
+  "Resistencia_a_Frio_e_Fogo__10_": {
+    "message": ""
+  },
+  "Resistencia_Final": {
+    "message": ""
+  },
+  "Resistir_tentacao_da_natureza": {
+    "message": ""
+  },
+  "Remover_Doenca": {
+    "message": ""
+  },
+  "Sentir_armadilha": {
+    "message": ""
+  },
+  "Saude_divina": {
+    "message": ""
+  },
+  "Talento": {
+    "message": ""
+  },
+  "Visao_no_Escuro": {
+    "message": ""
   }
+
 }

@@ -217,6 +217,9 @@ function PersonagemLimpaGeral() {
       delete gPersonagem.salvacoes[tipo_salvacao];
     }
   }
+  for (var tipo_item in tabelas_itens) {
+    gPersonagem[tipo_item].length = 0;
+  }
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();
@@ -284,6 +287,26 @@ function PersonagemPossuiTalento(nome_talento, complemento) {
                         nome_talento, complemento)) {
         return true;
       }
+    }
+  }
+  return false;
+}
+
+// Retorna true se o personagem possuir o item magico passado.
+function PersonagemPossuiItem(tipo_item, chave_item) {
+  for (var i = 0; i < gPersonagem[tipo_item].length; ++i) {
+    if (gPersonagem[tipo_item][i].chave == chave_item) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function PersonagemUsandoItem(tipo_item, chave_item) {
+  for (var i = 0; i < gPersonagem[tipo_item].length; ++i) {
+    var item = gPersonagem[tipo_item][i];
+    if (item.chave == chave_item && item.em_uso) {
+      return true;
     }
   }
   return false;

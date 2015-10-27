@@ -303,7 +303,7 @@ function _DependenciasBba() {
       gPersonagem.tamanho.modificador_ataque_defesa;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   gPersonagem.bba_distancia = gPersonagem.bba_cac_acuidade;
-  gPersonagem.numero_ataques = Math.floor((gPersonagem.bba - 1) / 5) + 1;
+  gPersonagem.numero_ataques = (gPersonagem.bba == 0) ? 1 : Math.floor((gPersonagem.bba - 1) / 5) + 1;
   gPersonagem.agarrar =
       gPersonagem.bba +
       gPersonagem.atributos['forca'].modificador +
@@ -725,6 +725,10 @@ function _DependenciasArma(arma_personagem) {
   }
   arma_personagem.proficiente = PersonagemProficienteComArma(
       arma_entrada.chave);
+  if (!arma_personagem.proficiente && arma_entrada.chave.indexOf('arco_') != -1 &&
+      (PersonagemUsandoItem('bracaduras', 'arqueiro_menor') || PersonagemUsandoItem('bracaduras', 'arqueiro_maior'))) {
+    arma_personagem.proficiente = true;
+  }
   arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
   arma_personagem.acuidade = PersonagemPossuiTalento(
@@ -758,6 +762,12 @@ function _DependenciasEstilo(estilo_personagem) {
 
   if (estilo_personagem.nome == 'rajada' && PersonagemNivelClasse('monge') == 0) {
     Mensagem('Estilo "rajada de golpes" requer nível de monge.');
+    estilo_personagem.nome = 'uma_arma';
+  }
+
+  if (estilo_personagem.nome == 'tiro_rapido' &&
+      (!PersonagemPossuiTalento('tiro_rapido') || (!('distancia' in arma_primaria.arma_tabela.categorias) && !('arremesso' in arma_primaria.arma_tabela.categorias)))) {
+    Mensagem('Estilo "tiro_rapido" requer talento tiro rapido e arma de distância.');
     estilo_personagem.nome = 'uma_arma';
   }
 
@@ -840,6 +850,8 @@ function _DependenciasBonusPorCategoria(
     } else {
       bonus_por_categoria.ataque[0] = -2;
     }
+  } else if (estilo.nome == 'tiro_rapido') {
+    bonus_por_categoria.ataque[0] = -2;
   }
 
   if (categoria.indexOf('cac') != -1 || estilo.nome == 'rajada') {
@@ -890,6 +902,20 @@ function _DependenciasBonusPorCategoria(
   if (arma_personagem.especializado) {
     bonus_por_categoria.dano += arma_personagem.especializado;
   }
+  // Alguns itens magicos especificos.
+  if (arma_personagem.entrada.chave.indexOf('arco') != -1) {
+    // Tem que pegar direto das proficiencias aqui, porque a arma ja foi marcada como proficiente nas DependenciasProficienciasArmas.
+    var proficiente = PersonagemProficienteComArma(arma_personagem.entrada.chave);
+    if (proficiente) {
+      // TODO os bonus sao de competencia.
+      if (PersonagemUsandoItem('bracaduras', 'arqueiro_menor')) {
+        bonus_por_categoria.ataque[0] += 1;
+      } else if (PersonagemUsandoItem('bracaduras', 'arqueiro_maior')) {
+        bonus_por_categoria.ataque[0] += 2;
+        bonus_por_categoria.dano += 1;
+      }
+    }
+  }
 
   // Bonus raciais.
   var bonus_racial = tabelas_raca[gPersonagem.raca].bonus_ataque;
@@ -900,12 +926,17 @@ function _DependenciasBonusPorCategoria(
       bonus_por_categoria.ataque[0] += bonus_racial.categorias[categoria];
     }
   }
+
+  // Ataques adicionais.
   if (estilo.nome == 'rajada' && nivel_monge > 0) {
     bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
     if (nivel_monge >= 11) {
       bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
     }
+  } else if (estilo.nome == 'tiro_rapido') {
+    bonus_por_categoria.ataque.push(bonus_por_categoria.ataque[0]);
   }
+  // Por nivel.
   if (primaria) {
     var num_ataques = gPersonagem.numero_ataques - 1;
     var modificador = -5;

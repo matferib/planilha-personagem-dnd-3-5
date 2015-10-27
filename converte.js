@@ -81,7 +81,10 @@ function _ConverteEquipamentos() {
     if (gEntradas[tipo_item] == null) {
       gEntradas[tipo_item] = [];
     }
-    gPersonagem[tipo_item] = gEntradas[tipo_item];
+    var itens_entrada = gEntradas[tipo_item];
+    itens_entrada.forEach(function(item_entrada) {
+      gPersonagem[tipo_item].push({ chave: item_entrada.chave, em_uso: item_entrada.em_uso });
+    });
   }
   // outros.
   gPersonagem.outros_equipamentos = gEntradas.outros_equipamentos;

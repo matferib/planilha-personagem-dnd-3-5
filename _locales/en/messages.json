@@ -1490,29 +1490,35 @@
   "Periapto_da_Sabedoria__6": {
     "message": "Periapt of Wisdom +6"
   },
-  "Bracadura_da_Armadura__1": {
+  "Bracadeira_da_Armadura__1": {
     "message": "Bracers of Armor +1"
   },
-  "Bracadura_da_Armadura__2": {
+  "Bracadeira_da_Armadura__2": {
     "message": "Bracers of Armor +2"
   },
-  "Bracadura_da_Armadura__3": {
+  "Bracadeira_da_Armadura__3": {
     "message": "Bracers of Armor +3"
   },
-  "Bracadura_da_Armadura__4": {
+  "Bracadeira_da_Armadura__4": {
     "message": "Bracers of Armor +4"
   },
-  "Bracadura_da_Armadura__5": {
+  "Bracadeira_da_Armadura__5": {
     "message": "Bracers of Armor +5"
   },
-  "Bracadura_da_Armadura__6": {
+  "Bracadeira_da_Armadura__6": {
     "message": "Bracers of Armor +6"
   },
-  "Bracadura_da_Armadura__7": {
+  "Bracadeira_da_Armadura__7": {
     "message": "Bracers of Armor +7"
   },
-  "Bracadura_da_Armadura__8": {
+  "Bracadeira_da_Armadura__8": {
     "message": "Bracers of Armor +8"
+  },
+  "Bracadeira_de_Arqueiro__Menor_": {
+    "message": "Bracers of Archery (lesser)"
+  },
+  "Bracadeira_de_Arqueiro__Maior_": {
+    "message": "Bracers of Archery (greater)"
   },
   "Botas_Aladas": {
     "message": "Winged"
@@ -2200,5 +2206,212 @@
 	},
 	"De": {
 		"message": "From"
-	}
+	},
+  "Alma_Diamante": {
+    "message": "Diamond Soul"
+  },
+  "Ataque_Chi__Magico_": {
+    "message": "Ki strike (magic)"
+  },
+  "Ataque_Chi__Ordem_": {
+    "message": "Ki strike (lawful)"
+  },
+  "Ataque_Chi__Adamante_": {
+    "message": "Ki strike (adamantine)"
+  },
+  "Ataque_Desarmado": {
+    "message": "Unarmed Strike"
+  },
+  "Ataque_furtivo": {
+    "message": "Sneak Attack"
+  },
+  "Aura_do_bem": {
+    "message": "Aura of good"
+  },
+  "Aura_de_coragem": {
+    "message": "Aura of courage"
+  },
+  "Auto_Perfeicao": {
+    "message": "Perfect self"
+  },
+  "Bonus_CA": {
+    "message": "AC Bonus"
+  },
+  "Caminho_da_Floresta": {
+    "message": "Woodland stride"
+  },
+  "Estilo_de_Combate_Aprimorado": {
+    "message": "Improved combat style"
+  },
+  "Expulsar_fascinar_morto_vivos": {
+    "message": "Turn or rebuke undead"
+  },
+  "Camuflagem": {
+    "message": "Camouflage"
+  },
+  "Companheiro_animal": {
+    "message": "Animal companion"
+  },
+  "Corpo_de_Diamante": {
+    "message": "Diamond body"
+  },
+  "Corpo_Atemporal": {
+    "message": "Timeless body"
+  },
+  "Corpo_Vazio": {
+    "message": "Empty body"
+  },
+  "Cura_pelas_maos": {
+    "message": "Lay on hands"
+  },
+  "Destruir_o_bem": {
+    "message": "Smite good"
+  },
+  "Destruir_o_mal": {
+    "message": "Smite evil"
+  },
+  "Detectar_o_mal": {
+    "message": "Detect evil"
+  },
+  "Empatia_com_a_natureza": {
+    "message": "Wild empathy"
+  },
+  "Encontrar_armadilha": {
+    "message": "Trapfinding"
+  },
+  "Evasao_Aprimorada": {
+    "message": "Improved evasion"
+  },
+  "Escudo_Heroico": {
+    "message": "Heroic Shield"
+  },
+  "Esquiva_Sobrenatural": {
+    "message": "Uncanny dodge"
+  },
+  "Estilo_de_Combate": {
+    "message": "Combat style"
+  },
+  "Familiar": {
+    "message": "Familiar"
+  },
+  "Forma_selvagem": {
+    "message": "Wild shape"
+  },
+  "Graca_divina": {
+    "message": "Divine Grace"
+  },
+  "Grito_de_Guerra": {
+    "message": "Rallying cry"
+  },
+  "Idiomas_do_Sol_e_da_Lua": {
+    "message": "Tongue of the sun and moon"
+  },
+  "Inimigo_Predileto": {
+    "message": "Favored enemy"
+  },
+  "Inspirar_Coragem": {
+    "message": "Inspire courage"
+  },
+  "Integridade_Corporal": {
+    "message": "Wholeness of body"
+  },
+  "Juramento_de_Furia": {
+    "message": "Oath of wrath"
+  },
+  "Maestria_do_Estilo_de_Combate": {
+    "message": "Combat style mastery"
+  },
+  "Mao_Vibrante": {
+    "message": "Quivering palm"
+  },
+  "Medo": {
+    "message": "Fear"
+  },
+  "Mente_Tranquila": {
+    "message": "Still mind"
+  },
+  "Mimetismo": {
+    "message": "Hide in plain sight"
+  },
+  "Montaria_especial": {
+    "message": "Special mount"
+  },
+  "Passo_Etereo": {
+    "message": "Abundant step"
+  },
+  "Pureza_Corporal": {
+    "message": "Purity of body"
+  },
+  "Queda_Suave__6m_": {
+    "message": "Slow fall (20 ft)"
+  },
+  "Queda_Suave__9m_": {
+    "message": "Slow fall (30 ft)"
+  },
+  "Queda_Suave__12m_": {
+    "message": "Slow fall (40 ft)"
+  },
+  "Queda_Suave__15m_": {
+    "message": "Slow fall (50 ft)"
+  },
+  "Queda_Suave__18m_": {
+    "message": "Slow fall (60 ft)"
+  },
+  "Queda_Suave__21m_": {
+    "message": "Slow fall (70 ft)"
+  },
+  "Queda_Suave__24m_": {
+    "message": "Slow fall (80 ft)"
+  },
+  "Queda_Suave__27m_": {
+    "message": "Slow fall (90 ft)"
+  },
+  "Queda_Suave__sem_limite_": {
+    "message": "Slow fall any distance"
+  },
+  "Senso_da_natureza": {
+    "message": "Nature sense"
+  },
+  "Rajada_de_Golpes": {
+    "message": "Flurry of blows"
+  },
+  "Rajada_Maior": {
+    "message": "Greater flurry"
+  },
+  "Rastrear": {
+    "message": "Track"
+  },
+  "Rastreador_Eficaz": {
+    "message": "Swift tracker"
+  },
+  "Rastro_invisivel": {
+    "message": "Trackless step"
+  },
+  "Resistencia_a_Frio_e_Fogo__5_": {
+    "message": "Resistance to cold and fire (5)"
+  },
+  "Resistencia_a_Frio_e_Fogo__10_": {
+    "message": "Resistance to cold and fire (10)"
+  },
+  "Resistencia_Final": {
+    "message": "Final stand"
+  },
+  "Resistir_tentacao_da_natureza": {
+    "message": "Resist nature´s lure"
+  },
+  "Remover_Doenca": {
+    "message": "Remove disease"
+  },
+  "Sentir_armadilha": {
+    "message": "Trap sense"
+  },
+  "Saude_divina": {
+    "message": "Divine Health"
+  },
+  "Talento": {
+    "message": "Bonus Feat"
+  },
+  "Visao_no_Escuro": {
+    "message": "Darkvision"
+  }
 }
