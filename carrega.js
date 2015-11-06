@@ -268,7 +268,7 @@ function _CarregaAtributos() {
     return;
   }
 
-  div.appendChild(CriaSpan('Atributos', null, 'titulo'));
+  div.appendChild(CriaSpan(Traduz('Atributos'), null, 'titulo'));
   div.appendChild(CriaBr());
   div.appendChild(CriaSpan(Traduz('Total:') + ' '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-total'));
@@ -332,7 +332,7 @@ function _CarregaTalentos() {
     var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
-          CriaSpan('Gerais: '));
+          CriaSpan(Traduz('Gerais') + ': '));
     } else {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('De') + ' ' + Traduz(tabelas_classes[chave_classe].nome) + ': '));

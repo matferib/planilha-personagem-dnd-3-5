@@ -299,7 +299,7 @@ function JanelaMensagem(mensagem) {
   div_titulo.className = 'div-titulo-janela';
   div_msg.className = 'div-msg-janela';
   div_botao.className = 'div-botao-janela';
-  div_titulo.appendChild(CriaSpan('Mensagem'));
+  div_titulo.appendChild(CriaSpan(Traduz('Mensagem')));
   div_msg.appendChild(CriaSpan(mensagem));
   var botao = CriaBotao('Ok', null, null, function() { FechaJanela(); });
   div_botao.appendChild(botao);

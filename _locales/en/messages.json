@@ -2207,6 +2207,9 @@
 	"De": {
 		"message": "From"
 	},
+	"Gerais": {
+		"message": "General"
+	},
   "Alma_Diamante": {
     "message": "Diamond Soul"
   },
@@ -2413,5 +2416,11 @@
   },
   "Visao_no_Escuro": {
     "message": "Darkvision"
-  }
+  },
+	"Atributos": {
+		"message": "Attributes"
+	},
+	"Mensagem": {
+		"message": "Message"
+	}
 }
