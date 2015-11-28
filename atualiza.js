@@ -503,7 +503,7 @@ function _AtualizaTalento(indice_talento, talento_personagem, div_talento, chave
     }
   }
   if (talento.descricao != null && talento.descricao.length > 0) {
-    TituloSimples(talento.descricao, div_talento);
+    TituloSimples(Traduz(talento.descricao), div_talento);
   }
 }
 

@@ -205,7 +205,7 @@ function _CarregaTemplates() {
   }
   select_template.appendChild(CriaOption('Nenhum', ''))
   for (var chave_template in tabelas_template) {
-    select_template.appendChild(CriaOption(tabelas_template[chave_template].nome, chave_template))
+    select_template.appendChild(CriaOption(Traduz(tabelas_template[chave_template].nome), chave_template))
   }
 }
 
@@ -268,7 +268,7 @@ function _CarregaAtributos() {
     return;
   }
 
-  div.appendChild(CriaSpan('Atributos', null, 'titulo'));
+  div.appendChild(CriaSpan(Traduz('Atributos'), null, 'titulo'));
   div.appendChild(CriaBr());
   div.appendChild(CriaSpan(Traduz('Total:') + ' '));
   div.appendChild(CriaSpan('0', 'pontos-atributos-total'));
@@ -315,7 +315,7 @@ function _CarregaAtributos() {
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-mod-bonus'));
     div_atributo.appendChild(CriaSpan(' = '));
     div_atributo.appendChild(CriaSpan('0', chave_atributo + '-valor-total'));
-    div_atributo.appendChild(CriaSpan(', modificador: '));
+    div_atributo.appendChild(CriaSpan(', ' + Traduz('modificador') + ': '));
     div_atributo.appendChild(CriaSpan('0', null, chave_atributo + '-mod-total'));
 
     div.appendChild(div_atributo);
@@ -332,10 +332,10 @@ function _CarregaTalentos() {
     var div_talentos_classe = CriaDiv('div-talentos-' + chave_classe);
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
-          CriaSpan('Gerais: '));
+          CriaSpan(Traduz('Gerais') + ': '));
     } else {
       div_talentos_classe.appendChild(
-          CriaSpan('De ' + tabelas_classes[chave_classe].nome + ': '));
+          CriaSpan(Traduz('De') + ' ' + Traduz(tabelas_classes[chave_classe].nome) + ': '));
     }
     div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
     div_talentos_classe.appendChild(CriaBr());
