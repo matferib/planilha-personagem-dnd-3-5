@@ -2468,6 +2468,12 @@
   "Criar_aneis_magicos_": {
     "message": "Allows creation of magic rings."
   },
+  "Fintar_Aprimorado": {
+    "message": "Improved Feint"
+  },
+  "Fintar_em_combate_se_torna_uma_acao_de_movimento_": {
+    "message": "Feint becomes a move action."
+  },
   "nivel_em_": {
     "message": "levels in "
   },

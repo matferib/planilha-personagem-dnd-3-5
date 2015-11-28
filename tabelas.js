@@ -1053,7 +1053,6 @@ Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
-Fintar Aprimorado¹ Especialização em Combate Fintar em combate é uma ação de movimento
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
@@ -1067,7 +1066,6 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
 Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
-Talentos de Criação de Item Pré-requisitos Benefícios
 */
   acrobatico: {
       nome: 'Acrobático',
@@ -1219,6 +1217,12 @@ Talentos de Criação de Item Pré-requisitos Benefícios
     requisitos: { talentos: [ 'foco_em_arma_maior', 'especializacao_arma'],
                   nivel: { guerreiro: 12 } },
     descricao: '+4 de bônus no dano com a arma escolhida (ao invés de 2 da especialização normal).', },
+  fintar_aprimorado: {
+    nome: 'Fintar Aprimorado',
+    requisitos: { talentos: ['especializacao_em_combate'], atributos: { inteligencia: 13 } },
+    guerreiro: true,
+    descricao: 'Fintar em combate se torna uma ação de movimento.'
+  },
   foco_em_arma: {
       nome: 'Foco em arma',
       complemento: 'arma',
