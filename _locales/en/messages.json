@@ -1997,9 +1997,6 @@
   "nivel_de_conjurador": {
     "message": "caster level"
   },
-  "nivel_em_": {
-    "message": "levels in "
-  },
   "talento": {
     "message": "feat"
   },
@@ -2464,5 +2461,20 @@
   },
   "vontade": {
     "message": "will"
+  },
+  "Forjar_Anel": {
+    "message": "Forge Ring"
+  },
+  "Criar_aneis_magicos_": {
+    "message": "Allows creation of magic rings."
+  },
+  "nivel_em_": {
+    "message": "levels in "
+  },
+  "nivel_de_personagem": {
+    "message": "character level"
+  },
+  "nivel_de_conjurador": {
+    "message": "caster level"
   }
 }

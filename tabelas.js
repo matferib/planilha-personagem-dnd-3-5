@@ -1068,7 +1068,6 @@ Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
 Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
 Talentos de Criação de Item Pré-requisitos Benefícios
-Forjar Anel 12° nível de conjurador Criar anéis mágicos
 */
   acrobatico: {
       nome: 'Acrobático',
@@ -1244,6 +1243,11 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
     complemento: 'escola_magia',
     requisitos: { talentos: ['foco_em_magia'] },
     descricao: '+1 de bônus na CD dos testes de resistência de uma escola de magia específica.',
+  },
+  forjar_anel: {
+    nome: 'Forjar Anel',
+    requisitos: { nivel: { conjurador: 12 } },
+    descricao: 'Criar anéis mágicos.'
   },
   fortitude_maior: {
       nome: 'Fortitude Maior',
