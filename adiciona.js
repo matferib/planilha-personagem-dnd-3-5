@@ -345,7 +345,7 @@ function AdicionaTalento(indice_talento, chave_classe, div_pai) {
   talentos_ordenados.forEach(function(chave_talento) {
     var talento_tabela = tabelas_talentos[chave_talento];
     var option_talento = CriaOption(Traduz(talento_tabela.nome), chave_talento);
-    option_talento.selected = chave_talento == 'usar_armas_simples';
+    option_talento.selected = chave_talento == 'outros';
     select_talento.add(option_talento, null);
   });
   var input_complemento_talento = CriaInputTexto('');

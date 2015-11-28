@@ -258,30 +258,29 @@ function _AtualizaAtaque() {
   // Corpo a corpo.
   var span_bba_cac = Dom('bba-corpo-a-corpo');
   ImprimeSinalizado(gPersonagem.bba_cac, span_bba_cac);
-  Titulo(
-      [{'bba': gPersonagem.bba},
-       {'força': gPersonagem.atributos['forca'].modificador},
-       {'tamanho': gPersonagem.tamanho.modificador_ataque_defesa}],
-      span_bba_cac);
+  var titulo_span_bba_cac = {};
+  titulo_span_bba_cac[Traduz('bba')] = gPersonagem.bba;
+  titulo_span_bba_cac[Traduz('força')] = gPersonagem.atributos['forca'].modificador;
+  titulo_span_bba_cac[Traduz('tamanho')] = gPersonagem.tamanho.modificador_ataque_defesa;
+  TituloChaves(titulo_span_bba_cac, span_bba_cac);
 
   // Distancia.
   var span_bba_distancia = Dom('bba-distancia');
   ImprimeSinalizado(gPersonagem.bba_distancia, span_bba_distancia);
-  Titulo(
-      [{'bba': gPersonagem.bba},
-       {'destreza': gPersonagem.atributos['destreza'].modificador},
-       {'tamanho': gPersonagem.tamanho.modificador_ataque_defesa}],
-      span_bba_distancia);
+  var titulo_span_bba_distancia = {};
+  titulo_span_bba_distancia[Traduz('bba')] = gPersonagem.bba;
+  titulo_span_bba_distancia[Traduz('destreza')] = gPersonagem.atributos['destreza'].modificador;
+  titulo_span_bba_distancia[Traduz('tamanho')] = gPersonagem.tamanho.modificador_ataque_defesa;
+  TituloChaves(titulo_span_bba_distancia, span_bba_distancia);
 
   // Agarrar
   var span_bba_agarrar = Dom('bba-agarrar');
   ImprimeSinalizado(gPersonagem.agarrar, span_bba_agarrar);
-  Titulo(
-      [{'bba': gPersonagem.bba},
-       {'força': gPersonagem.atributos['forca'].modificador},
-       {'tamanho especial': gPersonagem.tamanho.modificador_agarrar}],
-      span_bba_agarrar);
-
+  var titulo_span_bba_agarrar = {};
+  titulo_span_bba_agarrar[Traduz('bba')] = gPersonagem.bba;
+  titulo_span_bba_agarrar[Traduz('força')] = gPersonagem.atributos['forca'].modificador;
+  titulo_span_bba_agarrar[Traduz('tamanho especial')] = gPersonagem.tamanho.modificador_agarrar;
+  TituloChaves(titulo_span_bba_agarrar, span_bba_agarrar);
 }
 
 // Atualiza a lista de armas de cada estilo.
@@ -393,7 +392,7 @@ function _AtualizaSalvacoes() {
   RemoveFilhos(div_salvacoes);
   for (var tipo_salvacao in gPersonagem.salvacoes) {
     var div_salvacao = CriaDiv();
-    AdicionaSpanAoDiv(tipo_salvacao + ': ', null, div_salvacao);
+    AdicionaSpanAoDiv(Traduz(tipo_salvacao) + ': ', null, div_salvacao);
     var span_salvacao =
       AdicionaSpanAoDiv(StringSinalizada(gPersonagem.salvacoes[tipo_salvacao].Total()),
                         null, div_salvacao);

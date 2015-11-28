@@ -2404,6 +2404,26 @@
   },
   "Visao_no_Escuro": {
     "message": ""
+  },
+	"Atributos": {
+		"message": ""
+	},
+	"Mensagem": {
+		"message": ""
+	},
+  "Outros": {
+    "message": ""
+  },
+  "Para_talentos_que_nao_estao_presentes_na_planilha_": {
+    "message": ""
+  },
+  "fortitude": {
+    "message": ""
+  },
+  "reflexo": {
+    "message": ""
+  },
+  "vontade": {
+    "message": ""
   }
-
 }

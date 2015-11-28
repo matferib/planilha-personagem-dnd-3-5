@@ -394,7 +394,7 @@ function TituloSimples(titulo, dom) {
 }
 
 // Gera o titulo de um elemento HTML (o texto que aparece no mouseover).
-// @param pares um array de par: texto valor.
+// @param pares um array de chave:valor.
 // Dom o objeto que recebera o titulo.
 function Titulo(pares, dom) {
   var titulo = '';
@@ -403,6 +403,19 @@ function Titulo(pares, dom) {
     for (var chave in parcial) {
       titulo += chave + ': ' + StringSinalizada(parcial[chave]) + '\n';
     }
+  }
+  if (titulo.length > 0) {
+    titulo = titulo.slice(0, -1);
+  }
+  dom.title = titulo;
+}
+
+// Semelhante a acima, mas recebe um objeto com { chave: valor, chave2: valor2 } a ser impresso.
+// TODO deixar somente essa funcao.
+function TituloChaves(obj, dom) {
+  var titulo = '';
+  for (var chave in obj) {
+    titulo += chave + ': ' + StringSinalizada(obj[chave]) + '\n';
   }
   if (titulo.length > 0) {
     titulo = titulo.slice(0, -1);

@@ -68,6 +68,9 @@
   "span_iniciativa": {
 		"message": "Initiative:"
 	},
+  "bba": {
+		"message": "bab"
+	},
   "span_bba": {
 		"message": "Base Attack Bonus:"
 	},
@@ -260,20 +263,38 @@
 	"Forca": {
 		"message": "Strength"
 	},
+	"forca": {
+		"message": "strength"
+	},
+	"destreza": {
+		"message": "dexterity"
+	},
 	"Destreza": {
 		"message": "Dexterity"
 	},
 	"Constituicao": {
 		"message": "Constitution"
 	},
+	"constituicao": {
+		"message": "constitution"
+	},
 	"Inteligencia": {
 		"message": "Inteligence"
+	},
+	"inteligencia": {
+		"message": "inteligence"
 	},
 	"Sabedoria": {
 		"message": "Wisdom"
 	},
+	"sabedoria": {
+		"message": "wisdom"
+	},
 	"Carisma": {
 		"message": "Charisma"
+	},
+	"Carisma": {
+		"message": "charisma"
 	},
 	"Nivel": {
 		"message": "Level"
@@ -1234,6 +1255,12 @@
   },
   "Tamanho": {
     "message": "Size"
+  },
+  "tamanho": {
+    "message": "size"
+  },
+  "tamanho_especial": {
+    "message": "size (special)"
   },
   "Nenhuma": {
 		"message": "None"
@@ -2422,5 +2449,20 @@
 	},
 	"Mensagem": {
 		"message": "Message"
-	}
+	},
+  "Outros": {
+    "message": "Others"
+  },
+  "Para_talentos_que_nao_estao_presentes_na_planilha_": {
+    "message": "Other feats not included in this app."
+  },
+  "fortitude": {
+    "message": "fortitude"
+  },
+  "reflexo": {
+    "message": "reflex"
+  },
+  "vontade": {
+    "message": "will"
+  }
 }

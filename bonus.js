@@ -127,7 +127,7 @@ Bonus.prototype.TotalChave = function(chave_bonus) {
 
 // Exporta os bonus diferentes de zero.
 // Util para ser usado com a funcao Titulo.
-// @param opt excluir arra com os tipos de bonus a excluir (nao serao exportados).
+// @param opt excluir array com os tipos de bonus a excluir (nao serao exportados).
 // @return um array onde cada entrada eh um mapa nome: valor.
 Bonus.prototype.Exporta = function(excluir) {
   var array_retorno = [];

@@ -1492,6 +1492,11 @@ Forjar Anel 12° nível de conjurador Criar anéis mágicos
     descricao: 'Aumenta em 50% todas as variáveis numéricas dos efeitos da magia, ao custo de dois níveis adicionais.',
     niveis_adicionais: 2,
   },
+  outros: {
+    nome: 'Outros',
+    descricao: 'Para talentos que não estão presentes na planilha.',
+    complemento: 'livre'
+  },
 };
 
 // A penalidade de armadura indica o multiplicador de penalidade da armadura (default 0).
