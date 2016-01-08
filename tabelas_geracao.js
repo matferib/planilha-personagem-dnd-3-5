@@ -435,13 +435,18 @@ var tabelas_geracao = {
             amuletos: [ { chave: 'armadura_natural_2', em_uso: true } ],
       },
     },
-
-	},
+  },
   feiticeiro: {
-		atributos: [ 'carisma', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'forca' ],
-	},
+    atributos: [ 'carisma', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'forca' ],
+  },
   ladino: {
-		atributos: [ 'destreza', 'inteligencia', 'constituicao', 'forca', 'sabedoria', 'carisma' ],
+    atributos: [ 'destreza', 'inteligencia', 'constituicao', 'forca', 'sabedoria', 'carisma' ],
+    ordem_pericias: [
+      'esconderse', 'furtividade', 'observar', 'ouvir', 'abrir_fechaduras', 'procurar', 'operar_mecanismo',
+      'avaliacao', 'acrobacias', 'cavalgar', 'usar_instrumento_magico', 'equilibrio', 'saltar' ],
+    talentos: [
+      'iniciativa_aprimorada', 'tiro_certeiro', 'usar_escudo', 'tiro_preciso',
+    ],
     por_nivel: {
       3: { moedas: {  ouro: 1500 },
            armadura: { nome: 'couro_batido', obra_prima: true },
@@ -471,6 +476,14 @@ var tabelas_geracao = {
                     { chave: 'arco_curto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
+      7: { moedas: {  ouro: 4200 },
+           armadura: { nome: 'couro_batido', bonus: 1 },
+           escudo: { nome: 'broquel', bonus: 1, },
+           armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
+                    { chave: 'arco_curto', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+
     },
   },
   mago: {
@@ -512,7 +525,7 @@ var tabelas_geracao = {
     },
   },
   mago_necromante: {
-		atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
+    atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
     ordem_pericias: [
       'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
     talentos: [

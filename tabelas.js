@@ -2035,21 +2035,39 @@ var tabelas_pocoes = {
   reduzir_pessoa: { nome: 'Reduzir pessoa', tipo: 'pocao'  , preco: '250 PO' },
   ajuda: { nome: 'Ajuda', tipo: 'pocao'  , preco: '300 PO' },
   pele_arvore_2: { nome: 'Pele de árvore +2', tipo: 'pocao'  , preco: '300 PO' },
-  vigor_urso: { nome: 'Vigor do urso', tipo: 'pocao' , preco: '300 PO' },
+  vigor_urso: {
+    nome: 'Vigor do urso', tipo: 'pocao' , preco: '300 PO',
+    propriedades: { atributos: { constituicao: 4 } }
+  },
   nublar: { nome: 'Nublar', tipo: 'pocao' , preco: '300 PO' },
-  forca_touro: { nome: 'Força do touro', tipo: 'pocao'  , preco: '300 PO' },
-  agilidade_gato: { nome: 'Agilidade do gato', tipo: 'pocao'  , preco: '300 PO' },
+  forca_touro: {
+    nome: 'Força do touro', tipo: 'pocao'  , preco: '300 PO',
+    propriedades: { atributos: { forca: 4 } }
+  },
+  agilidade_gato: {
+    nome: 'Agilidade do gato', tipo: 'pocao'  , preco: '300 PO',
+    propriedades: { atributos: { destreza: 4 } }
+  },
   curar_ferimentos_moderados: { nome: 'Curar ferimentos moderados', tipo: 'pocao' , preco: '300 PO' },
   escuridao: { nome: 'Escuridão', tipo: 'oleo', preco: '300 PO' },
   visao_escuro: { nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO' },
   retardar_envenenamento: { nome: 'Retardar envenenamento', tipo: 'pocao' , preco: '300 PO' },
-  esplendor_aguia: { nome: 'Esplendor da águia', tipo: 'pocao' , preco: '300 PO' },
-  astucia_raposa: { nome: 'Astúcia da raposa', tipo: 'pocao', preco: '300 PO' },
+  esplendor_aguia: {
+    nome: 'Esplendor da águia', tipo: 'pocao' , preco: '300 PO',
+    propriedades: { atributos: { carisma: 4 } }
+  },
+  astucia_raposa: {
+    nome: 'Astúcia da raposa', tipo: 'pocao', preco: '300 PO',
+    propriedades: { atributos: { inteligencia: 4 } }
+  },
   invisibilidade: { nome: 'Invisibilidade', tipo: 'ambos', preco: '300 PO' },
   restauracao_menor: { nome: 'Restauração menor', tipo: 'pocao' , preco: '300 PO' },
   levitacao: { nome: 'Levitação', tipo: 'ambos', preco: '300 PO' },
   confundir_deteccao: { nome: 'Confundir detecção', tipo: 'pocao' , preco: '300 PO' },
-  sabedoria_coruja: { nome: 'Sabedoria da coruja', tipo: 'pocao' , preco: '300 PO' },
+  sabedoria_coruja: {
+    nome: 'Sabedoria da coruja', tipo: 'pocao' , preco: '300 PO',
+    propriedades: { atributos: { sabedoria: 4 } }
+  },
   protecao_contra_flechas_10: { nome: 'Proteção contra flechas 10/mágica', tipo: 'pocao', preco: '300 PO' },
   remover_paralisia: { nome: 'Remover paralisia', tipo: 'pocao', preco: '300 PO' },
   resistencia_elementos_10: { nome: 'Resistência a elementos (tipo) 10', tipo: 'pocao', preco: '300 PO' },
