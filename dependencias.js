@@ -99,6 +99,8 @@ function _DependenciasItem(chave_item, item_tabela) {
       _DependenciasItemSalvacoes(chave_item, item_tabela);
     } else if (propriedade == 'atributos') {
       _DependenciasItemAtributos(chave_item, item_tabela);
+    } else if (propriedade == 'tamanho') {
+      _DependenciasItemTamanho(chave_item, item_tabela);
     }
   }
 }
@@ -123,6 +125,19 @@ function _DependenciasItemAtributos(chave_item, item_tabela) {
   for (var chave_atributo in item_tabela.propriedades.atributos) {
     gPersonagem.atributos[chave_atributo].bonus.Adiciona(
         'melhoria', chave_item, item_tabela.propriedades.atributos[chave_atributo]);
+  }
+}
+
+function _DependenciasItemTamanho(chave_item, item_tabela) {
+  var quantidade = item_tabela.propriedades.tamanho;
+  while (quantidade != 0) {
+    var tamanho_personagem = tabelas_tamanho[gPersonagem.tamanho.categoria];
+    var proximo = quantidade > 0 ? tamanho_personagem.maior : tamanho_personagem.menor;
+    if (proximo == null) {
+      break;
+    }
+    gPersonagem.tamanho.categoria = proximo;
+    quantidade += (quantidade > 0) ? -1 : 1;
   }
 }
 
@@ -321,6 +336,13 @@ function _DependenciasProficienciaArmas() {
     var armas_classe = tabela_classe.proficiencia_armas || [];
     for (var j = 0; j < armas_classe.length; ++j) {
       gPersonagem.proficiencia_armas[armas_classe[j]] = true;
+      if (armas_classe[j] == 'arco_curto' || armas_classe[j] == 'arco_longo') {
+        for (var arma_tabela in tabelas_armas_comuns) {
+          if (arma_tabela.indexOf(armas_classe[j]) == 0) {
+            gPersonagem.proficiencia_armas[arma_tabela] = true;
+          } 
+        }
+      }
     }
     var talentos_classe = tabela_classe.talentos || [];
     for (var j = 0; j < talentos_classe.length; ++j) {

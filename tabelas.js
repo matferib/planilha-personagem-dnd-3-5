@@ -51,6 +51,49 @@ var tabelas_raca = {
       bonus_pericias: { ouvir: 2, procurar: 2, observar: 2 },
       outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
   },
+  genasi_agua: {
+      nome: 'Genasi (Água)',
+      origem: { livro: 'Forgotten Realms', pagina: '20' },
+      movimento: { terrestre: 6, aquatico: 6 },
+      atributos: { constituicao: 2, carisma: -2 }, tamanho: 'medio',
+      ajuste_nivel: 1,
+      // +1 contra agua no primeiro. TODO: +1 a cada 5 niveis.
+      outras_salvacoes: { agua: { base: ['reflexo'], bonus: 1 } },
+      // visao no escuro 60 pes (12 quadrados).
+      // Criar agua como druida de 5o nivel.
+  },
+  genasi_ar: {
+      nome: 'Genasi (Ar)',
+      origem: { livro: 'Forgotten Realms', pagina: '19' },
+      movimento: { terrestre: 6 },
+      atributos: { destreza: 2, inteligencia: 2, sabedoria: -2, carisma: -2 }, tamanho: 'medio',
+      ajuste_nivel: 1,
+      // +1 contra agua no primeiro. TODO: +1 a cada 5 niveis.
+      outras_salvacoes: { ar: { base: ['reflexo'], bonus: 1 } },
+      // Nao respira.
+      // visao no escuro 60 pes (12 quadrados).
+      // Levitar como feiticeiro de 5o nivel.
+  },
+  genasi_fogo: {
+      nome: 'Genasi (Fogo)',
+      origem: { livro: 'Forgotten Realms', pagina: '20' },
+      movimento: { terrestre: 6 },
+      atributos: { inteligencia: 2, carisma: -2 }, tamanho: 'medio',
+      ajuste_nivel: 1,
+      // +1 contra fogo no primeiro. TODO: +1 a cada 5 niveis.
+      outras_salvacoes: { fogo: { base: ['reflexo'], bonus: 1 } },
+      // visao no escuro 60 pes (12 quadrados).
+      // Controlar chamas como feiticeiro de 5o nivel.
+  },
+  genasi_terra: {
+      nome: 'Genasi (Terra)',
+      origem: { livro: 'Forgotten Realms', pagina: '19' },
+      movimento: { terrestre: 6 },
+      atributos: { forca: 2, constituicao: 2, sabedoria: -2, carisma: -2 }, tamanho: 'medio',
+      ajuste_nivel: 1,
+      // visao no escuro 60 pes (12 quadrados).
+      // Passo sem pegada uma vez por dia como druida de 5o.
+  },
   gnomo: {
       nome: 'Gnomo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
@@ -489,15 +532,15 @@ var tabelas_salvacao = {
 
 // Tabelas de tamanho.
 var tabelas_tamanho = {
-  minusculo: { nome: 'Minúsculo', ataque_defesa: 8, agarrar: -16 },
-  diminuto: { nome: 'Diminuto', ataque_defesa: 4, agarrar: -12 },
-  miudo: { nome: 'Miúdo', ataque_defesa: 2, agarrar: -8 },
-  pequeno: { nome: 'Pequeno', ataque_defesa: 1, agarrar: -4 },
-  medio: { nome: 'Médio', ataque_defesa: 0, agarrar: 0 },
-  grande: { nome: 'Grande', ataque_defesa: -1, agarrar: 4 },
-  enorme: { nome: 'Enorme', ataque_defesa: -2, agarrar: 8 },
-  imenso: { nome: 'Imenso', ataque_defesa: -4, agarrar: 12 },
-  colossal: { nome: 'Colossal', ataque_defesa: -8, agarrar: 16 },
+  minusculo: { nome: 'Minúsculo', ataque_defesa: 8, agarrar: -16, menor: null, maior: 'diminuto' },
+  diminuto: { nome: 'Diminuto', ataque_defesa: 4, agarrar: -12, menor: 'minusculo', maior: 'miudo' },
+  miudo: { nome: 'Miúdo', ataque_defesa: 2, agarrar: -8, menor: 'diminuto', maior: 'pequeno' },
+  pequeno: { nome: 'Pequeno', ataque_defesa: 1, agarrar: -4, menor: 'miudo', maior: 'medio' },
+  medio: { nome: 'Médio', ataque_defesa: 0, agarrar: 0, menor: 'pequeno', maior: 'grande' },
+  grande: { nome: 'Grande', ataque_defesa: -1, agarrar: 4, menor: 'medio', maior: 'enorme' },
+  enorme: { nome: 'Enorme', ataque_defesa: -2, agarrar: 8, menor: 'grande', maior: 'imenso' },
+  imenso: { nome: 'Imenso', ataque_defesa: -4, agarrar: 12, menor: 'enorme', maior: 'colossal' },
+  colossal: { nome: 'Colossal', ataque_defesa: -8, agarrar: 16, menor: 'imenso', maior: null },
 };
 
 // Conversao de dado de tamanho medio para outros tipos.
@@ -2032,7 +2075,10 @@ var tabelas_pocoes = {
   arma_abencoada: { nome: 'Arma Abençoada (Shillelagh)', tipo: 'oleo', preco: '50 PO' },
   abencoar_arma: { nome: 'Abençoar arma', tipo: 'oleo', preco: '100 PO' },
   aumentar_pessoa: { nome: 'Aumentar pessoa', tipo: 'pocao' , preco: '250 PO' },
-  reduzir_pessoa: { nome: 'Reduzir pessoa', tipo: 'pocao'  , preco: '250 PO' },
+  reduzir_pessoa: {
+    nome: 'Reduzir pessoa', tipo: 'pocao'  , preco: '250 PO',
+    propriedades: { tamanho: -1, atributos: { forca: -2, destreza: 2} },
+  },
   ajuda: { nome: 'Ajuda', tipo: 'pocao'  , preco: '300 PO' },
   pele_arvore_2: { nome: 'Pele de árvore +2', tipo: 'pocao'  , preco: '300 PO' },
   vigor_urso: {

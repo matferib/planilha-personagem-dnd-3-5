@@ -213,7 +213,7 @@ function _AtualizaTamanho() {
   ImprimeSinalizado(
       gPersonagem.tamanho.modificador_agarrar,
       DomsPorClasse('tamanho-mod-agarrar'));
-  SelecionaValor(gPersonagem.tamanho.categoria, Dom('tamanho'));
+  SelecionaValor(PersonagemTamanhoRaca(), Dom('tamanho'));
 }
 
 // Atualiza todos os modificadores dos atributos bases (for, des, con, int, sab, car),

@@ -5,7 +5,9 @@ var gPersonagem = {
   nome: '',
   raca: 'humano',
   template: '',
-  tamanho: { categoria: 'medio', modificador_ataque_defesa: 0, modificador_agarrar: 0 },
+  tamanho: {
+    categoria: 'medio', modificador_ataque_defesa: 0, modificador_agarrar: 0
+  },
   alinhamento: '',
   experiencia: 0,
   divindade: '',
@@ -513,3 +515,12 @@ function PersonagemMaiorClasseConjurador(tipo) {
   }
   return maior;
 }
+
+function PersonagemTamanhoRaca() {
+  return tabelas_raca[gPersonagem.raca].tamanho;
+}
+
+function PersonagemTamanhoEfetivo() {
+  return gPersonagem.tamanho.categoria;
+}
+

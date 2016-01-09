@@ -1,3 +1,4 @@
+Unit test  de tamanhos modificados.
 Estilo de luta: tiro rapido.
 Complemento de especiais.
 Estilo de luta de ranger (se escolher o talento de arquearia, os demais devem ser tb).
