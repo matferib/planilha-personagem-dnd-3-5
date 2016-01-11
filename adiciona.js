@@ -379,7 +379,7 @@ function AdicionaItem(tipo_item, div, div_pai) {
     items_ordenados.push({ chave_item: chave, valor_item: tabela_item[chave] });
   }
   items_ordenados.sort(function(ie, id) {
-    return ie.valor_item.nome.localeCompare(id.valor_item.nome);
+    return Traduz(ie.valor_item.nome).localeCompare(Traduz(id.valor_item.nome));
   });
   items_ordenados.forEach(function(item) {
     select.appendChild(
