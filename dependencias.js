@@ -753,8 +753,12 @@ function _DependenciasArma(arma_personagem) {
   }
   arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
-  arma_personagem.acuidade = PersonagemPossuiTalento(
-      'acuidade_arma', arma_entrada.chave);
+  if (arma_tabela.categoria == 'cac_leve' ||
+      arma_entrada.chave == 'sabre' ||
+      arma_entrada.chave == 'chicote' ||
+      arma_entrada.chave == 'corrente_com_cravos') {
+    arma_personagem.acuidade = PersonagemPossuiTalento('acuidade_arma');
+  }
 }
 
 function _DependenciasEstilos() {
