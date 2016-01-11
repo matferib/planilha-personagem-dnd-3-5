@@ -178,6 +178,7 @@ function _AtualizaClasses() {
 function _AtualizaClasse(classes_desabilitadas, classe, nivel, nivel_conjurador, indice) {
   var select_classe = Dom('select-classe-' + indice);
   select_classe.options.length = 0;
+  var options = [];
   for (var chave_classe in tabelas_classes) {
     if (tabelas_classes[chave_classe].mestre && !gPersonagem.modo_mestre) {
       // So adiciona as classes de mestre se estiver no modo mestre.
@@ -198,8 +199,14 @@ function _AtualizaClasse(classes_desabilitadas, classe, nivel, nivel_conjurador,
     option.setAttribute('name', chave_classe);
     option.selected = (chave_classe == classe) && !desabilitar_classe;
     option.disabled = desabilitar_classe;
-    select_classe.appendChild(option);
+    options.push(option);
   }
+  options.sort(function(oe, od) {
+    return Traduz(oe.text).localeCompare(od.text);
+  });
+  options.forEach(function(option) {
+    select_classe.appendChild(option);
+  });
   Dom('nivel-classe-' + indice).value = nivel;
   Dom('nivel-conjurador-' + indice).textContent = nivel_conjurador;
 }
