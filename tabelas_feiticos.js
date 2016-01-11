@@ -262,6 +262,31 @@ var tabelas_lista_feiticos_invertida = {};
 // O valor a ser usado da classe eh indice_feiticos.
 // TODO adicionar uma variavel precisa_memorizar. O precisa_conhecer esta sendo sobreusado para este proposito.
 var tabelas_feiticos = {
+  adepto: {
+      atributo_chave: 'sabedoria',
+      precisa_conhecer: false,
+      possui_nivel_zero: true,
+      por_nivel: {
+          1: { por_dia: '31',   },
+          2: { por_dia: '31',   },
+          3: { por_dia: '32',   },
+          4: { por_dia: '320',  },
+          5: { por_dia: '321',  },
+          6: { por_dia: '321',  },
+          7: { por_dia: '332',  },
+          8: { por_dia: '3320', },
+          9: { por_dia: '3321', },
+          10: { por_dia: '3321', },
+          11: { por_dia: '3332', },
+          12: { por_dia: '33320', },
+          13: { por_dia: '33321', },
+          14: { por_dia: '33321', },
+          15: { por_dia: '33332', },
+          16: { por_dia: '333320', },
+          17: { por_dia: '333321', },
+          18: { por_dia: '333321', },
+          19: { por_dia: '333332', },
+          20: { por_dia: '333332', }, }, },
   bardo: {
       atributo_chave: 'carisma',
       precisa_conhecer: true,
