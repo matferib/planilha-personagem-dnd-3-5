@@ -1115,7 +1115,7 @@ Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
       bonus_pericias: { saltar: 2, acrobacias: 2 } },
 
   acuidade_arma: {
-      nome: 'Acuidade com Arma', complemento: 'arma_leve',
+      nome: 'Acuidade com Arma',
       guerreiro: true,
       requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true },
       descricao: 'Aplica o modificador de Des (em vez de For) nas jogadas ' +
