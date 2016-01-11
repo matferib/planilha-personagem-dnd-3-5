@@ -155,7 +155,10 @@ function ClickLink() {
 // Gera o resumo do personagem para utilizacao em aventuras.
 function ClickGerarResumo() {
   AtualizaGeral();  // garante o preenchimento do personagem com tudo que ta na planilha.
-  Dom("resumo-personagem").innerHTML = GeraResumo();
+  var input = Dom("resumo-personagem-2");
+  input.value = GeraResumo();
+  input.focus();
+  input.select();
 }
 
 // Gera os pontos de vida do personagem de acordo com as classes.
