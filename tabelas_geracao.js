@@ -4,7 +4,7 @@
 var tabelas_geracao = {
   // Peguei do livro do mestre.
   barbaro: {
-		atributos: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+    atributos: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
     pericias: [],
     por_nivel: {
       1: { moedas: { ouro: 200 },
@@ -148,12 +148,12 @@ var tabelas_geracao = {
             amuletos: [ { chave: 'armadura_natural_3', em_uso: true } ],
       },
     },
-	},
+  },
   bardo: {
-		atributos: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
-	},
+    atributos: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
+  },
   clerigo: {
-		atributos: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
+    atributos: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
     ordem_pericias: [
       'concentracao', 'cura', 'diplomacia', 'conhecimento_religiao', 'conhecimento_historia',
       'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios' ],
@@ -268,9 +268,9 @@ var tabelas_geracao = {
             // luvas destreza +2
       },
     },
-	},
+  },
   druida: {
-		atributos: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
+    atributos: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
     por_nivel: {
       1: { moedas: { ouro: 250 },
            armadura: { nome: 'gibao_de_peles', },
@@ -303,9 +303,9 @@ var tabelas_geracao = {
                     { chave: 'funda', bonus: 0, obra_prima: true}, ],
       },
     },
-	},
+  },
   guerreiro: {
-		atributos: [ 'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
+    atributos: [ 'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
     por_nivel: {
       1: { moedas: { ouro: 350 },
            armadura: { nome: 'cota_de_talas', },
@@ -489,7 +489,10 @@ var tabelas_geracao = {
   mago: {
     atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
     ordem_pericias: [
-        'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
+      'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
+    talentos: [
+      'oficios', 'escrever_pergaminho', 'preparar_pocao', 'foco_em_magia', 'foco_em_magia_maior', 'fortitude_maior',
+    ],
     ordem_magias: {
       // Essas magias sao para necromantes.
       0: [ 'detectar_magia', 'ler_magias', 'raio_de_gelo', 'romper_morto_vivo', 'som_fantasma'],
@@ -529,7 +532,7 @@ var tabelas_geracao = {
     ordem_pericias: [
       'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
     talentos: [
-      'oficios', 'preparar_pocao', 'escrever_pergaminho', 'foco_em_magia', 'foco_em_magia_maior', 'fortitude_maior',
+      'oficios', 'escrever_pergaminho', 'preparar_pocao', 'foco_em_magia', 'foco_em_magia_maior', 'fortitude_maior',
     ],
     ordem_magias: {
       0: [ 'detectar_magia', 'ler_magias', 'raio_de_gelo', 'romper_morto_vivo', 'som_fantasma'],
@@ -577,7 +580,64 @@ var tabelas_geracao = {
   },
   // classes NPC: nao existe uma tabela para esses, coloquei o que achei mais adequado.
   adepto: {
-    atributos: [ 'sabedoria', 'destreza', 'constituicao', 'inteligencia', 'forca', 'carisma' ],
+    atributos: [ 'sabedoria', 'constituicao', 'forca', 'inteligencia',  'destreza', 'carisma' ],
+    ordem_pericias: [
+      'concentracao', 'cura', 'diplomacia', 'conhecimento_religiao', 'conhecimento_historia',
+      'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios' ],
+    talentos: [
+      'usar_armadura_leve', 'escrever_pergaminho', 'usar_escudo',
+    ],
+    ordem_magias: {
+      0: [ 'luz', 'orientacao', 'som_fantasma', ],
+      1: [ 'maos_flamejantes', 'protecao_contra_caos_mal_bem_ordem', 'bencao' ],
+      2: [ 'ajuda', 'curar_ferimentos_moderados', 'teia' ],
+      3: [ 'relampago', 'luz_do_dia', 'rogar_maldicao' ],
+      4: [ 'pele_de_pedra', 'polimorfismo', 'barreira_de_fogo' ],
+      5: [ 'cura_completa', 'levantar_os_mortos', 'visao_verdadeira' ],
+    },
+    por_nivel: {
+      // Tesouro de NPC tabela 4-23, usando um nivel a menos (Nivel de Desafio).
+      1: { moedas: { ouro: 450 },
+      },
+      2: { moedas: { ouro: 900 },
+      },
+      3: { moedas: { ouro: 2000 },
+      },
+      4: { moedas: { ouro: 2500 },
+      },
+      5: { moedas: { ouro: 3300 },
+      },
+      6: { moedas: { ouro: 4300 },
+      },
+      7: { moedas: { ouro: 5600 },
+      },
+      8: { moedas: { ouro: 7200 },
+      },
+      9: { moedas: { ouro: 9400 },
+      },
+      10: { moedas: { ouro: 12000 },
+      },
+      11: { moedas: { ouro: 16000 },
+      },
+      12: { moedas: { ouro: 21000 },
+      },
+      13: { moedas: { ouro: 27000 },
+      },
+      14: { moedas: { ouro: 35000 },
+      },
+      15: { moedas: { ouro: 45000 },
+      },
+      16: { moedas: { ouro: 59000 },
+      },
+      17: { moedas: { ouro: 77000 },
+      },
+      18: { moedas: { ouro: 100000 },
+      },
+      19: { moedas: { ouro: 130000 },
+      },
+      20: { moedas: { ouro: 170000 },
+      },
+    },
   },
   aristocrata: {
     atributos: [ 'inteligencia', 'destreza', 'constituicao', 'forca', 'carisma', 'sabedoria' ],
@@ -620,16 +680,16 @@ var tabelas_geracao = {
            aneis: [],
       },
     },
-	},
+  },
   plebeu: {
-		atributos: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
-	},
+    atributos: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
+  },
   // esse aqui varia de acordo com as escolhas da area de expertise.
   expert: {
-		atributos: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ],
-	},
+    atributos: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ],
+  },
   combatente: {
-		atributos: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
+    atributos: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
     // TODO fazer esse, ta igual guerreiro.
     por_nivel: {
       1: { moedas: {  ouro: 0 },

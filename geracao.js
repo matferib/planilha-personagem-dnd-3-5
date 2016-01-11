@@ -119,17 +119,18 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
 function _GeraArmas(tabela_geracao_classe_por_nivel) {
   // Mantem desarmado.
   gPersonagem.armas.length = 1;
-  with (tabela_geracao_classe_por_nivel) {
-    for (var i = 0; i < armas.length; ++i) {
-      var arma_entrada = {
-          entrada: {
-              chave: armas[i].chave,
-              bonus: armas[i].bonus,
-              obra_prima: armas[i].obra_prima
-          }
-      };
-      gPersonagem.armas.push(arma_entrada);
-    }
+  if (!('armas' in tabela_geracao_classe_por_nivel)) {
+    return;
+  }
+  for (var i = 0; i < tabela_geracao_classe_por_nivel.armas.length; ++i) {
+    var arma_entrada = {
+        entrada: {
+            chave: tabela_geracao_classe_por_nivel.armas[i].chave,
+            bonus: tabela_geracao_classe_por_nivel.armas[i].bonus,
+            obra_prima: tabela_geracao_classe_por_nivel.armas[i].obra_prima
+        }
+    };
+    gPersonagem.armas.push(arma_entrada);
   }
 }
 
@@ -245,7 +246,7 @@ function _GeraFeiticosClasse(classe_personagem, feiticos_classe, tabela_geracao_
                              feiticos_classe.conhecidos[nivel],
                              feiticos_classe.slots[nivel],
                              tabela_geracao_classe.ordem_magias[nivel],
-                             nivel in lista_feiticos_classe ? lista_feiticos_classe[nivel] : {});
+                             (lista_feiticos_classe != null) && (nivel in lista_feiticos_classe) ? lista_feiticos_classe[nivel] : {});
   }
 }
 

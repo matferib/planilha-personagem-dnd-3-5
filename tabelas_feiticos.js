@@ -1,6 +1,14 @@
 // Feiticos das classes.
 
 var tabelas_lista_feiticos = {
+  adepto: {
+    0: {},
+    1: {},
+    2: {},
+    3: {},
+    4: {},
+    5: {},
+  },
   clerigo: {
     0: {
       'consertar': { nome: 'Consertar', descricao: 'Faz pequenos reparos em um objeto.' },
@@ -106,7 +114,9 @@ var tabelas_lista_feiticos = {
       'remover_doencas': { nome: 'Remover Doenças', descricao: ' Cura todas as doenças que afetam o alvo.' },
       'remover_maldicao': { nome: 'Remover Maldição', descricao: ' Liberta objeto ou pessoa de maldição.' },
       'respirar_na_agua': { nome: 'Respirar na Água', descricao: ' Os alvos podem respirar sob a água.' },
-      'rogar_maldição': { nome: 'Rogar Maldição', descricao: ' -6 numa habilidade; -4 nos ataques e testes; ou 50% de chance de perder cada ação.' },
+      'rogar_maldição': { nome: 'Rogar Maldição',
+        descricao: 'toque causa -6 numa habilidade ou -4 nos ataques e testes ou 50% de chance de perder cada ação.'
+      },
       'roupa_encantada': { nome: 'Roupa Encantada', descricao: ' Armadura ou escudo recebe bônus de melhoria de +1/4 níveis.' },
       'símbolo_de_proteção': { nome: 'Símbolo de Proteção', descricao: ' Inscrição fere os intrusos', material: true },
     },
@@ -136,11 +146,14 @@ var tabelas_lista_feiticos = {
       },
     },
     1: {
-      'raio_enfraquecimento': {
-        nome: 'Raio do Enfraquecimento', descricao: 'Raio reduz For em 1d6+1/2 níveis até 1d6+5.', escola: 'necromancia',
+      'maos_flamejantes': {
+        nome: 'Mãos Flamejantes', descricao: 'Cone de fogo de 3 quadrados dando 1d4/nível até máximo 5d4.', escola: 'evocacao',
       },
       'misseis_magicos': {
         nome: 'Mísseis Mágicos', descricao: '1d4+1 de dano, 1 Míssil/2 níveis acima do 1º, máximo 5', escola: 'evocacao',
+      },
+      'raio_enfraquecimento': {
+        nome: 'Raio do Enfraquecimento', descricao: 'Raio reduz For em 1d6+1/2 níveis até 1d6+5.', escola: 'necromancia',
       },
     },
     2: {
@@ -152,6 +165,9 @@ var tabelas_lista_feiticos = {
       },
       'resistir_elementos': {
         nome: 'Resistência a Elementos', descricao: 'Criatura ganha resistência 10, 20 no 7º nível ou 30 no 11º nível) a um tipo de elemento', escola: 'abjuracao', duracao: '10 min / nível',
+      },
+      'teia': {
+        nome: 'Teia', descricao: '4 quadrados de teia apoiada em lados opostos prende criaturas na área. Ver descrição para mais detalhes.'
       },
     },
     3: {

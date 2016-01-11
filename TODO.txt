@@ -1,3 +1,8 @@
+Adepto sem feiticos.
+Ordem alfabetica dos itens.
+Varios casos de atualizacao apagando dados:
+- Gerar personagem, adicionar item;
+- Outros itens, adicionar item;
 Unit test  de tamanhos modificados.
 Estilo de luta: tiro rapido.
 Complemento de especiais.
