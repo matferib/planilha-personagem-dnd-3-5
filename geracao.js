@@ -194,6 +194,7 @@ function GeraPersonagem(modo, submodo) {
                 gPersonagem.classes[0].nivel);
   _GeraFeiticos();
   AtualizaGeralSemConverterEntradas();
+  LeEntradas();  // importante.
 }
 
 // Gera as pericias do personagem de forma tabelada.

@@ -1,3 +1,4 @@
+Geracao nao gera talentos.
 Varios casos de atualizacao apagando dados:
 - Gerar personagem, adicionar item;
 - Outros itens, adicionar item;
