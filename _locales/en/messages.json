@@ -2482,5 +2482,23 @@
   },
   "nivel_de_conjurador": {
     "message": "caster level"
+  },
+  "Vulto": {
+    "message": "Shade"
+  },
+  "Atravessar_Sombras": {
+    "message": "Shadow Stride"
+  },
+  "Imagem_das_Sombras__3_dia_": {
+    "message": "Shadow Image (3/day)"
+  },
+  "Cura_Acelerada__2_": {
+    "message": "Fast Healing (2)"
+  },
+  "Viajar_pelas_Sombras": {
+    "message": "Shadow Travel"
+  },
+  "Controlar_Luz": {
+    "message": "Control Light"
   }
 }

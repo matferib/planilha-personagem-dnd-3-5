@@ -1,3 +1,5 @@
+Pontos de vida temporarios.
+Penalidade de armadura e escudo se nao tiver pericia.
 Geracao nao gera talentos.
 Varios casos de atualizacao apagando dados:
 - Gerar personagem, adicionar item;

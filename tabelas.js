@@ -36,6 +36,14 @@ var tabelas_raca = {
       bonus_ataque: { categorias: { arremesso: 1 }, armas: { funda: 1 } },
       salvacoes: { fortitude: 1, vontade: 1, reflexo: 1 },
   },
+  hobgoblin: {
+      nome: 'Hobgoblin',
+      origem: { livro: 'Monster Manual' },
+      movimento: { terrestre: 6 },
+      atributos: { destreza: 2, constituicao: 2 }, tamanho: 'medio',
+      bonus_pericias: { furtividade: 4 },
+      ajuste_nivel: 1,
+  },
   humano: {
       nome: 'Humano',
       origem: { livro: 'Livro do Jogador', pagina: '' },
@@ -149,7 +157,8 @@ var tabelas_template = {
     tipo: 'morto-vivo',
     origem: { },
     dados_vida: 12,
-    armadura_natural: 5,
+    //armadura_natural: 5,
+    bonus_ca: { armadura_natural: 5 },
     arma_natural: { toque: { nome: 'Toque', dano: '1d8+5' } }, // 1 vez rodada energia negativa, paralisia, tem save de von
     aura: { tipo: 'medo', raio: '12 quadrados' },
     reducao_dano: { valor: '15', sobrepassar: ['estourante', 'magia']},
@@ -158,7 +167,26 @@ var tabelas_template = {
     resistencia_espantar: 4,
     imunidades: ['frio', 'eletricidade', 'polimorfismo', 'efeitos mentais'],
   },
-
+  vulto: {
+    nome: 'Vulto',
+    tipo: 'extra-planar',
+    // Velocidade: +4 quadrados no escuro.
+    // +4 deflexao no escuro.
+    // +2 competencia ataque e dano no escuro.
+    // +4 em todos testes de resistencia nas sombras.
+    atributos: { constituicao: 2, carisma: 2 },
+    ajuste_nivel: 5,  // (monster update).
+    bonus_pericias: { esconderse: 8, furtividade: 8, ouvir: 4, observar: 4 },
+    bonus_ca: { deflexao: 4 },
+    especiais: {
+      1: ['visao_escuro'  /*12 q*/, 'imagem_das_sombras_3', 'invisibilidade', 'cura_acelerada_2', 'controlar_luz'],
+      8: ['atravessar_sombras'],
+      12: ['viajar_pelas_sombras'],
+    },
+    resistencia_magia: [
+      { chave: 'magia', por_nivel: 11 },  // ganha hd +11.
+    ],
+  },
 }
 
 // Dados relacionados a classes.
@@ -363,6 +391,7 @@ var tabelas_especiais = {
   ataque_chi_adamante: { nome: 'Ataque Chi (Adamante)' },
   ataque_desarmado: { nome: 'Ataque Desarmado' },
   ataque_furtivo: { nome: 'Ataque furtivo', },
+  atravessar_sombras: { nome: 'Atravessar Sombras' },
   aura_bem: { nome: 'Aura do bem', },
   aura_coragem: { nome: 'Aura de coragem' },
   auto_perfeicao: { nome: 'Auto-Perfeição' },
@@ -372,9 +401,11 @@ var tabelas_especiais = {
   expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
   camuflagem: { nome: 'Camuflagem', },
   companheiro_animal: { nome: 'Companheiro animal', },
+  controlar_luz: { nome: 'Controlar Luz' },
   corpo_diamante: { nome: 'Corpo de Diamante' },
   corpo_atemporal: { nome: 'Corpo Atemporal' },
   corpo_vazio: { nome: 'Corpo Vazio' },
+  cura_acelerada_2: { nome: 'Cura Acelerada (2)', },
   cura_pelas_maos: { nome: 'Cura pelas mãos', },
   destruir_bem: { nome: 'Destruir o bem', },
   destruir_mal: { nome: 'Destruir o mal', },
@@ -390,9 +421,11 @@ var tabelas_especiais = {
   forma_selvagem: { nome: 'Forma selvagem', },
   graca_divina: { nome: 'Graça divina', },
   grito_guerra: { nome: 'Grito de Guerra', },
+  imagem_das_sombras_3: { nome: 'Imagem das Sombras (3/dia)' },
   idiomas_sol_lua: { nome: 'Idiomas do Sol e da Lua' },
   inimigo_predileto: { nome: 'Inimigo Predileto' },
   inspirar_coragem: { nome: 'Inspirar Coragem', },
+  invisibilidade: { nome: 'Invisibilidade', },
   integridade_corporal: { nome: 'Integridade Corporal' },
   juramento_furia: { nome: 'Juramento de Fúria', },
   maestria_estilo_combate: { nome: 'Maestria do Estilo de Combate' },
@@ -427,6 +460,7 @@ var tabelas_especiais = {
   saude_divina: { nome: 'Saúde divina', },
   talento: { nome: 'Talento' },
   tolerancia: { nome: 'Tolerancia' },
+  viajar_pelas_sombras: { nome: 'Viajar pelas Sombras' },
   visao_escuro: { nome: 'Visão no Escuro' },
 };
 
@@ -1106,9 +1140,6 @@ Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a ma
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
-Usar Armadura (leve) - Não sofre penalidade de armadura nas jogadas de ataque
-Usar Armadura (média) - Não sofre penalidade de armadura nas jogadas de ataque
-Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
 */
   acrobatico: {
       nome: 'Acrobático',
@@ -1448,6 +1479,20 @@ Usar Armadura (pesada) - Não sofre penalidade de armadura nas jogadas de ataque
       requisitos: { bba: 1 },
       guerreiro: true,
       descricao: 'Não sofre penalidade nos ataques com uma arma exótica específica.', },
+  usar_armadura_leve: {
+    nome: 'Usar Armadura (leve)',
+    descricao: 'Não sofre penalidade de armadura nas jogadas de ataque.'
+  },
+  usar_armadura_media: {
+    nome: 'Usar Armadura (média)',
+    requisitos: { talentos: ['usar_armadura_leve'] },
+    descricao: 'Não sofre penalidade de armadura nas jogadas de ataque.'
+  },
+  usar_armadura_pesada: {
+    nome: 'Usar Armadura (pesada)',
+    requisitos: { talentos: ['usar_armadura_leve', 'usar_armadura_media'] },
+    descricao: 'Não sofre penalidade de armadura nas jogadas de ataque.'
+  },
   // TODO implementar efeitos de nao ter o feat.
   usar_escudo: {
       nome: 'Usar Escudo',
@@ -2071,10 +2116,16 @@ var tabelas_pocoes = {
   protecao_contra_tendencia: { nome: 'Proteção contra (tendência)', tipo: 'pocao'  , preco: '50 PO' },
   remover_medo: { nome: 'Remover medo', tipo: 'pocao', preco: '50 PO' },
   santuario: { nome: 'Santuário', tipo: 'pocao', preco: '50 PO' },
-  escudo_da_fe_2: { nome: 'Escudo da fé +2', tipo: 'pocao', preco: '50 PO' },
+  escudo_da_fe_2: {
+    nome: 'Escudo da fé +2', tipo: 'pocao', preco: '50 PO',
+    propriedades: { ca: { deflexao: 2 } },
+  },
   arma_abencoada: { nome: 'Arma Abençoada (Shillelagh)', tipo: 'oleo', preco: '50 PO' },
   abencoar_arma: { nome: 'Abençoar arma', tipo: 'oleo', preco: '100 PO' },
-  aumentar_pessoa: { nome: 'Aumentar pessoa', tipo: 'pocao' , preco: '250 PO' },
+  aumentar_pessoa: {
+    nome: 'Aumentar pessoa', tipo: 'pocao' , preco: '250 PO',
+    propriedades: { tamanho: 1, atributos: { forca: 2, destreza: -2 } },
+  },
   reduzir_pessoa: {
     nome: 'Reduzir pessoa', tipo: 'pocao'  , preco: '250 PO',
     propriedades: { tamanho: -1, atributos: { forca: -2, destreza: 2} },
@@ -2117,11 +2168,17 @@ var tabelas_pocoes = {
   protecao_contra_flechas_10: { nome: 'Proteção contra flechas 10/mágica', tipo: 'pocao', preco: '300 PO' },
   remover_paralisia: { nome: 'Remover paralisia', tipo: 'pocao', preco: '300 PO' },
   resistencia_elementos_10: { nome: 'Resistência a elementos (tipo) 10', tipo: 'pocao', preco: '300 PO' },
-  escudo_da_fe_3: { nome: 'Escudo da fé +3', tipo: 'pocao', preco: '300 PO' },
+  escudo_da_fe_3: {
+    nome: 'Escudo da fé +3', tipo: 'pocao', preco: '300 PO',
+    propriedades: { ca: { deflexao: 3 } },
+  },
   patas_aranha: { nome: 'Patas de aranha', tipo: 'pocao', preco: '300 PO' },
   dissimular_tendencia: { nome: 'Dissimular tendência', tipo: 'pocao', preco: '300 PO' },
   pele_arvore_3: { nome: 'Pele de árvore +3', tipo: 'pocao', preco: '600 PO' },
-  escudo_da_fe_4: { nome: 'Escudo da fé +4', tipo: 'pocao', preco: '600 PO' },
+  escudo_da_fe_4: {
+    nome: 'Escudo da fé +4', tipo: 'pocao', preco: '600 PO',
+    propriedades: { ca: { deflexao: 4 } },
+  },
   resistencia_elementos_20: { nome: 'Resistência a elementos (tipo) 20', tipo: 'pocao'  , preco: '700 PO' },
   curar_ferimentos_serios: { nome: 'Curar ferimentos sérios', tipo: 'pocao', preco: '750 PO' },
   luz_dia: { nome: 'Luz do dia', tipo: 'oleo', preco: '750 PO' },
@@ -2147,7 +2204,10 @@ var tabelas_pocoes = {
   respirar_agua: { nome: 'Respirar na água', tipo: 'pocao', preco: '750 PO' },
   caminhar_agua: { nome: 'Caminhar na água', tipo: 'pocao' , preco: '750 PO' },
   pele_arvore_4: { nome: 'Pele de árvore +4', tipo: 'pocao'  , preco: '900 PO' },
-  escudo_da_fe_5: { nome: 'Escudo da fé +5', tipo: 'pocao' , preco: '900 PO' },
+  escudo_da_fe_5: {
+    nome: 'Escudo da fé +5', tipo: 'pocao' , preco: '900 PO',
+    propriedades: { ca: { deflexao: 5 } },
+  },
   boa_esperanca: { nome: 'Boa esperança', tipo: 'pocao'  , preco: '1050 PO' },
   resistencia_elementos_30: { nome: 'Resistência a elementos (tipo) 30', tipo: 'pocao'  , preco: '1100 PO' },
   pele_arvore_5: { nome: 'Pele de árvore +5', tipo: 'pocao'  , preco: '1200 PO' },

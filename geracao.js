@@ -160,7 +160,7 @@ function GeraPersonagem(modo, submodo) {
     submodo = 'tabelado';
   }
   if (tabelas_geracao[gPersonagem.classes[0].classe] == null) {
-    Mensagem(Traduz('Geração de ') + Traduz(tabelas_classe[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
+    Mensagem(Traduz('Geração de ') + Traduz(tabelas_classes[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
     return;
   }
   _GeraAtributos(modo, submodo);
@@ -172,7 +172,7 @@ function GeraPersonagem(modo, submodo) {
   var tabelas_geracao_classe = tabelas_geracao[gPersonagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
       tabelas_geracao_classe.por_nivel[gPersonagem.classes[0].nivel] == null) {
-    Mensagem(Traduz('Geração avançada de ') + Traduz(tabelas_classe[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
+    Mensagem(Traduz('Geração avançada de ') + Traduz(tabelas_classes[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
     return;
   }
   var tabela_geracao_classe_por_nivel =

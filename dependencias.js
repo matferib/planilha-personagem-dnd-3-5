@@ -708,6 +708,11 @@ function _DependenciasClasseArmadura() {
       'armadura_natural', 'racial', tabelas_raca[gPersonagem.raca].armadura_natural || 0);
   var template_personagem = PersonagemTemplate();
   if (template_personagem != null) {
+    if ('bonus_ca' in template_personagem) {
+      for (var chave in template_personagem.bonus_ca) {
+        bonus_ca.Adiciona(chave, 'template', template_personagem.bonus_ca[chave]);
+      }
+    }
     bonus_ca.Adiciona(
         'armadura_natural', 'template', template_personagem.armadura_natural || 0);
   }

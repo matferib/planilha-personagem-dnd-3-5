@@ -683,14 +683,241 @@ var tabelas_geracao = {
   },
   plebeu: {
     atributos: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
+    1: {
+      moedas: { ouro: 450 },
+    },
+    2: {
+      moedas: { ouro: 900 },
+    },
+    3: {
+      moedas: { ouro: 2000 },
+    },
+    4: {
+      moedas: { ouro: 2500 },
+    },
+    5: {
+      moedas: { ouro: 3300 },
+    },
+    6: {
+      moedas: { ouro: 4300 },
+    },
+    7: {
+      moedas: { ouro: 5600 },
+    },
+    8: {
+      moedas: { ouro: 7200 },
+    },
+    9: {
+      moedas: { ouro: 9400 },
+    },
+    10: {
+      moedas: { ouro: 12000 },
+    },
+    11: {
+      moedas: { ouro: 16000 },
+    },
+    12: {
+      moedas: { ouro: 21000 },
+    },
+    13: {
+      moedas: { ouro: 27000 },
+    },
+    14: {
+      moedas: { ouro: 35000 },
+    },
+    15: {
+      moedas: { ouro: 45000 },
+    },
+    16: {
+      moedas: { ouro: 59000 },
+    },
+    17: {
+      moedas: { ouro: 77000 },
+    },
+    18: {
+      moedas: { ouro: 100000 },
+    },
+    19: {
+      moedas: { ouro: 130000 },
+    },
+    20: {
+      moedas: { ouro: 170000 },
+    },
   },
   // esse aqui varia de acordo com as escolhas da area de expertise.
   expert: {
     atributos: [ 'inteligencia', 'forca', 'destreza', 'constituicao', 'sabedoria', 'carisma' ],
+    por_nivel: {
+      1: {
+        moedas: { ouro: 450 },
+      },
+      2: {
+        moedas: { ouro: 900 },
+      },
+      3: {
+        moedas: { ouro: 2000 },
+      },
+      4: {
+        moedas: { ouro: 2500 },
+      },
+      5: {
+        moedas: { ouro: 3300 },
+      },
+      6: {
+        moedas: { ouro: 4300 },
+      },
+      7: {
+        moedas: { ouro: 5600 },
+      },
+      8: {
+        moedas: { ouro: 7200 },
+      },
+      9: {
+        moedas: { ouro: 9400 },
+      },
+      10: {
+        moedas: { ouro: 12000 },
+      },
+      11: {
+        moedas: { ouro: 16000 },
+      },
+      12: {
+        moedas: { ouro: 21000 },
+      },
+      13: {
+        moedas: { ouro: 27000 },
+      },
+      14: {
+        moedas: { ouro: 35000 },
+      },
+      15: {
+        moedas: { ouro: 45000 },
+      },
+      16: {
+        moedas: { ouro: 59000 },
+      },
+      17: {
+        moedas: { ouro: 77000 },
+      },
+      18: {
+        moedas: { ouro: 100000 },
+      },
+      19: {
+        moedas: { ouro: 130000 },
+      },
+      20: {
+        moedas: { ouro: 170000 },
+      },
+    },
   },
   combatente: {
     atributos: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
-    // TODO fazer esse, ta igual guerreiro.
+    // Tesouro de NPC tabela 4-23, usando um nivel a menos (Nivel de Desafio).
+    por_nivel: {
+      1: {
+        moedas: { ouro: 450 },
+      },
+      2: {
+        moedas: { ouro: 900 },
+      },
+      3: {
+        moedas: { ouro: 2000 },
+      },
+      4: {
+        moedas: { ouro: 2500 },
+      },
+      5: {
+        moedas: { ouro: 3300 },
+      },
+      6: {
+        moedas: { ouro: 4300 },
+      },
+      7: {
+        moedas: { ouro: 5600 },
+      },
+      8: {
+        moedas: { ouro: 7200 },
+      },
+      9: {
+        moedas: { ouro: 9400 },
+      },
+      10: {
+        moedas: { ouro: 12000 },
+      },
+      11: {
+        moedas: { ouro: 16000 },
+      },
+      12: {
+        moedas: { ouro: 21000 },
+      },
+      13: {
+        moedas: { ouro: 27000 },
+      },
+      14: {
+        moedas: { ouro: 35000 },
+      },
+      15: {
+        moedas: { ouro: 45000 },
+      },
+      16: {
+        moedas: { ouro: 59000 },
+      },
+      17: {
+        moedas: { ouro: 77000 },
+      },
+      18: {
+        moedas: { ouro: 100000 },
+      },
+      19: {
+        moedas: { ouro: 130000 },
+      },
+      20: {
+        moedas: { ouro: 170000 },
+      },
+    },
+  },
+  aristocrata: {
+    atributos: [ 'inteligencia', 'destreza', 'constituicao', 'forca', 'carisma', 'sabedoria' ],
+    por_nivel: {
+      1: { moedas: {  ouro: 50 },
+           armadura: { nome: 'brunea', obra_prima: true },
+           escudo: { nome: 'broquel' },
+           armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+      2: { moedas: {  ouro: 2000 },
+           armadura: { nome: '', },
+           armas: [ { chave: '', bonus: 0, obra_prima: true },
+                    { chave: '', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+      3: { moedas: {  ouro: 2500 },
+           armadura: { nome: '', },
+           armas: [ { chave: '', bonus: 0, obra_prima: true },
+                    { chave: '', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+      4: { moedas: {  ouro: 3300 },
+           armadura: { nome: '', },
+           armas: [ { chave: '', bonus: 0, obra_prima: true },
+                    { chave: '', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+      5: { moedas: {  ouro: 4300 },
+           armadura: { nome: '', },
+           armas: [ { chave: '', bonus: 0, obra_prima: true },
+                    { chave: '', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+      6: { moedas: {  ouro: 5600 },
+           armadura: { nome: '', bonus: 0 },
+           armas: [ { chave: '', bonus: 0, obra_prima: true },
+                    { chave: '', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+    },
+
     por_nivel: {
       1: { moedas: {  ouro: 0 },
            armadura: { nome: '', },
