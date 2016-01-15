@@ -170,14 +170,13 @@ var tabelas_template = {
   vulto: {
     nome: 'Vulto',
     tipo: 'extra-planar',
-    // Velocidade: +4 quadrados no escuro.
-    // +4 deflexao no escuro.
-    // +2 competencia ataque e dano no escuro.
-    // +4 em todos testes de resistencia nas sombras.
     atributos: { constituicao: 2, carisma: 2 },
     ajuste_nivel: 5,  // (monster update).
+    bonus_ataque: { competencia: 2 },
+    bonus_dano: { competencia: 2 },
     bonus_pericias: { esconderse: 8, furtividade: 8, ouvir: 4, observar: 4 },
     bonus_ca: { deflexao: 4 },
+    bonus_movimento: { terrestre: 4 },
     especiais: {
       1: ['visao_escuro'  /*12 q*/, 'imagem_das_sombras_3', 'invisibilidade', 'cura_acelerada_2', 'controlar_luz'],
       8: ['atravessar_sombras'],
@@ -186,6 +185,7 @@ var tabelas_template = {
     resistencia_magia: [
       { chave: 'magia', por_nivel: 11 },  // ganha hd +11.
     ],
+    bonus_salvacoes: { fortitude: { sorte: 4 }, vontade: { sorte: 4 }, reflexo: { sorte: 4 } },
   },
 }
 
