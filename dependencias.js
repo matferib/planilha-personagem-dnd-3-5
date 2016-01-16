@@ -905,10 +905,21 @@ function _DependenciasBonusPorCategoria(
   } else if (categoria.indexOf('distancia') != -1) {
     bonus_por_categoria.ataque[0] +=
         gPersonagem.bba_distancia + arma_personagem.bonus_ataque;
+    if (arma_personagem.entrada.chave.indexOf('besta_') != -1 && estilo.nome == 'arma_escudo') {
+      // Vale para bestas de repeticao tb. Vou considerar que o ataque de uma arma usa duas maos. Entao
+      // a penalidade aqui so eh aplicada sobre arma e escudo.
+      if (arma_personagem.entrada.chave.indexOf('leve') != -1) {
+        bonus_por_categoria.ataque[0] -= 2;
+      } else if (arma_personagem.entrada.chave.indexOf('pesada') != -1) {
+        bonus_por_categoria.ataque[0] -= 4;
+      }
+    }
     bonus_por_categoria.dano += arma_personagem.bonus_dano;
     var bonus_forca = gPersonagem.atributos.forca.modificador;
     if (bonus_forca < 0) {
-      bonus_por_categoria.dano += bonus_forca;
+      if (arma_personagem.entrada.chave.indexOf('arco_') != -1 || arma_personagem.entrada.chave.indexOf('funda') != -1) {
+        bonus_por_categoria.dano += bonus_forca;
+      } 
     } else {
       var indice_composto = arma_personagem.entrada.chave.indexOf('composto_');
       if (indice_composto != -1) {

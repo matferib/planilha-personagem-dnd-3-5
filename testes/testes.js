@@ -99,7 +99,10 @@ function CarregaTestes() {
       { entrada: { chave: 'arco_curto', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto' },
       { entrada: { chave: 'arco_longo', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo' },
       { entrada: { chave: 'arco_curto_composto_1', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto Composto (1)' },
-      { entrada: { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo Composto (2)' } ],
+      { entrada: { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo Composto (2)' },
+      { entrada: { chave: 'besta_leve', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Leve' },
+      { entrada: { chave: 'besta_pesada', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Pesada' },
+  ],
   TemplateTeste({
     nome: 'ArmaPersonagem',
     Testa: function() {
@@ -986,6 +989,54 @@ function CarregaTestes() {
       this.resultado = true;
     },
   }, body);
+
+  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Bestas',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes[0].classe = 'guerreiro';
+      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 8);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'duas_maos', arma_primaria: 'besta leve', arma_secundaria: 'desarmado' }));
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'besta leve', arma_secundaria: 'desarmado' }));
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'besta pesada', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var dano_besta_leve = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.dano;
+      if (dano_besta_leve != 0) {
+        this.detalhes = 'Esperava 0 de penalidade de forca para besta.';
+        this.resultado = false;
+        return;
+      }
+      var ataque_besta_leve = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_besta_leve != 2) {
+        this.detalhes = 'Esperava 2 de ataque para besta.';
+        this.resultado = false;
+        return;
+      }
+      var ataque_besta_leve_arma_escudo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_besta_leve_arma_escudo != 0) {
+        this.detalhes = 'Esperava 0 de ataque para besta leve com escudo.';
+        this.resultado = false;
+        return;
+      }
+      var ataque_besta_pesada_arma_escudo = gPersonagem.estilos_luta[2].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_besta_pesada_arma_escudo != -2) {
+        this.detalhes = 'Esperava -2 de ataque para besta pesada com escudo.';
+        this.resultado = false;
+        return;
+      }
+
+      this.resultado = true;
+    },
+  }, body);
+
 
   PersonagemLimpaGeral();
   TemplateTeste({
