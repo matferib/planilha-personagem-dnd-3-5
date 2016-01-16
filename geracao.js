@@ -295,7 +295,9 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
     } else {
       resumo += arma_tabela.dano[gPersonagem.tamanho.categoria];
     }
-    resumo += StringSinalizada(bonus.dano, false) + '; ';
+    if (arma_tabela.critico != '×2' && arma_tabela.critico != 'x2') {
+      resumo += StringSinalizada(bonus.dano, false) + ' (' + arma_tabela.critico + '); ';
+    }
   }
   return resumo.slice(0, -2);
 }

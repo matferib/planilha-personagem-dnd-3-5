@@ -309,6 +309,7 @@ function _DependenciasBba() {
     gPersonagem.bba +=
         tabelas_classes[gPersonagem.classes[i].classe].bba(gPersonagem.classes[i].nivel);
   }
+
   gPersonagem.bba -= gPersonagem.niveis_negativos;
   gPersonagem.bba_cac =
       gPersonagem.bba + gPersonagem.atributos['forca'].modificador +
@@ -750,6 +751,18 @@ function _DependenciasArma(arma_personagem) {
   } else {
     arma_personagem.bonus_ataque = arma_personagem.bonus_dano = 0;
   }
+  var template_pc = PersonagemTemplate();
+  if (template_pc != null && 'bonus_dano' in template_pc) {
+    for (var tipo_bonus in template_pc.bonus_dano) {
+      arma_personagem.bonus_dano += template_pc.bonus_dano[tipo_bonus];
+    }
+  }
+  if (template_pc != null && 'bonus_ataque' in template_pc) {
+    for (var tipo_bonus in template_pc.bonus_dano) {
+      arma_personagem.bonus_ataque += template_pc.bonus_ataque[tipo_bonus];
+    }
+  }
+
   arma_personagem.proficiente = PersonagemProficienteComArma(
       arma_entrada.chave);
   if (!arma_personagem.proficiente && arma_entrada.chave.indexOf('arco_') != -1 &&
@@ -1024,6 +1037,15 @@ function _DependenciasSalvacoes() {
       gPersonagem.salvacoes[tipo_salvacao].Adiciona('atributo', 'carisma', bonus_carisma);
     }
   }
+  var template_pc = PersonagemTemplate();
+  if (template_pc != null && 'bonus_salvacoes' in template_pc) {
+    for (var tipo_salvacao in template_pc.bonus_salvacoes) {
+      for (var tipo_bonus in template_pc.bonus_salvacoes[tipo_salvacao]) {
+        gPersonagem.salvacoes[tipo_salvacao].Adiciona(tipo_bonus, '-', template_pc.bonus_salvacoes[tipo_salvacao][tipo_bonus]);
+      }
+    }
+  }
+
   var outras_salvacoes_raca = tabelas_raca[gPersonagem.raca].outras_salvacoes;
   for (var tipo_salvacao in outras_salvacoes_raca) {
     for (var i = 0; i < outras_salvacoes_raca[tipo_salvacao].base.length; ++i) {
