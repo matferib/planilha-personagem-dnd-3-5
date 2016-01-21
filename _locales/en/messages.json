@@ -2500,5 +2500,17 @@
   },
   "Controlar_Luz": {
     "message": "Control Light"
-  }
+  },
+	"Genasi__Agua_": {
+		"message": "Genasi (Water)"
+	},
+	"Genasi__Ar_": {
+		"message": "Genasi (Air)"
+	},
+	"Genasi__Fogo_": {
+		"message": "Genasi (Fire)"
+	},
+	"Genasi__Terra_": {
+		"message": "Genasi (Earth)"
+	}
 }
