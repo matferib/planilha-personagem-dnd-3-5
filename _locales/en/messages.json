@@ -326,6 +326,9 @@
 	"Mago": {
 		"message": "Mage"
 	},
+	"Escolas_Proibidas": {
+		"message": "Prohibited Schools"
+	},
 	"Mago_Necromante": {
 		"message": "Necromancer"
 	},
@@ -370,6 +373,15 @@
 	},
 	"Feiticos": {
 		"message": "Spells"
+	},
+	"Feiticos_de_": {
+		"message": "Spells for: "
+	},
+	"Feiticos_conhecidos": {
+		"message": "Known spells"
+	},
+	"Feiticos_por_Dia": {
+		"message": "Spells per Day"
 	},
 	"Modo_Mestre": {
 		"message": "DM Mode"

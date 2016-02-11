@@ -1,4 +1,4 @@
-Geracao nao gera talentos nem pericias.
+Fix de quando regride nivel de mago (3 pro 2).
 Penalidade de armadura e escudo se nao tiver pericia.
 Unit test  de tamanhos modificados.
 Estilo de luta: tiro rapido.

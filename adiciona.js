@@ -421,12 +421,12 @@ function AdicionaItem(tipo_item, div, div_pai) {
 function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
   var id_div = 'div-feiticos-' + chave_classe;
   var div_classe = CriaDiv(id_div, 'div-feiticos-classe');
-  div_classe.appendChild(CriaSpan('Feitiços de ' + tabelas_classes[chave_classe].nome));
+  div_classe.appendChild(CriaSpan(Traduz('Feitiços de ') + Traduz(tabelas_classes[chave_classe].nome)));
   // Escolas proibidas.
   var num_escolas_proibidas = tabelas_feiticos[chave_classe].num_escolas_proibidas;
   if (num_escolas_proibidas > 0) {
     var div_escolas_proibidas = CriaDiv('div-escolas-proibidas-' + chave_classe);
-    div_escolas_proibidas.appendChild(CriaSpan('Escolas Proibidas'));
+    div_escolas_proibidas.appendChild(CriaSpan(Traduz('Escolas Proibidas')));
     div_escolas_proibidas.appendChild(CriaBr());
     for (var i = 0; i < num_escolas_proibidas; ++i) {
       var input = CriaInputTexto('', 'div-escola-proibida-' + chave_classe + '-' + i, 'escolas-proibidas');
@@ -438,13 +438,13 @@ function AdicionaEsqueletoFeiticoParaClasse(chave_classe, div_feiticos) {
   }
   // Esqueletos dos conhecidos.
   var div_conhecidos_pai = CriaDiv('div-feiticos-conhecidos-' + chave_classe);
-  div_conhecidos_pai.appendChild(CriaSpan('Feitiços conhecidos'));
+  div_conhecidos_pai.appendChild(CriaSpan(Traduz('Feitiços conhecidos')));
   // Aqui serao adicionados os conhecidos.
   div_conhecidos_pai.appendChild(CriaDiv('div-feiticos-conhecidos-' + chave_classe + '-por-nivel'));
   div_classe.appendChild(div_conhecidos_pai);
   // Esqueleto dos slots.
   var div_slots = CriaDiv('div-feiticos-slots-' + chave_classe);
-  div_slots.appendChild(CriaSpan('Feitiços por Dia'));
+  div_slots.appendChild(CriaSpan(Traduz('Feitiços por Dia')));
   div_classe.appendChild(div_slots);
 
   // Adiciona a classe no div de feiticos.
@@ -462,7 +462,7 @@ function AdicionaNivelFeiticoConhecido(
     return;
   }
   var div_nivel = CriaDiv();
-  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ':'));
+  div_nivel.appendChild(CriaSpan(Traduz('Nível') + ' ' + nivel + ':'));
   if (!precisa_conhecer) {
     div_nivel.appendChild(CriaBotao('+', null, null, function() {
       if (gEntradas.feiticos_conhecidos[chave_classe] == null) {

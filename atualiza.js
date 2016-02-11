@@ -693,7 +693,7 @@ function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
       }
     } else {
       if (dom != null) {
-        RemoveFilho(dom_slots, dom);
+        RemoveFilho(div_slots, dom);
       }
     }
   }
