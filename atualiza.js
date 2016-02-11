@@ -90,7 +90,8 @@ function _AtualizaDadosVida() {
 function _AtualizaPontosVida() {
   // O valor dos ferimentos deve ser <= 0.
   var pontos_vida_corrente =
-      gPersonagem.pontos_vida.total - gPersonagem.pontos_vida.ferimentos;
+      gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total() + gPersonagem.pontos_vida.temporarios
+      - gPersonagem.pontos_vida.ferimentos - gPersonagem.pontos_vida.ferimentos_nao_letais;
   ImprimeNaoSinalizado(
       pontos_vida_corrente, Dom('pontos-vida-corrente'));
   Dom('pontos-vida-dados').value = gPersonagem.pontos_vida.total_dados ?
@@ -98,7 +99,11 @@ function _AtualizaPontosVida() {
   ImprimeSinalizado(
       gPersonagem.pontos_vida.bonus.Total(), Dom('pontos-vida-bonus'), false);
   ImprimeSinalizado(
+      gPersonagem.pontos_vida.temporarios, Dom('pontos-vida-temporarios'), false);
+  ImprimeSinalizado(
       -gPersonagem.pontos_vida.ferimentos, Dom('ferimentos'), false);
+  ImprimeSinalizado(
+      -gPersonagem.pontos_vida.ferimentos_nao_letais, Dom('ferimentos-nao-letais'), false);
 }
 
 function _AtualizaAtributos() {

@@ -25,9 +25,9 @@ var gPersonagem = {
   pontos_vida: {
     total_dados: 0,  // total dos dados de pontos de vida.
     bonus: new Bonus(), // outros bonus.
-    total: 0,  // soma dos dados mais bonus.
-    ferimentos: 0,  // ferimentos do personagem TODO(transformar em array). Valores devem ser >= 0.
     temporarios: 0,  // pontos de vida temporarios
+    ferimentos: 0,  // ferimentos do personagem. Valores devem ser >= 0.
+    ferimentos_nao_letais: 0,  // ferimentos nao letais.
   },
   // O valor do atributo é o valor final dados todos os modificadores. O modificador
   // é computado sobre esse valor.
@@ -190,8 +190,9 @@ function PersonagemTemPericia(chave, ranks, complemento) {
 
 // Limpa dependencias antes de comecar a conversao das entradas para o personagem. Tambem chamada na geracao de personagens.
 function PersonagemLimpaGeral() {
-  gPersonagem.pontos_vida.total = 0;
   gPersonagem.pontos_vida.bonus.Limpa();
+  gPersonagem.pontos_vida.temporarios = 0;
+  gPersonagem.pontos_vida.ferimentos_nao_letais = 0;
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
@@ -523,4 +524,3 @@ function PersonagemTamanhoRaca() {
 function PersonagemTamanhoEfetivo() {
   return gPersonagem.tamanho.categoria;
 }
-

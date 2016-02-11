@@ -5,6 +5,7 @@
 function CarregamentoInicial() {
   _CarregaTabelaNormalizacaoStrings();
   _CarregaTraducoes();
+  _CarregaTitulos();
   _CarregaHandlers();
   CarregaPersonagens();
   _CarregaRacas();
@@ -113,6 +114,23 @@ function _CarregaTabelaNormalizacaoStrings() {
   PreencheMapaDiacriticals();
 }
 
+function _CarregaTitulos() {
+  // Mapa de id de botoes para handler de click.
+  var mapa = {
+    "ferimentos": Traduz("Ferimentos"),
+    "ferimentos-nao-letais": Traduz("Ferimentos não letais"),
+    "pontos-vida-temporarios": Traduz("Pontos de vida temporários"),
+    "input-ferimento-nao-letal": Traduz("Ferimentos não letais"),
+  };
+
+  for (var id in mapa) {
+    var dom = Dom(id);
+    if (dom != null) {
+      TituloSimples(mapa[id], dom);
+    }
+  }
+}
+
 // Adiciona os handlers aos botoes da interface.
 function _CarregaHandlers() {
   // Mapa de id de botoes para handler de click.
@@ -154,6 +172,7 @@ function _CarregaHandlers() {
     "tamanho": { callback: AtualizaGeral, evento: 'change', },
     "alinhamento": { callback: AtualizaGeral, evento: 'change', },
     "pontos-vida-dados": { callback: AtualizaGeral, evento: 'change', },
+    "pontos-vida-temporarios": { callback: AtualizaGeral, evento: 'change', },
     "ferimentos": { callback: AtualizaGeral, evento: 'change', },
     "niveis-negativos": { callback: AtualizaGeral, evento: 'change' },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
@@ -256,7 +275,7 @@ function _CarregaBotoesVisao() {
   var botao_desfazer = CriaBotao(Traduz('Desfazer'));
   botao_desfazer.style.paddingBottom = '0';
   botao_desfazer.style.marginBottom = '0'
-  botao_desfazer.style.marginLeft = '30px';
+  botao_desfazer.style.marginLeft = '10ch';
   botao_desfazer.addEventListener('click', ClickDesfazer);
   div_visoes.appendChild(botao_desfazer);
 }
@@ -305,7 +324,7 @@ function _CarregaAtributos() {
                   } }));
     var span_rotulo = CriaSpan(Traduz(atributos[chave_atributo]));
     span_rotulo.style.display = 'inline-block';
-    span_rotulo.style.width = '80px';
+    span_rotulo.style.width = '13ch';
     div_atributo.appendChild(span_rotulo);
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
     input_atributo.size = 2;

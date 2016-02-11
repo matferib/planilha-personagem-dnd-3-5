@@ -287,8 +287,6 @@ function _DependenciasPontosVida() {
       gPersonagem.dados_vida.nivel_personagem * gPersonagem.atributos['constituicao'].modificador);
   gPersonagem.pontos_vida.bonus.Adiciona(
       'niveis_negativos', '-', -5 * gPersonagem.niveis_negativos);
-  gPersonagem.pontos_vida.total =
-      gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total();
 }
 
 function _DependenciasIniciativa() {

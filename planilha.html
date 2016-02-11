@@ -116,15 +116,20 @@ Template:
 
 <span id="span-pontos-vida" class="i18n">Pontos de Vida:</span>
 <span id="pontos-vida-corrente"></span> =
-<input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados" class="i18n"/>
+<input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados" class="i18n"/>+
+<input type="text" id="pontos-vida-temporarios" maxlength="3" size="3" placeholder="temporários" class="i18n"/>
 <span id="pontos-vida-bonus"></span>
-<span id="ferimentos" maxlength="3" size="8"></span><br>
+<span id="pontos-vida-temporarios"></span>
+<span id="ferimentos" maxlength="3" size="8"></span>
+<span id="ferimentos-nao-letais" maxlength="3" size="8"></span><br>
 
 <span style="color:Black" id="span-ferimentos" class="adiciona-remove-ferimentos i18n">Ferimentos</span>
 <button type="button" class="botao-ferimentos" id="botao-ferir-1">-1</button>
 <button type="button" class="botao-ferimentos" id="botao-ferir-3">-3</button>
 <button type="button" class="botao-ferimentos" id="botao-ferir-5">-5</button>
-<input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3"/><br>
+<input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3"/>
+<input type="checkbox" id="input-ferimento-nao-letal" maxlength="3" size="3"/><span class="i18n">Não letal</span>
+<br>
 <span style="color:Black" id="span-cura" class="adiciona-remove-ferimentos i18n">Cura</span>
 <button type="button" class="botao-ferimentos" id="botao-curar-1">+1</button>
 <button type="button" class="botao-ferimentos" id="botao-curar-3">+3</button>

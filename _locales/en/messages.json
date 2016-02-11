@@ -2512,5 +2512,20 @@
 	},
 	"Genasi__Terra_": {
 		"message": "Genasi (Earth)"
+	},
+	"Ferimentos": {
+		"message": "Wounds"
+	},
+	"Nao_letal": {
+		"message": "Non lethal"
+	},
+	"Ferimentos_nao_letais": {
+		"message": "Non lethal Wounds"
+	},
+	"Pontos_de_vida_temporarios": {
+		"message": "Temporary hit points"
+	},
+	"temporarios": {
+		"message": "temporary"
 	}
 }

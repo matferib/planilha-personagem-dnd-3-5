@@ -80,8 +80,8 @@ display: inline-block;
 width: 80px;
 }
 
-div#div-pontos-vida.botao-ferimentos {
-width: 40px;
+button.botao-ferimentos {
+width: 5ch;
 }
 
 div#div-geral {

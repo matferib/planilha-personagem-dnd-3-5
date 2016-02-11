@@ -19,7 +19,9 @@ var gEntradas = {
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
+  pontos_vida_temporarios: 0,
   ferimentos: 0,  // Valor deve ser >=  0.
+  ferimentos_nao_letais: 0,  // Valor deve ser >= 0.
   // experiencia.
   experiencia: 0,
   // atributos.
@@ -109,7 +111,9 @@ function LeEntradas() {
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
+  gEntradas.pontos_vida_temporarios = parseInt(Dom('pontos-vida-temporarios').value) || 0;
   gEntradas.ferimentos = Math.abs(parseInt(Dom('ferimentos').textContent)) || 0;
+  gEntradas.ferimentos_nao_letais = Math.abs(parseInt(Dom('ferimentos-nao-letais').textContent)) || 0;
   // Experiencia.
   gEntradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
   // atributos
@@ -500,9 +504,10 @@ function EntradasAdicionarMoedas(moedas) {
 }
 
 // Adiciona ferimentos as gEntradas.
-function EntradasAdicionarFerimentos(valor) {
-  gEntradas.ferimentos += valor;
-  if (gEntradas.ferimentos < 0) {
-    gEntradas.ferimentos = 0;
+function EntradasAdicionarFerimentos(valor, nao_letal) {
+  var tipo = nao_letal ? "ferimentos_nao_letais" : "ferimentos";
+  gEntradas[tipo] += valor;
+  if (gEntradas[tipo] < 0) {
+    gEntradas[tipo] = 0;
   }
 }
