@@ -252,6 +252,10 @@ var tabelas_classes = {
     proficiencia_armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ],
     especiais: {
       1: ['familiar'],
+      5: ['talento'],
+      10: ['talento'],
+      15: ['talento'],
+      20: ['talento'],
     },
   },
   mago_necromante: {
@@ -1129,13 +1133,12 @@ Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas c
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
 Contramágica Aprimorada - Contramágica com magias da mesma escola
-Dominar Magia² 1° nível de mago Capaz de preparar as magias escolhidas sem um grimório
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
-sorrateiro - +2 nos testes de Esconder-se e Furtividade
+Sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
@@ -1270,6 +1273,7 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     nome: 'Escrever Pergaminho',
     descricao: 'Criar pergaminhos mágicos.',
     requisitos: { nivel: { conjurador: 1 } },
+    mago: 1,
   },
   especializacao_arma: {
     nome: 'Especialização em Arma',
@@ -1325,7 +1329,8 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   forjar_anel: {
     nome: 'Forjar Anel',
     requisitos: { nivel: { conjurador: 12 } },
-    descricao: 'Criar anéis mágicos.'
+    descricao: 'Criar anéis mágicos.',
+    mago: 1,
   },
   fortitude_maior: {
       nome: 'Fortitude Maior',
@@ -1372,6 +1377,12 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       nome: 'Lutar as Cegas',
       guerreiro: true,
       descricao: 'Joga novamente a chance de falha por camuflagem.', },
+  dominar_magia: {
+    nome: "Dominar Magia",
+    descricao: "Capaz de preparar magias escolhidas (bônus inteligência) sem um grimório.",
+    requisito: { nivel: { mago: 1, mago_necromante: 1 } },
+    mago: 1,
+  },
   // Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem
   magia_natural: {
       nome: 'Magia Natural',
@@ -1517,77 +1528,100 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       bonus_salvacao: { vontade: 2, },
       descricao: '+2 de bônus nos testes de resistência de Vontade.', },
   criar_armaduras_e_armas_magicas: {
-      nome: 'Criar Armaduras e Armas Mágicas',
-      requisitos: { nivel: { conjurador: 5, }, },
-      descricao: 'Permite a criação de armas, armaduras e escudos mágicos.',
+    nome: 'Criar Armaduras e Armas Mágicas',
+    requisitos: { nivel: { conjurador: 5, }, },
+    descricao: 'Permite a criação de armas, armaduras e escudos mágicos.',
+    mago: 1,
   },
   criar_bastao: {
-      nome: 'Criar Bastão',
-      requisitos: { nivel: { conjurador: 9 }, },
-      descricao: 'Permite a criação de bastões mágicos.', },
+    nome: 'Criar Bastão',
+    requisitos: { nivel: { conjurador: 9 }, },
+    descricao: 'Permite a criação de bastões mágicos.',
+    mago: 1,
+  },
   criar_cajado: {
-      nome: 'Criar Cajado',
-      requisitos: { nivel: { conjurador: 12 }, },
-      descricao: 'Permite a criação de cajados mágicos', },
+    nome: 'Criar Cajado',
+    requisitos: { nivel: { conjurador: 12 }, },
+    descricao: 'Permite a criação de cajados mágicos',
+    mago: 1,
+  },
   criar_item_maravilhoso: {
-      nome: 'Criar Item Maravilhoso',
-      requisitos: { nivel: { conjurador: 3 }, },
-      descricao: 'Permite a criação de itens mágicos maravilhosos.', },
+    nome: 'Criar Item Maravilhoso',
+    requisitos: { nivel: { conjurador: 3 }, },
+    descricao: 'Permite a criação de itens mágicos maravilhosos.',
+    mago: 1,
+  },
   criar_varinha: {
-      nome: 'Criar Varinha',
-      requisitos: { nivel: { conjurador: 5 }, },
-      descricao: 'Permite a criação de varinhas mágicas .', },
+    nome: 'Criar Varinha',
+    requisitos: { nivel: { conjurador: 5 }, },
+    descricao: 'Permite a criação de varinhas mágicas .',
+    mago: 1,
+  },
   preparar_pocao: {
-      nome: 'Preparar Poção',
-      requisitos: { nivel: { conjurador: 3 }, },
-      descricao: 'Permite a criação de poções mágicas.', },
+    nome: 'Preparar Poção',
+    requisitos: { nivel: { conjurador: 3 }, },
+    descricao: 'Permite a criação de poções mágicas.',
+    mago: 1,
+  },
   // Talentos Metamágicos Pré-requisitos Benefícios
   // TODO implementar niveis_adicionais.
   acelerar_magia: {
-      nome: 'Acelerar Magia',
-      descricao: 'Permite conjurar magia como ação livre, ao custo de três níveis adicionais.',
-      niveis_adicionais: 3,
+    nome: 'Acelerar Magia',
+    descricao: 'Permite conjurar magia como ação livre, ao custo de três níveis adicionais.',
+    niveis_adicionais: 3,
+    mago: 1,
   },
   ampliar_magia: {
     nome: 'Ampliar Magia',
     descricao: 'Dobra a área da magia, ao custo de três níveis adicionais',
     niveis_adicionais: 3,
+    mago: 1,
   },
   aumentar_magia: {
     nome: 'Aumentar Magia',
     descricao: 'Dobra o alcance da magia, ao custo de um nível adicional',
     niveis_adicionais: 1,
+    mago: 1,
   },
   elevar_magia: {
     nome: 'Elevar Magia',
     descricao: 'Conjura a magia num nível mais elevado, alterando sua classe de dificuldade, nível etc.',
+    mago: 1,
+    //niveis_adicionais: variavel
   },
   estender_magia: {
     nome: 'Estender Magia',
     descricao: 'Dobra a duração da magia, ao custo de um nível adicional.',
     niveis_adicionais: 1,
+    mago: 1,
   },
   magia_sem_gestos: {
     nome: 'Magia sem Gestos',
     descricao: 'Ignora os componentes gestuais da magia, ao custo de um nível adicional.',
     niveis_adicionais: 1,
+    mago: 1,
   },
   magia_silenciosa: {
     nome: 'Magia Silenciosa',
     descricao: 'Ignora os componentes verbais da magia, ao custo de um nível adicional',
     niveis_adicionais: 1,
+    mago: 1,
     // TODO feiticos de bardo nao podem.
   },
   maximizar_magia: {
     nome: 'Maximizar Magia',
     descricao: 'Maximiza todas as variáveis numéricas dos efeitos da magia, ao custo de três níveis adicionais',
     niveis_adicionais: 3,
+    mago: 1,
   },
   potencializar_magia: {
     nome: 'Potencializar Magia',
     descricao: 'Aumenta em 50% todas as variáveis numéricas dos efeitos da magia, ao custo de dois níveis adicionais.',
     niveis_adicionais: 2,
+    mago: 1,
   },
+
+  // Outros talentos que nao se encaixam...
   outros: {
     nome: 'Outros',
     descricao: 'Para talentos que não estão presentes na planilha.',

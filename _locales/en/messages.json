@@ -795,7 +795,7 @@
     "message": "Enlarge Spell"
   },
   "Elevar_Magia": {
-    "message": "Highten Spell"
+    "message": "Heighten Spell"
   },
   "Estender_Magia": {
     "message": "Extend Spell"
@@ -1364,6 +1364,12 @@
   "Arcano__I_": {
     "message": "Wizardry (I)"
   },
+	"Dominar_Magia": {
+		"message": "Spell Mastery"
+	},
+	"Capaz_de_preparar_magias_escolhidas__bonus_inteligencia__sem_um_grimorio_": {
+		"message": "Can prepare spells (maximum inteligence bonys) without spellbook."
+	},
   "Evasao": {
     "message": "Evasion"
   },

@@ -1,8 +1,5 @@
+Geracao nao gera talentos nem pericias.
 Penalidade de armadura e escudo se nao tiver pericia.
-Geracao nao gera talentos.
-Varios casos de atualizacao apagando dados:
-- Gerar personagem, adicionar item;
-- Outros itens, adicionar item;
 Unit test  de tamanhos modificados.
 Estilo de luta: tiro rapido.
 Complemento de especiais.

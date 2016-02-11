@@ -187,14 +187,35 @@ function GeraPersonagem(modo, submodo) {
   }
   /*
   _GeraEstilosDeLuta();
-  _GeraTalentos();
   */
+  _GeraTalentos(gPersonagem.classes[0].classe,
+                tabelas_classes[gPersonagem.classes[0].classe],
+                tabelas_geracao_classe,
+                gPersonagem.classes[0].nivel);
   _GeraPericias(tabelas_classes[gPersonagem.classes[0].classe],
                 tabelas_geracao_classe,
                 gPersonagem.classes[0].nivel);
   _GeraFeiticos();
   AtualizaGeralSemConverterEntradas();
   LeEntradas();  // importante.
+}
+
+function _GeraTalentos(chave_classe, tabela_classe, tabela_geracao_classe, nivel) {
+  if (tabela_geracao_classe.talentos == null) {
+    // Nao possui talentos.
+    return;
+  }
+  var indice_geracao = 0;
+  var tipos_talentos = [ chave_classe, 'gerais' ];
+  for (var ti = 0; ti < tipos_talentos.length; ++ti) {
+    var tipo_talento = tipos_talentos[ti];
+    for (var i = 0;
+         (tipo_talento in gPersonagem.talentos) && (i < gPersonagem.talentos[tipo_talento].length) &&
+         indice_geracao < tabela_geracao_classe.talentos.length;
+         ++i, ++indice_geracao) {
+      gPersonagem.talentos[tipo_talento][i] = { chave: tabela_geracao_classe.talentos[indice_geracao], complemento: '' };
+    }
+  }
 }
 
 // Gera as pericias do personagem de forma tabelada.

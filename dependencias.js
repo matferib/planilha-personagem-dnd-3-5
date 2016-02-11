@@ -215,6 +215,8 @@ function _DependenciasTalentos() {
   } else {
     gPersonagem.talentos['guerreiro'].length = 0;
   }
+  // Mago.
+  gPersonagem.talentos['mago'].length = Math.floor(PersonagemNivelClasse('mago') / 5) + Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
   // Monge.
   var nivel_monge = PersonagemNivelClasse('monge');
   if (nivel_monge >= 6) {
