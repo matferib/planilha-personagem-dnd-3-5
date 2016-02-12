@@ -261,12 +261,12 @@ function AdicionaEstiloLuta() {
 
   div_novo_estilo.appendChild(_CriaBotaoRemoverEstilo(id_estilo, id_div_estilos_luta));
   div_novo_estilo.appendChild(CriaBr());
-  div_novo_estilo.appendChild(CriaSpan(Traduz('Principal') + ': '));
-  div_novo_estilo.appendChild(CriaSelect(id_select_primario, null, AtualizaGeral));
+  div_novo_estilo.appendChild(CriaSpan(Traduz('Principal') + ': ', null, 'estilo-rotulo'));
+  div_novo_estilo.appendChild(CriaSelect(id_select_primario, 'estilo-selecao', AtualizaGeral));
   div_novo_estilo.appendChild(CriaSpan(null, id_span_primario));
   div_novo_estilo.appendChild(CriaBr());
-  div_novo_estilo.appendChild(CriaSpan(Traduz('Secundária') + ': '));
-  div_novo_estilo.appendChild(CriaSelect(id_select_secundario, AtualizaGeral));
+  div_novo_estilo.appendChild(CriaSpan(Traduz('Secundária') + ': ', null, 'estilo-rotulo'));
+  div_novo_estilo.appendChild(CriaSelect(id_select_secundario, 'estilo-selecao', AtualizaGeral));
   div_novo_estilo.appendChild(CriaSpan(null, id_span_secundario));
   div_novo_estilo.appendChild(CriaBr());
   div_novo_estilo.appendChild(CriaSpan(Traduz('Classe de Armadura') + ': '));

@@ -86,6 +86,8 @@ var gPersonagem = {
     total_pontos: 8,
     // Quantos ele ja gastou.
     pontos_gastos: 0,
+    // Algumas pericias tem complementos. Tipo conhecimento.
+    complemento: '',
     // Cada entrada:
     // chave_pericia: { pontos, graduacoes, bonus, de_classe, total }.
     // pontos sao os pontos gastos, graduacoes sao os pontos modificados

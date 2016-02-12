@@ -58,11 +58,6 @@ div#div-visoes span.selecionado {
 background-color: #D8D8D8;
 }
 
-.pericias-nome {
-display: inline-block;
-width: 350px;
-}
-
 div.div-feiticos-classe {
 display: inline-block;
 vertical-align: top;
@@ -134,7 +129,35 @@ span.titulo {
   font-family: sans-serif;
 }
 
+span.estilo-rotulo {
+  float: left;  /* elementos inlines nao podem ter tamanho, por isso float. */
+  width: 12ch;
+}
+
+span.salvacao-rotulo {
+  float: left;
+  width: 10ch;
+}
+
+select.estilo-selecao {
+  width: 30ch;
+  margin-right: 1ch;
+}
+
 input.venda {
 }
 input.compra {
+}
+
+span.pericias-nome {
+  float: left;
+  width: 50ch;
+}
+
+input.input-pericias-pontos {
+  width: 5ch;
+}
+input.input-pericias-complemento {
+  width: 20ch;
+  margin-right: 1ch;
 }

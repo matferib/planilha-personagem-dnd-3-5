@@ -122,8 +122,9 @@ function _ConverteTalentos() {
 // de pericia, computando o valor de cada uma e o numero de pontos disponiveis.
 function _ConvertePericias() {
   for (var i = 0; i < gEntradas.pericias.length; ++i) {
-    gPersonagem.pericias.lista[gEntradas.pericias[i].chave].pontos =
-        gEntradas.pericias[i].pontos;
+    var pericia_personagem = gPersonagem.pericias.lista[gEntradas.pericias[i].chave];
+    pericia_personagem.pontos = gEntradas.pericias[i].pontos;
+    pericia_personagem.complemento = 'complemento' in gEntradas.pericias[i] ? gEntradas.pericias[i].complemento : '';
   }
 }
 

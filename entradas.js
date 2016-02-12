@@ -164,6 +164,8 @@ function _LePericias() {
     var entrada_pericia = gEntradas.pericias[i];
     var input_pontos = Dom('pericia-' + entrada_pericia.chave + '-pontos');
     entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
+    var input_complemento = Dom('pericia-' + entrada_pericia.chave + '-complemento');
+    entrada_pericia.complemento = (input_complemento == null) ? '' : input_complemento.value;
   }
 }
 

@@ -7,8 +7,6 @@ var tabelas_raca = {
       movimento: { terrestre: 4, aereo: 18 },
       atributos: { forca: -2, destreza: 4 }, tamanho: 'medio',
       proficiencia_armas: [ 'azagaia' ],  // Javelin em ingles.
-      //converte, add bonus racial p pericias, soma tbm no total, transforma em pericia de classe
-      //Todo(FC) incluir penalidades de ambientes fechados
       bonus_pericias: { oficios: 2, conhecimento_natureza: 2, ouvir: 2, observar: 2 },
       arma_natural: { garra: { nome: 'Garra', dano: '1d4' } },
     },

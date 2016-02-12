@@ -2543,6 +2543,9 @@
 	"Pontos_de_vida_temporarios": {
 		"message": "Temporary hit points"
 	},
+	"complemento": {
+		"message": "complement"
+	},
 	"temporarios": {
 		"message": "temporary"
 	}

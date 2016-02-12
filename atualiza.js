@@ -404,10 +404,10 @@ function _AtualizaSalvacoes() {
   RemoveFilhos(div_salvacoes);
   for (var tipo_salvacao in gPersonagem.salvacoes) {
     var div_salvacao = CriaDiv();
-    AdicionaSpanAoDiv(Traduz(tipo_salvacao) + ': ', null, div_salvacao);
+    AdicionaSpanAoDiv(Traduz(tipo_salvacao) + ': ', null, 'salvacao-rotulo', div_salvacao);
     var span_salvacao =
       AdicionaSpanAoDiv(StringSinalizada(gPersonagem.salvacoes[tipo_salvacao].Total()),
-                        null, div_salvacao);
+                        null, null, div_salvacao);
     Titulo(gPersonagem.salvacoes[tipo_salvacao].Exporta(), span_salvacao);
     div_salvacoes.appendChild(div_salvacao);
   }
@@ -543,8 +543,11 @@ function _AtualizaPericias() {
     } else {
       dom_pericia.className = '';
     }
+    var input_complemento = Dom('pericia-' + chave + '-complemento');
+    input_complemento.value = pericia_personagem.complemento;
     var input_pontos = Dom('pericia-' + chave + '-pontos');
     input_pontos.value = pericia_personagem.pontos;
+
     var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
     dom_graduacoes.textContent = pericia_personagem.graduacoes;
     var dom_total_bonus = Dom('pericia-' + chave + '-total-bonus');

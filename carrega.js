@@ -473,6 +473,18 @@ function _CarregaPericias() {
     div.appendChild(
         CriaSpan(texto_span, null, 'pericias-nome'));
 
+    var input_complemento =
+        CriaInputTexto('', prefixo_id + '-complemento', 'input-pericias-complemento',
+        {
+          chave_pericia: chave_pericia,
+          handleEvent: function(evento) {
+            AtualizaGeral();
+            evento.stopPropagation();
+          }
+        });
+    input_complemento.placeholder = Traduz('complemento');
+    div.appendChild(input_complemento);
+
     var input_pontos =
         CriaInputNumerico('0', prefixo_id + '-pontos', 'input-pericias-pontos',
         { chave_pericia: chave_pericia,
