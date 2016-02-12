@@ -144,13 +144,31 @@ function CarregaTestes() {
     Testa: function() {
       gPersonagem.classes[0].classe = 'monge';
       gPersonagem.classes[0].nivel= 5;
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
       gPersonagem.atributos.sabedoria.bonus.Adiciona('base', null, 13);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 15);
       _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'Desarmado' }));
       _DependenciasClasseArmadura();
+      _DependenciasEstilos();
       if (gPersonagem.ca.bonus.Total() != 4) {
         this.resultado = false;
         this.detalhes = 'Esperava 4 de bonus no AC (monge 5o, des 15, sab 13), recebi: ' + gPersonagem.ca.bonus.Total();
+        return;
+      }
+      if (tabelas_monge_desarmado[PersonagemNivelClasse('monge')].dano[PersonagemTamanhoEfetivo()] != '1d8') {
+        this.resultado = false;
+        this.detalhes = 'Esperava dano de 1d8 para monge de 5o nivel';
+        return;
+      }
+      var resumo = GeraResumoArmaEstilo(gPersonagem.armas[0], true, gPersonagem.estilos_luta[0]);
+      if (resumo != 'cac_leve: +3, 1d8') {
+        this.resultado = false;
+        this.detalhes = 'Esperava resumo de arma de monge "cac_leve: 3, 1d8" recebi ' + resumo;
         return;
       }
       this.resultado = true;
