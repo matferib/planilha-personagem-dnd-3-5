@@ -59,7 +59,7 @@ var gEntradas = {
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [] },
 
-  // pericias: cada entrada possui { chave, pontos }
+  // pericias: cada entrada possui { chave, pontos, complemento }
   pericias: [],
 
   // Para magos especialistas. Cada entrada:
@@ -151,16 +151,20 @@ function LeEntradas() {
   _LeTalentos();
 
   // Pericias.
-  for (var i = 0; i < gEntradas.pericias.length; ++i) {
-    var entrada_pericia = gEntradas.pericias[i];
-    var input_pontos = Dom('pericia-' + entrada_pericia.chave + '-pontos');
-    entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
-  }
+  _LePericias();
 
   // Feiticos.
   _LeFeiticos();
 
   gEntradas.notas = Dom('text-area-notas').value;
+}
+
+function _LePericias() {
+  for (var i = 0; i < gEntradas.pericias.length; ++i) {
+    var entrada_pericia = gEntradas.pericias[i];
+    var input_pontos = Dom('pericia-' + entrada_pericia.chave + '-pontos');
+    entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
+  }
 }
 
 function _LeTalentos() {

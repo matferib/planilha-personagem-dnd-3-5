@@ -226,12 +226,19 @@ function PersonagemLimpaGeral() {
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();
+  PersonagemLimpaTalentos();
 }
 
 function PersonagemLimpaPericias() {
   for (var chave_pericia in gPersonagem.pericias.lista) {
     var pericia_personagem = gPersonagem.pericias.lista[chave_pericia];
     pericia_personagem.bonus.Limpa();
+  }
+}
+
+function PersonagemLimpaTalentos() {
+  for (var chave_talento in gPersonagem.talentos) {
+    gPersonagem.talentos[chave_talento].length = 0;
   }
 }
 

@@ -26,14 +26,15 @@ function _ComparaMoedas(moedas1, moedas2) {
 }
 
 // @param salvacoes { chave: valor, ... }
-// @return true se o valor total das salvacoes do personagem for igual aos valores passados.
+// @return '' se o valor total das salvacoes do personagem for igual aos valores passados
+// ou string_falha caso contrario.
 function ComparaSalvacoes(salvacoes) {
   for (var tipo_salvacao in salvacoes) {
     if (gPersonagem.salvacoes[tipo_salvacao].Total() != salvacoes[tipo_salvacao]) {
-      return false;
+      return 'Tipo: ' + tipo_salvacao + ', esperava ' + salvacoes[tipo_salvacao] + ' veio ' + gPersonagem.salvacoes[tipo_salvacao].Total();
     }
   }
-  return true;
+  return '';
 }
 
 // Testes.
@@ -655,15 +656,15 @@ function CarregaTestes() {
       gPersonagem.classes[0].classe = 'guerreiro';
       gPersonagem.classes[0].nivel = 1;
       _DependenciasSalvacoes();
-      if (!ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 })) {
+      if (ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 }).length > 0) {
         this.resultado = false;
-        this.detalhes = 'Guerreiro de primeiro nível deveria ter fortitude 2.';
+        this.detalhes = 'Guerreiro de primeiro nível deveria ter fortitude 2: ' + ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 });
         return;
       }
       // Ladino nivel 1.
       gPersonagem.classes[0].classe = 'ladino';
       _DependenciasSalvacoes();
-      if (!ComparaSalvacoes({ fortitude: 0, reflexo: 2, vontade: 0 })) {
+      if (ComparaSalvacoes({ fortitude: 0, reflexo: 2, vontade: 0 }).length > 0) {
         this.resultado = false;
         this.detalhes = 'Ladino de primeiro nível deveria ter reflexo 2.';
         return;
@@ -672,9 +673,9 @@ function CarregaTestes() {
       gPersonagem.classes[0].classe = 'clerigo';
       gPersonagem.raca = 'halfling';
       _DependenciasSalvacoes();
-      if (!ComparaSalvacoes({ fortitude: 3, reflexo: 1, vontade: 3 })) {
+      if (ComparaSalvacoes({ fortitude: 3, reflexo: 1, vontade: 3 }).length > 0) {
         this.resultado = false;
-        this.detalhes = 'Clérigo halfling de primeiro nível deveria ser 3 1 3.';
+        this.detalhes = 'Clérigo halfling de primeiro nível deveria ser 3 1 3: ' + ComparaSalvacoes({ fortitude: 3, reflexo: 1, vontade: 3 });
         return;
       }
       this.resultado = true;
@@ -683,9 +684,9 @@ function CarregaTestes() {
       gPersonagem.talentos.gerais.push({ chave: 'fortitude_maior' });
       _DependenciasTalentos();
       _DependenciasSalvacoes();
-      if (!ComparaSalvacoes({ fortitude: 5, reflexo: 1, vontade: 3 })) {
+      if (ComparaSalvacoes({ fortitude: 5, reflexo: 1, vontade: 3 }).length > 0) {
         this.resultado = false;
-        this.detalhes = 'Clérigo halfling de primeiro nível com fortitude maior deveria ser 5 1 3.';
+        this.detalhes = 'Clérigo halfling de primeiro nível com fortitude maior deveria ser 5 1 3: ' + ComparaSalvacoes({ fortitude: 5, reflexo: 1, vontade: 3 });
         return;
       }
       this.resultado = true;
@@ -702,7 +703,7 @@ function CarregaTestes() {
       _DependenciasAtributos();
       _DependenciasHabilidadesEspeciais();
       _DependenciasSalvacoes();
-      if (!ComparaSalvacoes({ fortitude: 4, reflexo: 1, vontade: 1 })) {
+      if (ComparaSalvacoes({ fortitude: 4, reflexo: 1, vontade: 1 }).length > 0) {
         this.resultado = false;
         this.detalhes = 'Clérigo humano de segundo nível deveria ser 4 1 1.';
         return;

@@ -1,16 +1,13 @@
+Tratar pericias de ofício, conhecimento local, profissão com complemento.
+Dano de habilidade.
 Penalidade de armadura e escudo se nao tiver pericia.
 Unit test  de tamanhos modificados.
 Estilo de luta: tiro rapido.
 Complemento de especiais.
 Estilo de luta de ranger (se escolher o talento de arquearia, os demais devem ser tb).
-Ataque desarmado de monge.
 Completar a tabela de pericia com as classes de prestigio.
 Classes que modificam nivel de conjurador deveriam poder escolher de qual classe. Do jeito que ta pega a maior do tipo.
 Coisas de monge.
-Bug do feitico extra (mago de 10 com feitico de 6o).
-Feiticos extras de especialistas (necromantes). Fazer restricoes por escola.
-Mostrar segundo ataque.
-Mostrar hint dos talentos.
 Colapsar armas.
 Caracteristicas de escudos (resistencia feitico).
 Permitir memorizar feiticos com talentos metamagicos.
@@ -24,4 +21,3 @@ Arrumar o botao de descansar.
 Reescrever a geracao para manipular apenas os campos da gEntradas sem usar AtualizaGeralSemConverterEntradas.
 Venda de objetos por metade do preco.
 Adicionar campos para altura, peso, idade etc.
-Tratar pericias de ofício, conhecimento local, profissão com complemento.
