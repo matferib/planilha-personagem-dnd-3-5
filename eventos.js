@@ -444,11 +444,6 @@ function ClickGastarFeitico() {
   AtualizaGeral();
 }
 
-// Trata o evento de change no campo de notas.
-function ChangeNotas() {
-  AtualizaGeral();
-}
-
 // A mudanca de raca é quase igual ao atualiza geral, mas deve-se zerar o tamanho
 // para o padrão da nova raça.
 function ChangeRaca() {

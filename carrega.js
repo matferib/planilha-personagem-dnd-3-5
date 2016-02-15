@@ -195,7 +195,8 @@ function _CarregaHandlers() {
     "moedas-adicionais": { callback: ChangeAdicionarMoedas, evento: 'change', },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
-    "text-area-notas": { callback:  ChangeNotas, evento: 'change', },
+    "text-area-outros-equipamentos": { callback:  AtualizaGeral, evento: 'change', },
+    "text-area-notas": { callback:  AtualizaGeral, evento: 'change', },
   };
 
   for (var id in mapa) {

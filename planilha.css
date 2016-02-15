@@ -179,3 +179,7 @@ table#tabela-abrir-fechar {
 table#div-serializacao#tabela-importar-exportar {
   margin-left: 2ch;
 }
+
+input.input-complemento-talento {
+  width: 50ch;
+}

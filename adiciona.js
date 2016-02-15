@@ -348,7 +348,7 @@ function AdicionaTalento(indice_talento, chave_classe, div_pai) {
     option_talento.selected = chave_talento == 'outros';
     select_talento.add(option_talento, null);
   });
-  var input_complemento_talento = CriaInputTexto('');
+  var input_complemento_talento = CriaInputTexto('', null, 'input-complemento-talento');
   input_complemento_talento.name = 'complemento-talento';
   input_complemento_talento.addEventListener('change', AtualizaGeral);
 
