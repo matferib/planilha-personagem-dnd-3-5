@@ -1,14 +1,10 @@
-Tratar pericias de ofício, conhecimento local, profissão com complemento.
+Complemento de especiais.
 Dano de habilidade.
 Penalidade de armadura e escudo se nao tiver pericia.
 Unit test  de tamanhos modificados.
-Estilo de luta: tiro rapido.
-Complemento de especiais.
 Estilo de luta de ranger (se escolher o talento de arquearia, os demais devem ser tb).
 Completar a tabela de pericia com as classes de prestigio.
 Classes que modificam nivel de conjurador deveriam poder escolher de qual classe. Do jeito que ta pega a maior do tipo.
-Coisas de monge.
-Colapsar armas.
 Caracteristicas de escudos (resistencia feitico).
 Permitir memorizar feiticos com talentos metamagicos.
 Calcular a DC do feitico por slot.

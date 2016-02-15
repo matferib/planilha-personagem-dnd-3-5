@@ -511,3 +511,15 @@ function ClickHabilidadeEspecial() {
   // TODO da pra melhorar.
   AtualizaGeral();
 }
+
+function ClickBotaoEsconderDom(id_botao, id_alvo, display) {
+  var botao = Dom(id_botao);
+  var texto = botao.textContent;
+  if (texto == '▴') {
+    botao.textContent = '▾';
+    Dom(id_alvo).style.display = 'none';
+  } else {
+    botao.textContent = '▴';
+    Dom(id_alvo).style.display = display != null ? display : 'inline';
+  }
+}

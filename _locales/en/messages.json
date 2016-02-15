@@ -2546,6 +2546,27 @@
 	"complemento": {
 		"message": "complement"
 	},
+	"Esconde_Mostra_proficiencias_em_armas": {
+		"message": "Hides/Shows weapon proficiencies."
+	},
+	"Geral": {
+		"message": "General"
+	},
+	"Salvar": {
+		"message": "Save"
+	},
+	"Abrir": {
+		"message": "Open"
+	},
+	"Excluir": {
+		"message": "Delete"
+	},
+	"Importar": {
+		"message": "Import"
+	},
+	"Export": {
+		"message": "Export"
+	},
 	"temporarios": {
 		"message": "temporary"
 	}

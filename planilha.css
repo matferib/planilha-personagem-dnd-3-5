@@ -136,7 +136,7 @@ span.estilo-rotulo {
 
 span.salvacao-rotulo {
   float: left;
-  width: 10ch;
+  width: 20ch;
 }
 
 select.estilo-selecao {
@@ -160,4 +160,22 @@ input.input-pericias-pontos {
 input.input-pericias-complemento {
   width: 20ch;
   margin-right: 1ch;
+}
+
+button.botoes-serializacao {
+  width: 10ch;
+  height: 2em;
+  margin-bottom: 0.1px;
+}
+select#select-personagens {
+  margin-right: 2ch;
+  vertical-align: middle;
+}
+div#div-serializacao {
+}
+table#tabela-abrir-fechar {
+  margin-right: 2ch;
+}
+table#div-serializacao#tabela-importar-exportar {
+  margin-left: 2ch;
 }
