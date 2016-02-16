@@ -98,22 +98,26 @@ Template:<select id="template">
   <option id="option-cm" name="cm" value="cm" class="i18n">CM</option>
 </select>
 <br>
-<span id="span-classes" class="i18n">Classes:</span>
-<button type="button" id="botao-adicionar-classe">+</button>
-<button type="button" id="botao-remover-classe">-</button>
-<br>
-<!-- classes, criadas dinamicamente. -->
-<div id="classes"></div>
+<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/><br>
+<span id="span-experiencia" class="i18n">Experiência:</span>
+<input type="text" id="pontos-experiencia" size="6"/>+
+<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP" class="i18n"/><br>
+
+<div style="margin-top: 1em;">
+  <span id="span-classes" class="i18n">Classes:</span>
+  <button type="button" id="botao-adicionar-classe">+</button>
+  <button type="button" id="botao-remover-classe">-</button>
+  <br>
+  <!-- classes, criadas dinamicamente. -->
+  <div id="classes"></div>
+</div>
+
 <div>
 <button type="button" id="botao-gerar-personagem" class="botao-geracao">Gerar comum</button>
 <button type="button" id="botao-gerar-personagem-elite" class="botao-geracao">Gerar elite</button>
 </div>
 <span id="span-niveis-negativos" class="i18n">Níveis Negativos:</span>
 <input id="niveis-negativos" type="number" size="2" value="0" min="0"/><br>
-<span id="span-experiencia" class="i18n">Experiência:</span>
-<input type="text" id="pontos-experiencia" size="6"/>+
-<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP" class="i18n"/><br>
-<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">

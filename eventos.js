@@ -344,26 +344,13 @@ function ClickGerarPersonagem(modo) {
 }
 
 // Trata o botao de descansar
-// TODO arrumar.
 function ClickDescansar(valor) {
-  /*
-  for (var chave_classe in personagem.feiticos) {
-    if (!personagem.feiticos[chave_classe].em_uso) {
-      continue;
-    }
-    var feiticos_classe = personagem.feiticos[chave_classe];
-    for (var nivel in feiticos_classe.slots) {
-      if (feiticos_classe.slots[nivel].feiticos.length == 0) {
-        continue;
-      }
-      for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
-        feiticos_classe.slots[nivel].feiticos[indice].gasto = 0;
-      }
-    }
-  }
-  */
-  EntradasAdicionarFerimentos(-PersonagemNivel());
+  // Cura letal e nao letal.
+  EntradasAdicionarFerimentos(-PersonagemNivel(), false);
+  EntradasAdicionarFerimentos(-PersonagemNivel(), true);
+  EntradasRenovaSlotsFeiticos();
   AtualizaGeralSemLerEntradas();
+  AtualizaGeral();
 }
 
 // Encontra a arma ou armadura no dom.

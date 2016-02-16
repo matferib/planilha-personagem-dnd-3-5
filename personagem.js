@@ -176,6 +176,27 @@ var gPersonagem = {
   notas: '',
 };
 
+// Limpa o uso de todos os feiticos.
+function PersonagemRenovaFeiticos() {
+  for (var chave_classe in gPersonagem.feiticos) {
+    if (!gPersonagem.feiticos[chave_classe].em_uso) {
+      continue;
+    }
+    var slots_classe = gPersonagem.feiticos[chave_classe].slots;
+    for (var nivel in slots_classe) {
+      for (var indice = 0; indice < slots_classe[nivel].feiticos.length; ++indice) {
+        slots_classe[nivel].feiticos[indice].gasto = false;
+      }
+      if ('feitico_dominio' in slots_classe[nivel] && slots_classe[nivel].feitico_dominio != null) {
+        slots_classe[nivel].feitico_dominio.gasto = false;
+      }
+      if ('feitico_especializado' in slots_classe[nivel] && slots_classe[nivel].feitico_especializado != null) {
+        slots_classe[nivel].feitico_especializado.gasto = false;
+      }
+    }
+  }
+}
+
 // Retorna true se o personagem tiver a pericia. Se ranks nao for null, verifica o minimo tambem. Por ultimo, verifica complemento.
 function PersonagemTemPericia(chave, ranks, complemento) {
   if (ranks == null) {

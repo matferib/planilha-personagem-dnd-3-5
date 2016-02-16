@@ -78,6 +78,16 @@ var gEntradas = {
   notas: '',
 };
 
+function EntradasRenovaSlotsFeiticos() {
+  for (var chave in gEntradas.slots_feiticos) {
+    for (var nivel in gEntradas.slots_feiticos[chave]) {
+      for (var indice = 0; indice <  gEntradas.slots_feiticos[chave][nivel].length; ++indice) {
+        gEntradas.slots_feiticos[chave][nivel][indice].gasto = false;
+      }
+    }
+  }
+}
+
 // Le todos os inputs da planilha e armazena em 'gEntradas'.
 function LeEntradas() {
   // Modo mestre ligado ou nao.
