@@ -49,28 +49,19 @@
 </div> <!--div-versao-->
 
 <div id="div-serializacao" class="divs-principais">
-<table>
-<tr><td>
-  <table id="tabela-abrir-fechar">
-    <tr>
-      <td><button type="button" id="botao-salvar" class="botoes-serializacao i18n">Salvar</button></td>
-      <td><button type="button" id="botao-abrir" class="botoes-serializacao i18n">Abrir</button></td>
-      <td><button type="button" id="botao-excluir" class="botoes-serializacao i18n">Excluir</button></td>
-    </tr><tr>
-      <td colspan="3"><center><select id="select-personagens"></select></center></td>
-    </tr>
-  </table>
-</td><td>
-  <table id="tabela-importar-exportar">
-    <tr>
-      <td><button type="button" id="botao-importar" class="botoes-serializacao i18n">Importar</button></td>
-      <td><button type="button" id="botao-exportar" class="botoes-serializacao i18n">Exportar</button></td>
-    </tr><tr>
-      <td colspan="2"><center><input type="text" id="json-personagem"></input></center></td>
-    </tr>
-  </table>
-</td></tr>
-</table>
+  <div style="position: relative">
+  <span style="display: inline-block">
+    <button type="button" id="botao-salvar" class="botoes-serializacao i18n">Salvar</button>
+    <button type="button" id="botao-abrir" class="botoes-serializacao i18n">Abrir</button>
+    <button type="button" id="botao-excluir" class="botoes-serializacao i18n">Excluir</button><br>
+    <select id="select-personagens" style="width: 100%; margin-top: 0.5ch;"></select>
+  </span>
+  <span style="position: absolute; top: 0; display: inline-block; margin-left: 2ch">
+    <button type="button" id="botao-importar" class="botoes-serializacao i18n">Importar</button>
+    <button type="button" id="botao-exportar" class="botoes-serializacao i18n">Exportar</button><br>
+    <input type="text" id="json-personagem" style="margin-top: 0.5ch"></input>
+  </span>
+  </div>
 </div>
 
 <div id="div-geral" class="divs-principais">
