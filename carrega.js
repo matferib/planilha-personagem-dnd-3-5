@@ -5,6 +5,7 @@
 function CarregamentoInicial() {
   _CarregaTabelaNormalizacaoStrings();
   _CarregaTraducoes();
+  _CarregaTitulos();
   _CarregaHandlers();
   CarregaPersonagens();
   _CarregaRacas();
@@ -113,6 +114,24 @@ function _CarregaTabelaNormalizacaoStrings() {
   PreencheMapaDiacriticals();
 }
 
+function _CarregaTitulos() {
+  // Mapa de id de botoes para handler de click.
+  var mapa = {
+    "ferimentos": Traduz("Ferimentos"),
+    "ferimentos-nao-letais": Traduz("Ferimentos não letais"),
+    "pontos-vida-temporarios": Traduz("Pontos de vida temporários"),
+    "input-ferimento-nao-letal": Traduz("Ferimentos não letais"),
+    "botao-esconder-proficiencia-armas": Traduz("Esconde/Mostra proficiências em armas"),
+  };
+
+  for (var id in mapa) {
+    var dom = Dom(id);
+    if (dom != null) {
+      TituloSimples(mapa[id], dom);
+    }
+  }
+}
+
 // Adiciona os handlers aos botoes da interface.
 function _CarregaHandlers() {
   // Mapa de id de botoes para handler de click.
@@ -128,6 +147,8 @@ function _CarregaHandlers() {
     "botao-gerar-personagem": { callback:  function() { ClickGerarPersonagem('comum'); }, evento: 'click', },
     "botao-gerar-personagem-elite": { callback:  function() { ClickGerarPersonagem('elite'); }, evento: 'click', },
     "botao-adicionar-estilo-luta": { callback:  ClickAdicionarEstiloLuta, evento: 'click', },
+    "botao-esconder-proficiencia-armas": {
+        callback:  function() { ClickBotaoEsconderDom('botao-esconder-proficiencia-armas', 'span-proficiencia-armas'); }, evento: 'click', },
     "botao-link": { callback:  ClickLink, evento: 'click', },
     "botao-gerar-resumo": { callback:  ClickGerarResumo, evento: 'click', },
     "botao-adicionar-arma": { callback:  ClickAdicionarArma, evento: 'click', },
@@ -154,6 +175,7 @@ function _CarregaHandlers() {
     "tamanho": { callback: AtualizaGeral, evento: 'change', },
     "alinhamento": { callback: AtualizaGeral, evento: 'change', },
     "pontos-vida-dados": { callback: AtualizaGeral, evento: 'change', },
+    "pontos-vida-temporarios": { callback: AtualizaGeral, evento: 'change', },
     "ferimentos": { callback: AtualizaGeral, evento: 'change', },
     "niveis-negativos": { callback: AtualizaGeral, evento: 'change' },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
@@ -173,7 +195,8 @@ function _CarregaHandlers() {
     "moedas-adicionais": { callback: ChangeAdicionarMoedas, evento: 'change', },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
-    "text-area-notas": { callback:  ChangeNotas, evento: 'change', },
+    "text-area-outros-equipamentos": { callback:  AtualizaGeral, evento: 'change', },
+    "text-area-notas": { callback:  AtualizaGeral, evento: 'change', },
   };
 
   for (var id in mapa) {
@@ -256,7 +279,7 @@ function _CarregaBotoesVisao() {
   var botao_desfazer = CriaBotao(Traduz('Desfazer'));
   botao_desfazer.style.paddingBottom = '0';
   botao_desfazer.style.marginBottom = '0'
-  botao_desfazer.style.marginLeft = '30px';
+  botao_desfazer.style.marginLeft = '10ch';
   botao_desfazer.addEventListener('click', ClickDesfazer);
   div_visoes.appendChild(botao_desfazer);
 }
@@ -305,7 +328,7 @@ function _CarregaAtributos() {
                   } }));
     var span_rotulo = CriaSpan(Traduz(atributos[chave_atributo]));
     span_rotulo.style.display = 'inline-block';
-    span_rotulo.style.width = '80px';
+    span_rotulo.style.width = '13ch';
     div_atributo.appendChild(span_rotulo);
     var input_atributo = CriaInputTexto('10', chave_atributo + '-valor-base');
     input_atributo.size = 2;
@@ -453,6 +476,18 @@ function _CarregaPericias() {
     }
     div.appendChild(
         CriaSpan(texto_span, null, 'pericias-nome'));
+
+    var input_complemento =
+        CriaInputTexto('', prefixo_id + '-complemento', 'input-pericias-complemento',
+        {
+          chave_pericia: chave_pericia,
+          handleEvent: function(evento) {
+            AtualizaGeral();
+            evento.stopPropagation();
+          }
+        });
+    input_complemento.placeholder = Traduz('complemento');
+    div.appendChild(input_complemento);
 
     var input_pontos =
         CriaInputNumerico('0', prefixo_id + '-pontos', 'input-pericias-pontos',

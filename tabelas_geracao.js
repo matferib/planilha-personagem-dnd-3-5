@@ -491,7 +491,7 @@ var tabelas_geracao = {
     ordem_pericias: [
       'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
     talentos: [
-      'oficios', 'escrever_pergaminho', 'preparar_pocao', 'foco_em_magia', 'foco_em_magia_maior', 'fortitude_maior',
+      'escrever_pergaminho', 'preparar_pocao', 'foco_em_magia', 'foco_em_magia_maior', 'fortitude_maior',
     ],
     ordem_magias: {
       // Essas magias sao para necromantes.

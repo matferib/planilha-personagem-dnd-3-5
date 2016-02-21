@@ -215,6 +215,8 @@ function _DependenciasTalentos() {
   } else {
     gPersonagem.talentos['guerreiro'].length = 0;
   }
+  // Mago.
+  gPersonagem.talentos['mago'].length = Math.floor(PersonagemNivelClasse('mago') / 5) + Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
   // Monge.
   var nivel_monge = PersonagemNivelClasse('monge');
   if (nivel_monge >= 6) {
@@ -287,8 +289,6 @@ function _DependenciasPontosVida() {
       gPersonagem.dados_vida.nivel_personagem * gPersonagem.atributos['constituicao'].modificador);
   gPersonagem.pontos_vida.bonus.Adiciona(
       'niveis_negativos', '-', -5 * gPersonagem.niveis_negativos);
-  gPersonagem.pontos_vida.total =
-      gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total();
 }
 
 function _DependenciasIniciativa() {

@@ -279,7 +279,7 @@ function ClickBotaoAtributoMenos() {
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
 function ClickAjustarFerimentos(valor) {
-  EntradasAdicionarFerimentos(valor);
+  EntradasAdicionarFerimentos(valor, Dom('input-ferimento-nao-letal').checked);
   AtualizaGeralSemLerEntradas();
 }
 
@@ -344,26 +344,13 @@ function ClickGerarPersonagem(modo) {
 }
 
 // Trata o botao de descansar
-// TODO arrumar.
 function ClickDescansar(valor) {
-  /*
-  for (var chave_classe in personagem.feiticos) {
-    if (!personagem.feiticos[chave_classe].em_uso) {
-      continue;
-    }
-    var feiticos_classe = personagem.feiticos[chave_classe];
-    for (var nivel in feiticos_classe.slots) {
-      if (feiticos_classe.slots[nivel].feiticos.length == 0) {
-        continue;
-      }
-      for (var indice = 0; indice < feiticos_classe.slots[nivel].feiticos.length; ++indice) {
-        feiticos_classe.slots[nivel].feiticos[indice].gasto = 0;
-      }
-    }
-  }
-  */
-  EntradasAdicionarFerimentos(-PersonagemNivel());
+  // Cura letal e nao letal.
+  EntradasAdicionarFerimentos(-PersonagemNivel(), false);
+  EntradasAdicionarFerimentos(-PersonagemNivel(), true);
+  EntradasRenovaSlotsFeiticos();
   AtualizaGeralSemLerEntradas();
+  AtualizaGeral();
 }
 
 // Encontra a arma ou armadura no dom.
@@ -444,11 +431,6 @@ function ClickGastarFeitico() {
   AtualizaGeral();
 }
 
-// Trata o evento de change no campo de notas.
-function ChangeNotas() {
-  AtualizaGeral();
-}
-
 // A mudanca de raca é quase igual ao atualiza geral, mas deve-se zerar o tamanho
 // para o padrão da nova raça.
 function ChangeRaca() {
@@ -510,4 +492,16 @@ function ChangeAdicionarMoedas() {
 function ClickHabilidadeEspecial() {
   // TODO da pra melhorar.
   AtualizaGeral();
+}
+
+function ClickBotaoEsconderDom(id_botao, id_alvo, display) {
+  var botao = Dom(id_botao);
+  var texto = botao.textContent;
+  if (texto == '▴') {
+    botao.textContent = '▾';
+    Dom(id_alvo).style.display = 'none';
+  } else {
+    botao.textContent = '▴';
+    Dom(id_alvo).style.display = display != null ? display : 'inline';
+  }
 }

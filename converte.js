@@ -68,7 +68,9 @@ function _ConverteDadosVida() {
 
 function _ConvertePontosVida() {
   gPersonagem.pontos_vida.total_dados = gEntradas.pontos_vida;
+  gPersonagem.pontos_vida.temporarios = gEntradas.pontos_vida_temporarios;
   gPersonagem.pontos_vida.ferimentos = gEntradas.ferimentos;
+  gPersonagem.pontos_vida.ferimentos_nao_letais = gEntradas.ferimentos_nao_letais;
 }
 
 function _ConverteEquipamentos() {
@@ -120,8 +122,9 @@ function _ConverteTalentos() {
 // de pericia, computando o valor de cada uma e o numero de pontos disponiveis.
 function _ConvertePericias() {
   for (var i = 0; i < gEntradas.pericias.length; ++i) {
-    gPersonagem.pericias.lista[gEntradas.pericias[i].chave].pontos =
-        gEntradas.pericias[i].pontos;
+    var pericia_personagem = gPersonagem.pericias.lista[gEntradas.pericias[i].chave];
+    pericia_personagem.pontos = gEntradas.pericias[i].pontos;
+    pericia_personagem.complemento = 'complemento' in gEntradas.pericias[i] ? gEntradas.pericias[i].complemento : '';
   }
 }
 

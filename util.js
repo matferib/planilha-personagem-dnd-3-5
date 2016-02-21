@@ -189,8 +189,8 @@ function ImprimeNaoSinalizado(valor, dom, imprime_zero) {
 }
 
 // Adiciona um elemento span ao div e o retorna.
-function AdicionaSpanAoDiv(texto, id_span, div) {
-  var span = CriaSpan(texto, id_span);
+function AdicionaSpanAoDiv(texto, id_span, classe, div) {
+  var span = CriaSpan(texto, id_span, classe);
   div.appendChild(span);
   return span;
 }

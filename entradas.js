@@ -19,7 +19,9 @@ var gEntradas = {
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
+  pontos_vida_temporarios: 0,
   ferimentos: 0,  // Valor deve ser >=  0.
+  ferimentos_nao_letais: 0,  // Valor deve ser >= 0.
   // experiencia.
   experiencia: 0,
   // atributos.
@@ -57,7 +59,7 @@ var gEntradas = {
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [] },
 
-  // pericias: cada entrada possui { chave, pontos }
+  // pericias: cada entrada possui { chave, pontos, complemento }
   pericias: [],
 
   // Para magos especialistas. Cada entrada:
@@ -75,6 +77,16 @@ var gEntradas = {
 
   notas: '',
 };
+
+function EntradasRenovaSlotsFeiticos() {
+  for (var chave in gEntradas.slots_feiticos) {
+    for (var nivel in gEntradas.slots_feiticos[chave]) {
+      for (var indice = 0; indice <  gEntradas.slots_feiticos[chave][nivel].length; ++indice) {
+        gEntradas.slots_feiticos[chave][nivel][indice].gasto = false;
+      }
+    }
+  }
+}
 
 // Le todos os inputs da planilha e armazena em 'gEntradas'.
 function LeEntradas() {
@@ -109,7 +121,9 @@ function LeEntradas() {
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
+  gEntradas.pontos_vida_temporarios = parseInt(Dom('pontos-vida-temporarios').value) || 0;
   gEntradas.ferimentos = Math.abs(parseInt(Dom('ferimentos').textContent)) || 0;
+  gEntradas.ferimentos_nao_letais = Math.abs(parseInt(Dom('ferimentos-nao-letais').textContent)) || 0;
   // Experiencia.
   gEntradas.experiencia = parseInt(Dom('pontos-experiencia').value) || 0;
   // atributos
@@ -147,16 +161,22 @@ function LeEntradas() {
   _LeTalentos();
 
   // Pericias.
-  for (var i = 0; i < gEntradas.pericias.length; ++i) {
-    var entrada_pericia = gEntradas.pericias[i];
-    var input_pontos = Dom('pericia-' + entrada_pericia.chave + '-pontos');
-    entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
-  }
+  _LePericias();
 
   // Feiticos.
   _LeFeiticos();
 
   gEntradas.notas = Dom('text-area-notas').value;
+}
+
+function _LePericias() {
+  for (var i = 0; i < gEntradas.pericias.length; ++i) {
+    var entrada_pericia = gEntradas.pericias[i];
+    var input_pontos = Dom('pericia-' + entrada_pericia.chave + '-pontos');
+    entrada_pericia.pontos = parseInt(input_pontos.value) || 0;
+    var input_complemento = Dom('pericia-' + entrada_pericia.chave + '-complemento');
+    entrada_pericia.complemento = (input_complemento == null) ? '' : input_complemento.value;
+  }
 }
 
 function _LeTalentos() {
@@ -500,9 +520,10 @@ function EntradasAdicionarMoedas(moedas) {
 }
 
 // Adiciona ferimentos as gEntradas.
-function EntradasAdicionarFerimentos(valor) {
-  gEntradas.ferimentos += valor;
-  if (gEntradas.ferimentos < 0) {
-    gEntradas.ferimentos = 0;
+function EntradasAdicionarFerimentos(valor, nao_letal) {
+  var tipo = nao_letal ? "ferimentos_nao_letais" : "ferimentos";
+  gEntradas[tipo] += valor;
+  if (gEntradas[tipo] < 0) {
+    gEntradas[tipo] = 0;
   }
 }

@@ -326,6 +326,9 @@
 	"Mago": {
 		"message": "Mage"
 	},
+	"Escolas_Proibidas": {
+		"message": "Prohibited Schools"
+	},
 	"Mago_Necromante": {
 		"message": "Necromancer"
 	},
@@ -370,6 +373,15 @@
 	},
 	"Feiticos": {
 		"message": "Spells"
+	},
+	"Feiticos_de_": {
+		"message": "Spells for: "
+	},
+	"Feiticos_conhecidos": {
+		"message": "Known spells"
+	},
+	"Feiticos_por_Dia": {
+		"message": "Spells per Day"
 	},
 	"Modo_Mestre": {
 		"message": "DM Mode"
@@ -795,7 +807,7 @@
     "message": "Enlarge Spell"
   },
   "Elevar_Magia": {
-    "message": "Highten Spell"
+    "message": "Heighten Spell"
   },
   "Estender_Magia": {
     "message": "Extend Spell"
@@ -1364,6 +1376,12 @@
   "Arcano__I_": {
     "message": "Wizardry (I)"
   },
+	"Dominar_Magia": {
+		"message": "Spell Mastery"
+	},
+	"Capaz_de_preparar_magias_escolhidas__bonus_inteligencia__sem_um_grimorio_": {
+		"message": "Can prepare spells (maximum inteligence bonys) without spellbook."
+	},
   "Evasao": {
     "message": "Evasion"
   },
@@ -2518,5 +2536,56 @@
   },
   "Escuridao__1_dia": {
     "message": "Darkness (1/day)"
-  } 
+  },
+	"Genasi__Agua_": {
+		"message": "Genasi (Water)"
+	},
+	"Genasi__Ar_": {
+		"message": "Genasi (Air)"
+	},
+	"Genasi__Fogo_": {
+		"message": "Genasi (Fire)"
+	},
+	"Genasi__Terra_": {
+		"message": "Genasi (Earth)"
+	},
+	"Ferimentos": {
+		"message": "Wounds"
+	},
+	"Nao_letal": {
+		"message": "Non lethal"
+	},
+	"Ferimentos_nao_letais": {
+		"message": "Non lethal Wounds"
+	},
+	"Pontos_de_vida_temporarios": {
+		"message": "Temporary hit points"
+	},
+	"complemento": {
+		"message": "complement"
+	},
+	"Esconde_Mostra_proficiencias_em_armas": {
+		"message": "Hides/Shows weapon proficiencies."
+	},
+	"Geral": {
+		"message": "General"
+	},
+	"Salvar": {
+		"message": "Save"
+	},
+	"Abrir": {
+		"message": "Open"
+	},
+	"Excluir": {
+		"message": "Delete"
+	},
+	"Importar": {
+		"message": "Import"
+	},
+	"Export": {
+		"message": "Export"
+	},
+	"temporarios": {
+		"message": "temporary"
+	}
 }

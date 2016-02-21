@@ -25,9 +25,9 @@ var gPersonagem = {
   pontos_vida: {
     total_dados: 0,  // total dos dados de pontos de vida.
     bonus: new Bonus(), // outros bonus.
-    total: 0,  // soma dos dados mais bonus.
-    ferimentos: 0,  // ferimentos do personagem TODO(transformar em array). Valores devem ser >= 0.
     temporarios: 0,  // pontos de vida temporarios
+    ferimentos: 0,  // ferimentos do personagem. Valores devem ser >= 0.
+    ferimentos_nao_letais: 0,  // ferimentos nao letais.
   },
   // O valor do atributo é o valor final dados todos os modificadores. O modificador
   // é computado sobre esse valor.
@@ -86,6 +86,8 @@ var gPersonagem = {
     total_pontos: 8,
     // Quantos ele ja gastou.
     pontos_gastos: 0,
+    // Algumas pericias tem complementos. Tipo conhecimento.
+    complemento: '',
     // Cada entrada:
     // chave_pericia: { pontos, graduacoes, bonus, de_classe, total }.
     // pontos sao os pontos gastos, graduacoes sao os pontos modificados
@@ -174,6 +176,27 @@ var gPersonagem = {
   notas: '',
 };
 
+// Limpa o uso de todos os feiticos.
+function PersonagemRenovaFeiticos() {
+  for (var chave_classe in gPersonagem.feiticos) {
+    if (!gPersonagem.feiticos[chave_classe].em_uso) {
+      continue;
+    }
+    var slots_classe = gPersonagem.feiticos[chave_classe].slots;
+    for (var nivel in slots_classe) {
+      for (var indice = 0; indice < slots_classe[nivel].feiticos.length; ++indice) {
+        slots_classe[nivel].feiticos[indice].gasto = false;
+      }
+      if ('feitico_dominio' in slots_classe[nivel] && slots_classe[nivel].feitico_dominio != null) {
+        slots_classe[nivel].feitico_dominio.gasto = false;
+      }
+      if ('feitico_especializado' in slots_classe[nivel] && slots_classe[nivel].feitico_especializado != null) {
+        slots_classe[nivel].feitico_especializado.gasto = false;
+      }
+    }
+  }
+}
+
 // Retorna true se o personagem tiver a pericia. Se ranks nao for null, verifica o minimo tambem. Por ultimo, verifica complemento.
 function PersonagemTemPericia(chave, ranks, complemento) {
   if (ranks == null) {
@@ -190,8 +213,9 @@ function PersonagemTemPericia(chave, ranks, complemento) {
 
 // Limpa dependencias antes de comecar a conversao das entradas para o personagem. Tambem chamada na geracao de personagens.
 function PersonagemLimpaGeral() {
-  gPersonagem.pontos_vida.total = 0;
   gPersonagem.pontos_vida.bonus.Limpa();
+  gPersonagem.pontos_vida.temporarios = 0;
+  gPersonagem.pontos_vida.ferimentos_nao_letais = 0;
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
@@ -225,12 +249,19 @@ function PersonagemLimpaGeral() {
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();
+  PersonagemLimpaTalentos();
 }
 
 function PersonagemLimpaPericias() {
   for (var chave_pericia in gPersonagem.pericias.lista) {
     var pericia_personagem = gPersonagem.pericias.lista[chave_pericia];
     pericia_personagem.bonus.Limpa();
+  }
+}
+
+function PersonagemLimpaTalentos() {
+  for (var chave_talento in gPersonagem.talentos) {
+    gPersonagem.talentos[chave_talento].length = 0;
   }
 }
 
@@ -523,4 +554,3 @@ function PersonagemTamanhoRaca() {
 function PersonagemTamanhoEfetivo() {
   return gPersonagem.tamanho.categoria;
 }
-

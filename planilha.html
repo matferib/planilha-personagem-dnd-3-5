@@ -48,23 +48,28 @@
 <div id="div-versao"><span id="span-versao-planilha" class="i18n">Versão da Planilha</span>: 0.8.5
 </div> <!--div-versao-->
 
-<div id="div-geral" class="divs-principais">
-<span id="span-nome" class="i18n">Nome: </span><input type="text" id="nome"/>
-<button type="button" id="botao-salvar" class="i18n">Salvar</button>
-<button type="button" id="botao-abrir" class="i18n">Abrir</button>
-<button type="button" id="botao-excluir" class="i18n">Excluir</button>
-<select id="select-personagens"></select>
-<button type="button" id="botao-exportar" class="i18n">Exportar</button>
-<button type="button" id="botao-importar" class="i18n">Importar</button>
-<input type="text" id="json-personagem"></input>
-<br>
+<div id="div-serializacao" class="divs-principais">
+  <div style="position: relative">
+  <span style="display: inline-block">
+    <button type="button" id="botao-salvar" class="botoes-serializacao i18n">Salvar</button>
+    <button type="button" id="botao-abrir" class="botoes-serializacao i18n">Abrir</button>
+    <button type="button" id="botao-excluir" class="botoes-serializacao i18n">Excluir</button><br>
+    <select id="select-personagens" style="width: 100%; margin-top: 0.5ch;"></select>
+  </span>
+  <span style="position: absolute; top: 0; display: inline-block; margin-left: 2ch">
+    <button type="button" id="botao-importar" class="botoes-serializacao i18n">Importar</button>
+    <button type="button" id="botao-exportar" class="botoes-serializacao i18n">Exportar</button><br>
+    <input type="text" id="json-personagem" style="margin-top: 0.5ch"></input>
+  </span>
+  </div>
+</div>
 
-<span id="span-raca" class="i18n">Raça:</span>
-<select id="raca">
-</select>&nbsp;
+<div id="div-geral" class="divs-principais">
+<span class="titulo i18n">Geral</span><br>
+<span id="span-nome" class="i18n">Nome: </span><input type="text" id="nome"/>&nbsp;
+<span id="span-raca" class="i18n">Raça:</span><select id="raca"></select>&nbsp;
 <span id="span-template">
-Template:
-<select id="template">
+Template:<select id="template">
 </select>&nbsp;
 </span>
 <span id="span-tamanho" class="i18n">Tamanho:</span>
@@ -93,22 +98,26 @@ Template:
   <option id="option-cm" name="cm" value="cm" class="i18n">CM</option>
 </select>
 <br>
-<span id="span-classes" class="i18n">Classes:</span>
-<button type="button" id="botao-adicionar-classe">+</button>
-<button type="button" id="botao-remover-classe">-</button>
-<br>
-<!-- classes, criadas dinamicamente. -->
-<div id="classes"></div>
+<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/><br>
+<span id="span-experiencia" class="i18n">Experiência:</span>
+<input type="text" id="pontos-experiencia" size="6"/>+
+<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP" class="i18n"/><br>
+
+<div style="margin-top: 1em;">
+  <span id="span-classes" class="i18n">Classes:</span>
+  <button type="button" id="botao-adicionar-classe">+</button>
+  <button type="button" id="botao-remover-classe">-</button>
+  <br>
+  <!-- classes, criadas dinamicamente. -->
+  <div id="classes"></div>
+</div>
+
 <div>
 <button type="button" id="botao-gerar-personagem" class="botao-geracao">Gerar comum</button>
 <button type="button" id="botao-gerar-personagem-elite" class="botao-geracao">Gerar elite</button>
 </div>
 <span id="span-niveis-negativos" class="i18n">Níveis Negativos:</span>
 <input id="niveis-negativos" type="number" size="2" value="0" min="0"/><br>
-<span id="span-experiencia" class="i18n">Experiência:</span>
-<input type="text" id="pontos-experiencia" size="6"/>+
-<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP" class="i18n"/><br>
-<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/>
 </div> <!-- div-geral-->
 
 <div id="div-pontos-vida" class="divs-principais">
@@ -116,20 +125,31 @@ Template:
 
 <span id="span-pontos-vida" class="i18n">Pontos de Vida:</span>
 <span id="pontos-vida-corrente"></span> =
-<input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados" class="i18n"/>
+<input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados" class="i18n"/>+
+<input type="text" id="pontos-vida-temporarios" maxlength="3" size="3" placeholder="temporários" class="i18n"/>
 <span id="pontos-vida-bonus"></span>
-<span id="ferimentos" maxlength="3" size="8"></span><br>
-
+<span id="pontos-vida-temporarios"></span>
+<span id="ferimentos" maxlength="3" size="8"></span>
+<span id="ferimentos-nao-letais" maxlength="3" size="8"></span><br>
+<!-- esse div deve ser posicionado para que o position absolute funcione. -->
+<div style="position: relative">
+<span>
 <span style="color:Black" id="span-ferimentos" class="adiciona-remove-ferimentos i18n">Ferimentos</span>
 <button type="button" class="botao-ferimentos" id="botao-ferir-1">-1</button>
 <button type="button" class="botao-ferimentos" id="botao-ferir-3">-3</button>
 <button type="button" class="botao-ferimentos" id="botao-ferir-5">-5</button>
-<input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3"/><br>
+<input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3"/>
+<br>
 <span style="color:Black" id="span-cura" class="adiciona-remove-ferimentos i18n">Cura</span>
 <button type="button" class="botao-ferimentos" id="botao-curar-1">+1</button>
 <button type="button" class="botao-ferimentos" id="botao-curar-3">+3</button>
 <button type="button" class="botao-ferimentos" id="botao-curar-5">+5</button>
-<input type="text" id="input-remover-ferimentos" maxlength="3" size="3"/><br>
+<input type="text" id="input-remover-ferimentos" maxlength="3" size="3"/>
+</span>
+<span style="position: absolute; top: 0.6em">
+  <input type="checkbox" id="input-ferimento-nao-letal" maxlength="3" size="3"/><span class="i18n">Não letal</span>
+</span>
+</div>
 <button type="button" id="botao-descansar" class="botao-descansar i18n">Descansar</button>
 <br>
 </div> <!-- div-pontos-vida -->
@@ -218,8 +238,8 @@ Template:
 </div> <!-- div-talentos -->
 
 <div id="div-proficiencia-armas" class="divs-principais">
-<span id="span-proficiencia-com-armas" class="titulo i18n">Proficiência com Armas</span><br>
-<span id="span-proficiencia-armas"></span>
+<span class="titulo i18n">Proficiência com Armas</span><button type="button" id="botao-esconder-proficiencia-armas" text>▾</button><br>
+<span id="span-proficiencia-armas" style="display: none"></span>
 </div> <!-- div-proficiencia-armas -->
 
 <div id="div-pericias" class="divs-principais">

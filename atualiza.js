@@ -90,7 +90,8 @@ function _AtualizaDadosVida() {
 function _AtualizaPontosVida() {
   // O valor dos ferimentos deve ser <= 0.
   var pontos_vida_corrente =
-      gPersonagem.pontos_vida.total - gPersonagem.pontos_vida.ferimentos;
+      gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total() + gPersonagem.pontos_vida.temporarios
+      - gPersonagem.pontos_vida.ferimentos - gPersonagem.pontos_vida.ferimentos_nao_letais;
   ImprimeNaoSinalizado(
       pontos_vida_corrente, Dom('pontos-vida-corrente'));
   Dom('pontos-vida-dados').value = gPersonagem.pontos_vida.total_dados ?
@@ -98,7 +99,11 @@ function _AtualizaPontosVida() {
   ImprimeSinalizado(
       gPersonagem.pontos_vida.bonus.Total(), Dom('pontos-vida-bonus'), false);
   ImprimeSinalizado(
+      gPersonagem.pontos_vida.temporarios, Dom('pontos-vida-temporarios'), false);
+  ImprimeSinalizado(
       -gPersonagem.pontos_vida.ferimentos, Dom('ferimentos'), false);
+  ImprimeSinalizado(
+      -gPersonagem.pontos_vida.ferimentos_nao_letais, Dom('ferimentos-nao-letais'), false);
 }
 
 function _AtualizaAtributos() {
@@ -399,10 +404,10 @@ function _AtualizaSalvacoes() {
   RemoveFilhos(div_salvacoes);
   for (var tipo_salvacao in gPersonagem.salvacoes) {
     var div_salvacao = CriaDiv();
-    AdicionaSpanAoDiv(Traduz(tipo_salvacao) + ': ', null, div_salvacao);
+    AdicionaSpanAoDiv(Traduz(tipo_salvacao) + ': ', null, 'salvacao-rotulo', div_salvacao);
     var span_salvacao =
       AdicionaSpanAoDiv(StringSinalizada(gPersonagem.salvacoes[tipo_salvacao].Total()),
-                        null, div_salvacao);
+                        null, null, div_salvacao);
     Titulo(gPersonagem.salvacoes[tipo_salvacao].Exporta(), span_salvacao);
     div_salvacoes.appendChild(div_salvacao);
   }
@@ -538,8 +543,11 @@ function _AtualizaPericias() {
     } else {
       dom_pericia.className = '';
     }
+    var input_complemento = Dom('pericia-' + chave + '-complemento');
+    input_complemento.value = pericia_personagem.complemento;
     var input_pontos = Dom('pericia-' + chave + '-pontos');
     input_pontos.value = pericia_personagem.pontos;
+
     var dom_graduacoes = Dom('pericia-' + chave + '-graduacoes');
     dom_graduacoes.textContent = pericia_personagem.graduacoes;
     var dom_total_bonus = Dom('pericia-' + chave + '-total-bonus');
@@ -688,7 +696,7 @@ function _AtualizaSlotsFeiticosParaClasse(chave_classe, div_classe) {
       }
     } else {
       if (dom != null) {
-        RemoveFilho(dom_slots, dom);
+        RemoveFilho(div_slots, dom);
       }
     }
   }
