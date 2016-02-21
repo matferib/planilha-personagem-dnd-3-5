@@ -56,8 +56,23 @@ var tabelas_raca = {
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto',
                             'arco_curto_composto'],
+      // Visao penumbra.
+
       bonus_pericias: { ouvir: 2, procurar: 2, observar: 2 },
       outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
+  },
+  elfo_drow: {
+      nome: 'Elfo (Drow)',
+      origem: { livro: 'Forgotten Realms', pagina: '13' },
+      movimento: { terrestre: 6 },
+      atributos: { destreza: +2, inteligencia: 2, carisma: 2, constituicao: -2 }, tamanho: 'medio',
+      proficiencia_armas: [ 'sabre', 'espada_curta', 'besta_leve', 'besta_de_mao'],
+      bonus_pericias: { ouvir: 2, procurar: 2, observar: 2 },
+      outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
+      especiais: {
+        1: ['visao_escuro'  /*24 q*/, 'cegueira_luz_intensa', 'globo_luz', 'fogo_fadas', 'escuridao'],
+      },
+      ajuste_nivel: 2,
   },
   genasi_agua: {
       nome: 'Genasi (Água)',
@@ -397,6 +412,10 @@ var tabelas_especiais = {
   auto_perfeicao: { nome: 'Auto-Perfeição' },
   bonus_ca: { nome: 'Bonus CA' },
   caminho_floresta: { nome: 'Caminho da Floresta' },
+  cegueira_luz_intensa: { nome: 'Cegueira sob Luz Intensa' },
+  escuridao: { nome: 'Escuridão (1/dia)' },
+  globo_luz: { nome: 'Globos de Luz (1/dia)' },
+  fogo_fadas: { nome: 'Fogo das Fadas (1/dia)' },
   estilo_combate_aprimorado: { nome: 'Estilo de Combate Aprimorado' },
   expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
   camuflagem: { nome: 'Camuflagem', },
@@ -462,6 +481,7 @@ var tabelas_especiais = {
   tolerancia: { nome: 'Tolerancia' },
   viajar_pelas_sombras: { nome: 'Viajar pelas Sombras' },
   visao_escuro: { nome: 'Visão no Escuro' },
+  visao_penumbra: { nome: 'Visão na Penumbra' },
 };
 
 // Bonus base de ataque.

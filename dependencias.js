@@ -428,6 +428,9 @@ function _DependenciasHabilidadesEspeciais() {
     tabelas_nivel_especiais.push(
         { nivel: PersonagemNivelClasse(entrada_classe.classe), especiais: tabelas_classes[entrada_classe.classe].especiais });
   }
+  if ('especiais' in tabelas_raca[gPersonagem.raca]) {
+    tabelas_nivel_especiais.push({ nivel: PersonagemNivel(), especiais: tabelas_raca[gPersonagem.raca].especiais });
+  }
   var template_pc = PersonagemTemplate();
   if (template_pc != null && 'especiais' in template_pc) {
     tabelas_nivel_especiais.push({ nivel: PersonagemNivel(), especiais: template_pc.especiais });

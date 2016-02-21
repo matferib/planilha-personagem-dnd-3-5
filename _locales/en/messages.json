@@ -1649,6 +1649,9 @@
   "Visao_no_escuro": {
     "message": "Darkvision"
   },
+  "Visao_na_Penumbra": {
+    "message": "Low Light Vision"
+  },
   "Retardar_envenenamento": {
     "message": "Delay poison"
   },
@@ -2500,5 +2503,20 @@
   },
   "Controlar_Luz": {
     "message": "Control Light"
-  }
+  },
+  "Elfo__Drow_": {
+    "message": "Elf (Drow)"
+  },
+  "Cegueira_sob_Luz_Intensa": {
+    "message": "Light Blindness"
+  },
+  "Globos_de_Luz__1_dia_": {
+    "message": "Dancing Lights (1/day)"
+  },
+  "Fogo_das_Fadas": {
+    "message": "Faerie Fire (1/day)"
+  },
+  "Escuridao__1_dia": {
+    "message": "Darkness (1/day)"
+  } 
 }
