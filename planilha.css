@@ -144,6 +144,11 @@ select.estilo-selecao {
   margin-right: 1ch;
 }
 
+select.select-talento {
+  width: 30ch;
+  margin-right: 1ch;
+}
+
 input.venda {
 }
 input.compra {

@@ -312,7 +312,7 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 // @param div_pai div onde o talento sera adicionado.
 function AdicionaTalento(indice_talento, chave_classe, div_pai) {
   var div_select_talentos = Dom('div-select-talentos');
-  var select_talento = CriaSelect();
+  var select_talento = CriaSelect(null, 'select-talento');
   select_talento.name = 'chave-talento';
   select_talento.addEventListener('change', AtualizaGeral);
   var talentos_ordenados = [];
