@@ -79,6 +79,8 @@ function _CarregaTraducoes() {
   var elements = document.getElementsByClassName("i18n");
   for (var i = 0; i < elements.length; ++i) {
     var e = elements[i];
+    // Os elementos com i18n sao traduzidos pelo id. A entrada no locales deve
+    // conter o id normalizado.
     var trad = gm(_SubstituiTraducao(e.id));
     if (trad != null && trad.length > 0 && e.id.length != null && e.id.length > 0) {
       e.innerHTML = trad;

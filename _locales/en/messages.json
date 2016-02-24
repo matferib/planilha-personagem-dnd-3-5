@@ -2534,6 +2534,9 @@
 	"Ferimentos": {
 		"message": "Wounds"
 	},
+	"span_nao_letal": {
+		"message": "Non lethal"
+	},
 	"Nao_letal": {
 		"message": "Non lethal"
 	},
