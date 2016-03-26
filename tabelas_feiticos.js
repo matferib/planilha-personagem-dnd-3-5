@@ -144,6 +144,12 @@ var tabelas_lista_feiticos = {
       'luz': {
         nome: 'Luz', descricao: 'Um objeto brilha como uma tocha', escola: 'evocacao',
       },
+      'pasmar': {
+        nome: 'Pasmar', descricao: 'Criatura de até 4 HD perde próxima ação', escola: 'encantamento', duracao: '1 rodada'
+      },
+      'toque_da_fadiga': {
+        nome: 'Toque da Fadiga', descricao: 'Alvo tocado fica fatigado.', duracao: '1 rodada / nível', escola: 'necromancia'
+      },
     },
     1: {
       'maos_flamejantes': {
@@ -169,6 +175,13 @@ var tabelas_lista_feiticos = {
       'teia': {
         nome: 'Teia', descricao: '4 quadrados de teia apoiada em lados opostos prende criaturas na área. Ver descrição para mais detalhes.'
       },
+      'vitalidade_ilusoria': {
+        nome: 'Vitalidade Ilusória', descricao: 'Ganha 1d10 + (1 PV / nível) temporários por 1h / nível.',
+        escola: 'necromancia', duracao: '1h / nível'
+      },
+      'nublar': {
+        nome: 'Nublar', descricao: 'Ataques têm 20% de chance de falha.', escola: 'ilusao', duracao: '1 min / nível'
+      }
     },
     3: {
       'relampago': {
