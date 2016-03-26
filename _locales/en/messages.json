@@ -2108,10 +2108,10 @@
   "Joga_novamente_a_chance_de_falha_por_camuflagem_": {
     "message": "Rerolls camuflage miss test."
   },
-  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_para_uma_escola": {
+  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_": {
     "message": "+2 bonus on spell resistance checks for a school of magic."
   },
-  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_para_uma_escola__cumulativo_": {
+  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia__cumulativo__": {
     "message": "+2 bonus on spell resistance checks for a school of magic (cumulative)."
   },
   "_4_de_bonus_nos_teste_de_Concentracao_para_conjurar_na_defensiva_": {

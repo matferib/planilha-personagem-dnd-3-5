@@ -1385,17 +1385,16 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   magia_natural: {
       nome: 'Magia Natural',
       requisitos: { atributos: { sabedoria: 13 } } },
-  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia 
   magia_penetrante: {
       nome: 'Magia Penetrante',
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia.',
   },
   // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
   // (cumulativo com magia penetrante).
   magia_penetrante_maior: {
       nome: 'Magia Penetrante Maior',
       requisitos: { talentos: [ 'magia_penetrante' ] },
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola (cumulativo)',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia (cumulativo).',
   },
   magia_combate: {
       nome: 'Magia em Combate', descricao: '+4 de bônus nos teste de Concentração para conjurar na defensiva.',
