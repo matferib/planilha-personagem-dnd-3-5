@@ -438,6 +438,62 @@ var tabelas_geracao = {
   },
   feiticeiro: {
     atributos: [ 'carisma', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'forca' ],
+    ordem_pericias: [
+      'concentracao', 'blefar', 'conhecimento_arcano', 'identificar_magia'],
+    talentos: [
+      'escrever_pergaminho', 'foco_em_magia', 'magia_penetrante', 'magia_penetrante_maior',
+    ],
+    ordem_magias: {
+      // Essas magias sao para necromantes.
+      0: [ 'pasmar', 'detectar_magia', 'som_fantasma', 'mao_arcana', 'toque '],
+      1: [ 'armadura_arcana', 'misseis_magicos', 'patas_de_aranha', 'raio_enfraquecimento', 'toque_macabro', ],
+      2: [ 'invisibilidade', 'invocar_enxames', 'vida_falsa', 'resistir_elementos', 'suportar_elementos',
+           'toque_do_carnical', 'nublar'],
+      3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
+      4: [ 'pele_rochosa', ]
+    },
+    por_nivel: {
+      4: {
+        moedas: { ouro: 950 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      5: {
+        moedas: { ouro: 2000 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      6: {
+        moedas: { ouro: 4300 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      7: {
+        moedas: { ouro: 3900 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      8: {
+        moedas: { ouro: 6100 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      11: {
+        moedas: { ouro: 12700 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ 'armadura_natural_1' ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+    },
   },
   ladino: {
     atributos: [ 'destreza', 'inteligencia', 'constituicao', 'forca', 'sabedoria', 'carisma' ],
