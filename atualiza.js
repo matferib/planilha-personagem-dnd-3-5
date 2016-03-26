@@ -748,6 +748,10 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
       slots.feiticos.length + (possui_extra ? 1 : 0),
       AdicionaSlotFeitico.bind(null, div_nivel_slots, !precisa_conhecer, chave_classe, nivel, slots));
 
+  // Atualiza a CD.
+  var span = Dom('span-cd-' + chave_classe + '-' + nivel);
+  span.textContent = slots.cd;
+
   // Popula os selects.
   var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);
   for (var indice = 0; indice < selects_nivel.length; ++indice) {
