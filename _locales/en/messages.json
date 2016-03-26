@@ -2572,5 +2572,17 @@
 	},
 	"temporarios": {
 		"message": "temporary"
-	}
+	},
+  "Vitalidade_Ilusoria": {
+    "message": "False Life"
+  },
+  "Ganha_1d10____1_PV___nivel__temporarios_por_1h_nivel_": {
+    "message": "Gain 1d10 + (1 / level) temporary hp for 1h / level."
+  },
+  "Ataques_tem_20__de_chance_de_falha_": {
+    "message": "Attacks have a 20% miss chance."
+  },
+  "Pasmar": {
+    "message": "Daze"
+  }
 }
