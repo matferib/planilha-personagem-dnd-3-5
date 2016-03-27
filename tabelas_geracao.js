@@ -632,7 +632,21 @@ var tabelas_geracao = {
     atributos: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
   },
   ranger: {
+    ordem_pericias: [
+      'esconderse', 'furtividade', 'observar', 'sobrevivencia', 'ouvir', 'saltar', 'afinidade_com_animais', 'cavalgar'
+    ],
+    talentos: [
+      'tolerancia', 'tiro_certeiro', 'ataque_poderoso', 'tiro_preciso', 'foco_em_arma', 'combater_com_duas_armas_maior'
+    ],
     atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+    por_nivel: {
+      7: {
+        moedas: { ouro: 1400 },
+        armadura: { nome: 'couro_batido', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 1, obra_prima: true },
+                 { chave: 'arco_longo', bonus: 1, obra_prima: true }, ],
+      },
+    },
   },
   // classes NPC: nao existe uma tabela para esses, coloquei o que achei mais adequado.
   adepto: {
