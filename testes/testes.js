@@ -1068,7 +1068,7 @@ function CarregaTestes() {
           'feiticeiro',
           0,
           // slots
-          { feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1, gasto: true } ] },
+          { cd: 10, feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1, gasto: true } ] },
           // conhecidos
           { 0: [ { f0a: 'f0a'}, { f0b: 'f0b'} ]});
       if (Dom('div-feiticos-slots-feiticeiro-0').childNodes.length != 2) {
