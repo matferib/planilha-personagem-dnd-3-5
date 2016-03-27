@@ -1137,7 +1137,6 @@ Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Sorrateiro - +2 nos testes de Esconder-se e Furtividade
-Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
@@ -1559,6 +1558,14 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     requisitos: { nivel: { conjurador: 3 }, },
     descricao: 'Permite a criação de poções mágicas.',
     mago: 1,
+  },
+  // Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
+  sucesso_decisivo_aprimorado: {
+    nome: 'Sucesso Decisivo Aprimorado',
+    requisitos: { proficiencia_arma: true },
+    complemento: 'arma',
+    descricao: 'Dobra margem de ameaça da arma.',
+    guerreiro: true,
   },
   // Talentos Metamágicos Pré-requisitos Benefícios
   // TODO implementar niveis_adicionais.
