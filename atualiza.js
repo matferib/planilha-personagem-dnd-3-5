@@ -750,7 +750,9 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
 
   // Atualiza a CD.
   var span = Dom('span-cd-' + chave_classe + '-' + nivel);
-  span.textContent = slots.cd;
+  if (span != null) {
+    span.textContent = slots.cd;
+  }
 
   // Popula os selects.
   var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);
