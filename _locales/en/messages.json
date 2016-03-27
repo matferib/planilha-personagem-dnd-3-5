@@ -2584,5 +2584,11 @@
   },
   "Pasmar": {
     "message": "Daze"
+  },
+  "Sucesso_Decisivo_Aprimorado": {
+    "message": "Improved Critical"
+  },
+  "Dobra_margem_de_ameaca_da_arma_": {
+    "message": "Doubles weapon critical range."
   }
 }
