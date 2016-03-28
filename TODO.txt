@@ -1,4 +1,6 @@
-Dominios de clerigos.
+Familiares de magos e feiticeiros.
+Companheiro animal de druidas e rangers.
+Beneficios de dominios de clerigos.
 Complemento de especiais.
 Dano de habilidade.
 Penalidade de armadura e escudo se nao tiver pericia.

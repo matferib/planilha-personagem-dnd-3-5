@@ -11,6 +11,9 @@
 	"span_nome": {
 		"message": "Name: "
 	},
+	"span_dominios_rotulo": {
+		"message": "Domains: "
+	},
 	"botao_salvar": {
 		"message": "Save"
 	},
@@ -2590,5 +2593,188 @@
   },
   "Dobra_margem_de_ameaca_da_arma_": {
     "message": "Doubles weapon critical range."
+  },
+  // Dominios.
+  "Ar": {
+    "message": "Air"
+  },
+  "Animal": {
+    "message": "Animal"
+  },
+  "Caos": {
+    "message": "Chaos"
+  },
+  "Morte": {
+    "message": "Death"
+  },
+  "Destruicao": {
+    "message": "Destruction"
+  },
+  "Terra": {
+    "message": "Earth"
+  },
+  "Mal": {
+    "message": "Evil"
+  },
+  "Fogo": {
+    "message": "Fire"
+  },
+  "Bem": {
+    "message": "Good"
+  },
+  "Cura": {
+    "message": "Healing"
+  },
+  "Conhecimento": {
+    "message": "Knowledge"
+  },
+  "Ordem": {
+    "message": "Law"
+  },
+  "Sorte": {
+    "message": "Luck"
+  },
+  "Magia": {
+    "message": "Magic"
+  },
+  "Planta": {
+    "message": "Plant"
+  },
+  "Protecao": {
+    "message": "Protection"
+  },
+  "Forca": {
+    "message": "Strength"
+  },
+  "Sol": {
+    "message": "Sun"
+  },
+  "Viagem": {
+    "message": "Travel"
+  },
+  "Enganacao": {
+    "message": "Trickery"
+  },
+  "Guerra": {
+    "message": "War"
+  },
+  "Agua": {
+    "message": "Water"
+  },
+  // Abaixo, os de FR.
+  "Equilibrio": {
+    "message": "Balance"
+  },
+  "Caverna": {
+    "message": "Cavern"
+  },
+  "Encantamento": {
+    "message": "Charm"
+  },
+  "Frio": {
+    "message": "Cold"
+  },
+  "Oficios": {
+    "message": "Craft"
+  },
+  "Escuridao": {
+    "message": "Darkness"
+  },
+  "Drow": {
+    "message": "Drow"
+  },
+  "Anao": {
+    "message": "Dwarf"
+  },
+  "Elfo": {
+    "message": "Elf"
+  },
+  "Familia": {
+    "message": "Family"
+  },
+  "Destino": {
+    "message": "Fate"
+  },
+  "Gnomo": {
+    "message": "Gnome"
+  },
+  "Halfling": {
+    "message": "Halfling"
+  },
+  "Odio": {
+    "message": "Hatred"
+  },
+  "Ilusao": {
+    "message": "Illusion"
+  },
+  "Mentalismo": {
+    "message": "Mentalism"
+  },
+  "Metal": {
+    "message": "Metal"
+  },
+  "Lua": {
+    "message": "Moon"
+  },
+  "Nobreza": {
+    "message": "Nobility"
+  },
+  "Oceano": {
+    "message": "Ocean"
+  },
+  "Orc": {
+    "message": "Orc"
+  },
+  "Planejamento": {
+    "message": "Planning"
+  },
+  "Portal": {
+    "message": "Portal"
+  },
+  "Renovacao": {
+    "message": "Renewal"
+  },
+  "Repouso": {
+    "message": "Repose"
+  },
+  "Retribuicao": {
+    "message": "Retribution"
+  },
+  "Runa": {
+    "message": "Rune"
+  },
+  "Escamas": {
+    "message": "Scalykind"
+  },
+  "Geleia": {
+    "message": "Slime"
+  },
+  "Magicas": {
+    "message": "Spell"
+  },
+  "Aranha": {
+    "message": "Spider"
+  },
+  "Tempestade": {
+    "message": "Storm"
+  },
+  "Sofrimento": {
+    "message": "Suffering"
+  },
+  "Tempo": {
+    "message": "Time"
+  },
+  "Comercio": {
+    "message": "Trade"
+  },
+  "Tirania": {
+    "message": "Tiranny"
+  },
+  "Mortos_Vivos": {
+    "message": "Undeath"
+  },
+  "Morte_Aquosa__Prestigio__": {
+    "message": "Watery Death Prestige"
   }
+  // fim dominios.
 }

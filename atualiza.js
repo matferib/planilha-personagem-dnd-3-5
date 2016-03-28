@@ -48,6 +48,7 @@ function _AtualizaGeral() {
   _AtualizaPontosVida();
   _AtualizaAtributos();
   _AtualizaClasses();
+  _AtualizaDominios();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaIniciativa();
@@ -177,6 +178,14 @@ function _AtualizaClasses() {
     selects_classes[i].disabled = true;
   }
   selects_classes[selects_classes.length - 1].disabled = false;
+}
+
+function _AtualizaDominios() {
+  if (PersonagemNivelClasse('clerigo') == 0) {
+    Dom('span-dominios').style.display = 'none';
+  } else {
+    Dom('span-dominios').style.display = 'inline';
+  }
 }
 
 // Atualiza uma classe.

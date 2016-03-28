@@ -16,6 +16,8 @@ var gPersonagem = {
   classes: [
       { classe: 'guerreiro', nivel: 1, nivel_conjurador: 0, linha_tabela_feiticos: 0 },
   ],
+  // Chave dos dominios.
+  dominios: [],
   niveis_negativos: 0,
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {

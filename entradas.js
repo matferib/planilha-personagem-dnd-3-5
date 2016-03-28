@@ -16,6 +16,7 @@ var gEntradas = {
   divindade: '',
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
+  dominios: [],
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
@@ -116,6 +117,13 @@ function LeEntradas() {
       gEntradas.classes.push({
         classe: ValorSelecionado(select),
         nivel: parseInt(input.value)});
+    }
+  }
+  gEntradas.dominios.length = 0;
+  var doms_dominios = [ Dom('dominio-0'), Dom('dominio-1') ];
+  for (var dom of doms_dominios) {
+    if (dom.style.display != 'none') {
+      gEntradas.dominios.push(ValorSelecionado(dom));
     }
   }
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;

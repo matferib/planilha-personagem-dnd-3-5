@@ -7,6 +7,7 @@ function CarregamentoInicial() {
   _CarregaTraducoes();
   _CarregaTitulos();
   CarregaPersonagens();
+  _CarregaDominios();
   _CarregaRacas();
   _CarregaTemplates();
   _CarregaBotoesVisao();
@@ -201,6 +202,8 @@ function _CarregaHandlers() {
     "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
     "text-area-outros-equipamentos": { callback:  AtualizaGeral, evento: 'change', },
     "text-area-notas": { callback:  AtualizaGeral, evento: 'change', },
+    "dominio-0": { callback: AtualizaGeral, evento: 'change' },
+    "dominio-1": { callback: AtualizaGeral, evento: 'change' },
   };
 
   for (var id in mapa) {
@@ -220,6 +223,26 @@ function _CarregaRacas() {
   }
   for (var chave_raca in tabelas_raca) {
     select_raca.appendChild(CriaOption(Traduz(tabelas_raca[chave_raca].nome), chave_raca))
+  }
+}
+
+function _CarregaDominios() {
+  var dominios_ordenados = [];  // para ordenar.
+  for (var dominio in tabelas_dominios) {
+    var obj = { chave: dominio, nome: Traduz(tabelas_dominios[dominio].nome)};
+    dominios_ordenados.push(obj);
+  }
+  dominios_ordenados.sort(function(lhs, rhs) {
+    return lhs.nome.localeCompare(rhs.nome);
+  });
+  var valores_finais = {};
+  for (var dominio of dominios_ordenados) {
+    valores_finais[dominio.chave] = dominio.nome;
+  }
+  valores_finais = [ valores_finais ];
+  var doms = [ Dom('dominio-0'), Dom('dominio-1') ];
+  for (var dom of doms) {
+    PopulaSelect(valores_finais, dom);
   }
 }
 
@@ -526,7 +549,7 @@ function _CarregaPericias() {
     divs_ordenados.push({ traducao: texto_span, div_a_inserir: div});
   }
   divs_ordenados.sort(function(lhs, rhs) {
-    return (lhs.traducao < rhs.traducao) ? -1 : (lhs.traducao > rhs.traducao) ? 1 : 0;
+    return lhs.traducao.localeCompare(rhs.traducao);
   });
   divs_ordenados.forEach(function(trad_div) {
     if (div_pericias != null) {
