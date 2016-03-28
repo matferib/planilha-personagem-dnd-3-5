@@ -153,10 +153,16 @@ var tabelas_geracao = {
     atributos: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
   },
   clerigo: {
-    atributos: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
+    atributos: [
+      'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza'
+    ],
     ordem_pericias: [
       'concentracao', 'cura', 'diplomacia', 'conhecimento_religiao', 'conhecimento_historia',
-      'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios' ],
+      'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios'
+    ],
+    talentos: [
+      'preparar_pocao', 'magia_combate', 'escrever_pergaminho', 'reflexos_rapidos', 'foco_em_arma',
+    ],
     ordem_magias: {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
