@@ -401,6 +401,16 @@ function PersonagemNivelClasse(classe) {
   return 0;
 }
 
+// @return true se o personagem tem algum nivel de mago (ou mago_*).
+function PersonagemTemNivelMago() {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    if (gPersonagem.classes[i].classe.find('mago') == 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // @param classe se null, retorna o maior de todas as classes.
 // @return o nivel de conjurador de uma classe de personagem.
 function PersonagemNivelConjuradorClasse(classe) {

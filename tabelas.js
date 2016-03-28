@@ -439,6 +439,7 @@ var tabelas_especiais = {
   mente_tranquila: { nome: 'Mente Tranquila' },
   mimetismo: { nome: 'Mimetismo' },
   montaria_especial: { nome: 'Montaria especial', },
+  mordida_venenosa: { nome: 'Mordida Venenosa' },
   passo_etereo: { nome: 'Passo Etéreo' },
   pureza_corporal: { nome: 'Pureza Corporal' },
   queda_suave_6m: { nome: 'Queda Suave (6m)' },
@@ -2468,7 +2469,7 @@ var tabelas_familiares = {
   // FR.
   aranha_cabeluda: {
     nome: 'Aranha Cabeluda',
-    propriedades: { especiais: 'visao_escuro' },  // visao no escuro, mordida venenosa.
+    propriedades: { especiais: { visao_escuro: 1, mordida_venenosa: 1 } },
   },
   polvo: {
     nome: 'Polvo',

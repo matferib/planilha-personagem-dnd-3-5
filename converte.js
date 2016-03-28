@@ -16,7 +16,7 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.divindade = gEntradas.divindade;
   gPersonagem.classes = gEntradas.classes;
   gPersonagem.dominios = gEntradas.dominios || [];
-  gPersonagem.familiar = gEntradas.familiar || '';
+  gPersonagem.familiar = gEntradas.familiar || {};
   gPersonagem.niveis_negativos = gEntradas.niveis_negativos || 0;
 
   gPersonagem.experiencia = gEntradas.experiencia;

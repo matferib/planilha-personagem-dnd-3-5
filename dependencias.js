@@ -72,10 +72,14 @@ function _DependenciasNivelConjurador() {
 }
 
 function _DependenciasFamiliar() {
-  if (!(gPersonagem.familiar in tabelas_familiares)) {
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares)) {
     return;
   }
-  _DependenciasItemOuFamiliar('familiar', tabelas_familiares[gPersonagem.familiar]);
+  if (!gPersonagem.familiar.em_uso) {
+    return;
+  }
+  _DependenciasItemOuFamiliar('familiar', tabelas_familiares[gPersonagem.familiar.chave]);
 }
 
 function _DependenciasEquipamentos() {
@@ -238,7 +242,14 @@ function _DependenciasTalentos() {
   if (tabelas_raca[gPersonagem.raca].talento_extra) {
     ++talentos_gerais_por_nivel;
   }
+  if ('em_uso' in gPersonagem.familiar && gPersonagem.familiar.em_uso) {
+    gPersonagem.talentos['gerais'][talentos_gerais_por_nivel] = {
+      chave: 'prontidao', complemento: 'familiar'
+    };
+    ++talentos_gerais_por_nivel;  // alerta
+  }
   gPersonagem.talentos['gerais'].length = talentos_gerais_por_nivel;
+
   // Outros nao precisa fazer nada.
   // Guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
@@ -248,7 +259,9 @@ function _DependenciasTalentos() {
     gPersonagem.talentos['guerreiro'].length = 0;
   }
   // Mago.
-  gPersonagem.talentos['mago'].length = Math.floor(PersonagemNivelClasse('mago') / 5) + Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
+  gPersonagem.talentos['mago'].length =
+      Math.floor(PersonagemNivelClasse('mago') / 5) +
+      Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
   // Monge.
   var nivel_monge = PersonagemNivelClasse('monge');
   if (nivel_monge >= 6) {

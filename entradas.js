@@ -17,7 +17,7 @@ var gEntradas = {
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
   dominios: [],
-  familiar: '',
+  familiar: { em_uso: false, chave: '' },
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
@@ -197,7 +197,7 @@ function _LeTalentos() {
 }
 
 function _LeDominios() {
-  gEntradas.dominios.length = 0;
+  gEntradas.dominios = [];
   var doms_dominios = [ Dom('dominio-0'), Dom('dominio-1') ];
   for (var dom of doms_dominios) {
     if (dom.style.display != 'none') {
@@ -207,11 +207,14 @@ function _LeDominios() {
 }
 
 function _LeFamiliar() {
-  gEntradas.familiar = '';
+  gEntradas.familiar = { em_uso: false, chave: '' };
+  var dom_em_uso = Dom('familiar-em-uso');
   var dom_familiar = Dom('select-familiar');
-  if (dom_familiar.style.display != 'none') {
-    gEntradas.familiar = ValorSelecionado(dom_familiar);
+  if (dom_familiar.style.display == 'none') {
+    return;
   }
+  gEntradas.familiar.em_uso = dom_em_uso.checked;
+  gEntradas.familiar.chave = ValorSelecionado(dom_familiar);
 }
 
 // Le o talento do div e o retorna no formato da entrada.

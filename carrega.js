@@ -206,6 +206,7 @@ function _CarregaHandlers() {
     "dominio-0": { callback: AtualizaGeral, evento: 'change' },
     "dominio-1": { callback: AtualizaGeral, evento: 'change' },
     "select-familiar": { callback: AtualizaGeral, evento: 'change' },
+    "familiar-em-uso": { callback: AtualizaGeral, evento: 'change' },
   };
 
   for (var id in mapa) {
