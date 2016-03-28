@@ -527,6 +527,7 @@ function _AtualizaTalento(indice_talento, talento_personagem, div_talento, chave
   for (var i = 0; i < div_talento.childNodes.length; ++i) {
     var filho = div_talento.childNodes[i];
     if (filho.name == 'chave-talento') {
+      filho.disabled = talento_personagem.imutavel;
       SelecionaValor(talento_personagem.chave, filho);
     } else if (filho.name == 'complemento-talento') {
       filho.disabled = !('complemento' in talento);

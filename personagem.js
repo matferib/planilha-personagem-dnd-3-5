@@ -77,9 +77,11 @@ var gPersonagem = {
     // Algumas classes ganham talentos especificos.
     // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
-    // Cada talento: { chave, complemento }
+    // Cada talento: { chave, complemento, imutavel }
     // Outros se referem a talentos que vem de excecoes de regras, muito dificeis
     // de implementar e a pessoa poe manualmente.
+    // Se imutavel, o select nao permitira mudanca (usado para talentos derivados, como
+    // prontidao de familiar).
     gerais: [],
     guerreiro: [],
     mago: [],

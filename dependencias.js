@@ -242,9 +242,9 @@ function _DependenciasTalentos() {
   if (tabelas_raca[gPersonagem.raca].talento_extra) {
     ++talentos_gerais_por_nivel;
   }
-  if ('em_uso' in gPersonagem.familiar && gPersonagem.familiar.em_uso) {
+  if (gPersonagem.familiar != null && gPersonagem.familiar.em_uso) {
     gPersonagem.talentos['gerais'][talentos_gerais_por_nivel] = {
-      chave: 'prontidao', complemento: 'familiar'
+      chave: 'prontidao', complemento: 'familiar', imutavel: true
     };
     ++talentos_gerais_por_nivel;  // alerta
   }

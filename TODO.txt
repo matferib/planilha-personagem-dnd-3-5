@@ -1,4 +1,4 @@
-Familiares de magos e feiticeiros.
+Dados de familiares de magos e feiticeiros.
 Companheiro animal de druidas e rangers.
 Beneficios de dominios de clerigos.
 Complemento de especiais.
