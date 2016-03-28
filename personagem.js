@@ -74,11 +74,14 @@ var gPersonagem = {
     // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
     // Cada talento: { chave, complemento }
+    // Outros se referem a talentos que vem de excecoes de regras, muito dificeis
+    // de implementar e a pessoa poe manualmente.
     gerais: [],
     guerreiro: [],
     mago: [],
     monge: [],
     ranger: [],
+    outros: [],
   },
   // pericias.
   pericias: {

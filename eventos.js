@@ -505,3 +505,13 @@ function ClickBotaoEsconderDom(id_botao, id_alvo, display) {
     Dom(id_alvo).style.display = display != null ? display : 'inline';
   }
 }
+
+function ClickAdicionarTalento() {
+  gEntradas.talentos['outros'].push({});
+  AtualizaGeralSemLerEntradas();
+}
+
+function ClickRemoverTalento(indice) {
+  gEntradas.talentos['outros'].splice(indice, 1);
+  AtualizaGeralSemLerEntradas();
+}

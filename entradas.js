@@ -57,7 +57,7 @@ var gEntradas = {
   capas: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
-  talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [] },
+  talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [], outros: [] },
 
   // pericias: cada entrada possui { chave, pontos, complemento }
   pericias: [],

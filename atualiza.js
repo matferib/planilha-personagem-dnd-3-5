@@ -466,7 +466,7 @@ function _AtualizaTalentos() {
     var div_talentos_classe = Dom('div-talentos-' + chave_classe);
     var lista_classe = gPersonagem.talentos[chave_classe];
     var div_selects = Dom('div-talentos-' + chave_classe + '-selects');
-    if (lista_classe.length > 0) {
+    if (lista_classe.length > 0 || chave_classe == 'outros') {
       ImprimeNaoSinalizado(
           lista_classe.length,
           Dom('talentos-' + chave_classe + '-total'));
@@ -476,7 +476,7 @@ function _AtualizaTalentos() {
             lista_classe[i],
             i < div_selects.childNodes.length ?
                 div_selects.childNodes[i] : null,
-            (chave_classe == 'gerais') ? null : chave_classe,
+            chave_classe,
             div_selects);
       }
       // Se tinha mais talentos, tira os que estavam a mais.

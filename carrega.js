@@ -6,7 +6,6 @@ function CarregamentoInicial() {
   _CarregaTabelaNormalizacaoStrings();
   _CarregaTraducoes();
   _CarregaTitulos();
-  _CarregaHandlers();
   CarregaPersonagens();
   _CarregaRacas();
   _CarregaTemplates();
@@ -18,6 +17,8 @@ function CarregamentoInicial() {
   _CarregaTabelaArmasArmaduras();
   _CarregaPericias();
   _CarregaFeiticos();
+
+  _CarregaHandlers();
 
   // Inicia o objeto de personagem.
   IniciaPersonagem();
@@ -149,6 +150,7 @@ function _CarregaHandlers() {
     "botao-gerar-personagem": { callback:  function() { ClickGerarPersonagem('comum'); }, evento: 'click', },
     "botao-gerar-personagem-elite": { callback:  function() { ClickGerarPersonagem('elite'); }, evento: 'click', },
     "botao-adicionar-estilo-luta": { callback:  ClickAdicionarEstiloLuta, evento: 'click', },
+    "botao-adicionar-talento": { callback:  ClickAdicionarTalento, evento: 'click', },
     "botao-esconder-proficiencia-armas": {
         callback:  function() { ClickBotaoEsconderDom('botao-esconder-proficiencia-armas', 'span-proficiencia-armas'); }, evento: 'click', },
     "botao-link": { callback:  ClickLink, evento: 'click', },
@@ -358,11 +360,18 @@ function _CarregaTalentos() {
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('Gerais') + ': '));
+    } else if (chave_classe == 'outros') {
+      div_talentos_classe.appendChild(
+          CriaSpan(Traduz('Outros') + ': '));
     } else {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('De') + ' ' + Traduz(tabelas_classes[chave_classe].nome) + ': '));
     }
     div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
+    if (chave_classe == 'outros') {
+      div_talentos_classe.appendChild(
+          CriaBotao('+', 'botao-adicionar-talento'));
+    }
     div_talentos_classe.appendChild(CriaBr());
     div_talentos_classe.appendChild(CriaDiv('div-talentos-' + chave_classe + '-selects'));
     div_talentos.appendChild(div_talentos_classe);

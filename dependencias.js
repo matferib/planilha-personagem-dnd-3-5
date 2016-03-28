@@ -208,6 +208,7 @@ function _DependenciasTalentos() {
     ++talentos_gerais_por_nivel;
   }
   gPersonagem.talentos['gerais'].length = talentos_gerais_por_nivel;
+  // Outros nao precisa fazer nada.
   // Guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
   if (nivel_guerreiro > 0) {

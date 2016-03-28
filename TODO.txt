@@ -1,3 +1,4 @@
+Dominios de clerigos.
 Complemento de especiais.
 Dano de habilidade.
 Penalidade de armadura e escudo se nao tiver pericia.
