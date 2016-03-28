@@ -8,6 +8,7 @@ function CarregamentoInicial() {
   _CarregaTitulos();
   CarregaPersonagens();
   _CarregaDominios();
+  _CarregaFamiliares();
   _CarregaRacas();
   _CarregaTemplates();
   _CarregaBotoesVisao();
@@ -204,6 +205,7 @@ function _CarregaHandlers() {
     "text-area-notas": { callback:  AtualizaGeral, evento: 'change', },
     "dominio-0": { callback: AtualizaGeral, evento: 'change' },
     "dominio-1": { callback: AtualizaGeral, evento: 'change' },
+    "select-familiar": { callback: AtualizaGeral, evento: 'change' },
   };
 
   for (var id in mapa) {
@@ -244,6 +246,23 @@ function _CarregaDominios() {
   for (var dom of doms) {
     PopulaSelect(valores_finais, dom);
   }
+}
+
+function _CarregaFamiliares() {
+  var familiares_ordenados = [];
+  for (var familiar in tabelas_familiares) {
+    familiares_ordenados.push(
+        { chave: familiar, nome: Traduz(tabelas_familiares[familiar].nome) });
+  }
+  familiares_ordenados.sort(function(lhs, rhs) {
+    return lhs.nome.localeCompare(rhs.nome);
+  });
+  var valores_finais = {};
+  for (var familiar of familiares_ordenados) {
+    valores_finais[familiar.chave] = familiar.nome;
+  }
+  valores_finais = [valores_finais];
+  PopulaSelect(valores_finais, Dom('select-familiar'));
 }
 
 // Adiciona racas dinamicamente na planilha

@@ -1899,6 +1899,14 @@ var tabelas_atributos_invertidos = {
   'Carisma': 'carisma',
 };
 
+// As propriedades podem ser:
+// ca: { tipo: valor}
+// pericias: { chave: valor, ... }
+// atributos: { chave: valor, ... }
+// tamanho: +- valor.
+// salvacoes: { chave: valor}, chave pode ser 'todas'.
+// bonus_pv: { chave: valor }
+// especiais: { chave: valor }
 var tabelas_aneis = {
   protecao_1: {
       nome: 'Proteção +1', preco: '2000 PO',
@@ -2188,7 +2196,10 @@ var tabelas_pocoes = {
   },
   curar_ferimentos_moderados: { nome: 'Curar ferimentos moderados', tipo: 'pocao' , preco: '300 PO' },
   escuridao: { nome: 'Escuridão', tipo: 'oleo', preco: '300 PO' },
-  visao_escuro: { nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO' },
+  visao_escuro: {
+    nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO',
+    propriedades: { especiais: { visao_escuro: 1 } }
+  },
   retardar_envenenamento: { nome: 'Retardar envenenamento', tipo: 'pocao' , preco: '300 PO' },
   esplendor_aguia: {
     nome: 'Esplendor da águia', tipo: 'pocao' , preco: '300 PO',
@@ -2410,4 +2421,58 @@ var tabelas_dominios = {
   tirania: { nome: 'Tirania' },
   mortos_vivos: { nome: 'Mortos-Vivos' },
   morte_aquosa: { nome: 'Morte Aquosa (Prestígio)' },
+};
+
+var tabelas_familiares = {
+  morcego: {
+    nome: 'Morcego',
+    propriedades: { pericias: { ouvir: 3 } },
+  },
+  gato: {
+    nome: 'Gato',
+    propriedades: { pericias: { furtividade: { familiar: 3 } } },
+  },
+  falcao: {
+    nome: 'Falcão',
+    propriedades: { pericias: { observar: { familiar: 3 } } },  // na luz
+  },
+  lagarto: {
+    nome: 'Lagarto',
+    propriedades: { pericias: { escalar: { familiar: 3 } } },
+  },
+  coruja: {
+    nome: 'Coruja',
+    propriedades: { pericias: { observar: { familiar: 3 } } },  // nas sombras.
+  },
+  rato: {
+    nome: 'Rato',
+    propriedades: { salvacoes: { fortitude: 2 } },  // nas sombras.
+  },
+  corvo: {
+    nome: 'Corvo',
+    propriedades: { pericias: { avaliacao: { familiar: 3 } } },  // na luz
+  },
+  cobra: {
+    nome: 'Cobra',
+    propriedades: { pericias: { blefar: { familiar: 3 } } },
+  },
+  sapo: {
+    nome: 'Sapo',
+    propriedades: { bonus_pv: { familiar: 3 } },
+  },
+  texugo: {
+    nome: 'Texugo',
+    propriedades: { salvacoes: { reflexo: 2 } },  // nas sombras.
+  },
+  // Aprimorado.
+  // FR.
+  aranha_cabeluda: {
+    nome: 'Aranha Cabeluda',
+    propriedades: { especiais: 'visao_escuro' },  // visao no escuro, mordida venenosa.
+  },
+  polvo: {
+    nome: 'Polvo',
+    // Interessante. o bonus eh menor pq nao eh condicionado a sombra ou luz.
+    propriedades: { pericias: { observar: { familiar: 2 } } },
+  },
 };

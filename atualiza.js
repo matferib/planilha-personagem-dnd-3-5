@@ -49,6 +49,7 @@ function _AtualizaGeral() {
   _AtualizaAtributos();
   _AtualizaClasses();
   _AtualizaDominios();
+  _AtualizaFamiliar();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaIniciativa();
@@ -185,6 +186,16 @@ function _AtualizaDominios() {
     Dom('span-dominios').style.display = 'none';
   } else {
     Dom('span-dominios').style.display = 'inline';
+  }
+}
+
+function _AtualizaFamiliar() {
+  if (PersonagemNivelClasse('feiticeiro') == 0 &&
+      PersonagemNivelClasse('mago') == 0 &&
+      PersonagemNivelClasse('mago_necromante') == 0) {
+    Dom('familiar').style.display = 'none';
+  } else {
+    Dom('familiar').style.display = 'block';
   }
 }
 

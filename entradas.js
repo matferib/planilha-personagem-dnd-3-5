@@ -17,6 +17,7 @@ var gEntradas = {
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
   dominios: [],
+  familiar: '',
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
@@ -119,13 +120,10 @@ function LeEntradas() {
         nivel: parseInt(input.value)});
     }
   }
-  gEntradas.dominios.length = 0;
-  var doms_dominios = [ Dom('dominio-0'), Dom('dominio-1') ];
-  for (var dom of doms_dominios) {
-    if (dom.style.display != 'none') {
-      gEntradas.dominios.push(ValorSelecionado(dom));
-    }
-  }
+  // Dominios de clerigo.
+  _LeDominios();
+  // Familiares.
+  _LeFamiliar();
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
@@ -195,6 +193,24 @@ function _LeTalentos() {
       gEntradas.talentos[chave_classe].push(
           _LeTalento(div_talentos.childNodes[i]));
     }
+  }
+}
+
+function _LeDominios() {
+  gEntradas.dominios.length = 0;
+  var doms_dominios = [ Dom('dominio-0'), Dom('dominio-1') ];
+  for (var dom of doms_dominios) {
+    if (dom.style.display != 'none') {
+      gEntradas.dominios.push(ValorSelecionado(dom));
+    }
+  }
+}
+
+function _LeFamiliar() {
+  gEntradas.familiar = '';
+  var dom_familiar = Dom('select-familiar');
+  if (dom_familiar.style.display != 'none') {
+    gEntradas.familiar = ValorSelecionado(dom_familiar);
   }
 }
 

@@ -18,6 +18,8 @@ var gPersonagem = {
   ],
   // Chave dos dominios.
   dominios: [],
+  // Chave do familiar.
+  familiar: '',
   niveis_negativos: 0,
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {
@@ -251,6 +253,7 @@ function PersonagemLimpaGeral() {
   for (var tipo_item in tabelas_itens) {
     gPersonagem[tipo_item].length = 0;
   }
+  gPersonagem.especiais = {};
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();

@@ -14,6 +14,9 @@
 	"span_dominios_rotulo": {
 		"message": "Domains: "
 	},
+	"span_familiar": {
+		"message": "Familiar"
+	},
 	"botao_salvar": {
 		"message": "Save"
 	},
@@ -2775,6 +2778,44 @@
   },
   "Morte_Aquosa__Prestigio__": {
     "message": "Watery Death Prestige"
-  }
+  },
   // fim dominios.
+  // Familiares.
+  "Morcego": {
+    "message": "Bat"
+  },
+  "Gato": {
+    "message": "Cat"
+  },
+  "Falcao": {
+    "message": "Hawk"
+  },
+  "Lagarto": {
+    "message": "Lizard"
+  },
+  "Coruja": {
+    "message": "Owl"
+  },
+  "Rato": {
+    "message": "Rat"
+  },
+  "Corvo": {
+    "message": "Raven"
+  },
+  "Cobra": {
+    "message": "Snake"
+  },
+  "Sapo": {
+    "message": "Toad"
+  },
+  "Texugo": {
+    "message": "Weasel"
+  },
+  "Aranha_Cabeluda": {
+    "message": "Hairy Spider"
+  },
+  "Polvo": {
+    "message": "Octopus"
+  }
+  // fim Familiares.
 }

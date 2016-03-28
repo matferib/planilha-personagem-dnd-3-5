@@ -20,6 +20,7 @@ function Bonus() {
   this.por_chave.escudo = { nome: 'Escudo', cumulativo: false, por_origem: {}, };
   this.por_chave.escudo_melhoria = { nome: 'Escudo (melhoria)', cumulativo: false, por_origem: {}, };
   this.por_chave.esquiva = { nome: 'Esquiva', cumulativo: true, por_origem: {}, };
+  this.por_chave.familiar = { nome: 'Familiar', cumulativo: true, por_origem: {}, };
   this.por_chave.inerente = { nome: 'Inerente', cumulativo: false, por_origem: {}, };
   this.por_chave.intuicao = { nome: 'Intuição', cumulativo: false, por_origem: {}, };
   this.por_chave.melhoria = { nome: 'Melhoria', cumulativo: false, por_origem: {}, };
