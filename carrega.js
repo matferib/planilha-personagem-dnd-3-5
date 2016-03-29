@@ -82,11 +82,11 @@ function _CarregaTraducoes() {
   var elements = document.getElementsByClassName("i18n");
   for (var i = 0; i < elements.length; ++i) {
     var e = elements[i];
-    // Os elementos com i18n sao traduzidos pelo id. A entrada no locales deve
-    // conter o id normalizado.
-    var trad = gm(_SubstituiTraducao(e.id));
+    // Os elementos com i18n sao traduzidos pelo id. Se nao houver, vai pelo texto.
+    // A entrada no locales deve conter o id ou texto normalizado.
+    var trad = gm(_SubstituiTraducao(e.id || e.textContent));
     if (trad != null && trad.length > 0 && e.id.length != null && e.id.length > 0) {
-      e.innerHTML = trad;
+      e.textContent = trad;
     }
     if (e.placeholder != null && e.placeholder.length > 0) {
       var tp = Traduz(e.placeholder);
