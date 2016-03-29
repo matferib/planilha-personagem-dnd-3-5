@@ -80,6 +80,7 @@ function _DependenciasFamiliar() {
     return;
   }
   _DependenciasItemOuFamiliar('familiar', tabelas_familiares[gPersonagem.familiar.chave]);
+  // Pontos de vida feito no DependenciasPontosVida.
 }
 
 function _DependenciasEquipamentos() {
@@ -334,6 +335,14 @@ function _DependenciasPontosVida() {
       gPersonagem.dados_vida.nivel_personagem * gPersonagem.atributos['constituicao'].modificador);
   gPersonagem.pontos_vida.bonus.Adiciona(
       'niveis_negativos', '-', -5 * gPersonagem.niveis_negativos);
+  // Familiar tem que ser aqui, pq depende dos pontos de vida do personagem e o personagem pode depender do familiar tb.
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares) ||
+      !gPersonagem.familiar.em_uso) {
+    return;
+  }
+  Dom('pontos-vida-corrente-familiar').textContent =
+    Math.floor((gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total()) / 2.0);
 }
 
 function _DependenciasIniciativa() {
