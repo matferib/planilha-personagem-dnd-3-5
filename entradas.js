@@ -17,7 +17,7 @@ var gEntradas = {
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
   dominios: [],
-  familiar: { em_uso: false, chave: '' },
+  familiar: { em_uso: false, chave: '', temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 },
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
@@ -207,7 +207,9 @@ function _LeDominios() {
 }
 
 function _LeFamiliar() {
-  gEntradas.familiar = { em_uso: false, chave: '' };
+  if (gEntradas.familiar == null) {
+    gEntradas.familiar = { em_uso: false, chave: '', temporarios: 0 };
+  }
   var dom_em_uso = Dom('familiar-em-uso');
   var dom_familiar = Dom('select-familiar');
   if (dom_familiar.style.display == 'none') {
@@ -215,6 +217,9 @@ function _LeFamiliar() {
   }
   gEntradas.familiar.em_uso = dom_em_uso.checked;
   gEntradas.familiar.chave = ValorSelecionado(dom_familiar);
+  gEntradas.familiar.temporarios = parseInt(Dom('pontos-vida-temporarios-familiar').value) || 0;
+  gEntradas.familiar.ferimentos = -parseInt(Dom('ferimentos-familiar').textContent) || 0;
+  gEntradas.familiar.ferimentos_nao_letais = -parseInt(Dom('ferimentos-nao-letais-familiar').textContent) || 0;
 }
 
 // Le o talento do div e o retorna no formato da entrada.
@@ -552,5 +557,13 @@ function EntradasAdicionarFerimentos(valor, nao_letal) {
   gEntradas[tipo] += valor;
   if (gEntradas[tipo] < 0) {
     gEntradas[tipo] = 0;
+  }
+}
+
+function EntradasAdicionarFerimentosFamiliar(valor, nao_letal) {
+  var tipo = nao_letal ? "ferimentos_nao_letais" : "ferimentos";
+  gEntradas.familiar[tipo] += valor;
+  if (gEntradas.familiar[tipo] < 0) {
+    gEntradas.familiar[tipo] = 0;
   }
 }

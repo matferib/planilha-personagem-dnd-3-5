@@ -80,7 +80,7 @@ function _DependenciasFamiliar() {
     return;
   }
   _DependenciasItemOuFamiliar('familiar', tabelas_familiares[gPersonagem.familiar.chave]);
-  // Pontos de vida feito no DependenciasPontosVida.
+  // Pontos de vida base feito no DependenciasPontosVida.
 }
 
 function _DependenciasEquipamentos() {
@@ -341,7 +341,7 @@ function _DependenciasPontosVida() {
       !gPersonagem.familiar.em_uso) {
     return;
   }
-  Dom('pontos-vida-corrente-familiar').textContent =
+  gPersonagem.familiar.pontos_vida.base =
     Math.floor((gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total()) / 2.0);
 }
 

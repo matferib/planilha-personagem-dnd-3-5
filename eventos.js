@@ -278,8 +278,13 @@ function ClickBotaoAtributoMenos() {
 
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
-function ClickAjustarFerimentos(valor) {
+function ChangeAjustarFerimentos(valor) {
   EntradasAdicionarFerimentos(valor, Dom('input-ferimento-nao-letal').checked);
+  AtualizaGeralSemLerEntradas();
+}
+
+function ChangeAjustarFerimentosFamiliar(valor) {
+  EntradasAdicionarFerimentosFamiliar(valor, Dom('input-ferimento-nao-letal-familiar').checked);
   AtualizaGeralSemLerEntradas();
 }
 

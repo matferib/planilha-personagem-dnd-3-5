@@ -106,6 +106,22 @@ function _AtualizaPontosVida() {
       -gPersonagem.pontos_vida.ferimentos, Dom('ferimentos'), false);
   ImprimeSinalizado(
       -gPersonagem.pontos_vida.ferimentos_nao_letais, Dom('ferimentos-nao-letais'), false);
+
+  // Familiar.
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares) ||
+      !gPersonagem.familiar.em_uso) {
+    return;
+  }
+  Dom('pontos-vida-base-familiar').textContent = gPersonagem.familiar.pontos_vida.base;
+  Dom('pontos-vida-temporarios-familiar').value = gPersonagem.familiar.pontos_vida.temporarios;
+  var pontos_vida_familiar = gPersonagem.familiar.pontos_vida;
+  ImprimeSinalizado(-pontos_vida_familiar.ferimentos, Dom('ferimentos-familiar'), false);
+  ImprimeSinalizado(-pontos_vida_familiar.ferimentos_nao_letais, Dom('ferimentos-nao-letais-familiar'), false);
+  var pontos_vida_corrente_familiar =
+      pontos_vida_familiar.base + pontos_vida_familiar.bonus.Total() + pontos_vida_familiar.temporarios
+      - pontos_vida_familiar.ferimentos - pontos_vida_familiar.ferimentos_nao_letais;
+  Dom('pontos-vida-corrente-familiar').textContent = pontos_vida_corrente_familiar;
 }
 
 function _AtualizaAtributos() {

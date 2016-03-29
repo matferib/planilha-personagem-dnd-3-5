@@ -170,12 +170,12 @@ function _CarregaHandlers() {
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
-    "botao-ferir-1": { callback: function() { ClickAjustarFerimentos(1); }, evento: 'click', },
-    "botao-ferir-3": { callback: function() { ClickAjustarFerimentos(3); }, evento: 'click', },
-    "botao-ferir-5": { callback: function() { ClickAjustarFerimentos(5); }, evento: 'click', },
-    "botao-curar-1": { callback: function() { ClickAjustarFerimentos(-1); }, evento: 'click', },
-    "botao-curar-3": { callback: function() { ClickAjustarFerimentos(-3); }, evento: 'click', },
-    "botao-curar-5": { callback: function() { ClickAjustarFerimentos(-5); }, evento: 'click', },
+    "botao-ferir-1": { callback: function() { ChangeAjustarFerimentos(1); }, evento: 'click', },
+    "botao-ferir-3": { callback: function() { ChangeAjustarFerimentos(3); }, evento: 'click', },
+    "botao-ferir-5": { callback: function() { ChangeAjustarFerimentos(5); }, evento: 'click', },
+    "botao-curar-1": { callback: function() { ChangeAjustarFerimentos(-1); }, evento: 'click', },
+    "botao-curar-3": { callback: function() { ChangeAjustarFerimentos(-3); }, evento: 'click', },
+    "botao-curar-5": { callback: function() { ChangeAjustarFerimentos(-5); }, evento: 'click', },
     "botao-descansar": { callback: function() { ClickDescansar(); }, evento: 'click', },
     // Changes.
     "nome": { callback: AtualizaGeral, evento: 'change', },
@@ -189,13 +189,18 @@ function _CarregaHandlers() {
     "niveis-negativos": { callback: AtualizaGeral, evento: 'change' },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "pontos-experiencia-adicionais": { callback: ChangePontosExperienciaAdicionais, evento: 'change', },
+    "pontos-vida-temporarios-familiar": { callback: AtualizaGeral, evento: 'change' },
     "input-adicionar-ferimentos": { callback:  function() {
         var dom = Dom('input-adicionar-ferimentos');
-        ClickAjustarFerimentos(parseInt(dom.value));
+        ChangeAjustarFerimentos(parseInt(dom.value) || 0);
+        dom.value = ''; }, evento: 'change', },
+    "input-adicionar-ferimentos-familiar": { callback:  function() {
+        var dom = Dom('input-adicionar-ferimentos-familiar');
+        ChangeAjustarFerimentosFamiliar(parseInt(dom.value) || 0);
         dom.value = ''; }, evento: 'change', },
     "input-remover-ferimentos": { callback:  function() {
         var dom = Dom('input-remover-ferimentos');
-        ClickAjustarFerimentos(-parseInt(dom.value));
+        ChangeAjustarFerimentos(-parseInt(dom.value));
         dom.value = ''; }, evento: 'change', },
     "moedas-platina": { callback: AtualizaGeral, evento: 'change', },
     "moedas-ouro": { callback: AtualizaGeral, evento: 'change', },

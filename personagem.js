@@ -18,8 +18,7 @@ var gPersonagem = {
   ],
   // Chave dos dominios.
   dominios: [],
-  // Chave do familiar.
-  familiar: '',
+  familiar: { chave: '', em_uso: false, pontos_vida: { base: 0, bonus: new Bonus(), temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 } },
   niveis_negativos: 0,
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {

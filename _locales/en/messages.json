@@ -2561,6 +2561,9 @@
 	"Ferimentos": {
 		"message": "Wounds"
 	},
+	"Ferir_Curar": {
+		"message": "Wound/Heal"
+	},
 	"span_nao_letal": {
 		"message": "Non lethal"
 	},
@@ -2572,6 +2575,12 @@
 	},
 	"Pontos_de_vida_temporarios": {
 		"message": "Temporary hit points"
+	},
+	"Pontos_de_Vida": {
+		"message": "Hit Points"
+	},
+	"span_pontos_vida_familiar": {
+		"message": "Hit Points"
 	},
 	"complemento": {
 		"message": "complement"
