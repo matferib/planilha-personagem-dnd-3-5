@@ -45,7 +45,7 @@
 <div id="div-visoes" >
 </div> <!--div-visoes-->
 
-<div id="div-versao"><span id="span-versao-planilha" class="i18n">Versão da Planilha</span>: 0.8.5
+<div id="div-versao"><span id="span-versao-planilha" class="i18n">Versão da Planilha</span>: 0.8.8
 </div> <!--div-versao-->
 
 <div id="div-serializacao" class="divs-principais">
@@ -98,7 +98,7 @@ Template:<select id="template">
   <option id="option-cm" name="cm" value="cm" class="i18n">CM</option>
 </select>
 <br>
-<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/><br>
+<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/>&nbsp;<span id='span-dominios'><span id="span-dominios-rotulo" class="i18n">Domínios:</span><select id='dominio-0'></select><select id='dominio-1'></select></span><br>
 <span id="span-experiencia" class="i18n">Experiência:</span>
 <input type="text" id="pontos-experiencia" size="6"/>+
 <input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP" class="i18n"/><br>
@@ -147,7 +147,7 @@ Template:<select id="template">
 <input type="text" id="input-remover-ferimentos" maxlength="3" size="3"/>
 </span>
 <span style="position: absolute; top: 0.6em">
-  <input type="checkbox" id="input-ferimento-nao-letal" maxlength="3" size="3"/><span class="i18n">Não letal</span>
+  <input type="checkbox" id="input-ferimento-nao-letal" maxlength="3" size="3"/><span class="i18n" id="span-nao-letal">Não letal</span>
 </span>
 </div>
 <button type="button" id="botao-descansar" class="botao-descansar i18n">Descansar</button>
@@ -183,16 +183,38 @@ Template:<select id="template">
 </div> <!-- div-especiais -->
 </div>
 
+<div class="divs-principais" id=div-familiar>
+<div>
+  <span id="span-familiar" class="titulo i18n">Familiar</span>
+  <div id="familiar">
+    <input id="familiar-em-uso" type="checkbox"/>
+    <select id="select-familiar"></select>
+    <br>
+    <!-- pontos vida familiar -->
+    <span id="span-pontos-vida-familiar" class="i18n">Pontos de Vida:</span>
+    <span id="pontos-vida-corrente-familiar"></span> =
+    <span id="pontos-vida-total-familiar">0</span>+
+    <input type="text" id="pontos-vida-temporarios-familiar" maxlength="3" size="3" placeholder="temporários" class="i18n"/>
+    <span id="ferimentos-familiar" maxlength="3" size="8"></span>
+    <span id="ferimentos-nao-letais-familiar" maxlength="3" size="8"></span><br>
+    <div>
+      <span class="adiciona-remove-ferimentos i18n">Ferir/Curar</span>
+      <input type="text" id="input-adicionar-ferimentos-familiar" maxlength="3" size="3"/>
+      <input type="checkbox" id="input-ferimento-nao-letal-familiar" maxlength="3" size="3"/><span class="i18n">Não letal</span>
+    </div>
+  </div>
+</div>
+
 <div class="divs-principais">
 <div id="div-imunidades">
 <span id="span-imunidades" class="titulo i18n">Imunidades</span> <span id="imunidades"></span>
-</div> <!-- div-especiais -->
+</div> <!-- div-imunidades -->
 </div>
 
 <div class="divs-principais">
 <div id="div-resistencia-magia">
 <span id="span-resistencia-magia" class="titulo i18n">Resistência a Magia</span> <span id="resistencia-magia"></span>
-</div> <!-- div-especiais -->
+</div> <!-- div-resistencia-magia -->
 </div>
 
 <div class="divs-principais">
@@ -238,7 +260,7 @@ Template:<select id="template">
 </div> <!-- div-talentos -->
 
 <div id="div-proficiencia-armas" class="divs-principais">
-<span class="titulo i18n">Proficiência com Armas</span><button type="button" id="botao-esconder-proficiencia-armas" text>▾</button><br>
+<span class="titulo i18n" id="span-proficiencia-com-armas">Proficiência com Armas</span><button type="button" id="botao-esconder-proficiencia-armas" text>▾</button><br>
 <span id="span-proficiencia-armas" style="display: none"></span>
 </div> <!-- div-proficiencia-armas -->
 

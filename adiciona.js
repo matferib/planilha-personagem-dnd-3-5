@@ -310,15 +310,17 @@ function AdicionaArmasAoEstilo(select_arma, arma_selecionada) {
 // @param indice_talento o indice do talento. Bom para talentos especificos por nivel (tipo monge).
 // @param chave_classe se o talento a ser adicionado for de classe.
 // @param div_pai div onde o talento sera adicionado.
+// @return o div com o dom do talento.
 function AdicionaTalento(indice_talento, chave_classe, div_pai) {
   var div_select_talentos = Dom('div-select-talentos');
-  var select_talento = CriaSelect();
+  var select_talento = CriaSelect(null, 'select-talento');
   select_talento.name = 'chave-talento';
   select_talento.addEventListener('change', AtualizaGeral);
   var talentos_ordenados = [];
+  var eh_classe = chave_classe != 'outros' && chave_classe != 'gerais';
   for (var chave_talento in tabelas_talentos) {
     var talento_tabela = tabelas_talentos[chave_talento];
-    if (chave_classe && !(chave_classe in talento_tabela)) {
+    if (eh_classe && !(chave_classe in talento_tabela)) {
       continue;
     }
     // Monge eh limitado por nivel.
@@ -355,8 +357,13 @@ function AdicionaTalento(indice_talento, chave_classe, div_pai) {
   var div_select_talento = CriaDiv();
   div_select_talento.appendChild(select_talento);
   div_select_talento.appendChild(input_complemento_talento);
+  if (chave_classe == 'outros') {
+    div_select_talento.appendChild(
+        CriaBotao('-', null, null, ClickRemoverTalento.bind(null, indice_talento)));
+  }
 
   div_pai.appendChild(div_select_talento);
+
   return div_select_talento;
 }
 

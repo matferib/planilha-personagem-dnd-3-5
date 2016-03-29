@@ -6,8 +6,9 @@ function CarregamentoInicial() {
   _CarregaTabelaNormalizacaoStrings();
   _CarregaTraducoes();
   _CarregaTitulos();
-  _CarregaHandlers();
   CarregaPersonagens();
+  _CarregaDominios();
+  _CarregaFamiliares();
   _CarregaRacas();
   _CarregaTemplates();
   _CarregaBotoesVisao();
@@ -18,6 +19,8 @@ function CarregamentoInicial() {
   _CarregaTabelaArmasArmaduras();
   _CarregaPericias();
   _CarregaFeiticos();
+
+  _CarregaHandlers();
 
   // Inicia o objeto de personagem.
   IniciaPersonagem();
@@ -79,9 +82,11 @@ function _CarregaTraducoes() {
   var elements = document.getElementsByClassName("i18n");
   for (var i = 0; i < elements.length; ++i) {
     var e = elements[i];
-    var trad = gm(_SubstituiTraducao(e.id));
+    // Os elementos com i18n sao traduzidos pelo id. Se nao houver, vai pelo texto.
+    // A entrada no locales deve conter o id ou texto normalizado.
+    var trad = gm(_SubstituiTraducao(e.id || e.textContent));
     if (trad != null && trad.length > 0 && e.id.length != null && e.id.length > 0) {
-      e.innerHTML = trad;
+      e.textContent = trad;
     }
     if (e.placeholder != null && e.placeholder.length > 0) {
       var tp = Traduz(e.placeholder);
@@ -147,6 +152,7 @@ function _CarregaHandlers() {
     "botao-gerar-personagem": { callback:  function() { ClickGerarPersonagem('comum'); }, evento: 'click', },
     "botao-gerar-personagem-elite": { callback:  function() { ClickGerarPersonagem('elite'); }, evento: 'click', },
     "botao-adicionar-estilo-luta": { callback:  ClickAdicionarEstiloLuta, evento: 'click', },
+    "botao-adicionar-talento": { callback:  ClickAdicionarTalento, evento: 'click', },
     "botao-esconder-proficiencia-armas": {
         callback:  function() { ClickBotaoEsconderDom('botao-esconder-proficiencia-armas', 'span-proficiencia-armas'); }, evento: 'click', },
     "botao-link": { callback:  ClickLink, evento: 'click', },
@@ -197,6 +203,10 @@ function _CarregaHandlers() {
     "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
     "text-area-outros-equipamentos": { callback:  AtualizaGeral, evento: 'change', },
     "text-area-notas": { callback:  AtualizaGeral, evento: 'change', },
+    "dominio-0": { callback: AtualizaGeral, evento: 'change' },
+    "dominio-1": { callback: AtualizaGeral, evento: 'change' },
+    "select-familiar": { callback: AtualizaGeral, evento: 'change' },
+    "familiar-em-uso": { callback: AtualizaGeral, evento: 'change' },
   };
 
   for (var id in mapa) {
@@ -217,6 +227,43 @@ function _CarregaRacas() {
   for (var chave_raca in tabelas_raca) {
     select_raca.appendChild(CriaOption(Traduz(tabelas_raca[chave_raca].nome), chave_raca))
   }
+}
+
+function _CarregaDominios() {
+  var dominios_ordenados = [];  // para ordenar.
+  for (var dominio in tabelas_dominios) {
+    var obj = { chave: dominio, nome: Traduz(tabelas_dominios[dominio].nome)};
+    dominios_ordenados.push(obj);
+  }
+  dominios_ordenados.sort(function(lhs, rhs) {
+    return lhs.nome.localeCompare(rhs.nome);
+  });
+  var valores_finais = {};
+  for (var dominio of dominios_ordenados) {
+    valores_finais[dominio.chave] = dominio.nome;
+  }
+  valores_finais = [ valores_finais ];
+  var doms = [ Dom('dominio-0'), Dom('dominio-1') ];
+  for (var dom of doms) {
+    PopulaSelect(valores_finais, dom);
+  }
+}
+
+function _CarregaFamiliares() {
+  var familiares_ordenados = [];
+  for (var familiar in tabelas_familiares) {
+    familiares_ordenados.push(
+        { chave: familiar, nome: Traduz(tabelas_familiares[familiar].nome) });
+  }
+  familiares_ordenados.sort(function(lhs, rhs) {
+    return lhs.nome.localeCompare(rhs.nome);
+  });
+  var valores_finais = {};
+  for (var familiar of familiares_ordenados) {
+    valores_finais[familiar.chave] = familiar.nome;
+  }
+  valores_finais = [valores_finais];
+  PopulaSelect(valores_finais, Dom('select-familiar'));
 }
 
 // Adiciona racas dinamicamente na planilha
@@ -356,11 +403,18 @@ function _CarregaTalentos() {
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('Gerais') + ': '));
+    } else if (chave_classe == 'outros') {
+      div_talentos_classe.appendChild(
+          CriaSpan(Traduz('Outros') + ': '));
     } else {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('De') + ' ' + Traduz(tabelas_classes[chave_classe].nome) + ': '));
     }
     div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
+    if (chave_classe == 'outros') {
+      div_talentos_classe.appendChild(
+          CriaBotao('+', 'botao-adicionar-talento'));
+    }
     div_talentos_classe.appendChild(CriaBr());
     div_talentos_classe.appendChild(CriaDiv('div-talentos-' + chave_classe + '-selects'));
     div_talentos.appendChild(div_talentos_classe);
@@ -515,7 +569,7 @@ function _CarregaPericias() {
     divs_ordenados.push({ traducao: texto_span, div_a_inserir: div});
   }
   divs_ordenados.sort(function(lhs, rhs) {
-    return (lhs.traducao < rhs.traducao) ? -1 : (lhs.traducao > rhs.traducao) ? 1 : 0;
+    return lhs.traducao.localeCompare(rhs.traducao);
   });
   divs_ordenados.forEach(function(trad_div) {
     if (div_pericias != null) {

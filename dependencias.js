@@ -6,6 +6,7 @@
 function DependenciasGerais() {
   _DependenciasNivelConjurador();
   _DependenciasEquipamentos();
+  _DependenciasFamiliar();
   _DependenciasDadosVida();
   _DependenciasAtributos();
   _DependenciasTalentos();
@@ -70,6 +71,17 @@ function _DependenciasNivelConjurador() {
   });
 }
 
+function _DependenciasFamiliar() {
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares)) {
+    return;
+  }
+  if (!gPersonagem.familiar.em_uso) {
+    return;
+  }
+  _DependenciasItemOuFamiliar('familiar', tabelas_familiares[gPersonagem.familiar.chave]);
+}
+
 function _DependenciasEquipamentos() {
   for (var chave_item in tabelas_itens) {
     _DependenciasItens(chave_item);
@@ -82,14 +94,14 @@ function _DependenciasItens(tipo_item) {
     if (!item.em_uso) {
       continue;
     }
-    _DependenciasItem(item.chave, tabelas_itens[tipo_item].tabela[item.chave]);
+    _DependenciasItemOuFamiliar(item.chave, tabelas_itens[tipo_item].tabela[item.chave]);
   }
 }
 
 // Calcula as dependencias do item.
 // @param chave_item a chave do item.
-// @param item_tabela o item na tabela apropriada.
-function _DependenciasItem(chave_item, item_tabela) {
+// @param item_tabela ou familiar, deve conter propriedades.
+function _DependenciasItemOuFamiliar(chave_item, item_tabela) {
   for (var propriedade in item_tabela.propriedades) {
     if (propriedade == 'ca') {
       _DependenciasItemCa(chave_item, item_tabela);
@@ -101,6 +113,10 @@ function _DependenciasItem(chave_item, item_tabela) {
       _DependenciasItemAtributos(chave_item, item_tabela);
     } else if (propriedade == 'tamanho') {
       _DependenciasItemTamanho(chave_item, item_tabela);
+    } else if (propriedade == 'bonus_pv') {
+      _DependenciasItemPontosVida(chave_item, item_tabela);
+    } else if (propriedade == 'especiais') {
+      _DependenciasItemEspeciais(chave_item, item_tabela);
     }
   }
 }
@@ -159,6 +175,25 @@ function _DependenciasItemPericias(chave_item, item_tabela) {
   }
 }
 
+function _DependenciasItemPontosVida(chave_item, item_tabela) {
+  for (var chave_bonus in item_tabela.propriedades.bonus_pv) {
+    gPersonagem.pontos_vida.bonus.Adiciona(
+        chave_bonus, chave_item, item_tabela.propriedades.bonus_pv[chave_bonus]);
+  }
+}
+
+function _DependenciasItemEspeciais(chave_item, item_tabela) {
+  for (var chave_especial in item_tabela.propriedades.especiais) {
+    if (chave_especial in gPersonagem.especiais) {
+      gPersonagem.especiais.vezes += item_tabela.propriedades.especiais[chave_especial];
+    } else {
+      gPersonagem.especiais[chave_especial] = {
+        vezes: item_tabela.propriedades.especiais[chave_especial], usado: 0, complemento: ''
+      }
+    }
+  }
+}
+
 function _DependenciasDadosVida() {
 }
 
@@ -207,7 +242,15 @@ function _DependenciasTalentos() {
   if (tabelas_raca[gPersonagem.raca].talento_extra) {
     ++talentos_gerais_por_nivel;
   }
+  if (gPersonagem.familiar != null && gPersonagem.familiar.em_uso) {
+    gPersonagem.talentos['gerais'][talentos_gerais_por_nivel] = {
+      chave: 'prontidao', complemento: 'familiar', imutavel: true
+    };
+    ++talentos_gerais_por_nivel;  // alerta
+  }
   gPersonagem.talentos['gerais'].length = talentos_gerais_por_nivel;
+
+  // Outros nao precisa fazer nada.
   // Guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
   if (nivel_guerreiro > 0) {
@@ -216,7 +259,9 @@ function _DependenciasTalentos() {
     gPersonagem.talentos['guerreiro'].length = 0;
   }
   // Mago.
-  gPersonagem.talentos['mago'].length = Math.floor(PersonagemNivelClasse('mago') / 5) + Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
+  gPersonagem.talentos['mago'].length =
+      Math.floor(PersonagemNivelClasse('mago') / 5) +
+      Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
   // Monge.
   var nivel_monge = PersonagemNivelClasse('monge');
   if (nivel_monge >= 6) {
@@ -418,7 +463,6 @@ function _DependenciasProficienciaArmas() {
 // Habilidades especiais do gPersonagem.
 function _DependenciasHabilidadesEspeciais() {
   var especiais_antes = gPersonagem.especiais;
-  gPersonagem.especiais = {};
   var tabelas_nivel_especiais = [];
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var entrada_classe = gPersonagem.classes[i];

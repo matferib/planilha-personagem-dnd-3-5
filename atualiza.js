@@ -48,6 +48,8 @@ function _AtualizaGeral() {
   _AtualizaPontosVida();
   _AtualizaAtributos();
   _AtualizaClasses();
+  _AtualizaDominios();
+  _AtualizaFamiliar();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaIniciativa();
@@ -177,6 +179,24 @@ function _AtualizaClasses() {
     selects_classes[i].disabled = true;
   }
   selects_classes[selects_classes.length - 1].disabled = false;
+}
+
+function _AtualizaDominios() {
+  if (PersonagemNivelClasse('clerigo') == 0) {
+    Dom('span-dominios').style.display = 'none';
+  } else {
+    Dom('span-dominios').style.display = 'inline';
+  }
+}
+
+function _AtualizaFamiliar() {
+  if (PersonagemNivelClasse('feiticeiro') == 0 &&
+      PersonagemNivelClasse('mago') == 0 &&
+      PersonagemNivelClasse('mago_necromante') == 0) {
+    Dom('familiar').style.display = 'none';
+  } else {
+    Dom('familiar').style.display = 'block';
+  }
 }
 
 // Atualiza uma classe.
@@ -466,7 +486,7 @@ function _AtualizaTalentos() {
     var div_talentos_classe = Dom('div-talentos-' + chave_classe);
     var lista_classe = gPersonagem.talentos[chave_classe];
     var div_selects = Dom('div-talentos-' + chave_classe + '-selects');
-    if (lista_classe.length > 0) {
+    if (lista_classe.length > 0 || chave_classe == 'outros') {
       ImprimeNaoSinalizado(
           lista_classe.length,
           Dom('talentos-' + chave_classe + '-total'));
@@ -476,7 +496,7 @@ function _AtualizaTalentos() {
             lista_classe[i],
             i < div_selects.childNodes.length ?
                 div_selects.childNodes[i] : null,
-            (chave_classe == 'gerais') ? null : chave_classe,
+            chave_classe,
             div_selects);
       }
       // Se tinha mais talentos, tira os que estavam a mais.
@@ -507,6 +527,7 @@ function _AtualizaTalento(indice_talento, talento_personagem, div_talento, chave
   for (var i = 0; i < div_talento.childNodes.length; ++i) {
     var filho = div_talento.childNodes[i];
     if (filho.name == 'chave-talento') {
+      filho.disabled = talento_personagem.imutavel;
       SelecionaValor(talento_personagem.chave, filho);
     } else if (filho.name == 'complemento-talento') {
       filho.disabled = !('complemento' in talento);
@@ -747,6 +768,12 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
       div_nivel_slots,
       slots.feiticos.length + (possui_extra ? 1 : 0),
       AdicionaSlotFeitico.bind(null, div_nivel_slots, !precisa_conhecer, chave_classe, nivel, slots));
+
+  // Atualiza a CD.
+  var span = Dom('span-cd-' + chave_classe + '-' + nivel);
+  if (span != null) {
+    span.textContent = slots.cd;
+  }
 
   // Popula os selects.
   var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);

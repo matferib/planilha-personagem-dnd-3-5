@@ -16,6 +16,10 @@ var gPersonagem = {
   classes: [
       { classe: 'guerreiro', nivel: 1, nivel_conjurador: 0, linha_tabela_feiticos: 0 },
   ],
+  // Chave dos dominios.
+  dominios: [],
+  // Chave do familiar.
+  familiar: '',
   niveis_negativos: 0,
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {
@@ -73,12 +77,17 @@ var gPersonagem = {
     // Algumas classes ganham talentos especificos.
     // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
-    // Cada talento: { chave, complemento }
+    // Cada talento: { chave, complemento, imutavel }
+    // Outros se referem a talentos que vem de excecoes de regras, muito dificeis
+    // de implementar e a pessoa poe manualmente.
+    // Se imutavel, o select nao permitira mudanca (usado para talentos derivados, como
+    // prontidao de familiar).
     gerais: [],
     guerreiro: [],
     mago: [],
     monge: [],
     ranger: [],
+    outros: [],
   },
   // pericias.
   pericias: {
@@ -246,6 +255,7 @@ function PersonagemLimpaGeral() {
   for (var tipo_item in tabelas_itens) {
     gPersonagem[tipo_item].length = 0;
   }
+  gPersonagem.especiais = {};
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();
@@ -391,6 +401,16 @@ function PersonagemNivelClasse(classe) {
     }
   }
   return 0;
+}
+
+// @return true se o personagem tem algum nivel de mago (ou mago_*).
+function PersonagemTemNivelMago() {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    if (gPersonagem.classes[i].classe.find('mago') == 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // @param classe se null, retorna o maior de todas as classes.

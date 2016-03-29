@@ -152,7 +152,9 @@ function SelecionaValor(valor_selecionado, dom_select) {
 
 // Popula o select com os valores passados.
 // @param valores a serem colocados no select.
-//   [ {valor: texto} ]
+//   [ {valor: texto} ].
+// Essa funcao ta bizarra. Nao sei o motivo do array externo.
+// TODO mudar!
 function PopulaSelect(valores, dom_select) {
   dom_select.options.length = 0;
   RemoveFilhos(dom_select);

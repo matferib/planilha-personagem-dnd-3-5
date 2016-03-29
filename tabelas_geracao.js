@@ -153,10 +153,16 @@ var tabelas_geracao = {
     atributos: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
   },
   clerigo: {
-    atributos: [ 'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza' ],
+    atributos: [
+      'sabedoria', 'constituicao', 'forca', 'carisma', 'inteligencia',  'destreza'
+    ],
     ordem_pericias: [
       'concentracao', 'cura', 'diplomacia', 'conhecimento_religiao', 'conhecimento_historia',
-      'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios' ],
+      'conhecimento_arcano', 'conhecimento_planos', 'profissao', 'identificar_magia', 'oficios'
+    ],
+    talentos: [
+      'preparar_pocao', 'magia_combate', 'escrever_pergaminho', 'reflexos_rapidos', 'foco_em_arma',
+    ],
     ordem_magias: {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
@@ -165,36 +171,36 @@ var tabelas_geracao = {
     },
     por_nivel: {
       1: { moedas: { ouro: 300 },
-          armadura: 'cota_de_talas',
-          escudo: 'pesado_aco',
+          armadura: { nome: 'cota_de_talas' },
+          escudo: { nome: 'pesado_aco' },
           armas: [ { chave: 'maca_estrela', obra_prima: true },
                    { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
           aneis: [],
       },
       2: { moedas: { ouro: 1000 },
-           armadura: 'meia_armadura',
-           escudo: 'pesado_aco',
+           armadura: { nome: 'meia_armadura' },
+           escudo: { nome: 'pesado_aco' },
            armas: [ { chave: 'maca_estrela', obra_prima: true },
                     { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
            aneis: [],
       },
       3: { moedas: { ouro: 600 },
-           armadura: 'armadura_de_batalha',
-           escudo: 'pesado_aco',
+           armadura: { nome: 'armadura_de_batalha' },
+           escudo: { nome: 'pesado_aco' },
            armas: [ { chave: 'maca_estrela', obra_prima: true },
                     { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
            aneis: [],
       },
       4: { moedas: { ouro: 1400 },
-           armadura: 'armadura_de_batalha',
-           escudo: 'pesado_aco',
+           armadura: { nome: 'armadura_de_batalha' },
+           escudo: { nome: 'pesado_aco' },
            armas: [ { chave: 'maca_estrela', obra_prima: true },
                     { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
            aneis: [],
       },
       5: { moedas: { ouro: 2500 },
-           armadura: 'armadura_de_batalha',
-           escudo: 'pesado_aco',
+           armadura: { nome: 'armadura_de_batalha' },
+           escudo: { nome: 'pesado_aco' },
            armas: [ { chave: 'maca_estrela', obra_prima: true },
                     { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
            aneis: [],
@@ -438,6 +444,62 @@ var tabelas_geracao = {
   },
   feiticeiro: {
     atributos: [ 'carisma', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'forca' ],
+    ordem_pericias: [
+      'concentracao', 'blefar', 'conhecimento_arcano', 'identificar_magia'],
+    talentos: [
+      'escrever_pergaminho', 'foco_em_magia', 'magia_penetrante', 'magia_penetrante_maior',
+    ],
+    ordem_magias: {
+      // Essas magias sao para necromantes.
+      0: [ 'pasmar', 'detectar_magia', 'som_fantasma', 'mao_arcana', 'toque '],
+      1: [ 'armadura_arcana', 'misseis_magicos', 'patas_de_aranha', 'raio_enfraquecimento', 'toque_macabro', ],
+      2: [ 'invisibilidade', 'invocar_enxames', 'vida_falsa', 'resistir_elementos', 'suportar_elementos',
+           'toque_do_carnical', 'nublar'],
+      3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
+      4: [ 'pele_rochosa', ]
+    },
+    por_nivel: {
+      4: {
+        moedas: { ouro: 950 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      5: {
+        moedas: { ouro: 2000 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      6: {
+        moedas: { ouro: 4300 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      7: {
+        moedas: { ouro: 3900 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      8: {
+        moedas: { ouro: 6100 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      11: {
+        moedas: { ouro: 12700 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ 'armadura_natural_1' ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+    },
   },
   ladino: {
     atributos: [ 'destreza', 'inteligencia', 'constituicao', 'forca', 'sabedoria', 'carisma' ],
@@ -576,7 +638,21 @@ var tabelas_geracao = {
     atributos: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
   },
   ranger: {
+    ordem_pericias: [
+      'esconderse', 'furtividade', 'observar', 'sobrevivencia', 'ouvir', 'saltar', 'afinidade_com_animais', 'cavalgar'
+    ],
+    talentos: [
+      'tolerancia', 'tiro_certeiro', 'ataque_poderoso', 'tiro_preciso', 'foco_em_arma', 'combater_com_duas_armas_maior'
+    ],
     atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+    por_nivel: {
+      7: {
+        moedas: { ouro: 1400 },
+        armadura: { nome: 'couro_batido', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 1, obra_prima: true },
+                 { chave: 'arco_longo', bonus: 1, obra_prima: true }, ],
+      },
+    },
   },
   // classes NPC: nao existe uma tabela para esses, coloquei o que achei mais adequado.
   adepto: {

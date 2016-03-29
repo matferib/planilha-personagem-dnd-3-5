@@ -243,6 +243,9 @@ var tabelas_classes = {
     nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba:
     bba_fraco, nivel_conjurador: { modificador: 1.0, },
     talentos: [ 'usar_armas_simples' ],
+    especiais: {
+      1: ['familiar'],
+    },
   },
   ladino: {
     nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio,
@@ -455,6 +458,7 @@ var tabelas_especiais = {
   mente_tranquila: { nome: 'Mente Tranquila' },
   mimetismo: { nome: 'Mimetismo' },
   montaria_especial: { nome: 'Montaria especial', },
+  mordida_venenosa: { nome: 'Mordida Venenosa' },
   passo_etereo: { nome: 'Passo Etéreo' },
   pureza_corporal: { nome: 'Pureza Corporal' },
   queda_suave_6m: { nome: 'Queda Suave (6m)' },
@@ -1157,7 +1161,6 @@ Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Sorrateiro - +2 nos testes de Esconder-se e Furtividade
-Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
@@ -1405,17 +1408,16 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   magia_natural: {
       nome: 'Magia Natural',
       requisitos: { atributos: { sabedoria: 13 } } },
-  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia 
   magia_penetrante: {
       nome: 'Magia Penetrante',
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia.',
   },
   // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
   // (cumulativo com magia penetrante).
   magia_penetrante_maior: {
       nome: 'Magia Penetrante Maior',
       requisitos: { talentos: [ 'magia_penetrante' ] },
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola (cumulativo)',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia (cumulativo).',
   },
   magia_combate: {
       nome: 'Magia em Combate', descricao: '+4 de bônus nos teste de Concentração para conjurar na defensiva.',
@@ -1580,6 +1582,14 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     requisitos: { nivel: { conjurador: 3 }, },
     descricao: 'Permite a criação de poções mágicas.',
     mago: 1,
+  },
+  // Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
+  sucesso_decisivo_aprimorado: {
+    nome: 'Sucesso Decisivo Aprimorado',
+    requisitos: { proficiencia_arma: true },
+    complemento: 'arma',
+    descricao: 'Dobra margem de ameaça da arma.',
+    guerreiro: true,
   },
   // Talentos Metamágicos Pré-requisitos Benefícios
   // TODO implementar niveis_adicionais.
@@ -1910,6 +1920,14 @@ var tabelas_atributos_invertidos = {
   'Carisma': 'carisma',
 };
 
+// As propriedades podem ser:
+// ca: { tipo: valor}
+// pericias: { chave: valor, ... }
+// atributos: { chave: valor, ... }
+// tamanho: +- valor.
+// salvacoes: { chave: valor}, chave pode ser 'todas'.
+// bonus_pv: { chave: valor }
+// especiais: { chave: valor }
 var tabelas_aneis = {
   protecao_1: {
       nome: 'Proteção +1', preco: '2000 PO',
@@ -2199,7 +2217,10 @@ var tabelas_pocoes = {
   },
   curar_ferimentos_moderados: { nome: 'Curar ferimentos moderados', tipo: 'pocao' , preco: '300 PO' },
   escuridao: { nome: 'Escuridão', tipo: 'oleo', preco: '300 PO' },
-  visao_escuro: { nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO' },
+  visao_escuro: {
+    nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO',
+    propriedades: { especiais: { visao_escuro: 1 } }
+  },
   retardar_envenenamento: { nome: 'Retardar envenenamento', tipo: 'pocao' , preco: '300 PO' },
   esplendor_aguia: {
     nome: 'Esplendor da águia', tipo: 'pocao' , preco: '300 PO',
@@ -2357,4 +2378,122 @@ var tabelas_materiais_especiais = {
   prata_alquimica: {
       nome: 'prata alquímica',
       requisitos: { arma: true, metal: true, }, },
+};
+
+var tabelas_dominios = {
+  ar: { nome: 'Ar' },
+  animal: { nome: 'Animal' },
+  caos: { nome: 'Caos' },
+  morte: { nome: 'Morte' },
+  destruicao: { nome: 'Destruição' },
+  terra: { nome: 'Terra' },
+  mal: { nome: 'Mal' },
+  fogo: { nome: 'Fogo' },
+  bem: { nome: 'Bem' },
+  cura: { nome: 'Cura' },
+  conhecimento: { nome: 'Conhecimento' },
+  ordem: { nome: 'Ordem' },
+  sorte: { nome: 'Sorte' },
+  magia: { nome: 'Magia' },
+  planta: { nome: 'Planta' },
+  protecao: { nome: 'Proteção' },
+  forca: { nome: 'Força' },
+  sol: { nome: 'Sol' },
+  viagem: { nome: 'Viagem' },
+  enganacao: { nome: 'Enganação' },
+  guerra: { nome: 'Guerra' },
+  agua: { nome: 'Água' },
+  // Abaixo, os de FR.
+  equilibrio: { nome: 'Equilíbrio' },
+  caverna: { nome: 'Caverna' },
+  encantamento: { nome: 'Encantamento' },
+  frio: { nome: 'Frio' },
+  oficios: { nome: 'Ofícios' },
+  escuridao: { nome: 'Escuridão' },
+  drow: { nome: 'Drow' },
+  anao: { nome: 'Anão' },
+  elfo: { nome: 'Elfo' },
+  familia: { nome: 'Família' },
+  destino: { nome: 'Destino' },
+  gnomo: { nome: 'Gnomo' },
+  halfling: { nome: 'Halfling' },
+  odio: { nome: 'Ódio' },
+  ilusao: { nome: 'Ilusão' },
+  mentalismo: { nome: 'Mentalismo' },
+  metal: { nome: 'Metal' },
+  lua: { nome: 'Lua' },
+  nobreza: { nome: 'Nobreza' },
+  oceano: { nome: 'Oceano' },
+  orc: { nome: 'Orc' },
+  planejamento: { nome: 'Planejamento' },
+  portal: { nome: 'Portal' },
+  renovacao: { nome: 'Renovação' },
+  repouso: { nome: 'Repouso' },
+  retribuicao: { nome: 'Retribuição' },
+  runa: { nome: 'Runa' },
+  escamas: { nome: 'Escamas' },
+  geleia: { nome: 'Geléia' },
+  magicas: { nome: 'Mágicas' },
+  aranha: { nome: 'Aranha' },
+  tempestade: { nome: 'Tempestade' },
+  sofrimento: { nome: 'Sofrimento' },
+  tempo: { nome: 'Tempo' },
+  comercio: { nome: 'Comércio' },
+  tirania: { nome: 'Tirania' },
+  mortos_vivos: { nome: 'Mortos-Vivos' },
+  morte_aquosa: { nome: 'Morte Aquosa (Prestígio)' },
+};
+
+var tabelas_familiares = {
+  morcego: {
+    nome: 'Morcego',
+    propriedades: { pericias: { ouvir: 3 } },
+  },
+  gato: {
+    nome: 'Gato',
+    propriedades: { pericias: { furtividade: { familiar: 3 } } },
+  },
+  falcao: {
+    nome: 'Falcão',
+    propriedades: { pericias: { observar: { familiar: 3 } } },  // na luz
+  },
+  lagarto: {
+    nome: 'Lagarto',
+    propriedades: { pericias: { escalar: { familiar: 3 } } },
+  },
+  coruja: {
+    nome: 'Coruja',
+    propriedades: { pericias: { observar: { familiar: 3 } } },  // nas sombras.
+  },
+  rato: {
+    nome: 'Rato',
+    propriedades: { salvacoes: { fortitude: 2 } },  // nas sombras.
+  },
+  corvo: {
+    nome: 'Corvo',
+    propriedades: { pericias: { avaliacao: { familiar: 3 } } },  // na luz
+  },
+  cobra: {
+    nome: 'Cobra',
+    propriedades: { pericias: { blefar: { familiar: 3 } } },
+  },
+  sapo: {
+    nome: 'Sapo',
+    propriedades: { bonus_pv: { familiar: 3 } },
+  },
+  texugo: {
+    nome: 'Texugo',
+    propriedades: { salvacoes: { reflexo: 2 } },  // nas sombras.
+  },
+  // Aprimorado.
+  // FR.
+  aranha_cabeluda: {
+    nome: 'Aranha Cabeluda',
+    propriedades: { especiais: { visao_escuro: 1, mordida_venenosa: 1 } },
+  },
+  polvo: {
+    nome: 'Polvo',
+    // Interessante. o bonus eh menor pq nao eh condicionado a sombra ou luz.
+    propriedades: { pericias: { observar: { familiar: 2 } } },
+  },
 };
