@@ -2579,6 +2579,9 @@
 	"Esconde_Mostra_proficiencias_em_armas": {
 		"message": "Hides/Shows weapon proficiencies."
 	},
+	"Esconde_Mostra_pericias": {
+		"message": "Hides/Shows skills."
+	},
 	"Geral": {
 		"message": "General"
 	},

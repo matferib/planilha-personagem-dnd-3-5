@@ -127,6 +127,7 @@ function _CarregaTitulos() {
     "pontos-vida-temporarios": Traduz("Pontos de vida temporários"),
     "input-ferimento-nao-letal": Traduz("Ferimentos não letais"),
     "botao-esconder-proficiencia-armas": Traduz("Esconde/Mostra proficiências em armas"),
+    "botao-esconder-pericias": Traduz("Esconde/Mostra perícias"),
   };
 
   for (var id in mapa) {
@@ -155,6 +156,8 @@ function _CarregaHandlers() {
     "botao-adicionar-talento": { callback:  ClickAdicionarTalento, evento: 'click', },
     "botao-esconder-proficiencia-armas": {
         callback:  function() { ClickBotaoEsconderDom('botao-esconder-proficiencia-armas', 'span-proficiencia-armas'); }, evento: 'click', },
+    "botao-esconder-pericias": {
+        callback:  function() { ClickBotaoEsconderDom('botao-esconder-pericias', 'span-lista-pericias'); }, evento: 'click', },
     "botao-link": { callback:  ClickLink, evento: 'click', },
     "botao-gerar-resumo": { callback:  ClickGerarResumo, evento: 'click', },
     "botao-adicionar-arma": { callback:  ClickAdicionarArma, evento: 'click', },
@@ -516,7 +519,7 @@ function _CarregaPericias() {
       }
     }
   }
-  var div_pericias = Dom('div-pericias');
+  var span_pericias = Dom('span-lista-pericias');
   // Ordenacao.
   var divs_ordenados = [];
   for (var chave_pericia in tabelas_pericias) {
@@ -572,8 +575,8 @@ function _CarregaPericias() {
     return lhs.traducao.localeCompare(rhs.traducao);
   });
   divs_ordenados.forEach(function(trad_div) {
-    if (div_pericias != null) {
-      div_pericias.appendChild(trad_div.div_a_inserir);
+    if (span_pericias != null) {
+      span_pericias.appendChild(trad_div.div_a_inserir);
     }
   });
 }
