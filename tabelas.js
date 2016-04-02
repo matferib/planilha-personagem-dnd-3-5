@@ -2467,7 +2467,7 @@ var tabelas_familiares = {
   },
   rato: {
     nome: 'Rato',
-    propriedades: { salvacoes: { fortitude: 2 } },  // nas sombras.
+    propriedades: { salvacoes: { fortitude: 2 } },
   },
   corvo: {
     nome: 'Corvo',
@@ -2483,7 +2483,7 @@ var tabelas_familiares = {
   },
   texugo: {
     nome: 'Texugo',
-    propriedades: { salvacoes: { reflexo: 2 } },  // nas sombras.
+    propriedades: { salvacoes: { reflexo: 2 } },
   },
   // Aprimorado.
   // FR.
