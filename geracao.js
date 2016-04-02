@@ -154,6 +154,7 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
 // Gera um personagem a partir das classes e niveis.
 // @param modo 'elite' ou 'comum'.
 // @param submodo opcional 'tabelado' ou 'aleatorio'.
+// TODO refazer essa funcao gerando tudo a partir das entradas para nao ficar essa coisa de ir do personagem para as entradas e voltar.
 function GeraPersonagem(modo, submodo) {
   PersonagemLimpaGeral();
   if (!submodo) {
@@ -196,8 +197,10 @@ function GeraPersonagem(modo, submodo) {
                 tabelas_geracao_classe,
                 gPersonagem.classes[0].nivel);
   _GeraFeiticos();
+  // Importante regerar aqui para evitar duplicacoes.
+  gPersonagem.especiais = {};
   AtualizaGeralSemConverterEntradas();
-  LeEntradas();  // importante.
+  LeEntradas();  // importante, pois as entradas estao vazias. Isso efetivamente salva o personagem.
 }
 
 function _GeraTalentos(chave_classe, tabela_classe, tabela_geracao_classe, nivel) {
