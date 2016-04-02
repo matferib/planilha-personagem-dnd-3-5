@@ -253,7 +253,10 @@ function _CarregaDominios() {
   valores_finais = [ valores_finais ];
   var doms = [ Dom('dominio-0'), Dom('dominio-1') ];
   for (var dom of doms) {
-    PopulaSelect(valores_finais, dom);
+    // Verificacao por causa dos testes.
+    if (dom != null) {
+      PopulaSelect(valores_finais, dom);
+    }
   }
 }
 
@@ -271,7 +274,11 @@ function _CarregaFamiliares() {
     valores_finais[familiar.chave] = familiar.nome;
   }
   valores_finais = [valores_finais];
-  PopulaSelect(valores_finais, Dom('select-familiar'));
+  var dom_familiar = Dom('select-familiar');
+  // Verificacao por causa dos testes.
+  if (dom_familiar != null) {
+    PopulaSelect(valores_finais, dom_familiar);
+  }
 }
 
 // Adiciona racas dinamicamente na planilha
