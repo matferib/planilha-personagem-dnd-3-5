@@ -494,7 +494,7 @@ function CarregaTestes() {
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
       _ConvertePericias();
       _DependenciasAtributos();
-      _DependenciasItem('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
+      _DependenciasItemOuFamiliar('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
       _DependenciasPericias();
       if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 6) {
         this.resultado = false;
