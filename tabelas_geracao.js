@@ -312,6 +312,8 @@ var tabelas_geracao = {
   },
   guerreiro: {
     atributos: [ 'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
+    ordem_pericias: [ 'escalar', 'saltar', 'intimidar', 'cura' ],
+    talentos: [ 'ataque_poderoso', 'trespassar', 'esquiva', 'usar_arma_exotica', 'sucesso_decisivo_aprimorado', 'iniciativa_aprimorada' ],
     por_nivel: {
       1: { moedas: { ouro: 350 },
            armadura: { nome: 'cota_de_talas', },
@@ -559,12 +561,45 @@ var tabelas_geracao = {
       // Essas magias sao para necromantes.
       0: [ 'detectar_magia', 'ler_magias', 'raio_de_gelo', 'romper_morto_vivo', 'som_fantasma'],
       1: [ 'armadura_arcana', 'maos_flamejantes', 'patas_de_aranha', 'raio_enfraquecimento', 'toque_macabro', ],
-      2: [ 'invisibilidade', 'invocar_enxames', 'queimadura_aganazzar', 'resistir_elementos', 'suportar_elementos',
+      2: [ 'invisibilidade', 'vitalidade_ilusoria', 'invocar_enxames', 'queimadura_aganazzar', 'resistir_elementos', 'suportar_elementos',
            'toque_do_carnical'],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
       4: [ 'pele_rochosa', ]
     },
     por_nivel: {
+      1: {
+        moedas: { ouro: 800 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+      },
+      2: {
+        moedas: { ouro: 1650 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+      },
+      3: {
+        moedas: { ouro: 2150 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+      },
+      4: {
+        moedas: { ouro: 950 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      5: {
+        moedas: { ouro: 2000 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      6: {
+        moedas: { ouro: 4300 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
       7: {
         moedas: { ouro: 3900 },
         armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
