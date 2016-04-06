@@ -2849,6 +2849,33 @@
   },
   "Polvo": {
     "message": "Octopus"
-  }
+  },
   // fim Familiares.
+  "sem_esquiva": {
+    "message": "no dodge"
+  },
+  "Patas_de_Aranha": {
+    "message": "Spider Climb"
+  },
+  "Concede_habilidade_para_andar_em_parede_e_tetos_": {
+    "message": "Grants ability to walk on walls and ceilings."
+  },
+  "Armadura_Arcana": {
+    "message": "Mage Armor"
+  },
+  "Concede_ao_alvo_4_de_bonus_de_armadura_": {
+    "message": "Grants +4 armor bonus."
+  },
+  "Area_Escorregadia": {
+    "message": "Grease"
+  },
+  "Torna_3_m_quadrados_ou_um_objeto_escorregadios_": {
+    "message": "Makes 10-ft. square or one object slippery."
+  },
+  "Invisibilidade": {
+    "message": "Invisibility"
+  },
+  "O_alvo_fica_invisivel_durante_1_min_nivel_ou_ate_atacar_": {
+    "message": "Subject is invisible for 1 min./level or until it attacks."
+  }
 }
