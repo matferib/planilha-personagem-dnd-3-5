@@ -1132,6 +1132,7 @@ var tabelas_armas_exoticas = {
 //   bonus_pv, (quantos pontos de vida o talento concede).
 //   bonus_salvacao: { tipo: valor }, (quantos pontos o talento fornece em salvacoes).
 //   bonus_iniciativa,  (bonus que o talento fornece na iniciativa do personagem)
+//   bonus_ca: { tipo: valor }
 //   cumulativo, (se o talento puder ser selecionado mais de uma vez e acumular.
 //                eg vitalidade).
 //   multiplas_vezes, (se o talento puder ser selecionado mais de uma vez com
@@ -1307,6 +1308,7 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     nome: 'Esquiva',
     requisitos: { atributos: { destreza: 13 } },
     descricao: '+1 de bônus de esquiva na CA contra um adversário à sua escolha.',
+    bonus_ca: { esquiva: 1, },
     guerreiro: true,
   },
   especializacao_arma_maior: {
@@ -1424,16 +1426,20 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   },
   maos_level: {
       nome: 'Mãos Leves',
-      bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
+      bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 }
+  },
   mobilidade: {
       nome: 'Mobilidade',
       requisitos: { talentos: [ 'esquiva'], },
       descricao: '+4 de bônus de esquiva na CA contra ataques de oportunidade.',
-      guerreiro: true, },
+      bonus_ca: { esquiva: 4 },
+      guerreiro: true,
+  },
   negociador: {
       nome: 'Negociador',
       descricao: '+2 de bônus nos testes de Diplomacia e Sentir Motivação.',
-      bonus_pericias: { diplomacia: 2, sentir_motivacao: 2, }, },
+      bonus_pericias: { diplomacia: 2, sentir_motivacao: 2, },
+  },
   persuasivo: {
       nome: 'Persuasivo',
       descricao: '+2 de bônus nos testes de blefar e intimidação.',
