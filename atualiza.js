@@ -396,14 +396,23 @@ function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
 function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   var usar_escudo = (nome_estilo == 'arma_escudo');
   RemoveFilhos(span_classe_armadura);
+  var tem_esquiva = PersonagemPossuiTalento('esquiva');
   // AC normal.
   var span_ca_normal = CriaSpan();
-  var array_exclusao = usar_escudo ? null : ['escudo', 'escudo_melhoria'];
+  var array_exclusao = usar_escudo ? [] : ['escudo', 'escudo_melhoria'];
   ImprimeNaoSinalizado(
       10 + gPersonagem.ca.bonus.Total(array_exclusao),
       span_ca_normal);
   Titulo(gPersonagem.ca.bonus.Exporta(array_exclusao), span_ca_normal);
   span_classe_armadura.appendChild(span_ca_normal);
+  if (tem_esquiva) {
+    var dom_falso = { textContent: '' };
+    array_exclusao.push('esquiva');
+    ImprimeNaoSinalizado(
+        10 + gPersonagem.ca.bonus.Total(array_exclusao),
+        dom_falso);
+    span_ca_normal.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
+  }
   span_ca_normal.textContent += ', ';
   // AC surpreso.
   var span_ca_surpreso = CriaSpan();
@@ -429,6 +438,14 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
       gPersonagem.ca.bonus.Exporta(array_exclusao),
       span_ca_toque);
   span_ca_toque.textContent = Traduz('Toque') + ': ' + span_ca_toque.textContent;
+  if (tem_esquiva) {
+    var dom_falso = { textContent: '' };
+    array_exclusao.push('esquiva');
+    ImprimeNaoSinalizado(
+        10 + gPersonagem.ca.bonus.Total(array_exclusao),
+        dom_falso);
+    span_ca_toque.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
+  }
   span_classe_armadura.appendChild(span_ca_toque);
 }
 
