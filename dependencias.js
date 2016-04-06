@@ -934,6 +934,7 @@ function _DependenciasBonusPorCategoria(
   if (estilo.nome == 'uma_arma') {
     multiplicador_dano_forca = 1.0;
     if (gPersonagem.atributos.forca.modificador > 0 && !arma_leve) {
+      // arcos vao entrar aqui mas na hora de computar o dano nao vao levar isso em consideracao.
       multiplicador_dano_forca = 1.5;
     }
   } else if (estilo.nome == 'arma_escudo') {
