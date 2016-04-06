@@ -893,7 +893,7 @@ var tabelas_armas_comuns = {
 
   sabre: { nome: 'sabre', preco: '20 PO', dano: { medio: '1d6' } ,
            categorias: { cac: true } ,
-           critico: '18-20/x2', peso: '1kg', tipo: 'perfurante' },
+           critico: '18-20/×2', peso: '1kg', tipo: 'perfurante' },
 
   tridente: { nome: 'tridente', preco: '15 PO', dano: { medio: '1d8' } ,
               categorias: { cac: true, arremesso: true} ,
@@ -935,15 +935,15 @@ var tabelas_armas_comuns = {
 
   machado_grande: { nome: 'machado grande', preco: '20 PO', dano: { medio: '1d12' } ,
                     categorias: { cac_duas_maos: true } ,
-                    critico: 'x3', peso: '11kg', tipo: 'cortante' },
+                    critico: '×3', peso: '11kg', tipo: 'cortante' },
 
   mangual_pesado: { nome: 'mangual pesado', preco: '15 PO', dano: { medio: '1d10' } ,
                     categorias: { cac_duas_maos: true } ,
-                    critico: '19-20/x2', peso: '10kg', tipo: 'concussão' },
+                    critico: '19-20/×2', peso: '10kg', tipo: 'concussão' },
 
   ranseur: { nome: 'ranseur', preco: '10 PO', dano: { medio: '2d4' } ,
              categorias: { cac_duas_maos: true } ,
-             critico: 'x3', peso: '11kg', tipo: 'perfurante' },
+             critico: '×3', peso: '11kg', tipo: 'perfurante' },
 
 // Ranged Weapons
 
@@ -952,70 +952,70 @@ var tabelas_armas_comuns = {
                 incremento_distancia: '12 quadrados', peso: '1Kg', tipo: 'perfurante' },
 
   arco_curto_composto: { nome: 'arco curto composto', preco: '75 PO',
-                         dano: { medio: '1d6'  }, critico: 'x3',
+                         dano: { medio: '1d6'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_1: { nome: 'arco curto composto (1)', preco: '150 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_2: { nome: 'arco curto composto (2)', preco: '225 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_3: { nome: 'arco curto composto (3)', preco: '300 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_4: { nome: 'arco curto composto (4)', preco: '375 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_5: { nome: 'arco curto composto (5)', preco: '450 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_6: { nome: 'arco curto composto (6)', preco: '525 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
 
-  arco_longo: { nome: 'arco longo', preco: '75 PO', dano: { medio: '1d8'  }, critico: 'x3',
+  arco_longo: { nome: 'arco longo', preco: '75 PO', dano: { medio: '1d8'  }, critico: '×3',
                 categorias: { distancia: true },
                 incremento_distancia: '20 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto: { nome: 'arco longo composto', preco: '100 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_1: { nome: 'arco longo composto (1)', preco: '200 PO',
-                           dano: { medio: '1d8'  }, critico: 'x3',
+                           dano: { medio: '1d8'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_2: { nome: 'arco longo composto (2)', preco: '300 PO',
-                           dano: { medio: '1d8'  }, critico: 'x3',
+                           dano: { medio: '1d8'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_3: { nome: 'arco longo composto (3)', preco: '400 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_4: { nome: 'arco longo composto (4)', preco: '500 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_5: { nome: 'arco longo composto (5)', preco: '600 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_6: { nome: 'arco longo composto (6)', preco: '700 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
@@ -1051,7 +1051,7 @@ var tabelas_armas_exoticas = {
 
   espada_bastarda: { nome: 'espada bastarda', preco: '35 PO', dano: { medio: '1d10' } ,
                      categorias: { cac: true } ,
-                     critico: '19-20/x2', peso: '3Kg', tipo: 'cortante' },
+                     critico: '19-20/×2', peso: '3Kg', tipo: 'cortante' },
 
   machado_de_guerra_anao: { nome: 'machado de guerra anão', preco: '30 PO',
                             dano: { medio: '1d10'}, categorias: { cac: true  } ,
@@ -1068,7 +1068,7 @@ var tabelas_armas_exoticas = {
                             dano: { medio: '1d8'  },
                             dano_secundario: {pequeno: '1d6', medio: '1d8' },
                             categorias: { cac: true }, arma_dupla: true,
-                            critico: '19-20/x2', peso: '10Kg', tipo: 'cortante' },
+                            critico: '19-20/×2', peso: '10Kg', tipo: 'cortante' },
 
   machado_orc_duplo: { nome: 'machado orc duplo', preco: '60 PO',
                        dano: { medio: '1d8'  },
@@ -1086,31 +1086,31 @@ var tabelas_armas_exoticas = {
                               dano: { medio: '1d8' },
                               dano_secundario: { pequeno: '1d4', medio: '1d6'},
                               categorias: { cac: true }, arma_dupla: true,
-                              critico: '×3/x4', peso: '3kg', tipo: 'concussão e perfurante' },
+                              critico: '×3/×4', peso: '3kg', tipo: 'concussão e perfurante' },
 
   urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO',
                   dano: { medio: '1d8' },
                   dano_secundario: { pequeno: '1d4', medio: '1d6'},
                   categorias: { cac: true }, arma_dupla: true,
-                  critico: 'x3', peso: '11kg', tipo: 'cortante ou perfurante' },
+                  critico: '×3', peso: '11kg', tipo: 'cortante ou perfurante' },
 
 // Ranged Weapons
 
   besta_leve_de_repeticao: { nome: 'besta leve de repetição', preco: '250 PO',
-                             dano: { medio: '1d8'  }, critico: '19-20/x2',
+                             dano: { medio: '1d8'  }, critico: '19-20/×2',
                              categorias: { distancia: true },
                              incremento_distancia: '16 quadrados', peso: '3Kg', tipo: 'perfurante' },
 
   besta_pesada_de_repeticao: { nome: 'besta pesada de repetição', preco: '400 PO',
-                               dano: { medio: '1d10'  }, critico: '19-20/x2',
+                               dano: { medio: '1d10'  }, critico: '19-20/×2',
                                categorias: { distancia: true },
                                incremento_distancia: '24 quadrados', peso: '11kg', tipo: 'perfurante' },
 
   besta_de_mao: { nome: 'besta de mão', preco: '100 PO', dano: { medio: '1d4'  },
-                  critico: '19-20/x2', categorias: { distancia: true },
+                  critico: '19-20/×2', categorias: { distancia: true },
                   incremento_distancia: '6 quadrados', peso: '1kg', tipo: 'perfurante' },
 
-  boleadeira: { nome: 'boleadeira', preco: '5 PO', dano: { medio: '1d4'  }, critico: 'x2',
+  boleadeira: { nome: 'boleadeira', preco: '5 PO', dano: { medio: '1d4'  }, critico: '×2',
                 categorias: { distancia: true },
                 incremento_distancia: '2 quadrados', peso: '1kg', tipo: 'concussão' },
 
@@ -1118,7 +1118,7 @@ var tabelas_armas_exoticas = {
           categorias: { distancia: true },
           incremento_distancia: '2 quadrados', peso: '3kg', tipo: '-' },
 
-  shuriken: { nome: 'shuriken (5)', preco: '1 PO', dano: { medio: '1d2'  }, critico: 'x2',
+  shuriken: { nome: 'shuriken (5)', preco: '1 PO', dano: { medio: '1d2'  }, critico: '×2',
               categorias: { arremesso: true },
               incremento_distancia: '2 quadrados', peso: '0,25kg', tipo: 'perfurante' },
 
