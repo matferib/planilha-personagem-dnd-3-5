@@ -141,6 +141,9 @@ var tabelas_lista_feiticos = {
       'raio_de_acido': {
         nome: 'Raio de Ácido', descricao: 'Raio causa 1d3 de dano de ácido', escola: 'conjuracao',
       },
+      'ler_magias': {
+        nome: 'Ler Magias', descricao: 'Decifra pergaminho ou grimórios', escola: '',
+      },
       'luz': {
         nome: 'Luz', descricao: 'Um objeto brilha como uma tocha', escola: 'evocacao',
       },
@@ -152,6 +155,12 @@ var tabelas_lista_feiticos = {
       },
     },
     1: {
+      'area_escorregadia': {
+        nome: 'Área Escorregadia', descricao: 'Torna 3 m quadrados ou um objeto escorregadios.', escola: 'conjuracao'
+      },
+      'armadura_arcana': {
+        nome: 'Armadura Arcana', descricao: 'Concede ao alvo +4 de bônus de armadura.', escola: 'abjuracao'
+      },
       'maos_flamejantes': {
         nome: 'Mãos Flamejantes', descricao: 'Cone de fogo de 3 quadrados dando 1d4/nível até máximo 5d4.', escola: 'evocacao',
       },
@@ -163,11 +172,17 @@ var tabelas_lista_feiticos = {
       },
     },
     2: {
+      'invisibilidade': {
+        nome: 'Invisibilidade', descricao: 'O alvo fica invisível durante 1 min/nível ou até atacar.', escola: 'ilusao'
+      },
       'queimadura_aganazzar': {
         nome: 'Queimadura de Aganazzar', descricao: 'Linha de fogo causa 1d8/2 níveis até 5d8.', escola: 'evocacao', fonte: 'FR',
       },
       'mao_espectral': {
         nome: 'Mão Espectral', descricao: 'Mão brilhante realiza ataques de toque, permitindo lançamento de feitiços de 4º nível ou menor com +2 de bônus, como ação de ataque. Ao criar a mão, perde-se 1d4 pontos de vida.', escola: 'evocacao', fonte: 'FR',
+      },
+      'patas_de_aranha': {
+        nome: 'Patas de Aranha', descricao: 'Concede habilidade para andar em parede e tetos.', escola: 'transmutacao'
       },
       'resistir_elementos': {
         nome: 'Resistência a Elementos', descricao: 'Criatura ganha resistência 10, 20 no 7º nível ou 30 no 11º nível) a um tipo de elemento', escola: 'abjuracao', duracao: '10 min / nível',
