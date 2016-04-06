@@ -14,7 +14,9 @@ function ConverteEntradasParaPersonagem() {
 
   gPersonagem.alinhamento = gEntradas.alinhamento;
   gPersonagem.divindade = gEntradas.divindade;
-  gPersonagem.classes = gEntradas.classes;
+  gEntradas.classes.forEach(function(classe_entrada) {
+    gPersonagem.classes.push({ classe: classe_entrada.classe, nivel: classe_entrada.nivel });
+  });
   gPersonagem.dominios = gEntradas.dominios || [];
   _ConverteFamiliar();
   gPersonagem.niveis_negativos = gEntradas.niveis_negativos || 0;
