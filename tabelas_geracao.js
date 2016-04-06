@@ -454,9 +454,9 @@ var tabelas_geracao = {
     ordem_magias: {
       // Essas magias sao para necromantes.
       0: [ 'pasmar', 'detectar_magia', 'som_fantasma', 'mao_arcana', 'toque '],
-      1: [ 'armadura_arcana', 'misseis_magicos', 'patas_de_aranha', 'raio_enfraquecimento', 'toque_macabro', ],
+      1: [ 'armadura_arcana', 'misseis_magicos', 'area_escorregadia', 'raio_enfraquecimento', 'toque_macabro', ],
       2: [ 'invisibilidade', 'invocar_enxames', 'vida_falsa', 'resistir_elementos', 'suportar_elementos',
-           'toque_do_carnical', 'nublar'],
+           'toque_do_carnical', 'nublar', 'patas_de_aranha'],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
       4: [ 'pele_rochosa', ]
     },
@@ -560,9 +560,9 @@ var tabelas_geracao = {
     ordem_magias: {
       // Essas magias sao para necromantes.
       0: [ 'detectar_magia', 'ler_magias', 'raio_de_gelo', 'romper_morto_vivo', 'som_fantasma'],
-      1: [ 'armadura_arcana', 'maos_flamejantes', 'patas_de_aranha', 'raio_enfraquecimento', 'toque_macabro', ],
+      1: [ 'armadura_arcana', 'maos_flamejantes', 'misseis_magicos', 'area_escorregadia', 'raio_enfraquecimento', 'toque_macabro', ],
       2: [ 'invisibilidade', 'vitalidade_ilusoria', 'invocar_enxames', 'queimadura_aganazzar', 'resistir_elementos', 'suportar_elementos',
-           'toque_do_carnical'],
+           'toque_do_carnical', 'patas_de_aranha' ],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
       4: [ 'pele_rochosa', ]
     },
@@ -633,9 +633,9 @@ var tabelas_geracao = {
     ],
     ordem_magias: {
       0: [ 'detectar_magia', 'ler_magias', 'raio_de_gelo', 'romper_morto_vivo', 'som_fantasma'],
-      1: [ 'armadura_arcana', 'maos_flamejantes', 'patas_de_aranha', 'raio_enfraquecimento', 'toque_macabro', ],
+      1: [ 'armadura_arcana', 'maos_flamejantes', 'misseis_magicos', 'area_escorregadia', 'raio_enfraquecimento', 'toque_macabro', ],
       2: [ 'invisibilidade', 'invocar_enxames', 'queimadura_aganazzar', 'resistir_elementos', 'suportar_elementos',
-           'toque_do_carnical'],
+           'toque_do_carnical', 'patas_de_aranha'],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
       4: [ 'rogar_maldicao', 'criar_mortos_vivos_menor', 'invocar_criaturas_iv', 'grito', 'pedra_rochosa'],
       5: [ 'recipiente_arcano', 'cone_glacial', 'invocar_criaturas_v', 'onda_fadiga'],
