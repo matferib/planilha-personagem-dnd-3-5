@@ -504,7 +504,7 @@ function _CarregaTabelasCompostas(
       // Compoe a tabela principal.
       tabela_composta[entrada] = entrada_especifica;
       // Compoe a tabela invertida.
-      tabela_invertida[entrada_especifica.nome] = entrada;
+      tabela_invertida[Traduz(entrada_especifica.nome)] = entrada;
     }
   }
 }
