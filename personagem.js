@@ -134,7 +134,7 @@ var gPersonagem = {
   // Cada entrada: { chave_arma: 2|4 }.
   especializacao_armas: {},
   // Cada entrada:
-  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, texto_nome, bonus_ataque, bonus_dano,
+  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, texto_nome, bonus_ataque, bonus_dano, critico,
   //       proficiente, proficiente_duas_maos, foco, especializado, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
