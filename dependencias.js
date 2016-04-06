@@ -327,6 +327,11 @@ function _DependenciasTalento(talento_personagem, indice) {
           'talento', subchave_bonus, talento.bonus_salvacao[tipo_salvacao]);
     }
   }
+  if ('bonus_ca' in talento) {
+    for (var tipo_bonus in talento['bonus_ca']) {
+      gPersonagem.ca.bonus.Adiciona(tipo_bonus, 'talento_' + chave_talento , talento.bonus_ca[tipo_bonus]);
+    }
+  }
 }
 
 function _DependenciasPontosVida() {
@@ -399,6 +404,7 @@ function _DependenciasProficienciaArmas() {
         }
       }
     }
+    // TODO usar a nova funcao de PersonagemProficienteTipoArma.
     var talentos_classe = tabela_classe.talentos || [];
     for (var j = 0; j < talentos_classe.length; ++j) {
       if (talentos_classe[j] == 'usar_armas_simples') {
@@ -819,11 +825,14 @@ function _DependenciasArma(arma_personagem) {
     }
   }
 
-  arma_personagem.proficiente = PersonagemProficienteComArma(
-      arma_entrada.chave);
-  if (!arma_personagem.proficiente && arma_entrada.chave.indexOf('arco_') != -1 &&
-      (PersonagemUsandoItem('bracaduras', 'arqueiro_menor') || PersonagemUsandoItem('bracaduras', 'arqueiro_maior'))) {
-    arma_personagem.proficiente = true;
+  arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.chave);
+  if (!arma_personagem.proficiente) {
+    if (arma_entrada.chave.indexOf('arco_') != -1 &&
+        (PersonagemUsandoItem('bracaduras', 'arqueiro_menor') || PersonagemUsandoItem('bracaduras', 'arqueiro_maior'))) {
+      arma_personagem.proficiente = true;
+    } else if (arma_entrada.chave == 'espada_bastarda' && PersonagemProficienteTipoArma('comuns')) {
+      arma_personagem.proficiente_duas_maos = true;
+    }
   }
   arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
@@ -1004,7 +1013,8 @@ function _DependenciasBonusPorCategoria(
   }
 
   // Proficiencia e foco.
-  if (!arma_personagem.proficiente) {
+  var proficiente = arma_personagem.proficiente || (estilo.nome == 'uma_arma' && arma_personagem.proficiente_duas_maos);
+  if (!proficiente) {
     bonus_por_categoria.ataque[0] -= 4;
   } else if (arma_personagem.foco) {
     bonus_por_categoria.ataque[0] += arma_personagem.foco;
