@@ -794,6 +794,7 @@ function _DependenciasArma(arma_personagem) {
       arma_personagem.arma_tabela = tabelas_armas[arma_entrada.chave];
   arma_personagem.nome_gerado = arma_tabela.nome;
   arma_personagem.texto_nome = Traduz(arma_tabela.nome);
+  arma_personagem.critico = arma_tabela.critico;
   if (arma_entrada.material && arma_entrada.material != 'nenhum') {
     arma_personagem.nome_gerado +=
         ' (' + tabelas_materiais_especiais[arma_entrada.material].nome + ')';
@@ -841,6 +842,9 @@ function _DependenciasArma(arma_personagem) {
       arma_entrada.chave == 'chicote' ||
       arma_entrada.chave == 'corrente_com_cravos') {
     arma_personagem.acuidade = PersonagemPossuiTalento('acuidade_arma');
+  }
+  if (PersonagemPossuiTalento('sucesso_decisivo_aprimorado', Traduz(arma_tabela.nome))) {
+    arma_personagem.critico = DobraMargemCritico(arma_personagem.critico);
   }
 }
 

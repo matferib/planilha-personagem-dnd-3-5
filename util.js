@@ -513,5 +513,24 @@ function AtualizaObjeto(valores, objeto) {
 // TODO  
 }
 
+// @param ver codigo para valores validos.
+function DobraMargemCritico(critico) {
+  var pos = critico.indexOf('-20');
+  if (pos == -1) {
+    return '19-20/' + critico;
+  }
+  var multiplicador = critico.substr(pos + 3);
+  var valor_baixo = parseInt(critico.substr(0, pos)) || 0;
+  if (valor_baixo == 0) {
+    // Erro!
+    return critico;
+  }
+  var margem = (20 - valor_baixo + 1) * 2;
+  valor_baixo = 20 - margem + 1;
+  if (valor_baixo < 0 || valor_baixo >= 20) {
+    return critico;
+  } 
+  return valor_baixo + '-20' + multiplicador; 
+}
 
 // Fim das funções de Storage.
