@@ -135,11 +135,13 @@ var gPersonagem = {
   especializacao_armas: {},
   // Cada entrada:
   //     { entrada: { chave, bonus, obra_prima }, nome_gerado, texto_nome, bonus_ataque, bonus_dano,
-  //       proficiente, foco, especializado, acuidade, arma_tabela };
+  //       proficiente, proficiente_duas_maos, foco, especializado, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   // O texto do nome eh o nome gerado internacionalizado. O nome_gerado eh usado
   // para ligar entradas com a arma, o texto_nome so eh usado para display.
+  // Caso o personagem seja proficiente, ele tambem o sera com duas maos. Mas eh possivel ser proficiente apenas com duas
+  // maos, caso da espada bastarda sem pericia em arma exotica.
   armas: [],
   // Armadura: aponta para a armadura que estiver sendo usada.
   armadura: null,
@@ -221,9 +223,12 @@ function PersonagemTemPericia(chave, ranks, complemento) {
 
 // Limpa dependencias antes de comecar a conversao das entradas para o personagem. Tambem chamada na geracao de personagens.
 function PersonagemLimpaGeral() {
+  gPersonagem.classes.length = 0;
   gPersonagem.pontos_vida.bonus.Limpa();
   gPersonagem.pontos_vida.temporarios = 0;
   gPersonagem.pontos_vida.ferimentos_nao_letais = 0;
+  gPersonagem.armas.length = 1;  // para manter desarmado.
+  gPersonagem.armaduras.length = 0;
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
@@ -296,6 +301,27 @@ function ArmaPersonagem(nome_gerado) {
     }
   }
   return null;
+}
+
+// @return true se alguma das classes do personagem fornece a proficiencia com armas por tipo.
+// @param tipo_arma 'simples' ou 'comuns'.
+function PersonagemProficienteTipoArma(tipo_arma) {
+  var entrada_talento = 'usar_armas_' + tipo_arma;
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var chave_classe = gPersonagem.classes[i].classe;
+    var tabela_classe = tabelas_classes[chave_classe];
+    var talentos_classe = tabela_classe.talentos || [];
+    for (var j = 0; j < talentos_classe.length; ++j) {
+      if (talentos_classe[j] == entrada_talento) {
+        return true;
+      }
+    }
+  }
+  // Armas comuns eh por arma, mas armas simples abrange a categoria.
+  if (tipo_arma == 'simples' && PersonagemPossuiTalento('usar_armas_simples')) {
+    return true;
+  }
+  return false;
 }
 
 // @return true se o personagem for proficiente com uma arma.
