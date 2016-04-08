@@ -938,23 +938,32 @@ function CarregaTestes() {
       gPersonagem.classes.push({ classe: 'guerreiro', nivel: 6 });
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 15);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
+      gPersonagem.talentos.gerais[0] = { chave: 'foco_em_arma', complemento: 'arco curto' };
       _DependenciasAtributos();
       _DependenciasTalentos();
       _DependenciasBba();
       _DependenciasProficienciaArmas();
+      _DependenciasFocoArmas();
       _DependenciasArmas();
       gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco curto composto (1)', arma_secundaria: 'desarmado' }));
       gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco longo composto (2)', arma_secundaria: 'desarmado' }));
       _DependenciasEstilos();
+      var ataque_arco_curto = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_arco_curto != 7) {
+        this.detalhes = 'Esperava 7 de bonus de ataque arco curto composto (1).';
+        this.resultado = false;
+        return;
+      }
+
       var dano_arco_curto = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.dano;
       if (dano_arco_curto != 1) {
-        this.detalhes = 'Esperava 1 de bonus de dano arco composto (1).';
+        this.detalhes = 'Esperava 1 de bonus de dano arco curto composto (1).';
         this.resultado = false;
         return;
       }
       var dano_arco_longo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.dano;
       if (dano_arco_longo != 2) {
-        this.detalhes = 'Esperava 2 de bonus de dano arco composto (2).';
+        this.detalhes = 'Esperava 2 de bonus de dano arco curto composto (2).';
         this.resultado = false;
         return;
       }
