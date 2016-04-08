@@ -1139,7 +1139,7 @@ var tabelas_armas_exoticas = {
 //                     complementos diferentes - eg foco em arma)
 //   complemento, (se o talento precisa de um complemento por exemplo,
 //                 usar arma exotica. Pode ser arma, arma_leve, arma_exotica,
-//                 arma_comum)
+//                 arma_comum, pericia)
 //   guerreiro, indica se o talento pode ser usado em bonus de guerreiro
 //                  (que tambem devera atender aos requisitos)
 //   // A classe do nivel pode ser 'conjurador', 'total' ou uma chave de classe.
@@ -1158,7 +1158,6 @@ Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
-Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Sorrateiro - +2 nos testes de Esconder-se e Furtividade
@@ -1329,6 +1328,12 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     requisitos: { talentos: ['especializacao_em_combate'], atributos: { inteligencia: 13 } },
     guerreiro: true,
     descricao: 'Fintar em combate se torna uma ação de movimento.'
+  },
+  // TODO fazer funcionar.
+  foco_em_pericia: {
+    nome: 'Foco em Perícia',
+    complemento: 'pericia',
+    descricao: '+3 de bônus nos teste da perícia escolhida.'
   },
   foco_em_arma: {
       nome: 'Foco em arma',

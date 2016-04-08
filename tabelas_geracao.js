@@ -151,6 +151,37 @@ var tabelas_geracao = {
   },
   bardo: {
     atributos: [ 'carisma', 'inteligencia', 'destreza', 'constituicao', 'forca', 'sabedoria' ],
+    ordem_pericias: [
+      'blefar', 'diplomacia', 'usar_instrumento_magico', 'sentir_motivacao', 'acrobacias', 'arte_da_fuga', 'atuacao', 'conhecimento_nobreza_e_realeza'
+    ],
+    talentos: [
+      'esquiva', 'iniciativa_aprimorada', 'foco_em_arma', 'foco_em_pericia'
+    ],
+    ordem_magias: {
+      0: [ 'pasmar', 'som_fantasma', 'luz', 'ler_magia', 'cancao_de_ninar' ],
+      1: [ 'sono', 'encantar_pessoa', 'curar_ferimentos_leves', 'causar_medo' ],
+    },
+    por_nivel: {
+      1: { moedas: { ouro: 0 },
+           armadura: { nome: 'couro_batido', obra_prima: true },
+           armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+      },
+      2: { moedas: { ouro: 1000 },
+           armadura: { nome: 'couro_batido', obra_prima: true },
+           armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+      },
+      3: { moedas: { ouro: 1500 },
+           armadura: { nome: 'couro_batido', obra_prima: true },
+           armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+      },
+      4: { moedas: { ouro: 2300 },
+           armadura: { nome: 'couro_batido', obra_prima: true },
+           armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+      },
   },
   clerigo: {
     atributos: [

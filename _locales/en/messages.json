@@ -2880,5 +2880,11 @@
   },
   "_4_de_bonus_nos_testes_de_iniciativa": {
     "message": "+4 bonus on initiative."
+  },
+  "Foco_em_Pericia": {
+    "message": "Skill Focus"
+  },
+  "_3_de_bonus_nos_teste_da_pericia_escolhida_": {
+    "message": "+3 bonus on selected skill."
   }
 }
