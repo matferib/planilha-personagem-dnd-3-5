@@ -397,21 +397,26 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
   }
   if (nome_talento == chave_talento ||
       nome_talento == tabelas_talentos[chave_talento].nome) {
-    // TODO ver essa logica de complemento com calma.
-    if (tabelas_talentos[chave_talento].complemento &&
-        talento_personagem.complemento && complemento) {
-      // Trata complemento se houver.
-      if (talento_personagem.complemento == complemento) {
-        return true;
-      } else if (tabelas_talentos[chave_talento].complemento == 'arma') {
-        var chave_complemento = _NormalizaNomeArma(tabelas_armas_invertida[complemento]);
-        var chave_complemento_personagem = _NormalizaNomeArma(tabelas_armas_invertida[talento_personagem.complemento]);
-        return chave_complemento == chave_complemento_personagem;
-      }
-    } else {
+    // Talento nao tem complemento, nome igual.
+    if (tabelas_talentos[chave_talento].complemento == null) {
       return true;
     }
+    // Talento tem complemento, mas personagem nao.
+    if (talento_personagem.complemento == null || talento_personagem.complemento == '') {
+      return false;
+    }
+    // Complemento igual.
+    if (talento_personagem.complemento == complemento) {
+      return true;
+    }
+    // Complemento de arma eh mais complexo.
+    if (tabelas_talentos[chave_talento].complemento == 'arma') {
+      var chave_complemento = _NormalizaNomeArma(tabelas_armas_invertida[complemento]);
+      var chave_complemento_personagem = _NormalizaNomeArma(tabelas_armas_invertida[talento_personagem.complemento]);
+      return chave_complemento == chave_complemento_personagem;
+    }
   }
+  return false;
 }
 
 // @return true se o personagem possuir uma das classes passadas.
