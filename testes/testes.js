@@ -166,9 +166,9 @@ function CarregaTestes() {
         return;
       }
       var resumo = GeraResumoArmaEstilo(gPersonagem.armas[0], true, gPersonagem.estilos_luta[0]);
-      if (resumo != 'cac_leve: +3, 1d8') {
+      if (resumo != 'cac_leve: +3, 1d8 (×2)') {
         this.resultado = false;
-        this.detalhes = 'Esperava resumo de arma de monge "cac_leve: 3, 1d8" recebi ' + resumo;
+        this.detalhes = 'Esperava resumo de arma de monge "cac_leve: +3, 1d8 (×2)" recebi "' + resumo + '".';
         return;
       }
       this.resultado = true;
