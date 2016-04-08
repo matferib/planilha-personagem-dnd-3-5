@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_manifesto_nome__",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "default_locale": "pt_BR",
   "description": "__MSG_manifesto_descricao__",
   "app": {
