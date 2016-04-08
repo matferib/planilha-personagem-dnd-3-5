@@ -324,24 +324,34 @@ function PersonagemProficienteTipoArma(tipo_arma) {
   return false;
 }
 
+// Algumas armas sao identicas para proposito de especializacao, foco etc.
+function _NormalizaNomeArma(chave_arma) {
+  if (chave_arma.indexOf('arco_longo') == 0) {
+    return 'arco_longo';
+  } else if (chave_arma.indexOf('arco_curto') == 0) {
+    return 'arco_curto';
+  }
+  return chave_arma;
+}
+
 // @return true se o personagem for proficiente com uma arma.
 function PersonagemProficienteComArma(nome_arma) {
   // Verifica lista de armas.
-  return gPersonagem.proficiencia_armas[nome_arma] != null;
+  return gPersonagem.proficiencia_armas[_NormalizaNomeArma(nome_arma)] != null;
 }
 
 // @return o valor do foco do personagem com a arma (0, 1, 2).
 // @param nome_arma chave da arma.
 // @param maior indica se o foco eh maior.
 function PersonagemFocoComArma(chave_arma) {
-  return gPersonagem.foco_armas[chave_arma];
+  return gPersonagem.foco_armas[_NormalizaNomeArma(chave_arma)];
 }
 
 // @return o valor da especialização do personagem com a arma (0, 2, 4).
 // @param chave_arma chave da arma.
 // @param maior indica se o foco eh maior.
 function PersonagemEspecializacaoComArma(chave_arma) {
-  return gPersonagem.especializacao_armas[chave_arma];
+  return gPersonagem.especializacao_armas[_NormalizaNomeArma(chave_arma)];
 }
 
 // @param nome_talento nome do talento na tabela ou chave na tabela.
@@ -393,6 +403,10 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
       // Trata complemento se houver.
       if (talento_personagem.complemento == complemento) {
         return true;
+      } else if (tabelas_talentos[chave_talento].complemento == 'arma') {
+        var chave_complemento = _NormalizaNomeArma(tabelas_armas_invertida[complemento]);
+        var chave_complemento_personagem = _NormalizaNomeArma(tabelas_armas_invertida[talento_personagem.complemento]);
+        return chave_complemento == chave_complemento_personagem;
       }
     } else {
       return true;

@@ -562,6 +562,7 @@ function _VerificaPrerequisitosTalento() {
       }
       if (tabelas_talentos[talento.chave].complemento &&
           talento.complemento &&
+          talento.complemento != '' &&
           !_VerificaTipoComplementoTalento(talento)) {
         talento.complemento = null;
       }
@@ -675,6 +676,9 @@ function _DependenciasFocoArmas() {
       if (talento.chave && talento.chave.indexOf('foco_em_arma') != -1 &&
           talento.complemento != null) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
+        if (talento.complemento == '') {
+          continue;
+        }
         if (chave_arma == null) {
           Mensagem('Arma "' + talento.complemento + '" inválida para talento "' +
                 tabelas_talentos[talento.chave].nome + '"');

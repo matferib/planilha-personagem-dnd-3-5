@@ -1168,18 +1168,19 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
 */
   acrobatico: {
       nome: 'Acrobático',
-      bonus_pericias: { saltar: 2, acrobacias: 2 } },
-
+      bonus_pericias: { saltar: 2, acrobacias: 2 }
+  },
   acuidade_arma: {
       nome: 'Acuidade com Arma',
       guerreiro: true,
       requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true },
       descricao: 'Aplica o modificador de Des (em vez de For) nas jogadas ' +
-                 'de ataque corporal com armas leves.' },
+                 'de ataque corporal com armas leves.'
+  },
   afinidade_com_animais: {
       nome: 'Afinidade com Animais',
-      bonus_pericias: { cavalgar: 2, adestrar_animais: 2 } },
-
+      bonus_pericias: { cavalgar: 2, adestrar_animais: 2 }
+  },
   agarrar_aprimorado: {
       nome: 'Agarrar Aprimorado',
       guerreiro: true,
@@ -1189,16 +1190,18 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   },
   agil: {
       nome: 'Ágil',
-      bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 } },
-
+      bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 }
+  },
   apanhar_objetos: {
       nome: 'Apanhar Objetos',
       requisitos: { atributos: { destreza: 15 }, talentos: ['desviar_objetos', 'ataque_desarmado_aprimorado'], },
       descricao: 'Apanha uma arma arremessada ou projétil',
-      guerreiro: true, },
+      guerreiro: true,
+  },
   aptidao_magica: {
       nome: 'Aptidão Mágica',
-      bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
+      bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 }
+  },
   ataque_atordoante: {
       nome: 'Ataque Atordoante',
       monge: 1,
@@ -1209,8 +1212,8 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   ataque_desarmado_aprimorado: {
       nome: 'Ataque Desarmado Aprimorado',
       guerreiro: true,
-      descricao: 'Considerado armado quando estiver desarmado', },
-
+      descricao: 'Considerado armado quando estiver desarmado',
+  },
   ataque_movimento: {
       nome: 'Ataque em Movimento',
       descricao: 'Capaz de deslocar antes e depois do ataque',
@@ -1221,13 +1224,16 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       nome: 'Ataque Poderoso',
       requisitos: { atributos: { forca: 13 } },
       guerreiro: true,
-      descricao: 'Substitui bônus de ataque por dano (máximo: bônus base de ataque).' },
+      descricao: 'Substitui bônus de ataque por dano (máximo: bônus base de ataque).'
+  },
   atletico: {
       nome: 'Atlético',
-      bonus_pericias: { escalar: 2, natacao: 2 } },
+      bonus_pericias: { escalar: 2, natacao: 2 }
+  },
   auto_suficiente: {
       nome: 'Auto-Suficiente',
-      bonus_pericias: { cura: 2, sobrevivencia: 2 } },
+      bonus_pericias: { cura: 2, sobrevivencia: 2 }
+  },
   combate_montado: {
       nome: 'Combate Montado',
       requisitos: { pericias: { cavalgar: 1 } },
