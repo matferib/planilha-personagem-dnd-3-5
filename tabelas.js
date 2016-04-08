@@ -1384,18 +1384,21 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       requisitos: { atributos: { inteligencia: 13 } },
       descricao: 'Substitui bônus de ataque por CA (máximo 5 pontos).',
   },
-  // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
   iniciativa_aprimorada: {
       nome: 'Iniciativa Aprimorada',
       bonus_iniciativa: 4,
-      guerreiro: true, },
+      guerreiro: true,
+      descricao: '+4 de bônus nos testes de iniciativa.'
+  },
   investigador: {
       nome: 'Investigador',
-      bonus_pericias: { obter_informacao: 2, procurar: 2 } },
+      bonus_pericias: { obter_informacao: 2, procurar: 2 }
+  },
   lideranca: {
       nome: 'Liderança',
       requisitos: { nivel: { total: 6, }, },
-      descricao: 'Personagem atrai parceiros e seguidores.', },
+      descricao: 'Personagem atrai parceiros e seguidores.',
+  },
   lutar_as_cegas: {
       nome: 'Lutar as Cegas',
       guerreiro: true,

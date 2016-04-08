@@ -1,3 +1,5 @@
+Arrumar foco em arma para arco (deve valer para os compostos tambem). Mesma coisa para sucesso decisivo aprimorado.
+Arrumar sucesso decisivo aprimorado: quando vazio esta aplicando em algum qualquer e depois nao desaplica.
 Furia de barbaro.
 Testes de familiar.
 Dano de habilidade.
