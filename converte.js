@@ -86,10 +86,10 @@ function _ConverteFamiliar() {
 }
 
 function _ConvertePontosVida() {
-  gPersonagem.pontos_vida.total_dados = gEntradas.pontos_vida;
-  gPersonagem.pontos_vida.temporarios = gEntradas.pontos_vida_temporarios;
-  gPersonagem.pontos_vida.ferimentos = gEntradas.ferimentos;
-  gPersonagem.pontos_vida.ferimentos_nao_letais = gEntradas.ferimentos_nao_letais;
+  gPersonagem.pontos_vida.total_dados = gEntradas.pontos_vida || 0;
+  gPersonagem.pontos_vida.temporarios = gEntradas.pontos_vida_temporarios || 0;
+  gPersonagem.pontos_vida.ferimentos = gEntradas.ferimentos || 0;
+  gPersonagem.pontos_vida.ferimentos_nao_letais = gEntradas.ferimentos_nao_letais || 0;
 }
 
 function _ConverteEquipamentos() {
