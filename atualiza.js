@@ -202,16 +202,21 @@ function _AtualizaDominios() {
     Dom('span-dominios').style.display = 'none';
   } else {
     Dom('span-dominios').style.display = 'inline';
+    for (var i = 0; i < 2; ++i) {
+      SelecionaValor(gPersonagem.dominios[i], Dom('dominio-' + i));
+    }
   }
 }
 
 function _AtualizaFamiliar() {
   if (PersonagemNivelClasse('feiticeiro') == 0 &&
-      PersonagemNivelClasse('mago') == 0 &&
-      PersonagemNivelClasse('mago_necromante') == 0) {
+      !PersonagemTemNivelMago()) {
     Dom('familiar').style.display = 'none';
   } else {
     Dom('familiar').style.display = 'block';
+    Dom('familiar-em-uso').checked = gPersonagem.familiar.em_uso;
+    SelecionaValor(gPersonagem.familiar.chave, Dom('select-familiar'));
+    // Pontos de vida na funcao de pontos de vida.
   }
 }
 

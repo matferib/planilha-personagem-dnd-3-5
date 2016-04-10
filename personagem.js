@@ -450,7 +450,7 @@ function PersonagemNivelClasse(classe) {
 // @return true se o personagem tem algum nivel de mago (ou mago_*).
 function PersonagemTemNivelMago() {
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
-    if (gPersonagem.classes[i].classe.find('mago') == 0) {
+    if (gPersonagem.classes[i].classe.indexOf('mago') == 0) {
       return true;
     }
   }
