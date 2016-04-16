@@ -1,3 +1,4 @@
+Ao reduzir nivel, pericias nao estao atualizando e o personagem fica com mais gastos que tem.
 Varinhas, cajados e bastões (cetros).
 Talento Foco em pericia.
 Furia de barbaro.
