@@ -354,6 +354,17 @@ function PersonagemEspecializacaoComArma(chave_arma) {
   return gPersonagem.especializacao_armas[_NormalizaNomeArma(chave_arma)];
 }
 
+// @return true se o personagem possuir a habilidade passada.
+// @param chave da tabela de habilidades especiais (tabelas_especiais).
+function PersonagemPossuiHabilidadeEspecial(chave) {
+  for (var especial in gPersonagem.especiais) {
+    if (especial == chave) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // @param nome_talento nome do talento na tabela ou chave na tabela.
 // @param complemento alguns talentos precisam de um complemento. Por exemplo,
 //        conhecimento (complemento), usar_arma_comum (complemento).

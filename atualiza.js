@@ -421,7 +421,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   span_ca_normal.textContent += ', ';
   // AC surpreso.
   var span_ca_surpreso = CriaSpan();
-  array_exclusao = ['atributo'];
+  array_exclusao = PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural') ? [] : ['atributo'];
   if (!usar_escudo) {
     array_exclusao.push('escudo');
     array_exclusao.push('escudo_melhoria');
