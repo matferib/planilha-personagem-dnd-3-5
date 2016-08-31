@@ -462,7 +462,13 @@ function SalvaNoArmazem(nome, valor, callback) {
   if (_ArmazemChrome()) {
     var obj = {};
     obj[nome] = valor;
-    chrome.storage.sync.set(obj, callback);
+    chrome.storage.sync.set(obj, function() {
+      if (chrome.runtime.lastError) {
+        Mensagem(chrome.runtime.lastError.message);
+      } else {
+        callback();
+      }
+    });
   } else {
     localStorage.setItem(nome, valor);
     callback();
@@ -474,7 +480,13 @@ function SalvaNoArmazem(nome, valor, callback) {
 // Caso nao haja valor, chamará callback({ nome: null }).
 function AbreDoArmazem(nome, callback) {
   if (_ArmazemChrome()) {
-    chrome.storage.sync.get(nome, callback);
+    chrome.storage.sync.get(nome, function() {
+      if (chrome.runtime.lastError) {
+        Mensagem(chrome.runtime.lastError.message);
+      } else {
+        callback();
+      }
+    });
   } else {
     var obj = {};
     obj[nome] = (nome in localStorage) ? localStorage.getItem(nome) : null;
