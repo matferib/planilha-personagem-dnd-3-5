@@ -29,6 +29,9 @@
   "span_raca": {
 		"message": "Race"
 	},
+  "span_geral": {
+		"message": "General"
+	},
   "span_tamanho": {
 		"message": "Size"
 	},
