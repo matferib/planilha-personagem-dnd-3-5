@@ -6,6 +6,7 @@
 function DependenciasGerais() {
   _DependenciasNivelConjurador();
   _DependenciasEquipamentos();
+  _DependenciasFamiliar();
   _DependenciasDadosVida();
   _DependenciasAtributos();
   _DependenciasTalentos();
@@ -70,6 +71,18 @@ function _DependenciasNivelConjurador() {
   });
 }
 
+function _DependenciasFamiliar() {
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares)) {
+    return;
+  }
+  if (!gPersonagem.familiar.em_uso) {
+    return;
+  }
+  _DependenciasItemOuFamiliar('familiar', tabelas_familiares[gPersonagem.familiar.chave]);
+  // Pontos de vida base feito no DependenciasPontosVida.
+}
+
 function _DependenciasEquipamentos() {
   for (var chave_item in tabelas_itens) {
     _DependenciasItens(chave_item);
@@ -82,14 +95,14 @@ function _DependenciasItens(tipo_item) {
     if (!item.em_uso) {
       continue;
     }
-    _DependenciasItem(item.chave, tabelas_itens[tipo_item].tabela[item.chave]);
+    _DependenciasItemOuFamiliar(item.chave, tabelas_itens[tipo_item].tabela[item.chave]);
   }
 }
 
 // Calcula as dependencias do item.
 // @param chave_item a chave do item.
-// @param item_tabela o item na tabela apropriada.
-function _DependenciasItem(chave_item, item_tabela) {
+// @param item_tabela ou familiar, deve conter propriedades.
+function _DependenciasItemOuFamiliar(chave_item, item_tabela) {
   for (var propriedade in item_tabela.propriedades) {
     if (propriedade == 'ca') {
       _DependenciasItemCa(chave_item, item_tabela);
@@ -101,6 +114,10 @@ function _DependenciasItem(chave_item, item_tabela) {
       _DependenciasItemAtributos(chave_item, item_tabela);
     } else if (propriedade == 'tamanho') {
       _DependenciasItemTamanho(chave_item, item_tabela);
+    } else if (propriedade == 'bonus_pv') {
+      _DependenciasItemPontosVida(chave_item, item_tabela);
+    } else if (propriedade == 'especiais') {
+      _DependenciasItemEspeciais(chave_item, item_tabela);
     }
   }
 }
@@ -159,6 +176,25 @@ function _DependenciasItemPericias(chave_item, item_tabela) {
   }
 }
 
+function _DependenciasItemPontosVida(chave_item, item_tabela) {
+  for (var chave_bonus in item_tabela.propriedades.bonus_pv) {
+    gPersonagem.pontos_vida.bonus.Adiciona(
+        chave_bonus, chave_item, item_tabela.propriedades.bonus_pv[chave_bonus]);
+  }
+}
+
+function _DependenciasItemEspeciais(chave_item, item_tabela) {
+  for (var chave_especial in item_tabela.propriedades.especiais) {
+    if (chave_especial in gPersonagem.especiais) {
+      gPersonagem.especiais.vezes += item_tabela.propriedades.especiais[chave_especial];
+    } else {
+      gPersonagem.especiais[chave_especial] = {
+        vezes: item_tabela.propriedades.especiais[chave_especial], usado: 0, complemento: ''
+      }
+    }
+  }
+}
+
 function _DependenciasDadosVida() {
 }
 
@@ -207,7 +243,15 @@ function _DependenciasTalentos() {
   if (tabelas_raca[gPersonagem.raca].talento_extra) {
     ++talentos_gerais_por_nivel;
   }
+  if (gPersonagem.familiar != null && gPersonagem.familiar.em_uso) {
+    gPersonagem.talentos['gerais'][talentos_gerais_por_nivel] = {
+      chave: 'prontidao', complemento: 'familiar', imutavel: true
+    };
+    ++talentos_gerais_por_nivel;  // alerta
+  }
   gPersonagem.talentos['gerais'].length = talentos_gerais_por_nivel;
+
+  // Outros nao precisa fazer nada.
   // Guerreiro.
   var nivel_guerreiro = PersonagemNivelClasse('guerreiro');
   if (nivel_guerreiro > 0) {
@@ -216,7 +260,9 @@ function _DependenciasTalentos() {
     gPersonagem.talentos['guerreiro'].length = 0;
   }
   // Mago.
-  gPersonagem.talentos['mago'].length = Math.floor(PersonagemNivelClasse('mago') / 5) + Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
+  gPersonagem.talentos['mago'].length =
+      Math.floor(PersonagemNivelClasse('mago') / 5) +
+      Math.floor(PersonagemNivelClasse('mago_necromante') / 5);
   // Monge.
   var nivel_monge = PersonagemNivelClasse('monge');
   if (nivel_monge >= 6) {
@@ -281,6 +327,11 @@ function _DependenciasTalento(talento_personagem, indice) {
           'talento', subchave_bonus, talento.bonus_salvacao[tipo_salvacao]);
     }
   }
+  if ('bonus_ca' in talento) {
+    for (var tipo_bonus in talento['bonus_ca']) {
+      gPersonagem.ca.bonus.Adiciona(tipo_bonus, 'talento_' + chave_talento , talento.bonus_ca[tipo_bonus]);
+    }
+  }
 }
 
 function _DependenciasPontosVida() {
@@ -289,6 +340,14 @@ function _DependenciasPontosVida() {
       gPersonagem.dados_vida.nivel_personagem * gPersonagem.atributos['constituicao'].modificador);
   gPersonagem.pontos_vida.bonus.Adiciona(
       'niveis_negativos', '-', -5 * gPersonagem.niveis_negativos);
+  // Familiar tem que ser aqui, pq depende dos pontos de vida do personagem e o personagem pode depender do familiar tb.
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares) ||
+      !gPersonagem.familiar.em_uso) {
+    return;
+  }
+  gPersonagem.familiar.pontos_vida.base =
+    Math.floor((gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total()) / 2.0);
 }
 
 function _DependenciasIniciativa() {
@@ -345,6 +404,7 @@ function _DependenciasProficienciaArmas() {
         }
       }
     }
+    // TODO usar a nova funcao de PersonagemProficienteTipoArma.
     var talentos_classe = tabela_classe.talentos || [];
     for (var j = 0; j < talentos_classe.length; ++j) {
       if (talentos_classe[j] == 'usar_armas_simples') {
@@ -418,7 +478,6 @@ function _DependenciasProficienciaArmas() {
 // Habilidades especiais do gPersonagem.
 function _DependenciasHabilidadesEspeciais() {
   var especiais_antes = gPersonagem.especiais;
-  gPersonagem.especiais = {};
   var tabelas_nivel_especiais = [];
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var entrada_classe = gPersonagem.classes[i];
@@ -427,6 +486,9 @@ function _DependenciasHabilidadesEspeciais() {
     }
     tabelas_nivel_especiais.push(
         { nivel: PersonagemNivelClasse(entrada_classe.classe), especiais: tabelas_classes[entrada_classe.classe].especiais });
+  }
+  if ('especiais' in tabelas_raca[gPersonagem.raca]) {
+    tabelas_nivel_especiais.push({ nivel: PersonagemNivel(), especiais: tabelas_raca[gPersonagem.raca].especiais });
   }
   var template_pc = PersonagemTemplate();
   if (template_pc != null && 'especiais' in template_pc) {
@@ -500,6 +562,7 @@ function _VerificaPrerequisitosTalento() {
       }
       if (tabelas_talentos[talento.chave].complemento &&
           talento.complemento &&
+          talento.complemento != '' &&
           !_VerificaTipoComplementoTalento(talento)) {
         talento.complemento = null;
       }
@@ -613,6 +676,9 @@ function _DependenciasFocoArmas() {
       if (talento.chave && talento.chave.indexOf('foco_em_arma') != -1 &&
           talento.complemento != null) {
         var chave_arma = tabelas_armas_invertida[talento.complemento];
+        if (talento.complemento == '') {
+          continue;
+        }
         if (chave_arma == null) {
           Mensagem('Arma "' + talento.complemento + '" inválida para talento "' +
                 tabelas_talentos[talento.chave].nome + '"');
@@ -732,6 +798,7 @@ function _DependenciasArma(arma_personagem) {
       arma_personagem.arma_tabela = tabelas_armas[arma_entrada.chave];
   arma_personagem.nome_gerado = arma_tabela.nome;
   arma_personagem.texto_nome = Traduz(arma_tabela.nome);
+  arma_personagem.critico = arma_tabela.critico;
   if (arma_entrada.material && arma_entrada.material != 'nenhum') {
     arma_personagem.nome_gerado +=
         ' (' + tabelas_materiais_especiais[arma_entrada.material].nome + ')';
@@ -763,11 +830,14 @@ function _DependenciasArma(arma_personagem) {
     }
   }
 
-  arma_personagem.proficiente = PersonagemProficienteComArma(
-      arma_entrada.chave);
-  if (!arma_personagem.proficiente && arma_entrada.chave.indexOf('arco_') != -1 &&
-      (PersonagemUsandoItem('bracaduras', 'arqueiro_menor') || PersonagemUsandoItem('bracaduras', 'arqueiro_maior'))) {
-    arma_personagem.proficiente = true;
+  arma_personagem.proficiente = PersonagemProficienteComArma(arma_entrada.chave);
+  if (!arma_personagem.proficiente) {
+    if (arma_entrada.chave.indexOf('arco_') != -1 &&
+        (PersonagemUsandoItem('bracaduras', 'arqueiro_menor') || PersonagemUsandoItem('bracaduras', 'arqueiro_maior'))) {
+      arma_personagem.proficiente = true;
+    } else if (arma_entrada.chave == 'espada_bastarda' && PersonagemProficienteTipoArma('comuns')) {
+      arma_personagem.proficiente_duas_maos = true;
+    }
   }
   arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
@@ -776,6 +846,9 @@ function _DependenciasArma(arma_personagem) {
       arma_entrada.chave == 'chicote' ||
       arma_entrada.chave == 'corrente_com_cravos') {
     arma_personagem.acuidade = PersonagemPossuiTalento('acuidade_arma');
+  }
+  if (PersonagemPossuiTalento('sucesso_decisivo_aprimorado', Traduz(arma_tabela.nome))) {
+    arma_personagem.critico = DobraMargemCritico(arma_personagem.critico);
   }
 }
 
@@ -869,6 +942,7 @@ function _DependenciasBonusPorCategoria(
   if (estilo.nome == 'uma_arma') {
     multiplicador_dano_forca = 1.0;
     if (gPersonagem.atributos.forca.modificador > 0 && !arma_leve) {
+      // arcos vao entrar aqui mas na hora de computar o dano nao vao levar isso em consideracao.
       multiplicador_dano_forca = 1.5;
     }
   } else if (estilo.nome == 'arma_escudo') {
@@ -948,7 +1022,8 @@ function _DependenciasBonusPorCategoria(
   }
 
   // Proficiencia e foco.
-  if (!arma_personagem.proficiente) {
+  var proficiente = arma_personagem.proficiente || (estilo.nome == 'uma_arma' && arma_personagem.proficiente_duas_maos);
+  if (!proficiente) {
     bonus_por_categoria.ataque[0] -= 4;
   } else if (arma_personagem.foco) {
     bonus_por_categoria.ataque[0] += arma_personagem.foco;

@@ -6,8 +6,9 @@ function CarregamentoInicial() {
   _CarregaTabelaNormalizacaoStrings();
   _CarregaTraducoes();
   _CarregaTitulos();
-  _CarregaHandlers();
   CarregaPersonagens();
+  _CarregaDominios();
+  _CarregaFamiliares();
   _CarregaRacas();
   _CarregaTemplates();
   _CarregaBotoesVisao();
@@ -18,6 +19,8 @@ function CarregamentoInicial() {
   _CarregaTabelaArmasArmaduras();
   _CarregaPericias();
   _CarregaFeiticos();
+
+  _CarregaHandlers();
 
   // Inicia o objeto de personagem.
   IniciaPersonagem();
@@ -79,11 +82,11 @@ function _CarregaTraducoes() {
   var elements = document.getElementsByClassName("i18n");
   for (var i = 0; i < elements.length; ++i) {
     var e = elements[i];
-    // Os elementos com i18n sao traduzidos pelo id. A entrada no locales deve
-    // conter o id normalizado.
-    var trad = gm(_SubstituiTraducao(e.id));
+    // Os elementos com i18n sao traduzidos pelo id. Se nao houver, vai pelo texto.
+    // A entrada no locales deve conter o id ou texto normalizado.
+    var trad = gm(_SubstituiTraducao(e.id || e.textContent));
     if (trad != null && trad.length > 0 && e.id.length != null && e.id.length > 0) {
-      e.innerHTML = trad;
+      e.textContent = trad;
     }
     if (e.placeholder != null && e.placeholder.length > 0) {
       var tp = Traduz(e.placeholder);
@@ -124,6 +127,7 @@ function _CarregaTitulos() {
     "pontos-vida-temporarios": Traduz("Pontos de vida temporários"),
     "input-ferimento-nao-letal": Traduz("Ferimentos não letais"),
     "botao-esconder-proficiencia-armas": Traduz("Esconde/Mostra proficiências em armas"),
+    "botao-esconder-pericias": Traduz("Esconde/Mostra perícias"),
   };
 
   for (var id in mapa) {
@@ -149,8 +153,11 @@ function _CarregaHandlers() {
     "botao-gerar-personagem": { callback:  function() { ClickGerarPersonagem('comum'); }, evento: 'click', },
     "botao-gerar-personagem-elite": { callback:  function() { ClickGerarPersonagem('elite'); }, evento: 'click', },
     "botao-adicionar-estilo-luta": { callback:  ClickAdicionarEstiloLuta, evento: 'click', },
+    "botao-adicionar-talento": { callback:  ClickAdicionarTalento, evento: 'click', },
     "botao-esconder-proficiencia-armas": {
         callback:  function() { ClickBotaoEsconderDom('botao-esconder-proficiencia-armas', 'span-proficiencia-armas'); }, evento: 'click', },
+    "botao-esconder-pericias": {
+        callback:  function() { ClickBotaoEsconderDom('botao-esconder-pericias', 'span-lista-pericias'); }, evento: 'click', },
     "botao-link": { callback:  ClickLink, evento: 'click', },
     "botao-gerar-resumo": { callback:  ClickGerarResumo, evento: 'click', },
     "botao-adicionar-arma": { callback:  ClickAdicionarArma, evento: 'click', },
@@ -163,12 +170,12 @@ function _CarregaHandlers() {
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
-    "botao-ferir-1": { callback: function() { ClickAjustarFerimentos(1); }, evento: 'click', },
-    "botao-ferir-3": { callback: function() { ClickAjustarFerimentos(3); }, evento: 'click', },
-    "botao-ferir-5": { callback: function() { ClickAjustarFerimentos(5); }, evento: 'click', },
-    "botao-curar-1": { callback: function() { ClickAjustarFerimentos(-1); }, evento: 'click', },
-    "botao-curar-3": { callback: function() { ClickAjustarFerimentos(-3); }, evento: 'click', },
-    "botao-curar-5": { callback: function() { ClickAjustarFerimentos(-5); }, evento: 'click', },
+    "botao-ferir-1": { callback: function() { ChangeAjustarFerimentos(1); }, evento: 'click', },
+    "botao-ferir-3": { callback: function() { ChangeAjustarFerimentos(3); }, evento: 'click', },
+    "botao-ferir-5": { callback: function() { ChangeAjustarFerimentos(5); }, evento: 'click', },
+    "botao-curar-1": { callback: function() { ChangeAjustarFerimentos(-1); }, evento: 'click', },
+    "botao-curar-3": { callback: function() { ChangeAjustarFerimentos(-3); }, evento: 'click', },
+    "botao-curar-5": { callback: function() { ChangeAjustarFerimentos(-5); }, evento: 'click', },
     "botao-descansar": { callback: function() { ClickDescansar(); }, evento: 'click', },
     // Changes.
     "nome": { callback: AtualizaGeral, evento: 'change', },
@@ -182,13 +189,18 @@ function _CarregaHandlers() {
     "niveis-negativos": { callback: AtualizaGeral, evento: 'change' },
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "pontos-experiencia-adicionais": { callback: ChangePontosExperienciaAdicionais, evento: 'change', },
+    "pontos-vida-temporarios-familiar": { callback: AtualizaGeral, evento: 'change' },
     "input-adicionar-ferimentos": { callback:  function() {
         var dom = Dom('input-adicionar-ferimentos');
-        ClickAjustarFerimentos(parseInt(dom.value));
+        ChangeAjustarFerimentos(parseInt(dom.value) || 0);
+        dom.value = ''; }, evento: 'change', },
+    "input-adicionar-ferimentos-familiar": { callback:  function() {
+        var dom = Dom('input-adicionar-ferimentos-familiar');
+        ChangeAjustarFerimentosFamiliar(parseInt(dom.value) || 0);
         dom.value = ''; }, evento: 'change', },
     "input-remover-ferimentos": { callback:  function() {
         var dom = Dom('input-remover-ferimentos');
-        ClickAjustarFerimentos(-parseInt(dom.value));
+        ChangeAjustarFerimentos(-parseInt(dom.value));
         dom.value = ''; }, evento: 'change', },
     "moedas-platina": { callback: AtualizaGeral, evento: 'change', },
     "moedas-ouro": { callback: AtualizaGeral, evento: 'change', },
@@ -199,6 +211,10 @@ function _CarregaHandlers() {
     "divindade-patrona": { callback: AtualizaGeral, evento: 'change', },
     "text-area-outros-equipamentos": { callback:  AtualizaGeral, evento: 'change', },
     "text-area-notas": { callback:  AtualizaGeral, evento: 'change', },
+    "dominio-0": { callback: AtualizaGeral, evento: 'change' },
+    "dominio-1": { callback: AtualizaGeral, evento: 'change' },
+    "select-familiar": { callback: AtualizaGeral, evento: 'change' },
+    "familiar-em-uso": { callback: AtualizaGeral, evento: 'change' },
   };
 
   for (var id in mapa) {
@@ -218,6 +234,50 @@ function _CarregaRacas() {
   }
   for (var chave_raca in tabelas_raca) {
     select_raca.appendChild(CriaOption(Traduz(tabelas_raca[chave_raca].nome), chave_raca))
+  }
+}
+
+function _CarregaDominios() {
+  var dominios_ordenados = [];  // para ordenar.
+  for (var dominio in tabelas_dominios) {
+    var obj = { chave: dominio, nome: Traduz(tabelas_dominios[dominio].nome)};
+    dominios_ordenados.push(obj);
+  }
+  dominios_ordenados.sort(function(lhs, rhs) {
+    return lhs.nome.localeCompare(rhs.nome);
+  });
+  var valores_finais = {};
+  for (var dominio of dominios_ordenados) {
+    valores_finais[dominio.chave] = dominio.nome;
+  }
+  valores_finais = [ valores_finais ];
+  var doms = [ Dom('dominio-0'), Dom('dominio-1') ];
+  for (var dom of doms) {
+    // Verificacao por causa dos testes.
+    if (dom != null) {
+      PopulaSelect(valores_finais, dom);
+    }
+  }
+}
+
+function _CarregaFamiliares() {
+  var familiares_ordenados = [];
+  for (var familiar in tabelas_familiares) {
+    familiares_ordenados.push(
+        { chave: familiar, nome: Traduz(tabelas_familiares[familiar].nome) });
+  }
+  familiares_ordenados.sort(function(lhs, rhs) {
+    return lhs.nome.localeCompare(rhs.nome);
+  });
+  var valores_finais = {};
+  for (var familiar of familiares_ordenados) {
+    valores_finais[familiar.chave] = familiar.nome;
+  }
+  valores_finais = [valores_finais];
+  var dom_familiar = Dom('select-familiar');
+  // Verificacao por causa dos testes.
+  if (dom_familiar != null) {
+    PopulaSelect(valores_finais, dom_familiar);
   }
 }
 
@@ -358,11 +418,18 @@ function _CarregaTalentos() {
     if (chave_classe == 'gerais') {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('Gerais') + ': '));
+    } else if (chave_classe == 'outros') {
+      div_talentos_classe.appendChild(
+          CriaSpan(Traduz('Outros') + ': '));
     } else {
       div_talentos_classe.appendChild(
           CriaSpan(Traduz('De') + ' ' + Traduz(tabelas_classes[chave_classe].nome) + ': '));
     }
     div_talentos_classe.appendChild(CriaSpan(null, 'talentos-' + chave_classe + '-total'));
+    if (chave_classe == 'outros') {
+      div_talentos_classe.appendChild(
+          CriaBotao('+', 'botao-adicionar-talento'));
+    }
     div_talentos_classe.appendChild(CriaBr());
     div_talentos_classe.appendChild(CriaDiv('div-talentos-' + chave_classe + '-selects'));
     div_talentos.appendChild(div_talentos_classe);
@@ -437,7 +504,7 @@ function _CarregaTabelasCompostas(
       // Compoe a tabela principal.
       tabela_composta[entrada] = entrada_especifica;
       // Compoe a tabela invertida.
-      tabela_invertida[entrada_especifica.nome] = entrada;
+      tabela_invertida[Traduz(entrada_especifica.nome)] = entrada;
     }
   }
 }
@@ -464,7 +531,7 @@ function _CarregaPericias() {
       }
     }
   }
-  var div_pericias = Dom('div-pericias');
+  var span_pericias = Dom('span-lista-pericias');
   // Ordenacao.
   var divs_ordenados = [];
   for (var chave_pericia in tabelas_pericias) {
@@ -517,11 +584,11 @@ function _CarregaPericias() {
     divs_ordenados.push({ traducao: texto_span, div_a_inserir: div});
   }
   divs_ordenados.sort(function(lhs, rhs) {
-    return (lhs.traducao < rhs.traducao) ? -1 : (lhs.traducao > rhs.traducao) ? 1 : 0;
+    return lhs.traducao.localeCompare(rhs.traducao);
   });
   divs_ordenados.forEach(function(trad_div) {
-    if (div_pericias != null) {
-      div_pericias.appendChild(trad_div.div_a_inserir);
+    if (span_pericias != null) {
+      span_pericias.appendChild(trad_div.div_a_inserir);
     }
   });
 }

@@ -16,6 +16,9 @@ var gPersonagem = {
   classes: [
       { classe: 'guerreiro', nivel: 1, nivel_conjurador: 0, linha_tabela_feiticos: 0 },
   ],
+  // Chave dos dominios.
+  dominios: [],
+  familiar: { chave: '', em_uso: false, pontos_vida: { base: 0, bonus: new Bonus(), temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 } },
   niveis_negativos: 0,
   // TODO remover dados de vida do pontos de vida e usar este.
   dados_vida: {
@@ -73,12 +76,17 @@ var gPersonagem = {
     // Algumas classes ganham talentos especificos.
     // Gerais sao talentos normais, sem serem de classes especificas.
     // TODO outras classes.
-    // Cada talento: { chave, complemento }
+    // Cada talento: { chave, complemento, imutavel }
+    // Outros se referem a talentos que vem de excecoes de regras, muito dificeis
+    // de implementar e a pessoa poe manualmente.
+    // Se imutavel, o select nao permitira mudanca (usado para talentos derivados, como
+    // prontidao de familiar).
     gerais: [],
     guerreiro: [],
     mago: [],
     monge: [],
     ranger: [],
+    outros: [],
   },
   // pericias.
   pericias: {
@@ -126,12 +134,14 @@ var gPersonagem = {
   // Cada entrada: { chave_arma: 2|4 }.
   especializacao_armas: {},
   // Cada entrada:
-  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, texto_nome, bonus_ataque, bonus_dano,
-  //       proficiente, foco, especializado, acuidade, arma_tabela };
+  //     { entrada: { chave, bonus, obra_prima }, nome_gerado, texto_nome, bonus_ataque, bonus_dano, critico,
+  //       proficiente, proficiente_duas_maos, foco, especializado, acuidade, arma_tabela };
   // O nome_gerado junta o nome com OP ou o bonus. Por exemplo, espada longa +1.
   // Sempre havera um ataque desarmado aqui.
   // O texto do nome eh o nome gerado internacionalizado. O nome_gerado eh usado
   // para ligar entradas com a arma, o texto_nome so eh usado para display.
+  // Caso o personagem seja proficiente, ele tambem o sera com duas maos. Mas eh possivel ser proficiente apenas com duas
+  // maos, caso da espada bastarda sem pericia em arma exotica.
   armas: [],
   // Armadura: aponta para a armadura que estiver sendo usada.
   armadura: null,
@@ -213,9 +223,12 @@ function PersonagemTemPericia(chave, ranks, complemento) {
 
 // Limpa dependencias antes de comecar a conversao das entradas para o personagem. Tambem chamada na geracao de personagens.
 function PersonagemLimpaGeral() {
+  gPersonagem.classes.length = 0;
   gPersonagem.pontos_vida.bonus.Limpa();
   gPersonagem.pontos_vida.temporarios = 0;
   gPersonagem.pontos_vida.ferimentos_nao_letais = 0;
+  gPersonagem.armas.length = 1;  // para manter desarmado.
+  gPersonagem.armaduras.length = 0;
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
@@ -246,6 +259,7 @@ function PersonagemLimpaGeral() {
   for (var tipo_item in tabelas_itens) {
     gPersonagem[tipo_item].length = 0;
   }
+  gPersonagem.especiais = {};
   gPersonagem.imunidades.length = 0;
   gPersonagem.resistencia_magia.length = 0;
   PersonagemLimpaPericias();
@@ -289,24 +303,66 @@ function ArmaPersonagem(nome_gerado) {
   return null;
 }
 
+// @return true se alguma das classes do personagem fornece a proficiencia com armas por tipo.
+// @param tipo_arma 'simples' ou 'comuns'.
+function PersonagemProficienteTipoArma(tipo_arma) {
+  var entrada_talento = 'usar_armas_' + tipo_arma;
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    var chave_classe = gPersonagem.classes[i].classe;
+    var tabela_classe = tabelas_classes[chave_classe];
+    var talentos_classe = tabela_classe.talentos || [];
+    for (var j = 0; j < talentos_classe.length; ++j) {
+      if (talentos_classe[j] == entrada_talento) {
+        return true;
+      }
+    }
+  }
+  // Armas comuns eh por arma, mas armas simples abrange a categoria.
+  if (tipo_arma == 'simples' && PersonagemPossuiTalento('usar_armas_simples')) {
+    return true;
+  }
+  return false;
+}
+
+// Algumas armas sao identicas para proposito de especializacao, foco etc.
+function _NormalizaNomeArma(chave_arma) {
+  if (chave_arma.indexOf('arco_longo') == 0) {
+    return 'arco_longo';
+  } else if (chave_arma.indexOf('arco_curto') == 0) {
+    return 'arco_curto';
+  }
+  return chave_arma;
+}
+
 // @return true se o personagem for proficiente com uma arma.
 function PersonagemProficienteComArma(nome_arma) {
   // Verifica lista de armas.
-  return gPersonagem.proficiencia_armas[nome_arma] != null;
+  return gPersonagem.proficiencia_armas[_NormalizaNomeArma(nome_arma)] != null;
 }
 
 // @return o valor do foco do personagem com a arma (0, 1, 2).
 // @param nome_arma chave da arma.
 // @param maior indica se o foco eh maior.
 function PersonagemFocoComArma(chave_arma) {
-  return gPersonagem.foco_armas[chave_arma];
+  return gPersonagem.foco_armas[_NormalizaNomeArma(chave_arma)];
 }
 
 // @return o valor da especialização do personagem com a arma (0, 2, 4).
 // @param chave_arma chave da arma.
 // @param maior indica se o foco eh maior.
 function PersonagemEspecializacaoComArma(chave_arma) {
-  return gPersonagem.especializacao_armas[chave_arma];
+  return gPersonagem.especializacao_armas[_NormalizaNomeArma(chave_arma)];
+}
+
+// @return true se o personagem possuir a habilidade passada.
+// @param chave da tabela de habilidades especiais (tabelas_especiais).
+function PersonagemPossuiHabilidadeEspecial(chave) {
+  for (var especial in gPersonagem.especiais) {
+    if (especial == chave) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // @param nome_talento nome do talento na tabela ou chave na tabela.
@@ -352,17 +408,26 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
   }
   if (nome_talento == chave_talento ||
       nome_talento == tabelas_talentos[chave_talento].nome) {
-    // TODO ver essa logica de complemento com calma.
-    if (tabelas_talentos[chave_talento].complemento &&
-        talento_personagem.complemento && complemento) {
-      // Trata complemento se houver.
-      if (talento_personagem.complemento == complemento) {
-        return true;
-      }
-    } else {
+    // Talento nao tem complemento, nome igual.
+    if (tabelas_talentos[chave_talento].complemento == null) {
       return true;
     }
+    // Talento tem complemento, mas personagem nao.
+    if (talento_personagem.complemento == null || talento_personagem.complemento == '') {
+      return false;
+    }
+    // Complemento igual.
+    if (talento_personagem.complemento == complemento) {
+      return true;
+    }
+    // Complemento de arma eh mais complexo.
+    if (tabelas_talentos[chave_talento].complemento == 'arma') {
+      var chave_complemento = _NormalizaNomeArma(tabelas_armas_invertida[complemento]);
+      var chave_complemento_personagem = _NormalizaNomeArma(tabelas_armas_invertida[talento_personagem.complemento]);
+      return chave_complemento == chave_complemento_personagem;
+    }
   }
+  return false;
 }
 
 // @return true se o personagem possuir uma das classes passadas.
@@ -391,6 +456,16 @@ function PersonagemNivelClasse(classe) {
     }
   }
   return 0;
+}
+
+// @return true se o personagem tem algum nivel de mago (ou mago_*).
+function PersonagemTemNivelMago() {
+  for (var i = 0; i < gPersonagem.classes.length; ++i) {
+    if (gPersonagem.classes[i].classe.indexOf('mago') == 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // @param classe se null, retorna o maior de todas as classes.

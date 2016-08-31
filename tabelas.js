@@ -54,8 +54,23 @@ var tabelas_raca = {
       atributos: { destreza: +2, constituicao: -2 }, tamanho: 'medio',
       proficiencia_armas: [ 'espada_longa', 'sabre', 'arco_longo', 'arco_longo_composto', 'arco_curto',
                             'arco_curto_composto'],
+      // Visao penumbra.
+
       bonus_pericias: { ouvir: 2, procurar: 2, observar: 2 },
       outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
+  },
+  elfo_drow: {
+      nome: 'Elfo (Drow)',
+      origem: { livro: 'Forgotten Realms', pagina: '13' },
+      movimento: { terrestre: 6 },
+      atributos: { destreza: +2, inteligencia: 2, carisma: 2, constituicao: -2 }, tamanho: 'medio',
+      proficiencia_armas: [ 'sabre', 'espada_curta', 'besta_leve', 'besta_de_mao'],
+      bonus_pericias: { ouvir: 2, procurar: 2, observar: 2 },
+      outras_salvacoes: { encantamento: { base: ['vontade'], bonus: 2 } },
+      especiais: {
+        1: ['visao_escuro'  /*24 q*/, 'cegueira_luz_intensa', 'globo_luz', 'fogo_fadas', 'escuridao'],
+      },
+      ajuste_nivel: 2,
   },
   genasi_agua: {
       nome: 'Genasi (Água)',
@@ -228,6 +243,9 @@ var tabelas_classes = {
     nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba:
     bba_fraco, nivel_conjurador: { modificador: 1.0, },
     talentos: [ 'usar_armas_simples' ],
+    especiais: {
+      1: ['familiar'],
+    },
   },
   ladino: {
     nome: 'Ladino', dados_vida: 6, pontos_pericia: 8, bba: bba_medio,
@@ -399,6 +417,10 @@ var tabelas_especiais = {
   auto_perfeicao: { nome: 'Auto-Perfeição' },
   bonus_ca: { nome: 'Bonus CA' },
   caminho_floresta: { nome: 'Caminho da Floresta' },
+  cegueira_luz_intensa: { nome: 'Cegueira sob Luz Intensa' },
+  escuridao: { nome: 'Escuridão (1/dia)' },
+  globo_luz: { nome: 'Globos de Luz (1/dia)' },
+  fogo_fadas: { nome: 'Fogo das Fadas (1/dia)' },
   estilo_combate_aprimorado: { nome: 'Estilo de Combate Aprimorado' },
   expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
   camuflagem: { nome: 'Camuflagem', },
@@ -436,6 +458,7 @@ var tabelas_especiais = {
   mente_tranquila: { nome: 'Mente Tranquila' },
   mimetismo: { nome: 'Mimetismo' },
   montaria_especial: { nome: 'Montaria especial', },
+  mordida_venenosa: { nome: 'Mordida Venenosa' },
   passo_etereo: { nome: 'Passo Etéreo' },
   pureza_corporal: { nome: 'Pureza Corporal' },
   queda_suave_6m: { nome: 'Queda Suave (6m)' },
@@ -464,6 +487,7 @@ var tabelas_especiais = {
   tolerancia: { nome: 'Tolerancia' },
   viajar_pelas_sombras: { nome: 'Viajar pelas Sombras' },
   visao_escuro: { nome: 'Visão no Escuro' },
+  visao_penumbra: { nome: 'Visão na Penumbra' },
 };
 
 // Bonus base de ataque.
@@ -869,7 +893,7 @@ var tabelas_armas_comuns = {
 
   sabre: { nome: 'sabre', preco: '20 PO', dano: { medio: '1d6' } ,
            categorias: { cac: true } ,
-           critico: '18-20/x2', peso: '1kg', tipo: 'perfurante' },
+           critico: '18-20/×2', peso: '1kg', tipo: 'perfurante' },
 
   tridente: { nome: 'tridente', preco: '15 PO', dano: { medio: '1d8' } ,
               categorias: { cac: true, arremesso: true} ,
@@ -911,15 +935,15 @@ var tabelas_armas_comuns = {
 
   machado_grande: { nome: 'machado grande', preco: '20 PO', dano: { medio: '1d12' } ,
                     categorias: { cac_duas_maos: true } ,
-                    critico: 'x3', peso: '11kg', tipo: 'cortante' },
+                    critico: '×3', peso: '11kg', tipo: 'cortante' },
 
   mangual_pesado: { nome: 'mangual pesado', preco: '15 PO', dano: { medio: '1d10' } ,
                     categorias: { cac_duas_maos: true } ,
-                    critico: '19-20/x2', peso: '10kg', tipo: 'concussão' },
+                    critico: '19-20/×2', peso: '10kg', tipo: 'concussão' },
 
   ranseur: { nome: 'ranseur', preco: '10 PO', dano: { medio: '2d4' } ,
              categorias: { cac_duas_maos: true } ,
-             critico: 'x3', peso: '11kg', tipo: 'perfurante' },
+             critico: '×3', peso: '11kg', tipo: 'perfurante' },
 
 // Ranged Weapons
 
@@ -928,70 +952,70 @@ var tabelas_armas_comuns = {
                 incremento_distancia: '12 quadrados', peso: '1Kg', tipo: 'perfurante' },
 
   arco_curto_composto: { nome: 'arco curto composto', preco: '75 PO',
-                         dano: { medio: '1d6'  }, critico: 'x3',
+                         dano: { medio: '1d6'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_1: { nome: 'arco curto composto (1)', preco: '150 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_2: { nome: 'arco curto composto (2)', preco: '225 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_3: { nome: 'arco curto composto (3)', preco: '300 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_4: { nome: 'arco curto composto (4)', preco: '375 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_5: { nome: 'arco curto composto (5)', preco: '450 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
   arco_curto_composto_6: { nome: 'arco curto composto (6)', preco: '525 PO',
-                           dano: { medio: '1d6'  }, critico: 'x3',
+                           dano: { medio: '1d6'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '14 quadrados', peso: '1kg', tipo: 'perfurante' },
 
-  arco_longo: { nome: 'arco longo', preco: '75 PO', dano: { medio: '1d8'  }, critico: 'x3',
+  arco_longo: { nome: 'arco longo', preco: '75 PO', dano: { medio: '1d8'  }, critico: '×3',
                 categorias: { distancia: true },
                 incremento_distancia: '20 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto: { nome: 'arco longo composto', preco: '100 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_1: { nome: 'arco longo composto (1)', preco: '200 PO',
-                           dano: { medio: '1d8'  }, critico: 'x3',
+                           dano: { medio: '1d8'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_2: { nome: 'arco longo composto (2)', preco: '300 PO',
-                           dano: { medio: '1d8'  }, critico: 'x3',
+                           dano: { medio: '1d8'  }, critico: '×3',
                            categorias: { distancia: true },
                            incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_3: { nome: 'arco longo composto (3)', preco: '400 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_4: { nome: 'arco longo composto (4)', preco: '500 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_5: { nome: 'arco longo composto (5)', preco: '600 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
   arco_longo_composto_6: { nome: 'arco longo composto (6)', preco: '700 PO',
-                         dano: { medio: '1d8'  }, critico: 'x3',
+                         dano: { medio: '1d8'  }, critico: '×3',
                          categorias: { distancia: true },
                          incremento_distancia: '22 quadrados', peso: '1,5kg', tipo: 'perfurante' },
 
@@ -1027,7 +1051,7 @@ var tabelas_armas_exoticas = {
 
   espada_bastarda: { nome: 'espada bastarda', preco: '35 PO', dano: { medio: '1d10' } ,
                      categorias: { cac: true } ,
-                     critico: '19-20/x2', peso: '3Kg', tipo: 'cortante' },
+                     critico: '19-20/×2', peso: '3Kg', tipo: 'cortante' },
 
   machado_de_guerra_anao: { nome: 'machado de guerra anão', preco: '30 PO',
                             dano: { medio: '1d10'}, categorias: { cac: true  } ,
@@ -1044,7 +1068,7 @@ var tabelas_armas_exoticas = {
                             dano: { medio: '1d8'  },
                             dano_secundario: {pequeno: '1d6', medio: '1d8' },
                             categorias: { cac: true }, arma_dupla: true,
-                            critico: '19-20/x2', peso: '10Kg', tipo: 'cortante' },
+                            critico: '19-20/×2', peso: '10Kg', tipo: 'cortante' },
 
   machado_orc_duplo: { nome: 'machado orc duplo', preco: '60 PO',
                        dano: { medio: '1d8'  },
@@ -1062,31 +1086,31 @@ var tabelas_armas_exoticas = {
                               dano: { medio: '1d8' },
                               dano_secundario: { pequeno: '1d4', medio: '1d6'},
                               categorias: { cac: true }, arma_dupla: true,
-                              critico: '×3/x4', peso: '3kg', tipo: 'concussão e perfurante' },
+                              critico: '×3/×4', peso: '3kg', tipo: 'concussão e perfurante' },
 
   urgrosh_anao: { nome: 'urgrosh anão', preco: '50 PO',
                   dano: { medio: '1d8' },
                   dano_secundario: { pequeno: '1d4', medio: '1d6'},
                   categorias: { cac: true }, arma_dupla: true,
-                  critico: 'x3', peso: '11kg', tipo: 'cortante ou perfurante' },
+                  critico: '×3', peso: '11kg', tipo: 'cortante ou perfurante' },
 
 // Ranged Weapons
 
   besta_leve_de_repeticao: { nome: 'besta leve de repetição', preco: '250 PO',
-                             dano: { medio: '1d8'  }, critico: '19-20/x2',
+                             dano: { medio: '1d8'  }, critico: '19-20/×2',
                              categorias: { distancia: true },
                              incremento_distancia: '16 quadrados', peso: '3Kg', tipo: 'perfurante' },
 
   besta_pesada_de_repeticao: { nome: 'besta pesada de repetição', preco: '400 PO',
-                               dano: { medio: '1d10'  }, critico: '19-20/x2',
+                               dano: { medio: '1d10'  }, critico: '19-20/×2',
                                categorias: { distancia: true },
                                incremento_distancia: '24 quadrados', peso: '11kg', tipo: 'perfurante' },
 
   besta_de_mao: { nome: 'besta de mão', preco: '100 PO', dano: { medio: '1d4'  },
-                  critico: '19-20/x2', categorias: { distancia: true },
+                  critico: '19-20/×2', categorias: { distancia: true },
                   incremento_distancia: '6 quadrados', peso: '1kg', tipo: 'perfurante' },
 
-  boleadeira: { nome: 'boleadeira', preco: '5 PO', dano: { medio: '1d4'  }, critico: 'x2',
+  boleadeira: { nome: 'boleadeira', preco: '5 PO', dano: { medio: '1d4'  }, critico: '×2',
                 categorias: { distancia: true },
                 incremento_distancia: '2 quadrados', peso: '1kg', tipo: 'concussão' },
 
@@ -1094,7 +1118,7 @@ var tabelas_armas_exoticas = {
           categorias: { distancia: true },
           incremento_distancia: '2 quadrados', peso: '3kg', tipo: '-' },
 
-  shuriken: { nome: 'shuriken (5)', preco: '1 PO', dano: { medio: '1d2'  }, critico: 'x2',
+  shuriken: { nome: 'shuriken (5)', preco: '1 PO', dano: { medio: '1d2'  }, critico: '×2',
               categorias: { arremesso: true },
               incremento_distancia: '2 quadrados', peso: '0,25kg', tipo: 'perfurante' },
 
@@ -1108,13 +1132,14 @@ var tabelas_armas_exoticas = {
 //   bonus_pv, (quantos pontos de vida o talento concede).
 //   bonus_salvacao: { tipo: valor }, (quantos pontos o talento fornece em salvacoes).
 //   bonus_iniciativa,  (bonus que o talento fornece na iniciativa do personagem)
+//   bonus_ca: { tipo: valor }
 //   cumulativo, (se o talento puder ser selecionado mais de uma vez e acumular.
 //                eg vitalidade).
 //   multiplas_vezes, (se o talento puder ser selecionado mais de uma vez com
 //                     complementos diferentes - eg foco em arma)
 //   complemento, (se o talento precisa de um complemento por exemplo,
 //                 usar arma exotica. Pode ser arma, arma_leve, arma_exotica,
-//                 arma_comum)
+//                 arma_comum, pericia)
 //   guerreiro, indica se o talento pode ser usado em bonus de guerreiro
 //                  (que tambem devera atender aos requisitos)
 //   // A classe do nivel pode ser 'conjurador', 'total' ou uma chave de classe.
@@ -1133,29 +1158,28 @@ Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
-Foco em Perícia² - +3 de bônus nos teste da perícia escolhida
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Sorrateiro - +2 nos testes de Esconder-se e Furtividade
-Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
 */
   acrobatico: {
       nome: 'Acrobático',
-      bonus_pericias: { saltar: 2, acrobacias: 2 } },
-
+      bonus_pericias: { saltar: 2, acrobacias: 2 }
+  },
   acuidade_arma: {
       nome: 'Acuidade com Arma',
       guerreiro: true,
       requisitos: { bba: 1, proficiencia_arma: true, arma_leve: true },
       descricao: 'Aplica o modificador de Des (em vez de For) nas jogadas ' +
-                 'de ataque corporal com armas leves.' },
+                 'de ataque corporal com armas leves.'
+  },
   afinidade_com_animais: {
       nome: 'Afinidade com Animais',
-      bonus_pericias: { cavalgar: 2, adestrar_animais: 2 } },
-
+      bonus_pericias: { cavalgar: 2, adestrar_animais: 2 }
+  },
   agarrar_aprimorado: {
       nome: 'Agarrar Aprimorado',
       guerreiro: true,
@@ -1165,16 +1189,18 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   },
   agil: {
       nome: 'Ágil',
-      bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 } },
-
+      bonus_pericias: { equilibrio: 2, arte_da_fuga: 2 }
+  },
   apanhar_objetos: {
       nome: 'Apanhar Objetos',
       requisitos: { atributos: { destreza: 15 }, talentos: ['desviar_objetos', 'ataque_desarmado_aprimorado'], },
       descricao: 'Apanha uma arma arremessada ou projétil',
-      guerreiro: true, },
+      guerreiro: true,
+  },
   aptidao_magica: {
       nome: 'Aptidão Mágica',
-      bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 } },
+      bonus_pericias: { identificar_magia: 2, usar_instrumento_magico: 2 }
+  },
   ataque_atordoante: {
       nome: 'Ataque Atordoante',
       monge: 1,
@@ -1185,8 +1211,8 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   ataque_desarmado_aprimorado: {
       nome: 'Ataque Desarmado Aprimorado',
       guerreiro: true,
-      descricao: 'Considerado armado quando estiver desarmado', },
-
+      descricao: 'Considerado armado quando estiver desarmado',
+  },
   ataque_movimento: {
       nome: 'Ataque em Movimento',
       descricao: 'Capaz de deslocar antes e depois do ataque',
@@ -1197,13 +1223,16 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       nome: 'Ataque Poderoso',
       requisitos: { atributos: { forca: 13 } },
       guerreiro: true,
-      descricao: 'Substitui bônus de ataque por dano (máximo: bônus base de ataque).' },
+      descricao: 'Substitui bônus de ataque por dano (máximo: bônus base de ataque).'
+  },
   atletico: {
       nome: 'Atlético',
-      bonus_pericias: { escalar: 2, natacao: 2 } },
+      bonus_pericias: { escalar: 2, natacao: 2 }
+  },
   auto_suficiente: {
       nome: 'Auto-Suficiente',
-      bonus_pericias: { cura: 2, sobrevivencia: 2 } },
+      bonus_pericias: { cura: 2, sobrevivencia: 2 }
+  },
   combate_montado: {
       nome: 'Combate Montado',
       requisitos: { pericias: { cavalgar: 1 } },
@@ -1284,6 +1313,7 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     nome: 'Esquiva',
     requisitos: { atributos: { destreza: 13 } },
     descricao: '+1 de bônus de esquiva na CA contra um adversário à sua escolha.',
+    bonus_ca: { esquiva: 1, },
     guerreiro: true,
   },
   especializacao_arma_maior: {
@@ -1298,6 +1328,12 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     requisitos: { talentos: ['especializacao_em_combate'], atributos: { inteligencia: 13 } },
     guerreiro: true,
     descricao: 'Fintar em combate se torna uma ação de movimento.'
+  },
+  // TODO fazer funcionar.
+  foco_em_pericia: {
+    nome: 'Foco em Perícia',
+    complemento: 'pericia',
+    descricao: '+3 de bônus nos teste da perícia escolhida.'
   },
   foco_em_arma: {
       nome: 'Foco em arma',
@@ -1359,18 +1395,21 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       requisitos: { atributos: { inteligencia: 13 } },
       descricao: 'Substitui bônus de ataque por CA (máximo 5 pontos).',
   },
-  // Iniciativa Aprimorada +4 de bônus nos testes de Iniciativa
   iniciativa_aprimorada: {
       nome: 'Iniciativa Aprimorada',
       bonus_iniciativa: 4,
-      guerreiro: true, },
+      guerreiro: true,
+      descricao: '+4 de bônus nos testes de iniciativa.'
+  },
   investigador: {
       nome: 'Investigador',
-      bonus_pericias: { obter_informacao: 2, procurar: 2 } },
+      bonus_pericias: { obter_informacao: 2, procurar: 2 }
+  },
   lideranca: {
       nome: 'Liderança',
       requisitos: { nivel: { total: 6, }, },
-      descricao: 'Personagem atrai parceiros e seguidores.', },
+      descricao: 'Personagem atrai parceiros e seguidores.',
+  },
   lutar_as_cegas: {
       nome: 'Lutar as Cegas',
       guerreiro: true,
@@ -1385,33 +1424,36 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   magia_natural: {
       nome: 'Magia Natural',
       requisitos: { atributos: { sabedoria: 13 } } },
-  // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia 
   magia_penetrante: {
       nome: 'Magia Penetrante',
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia.',
   },
   // Magia Penetrante TODO +2 de bônus nos testes de conjurador contra Resistência à Magia
   // (cumulativo com magia penetrante).
   magia_penetrante_maior: {
       nome: 'Magia Penetrante Maior',
       requisitos: { talentos: [ 'magia_penetrante' ] },
-      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia para uma escola (cumulativo)',
+      descricao: '+2 de bônus nos testes de conjurador contra Resistência à Magia (cumulativo).',
   },
   magia_combate: {
       nome: 'Magia em Combate', descricao: '+4 de bônus nos teste de Concentração para conjurar na defensiva.',
   },
   maos_level: {
       nome: 'Mãos Leves',
-      bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 } },
+      bonus_pericias: { prestidigitacao: 2, usar_cordas: 2 }
+  },
   mobilidade: {
       nome: 'Mobilidade',
       requisitos: { talentos: [ 'esquiva'], },
       descricao: '+4 de bônus de esquiva na CA contra ataques de oportunidade.',
-      guerreiro: true, },
+      bonus_ca: { esquiva: 4 },
+      guerreiro: true,
+  },
   negociador: {
       nome: 'Negociador',
       descricao: '+2 de bônus nos testes de Diplomacia e Sentir Motivação.',
-      bonus_pericias: { diplomacia: 2, sentir_motivacao: 2, }, },
+      bonus_pericias: { diplomacia: 2, sentir_motivacao: 2, },
+  },
   persuasivo: {
       nome: 'Persuasivo',
       descricao: '+2 de bônus nos testes de blefar e intimidação.',
@@ -1560,6 +1602,14 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     requisitos: { nivel: { conjurador: 3 }, },
     descricao: 'Permite a criação de poções mágicas.',
     mago: 1,
+  },
+  // Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
+  sucesso_decisivo_aprimorado: {
+    nome: 'Sucesso Decisivo Aprimorado',
+    requisitos: { proficiencia_arma: true },
+    complemento: 'arma',
+    descricao: 'Dobra margem de ameaça da arma.',
+    guerreiro: true,
   },
   // Talentos Metamágicos Pré-requisitos Benefícios
   // TODO implementar niveis_adicionais.
@@ -1890,6 +1940,14 @@ var tabelas_atributos_invertidos = {
   'Carisma': 'carisma',
 };
 
+// As propriedades podem ser:
+// ca: { tipo: valor}
+// pericias: { chave: valor, ... }
+// atributos: { chave: valor, ... }
+// tamanho: +- valor.
+// salvacoes: { chave: valor}, chave pode ser 'todas'.
+// bonus_pv: { chave: valor }
+// especiais: { chave: valor }
 var tabelas_aneis = {
   protecao_1: {
       nome: 'Proteção +1', preco: '2000 PO',
@@ -2179,7 +2237,10 @@ var tabelas_pocoes = {
   },
   curar_ferimentos_moderados: { nome: 'Curar ferimentos moderados', tipo: 'pocao' , preco: '300 PO' },
   escuridao: { nome: 'Escuridão', tipo: 'oleo', preco: '300 PO' },
-  visao_escuro: { nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO' },
+  visao_escuro: {
+    nome: 'Visão no escuro', tipo: 'pocao', preco: '300 PO',
+    propriedades: { especiais: { visao_escuro: 1 } }
+  },
   retardar_envenenamento: { nome: 'Retardar envenenamento', tipo: 'pocao' , preco: '300 PO' },
   esplendor_aguia: {
     nome: 'Esplendor da águia', tipo: 'pocao' , preco: '300 PO',
@@ -2337,4 +2398,122 @@ var tabelas_materiais_especiais = {
   prata_alquimica: {
       nome: 'prata alquímica',
       requisitos: { arma: true, metal: true, }, },
+};
+
+var tabelas_dominios = {
+  ar: { nome: 'Ar' },
+  animal: { nome: 'Animal' },
+  caos: { nome: 'Caos' },
+  morte: { nome: 'Morte' },
+  destruicao: { nome: 'Destruição' },
+  terra: { nome: 'Terra' },
+  mal: { nome: 'Mal' },
+  fogo: { nome: 'Fogo' },
+  bem: { nome: 'Bem' },
+  cura: { nome: 'Cura' },
+  conhecimento: { nome: 'Conhecimento' },
+  ordem: { nome: 'Ordem' },
+  sorte: { nome: 'Sorte' },
+  magia: { nome: 'Magia' },
+  planta: { nome: 'Planta' },
+  protecao: { nome: 'Proteção' },
+  forca: { nome: 'Força' },
+  sol: { nome: 'Sol' },
+  viagem: { nome: 'Viagem' },
+  enganacao: { nome: 'Enganação' },
+  guerra: { nome: 'Guerra' },
+  agua: { nome: 'Água' },
+  // Abaixo, os de FR.
+  equilibrio: { nome: 'Equilíbrio' },
+  caverna: { nome: 'Caverna' },
+  encantamento: { nome: 'Encantamento' },
+  frio: { nome: 'Frio' },
+  oficios: { nome: 'Ofícios' },
+  escuridao: { nome: 'Escuridão' },
+  drow: { nome: 'Drow' },
+  anao: { nome: 'Anão' },
+  elfo: { nome: 'Elfo' },
+  familia: { nome: 'Família' },
+  destino: { nome: 'Destino' },
+  gnomo: { nome: 'Gnomo' },
+  halfling: { nome: 'Halfling' },
+  odio: { nome: 'Ódio' },
+  ilusao: { nome: 'Ilusão' },
+  mentalismo: { nome: 'Mentalismo' },
+  metal: { nome: 'Metal' },
+  lua: { nome: 'Lua' },
+  nobreza: { nome: 'Nobreza' },
+  oceano: { nome: 'Oceano' },
+  orc: { nome: 'Orc' },
+  planejamento: { nome: 'Planejamento' },
+  portal: { nome: 'Portal' },
+  renovacao: { nome: 'Renovação' },
+  repouso: { nome: 'Repouso' },
+  retribuicao: { nome: 'Retribuição' },
+  runa: { nome: 'Runa' },
+  escamas: { nome: 'Escamas' },
+  geleia: { nome: 'Geléia' },
+  magicas: { nome: 'Mágicas' },
+  aranha: { nome: 'Aranha' },
+  tempestade: { nome: 'Tempestade' },
+  sofrimento: { nome: 'Sofrimento' },
+  tempo: { nome: 'Tempo' },
+  comercio: { nome: 'Comércio' },
+  tirania: { nome: 'Tirania' },
+  mortos_vivos: { nome: 'Mortos-Vivos' },
+  morte_aquosa: { nome: 'Morte Aquosa (Prestígio)' },
+};
+
+var tabelas_familiares = {
+  morcego: {
+    nome: 'Morcego',
+    propriedades: { pericias: { ouvir: 3 } },
+  },
+  gato: {
+    nome: 'Gato',
+    propriedades: { pericias: { furtividade: { familiar: 3 } } },
+  },
+  falcao: {
+    nome: 'Falcão',
+    propriedades: { pericias: { observar: { familiar: 3 } } },  // na luz
+  },
+  lagarto: {
+    nome: 'Lagarto',
+    propriedades: { pericias: { escalar: { familiar: 3 } } },
+  },
+  coruja: {
+    nome: 'Coruja',
+    propriedades: { pericias: { observar: { familiar: 3 } } },  // nas sombras.
+  },
+  rato: {
+    nome: 'Rato',
+    propriedades: { salvacoes: { fortitude: 2 } },
+  },
+  corvo: {
+    nome: 'Corvo',
+    propriedades: { pericias: { avaliacao: { familiar: 3 } } },  // na luz
+  },
+  cobra: {
+    nome: 'Cobra',
+    propriedades: { pericias: { blefar: { familiar: 3 } } },
+  },
+  sapo: {
+    nome: 'Sapo',
+    propriedades: { bonus_pv: { familiar: 3 } },
+  },
+  texugo: {
+    nome: 'Texugo',
+    propriedades: { salvacoes: { reflexo: 2 } },
+  },
+  // Aprimorado.
+  // FR.
+  aranha_cabeluda: {
+    nome: 'Aranha Cabeluda',
+    propriedades: { especiais: { visao_escuro: 1, mordida_venenosa: 1 } },
+  },
+  polvo: {
+    nome: 'Polvo',
+    // Interessante. o bonus eh menor pq nao eh condicionado a sombra ou luz.
+    propriedades: { pericias: { observar: { familiar: 2 } } },
+  },
 };

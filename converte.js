@@ -14,7 +14,11 @@ function ConverteEntradasParaPersonagem() {
 
   gPersonagem.alinhamento = gEntradas.alinhamento;
   gPersonagem.divindade = gEntradas.divindade;
-  gPersonagem.classes = gEntradas.classes;
+  gEntradas.classes.forEach(function(classe_entrada) {
+    gPersonagem.classes.push({ classe: classe_entrada.classe, nivel: classe_entrada.nivel });
+  });
+  gPersonagem.dominios = gEntradas.dominios && gEntradas.dominios.slice(0) || [];
+  _ConverteFamiliar();
   gPersonagem.niveis_negativos = gEntradas.niveis_negativos || 0;
 
   gPersonagem.experiencia = gEntradas.experiencia;
@@ -66,11 +70,26 @@ function _ConverteDadosVida() {
   }
 }
 
+function _ConverteFamiliar() {
+  var familiar = (gPersonagem.familiar != null)
+      ? gPersonagem.familiar : { pontos_vida: { base: 0, bonus: new Bonus(), temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 } };
+  if (gEntradas.familiar == null) {
+    gPersonagem.familiar = familiar;
+    return;
+  }
+  familiar.em_uso = gEntradas.familiar.em_uso;
+  familiar.chave = gEntradas.familiar.chave || '';
+  familiar.pontos_vida.temporarios = gEntradas.familiar.temporarios || 0;
+  familiar.pontos_vida.ferimentos = gEntradas.familiar.ferimentos || 0;
+  familiar.pontos_vida.ferimentos_nao_letais = gEntradas.familiar.ferimentos_nao_letais || 0;
+  gPersonagem.familiar = familiar;
+}
+
 function _ConvertePontosVida() {
-  gPersonagem.pontos_vida.total_dados = gEntradas.pontos_vida;
-  gPersonagem.pontos_vida.temporarios = gEntradas.pontos_vida_temporarios;
-  gPersonagem.pontos_vida.ferimentos = gEntradas.ferimentos;
-  gPersonagem.pontos_vida.ferimentos_nao_letais = gEntradas.ferimentos_nao_letais;
+  gPersonagem.pontos_vida.total_dados = gEntradas.pontos_vida || 0;
+  gPersonagem.pontos_vida.temporarios = gEntradas.pontos_vida_temporarios || 0;
+  gPersonagem.pontos_vida.ferimentos = gEntradas.ferimentos || 0;
+  gPersonagem.pontos_vida.ferimentos_nao_letais = gEntradas.ferimentos_nao_letais || 0;
 }
 
 function _ConverteEquipamentos() {

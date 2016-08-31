@@ -46,6 +46,19 @@ function ComparaSalvacoes(salvacoes) {
 // deve possuir o campo 'detalhes' para detalhar o teste.
 // @param dom onde o teste sera adicionado.
 function TemplateTeste(handler_teste, dom) {
+  PersonagemLimpaGeral();
+  gPersonagem.armas = [
+      { entrada: { chave: 'desarmado', bonus: 0, obra_prima: false}, nome_gerado: 'Desarmado' },
+      { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' },
+      { entrada: { chave: 'arco_curto', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto' },
+      { entrada: { chave: 'arco_longo', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo' },
+      { entrada: { chave: 'arco_curto_composto_1', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto Composto (1)' },
+      { entrada: { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo Composto (2)' },
+      { entrada: { chave: 'besta_leve', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Leve' },
+      { entrada: { chave: 'besta_pesada', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Pesada' },
+      { entrada: { chave: 'espada_bastarda', bonus: 0, obra_prima: false }, nome_gerado: 'espada bastarda' },
+  ];
+
   // div do teste. Cria de cara para os testes poderem acessar.
   var div_teste = CriaDiv(handler_teste.nome, 'div_teste');
   dom.appendChild(div_teste);
@@ -93,17 +106,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
-  gPersonagem.armas = [
-      { entrada: { chave: 'desarmado', bonus: 0, obra_prima: false}, nome_gerado: 'Desarmado' },
-      { entrada: { chave: 'espada_longa', bonus: 1, obra_prima: false }, nome_gerado: 'TesteArma' },
-      { entrada: { chave: 'arco_curto', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto' },
-      { entrada: { chave: 'arco_longo', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo' },
-      { entrada: { chave: 'arco_curto_composto_1', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Curto Composto (1)' },
-      { entrada: { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: false }, nome_gerado: 'Arco Longo Composto (2)' },
-      { entrada: { chave: 'besta_leve', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Leve' },
-      { entrada: { chave: 'besta_pesada', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Pesada' },
-  ],
   TemplateTeste({
     nome: 'ArmaPersonagem',
     Testa: function() {
@@ -123,7 +125,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'TestaEfeitoItems',
     Testa: function() {
@@ -139,12 +140,10 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'TestaMonge',
     Testa: function() {
-      gPersonagem.classes[0].classe = 'monge';
-      gPersonagem.classes[0].nivel= 5;
+      gPersonagem.classes.push({ classe: 'monge', nivel: 5 });
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
       gPersonagem.atributos.sabedoria.bonus.Adiciona('base', null, 13);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 15);
@@ -167,16 +166,15 @@ function CarregaTestes() {
         return;
       }
       var resumo = GeraResumoArmaEstilo(gPersonagem.armas[0], true, gPersonagem.estilos_luta[0]);
-      if (resumo != 'cac_leve: +3, 1d8') {
+      if (resumo != 'cac_leve: +3, 1d8 (×2)') {
         this.resultado = false;
-        this.detalhes = 'Esperava resumo de arma de monge "cac_leve: 3, 1d8" recebi ' + resumo;
+        this.detalhes = 'Esperava resumo de arma de monge "cac_leve: +3, 1d8 (×2)" recebi "' + resumo + '".';
         return;
       }
       this.resultado = true;
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'LePeso',
     Testa: function() {
@@ -211,7 +209,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'AjustaString',
     Testa: function() {
@@ -225,7 +222,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'UtilSomaPrecos',
     Testa: function() {
@@ -244,7 +240,6 @@ function CarregaTestes() {
   }, body);
 
 
-  PersonagemLimpaGeral();
   gPersonagem.moedas = { platina: 1, ouro: 2, prata: 3, cobre: 4 };
   TemplateTeste({
     nome: 'PersonagemAdicionarMoedas',
@@ -277,7 +272,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'UtilLePreco',
     Testa: function() {
@@ -311,7 +305,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'LeItem',
     Testa: function() {
@@ -337,7 +330,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'PrecoArmaArmaduraEscudo',
     Testa: function() {
@@ -487,14 +479,13 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Pericias',
     Testa: function() {
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
       _ConvertePericias();
       _DependenciasAtributos();
-      _DependenciasItem('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
+      _DependenciasItemOuFamiliar('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
       _DependenciasPericias();
       if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 6) {
         this.resultado = false;
@@ -505,7 +496,6 @@ function CarregaTestes() {
     }
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'RequisitosTalentos',
     Testa: function() {
@@ -518,8 +508,7 @@ function CarregaTestes() {
       }
 
       // Requisito de pericia.
-      gPersonagem.classes[0].classe = 'guerreiro';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
       r =  PersonagemVerificaPrerequisitosTalento('combate_montado');
       if (r == null) {
         this.detalhes = 'Esperava erro no prerequisito de combate montado';
@@ -564,8 +553,7 @@ function CarregaTestes() {
         return;
       }
       // Paladino tem nivel = 1/2 nivel classe.
-      gPersonagem.classes[0].classe = 'paladino';
-      gPersonagem.classes[0].nivel= 6;
+      gPersonagem.classes.push({ classe: 'paladino', nivel: 6 });
       _DependenciasNivelConjurador();
       r = PersonagemVerificaPrerequisitosTalento('preparar_pocao');
       if (r != null) {
@@ -608,7 +596,6 @@ function CarregaTestes() {
   }, body);
 
   // AjustaFilhos.
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'AjustaFilhos',
     Testa: function() {
@@ -653,8 +640,7 @@ function CarregaTestes() {
     nome: 'DependenciasSalvacoes',
     Testa: function() {
       // Guerreiro 1 nivel default.
-      gPersonagem.classes[0].classe = 'guerreiro';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
       _DependenciasSalvacoes();
       if (ComparaSalvacoes({ fortitude: 2, reflexo: 0, vontade: 0 }).length > 0) {
         this.resultado = false;
@@ -693,8 +679,7 @@ function CarregaTestes() {
 
       // Paladino nivel 2 com graca divina e 1 de bonus carisma.
       PersonagemLimpaGeral();
-      gPersonagem.classes[0].classe = 'paladino';
-      gPersonagem.classes[0].nivel = 2;
+      gPersonagem.classes.push({ classe: 'paladino', nivel: 2 });
       gPersonagem.atributos.sabedoria.bonus.Adiciona('base', null, 10);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
       gPersonagem.atributos.constituicao.bonus.Adiciona('base', null, 10);
@@ -712,7 +697,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Ferimentos',
     Testa: function() {
@@ -739,7 +723,6 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'AdicionaItens',
     Testa: function() {
@@ -790,13 +773,11 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Template',
     Testa: function() {
       gPersonagem.template = 'lich',
-      gPersonagem.classes[0].classe = 'mago';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'mago', nivel: 1 });
       _GeraPontosDeVida('elite');
       if (gPersonagem.pontos_vida.total_dados != 12) {
         this.detalhes = 'Esperava 12 pontos de vida na geracao de um lich de primeiro nivel, obtive: ' + gPersonagem.pontos_vida.total_dados;
@@ -807,13 +788,11 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Nivel Conjurador',
     Testa: function() {
       gPersonagem.template = '',
-      gPersonagem.classes[0].classe = 'mago';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'mago', nivel: 1 });
       _DependenciasNivelConjurador();
       if (PersonagemNivelConjuradorClasse('mago') != 1) {
         this.resultado = false;
@@ -839,8 +818,7 @@ function CarregaTestes() {
       }
 
       PersonagemLimpaGeral();
-      gPersonagem.classes[0].classe = 'paladino';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'paladino', nivel: 1 });
       _DependenciasNivelConjurador();
       if (PersonagemNivelConjuradorClasse('paladino') != 0) {
         this.resultado = false;
@@ -864,13 +842,11 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Multiplos ataques',
     Testa: function() {
       gPersonagem.template = '',
-      gPersonagem.classes[0].classe = 'guerreiro';
-      gPersonagem.classes[0].nivel = 6;
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 6 });
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
       _DependenciasAtributos();
       _DependenciasTalentos();
@@ -899,13 +875,11 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Braçadeiras de Arqueiro',
     Testa: function() {
       gPersonagem.template = '',
-      gPersonagem.classes[0].classe = 'ladino';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'ladino', nivel: 1});
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
       gPersonagem.bracaduras.push({ chave: 'arqueiro_maior', em_uso: true });
@@ -957,32 +931,39 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Arcos Compostos',
     Testa: function() {
       gPersonagem.template = '',
-      gPersonagem.classes[0].classe = 'guerreiro';
-      gPersonagem.classes[0].nivel = 6;
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 6 });
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 15);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 10);
+      gPersonagem.talentos.gerais[0] = { chave: 'foco_em_arma', complemento: 'arco curto' };
       _DependenciasAtributos();
       _DependenciasTalentos();
       _DependenciasBba();
       _DependenciasProficienciaArmas();
+      _DependenciasFocoArmas();
       _DependenciasArmas();
       gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco curto composto (1)', arma_secundaria: 'desarmado' }));
       gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'arco longo composto (2)', arma_secundaria: 'desarmado' }));
       _DependenciasEstilos();
+      var ataque_arco_curto = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_arco_curto != 7) {
+        this.detalhes = 'Esperava 7 de bonus de ataque arco curto composto (1).';
+        this.resultado = false;
+        return;
+      }
+
       var dano_arco_curto = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.dano;
       if (dano_arco_curto != 1) {
-        this.detalhes = 'Esperava 1 de bonus de dano arco composto (1).';
+        this.detalhes = 'Esperava 1 de bonus de dano arco curto composto (1).';
         this.resultado = false;
         return;
       }
       var dano_arco_longo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.dano;
       if (dano_arco_longo != 2) {
-        this.detalhes = 'Esperava 2 de bonus de dano arco composto (2).';
+        this.detalhes = 'Esperava 2 de bonus de dano arco curto composto (2).';
         this.resultado = false;
         return;
       }
@@ -1009,13 +990,103 @@ function CarregaTestes() {
     },
   }, body);
 
-  PersonagemLimpaGeral();
+  TemplateTeste({
+    nome: 'Espada Bastarda',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes.push({ classe: 'mago', nivel: 1});
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'espada bastarda', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var ataque_espada_bastarda = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.cac.ataque[0];
+      if (ataque_espada_bastarda != -4) {
+        this.detalhes = 'Esperava -4 de de ataque da espada bastarda para mago 1, recebi: ' + ataque_espada_bastarda + '.';
+        this.resultado = false;
+        return;
+      }
+      this.resultado = true;
+
+      gPersonagem.template = '',
+      gPersonagem.classes[0].classe = 'guerreiro';
+      gPersonagem.classes[0].nivel = 6;
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta[0] = _ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'espada bastarda', arma_secundaria: 'desarmado' });
+      _DependenciasEstilos();
+      var ataque_espada_bastarda = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.cac.ataque[0];
+      if (ataque_espada_bastarda != 2) {
+        this.detalhes = 'Esperava 2 de de ataque da espada bastarda guerreiro 6 com arma e escudo, recebi ' + ataque_espada_bastarda + '.';
+        this.resultado = false;
+        return;
+      }
+
+      gPersonagem.estilos_luta[0] = _ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'espada bastarda', arma_secundaria: 'desarmado' });
+      _DependenciasEstilos();
+      var ataque_espada_bastarda = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.cac.ataque[0];
+      if (ataque_espada_bastarda != 6) {
+        this.detalhes = 'Esperava 6 de de ataque da espada bastarda guerreiro 6 com uma arma, recebi ' + ataque_espada_bastarda + '.';
+        this.resultado = false;
+        return;
+      }
+
+      gPersonagem.talentos.gerais[0] = { chave: 'usar_arma_exotica', complemento: 'espada bastarda' };
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta[0] = _ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'espada bastarda', arma_secundaria: 'desarmado' });
+      _DependenciasEstilos();
+      var ataque_espada_bastarda = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.cac.ataque[0];
+      if (ataque_espada_bastarda != 6) {
+        this.detalhes = 'Esperava 6 de de ataque da espada bastarda guerreiro 6 com arma e escudo com talento, recebi ' + ataque_espada_bastarda + '.';
+        this.resultado = false;
+        return;
+      }
+
+      this.resultado = true;
+    },
+  }, body);
+
+  // TODO outros testes.
+  TemplateTeste({
+    nome: 'PersonagemProficienteTipoArma',
+    Testa: function() {
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
+      if (!PersonagemProficienteTipoArma('simples') || !PersonagemProficienteTipoArma('comuns')) {
+        this.detalhes = 'Esperava guerreiro proficiente com armas simples e comuns.';
+        this.resultado = false;
+        return;
+      }
+      gPersonagem.classes[0] = { classe: 'mago', nivel: 1 };
+      if (!PersonagemProficienteTipoArma('simples') || PersonagemProficienteTipoArma('comuns')) {
+        this.detalhes = 'Esperava mago proficiente com armas simples mas nao comuns.';
+        this.resultado = false;
+        return;
+      }
+      gPersonagem.classes[0] = { classe: 'feiticeiro', nivel: 1 };
+      if (!PersonagemProficienteTipoArma('simples') || PersonagemProficienteTipoArma('comuns')) {
+        this.detalhes = 'Esperava feiticeiro nao proficiente com armas simples nem comuns.';
+        this.resultado = false;
+        return;
+      }
+
+      this.resultado = true;
+    },
+  }, body);
+
   TemplateTeste({
     nome: 'Bestas',
     Testa: function() {
       gPersonagem.template = '',
-      gPersonagem.classes[0].classe = 'guerreiro';
-      gPersonagem.classes[0].nivel = 1;
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 8);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
       _DependenciasAtributos();
@@ -1057,7 +1128,6 @@ function CarregaTestes() {
   }, body);
 
 
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'Feiticos',
     Testa: function() {
@@ -1068,7 +1138,7 @@ function CarregaTestes() {
           'feiticeiro',
           0,
           // slots
-          { feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1, gasto: true } ] },
+          { cd: 10, feiticos: [ { nivel_conhecido: 0, indice_conhecido: 0}, { nivel_conhecido: 0, indice_conhecido: 1, gasto: true } ] },
           // conhecidos
           { 0: [ { f0a: 'f0a'}, { f0b: 'f0b'} ]});
       if (Dom('div-feiticos-slots-feiticeiro-0').childNodes.length != 2) {
@@ -1089,7 +1159,6 @@ function CarregaTestes() {
 
   /*
    * Esse teste so vai funcionar quando AtualizaGeral funcionar.
-  PersonagemLimpaGeral();
   TemplateTeste({
     nome: 'ClickUsarItem',
     Testa: function() {
@@ -1118,7 +1187,6 @@ function CarregaTestes() {
    */
 
   // Parte assincrona do armazem.
-  PersonagemLimpaGeral();
   var nome_chave = 'nome de teste maluco que nunca devera ser usado';
   SalvaNoArmazem(nome_chave, 'valor de teste', function() {
     ListaDoArmazem(function(lista_nomes) {

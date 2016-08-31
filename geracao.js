@@ -154,22 +154,26 @@ function _GeraItens(tipo_item, tabela_geracao_classe_por_nivel) {
 // Gera um personagem a partir das classes e niveis.
 // @param modo 'elite' ou 'comum'.
 // @param submodo opcional 'tabelado' ou 'aleatorio'.
+// TODO refazer essa funcao gerando tudo a partir das entradas para nao ficar essa coisa de ir do personagem para as entradas e voltar.
 function GeraPersonagem(modo, submodo) {
-  PersonagemLimpaGeral();
   if (!submodo) {
     submodo = 'tabelado';
   }
-  if (tabelas_geracao[gPersonagem.classes[0].classe] == null) {
+  var classe_principal = gPersonagem.classes[0];
+  if (tabelas_geracao[classe_principal.classe] == null) {
     Mensagem(Traduz('Geração de ') + Traduz(tabelas_classes[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
     return;
   }
+  var tabelas_geracao_classe = tabelas_geracao[classe_principal.classe];
+  // So pode limpar aqui, pois isso zerara as classes.
+  PersonagemLimpaGeral();
+  gPersonagem.classes.push(classe_principal);
   _GeraAtributos(modo, submodo);
   _GeraPontosDeVida(modo, submodo);
 
   // Atualiza aqui para ja ter alguns numeros usados abaixo.
   AtualizaGeralSemConverterEntradas();
 
-  var tabelas_geracao_classe = tabelas_geracao[gPersonagem.classes[0].classe];
   if (tabelas_geracao_classe.por_nivel == null ||
       tabelas_geracao_classe.por_nivel[gPersonagem.classes[0].nivel] == null) {
     Mensagem(Traduz('Geração avançada de ') + Traduz(tabelas_classes[gPersonagem.classes[0].classe].nome) + ' ' + Traduz('não disponível'));
@@ -196,8 +200,10 @@ function GeraPersonagem(modo, submodo) {
                 tabelas_geracao_classe,
                 gPersonagem.classes[0].nivel);
   _GeraFeiticos();
+  // Importante regerar aqui para evitar duplicacoes.
+  gPersonagem.especiais = {};
   AtualizaGeralSemConverterEntradas();
-  LeEntradas();  // importante.
+  LeEntradas();  // importante, pois as entradas estao vazias. Isso efetivamente salva o personagem.
 }
 
 function _GeraTalentos(chave_classe, tabela_classe, tabela_geracao_classe, nivel) {
@@ -316,9 +322,8 @@ function GeraResumoArmaEstilo(arma_personagem, primaria, estilo) {
     } else {
       resumo += arma_tabela.dano[gPersonagem.tamanho.categoria];
     }
-    if (arma_tabela.critico != '×2' && arma_tabela.critico != 'x2') {
-      resumo += StringSinalizada(bonus.dano, false) + ' (' + arma_tabela.critico + ')';
-    }
+    resumo += StringSinalizada(bonus.dano, false);
+    resumo += ' (' + arma_personagem.critico + ')';
     resumo += '; ';
   }
   return resumo.slice(0, -2);

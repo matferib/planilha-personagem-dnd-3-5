@@ -48,6 +48,8 @@ function _AtualizaGeral() {
   _AtualizaPontosVida();
   _AtualizaAtributos();
   _AtualizaClasses();
+  _AtualizaDominios();
+  _AtualizaFamiliar();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaIniciativa();
@@ -104,6 +106,22 @@ function _AtualizaPontosVida() {
       -gPersonagem.pontos_vida.ferimentos, Dom('ferimentos'), false);
   ImprimeSinalizado(
       -gPersonagem.pontos_vida.ferimentos_nao_letais, Dom('ferimentos-nao-letais'), false);
+
+  // Familiar.
+  if (gPersonagem.familiar == null ||
+      !(gPersonagem.familiar.chave in tabelas_familiares) ||
+      !gPersonagem.familiar.em_uso) {
+    return;
+  }
+  Dom('pontos-vida-base-familiar').textContent = gPersonagem.familiar.pontos_vida.base;
+  Dom('pontos-vida-temporarios-familiar').value = gPersonagem.familiar.pontos_vida.temporarios;
+  var pontos_vida_familiar = gPersonagem.familiar.pontos_vida;
+  ImprimeSinalizado(-pontos_vida_familiar.ferimentos, Dom('ferimentos-familiar'), false);
+  ImprimeSinalizado(-pontos_vida_familiar.ferimentos_nao_letais, Dom('ferimentos-nao-letais-familiar'), false);
+  var pontos_vida_corrente_familiar =
+      pontos_vida_familiar.base + pontos_vida_familiar.bonus.Total() + pontos_vida_familiar.temporarios
+      - pontos_vida_familiar.ferimentos - pontos_vida_familiar.ferimentos_nao_letais;
+  Dom('pontos-vida-corrente-familiar').textContent = pontos_vida_corrente_familiar;
 }
 
 function _AtualizaAtributos() {
@@ -177,6 +195,29 @@ function _AtualizaClasses() {
     selects_classes[i].disabled = true;
   }
   selects_classes[selects_classes.length - 1].disabled = false;
+}
+
+function _AtualizaDominios() {
+  if (PersonagemNivelClasse('clerigo') == 0) {
+    Dom('span-dominios').style.display = 'none';
+  } else {
+    Dom('span-dominios').style.display = 'inline';
+    for (var i = 0; i < 2; ++i) {
+      SelecionaValor(gPersonagem.dominios[i], Dom('dominio-' + i));
+    }
+  }
+}
+
+function _AtualizaFamiliar() {
+  if (PersonagemNivelClasse('feiticeiro') == 0 &&
+      !PersonagemTemNivelMago()) {
+    Dom('familiar').style.display = 'none';
+  } else {
+    Dom('familiar').style.display = 'block';
+    Dom('familiar-em-uso').checked = gPersonagem.familiar.em_uso;
+    SelecionaValor(gPersonagem.familiar.chave, Dom('select-familiar'));
+    // Pontos de vida na funcao de pontos de vida.
+  }
 }
 
 // Atualiza uma classe.
@@ -360,18 +401,27 @@ function _AtualizaArmaEstilo(arma, primaria, estilo, span_arma) {
 function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   var usar_escudo = (nome_estilo == 'arma_escudo');
   RemoveFilhos(span_classe_armadura);
+  var tem_esquiva = PersonagemPossuiTalento('esquiva');
   // AC normal.
   var span_ca_normal = CriaSpan();
-  var array_exclusao = usar_escudo ? null : ['escudo', 'escudo_melhoria'];
+  var array_exclusao = usar_escudo ? [] : ['escudo', 'escudo_melhoria'];
   ImprimeNaoSinalizado(
       10 + gPersonagem.ca.bonus.Total(array_exclusao),
       span_ca_normal);
   Titulo(gPersonagem.ca.bonus.Exporta(array_exclusao), span_ca_normal);
   span_classe_armadura.appendChild(span_ca_normal);
+  if (tem_esquiva) {
+    var dom_falso = { textContent: '' };
+    array_exclusao.push('esquiva');
+    ImprimeNaoSinalizado(
+        10 + gPersonagem.ca.bonus.Total(array_exclusao),
+        dom_falso);
+    span_ca_normal.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
+  }
   span_ca_normal.textContent += ', ';
   // AC surpreso.
   var span_ca_surpreso = CriaSpan();
-  array_exclusao = ['atributo'];
+  array_exclusao = PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural') ? [] : ['atributo'];
   if (!usar_escudo) {
     array_exclusao.push('escudo');
     array_exclusao.push('escudo_melhoria');
@@ -393,6 +443,14 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
       gPersonagem.ca.bonus.Exporta(array_exclusao),
       span_ca_toque);
   span_ca_toque.textContent = Traduz('Toque') + ': ' + span_ca_toque.textContent;
+  if (tem_esquiva) {
+    var dom_falso = { textContent: '' };
+    array_exclusao.push('esquiva');
+    ImprimeNaoSinalizado(
+        10 + gPersonagem.ca.bonus.Total(array_exclusao),
+        dom_falso);
+    span_ca_toque.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
+  }
   span_classe_armadura.appendChild(span_ca_toque);
 }
 
@@ -466,7 +524,7 @@ function _AtualizaTalentos() {
     var div_talentos_classe = Dom('div-talentos-' + chave_classe);
     var lista_classe = gPersonagem.talentos[chave_classe];
     var div_selects = Dom('div-talentos-' + chave_classe + '-selects');
-    if (lista_classe.length > 0) {
+    if (lista_classe.length > 0 || chave_classe == 'outros') {
       ImprimeNaoSinalizado(
           lista_classe.length,
           Dom('talentos-' + chave_classe + '-total'));
@@ -476,7 +534,7 @@ function _AtualizaTalentos() {
             lista_classe[i],
             i < div_selects.childNodes.length ?
                 div_selects.childNodes[i] : null,
-            (chave_classe == 'gerais') ? null : chave_classe,
+            chave_classe,
             div_selects);
       }
       // Se tinha mais talentos, tira os que estavam a mais.
@@ -507,6 +565,7 @@ function _AtualizaTalento(indice_talento, talento_personagem, div_talento, chave
   for (var i = 0; i < div_talento.childNodes.length; ++i) {
     var filho = div_talento.childNodes[i];
     if (filho.name == 'chave-talento') {
+      filho.disabled = talento_personagem.imutavel;
       SelecionaValor(talento_personagem.chave, filho);
     } else if (filho.name == 'complemento-talento') {
       filho.disabled = !('complemento' in talento);
@@ -515,6 +574,8 @@ function _AtualizaTalento(indice_talento, talento_personagem, div_talento, chave
   }
   if (talento.descricao != null && talento.descricao.length > 0) {
     TituloSimples(Traduz(talento.descricao), div_talento);
+  } else {
+    TituloSimples('', div_talento);
   }
 }
 
@@ -747,6 +808,12 @@ function _AtualizaSlotsFeiticosParaClassePorNivel(chave_classe, nivel, slots, co
       div_nivel_slots,
       slots.feiticos.length + (possui_extra ? 1 : 0),
       AdicionaSlotFeitico.bind(null, div_nivel_slots, !precisa_conhecer, chave_classe, nivel, slots));
+
+  // Atualiza a CD.
+  var span = Dom('span-cd-' + chave_classe + '-' + nivel);
+  if (span != null) {
+    span.textContent = slots.cd;
+  }
 
   // Popula os selects.
   var selects_nivel = DomsPorClasse('feiticos-slots-' + chave_classe + '-' + nivel);

@@ -11,6 +11,12 @@
 	"span_nome": {
 		"message": "Name: "
 	},
+	"span_dominios_rotulo": {
+		"message": "Domains: "
+	},
+	"span_familiar": {
+		"message": "Familiar"
+	},
 	"botao_salvar": {
 		"message": "Save"
 	},
@@ -688,9 +694,6 @@
   },
   "Especializacao_em_Combate": {
     "message": "Combat Expertise"
-  },
-  "Iniciativa_Aprimorada": {
-    "message": "Improved Initiative"
   },
   "Investigador": {
     "message": "Investigator"
@@ -1670,6 +1673,9 @@
   "Visao_no_escuro": {
     "message": "Darkvision"
   },
+  "Visao_na_Penumbra": {
+    "message": "Low Light Vision"
+  },
   "Retardar_envenenamento": {
     "message": "Delay poison"
   },
@@ -2111,10 +2117,10 @@
   "Joga_novamente_a_chance_de_falha_por_camuflagem_": {
     "message": "Rerolls camuflage miss test."
   },
-  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_para_uma_escola": {
+  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_": {
     "message": "+2 bonus on spell resistance checks for a school of magic."
   },
-  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia_para_uma_escola__cumulativo_": {
+  "_2_de_bonus_nos_testes_de_conjurador_contra_Resistencia_a_Magia__cumulativo__": {
     "message": "+2 bonus on spell resistance checks for a school of magic (cumulative)."
   },
   "_4_de_bonus_nos_teste_de_Concentracao_para_conjurar_na_defensiva_": {
@@ -2384,6 +2390,9 @@
   "Montaria_especial": {
     "message": "Special mount"
   },
+  "Mordida_Venenosa": {
+    "message": "Poisonous Bite"
+  },
   "Passo_Etereo": {
     "message": "Abundant step"
   },
@@ -2522,6 +2531,21 @@
   "Controlar_Luz": {
     "message": "Control Light"
   },
+  "Elfo__Drow_": {
+    "message": "Elf (Drow)"
+  },
+  "Cegueira_sob_Luz_Intensa": {
+    "message": "Light Blindness"
+  },
+  "Globos_de_Luz__1_dia_": {
+    "message": "Dancing Lights (1/day)"
+  },
+  "Fogo_das_Fadas": {
+    "message": "Faerie Fire (1/day)"
+  },
+  "Escuridao__1_dia": {
+    "message": "Darkness (1/day)"
+  },
 	"Genasi__Agua_": {
 		"message": "Genasi (Water)"
 	},
@@ -2537,6 +2561,9 @@
 	"Ferimentos": {
 		"message": "Wounds"
 	},
+	"Ferir_Curar": {
+		"message": "Wound/Heal"
+	},
 	"span_nao_letal": {
 		"message": "Non lethal"
 	},
@@ -2549,11 +2576,20 @@
 	"Pontos_de_vida_temporarios": {
 		"message": "Temporary hit points"
 	},
+	"Pontos_de_Vida": {
+		"message": "Hit Points"
+	},
+	"span_pontos_vida_familiar": {
+		"message": "Hit Points"
+	},
 	"complemento": {
 		"message": "complement"
 	},
 	"Esconde_Mostra_proficiencias_em_armas": {
 		"message": "Hides/Shows weapon proficiencies."
+	},
+	"Esconde_Mostra_pericias": {
+		"message": "Hides/Shows skills."
 	},
 	"Geral": {
 		"message": "General"
@@ -2575,5 +2611,283 @@
 	},
 	"temporarios": {
 		"message": "temporary"
-	}
+	},
+  "Vitalidade_Ilusoria": {
+    "message": "False Life"
+  },
+  "Ganha_1d10____1_PV___nivel__temporarios_por_1h_nivel_": {
+    "message": "Gain 1d10 + (1 / level) temporary hp for 1h / level."
+  },
+  "Ataques_tem_20__de_chance_de_falha_": {
+    "message": "Attacks have a 20% miss chance."
+  },
+  "Pasmar": {
+    "message": "Daze"
+  },
+  "Sucesso_Decisivo_Aprimorado": {
+    "message": "Improved Critical"
+  },
+  "Dobra_margem_de_ameaca_da_arma_": {
+    "message": "Doubles weapon critical range."
+  },
+  // Dominios.
+  "Ar": {
+    "message": "Air"
+  },
+  "Animal": {
+    "message": "Animal"
+  },
+  "Caos": {
+    "message": "Chaos"
+  },
+  "Morte": {
+    "message": "Death"
+  },
+  "Destruicao": {
+    "message": "Destruction"
+  },
+  "Terra": {
+    "message": "Earth"
+  },
+  "Mal": {
+    "message": "Evil"
+  },
+  "Fogo": {
+    "message": "Fire"
+  },
+  "Bem": {
+    "message": "Good"
+  },
+  "Cura": {
+    "message": "Healing"
+  },
+  "Conhecimento": {
+    "message": "Knowledge"
+  },
+  "Ordem": {
+    "message": "Law"
+  },
+  "Sorte": {
+    "message": "Luck"
+  },
+  "Magia": {
+    "message": "Magic"
+  },
+  "Planta": {
+    "message": "Plant"
+  },
+  "Protecao": {
+    "message": "Protection"
+  },
+  "Forca": {
+    "message": "Strength"
+  },
+  "Sol": {
+    "message": "Sun"
+  },
+  "Viagem": {
+    "message": "Travel"
+  },
+  "Enganacao": {
+    "message": "Trickery"
+  },
+  "Guerra": {
+    "message": "War"
+  },
+  "Agua": {
+    "message": "Water"
+  },
+  // Abaixo, os de FR.
+  "Equilibrio": {
+    "message": "Balance"
+  },
+  "Caverna": {
+    "message": "Cavern"
+  },
+  "Encantamento": {
+    "message": "Charm"
+  },
+  "Frio": {
+    "message": "Cold"
+  },
+  "Oficios": {
+    "message": "Craft"
+  },
+  "Escuridao": {
+    "message": "Darkness"
+  },
+  "Drow": {
+    "message": "Drow"
+  },
+  "Anao": {
+    "message": "Dwarf"
+  },
+  "Elfo": {
+    "message": "Elf"
+  },
+  "Familia": {
+    "message": "Family"
+  },
+  "Destino": {
+    "message": "Fate"
+  },
+  "Gnomo": {
+    "message": "Gnome"
+  },
+  "Halfling": {
+    "message": "Halfling"
+  },
+  "Odio": {
+    "message": "Hatred"
+  },
+  "Ilusao": {
+    "message": "Illusion"
+  },
+  "Mentalismo": {
+    "message": "Mentalism"
+  },
+  "Metal": {
+    "message": "Metal"
+  },
+  "Lua": {
+    "message": "Moon"
+  },
+  "Nobreza": {
+    "message": "Nobility"
+  },
+  "Oceano": {
+    "message": "Ocean"
+  },
+  "Orc": {
+    "message": "Orc"
+  },
+  "Planejamento": {
+    "message": "Planning"
+  },
+  "Portal": {
+    "message": "Portal"
+  },
+  "Renovacao": {
+    "message": "Renewal"
+  },
+  "Repouso": {
+    "message": "Repose"
+  },
+  "Retribuicao": {
+    "message": "Retribution"
+  },
+  "Runa": {
+    "message": "Rune"
+  },
+  "Escamas": {
+    "message": "Scalykind"
+  },
+  "Geleia": {
+    "message": "Slime"
+  },
+  "Magicas": {
+    "message": "Spell"
+  },
+  "Aranha": {
+    "message": "Spider"
+  },
+  "Tempestade": {
+    "message": "Storm"
+  },
+  "Sofrimento": {
+    "message": "Suffering"
+  },
+  "Tempo": {
+    "message": "Time"
+  },
+  "Comercio": {
+    "message": "Trade"
+  },
+  "Tirania": {
+    "message": "Tiranny"
+  },
+  "Mortos_Vivos": {
+    "message": "Undeath"
+  },
+  "Morte_Aquosa__Prestigio__": {
+    "message": "Watery Death Prestige"
+  },
+  // fim dominios.
+  // Familiares.
+  "Morcego": {
+    "message": "Bat"
+  },
+  "Gato": {
+    "message": "Cat"
+  },
+  "Falcao": {
+    "message": "Hawk"
+  },
+  "Lagarto": {
+    "message": "Lizard"
+  },
+  "Coruja": {
+    "message": "Owl"
+  },
+  "Rato": {
+    "message": "Rat"
+  },
+  "Corvo": {
+    "message": "Raven"
+  },
+  "Cobra": {
+    "message": "Snake"
+  },
+  "Sapo": {
+    "message": "Toad"
+  },
+  "Texugo": {
+    "message": "Weasel"
+  },
+  "Aranha_Cabeluda": {
+    "message": "Hairy Spider"
+  },
+  "Polvo": {
+    "message": "Octopus"
+  },
+  // fim Familiares.
+  "sem_esquiva": {
+    "message": "no dodge"
+  },
+  "Patas_de_Aranha": {
+    "message": "Spider Climb"
+  },
+  "Concede_habilidade_para_andar_em_parede_e_tetos_": {
+    "message": "Grants ability to walk on walls and ceilings."
+  },
+  "Armadura_Arcana": {
+    "message": "Mage Armor"
+  },
+  "Concede_ao_alvo_4_de_bonus_de_armadura_": {
+    "message": "Grants +4 armor bonus."
+  },
+  "Area_Escorregadia": {
+    "message": "Grease"
+  },
+  "Torna_3_m_quadrados_ou_um_objeto_escorregadios_": {
+    "message": "Makes 10-ft. square or one object slippery."
+  },
+  "Invisibilidade": {
+    "message": "Invisibility"
+  },
+  "O_alvo_fica_invisivel_durante_1_min_nivel_ou_ate_atacar_": {
+    "message": "Subject is invisible for 1 min./level or until it attacks."
+  },
+  "Iniciativa_Aprimorada": {
+    "message": "Improved Initiative"
+  },
+  "_4_de_bonus_nos_testes_de_iniciativa": {
+    "message": "+4 bonus on initiative."
+  },
+  "Foco_em_Pericia": {
+    "message": "Skill Focus"
+  },
+  "_3_de_bonus_nos_teste_da_pericia_escolhida_": {
+    "message": "+3 bonus on selected skill."
+  }
 }

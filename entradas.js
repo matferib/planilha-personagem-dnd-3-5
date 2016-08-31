@@ -16,6 +16,8 @@ var gEntradas = {
   divindade: '',
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
+  dominios: [],
+  familiar: { em_uso: false, chave: '', temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 },
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
@@ -57,7 +59,7 @@ var gEntradas = {
   capas: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
-  talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [] },
+  talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [], outros: [] },
 
   // pericias: cada entrada possui { chave, pontos, complemento }
   pericias: [],
@@ -118,6 +120,10 @@ function LeEntradas() {
         nivel: parseInt(input.value)});
     }
   }
+  // Dominios de clerigo.
+  _LeDominios();
+  // Familiares.
+  _LeFamiliar();
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
@@ -188,6 +194,32 @@ function _LeTalentos() {
           _LeTalento(div_talentos.childNodes[i]));
     }
   }
+}
+
+function _LeDominios() {
+  gEntradas.dominios = [];
+  var doms_dominios = [ Dom('dominio-0'), Dom('dominio-1') ];
+  for (var dom of doms_dominios) {
+    if (dom.style.display != 'none') {
+      gEntradas.dominios.push(ValorSelecionado(dom));
+    }
+  }
+}
+
+function _LeFamiliar() {
+  if (gEntradas.familiar == null) {
+    gEntradas.familiar = { em_uso: false, chave: '', temporarios: 0 };
+  }
+  var dom_em_uso = Dom('familiar-em-uso');
+  var dom_familiar = Dom('select-familiar');
+  if (dom_familiar.style.display == 'none') {
+    return;
+  }
+  gEntradas.familiar.em_uso = dom_em_uso.checked;
+  gEntradas.familiar.chave = ValorSelecionado(dom_familiar);
+  gEntradas.familiar.temporarios = parseInt(Dom('pontos-vida-temporarios-familiar').value) || 0;
+  gEntradas.familiar.ferimentos = -parseInt(Dom('ferimentos-familiar').textContent) || 0;
+  gEntradas.familiar.ferimentos_nao_letais = -parseInt(Dom('ferimentos-nao-letais-familiar').textContent) || 0;
 }
 
 // Le o talento do div e o retorna no formato da entrada.
@@ -525,5 +557,13 @@ function EntradasAdicionarFerimentos(valor, nao_letal) {
   gEntradas[tipo] += valor;
   if (gEntradas[tipo] < 0) {
     gEntradas[tipo] = 0;
+  }
+}
+
+function EntradasAdicionarFerimentosFamiliar(valor, nao_letal) {
+  var tipo = nao_letal ? "ferimentos_nao_letais" : "ferimentos";
+  gEntradas.familiar[tipo] += valor;
+  if (gEntradas.familiar[tipo] < 0) {
+    gEntradas.familiar[tipo] = 0;
   }
 }

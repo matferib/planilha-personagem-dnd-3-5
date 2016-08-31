@@ -278,8 +278,13 @@ function ClickBotaoAtributoMenos() {
 
 // Soma valor aos ferimentos do personagem. Um valor positivo significa dano,
 // valor negativo eh cura.
-function ClickAjustarFerimentos(valor) {
+function ChangeAjustarFerimentos(valor) {
   EntradasAdicionarFerimentos(valor, Dom('input-ferimento-nao-letal').checked);
+  AtualizaGeralSemLerEntradas();
+}
+
+function ChangeAjustarFerimentosFamiliar(valor) {
+  EntradasAdicionarFerimentosFamiliar(valor, Dom('input-ferimento-nao-letal-familiar').checked);
   AtualizaGeralSemLerEntradas();
 }
 
@@ -504,4 +509,14 @@ function ClickBotaoEsconderDom(id_botao, id_alvo, display) {
     botao.textContent = '▴';
     Dom(id_alvo).style.display = display != null ? display : 'inline';
   }
+}
+
+function ClickAdicionarTalento() {
+  gEntradas.talentos['outros'].push({});
+  AtualizaGeralSemLerEntradas();
+}
+
+function ClickRemoverTalento(indice) {
+  gEntradas.talentos['outros'].splice(indice, 1);
+  AtualizaGeralSemLerEntradas();
 }
