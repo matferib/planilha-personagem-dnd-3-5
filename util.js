@@ -464,7 +464,8 @@ function SalvaNoArmazem(nome, valor, callback) {
     obj[nome] = valor;
     chrome.storage.sync.set(obj, function() {
       if (chrome.runtime.lastError) {
-        Mensagem(chrome.runtime.lastError.message);
+        Mensagem(chrome.runtime.lastError.message + ': ' + Traduz('salvando local'));
+        chrome.storage.local.set(obj, callback);
       } else {
         callback();
       }
@@ -478,13 +479,15 @@ function SalvaNoArmazem(nome, valor, callback) {
 // Le o valor de nome do Armazem. Chama callback({ nome: valor }). O valor será
 // uma string.
 // Caso nao haja valor, chamará callback({ nome: null }).
-function AbreDoArmazem(nome, callback) {
+function AbreDoArmazem(nome, eh_local, callback) {
   if (_ArmazemChrome()) {
-    chrome.storage.sync.get(nome, function() {
+    var storage = eh_local ? chrome.storage.local : chrome.storage.sync;
+    storage.get(nome, function(items) {
       if (chrome.runtime.lastError) {
         Mensagem(chrome.runtime.lastError.message);
+        callback({});
       } else {
-        callback();
+        callback(items);
       }
     });
   } else {
@@ -494,14 +497,19 @@ function AbreDoArmazem(nome, callback) {
   }
 }
 
-// @param callback chamado como callback(lista_nomes).
+// @param callback chamado como callback(lista_nomes_sync, lista_nomes_local).
 function ListaDoArmazem(callback) {
   if (_ArmazemChrome()) {
+    var lista_sync, lista_local;
     chrome.storage.sync.get(null, function(items) {
-      callback(MapaParaLista(items));
+      lista_sync = MapaParaLista(items);
+      chrome.storage.local.get(null, function(items) {
+        lista_local = MapaParaLista(items);
+        callback(lista_sync, lista_local);
+      })
     });
   } else {
-    callback(MapaParaLista(localStorage));
+    callback([], MapaParaLista(localStorage));
   }
 }
 

@@ -2889,5 +2889,8 @@
   },
   "_3_de_bonus_nos_teste_da_pericia_escolhida_": {
     "message": "+3 bonus on selected skill."
-  }
+  },
+	"salvando_local": {
+		"message": "saving locally"
+	}
 }

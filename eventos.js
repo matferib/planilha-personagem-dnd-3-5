@@ -81,6 +81,13 @@ function ClickAbrir() {
     Mensagem('Nome "--" não é válido.');
     return;
   }
+  var eh_local = false;
+  if (nome.indexOf('local_') == 0) {
+    eh_local = true;
+    nome = nome.substr(6);
+  } else {
+    nome = nome.substr(5);
+  }
   var handler = {
     nome: nome,
     f: function(dado) {
@@ -97,7 +104,7 @@ function ClickAbrir() {
     },
   };
   HabilitaOverlay();
-  AbreDoArmazem(nome, handler.f);
+  AbreDoArmazem(nome, eh_local, handler.f);
 }
 
 // Exclui um personagem do armazem.

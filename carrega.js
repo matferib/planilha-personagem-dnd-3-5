@@ -302,11 +302,14 @@ function CarregaPersonagens() {
     return;
   }
 
-  ListaDoArmazem(function(lista_nomes) {
+  ListaDoArmazem(function(lista_nomes_sync, lista_nomes_local) {
     LimpaSelect(select_personagens);
     select_personagens.add(CriaOption(Traduz('nenhum'), '--'));
-    for (var i = 0; i < lista_nomes.length; ++i) {
-      select_personagens.add(CriaOption(lista_nomes[i], lista_nomes[i]));
+    for (var i = 0; i < lista_nomes_sync.length; ++i) {
+      select_personagens.add(CriaOption(lista_nomes_sync[i], 'sync_' + lista_nomes_sync[i]));
+    }
+    for (var i = 0; i < lista_nomes_local.length; ++i) {
+      select_personagens.add(CriaOption(lista_nomes_local[i] + ' ' + Traduz('(local)'), 'local_' + lista_nomes_local[i]));
     }
   });
 }
