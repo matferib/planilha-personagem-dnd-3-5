@@ -355,7 +355,7 @@ function GeraResumo() {
   // Dados de vida e pontos de vida.
   resumo +=
     'DV: ' + PersonagemStringDadosVida() +
-    ', pv: ' + gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total() + '; ';
+    ', pv: ' + (gPersonagem.pontos_vida.total_dados + gPersonagem.pontos_vida.bonus.Total()) + '; ';
 
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var info_classe = gPersonagem.classes[i];
