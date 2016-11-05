@@ -2401,28 +2401,78 @@ var tabelas_materiais_especiais = {
 };
 
 var tabelas_dominios = {
-  ar: { nome: 'Ar' },
-  animal: { nome: 'Animal' },
-  caos: { nome: 'Caos' },
-  morte: { nome: 'Morte' },
-  destruicao: { nome: 'Destruição' },
-  terra: { nome: 'Terra' },
-  mal: { nome: 'Mal' },
-  fogo: { nome: 'Fogo' },
-  bem: { nome: 'Bem' },
-  cura: { nome: 'Cura' },
-  conhecimento: { nome: 'Conhecimento' },
-  ordem: { nome: 'Ordem' },
-  sorte: { nome: 'Sorte' },
-  magia: { nome: 'Magia' },
-  planta: { nome: 'Planta' },
-  protecao: { nome: 'Proteção' },
-  forca: { nome: 'Força' },
-  sol: { nome: 'Sol' },
-  viagem: { nome: 'Viagem' },
-  enganacao: { nome: 'Enganação' },
-  guerra: { nome: 'Guerra' },
-  agua: { nome: 'Água' },
+  agua: { nome: 'Água',
+          poder: 'Expulsa ou destrói criaturas do fogo como um clérigo bondoso usaria Expulsar. ' +
+                 'Fascina ou comanda criaturas da água como um clérigo maligno usaria Fascinar. ' +
+                 'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+                 'Este poder concedido é uma habilidade sobrenatural.' },
+  animal: { nome: 'Animal',
+            poder: 'Você pode lançar falar com animais uma vez por dia como uma habilidade similar a magia. ' +
+                   'Conhecimento (natureza) passa a ser uma perícia de classe.' },
+  ar: { nome: 'Ar',
+        poder: 'Expulsa ou destrói criaturas da terra como um clérigo bondoso usaria Expulsar. ' +
+               'Fascina ou comanda criaturas do ar como um clérigo maligno usaria Fascinar. ' +
+               'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+               'Este poder concedido é uma habilidade sobrenatural.' },
+  bem: { nome: 'Bem',
+         poder: 'Você conjura magias do bem com +1 no nível de conjurador.' },
+  caos: { nome: 'Caos',
+          poder: 'Você conjura magias do caos com +1 no nível de conjurador.' },
+  conhecimento: { nome: 'Conhecimento',
+                  poder: 'Todas as perícias de Conhecimento passam a ser perícias de classe. ' +
+                         'Você conjura magias de adivinhação com +1 no nível de conjurador.' },
+  cura: { nome: 'Cura', poder: 'Você conjura magias de cura com +1 no nível de conjurador.' },
+  destruicao: { nome: 'Destruição',
+                poder: 'Uma vez por dia, você ganha o poder de destruir, uma habilidade sobrenatural; ' +
+                       'pode-se realizar um único ataque corpo a corpo com +4 de bônus na jogada de ataque e ' +
+                       'um modificador de dano equivalente ao seu nível de clérigo (caso você acerte). ' +
+                       'Você precisa declarar o uso do poder antes de fazer a jogada de ataque.' },
+  enganacao: { nome: 'Enganação', poder: 'Blefar, Disfarces e Esconder-se passam a ser perícias de classe' },
+  fogo: { nome: 'Fogo',
+          poder: 'Expulsa ou destrói criaturas da água como um clérigo bondoso usaria Expulsar. ' +
+                 'Fascina ou comanda criaturas do fogo como um clérigo maligno usaria Fascinar. ' +
+                 'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+                 'Este poder concedido é uma habilidade sobrenatural.' },
+  forca: { nome: 'Força',
+           poder: 'Você pode realizar um feito de força, uma habilidade sobrenatural que concede um bônus de melhoria para sua Força ' +
+                  'igual ao seu nível de clérigo. Ativar esse poder é uma ação livre. Ele pode ser usado uma vez por dia e dura 1 rodada.' },
+  guerra: { nome: 'Guerra',
+            poder: 'Adquire o talento Usar Arma Comum (se necessário) e Foco em Arma da arma predileta de seu deus.' },
+  magia: { nome: 'Magia',
+           poder: 'Você usa pergaminhos, varinhas e outros itens mágicos de complemento a magia ou ativação de magia como um mago com metade ' +
+                  'de seu nível de clérigo (no mínimo 1° nível). Se você também for um mago, seu nível de mago e esses níveis são somados para esses fins.' },
+  mal: { nome: 'Mal', poder: '+1 no nível de conjurador de magias com descritor "mau"' },
+  morte: { nome: 'Morte',
+           poder: 'Você pode usar o toque da morte uma vez por dia; ele é uma habilidade sobrenatural que gera um efeito de morte. ' +
+                  'É preciso realizar um ataque de toque corporal contra uma criatura viva (usando as regras para magias de toque). ' +
+                  'Caso acerte, jogue 1d6 por nível de clérigo. Se o total igualar ou superar os pontos de vida do alvo, ele morre (sem testes de resistência).' },
+  ordem: { nome: 'Ordem', poder: 'Você conjura magias da ordem com +1 no nível de conjurador.' },
+  planta: { nome: 'Planta',
+            poder: 'Fascina ou comanda criaturas da terra como um clérigo maligno usaria Fascinar. ' +
+                   'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+                   'Este poder concedido é uma habilidade sobrenatural. Conhecimento (natureza) passa a ser uma perícia de classe.' },
+  protecao: { nome: 'Proteção',
+              poder: 'Você pode gerar um escudo de proteção, uma habilidade sobrenatural que concede ao alvo tocado um bônus de resistência ' +
+                     'no próximo teste de resistência igual ao seu nível de clérigo. Ativar este poder usa uma ação padrão. ' +
+                     'O escudo de proteção é um efeito de abjuração, com duração de 1 hora, que pode ser usado uma vez por dia.' },
+  sol: { nome: 'Sol',
+         poder: 'Uma vez por dia, você pode usar a Expulsão Aprimorada contra mortos-vivos no lugar de uma Expulsão comum. ' +
+                'A Expulsão Aprimorada é idêntica à Expulsão normal, mas todos os mortos-vivos que seriam expulsos, serão destruídos.' },
+  sorte: { nome: 'Sorte',
+           poder: 'Você adquire o poder da boa sorte, que pode ser usado uma vez por dia. ' +
+                  'Esta habilidade extraordinária lhe permite realizar novamente uma jogada. ' +
+                  'Você é obrigado a ficar com o novo resultado, mesmo se este for pior que o resultado original.' },
+  terra: { nome: 'Terra',
+           poder: 'Expulsa ou destrói criaturas do ar como um clérigo bondoso usaria Expulsar. ' +
+                  'Fascina ou comanda criaturas da terra como um clérigo maligno usaria Fascinar. ' +
+                  'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+                  'Este poder concedido é uma habilidade sobrenatural.'  },
+  viagem: { nome: 'Viagem',
+            poder: 'Durante 1 rodada/nível de clérigo por dia, você pode agir sem ser incomodado por efeitos mágicos que impedem o movimento ' +
+                   '(similar ao efeito da magia movimentação livre). ' +
+                   'Esse efeito é automático e permanece até seu tempo máximo diário se esgotar ou não ser mais necessário. ' +
+                   'Ele pode ser ativado várias vezes em um dia (até a quantidade máxima de rodadas disponível). ' +
+                   'Essa é uma habilidade sobrenatural. A Sobrevivência passa a ser uma perícia de classe.' },
   // Abaixo, os de FR.
   equilibrio: { nome: 'Equilíbrio' },
   caverna: { nome: 'Caverna' },
