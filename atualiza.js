@@ -203,7 +203,9 @@ function _AtualizaDominios() {
   } else {
     Dom('span-dominios').style.display = 'inline';
     for (var i = 0; i < 2; ++i) {
-      SelecionaValor(gPersonagem.dominios[i], Dom('dominio-' + i));
+      var dom = Dom('dominio-' + i);
+      SelecionaValor(gPersonagem.dominios[i], dom);
+      TituloSimples(tabelas_dominios[gPersonagem.dominios[i]].poder, dom);
     }
   }
 }
