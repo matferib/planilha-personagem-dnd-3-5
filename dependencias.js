@@ -504,10 +504,16 @@ function _DependenciasHabilidadesEspeciais() {
       for (var j = 0; j < especiais_por_nivel[nivel].length; ++j) {
         var especial = especiais_por_nivel[nivel][j];
         // Alguns especiais sao tratados de forma diferente.
-        if (especial == 'expulsar_fascinar_mortos_vivos') {
-          var num_expulsoes = 3 + gPersonagem.atributos['carisma'].modificador +
-            (PersonagemPossuiTalento('expulsao_adicional') ? 4 : 0);
-          gPersonagem.especiais[especial] = { vezes: num_expulsoes };
+        var especial_tabela = tabelas_especiais[especial];
+        if ('vezes' in especial_tabela) {
+          var valor = especial_tabela.vezes.fixo;
+          if ('atributo' in especial_tabela.vezes) {
+            valor += gPersonagem.atributos[especial_tabela.vezes.atributo].modificador;
+          }
+          if ('talento' in especial_tabela.vezes && PersonagemPossuiTalento(especial_tabela.vezes.talento.chave)) {
+            valor += especial_tabela.vezes.talento.fixo;
+          }
+          gPersonagem.especiais[especial] = { vezes: valor };
         } else {
           if (!(especial in gPersonagem.especiais)) {
             gPersonagem.especiais[especial] = { vezes: 1 };

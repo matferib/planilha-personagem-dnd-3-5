@@ -422,7 +422,9 @@ var tabelas_especiais = {
   globo_luz: { nome: 'Globos de Luz (1/dia)' },
   fogo_fadas: { nome: 'Fogo das Fadas (1/dia)' },
   estilo_combate_aprimorado: { nome: 'Estilo de Combate Aprimorado' },
-  expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
+  expulsar_fascinar_mortos_vivos: {
+    nome: 'Expulsar/fascinar mortos vivos',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
   camuflagem: { nome: 'Camuflagem', },
   companheiro_animal: { nome: 'Companheiro animal', },
   controlar_luz: { nome: 'Controlar Luz' },
