@@ -605,6 +605,9 @@
   "Aptidao_Magica": {
     "message": "Magical Aptitude"
   },
+  "Aptidao_Items_Magicos": {
+    "message": "Magic Item Aptitude"
+  },
   "Ataque_Atordoante": {
     "message": "Stunning Fist"
   },
@@ -2288,17 +2291,41 @@
   "Auto_Perfeicao": {
     "message": "Perfect self"
   },
+  "Boa_Sorte": {
+    "message": "Good Fortune"
+  },
   "Bonus_CA": {
     "message": "AC Bonus"
   },
   "Caminho_da_Floresta": {
     "message": "Woodland stride"
   },
+  "Destruir": {
+    "message": "Smite"
+  },
   "Estilo_de_Combate_Aprimorado": {
     "message": "Improved combat style"
   },
   "Expulsar_fascinar_morto_vivos": {
     "message": "Turn or rebuke undead"
+  },
+  "Expulsar_fascinar_criaturas_de_fogo": {
+    "message": "Turn or rebuke fire creatures"
+  },
+  "Expulsar_fascinar_criaturas_de_agua": {
+    "message": "Turn or rebuke water creatures"
+  },
+  "Expulsar_fascinar_criaturas_de_terra": {
+    "message": "Turn or rebuke earth creatures"
+  },
+  "Expulsar_fascinar_criaturas_de_ar": {
+    "message": "Turn or rebuke air creatures"
+  },
+  "Falar_com_Animais": {
+    "message": "Speak with Animals"
+  },
+  "Feito_de_Forca": {
+    "message": "Feat of Strength"
   },
   "Camuflagem": {
     "message": "Camouflage"
@@ -2336,6 +2363,9 @@
   "Evasao_Aprimorada": {
     "message": "Improved evasion"
   },
+  "Escudo_de_Protecao": {
+    "message": "Protective Ward"
+  },
   "Escudo_Heroico": {
     "message": "Heroic Shield"
   },
@@ -2345,8 +2375,14 @@
   "Estilo_de_Combate": {
     "message": "Combat style"
   },
+  "Expulsao_Aprimorada_Contra_Mortos_Vivos": {
+    "message": "Greater Turning Against Undead",
+  },
   "Familiar": {
     "message": "Familiar"
+  },
+  "Fascinar_Comandar_Plantas": {
+    "message": "Rebuke/Command Plants"
   },
   "Forma_selvagem": {
     "message": "Wild shape"
@@ -2392,6 +2428,9 @@
   },
   "Mordida_Venenosa": {
     "message": "Poisonous Bite"
+  },
+  "Movimentacao_Livre": {
+    "message": "Freedom of Movement"
   },
   "Passo_Etereo": {
     "message": "Abundant step"
@@ -2467,6 +2506,9 @@
   },
   "Talento": {
     "message": "Bonus Feat"
+  },
+  "Toque_da_Morte": {
+    "message": "Death Touch"
   },
   "Visao_no_Escuro": {
     "message": "Darkvision"
@@ -2892,5 +2934,11 @@
   },
 	"salvando_local": {
 		"message": "saving locally"
-	}
+	},
+  "Escuridao_Profunda": {
+    "message": "Darkness"
+  },
+  "Purgar_Invisibilidade": {
+    "message": "Invisibility Purge"
+  }
 }
