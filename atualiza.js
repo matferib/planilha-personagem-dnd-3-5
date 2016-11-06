@@ -205,7 +205,7 @@ function _AtualizaDominios() {
     for (var i = 0; i < 2; ++i) {
       var dom = Dom('dominio-' + i);
       SelecionaValor(gPersonagem.dominios[i], dom);
-      TituloSimples(tabelas_dominios[gPersonagem.dominios[i]].poder, dom);
+      TituloSimples(tabelas_dominios[gPersonagem.dominios[i]].descricao ? tabelas_dominios[gPersonagem.dominios[i]].descricao : '', dom);
     }
   }
 }
