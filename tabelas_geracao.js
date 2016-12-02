@@ -199,7 +199,8 @@ var tabelas_geracao = {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
       2: [ 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
-      3: [ 'dissipar_magia', 'dissipar_magia', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
+      3: [ 'dissipar_magia', 'purgar_invisibilidade', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
+      4: [ 'poder_divino', 'envenenamento', 'inseto_gigante', 'imunidade_a_magia' ],
     },
     por_nivel: {
       1: { moedas: { ouro: 300 },
@@ -539,7 +540,7 @@ var tabelas_geracao = {
     atributos: [ 'destreza', 'inteligencia', 'constituicao', 'forca', 'sabedoria', 'carisma' ],
     ordem_pericias: [
       'esconderse', 'furtividade', 'observar', 'ouvir', 'abrir_fechaduras', 'procurar', 'operar_mecanismo',
-      'avaliacao', 'acrobacias', 'cavalgar', 'usar_instrumento_magico', 'equilibrio', 'saltar' ],
+      'avaliacao', 'acrobacias', 'blefar', 'usar_instrumento_magico', 'equilibrio', 'saltar', 'cavalgar' ],
     talentos: [
       'iniciativa_aprimorada', 'tiro_certeiro', 'usar_escudo', 'tiro_preciso',
     ],
@@ -573,6 +574,13 @@ var tabelas_geracao = {
            aneis: [],
       },
       7: { moedas: {  ouro: 4200 },
+           armadura: { nome: 'couro_batido', bonus: 1 },
+           escudo: { nome: 'broquel', bonus: 1, },
+           armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
+                    { chave: 'arco_curto', bonus: 0, obra_prima: true }, ],
+           aneis: [],
+      },
+      8: { moedas: {  ouro: 6400 },
            armadura: { nome: 'couro_batido', bonus: 1 },
            escudo: { nome: 'broquel', bonus: 1, },
            armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
