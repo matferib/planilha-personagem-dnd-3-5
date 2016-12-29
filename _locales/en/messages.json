@@ -2948,70 +2948,70 @@
     "message": "Generate elite"
   },
   // Dominios: hack de usar desc-dominio-chave porque o texto é grande.
-  "desc-dom-agua": {
+  "desc_dom_agua": {
     "message": "Turn or destroy water creatures as a good cleric turns undead. Rebuke, command, or bolster fire creatures as an evil cleric rebukes undead. Use these abilities a total number of times per day equal to 3 + your Charisma modifier. This granted power is a supernatural ability."
   },
-  "desc-dom-animal": {
+  "desc_dom_animal": {
     "message": "You can use speak with animals once per day as a spell-like ability. Add Knowledge (nature) to your list of cleric class skills."
   },
-  "desc-dom-ar": {
+  "desc_dom_ar": {
     "message": "Turn or destroy earth creatures as a good cleric turns undead. Rebuke, command, or bolster air creatures as an evil cleric rebukes undead. Use these abilities a total number of times per day equal to 3 + your Charisma modifier. This granted power is a supernatural ability."
   },
-  "desc-dom-bem": {
+  "desc_dom_bem": {
     "message": "You cast good spells at +1 caster level."
   },
-  "desc-dom-caos": {
+  "desc_dom_caos": {
     "message": "You cast chaos spells at +1 caster level."
   },
-  "desc-dom-conhecimento": {
+  "desc_dom_conhecimento": {
     "message": "Add all Knowledge skills to your list of cleric class skills. You cast divination spells at +1 caster level."
   },
-  "desc-dom-cura": {
+  "desc_dom_cura": {
     "message": "You cast healing spells at +1 caster level."
   },
-  "desc-dom-destruicao": {
+  "desc_dom_destruicao": {
     "message": "You gain the smite power, the supernatural ability to make a single melee attack with a +4 bonus on attack rolls and a bonus on damage rolls equal to your cleric level (if you hit). You must declare the smite before making the attack. This ability is usable once per day."
   },
-  "desc-dom-enganacao": {
+  "desc_dom_enganacao": {
     "message": "Add Bluff, Disguise, and Hide to your list of cleric class skills."
   },
-  "desc-dom-fogo": {
+  "desc_dom_fogo": {
     "message": "Turn or destroy water creatures as a good cleric turns undead. Rebuke, command, or bolster fire creatures as an evil cleric rebukes undead. Use these abilities a total number of times per day equal to 3 + your Charisma modifier. This granted power is a supernatural ability."
   },
-  "desc-dom-forca": {
+  "desc_dom_forca": {
     "message": "You can perform a feat of strength as a supernatural ability. You gain an enhancement bonus to Strength equal to your cleric level. Activating the power is a free action, the power lasts 1 round, and it is usable once per day."
   },
-  "desc-dom-guerra": {
+  "desc_dom_guerra": {
     "message": "Free Martial Weapon Proficiency with deity’s favored weapon (if necessary) and Weapon Focus with the deity’s favored weapon."
   },
-  "desc-dom-magia": {
+  "desc_dom_magia": {
     "message": "Use scrolls, wands, and other devices with spell completion or spell trigger activation as a wizard of one-half your cleric level (at least 1st level). For the purpose of using a scroll or other magic device, if you are also a wizard, actual wizard levels and these effective wizard levels stack."
   },
-  "desc-dom-mal": {
+  "desc_dom_mal": {
     "message": "You cast evil spells at +1 caster level."
   },
-  "desc-dom-morte": {
+  "desc_dom_morte": {
     "message": "You may use a death touch once per day. Your death touch is a supernatural ability that produces a death effect. You must succeed on a melee touch attack against a living creature (using the rules for touch spells). When you touch, roll 1d6 per cleric level you possess. If the total at least equals the creature’s current hit points, it dies (no save)."
   },
-  "desc-dom-ordem": {
+  "desc_dom_ordem": {
     "message": "You cast law spells at +1 caster level."
   },
-  "desc-dom-planta": {
+  "desc_dom_planta": {
     "message": "Rebuke or command plant creatures as an evil cleric rebukes or commands undead. Use this ability a total number of times per day equal to 3 + your Charisma modifier. This granted power is a supernatural ability. Add Knowledge (nature) to your list of cleric class skills."
   },
-  "desc-dom-protecao": {
+  "desc_dom_protecao": {
     "message": "You can generate a protective ward as a supernatural ability. Grant someone you touch a resistance bonus equal to your cleric level on his or her next saving throw. Activating this power is a standard action. The protective ward is an abjuration effect with a duration of 1 hour that is usable once per day."
   },
-  "desc-dom-sol": {
+  "desc_dom_sol": {
     "message": "Once per day, you can perform a greater turning against undead in place of a regular turning. The greater turning is like a normal turning except that the undead creatures that would be turned are destroyed instead."
   },
-  "desc-dom-sorte": {
+  "desc_dom_sorte": {
     "message": "You gain the power of good fortune, which is usable once per day. This extraordinary ability allows you to reroll one roll that you have just made before the game master declares whether the roll results in success or failure. You must take the result of the reroll, even if it’s worse than the original roll."
   },
-  "desc-dom-terra": {
+  "desc_dom_terra": {
     "message": "Turn or destroy air creatures as a good cleric turns undead. Rebuke, command, or bolster earth creatures as an evil cleric rebukes undead. Use these abilities a total number of times per day equal to 3 + your Charisma modifier. This granted power is a supernatural ability."
   },
-  "desc-dom-viagem": {
+  "desc_dom_viagem": {
     "message": "For a total time per day of 1 round per cleric level you possess, you can act normally regardless of magical effects that impede movement as if you were affected by the spell freedom of movement. This effect occurs automatically as soon as it applies, lasts until it runs out or is no longer needed, and can operate multiple times per day (up to the total daily limit of rounds). Add Survival to your list of cleric class skills."
   }
 }
