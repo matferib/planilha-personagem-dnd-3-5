@@ -475,53 +475,76 @@ function _DependenciasProficienciaArmas() {
   }
 }
 
+// Retorna o numero de vezes que o especial pode ser usado.
+function _VezesEspecial(especial) {
+  var especial_tabela = tabelas_especiais[especial];
+  var valor = 0;
+  if ('vezes' in especial_tabela) {
+    var valor = especial_tabela.vezes.fixo || 0;
+    if ('nivel' in especial_tabela.vezes) {
+      valor += PersonagemNivelClasse(especial_tabela.vezes.nivel);
+    }
+    if ('atributo' in especial_tabela.vezes) {
+      valor += gPersonagem.atributos[especial_tabela.vezes.atributo].modificador;
+    }
+    if ('talento' in especial_tabela.vezes && PersonagemPossuiTalento(especial_tabela.vezes.talento.chave)) {
+      valor += especial_tabela.vezes.talento.fixo;
+    }
+  }
+  return valor;
+}
+
+function _DependenciaHabilidadeEspecial(especial) {
+  var valor = _VezesEspecial(especial);
+  if (especial in gPersonagem.especiais) {
+    gPersonagem.especiais[especial].vezes += valor;
+  } else {
+    gPersonagem.especiais[especial] = { vezes: valor };
+  }
+}
+
 // Habilidades especiais do gPersonagem.
 function _DependenciasHabilidadesEspeciais() {
   var especiais_antes = gPersonagem.especiais;
-  var tabelas_nivel_especiais = [];
+  var especiais_nivel_classe = [];
   for (var i = 0; i < gPersonagem.classes.length; ++i) {
     var entrada_classe = gPersonagem.classes[i];
     if (tabelas_classes[entrada_classe.classe].especiais == null) {
       continue;
     }
-    tabelas_nivel_especiais.push(
-        { nivel: PersonagemNivelClasse(entrada_classe.classe), especiais: tabelas_classes[entrada_classe.classe].especiais });
+    especiais_nivel_classe.push(
+        { nivel: PersonagemNivelClasse(entrada_classe.classe), especiais_classe: tabelas_classes[entrada_classe.classe].especiais });
   }
   if ('especiais' in tabelas_raca[gPersonagem.raca]) {
-    tabelas_nivel_especiais.push({ nivel: PersonagemNivel(), especiais: tabelas_raca[gPersonagem.raca].especiais });
+    especiais_nivel_classe.push({ nivel: PersonagemNivel(), especiais_classe: tabelas_raca[gPersonagem.raca].especiais });
   }
   var template_pc = PersonagemTemplate();
   if (template_pc != null && 'especiais' in template_pc) {
-    tabelas_nivel_especiais.push({ nivel: PersonagemNivel(), especiais: template_pc.especiais });
+    especiais_nivel_classe.push({ nivel: PersonagemNivel(), especiais_classe: template_pc.especiais });
   }
 
-  for (var i = 0; i < tabelas_nivel_especiais.length; ++i) {
-    for (var nivel = 1; nivel <= tabelas_nivel_especiais[i].nivel; ++nivel) {
-      var especiais_por_nivel = tabelas_nivel_especiais[i].especiais;
+  for (var i = 0; i < especiais_nivel_classe.length; ++i) {
+    var dados_nivel_classe = especiais_nivel_classe[i];
+    for (var nivel = 1; nivel <= dados_nivel_classe.nivel; ++nivel) {
+      var especiais_por_nivel = dados_nivel_classe.especiais_classe;
       if (!(nivel in especiais_por_nivel)) {
         continue;
       }
       for (var j = 0; j < especiais_por_nivel[nivel].length; ++j) {
-        var especial = especiais_por_nivel[nivel][j];
-        // Alguns especiais sao tratados de forma diferente.
-        if (especial == 'expulsar_fascinar_mortos_vivos') {
-          var num_expulsoes = 3 + gPersonagem.atributos['carisma'].modificador +
-            (PersonagemPossuiTalento('expulsao_adicional') ? 4 : 0);
-          gPersonagem.especiais[especial] = { vezes: num_expulsoes };
-        } else {
-          if (!(especial in gPersonagem.especiais)) {
-            gPersonagem.especiais[especial] = { vezes: 1 };
-          } else {
-            ++gPersonagem.especiais[especial].vezes;
-          }
-        }
+        _DependenciaHabilidadeEspecial(especiais_por_nivel[nivel][j]);
       }
     }
   }
+  gPersonagem.dominios.forEach(function(dominio) {
+    if ('habilidade_especial' in tabelas_dominios[dominio]) {
+      _DependenciaHabilidadeEspecial(tabelas_dominios[dominio].habilidade_especial);
+    }
+  });
+
   // Atualiza o numero de usos de cada especial.
   for (var chave_especial in gPersonagem.especiais) {
     if (chave_especial in especiais_antes) {
-      gPersonagem.especiais[chave_especial].usado = especiais_antes[chave_especial].usado;
+      gPersonagem.especiais[chave_especial].usado = especiais_antes[chave_especial].usado || 0;
     } else {
       gPersonagem.especiais[chave_especial].usado = 0;
     }

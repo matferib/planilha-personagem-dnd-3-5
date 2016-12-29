@@ -203,7 +203,18 @@ function _AtualizaDominios() {
   } else {
     Dom('span-dominios').style.display = 'inline';
     for (var i = 0; i < 2; ++i) {
-      SelecionaValor(gPersonagem.dominios[i], Dom('dominio-' + i));
+      var dom = Dom('dominio-' + i);
+      SelecionaValor(gPersonagem.dominios[i], dom);
+      // Hack de traducao de dominio. Os textos sao muito grandes para usar como chave.
+      var chave_trad = 'desc-dominio-' + gPersonagem.dominios[i];
+      var trad = Traduz(chave_trad);
+      if (trad != chave_trad) {
+        TituloSimples(trad, dom);
+      } else {
+        TituloSimples(
+            tabelas_dominios[gPersonagem.dominios[i]].descricao ? tabelas_dominios[gPersonagem.dominios[i]].descricao : '',
+            dom);
+      }
     }
   }
 }

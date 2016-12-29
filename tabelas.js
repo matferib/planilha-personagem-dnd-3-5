@@ -404,25 +404,49 @@ var tabelas_classes = {
   },
 };
 
+// Todo especial com vezes por dia deve definir vezes, senao nada sera mostrado na interface.
 var tabelas_especiais = {
   alma_diamante: { nome: 'Alma Diamante' },
+  aptidao_items_magicos: { nome: 'Aptidão Items Mágicos' },
   ataque_chi_magico: { nome: 'Ataque Chi (Mágico)' },
   ataque_chi_ordem: { nome: 'Ataque Chi (Ordem)' },
   ataque_chi_adamante: { nome: 'Ataque Chi (Adamante)' },
   ataque_desarmado: { nome: 'Ataque Desarmado' },
-  ataque_furtivo: { nome: 'Ataque furtivo', },
+  ataque_furtivo: { nome: 'Ataque furtivo', vezes: { fixo: 1 } },
   atravessar_sombras: { nome: 'Atravessar Sombras' },
   aura_bem: { nome: 'Aura do bem', },
   aura_coragem: { nome: 'Aura de coragem' },
   auto_perfeicao: { nome: 'Auto-Perfeição' },
+  boa_sorte: { nome: 'Boa Sorte', vezes: { fixo: 1 } },
   bonus_ca: { nome: 'Bonus CA' },
   caminho_floresta: { nome: 'Caminho da Floresta' },
   cegueira_luz_intensa: { nome: 'Cegueira sob Luz Intensa' },
-  escuridao: { nome: 'Escuridão (1/dia)' },
-  globo_luz: { nome: 'Globos de Luz (1/dia)' },
-  fogo_fadas: { nome: 'Fogo das Fadas (1/dia)' },
+  destruir: { nome: 'Destruir' },
+  escudo_protecao: { nome: 'Escudo de Proteção', vezes: { fixo: 1 } },
+  escuridao: { nome: 'Escuridão (1/dia)', vezes: { fixo: 1 }  },
+  globo_luz: { nome: 'Globos de Luz (1/dia)', vezes: { fixo: 1 } },
+  falar_com_animais: { nome: 'Falar com Animais' },
+  feito_de_forca: { nome: 'Feito de Força', vezes: { fixo: 1 } },
+  fogo_fadas: { nome: 'Fogo das Fadas (1/dia)', vezes: { fixo: 1 } },
+  fascinar_plantas: {
+    nome: 'Fascinar/Comandar Plantas',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
   estilo_combate_aprimorado: { nome: 'Estilo de Combate Aprimorado' },
-  expulsar_fascinar_mortos_vivos: { nome: 'Expulsar/fascinar mortos vivos', },
+  expulsar_fascinar_mortos_vivos: {
+    nome: 'Expulsar/fascinar mortos vivos',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
+  expulsar_fascinar_criaturas_agua: {
+    nome: 'Expulsar/fascinar criaturas de água',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
+  expulsar_fascinar_criaturas_ar: {
+    nome: 'Expulsar/fascinar criaturas de ar',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
+  expulsar_fascinar_criaturas_fogo: {
+    nome: 'Expulsar/fascinar criaturas de fogo',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
+  expulsar_fascinar_criaturas_terra: {
+    nome: 'Expulsar/fascinar criaturas de terra',
+    vezes: { fixo: 3, atributo: 'carisma', talento: { chave: 'expulsao_adicional', fixo: 4 } } },
   camuflagem: { nome: 'Camuflagem', },
   companheiro_animal: { nome: 'Companheiro animal', },
   controlar_luz: { nome: 'Controlar Luz' },
@@ -430,7 +454,7 @@ var tabelas_especiais = {
   corpo_atemporal: { nome: 'Corpo Atemporal' },
   corpo_vazio: { nome: 'Corpo Vazio' },
   cura_acelerada_2: { nome: 'Cura Acelerada (2)', },
-  cura_pelas_maos: { nome: 'Cura pelas mãos', },
+  cura_pelas_maos: { nome: 'Cura pelas mãos', /* TODO carisma x nivel paladino */},
   destruir_bem: { nome: 'Destruir o bem', },
   destruir_mal: { nome: 'Destruir o mal', },
   detectar_mal: { nome: 'Detectar o mal', },
@@ -441,11 +465,12 @@ var tabelas_especiais = {
   escudo_heroico: { nome: 'Escudo Heróico', },
   esquiva_sobrenatural: { nome: 'Esquiva Sobrenatural', },
   estilo_combate: { nome: 'Estilo de Combate' },
+  expulsao_aprimorada_mortos_vivos: { nome: 'Expulsao Aprimorada Contra Mortos-Vivos', vezes: { fixo: 1 } },
   familiar: { nome: 'Familiar', },
   forma_selvagem: { nome: 'Forma selvagem', },
   graca_divina: { nome: 'Graça divina', },
   grito_guerra: { nome: 'Grito de Guerra', },
-  imagem_das_sombras_3: { nome: 'Imagem das Sombras (3/dia)' },
+  imagem_das_sombras_3: { nome: 'Imagem das Sombras (3/dia)', vezes: { fixo: 3 }  },
   idiomas_sol_lua: { nome: 'Idiomas do Sol e da Lua' },
   inimigo_predileto: { nome: 'Inimigo Predileto' },
   inspirar_coragem: { nome: 'Inspirar Coragem', },
@@ -459,6 +484,9 @@ var tabelas_especiais = {
   mimetismo: { nome: 'Mimetismo' },
   montaria_especial: { nome: 'Montaria especial', },
   mordida_venenosa: { nome: 'Mordida Venenosa' },
+  movimentacao_livre: {
+    nome: 'Movimentacao Livre',
+    vezes: { fixo: 0, nivel: 'clerigo', } },
   passo_etereo: { nome: 'Passo Etéreo' },
   pureza_corporal: { nome: 'Pureza Corporal' },
   queda_suave_6m: { nome: 'Queda Suave (6m)' },
@@ -484,6 +512,7 @@ var tabelas_especiais = {
   sentir_armadilha: { nome: 'Sentir armadilha', },
   saude_divina: { nome: 'Saúde divina', },
   talento: { nome: 'Talento' },
+  toque_morte: { nome: 'Toque da Morte' },
   tolerancia: { nome: 'Tolerancia' },
   viajar_pelas_sombras: { nome: 'Viajar pelas Sombras' },
   visao_escuro: { nome: 'Visão no Escuro' },
@@ -2401,28 +2430,114 @@ var tabelas_materiais_especiais = {
 };
 
 var tabelas_dominios = {
-  ar: { nome: 'Ar' },
-  animal: { nome: 'Animal' },
-  caos: { nome: 'Caos' },
-  morte: { nome: 'Morte' },
-  destruicao: { nome: 'Destruição' },
-  terra: { nome: 'Terra' },
-  mal: { nome: 'Mal' },
-  fogo: { nome: 'Fogo' },
-  bem: { nome: 'Bem' },
-  cura: { nome: 'Cura' },
-  conhecimento: { nome: 'Conhecimento' },
-  ordem: { nome: 'Ordem' },
-  sorte: { nome: 'Sorte' },
-  magia: { nome: 'Magia' },
-  planta: { nome: 'Planta' },
-  protecao: { nome: 'Proteção' },
-  forca: { nome: 'Força' },
-  sol: { nome: 'Sol' },
-  viagem: { nome: 'Viagem' },
-  enganacao: { nome: 'Enganação' },
-  guerra: { nome: 'Guerra' },
-  agua: { nome: 'Água' },
+  agua: {
+    nome: 'Água',
+    habilidade_especial: 'expulsar_fascinar_criaturas_fogo',
+    descricao: 'Expulsa ou destrói criaturas do fogo como um clérigo bondoso usaria Expulsar. ' +
+               'Fascina ou comanda criaturas da água como um clérigo maligno usaria Fascinar. ' +
+               'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+               'Este poder concedido é uma habilidade sobrenatural.' },
+  animal: {
+    nome: 'Animal',
+    habilidade_especial: 'falar_com_animais',
+    descricao: 'Você pode lançar falar com animais uma vez por dia como uma habilidade similar a magia. ' +
+               'Conhecimento (natureza) passa a ser uma perícia de classe.' },
+  ar: {
+    nome: 'Ar',
+    habilidade_especial: 'expulsar_fascinar_criaturas_terra',
+    descricao: 'Expulsa ou destrói criaturas da terra como um clérigo bondoso usaria Expulsar. ' +
+               'Fascina ou comanda criaturas do ar como um clérigo maligno usaria Fascinar. ' +
+               'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+               'Este poder concedido é uma habilidade sobrenatural.' },
+  bem: { nome: 'Bem',
+         descricao: 'Você conjura magias do bem com +1 no nível de conjurador.' },
+  caos: { nome: 'Caos',
+          descricao: 'Você conjura magias do caos com +1 no nível de conjurador.' },
+  conhecimento: {
+    nome: 'Conhecimento',
+    pericias: [ 'conhecimento_arcano', 'conhecimento_arquitetura_e_engenharia', 'conhecimento_geografia', 'conhecimento_historia', 'conhecimento_local',
+                'conhecimento_masmorras', 'conhecimento_natureza', 'conhecimento_nobreza_e_realeza', 'conhecimento_planos', 'conhecimento_religiao'],
+    descricao: 'Todas as perícias de Conhecimento passam a ser perícias de classe. ' +
+               'Você conjura magias de adivinhação com +1 no nível de conjurador.' },
+  cura: { nome: 'Cura', descricao: 'Você conjura magias de cura com +1 no nível de conjurador.' },
+  destruicao: {
+    nome: 'Destruição',
+    habilidade_especial: 'destruir',
+    descricao: 'Uma vez por dia, você ganha o poder de destruir, uma habilidade sobrenatural; ' +
+               'pode-se realizar um único ataque corpo a corpo com +4 de bônus na jogada de ataque e ' +
+               'um modificador de dano equivalente ao seu nível de clérigo (caso você acerte). ' +
+               'Você precisa declarar o uso do poder antes de fazer a jogada de ataque.' },
+  enganacao: {
+    nome: 'Enganação',
+    pericias: [ 'blefar', 'disfarces', 'esconderse'],
+    descricao: 'Blefar, Disfarces e Esconder-se passam a ser perícias de classe' },
+  fogo: {
+    nome: 'Fogo',
+    habilidade_especial: 'expulsar_fascinar_criaturas_agua',
+    descricao: 'Expulsa ou destrói criaturas da água como um clérigo bondoso usaria Expulsar. ' +
+                'Fascina ou comanda criaturas do fogo como um clérigo maligno usaria Fascinar. ' +
+                'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+                'Este poder concedido é uma habilidade sobrenatural.' },
+  forca: {
+    nome: 'Força',
+    habilidade_especial: 'feito_de_forca',
+    descricao: 'Você pode realizar um feito de força, uma habilidade sobrenatural que concede um bônus de melhoria para sua Força ' +
+               'igual ao seu nível de clérigo. Ativar esse poder é uma ação livre. Ele pode ser usado uma vez por dia e dura 1 rodada.' },
+  guerra: {
+    nome: 'Guerra',
+    talentos: [ 'usar_arma_comum', 'foco_em_arma' ],
+    descricao: 'Adquire o talento Usar Arma Comum (se necessário) e Foco em Arma da arma predileta de seu deus.' },
+  magia: {
+    nome: 'Magia',
+    habilidade_especial: 'aptidao_items_magicos',
+    descricao: 'Você usa pergaminhos, varinhas e outros itens mágicos de complemento a magia ou ativação de magia como um mago com metade ' +
+               'de seu nível de clérigo (no mínimo 1° nível). Se você também for um mago, seu nível de mago e esses níveis são somados para esses fins.' },
+  mal: { nome: 'Mal', descricao: '+1 no nível de conjurador de magias com descritor "mau"' },
+  morte: {
+    nome: 'Morte',
+    habilidade_especial: 'toque_morte',
+    descricao: 'Você pode usar o toque da morte uma vez por dia; ele é uma habilidade sobrenatural que gera um efeito de morte. ' +
+               'É preciso realizar um ataque de toque corporal contra uma criatura viva (usando as regras para magias de toque). ' +
+               'Caso acerte, jogue 1d6 por nível de clérigo. Se o total igualar ou superar os pontos de vida do alvo, ele morre (sem testes de resistência).' },
+  ordem: { nome: 'Ordem', descricao: 'Você conjura magias da ordem com +1 no nível de conjurador.' },
+  planta: {
+    nome: 'Planta',
+    habilidade_especial: 'fascinar_plantas',
+    descricao: 'Fascina ou comanda criaturas da terra como um clérigo maligno usaria Fascinar. ' +
+               'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+               'Este poder concedido é uma habilidade sobrenatural. Conhecimento (natureza) passa a ser uma perícia de classe.' },
+  protecao: {
+    nome: 'Proteção',
+    habilidade_especial: 'escudo_protecao',
+    descricao: 'Você pode gerar um escudo de proteção, uma habilidade sobrenatural que concede ao alvo tocado um bônus de resistência ' +
+               'no próximo teste de resistência igual ao seu nível de clérigo. Ativar este poder usa uma ação padrão. ' +
+               'O escudo de proteção é um efeito de abjuração, com duração de 1 hora, que pode ser usado uma vez por dia.' },
+  sol: {
+    nome: 'Sol',
+    habilidade_especial: 'expulsao_aprimorada_mortos_vivos',
+    descricao: 'Uma vez por dia, você pode usar a Expulsão Aprimorada contra mortos-vivos no lugar de uma Expulsão comum. ' +
+               'A Expulsão Aprimorada é idêntica à Expulsão normal, mas todos os mortos-vivos que seriam expulsos, serão destruídos.' },
+  sorte: {
+    nome: 'Sorte',
+    habilidade_especial: 'boa_sorte',
+    descricao: 'Você adquire o poder da boa sorte, que pode ser usado uma vez por dia. ' +
+               'Esta habilidade extraordinária lhe permite realizar novamente uma jogada. ' +
+               'Você é obrigado a ficar com o novo resultado, mesmo se este for pior que o resultado original.' },
+  terra: {
+    nome: 'Terra',
+    habilidade_especial: 'expulsar_fascinar_criaturas_ar',
+    descricao: 'Expulsa ou destrói criaturas do ar como um clérigo bondoso usaria Expulsar. ' +
+               'Fascina ou comanda criaturas da terra como um clérigo maligno usaria Fascinar. ' +
+               'Essa habilidade pode ser usada uma quantidade de vezes equivalente a 3+ seu modificador de Carisma por dia. ' +
+               'Este poder concedido é uma habilidade sobrenatural.'  },
+  viagem: {
+    nome: 'Viagem',
+    habilidade_especial: 'movimentacao_livre',
+    descricao: 'Durante 1 rodada/nível de clérigo por dia, você pode agir sem ser incomodado por efeitos mágicos que impedem o movimento ' +
+               '(similar ao efeito da magia movimentação livre). ' +
+               'Esse efeito é automático e permanece até seu tempo máximo diário se esgotar ou não ser mais necessário. ' +
+               'Ele pode ser ativado várias vezes em um dia (até a quantidade máxima de rodadas disponível). ' +
+               'Essa é uma habilidade sobrenatural. A Sobrevivência passa a ser uma perícia de classe.' },
   // Abaixo, os de FR.
   equilibrio: { nome: 'Equilíbrio' },
   caverna: { nome: 'Caverna' },
