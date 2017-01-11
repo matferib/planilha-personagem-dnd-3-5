@@ -587,7 +587,30 @@ var tabelas_geracao = {
                     { chave: 'arco_curto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
+      9: {
+        moedas: { ouro: 5000 },
+        armadura: { nome: 'couro_batido', bonus: 1 },
+        escudo: { nome: 'broquel', bonus: 1, },
+        armas: [ { chave: 'adaga', bonus: 1, obra_prima: true },
+                 { chave: 'arco_curto', bonus: 1, obra_prima: true }, ],
 
+      },
+      10: {
+        moedas: { ouro: 1000 },
+        escudo: { nome: 'broquel', bonus: 2, },
+        armas: [ { chave: 'adaga', bonus: 1, obra_prima: true },
+                 { chave: 'arco_curto', bonus: 1, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_2', em_uso: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+      },
+      11: {
+        moedas: { ouro: 6000 },
+        escudo: { nome: 'broquel', bonus: 2, },
+        armas: [ { chave: 'adaga', bonus: 1, obra_prima: true },
+                 { chave: 'arco_curto', bonus: 1, obra_prima: true }, ],
+        bracaduras: [ { chave: 'armadura_2', em_uso: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+      },
     },
   },
   mago: {
