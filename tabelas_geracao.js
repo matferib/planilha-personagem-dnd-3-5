@@ -593,7 +593,7 @@ var tabelas_geracao = {
         escudo: { nome: 'broquel', bonus: 1, },
         armas: [ { chave: 'adaga', bonus: 1, obra_prima: true },
                  { chave: 'arco_curto', bonus: 1, obra_prima: true }, ],
-
+        aneis: [],
       },
       10: {
         moedas: { ouro: 1000 },

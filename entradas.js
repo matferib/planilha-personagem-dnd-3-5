@@ -200,9 +200,7 @@ function _LeDominios() {
   gEntradas.dominios = [];
   var doms_dominios = [ Dom('dominio-0'), Dom('dominio-1') ];
   for (var dom of doms_dominios) {
-    if (dom.style.display != 'none') {
-      gEntradas.dominios.push(ValorSelecionado(dom));
-    }
+    gEntradas.dominios.push(ValorSelecionado(dom));
   }
 }
 

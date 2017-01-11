@@ -1,3 +1,4 @@
+Bug: nao clerigos aparecendo poder de dominio.
 Implementar talentos e pericias de dominio.
 Dominios: completar os poderes e traduzir.
 Feiticos: adicionar nos clerigos os feiticos de dominio e traduzir mais.
