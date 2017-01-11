@@ -206,7 +206,7 @@ function _AtualizaDominios() {
       var dom = Dom('dominio-' + i);
       SelecionaValor(gPersonagem.dominios[i], dom);
       // Hack de traducao de dominio. Os textos sao muito grandes para usar como chave.
-      var chave_trad = 'desc-dominio-' + gPersonagem.dominios[i];
+      var chave_trad = 'desc-dom-' + gPersonagem.dominios[i];
       var trad = Traduz(chave_trad);
       if (trad != chave_trad) {
         TituloSimples(trad, dom);
