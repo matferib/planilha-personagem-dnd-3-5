@@ -1,0 +1,190 @@
+/* CSS da planilha. */
+
+html {
+overflow-y: scroll;
+}
+
+body {
+margin: 0px;
+}
+
+div#div-overlay {
+padding: 0px;
+border: 0px;
+margin: 0px;
+position: fixed;
+height: 100%;
+width: 100%;
+display: none;
+background-color: #A8A8A8;
+opacity: 0.5;
+z-index: 1;
+}
+
+div#div-janela {
+position: fixed;
+padding: 0px;
+margin: 0px;
+display: none;
+background-color: #A8A8A8;
+top: 50%;
+left: 50%;
+border: 2px solid black;
+z-index: 2;
+}
+
+div#div-visoes {
+padding: 0px;
+border: 0px;
+margin-bottom: 0px;
+}
+
+div#div-visoes span {
+display: inline-block;
+background-color: #A8A8A8;
+margin-right: 2px;
+margin-left: 2px;
+margin-bottom: 0px;
+padding-top: 3px;
+padding-bottom: 3px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-right-radius: 8px;
+border-top-left-radius: 3px;
+cursor: default;
+}
+
+div#div-visoes span.selecionado {
+background-color: #D8D8D8;
+}
+
+div.div-feiticos-classe {
+display: inline-block;
+vertical-align: top;
+padding: 10px;
+}
+
+/* os divs principais da planilha. */
+div.divs-principais {
+background-color: #D8D8D8;
+padding: 7px;
+}
+
+div#div-pontos-vida .adiciona-remove-ferimentos {
+display: inline-block;
+width: 80px;
+}
+
+button.botao-ferimentos {
+width: 5ch;
+}
+
+div#div-geral {
+}
+
+div#div-stats {
+}
+
+div#div-ataque {
+}
+
+div#div-defesa {
+}
+
+div#div-equipamentos {
+}
+
+div#div-salvacoes {
+}
+
+div.pericia-de-classe {
+background-color: #E8E8E8;
+}
+
+/* Elementos das janelas. */
+div.div-titulo-janela {
+  border-bottom: 2px solid;
+  border-color: black;
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+div.div-msg-janela {
+  padding: 2px;
+  text-align: center;
+}
+div.div-botao-janela {
+  padding: 2px;
+  text-align: center;
+}
+/* fim janelas. */
+
+span.span-item {
+  display: inline-block;
+  width: 75px;
+}
+
+span.titulo {
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+span.estilo-rotulo {
+  float: left;  /* elementos inlines nao podem ter tamanho, por isso float. */
+  width: 12ch;
+}
+
+span.salvacao-rotulo {
+  float: left;
+  width: 20ch;
+}
+
+select.estilo-selecao {
+  width: 30ch;
+  margin-right: 1ch;
+}
+
+select.select-talento {
+  width: 30ch;
+  margin-right: 1ch;
+}
+
+input.venda {
+}
+input.compra {
+}
+
+span.pericias-nome {
+  float: left;
+  width: 50ch;
+}
+
+input.input-pericias-pontos {
+  width: 5ch;
+}
+input.input-pericias-complemento {
+  width: 20ch;
+  margin-right: 1ch;
+}
+
+button.botoes-serializacao {
+  width: 10ch;
+  height: 2em;
+  margin-bottom: 0.1px;
+}
+select#select-personagens {
+  margin-right: 2ch;
+  vertical-align: middle;
+}
+div#div-serializacao {
+}
+table#tabela-abrir-fechar {
+  margin-right: 2ch;
+}
+table#div-serializacao#tabela-importar-exportar {
+  margin-left: 2ch;
+}
+
+input.input-complemento-talento {
+  width: 50ch;
+}
