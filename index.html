@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html manifest="planilha.appcache">
+<!--html-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!--meta name="viewport" content="user-scalable=no, width=800" /-->
+<link rel="apple-touch-icon" href="icon72.png" />
+<link rel="apple-touch-startup-image" href="icon1004.png" />
+<title>Planilha de Personagens, 3.5 ed.</title>
+<link rel="stylesheet" type="text/css" href="planilha.css" />
+<!-- versao normal -->
+<script type="text/javascript" src="adiciona.js"></script>
+<script type="text/javascript" src="atualiza.js"></script>
+<script type="text/javascript" src="bonus.js"></script>
+<script type="text/javascript" src="carrega.js"></script>
+<script type="text/javascript" src="converte.js"></script>
+<script type="text/javascript" src="dependencias.js"></script>
+<script type="text/javascript" src="dom.js"></script>
+<script type="text/javascript" src="dom_planilha.js"></script>
+<script type="text/javascript" src="entradas.js"></script>
+<script type="text/javascript" src="estado.js"></script>
+<script type="text/javascript" src="eventos.js"></script>
+<script type="text/javascript" src="geracao.js"></script>
+<script type="text/javascript" src="personagem.js"></script>
+<script type="text/javascript" src="tabelas.js"></script>
+<script type="text/javascript" src="tabelas_geracao.js"></script>
+<script type="text/javascript" src="tabelas_habilidades.js"></script>
+<script type="text/javascript" src="tabelas_feiticos.js"></script>
+<script type="text/javascript" src="util.js"></script>
+<!-- versao compilada -->
+<!--script type="text/javascript" src="tudo.js"></script-->
+</head>
+
+<!-- Para eventos, ver carrega.js. -->
+<body>
+<div id="div-overlay">
+</div><!--div-overlay-->
+
+<!-- Usado para dialogos modais -->
+<div id="div-janela">
+</div><!--div-janela-->
+
+<div id="div-visoes" >
+</div> <!--div-visoes-->
+
+<div id="div-versao"><span id="span-versao-planilha" class="i18n">Versão da Planilha</span>: 1.0.3
+</div> <!--div-versao-->
+
+<div id="div-serializacao" class="divs-principais">
+  <div style="position: relative">
+  <span style="display: inline-block">
+    <button type="button" id="botao-salvar" class="botoes-serializacao i18n">Salvar</button>
+    <button type="button" id="botao-abrir" class="botoes-serializacao i18n">Abrir</button>
+    <button type="button" id="botao-excluir" class="botoes-serializacao i18n">Excluir</button><br>
+    <select id="select-personagens" style="width: 100%; margin-top: 0.5ch;"></select>
+  </span>
+  <span style="position: absolute; top: 0; display: inline-block; margin-left: 2ch">
+    <button type="button" id="botao-importar" class="botoes-serializacao i18n">Importar</button>
+    <button type="button" id="botao-exportar" class="botoes-serializacao i18n">Exportar</button><br>
+    <input type="text" id="json-personagem" style="margin-top: 0.5ch"></input>
+  </span>
+  </div>
+</div>
+
+<div id="div-geral" class="divs-principais">
+<span id="span-geral" class="titulo i18n">Geral</span><br>
+<span id="span-nome" class="i18n">Nome: </span><input type="text" id="nome"/>&nbsp;
+<span id="span-raca" class="i18n">Raça:</span><select id="raca"></select>&nbsp;
+<span id="span-template">
+Template:<select id="template">
+</select>&nbsp;
+</span>
+<span id="span-tamanho" class="i18n">Tamanho:</span>
+<select id="tamanho">
+  <option id="option-minusculo" class="i18n" value="minusculo">Minusculo</option>
+  <option id="option-diminuto"  class="i18n" value="diminuto" >Diminuto</option>
+  <option id="option-miudo"     class="i18n" value="miudo"    >Miúdo</option>
+  <option id="option-pequeno"   class="i18n" value="pequeno"  >Pequeno</option>
+  <option id="option-medio"     class="i18n" value="medio"    >Médio</option>
+  <option id="option-grande"    class="i18n" value="grande"   >Grande</option>
+  <option id="option-enorme"    class="i18n" value="enorme"   >Enorme</option>
+  <option id="option-imenso"    class="i18n" value="imenso"   >Imenso</option>
+  <option id="option-colossal"  class="i18n" value="colossal" >Colossal</option>
+</select>
+<br>
+<span id="span-alinhamento" class="i18n">Alinhamento:</span>
+<select id="alinhamento">
+  <option id="option-lb" name="lb" value="lb" class="i18n">LB</option>
+  <option id="option-ln" name="ln" value="ln" class="i18n">LN</option>
+  <option id="option-lm" name="lm" value="lm" class="i18n">LM</option>
+  <option id="option-nb" name="nb" value="nb" class="i18n">NB</option>
+  <option id="option-n"  name="n"  value="n"  class="i18n">N</option>
+  <option id="option-nm" name="nm" value="nm" class="i18n">NM</option>
+  <option id="option-cb" name="cb" value="cb" class="i18n">CB</option>
+  <option id="option-cn" name="cn" value="cn" class="i18n">CN</option>
+  <option id="option-cm" name="cm" value="cm" class="i18n">CM</option>
+</select>
+<br>
+<span id="span-divindade" class="i18n">Divindade Patrona:</span> <input type="text" id="divindade-patrona" size="20"/>&nbsp;<span id='span-dominios'><span id="span-dominios-rotulo" class="i18n">Domínios:</span><select id='dominio-0'></select><select id='dominio-1'></select></span><br>
+<span id="span-experiencia" class="i18n">Experiência:</span>
+<input type="text" id="pontos-experiencia" size="6"/>+
+<input type="text" id="pontos-experiencia-adicionais" size="6" placeholder="adicionar XP" class="i18n"/><br>
+
+<div style="margin-top: 1em;">
+  <span id="span-classes" class="i18n">Classes:</span>
+  <button type="button" id="botao-adicionar-classe">+</button>
+  <button type="button" id="botao-remover-classe">-</button>
+  <br>
+  <!-- classes, criadas dinamicamente. -->
+  <div id="classes"></div>
+</div>
+
+<div>
+<button type="button" id="botao-gerar-personagem" class="botao-geracao">Gerar comum</button>
+<button type="button" id="botao-gerar-personagem-elite" class="botao-geracao">Gerar elite</button>
+</div>
+<span id="span-niveis-negativos" class="i18n">Níveis Negativos:</span>
+<input id="niveis-negativos" type="number" size="2" value="0" min="0"/><br>
+</div> <!-- div-geral-->
+
+<div id="div-pontos-vida" class="divs-principais">
+<span id="span-dados-vida" class="i18n">Dados de Vida:</span> <span id="dados-vida-classes"></span><br>
+
+<span id="span-pontos-vida" class="i18n">Pontos de Vida:</span>
+<span id="pontos-vida-corrente"></span> =
+<input type="text" id="pontos-vida-dados" maxlength="3" size="3" placeholder="dados" class="i18n"/>+
+<input type="text" id="pontos-vida-temporarios" maxlength="3" size="3" placeholder="temporários" class="i18n"/>
+<span id="pontos-vida-bonus"></span>
+<span id="pontos-vida-temporarios"></span>
+<span id="ferimentos" maxlength="3" size="8"></span>
+<span id="ferimentos-nao-letais" maxlength="3" size="8"></span><br>
+<!-- esse div deve ser posicionado para que o position absolute funcione. -->
+<div style="position: relative">
+<span>
+<span style="color:Black" id="span-ferimentos" class="adiciona-remove-ferimentos i18n">Ferimentos</span>
+<button type="button" class="botao-ferimentos" id="botao-ferir-1">-1</button>
+<button type="button" class="botao-ferimentos" id="botao-ferir-3">-3</button>
+<button type="button" class="botao-ferimentos" id="botao-ferir-5">-5</button>
+<input type="text" id="input-adicionar-ferimentos" maxlength="3" size="3"/>
+<br>
+<span style="color:Black" id="span-cura" class="adiciona-remove-ferimentos i18n">Cura</span>
+<button type="button" class="botao-ferimentos" id="botao-curar-1">+1</button>
+<button type="button" class="botao-ferimentos" id="botao-curar-3">+3</button>
+<button type="button" class="botao-ferimentos" id="botao-curar-5">+5</button>
+<input type="text" id="input-remover-ferimentos" maxlength="3" size="3"/>
+</span>
+<span style="position: absolute; top: 0.6em">
+  <input type="checkbox" id="input-ferimento-nao-letal" maxlength="3" size="3"/><span class="i18n" id="span-nao-letal">Não letal</span>
+</span>
+</div>
+<button type="button" id="botao-descansar" class="botao-descansar i18n">Descansar</button>
+<br>
+</div> <!-- div-pontos-vida -->
+
+<!-- Os atributos serão inseridos aqui. -->
+<div id="div-stats" class="divs-principais">
+</div> <!-- div-stats -->
+
+<div id="div-iniciativa" class="divs-principais">
+</div> <!-- div-iniciativas -->
+
+<div id="div-ataque" class="divs-principais">
+<span id="span-valores-basicos" class="titulo i18n">Valores Básicos</span><br>
+<span id="span-iniciativa" class="i18n">Iniciativa:</span> <span id="iniciativa">0</span><br>
+<span id="span-bba" class="i18n">Bonus Base de Ataque:</span> <span class="bba"></span><br>
+<span id="span-num-ataques" class="i18n">Número de Ataques:</span> <span class="numero-ataques"></span><br>
+<span id="span-cac" class="i18n">Corpo a corpo:</span>
+<span id="bba-corpo-a-corpo" title=""></span><br>
+<span id="span-distancia" class="i18n">Distância:</span>
+<span id="bba-distancia" title=""></span><br>
+<span id="span-agarrar" class="i18n">Agarrar:</span>
+<span id="bba-agarrar"></span><br><br>
+
+<span id="span-estilos-luta" class="titulo i18n">Estilos de Luta:</span> <button type="button" id="botao-adicionar-estilo-luta">+</button>
+<div id="div-estilos-luta"></div>
+</div> <!-- div-ataque -->
+
+<div class="divs-principais">
+<div id="div-especiais">
+<span id="span-habilidades-especiais" class="titulo i18n">Habilidades especiais</span> <span id="habilidades-especiais"></span>
+</div> <!-- div-especiais -->
+</div>
+
+<div class="divs-principais" id=div-familiar>
+<div>
+  <span id="span-familiar" class="titulo i18n">Familiar</span>
+  <div id="familiar">
+    <input id="familiar-em-uso" type="checkbox"/>
+    <select id="select-familiar"></select>
+    <br>
+    <!-- pontos vida familiar -->
+    <span id="span-pontos-vida-familiar" class="i18n">Pontos de Vida</span>:
+    <span id="pontos-vida-corrente-familiar"></span> =
+    <span id="pontos-vida-base-familiar">0</span>+
+    <input type="text" id="pontos-vida-temporarios-familiar" maxlength="3" size="3" placeholder="temporários" class="i18n"/>
+    <span id="ferimentos-familiar" maxlength="3" size="8"></span>
+    <span id="ferimentos-nao-letais-familiar" maxlength="3" size="8"></span><br>
+    <div>
+      <span class="adiciona-remove-ferimentos i18n">Ferir/Curar</span>
+      <input type="text" id="input-adicionar-ferimentos-familiar" maxlength="3" size="3"/>
+      <input type="checkbox" id="input-ferimento-nao-letal-familiar" maxlength="3" size="3"/><span class="i18n">Não letal</span>
+    </div>
+  </div>
+</div>
+
+<div class="divs-principais">
+<div id="div-imunidades">
+<span id="span-imunidades" class="titulo i18n">Imunidades</span> <span id="imunidades"></span>
+</div> <!-- div-imunidades -->
+</div>
+
+<div class="divs-principais">
+<div id="div-resistencia-magia">
+<span id="span-resistencia-magia" class="titulo i18n">Resistência a Magia</span> <span id="resistencia-magia"></span>
+</div> <!-- div-resistencia-magia -->
+</div>
+
+<div class="divs-principais">
+<span id="span-testes-resistencia" class="titulo i18n">Testes de Resistência (salvações)</span>
+<div id="div-salvacoes">
+</div> <!-- div-salvacoes -->
+</div>
+
+<div id="div-equipamentos" class="divs-principais">
+<span id="span-moedas" class="titulo i18n">Moedas</span><br>
+<span id="span-platina" class="i18n">Platina:</span><input id="moedas-platina" size="5"/>
+<span id="span-ouro" class="i18n">Ouro:</span><input id="moedas-ouro" size="5"/>
+<span id="span-prata" class="i18n">Prata:</span><input id="moedas-prata" size="5"/>
+<span id="span-cobre" class="i18n">Cobre:</span><input id="moedas-cobre" size="5"/>
+<span id="span-adicionar" class="i18n">Adicionar:</span><input id="moedas-adicionais" placeholder="+/- qtde moeda" size="5" class="i18n"/>
+<br><br>
+
+<span id="span-equipamentos" class="titulo i18n">Equipamentos</span><br>
+<span id="span-armas" class="span-item i18n">Armas:</span><button type="button" id="botao-adicionar-arma">+</button>
+<div id="div-equipamentos-armas"></div>
+<span id="span-armaduras" class="span-item i18n">Armaduras:</span><button type="button" id="botao-adicionar-armadura">+</button><br>
+<div id="div-equipamentos-armaduras"></div>
+<span id="span-escudos" class="span-item i18n">Escudos:</span><button type="button" id="botao-adicionar-escudo">+</button><br>
+<div id="div-equipamentos-escudos"></div>
+<span id="span-aneis" class="span-item i18n">Anéis:</span><button type="button" id="botao-adicionar-anel">+</button>
+<div id="div-equipamentos-aneis"></div>
+<span id="span-amuletos" class="span-item i18n">Amuletos:</span><button type="button" id="botao-adicionar-amuleto">+</button>
+<div id="div-equipamentos-amuletos"></div>
+<span id="span-botas" class="span-item i18n">Botas:</span><button type="button" id="botao-adicionar-bota">+</button>
+<div id="div-equipamentos-botas"></div>
+<span id="span-bracaduras" class="span-item i18n">Braçaduras:</span><button type="button" id="botao-adicionar-bracadura">+</button>
+<div id="div-equipamentos-bracaduras"></div>
+<span id="span-pocoes" class="span-item i18n">Poções:</span><button type="button" id="botao-adicionar-pocao">+</button>
+<div id="div-equipamentos-pocoes"></div>
+<span id="span-capas" class="span-item i18n">Capas:</span><button type="button" id="botao-adicionar-capa">+</button>
+<div id="div-equipamentos-capas"></div>
+<span id="span-outros-equipamentos" class="i18n">Outros Equipamentos:</span><br>
+<textarea rows="2" cols="20" id="text-area-outros-equipamentos"></textarea>
+</div> <!-- div-equipamentos -->
+
+<div id="div-talentos" class="divs-principais">
+<span id="span-talentos" class="titulo i18n">Talentos</span>
+</div> <!-- div-talentos -->
+
+<div id="div-proficiencia-armas" class="divs-principais">
+<span class="titulo i18n" id="span-proficiencia-com-armas">Proficiência com Armas</span><button type="button" id="botao-esconder-proficiencia-armas">▾</button><br>
+<span id="span-proficiencia-armas" style="display: none"></span>
+</div> <!-- div-proficiencia-armas -->
+
+<div id="div-pericias" class="divs-principais">
+  <span id="span-pericias" class="titulo i18n">Perícias</span><button type="button" id="botao-esconder-pericias">▴</button><br>
+  <span id="span-pericias-total" class="i18n">Total:</span> <span id="pericias-total-pontos"></span>, <span id="span-pericias-gastos" class="i18n">gastos:</span> <span id="pericias-pontos-gastos"></span><br>
+  <span id="span-lista-pericias"></span>
+</div> <!-- div-pericias -->
+
+<div id="div-feiticos" class="divs-principais">
+</div> <!-- div-feiticos -->
+
+<div id="div-notas" class="divs-principais">
+<span id="span-notas" class="titulo i18n">Notas</span><br>
+<textarea rows="5" cols="40" id="text-area-notas"></textarea>
+</div> <!-- div-notas -->
+
+<div id="div-link">
+<button type="button" id="botao-link">Link</button>
+<span id="link-personagem"></span>
+</div> <!-- div-link -->
+
+<div id="div-gerar-resumo" class="botao-geracao">
+<button type="button" id="botao-gerar-resumo" class="i18n">Gerar Resumo</button>
+<input type="text" id="resumo-personagem-2"></input>
+</div> <!-- div-salvar -->
+
+</body>
+</html>
