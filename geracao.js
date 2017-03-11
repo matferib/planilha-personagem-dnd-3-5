@@ -376,10 +376,10 @@ function GeraResumo() {
   }
   resumo = resumo.slice(0, -2) + '; ';
   resumo += 'Classe de Armadura: total ' + (10 + gPersonagem.ca.bonus.Total()) + ', ';
-  resumo += 'surpreso ' + (10 + gPersonagem.ca.bonus.Total(['atributo'])) + ', ';
   resumo += 'toque ' +
       (10 + gPersonagem.ca.bonus.Total(
           ['armadura', 'escudo', 'armadura_melhoria', 'escudo_melhoria', 'armadura_natural'])) + '; ';
+  resumo += 'surpreso ' + (10 + gPersonagem.ca.bonus.Total(['atributo'])) + ', ';
 
   // Pericias: apenas as rankeadas.
   resumo += 'Perícias (total ' + gPersonagem.pericias.total_pontos + '): ';

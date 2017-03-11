@@ -430,19 +430,6 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
     span_ca_normal.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
   }
   span_ca_normal.textContent += ', ';
-  // AC surpreso.
-  var span_ca_surpreso = CriaSpan();
-  array_exclusao = PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural') ? [] : ['atributo'];
-  if (!usar_escudo) {
-    array_exclusao.push('escudo');
-    array_exclusao.push('escudo_melhoria');
-  }
-  ImprimeNaoSinalizado(
-      10 + gPersonagem.ca.bonus.Total(array_exclusao),
-      span_ca_surpreso);
-  Titulo(gPersonagem.ca.bonus.Exporta(array_exclusao), span_ca_surpreso);
-  span_classe_armadura.appendChild(span_ca_surpreso);
-  span_ca_surpreso.textContent = Traduz('Surpresa') + ': ' + span_ca_surpreso.textContent + ', ';
   // AC toque.
   var span_ca_toque = CriaSpan();
   array_exclusao =
@@ -463,6 +450,19 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
     span_ca_toque.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
   }
   span_classe_armadura.appendChild(span_ca_toque);
+  // AC surpreso.
+  var span_ca_surpreso = CriaSpan();
+  array_exclusao = PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural') ? [] : ['atributo'];
+  if (!usar_escudo) {
+    array_exclusao.push('escudo');
+    array_exclusao.push('escudo_melhoria');
+  }
+  ImprimeNaoSinalizado(
+      10 + gPersonagem.ca.bonus.Total(array_exclusao),
+      span_ca_surpreso);
+  Titulo(gPersonagem.ca.bonus.Exporta(array_exclusao), span_ca_surpreso);
+  span_classe_armadura.appendChild(span_ca_surpreso);
+  span_ca_surpreso.textContent = ', ' + Traduz('Surpresa') + ': ' + span_ca_surpreso.textContent;
 }
 
 // Atualiza as salvacoes, calculando o bonus base de acordo com a classe e
