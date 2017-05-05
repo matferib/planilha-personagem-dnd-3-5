@@ -295,6 +295,11 @@ function ChangeAjustarFerimentosFamiliar(valor) {
   AtualizaGeralSemLerEntradas();
 }
 
+function ChangeAjustarFerimentosCompanheiroAnimal(valor) {
+  EntradasAdicionarFerimentosCompanheiroAnimal(valor, Dom('input-ferimento-nao-letal-canimal').checked);
+  AtualizaGeralSemLerEntradas();
+}
+
 // Esconde/mostra os botoes de geracao (class="botao-geracao)".
 function ClickVisualizacaoModoMestre() {
   gEntradas.modo_mestre = Dom('input-modo-mestre').checked;
