@@ -50,6 +50,7 @@ function _AtualizaGeral() {
   _AtualizaClasses();
   _AtualizaDominios();
   _AtualizaFamiliar();
+  _AtualizaCompanheiroAnimal();
   _AtualizaTamanho();
   _AtualizaModificadoresAtributos();
   _AtualizaIniciativa();
@@ -106,6 +107,21 @@ function _AtualizaPontosVida() {
       -gPersonagem.pontos_vida.ferimentos, Dom('ferimentos'), false);
   ImprimeSinalizado(
       -gPersonagem.pontos_vida.ferimentos_nao_letais, Dom('ferimentos-nao-letais'), false);
+
+  // Companheiro animal.
+  if (gPersonagem.canimal != null) {
+    Dom('pontos-vida-base-canimal').value = gPersonagem.canimal.pontos_vida.base;
+    Dom('pontos-vida-temporarios-canimal').value = gPersonagem.canimal.pontos_vida.temporarios;
+    var pontos_vida_canimal = gPersonagem.canimal.pontos_vida;
+    ImprimeSinalizado(-pontos_vida_canimal.ferimentos, Dom('ferimentos-canimal'), false);
+    ImprimeSinalizado(-pontos_vida_canimal.ferimentos_nao_letais, Dom('ferimentos-nao-letais-canimal'), false);
+    var pontos_vida_corrente_canimal =
+        pontos_vida_canimal.base + pontos_vida_canimal.bonus.Total() + pontos_vida_canimal.temporarios
+        - pontos_vida_canimal.ferimentos - pontos_vida_canimal.ferimentos_nao_letais;
+    Dom('pontos-vida-corrente-canimal').textContent = pontos_vida_corrente_canimal;
+    Dom('notas-canimal').textContent = gPersonagem.canimal.notas;
+    Dom('canimal-raca').value = gPersonagem.canimal.raca;
+  }
 
   // Familiar.
   if (gPersonagem.familiar == null ||
@@ -227,6 +243,16 @@ function _AtualizaFamiliar() {
     Dom('familiar').style.display = 'block';
     Dom('familiar-em-uso').checked = gPersonagem.familiar.em_uso;
     SelecionaValor(gPersonagem.familiar.chave, Dom('select-familiar'));
+    // Pontos de vida na funcao de pontos de vida.
+  }
+}
+
+function _AtualizaCompanheiroAnimal() {
+  if (PersonagemNivelClasse('ranger') == 0 &&
+      PersonagemNivelClasse('druida') == 0) {
+    Dom('canimal').style.display = 'none';
+  } else {
+    Dom('canimal').style.display = 'block';
     // Pontos de vida na funcao de pontos de vida.
   }
 }

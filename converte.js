@@ -19,6 +19,7 @@ function ConverteEntradasParaPersonagem() {
   });
   gPersonagem.dominios = PersonagemNivelClasse('clerigo') > 0 && gEntradas.dominios && gEntradas.dominios.slice(0) || [];
   _ConverteFamiliar();
+  _ConverteCompanheiroAnimal();
   gPersonagem.niveis_negativos = gEntradas.niveis_negativos || 0;
 
   gPersonagem.experiencia = gEntradas.experiencia;
@@ -79,10 +80,28 @@ function _ConverteFamiliar() {
   }
   familiar.em_uso = gEntradas.familiar.em_uso;
   familiar.chave = gEntradas.familiar.chave || '';
+  // Para familiar a base eh computada de acordo com os PV do personagem.
   familiar.pontos_vida.temporarios = gEntradas.familiar.temporarios || 0;
   familiar.pontos_vida.ferimentos = gEntradas.familiar.ferimentos || 0;
   familiar.pontos_vida.ferimentos_nao_letais = gEntradas.familiar.ferimentos_nao_letais || 0;
   gPersonagem.familiar = familiar;
+}
+
+function _ConverteCompanheiroAnimal() {
+  var canimal = (gPersonagem.canimal != null)
+      ? gPersonagem.canimal
+      : { pontos_vida: { base: 0, bonus: new Bonus(), temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 }, notas: '' };
+  if (gEntradas.canimal == null) {
+    gPersonagem.canimal = canimal;
+    return;
+  }
+  canimal.raca = gEntradas.canimal.raca || '';
+  canimal.pontos_vida.base = gEntradas.canimal.base || 0;
+  canimal.pontos_vida.temporarios = gEntradas.canimal.temporarios || 0;
+  canimal.pontos_vida.ferimentos = gEntradas.canimal.ferimentos || 0;
+  canimal.pontos_vida.ferimentos_nao_letais = gEntradas.canimal.ferimentos_nao_letais || 0;
+  canimal.notas = gEntradas.canimal.notas;
+  gPersonagem.canimal = canimal;
 }
 
 function _ConvertePontosVida() {

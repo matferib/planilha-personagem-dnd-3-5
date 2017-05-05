@@ -17,7 +17,9 @@ var gEntradas = {
   // Cada entrada possui classe e nivel.
   classes: [ { classe: 'guerreiro', nivel: 1 } ],
   dominios: [],
+  // Familiar nao tem base de PV porque depende do PV do personagem.
   familiar: { em_uso: false, chave: '', temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 },
+  canimal: { raca: '', base: 0, temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0, notas: '' },
   niveis_negativos: 0,
   // pontos de vida.
   pontos_vida: 0,
@@ -124,6 +126,7 @@ function LeEntradas() {
   _LeDominios();
   // Familiares.
   _LeFamiliar();
+  _LeCompanheiroAnimal();
   gEntradas.niveis_negativos = parseInt(Dom('niveis-negativos').value) || 0;
   // pontos de vida e ferimentos.
   gEntradas.pontos_vida = parseInt(Dom('pontos-vida-dados').value) || 0;
@@ -215,9 +218,25 @@ function _LeFamiliar() {
   }
   gEntradas.familiar.em_uso = dom_em_uso.checked;
   gEntradas.familiar.chave = ValorSelecionado(dom_familiar);
+  // A base nao eh input para familiar, eh dependencia de pontos de vida do personagem.
   gEntradas.familiar.temporarios = parseInt(Dom('pontos-vida-temporarios-familiar').value) || 0;
   gEntradas.familiar.ferimentos = -parseInt(Dom('ferimentos-familiar').textContent) || 0;
   gEntradas.familiar.ferimentos_nao_letais = -parseInt(Dom('ferimentos-nao-letais-familiar').textContent) || 0;
+}
+
+function _LeCompanheiroAnimal() {
+  if (gEntradas.canimal == null) {
+    gEntradas.canimal = { raca: '', temporarios: 0 };
+  }
+  if (Dom('div-canimal').style.display == 'none') {
+    return;
+  }
+  gEntradas.canimal.raca = Dom('canimal-raca').value;
+  gEntradas.canimal.base = parseInt(Dom('pontos-vida-base-canimal').value) || 0;
+  gEntradas.canimal.temporarios = parseInt(Dom('pontos-vida-temporarios-canimal').value) || 0;
+  gEntradas.canimal.ferimentos = -parseInt(Dom('ferimentos-canimal').textContent) || 0;
+  gEntradas.canimal.ferimentos_nao_letais = -parseInt(Dom('ferimentos-nao-letais-canimal').textContent) || 0;
+  gEntradas.canimal.notas = Dom('notas-canimal').value;
 }
 
 // Le o talento do div e o retorna no formato da entrada.
@@ -558,10 +577,19 @@ function EntradasAdicionarFerimentos(valor, nao_letal) {
   }
 }
 
-function EntradasAdicionarFerimentosFamiliar(valor, nao_letal) {
+
+function _EntradasAdicionarFerimentosGeral(valor, nao_letal, obj) {
   var tipo = nao_letal ? "ferimentos_nao_letais" : "ferimentos";
-  gEntradas.familiar[tipo] += valor;
-  if (gEntradas.familiar[tipo] < 0) {
-    gEntradas.familiar[tipo] = 0;
+  obj[tipo] += valor;
+  if (obj[tipo] < 0) {
+    obj[tipo] = 0;
   }
+}
+
+function EntradasAdicionarFerimentosFamiliar(valor, nao_letal) {
+  _EntradasAdicionarFerimentosGeral(valor, nao_letal, gEntradas.familiar);
+}
+
+function EntradasAdicionarFerimentosCompanheiroAnimal(valor, nao_letal) {
+  _EntradasAdicionarFerimentosGeral(valor, nao_letal, gEntradas.canimal);
 }
