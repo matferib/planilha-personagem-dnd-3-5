@@ -190,6 +190,10 @@ function _CarregaHandlers() {
     "pontos-experiencia": { callback: AtualizaGeral, evento: 'change', },
     "pontos-experiencia-adicionais": { callback: ChangePontosExperienciaAdicionais, evento: 'change', },
     "pontos-vida-temporarios-familiar": { callback: AtualizaGeral, evento: 'change' },
+    "pontos-vida-base-canimal": { callback: AtualizaGeral, evento: 'change' },
+    "pontos-vida-temporarios-canimal": { callback: AtualizaGeral, evento: 'change' },
+    "canimal-raca": { callback: AtualizaGeral, evento: 'change' },
+    "notas-canimal": { callback: AtualizaGeral, evento: 'change' },
     "input-adicionar-ferimentos": { callback:  function() {
         var dom = Dom('input-adicionar-ferimentos');
         ChangeAjustarFerimentos(parseInt(dom.value) || 0);
@@ -197,6 +201,10 @@ function _CarregaHandlers() {
     "input-adicionar-ferimentos-familiar": { callback:  function() {
         var dom = Dom('input-adicionar-ferimentos-familiar');
         ChangeAjustarFerimentosFamiliar(parseInt(dom.value) || 0);
+        dom.value = ''; }, evento: 'change', },
+    "input-adicionar-ferimentos-canimal": { callback:  function() {
+        var dom = Dom('input-adicionar-ferimentos-canimal');
+        ChangeAjustarFerimentosCompanheiroAnimal(parseInt(dom.value) || 0);
         dom.value = ''; }, evento: 'change', },
     "input-remover-ferimentos": { callback:  function() {
         var dom = Dom('input-remover-ferimentos');
