@@ -1,3 +1,4 @@
+Companheiro animal de druidas e rangers.
 Bug: nao clerigos aparecendo poder de dominio.
 Implementar talentos e pericias de dominio.
 Dominios: completar os poderes e traduzir.
@@ -11,7 +12,6 @@ Testes de familiar.
 Dano de habilidade.
 Pergaminhos.
 Adicionar um campo de outros para familiares.
-Companheiro animal de druidas e rangers.
 Beneficios de dominios de clerigos.
 Complemento de especiais.
 Penalidade de armadura e escudo se nao tiver pericia.
