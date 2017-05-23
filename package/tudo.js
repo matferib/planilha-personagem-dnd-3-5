@@ -5519,7 +5519,7 @@ var tabelas_classes = {
     especiais: {
       1: [ 'companheiro_animal', 'senso_natureza', 'empatia_natureza' ],
       2: [ 'caminho_floresta' ],
-      3: [ 'ratros_invisivel' ],
+      3: [ 'rastro_invisivel' ],
       4: [ 'resistir_tentacao_natureza' ],
       5: [ 'forma_selvagem' ],
     },
