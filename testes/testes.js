@@ -57,6 +57,7 @@ function TemplateTeste(handler_teste, dom) {
       { entrada: { chave: 'besta_leve', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Leve' },
       { entrada: { chave: 'besta_pesada', bonus: 0, obra_prima: false }, nome_gerado: 'Besta Pesada' },
       { entrada: { chave: 'espada_bastarda', bonus: 0, obra_prima: false }, nome_gerado: 'espada bastarda' },
+      { entrada: { chave: 'espada_curta', bonus: 0, obra_prima: false }, nome_gerado: 'espada curta' },
   ];
 
   // div do teste. Cria de cara para os testes poderem acessar.
@@ -838,6 +839,31 @@ function CarregaTestes() {
         return;
       }
 
+      this.resultado = true;
+    },
+  }, body);
+
+  TemplateTeste({
+    nome: 'Acuidade com Arma',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 10);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 14);
+      gPersonagem.talentos.gerais[0] = { chave: 'acuidade_arma', };
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'uma_arma', arma_primaria: 'espada curta +1', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var bonus_espada = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.cac_leve;
+      if (bonus_espada.ataque[0] != 3) {
+        this.detalhes = 'Esperava +3 ataque com espada curta, recebi: ' + bonus_espada.ataque[0];
+        this.resultado = false;
+        return;
+      }
       this.resultado = true;
     },
   }, body);
