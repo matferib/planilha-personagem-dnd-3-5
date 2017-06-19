@@ -997,7 +997,7 @@ function _DependenciasBonusPorCategoria(
 
   if (categoria.indexOf('cac') != -1 || estilo.nome == 'rajada') {
     // Quando tem acuidade, usa destreza.
-    if (arma_leve && arma_personagem.acuidade && gPersonagem.bba_cac < gPersonagem.bba_cac_acuidade) {
+    if (arma_personagem.acuidade && gPersonagem.bba_cac < gPersonagem.bba_cac_acuidade) {
       bonus_por_categoria.ataque[0] += gPersonagem.bba_cac_acuidade;
     } else {
       bonus_por_categoria.ataque[0] += gPersonagem.bba_cac;
