@@ -5482,7 +5482,7 @@ var tabelas_template = {
     bonus_ca: { deflexao: 4 },
     bonus_movimento: { terrestre: 4 },
     especiais: {
-      1: ['visao_escuro'  /*12 q*/, 'imagem_das_sombras_3', 'invisibilidade', 'cura_acelerada_2', 'controlar_luz'],
+      1: ['visao_escuro'  /*12 q*/, 'imagem_das_sombras_3', 'invisibilidade', 'cura_acelerada_2', 'controlar_luz', 'competencia_ataque_dano_2'],
       8: ['atravessar_sombras'],
       12: ['viajar_pelas_sombras'],
     },
@@ -5712,6 +5712,7 @@ var tabelas_especiais = {
   bonus_ca: { nome: 'Bonus CA' },
   caminho_floresta: { nome: 'Caminho da Floresta' },
   cegueira_luz_intensa: { nome: 'Cegueira sob Luz Intensa' },
+  competencia_ataque_dano_2: { nome: '+2 ataque e dano por competência' },
   destruir: { nome: 'Destruir' },
   escudo_protecao: { nome: 'Escudo de Proteção', vezes: { fixo: 1 } },
   escuridao: { nome: 'Escuridão (1/dia)', vezes: { fixo: 1 }  },
@@ -7541,7 +7542,9 @@ var tabelas_pocoes = {
     propriedades: { tamanho: -1, atributos: { forca: -2, destreza: 2} },
   },
   ajuda: { nome: 'Ajuda', tipo: 'pocao'  , preco: '300 PO' },
-  pele_arvore_2: { nome: 'Pele de árvore +2', tipo: 'pocao'  , preco: '300 PO' },
+  pele_arvore_2: { nome: 'Pele de árvore +2', tipo: 'pocao'  , preco: '300 PO',
+    propriedades: { ca: { armadura_natural: 2 } },
+  },
   vigor_urso: {
     nome: 'Vigor do urso', tipo: 'pocao' , preco: '300 PO',
     propriedades: { atributos: { constituicao: 4 } }
@@ -7587,7 +7590,9 @@ var tabelas_pocoes = {
   },
   patas_aranha: { nome: 'Patas de aranha', tipo: 'pocao', preco: '300 PO' },
   dissimular_tendencia: { nome: 'Dissimular tendência', tipo: 'pocao', preco: '300 PO' },
-  pele_arvore_3: { nome: 'Pele de árvore +3', tipo: 'pocao', preco: '600 PO' },
+  pele_arvore_3: { nome: 'Pele de árvore +3', tipo: 'pocao', preco: '600 PO',
+    propriedades: { ca: { armadura_natural: 3 } },
+  },
   escudo_da_fe_4: {
     nome: 'Escudo da fé +4', tipo: 'pocao', preco: '600 PO',
     propriedades: { ca: { deflexao: 4 } },
@@ -7616,14 +7621,18 @@ var tabelas_pocoes = {
   idiomas: { nome: 'Idiomas', tipo: 'pocao', preco: '750 PO' },
   respirar_agua: { nome: 'Respirar na água', tipo: 'pocao', preco: '750 PO' },
   caminhar_agua: { nome: 'Caminhar na água', tipo: 'pocao' , preco: '750 PO' },
-  pele_arvore_4: { nome: 'Pele de árvore +4', tipo: 'pocao'  , preco: '900 PO' },
+  pele_arvore_4: { nome: 'Pele de árvore +4', tipo: 'pocao'  , preco: '900 PO',
+    propriedades: { ca: { armadura_natural: 4 } },
+  },
   escudo_da_fe_5: {
     nome: 'Escudo da fé +5', tipo: 'pocao' , preco: '900 PO',
     propriedades: { ca: { deflexao: 5 } },
   },
   boa_esperanca: { nome: 'Boa esperança', tipo: 'pocao'  , preco: '1050 PO' },
   resistencia_elementos_30: { nome: 'Resistência a elementos (tipo) 30', tipo: 'pocao'  , preco: '1100 PO' },
-  pele_arvore_5: { nome: 'Pele de árvore +5', tipo: 'pocao'  , preco: '1200 PO' },
+  pele_arvore_5: { nome: 'Pele de árvore +5', tipo: 'pocao'  , preco: '1200 PO',
+    propriedades: { ca: { armadura_natural: 5 } },
+  },
   presa_magica_maior_2: { nome: 'Presa mágica maior +2', tipo: 'pocao'  , preco: '1200 PO' },
   arma_magica_maior_2: { nome: 'Arma mágica maior +2', tipo: 'oleo' , preco: '1200 PO' },
   roupa_encantada_2: { nome: 'Roupa encantada +2', tipo: 'oleo' , preco: '1200 PO' },
@@ -9231,7 +9240,7 @@ var tabelas_geracao = {
       'esconderse', 'furtividade', 'observar', 'sobrevivencia', 'ouvir', 'saltar', 'afinidade_com_animais', 'cavalgar'
     ],
     talentos: [
-      'tolerancia', 'tiro_certeiro', 'ataque_poderoso', 'tiro_preciso', 'foco_em_arma', 'combater_com_duas_armas_maior'
+      'tolerancia', 'tiro_certeiro', 'ataque_poderoso', 'tiro_preciso', 'foco_em_arma', 'combater_duas_armas_maior'
     ],
     atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
     por_nivel: {
@@ -11097,7 +11106,7 @@ function _DependenciasArma(arma_personagem) {
   }
   arma_personagem.foco = PersonagemFocoComArma(arma_entrada.chave);
   arma_personagem.especializado = PersonagemEspecializacaoComArma(arma_entrada.chave);
-  if (arma_tabela.categoria == 'cac_leve' ||
+  if ('cac_leve' in arma_tabela.categorias ||
       arma_entrada.chave == 'sabre' ||
       arma_entrada.chave == 'chicote' ||
       arma_entrada.chave == 'corrente_com_cravos') {
@@ -11230,7 +11239,7 @@ function _DependenciasBonusPorCategoria(
 
   if (categoria.indexOf('cac') != -1 || estilo.nome == 'rajada') {
     // Quando tem acuidade, usa destreza.
-    if (arma_leve && arma_personagem.acuidade && gPersonagem.bba_cac < gPersonagem.bba_cac_acuidade) {
+    if (arma_personagem.acuidade && gPersonagem.bba_cac < gPersonagem.bba_cac_acuidade) {
       bonus_por_categoria.ataque[0] += gPersonagem.bba_cac_acuidade;
     } else {
       bonus_por_categoria.ataque[0] += gPersonagem.bba_cac;
