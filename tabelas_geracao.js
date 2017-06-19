@@ -740,7 +740,7 @@ var tabelas_geracao = {
       'esconderse', 'furtividade', 'observar', 'sobrevivencia', 'ouvir', 'saltar', 'afinidade_com_animais', 'cavalgar'
     ],
     talentos: [
-      'tolerancia', 'tiro_certeiro', 'ataque_poderoso', 'tiro_preciso', 'foco_em_arma', 'combater_com_duas_armas_maior'
+      'tolerancia', 'tiro_certeiro', 'ataque_poderoso', 'tiro_preciso', 'foco_em_arma', 'combater_duas_armas_maior'
     ],
     atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
     por_nivel: {
