@@ -1,3 +1,7 @@
+idiomas.
+sinergia: conhecimento natureza com sobrevivencia.
+Sinergia: adestrar animais e cavalgar
+Forma alternativa de druida.
 Companheiro animal de druidas e rangers.
 Bug: nao clerigos aparecendo poder de dominio.
 Implementar talentos e pericias de dominio.
