@@ -2579,6 +2579,9 @@
   "Cegueira_sob_Luz_Intensa": {
     "message": "Light Blindness"
   },
+  "_2_ataque_e_dano_por_competencia": {
+    "message": "+2 competence bonus to attack and damage"
+  },
   "Globos_de_Luz__1_dia_": {
     "message": "Dancing Lights (1/day)"
   },
