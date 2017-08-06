@@ -5,6 +5,9 @@ var tabelas_geracao = {
   // Peguei do livro do mestre.
   barbaro: {
     atributos: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+    talentos: [
+      'ataque_poderoso', 'trespassar'
+    ],
     pericias: [],
     por_nivel: {
       1: { moedas: { ouro: 200 },
@@ -744,6 +747,12 @@ var tabelas_geracao = {
     ],
     atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
     por_nivel: {
+      6: {
+        moedas: { ouro: 2800 },
+        armadura: { nome: 'couro_batido', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 1, obra_prima: true },
+                 { chave: 'arco_longo', obra_prima: true }, ],
+      },
       7: {
         moedas: { ouro: 1400 },
         armadura: { nome: 'couro_batido', bonus: 1 },
