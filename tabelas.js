@@ -19,6 +19,14 @@ var tabelas_raca = {
       outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 },
                           magias: { base: ['fortitude', 'reflexo', 'vontade' ], bonus: 2, } },
   },
+  gnoll: {
+      nome: 'Gnoll',
+      origem: { livro: 'Monster Manual', pagina: '' },
+      movimento: { terrestre: 6 },
+      atributos: { forca: 4, constituicao: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio',
+      ajuste_nivel: 1, armadura_natural: 1, bba: 1, salvacoes: { fortitude: 3 },
+      // dados de vida racial: 2d8: TODO
+  },
   goblin: {
       nome: 'Goblin',
       origem: { livro: 'Monster Manual', pagina: '133' },
@@ -1190,7 +1198,6 @@ Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, At
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
-Sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
@@ -1337,7 +1344,7 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     guerreiro: true,
     complemento: 'arma',
     requisitos: { proficiencia_arma: true, talentos: [ 'foco_em_arma'], nivel: { guerreiro: 4 }},
-    descrição: '+2 de bônus no dano com a arma escolhida.', },
+    descricao: '+2 de bônus no dano com a arma escolhida.', },
   // TODO implementar/mostrar esse bonus de alguma forma.
   esquiva: {
     nome: 'Esquiva',
@@ -1510,6 +1517,11 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       requisitos: { bba: 1 },
       guerreiro: true,
       descricao: 'Saca uma arma branca como ação livre.',
+  },
+  sorrateiro: {
+    nome: 'Sorrateiro',
+    bonus_pericias: { esconderse: 2, furtividade: 2 },
+    descricao: '+2 nos testes de Esconder-se e Furtividade.'
   },
   tiro_certeiro: {
     nome: 'Tiro Certeiro',
