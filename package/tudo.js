@@ -999,9 +999,13 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
     span_ca_toque.textContent += ' (' + Traduz('sem esquiva') + ': ' + dom_falso.textContent + ')';
   }
   span_classe_armadura.appendChild(span_ca_toque);
-  // AC surpreso.
+  // CA surpreso.
   var span_ca_surpreso = CriaSpan();
-  array_exclusao = PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural') ? [] : ['atributo'];
+  array_exclusao = [];
+  if (gPersonagem.ca.bonus.Le('atributo') > 0 &&
+      !PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural')) {
+    array_exclusao.push('atributo');
+  }
   if (!usar_escudo) {
     array_exclusao.push('escudo');
     array_exclusao.push('escudo_melhoria');
