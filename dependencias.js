@@ -369,6 +369,7 @@ function _DependenciasBba() {
         tabelas_classes[gPersonagem.classes[i].classe].bba(gPersonagem.classes[i].nivel);
   }
 
+  gPersonagem.bba += tabelas_raca[gPersonagem.raca].bba || 0;
   gPersonagem.bba -= gPersonagem.niveis_negativos;
   gPersonagem.bba_cac =
       gPersonagem.bba + gPersonagem.atributos['forca'].modificador +
