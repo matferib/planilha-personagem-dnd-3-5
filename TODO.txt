@@ -1,3 +1,6 @@
+Implementar bloqueio ambidestro direito (so aplicar com duas armas).
+Dados de vida raciais.
+Colocar bonus temporarios de atributos (que nao consigo modelar, como força temporária de alguma magia).
 idiomas.
 sinergia: conhecimento natureza com sobrevivencia.
 Sinergia: adestrar animais e cavalgar

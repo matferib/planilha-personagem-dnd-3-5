@@ -1192,7 +1192,6 @@ Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e n�
 Arquearia Montada¹ Combate Montado Sofre metade das penalidades nos ataques à distância realizados sobre montarias
 Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas causam dano dobrado
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
-Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
@@ -1270,6 +1269,13 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       nome: 'Auto-Suficiente',
       bonus_pericias: { cura: 2, sobrevivencia: 2 }
   },
+  bloqueio_ambidestro: {
+    nome: 'Bloqueio Ambidestro',
+    guerreiro: true,
+    requisitos: { talentos: [ 'combater_duas_armas'], atributos: { destreza: 15 } },
+    bonus_ca: { escudo: 1 },
+    descricao: 'A arma da mão inábil concede +1 de bônus de escudo na CA. Em defesa total vira +2.',
+  },
   combate_montado: {
       nome: 'Combate Montado',
       requisitos: { pericias: { cavalgar: 1 } },
@@ -1344,7 +1350,8 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     guerreiro: true,
     complemento: 'arma',
     requisitos: { proficiencia_arma: true, talentos: [ 'foco_em_arma'], nivel: { guerreiro: 4 }},
-    descricao: '+2 de bônus no dano com a arma escolhida.', },
+    descricao: '+2 de bônus no dano com a arma escolhida.',
+  },
   // TODO implementar/mostrar esse bonus de alguma forma.
   esquiva: {
     nome: 'Esquiva',
