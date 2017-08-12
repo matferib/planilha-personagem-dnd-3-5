@@ -106,6 +106,8 @@ function _DependenciasItemOuFamiliar(chave_item, item_tabela) {
   for (var propriedade in item_tabela.propriedades) {
     if (propriedade == 'ca') {
       _DependenciasItemCa(chave_item, item_tabela);
+    } else if (propriedade == 'ataque') {
+      _DependenciasItemAtaque(chave_item, item_tabela);
     } else if (propriedade == 'pericias') {
       _DependenciasItemPericias(chave_item, item_tabela);
     } else if (propriedade == 'salvacoes') {
@@ -121,6 +123,15 @@ function _DependenciasItemOuFamiliar(chave_item, item_tabela) {
     }
   }
 }
+
+// Item que afeta os ataques.
+function _DependenciasItemAtaque(chave_item, item_tabela) {
+  for (var chave_bonus in item_tabela.propriedades.ataque) {
+    var valor = item_tabela.propriedades.ataque[chave_bonus];
+    gPersonagem.outros_bonus_ataque.Adiciona(chave_bonus, chave_item, valor);
+  }
+}
+
 
 // Item que afeta as salvacoes (resistencias).
 function _DependenciasItemSalvacoes(chave_item, item_tabela) {
@@ -168,10 +179,20 @@ function _DependenciasItemCa(chave_item, item_tabela) {
 
 // Item que afeta pericias.
 function _DependenciasItemPericias(chave_item, item_tabela) {
-  for (var chave_pericia in item_tabela.propriedades.pericias) {
-    for (var chave_bonus in item_tabela.propriedades.pericias[chave_pericia]) {
-      gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
-          chave_bonus, chave_item, item_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
+  var chaves_pericias = [];
+  if ('todas' in item_tabela.propriedades.pericias) {
+    for (var chave_pericia in tabelas_pericias) {
+      for (var chave_bonus in item_tabela.propriedades.pericias['todas']) {
+        gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
+            chave_bonus, chave_item, item_tabela.propriedades.pericias['todas'][chave_bonus]);
+      }
+    }
+  } else {
+    for (var chave_pericia in chaves_pericias) {
+      for (var chave_bonus in item_tabela.propriedades.pericias[chave_pericia]) {
+        gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
+            chave_bonus, chave_item, item_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
+      }
     }
   }
 }
@@ -369,21 +390,23 @@ function _DependenciasBba() {
         tabelas_classes[gPersonagem.classes[i].classe].bba(gPersonagem.classes[i].nivel);
   }
 
+  var total_outros = gPersonagem.outros_bonus_ataque.Total();
   gPersonagem.bba += tabelas_raca[gPersonagem.raca].bba || 0;
   gPersonagem.bba -= gPersonagem.niveis_negativos;
   gPersonagem.bba_cac =
       gPersonagem.bba + gPersonagem.atributos['forca'].modificador +
-      gPersonagem.tamanho.modificador_ataque_defesa;
+      gPersonagem.tamanho.modificador_ataque_defesa + total_outros;
   gPersonagem.bba_cac_acuidade =
       gPersonagem.bba + gPersonagem.atributos['destreza'].modificador +
-      gPersonagem.tamanho.modificador_ataque_defesa;
+      gPersonagem.tamanho.modificador_ataque_defesa + total_outros;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   gPersonagem.bba_distancia = gPersonagem.bba_cac_acuidade;
   gPersonagem.numero_ataques = (gPersonagem.bba == 0) ? 1 : Math.floor((gPersonagem.bba - 1) / 5) + 1;
   gPersonagem.agarrar =
       gPersonagem.bba +
       gPersonagem.atributos['forca'].modificador +
-      gPersonagem.tamanho.modificador_agarrar;
+      gPersonagem.tamanho.modificador_agarrar +
+      total_outros;
 }
 
 // Converte a proficiencia em armas do personagem.

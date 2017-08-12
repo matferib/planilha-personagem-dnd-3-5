@@ -71,6 +71,7 @@ var gPersonagem = {
   bba_cac_acuidade: 1,  // inclui tamanho e destreza.
   bba_distancia: 1,  // inclui tamanho e destreza.
   agarrar: 1,
+  outros_bonus_ataque: new Bonus(),
   numero_ataques: 1,
   // talentos
   talentos: {
@@ -232,6 +233,7 @@ function PersonagemLimpaGeral() {
   gPersonagem.armaduras.length = 0;
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
+  gPersonagem.outros_bonus_ataque.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
   gPersonagem.atributos.pontos.gastos.length = 0;
   for (var atributo in tabelas_atributos) {

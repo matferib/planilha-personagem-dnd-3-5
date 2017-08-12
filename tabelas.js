@@ -2335,7 +2335,11 @@ var tabelas_pocoes = {
   presa_magica_maior_1: { nome: 'Presa mágica maior +1', tipo: 'pocao'  , preco: '750 PO' },
   arma_magica_maior: { nome: 'Arma mágica +1', tipo: 'oleo' , preco: '750 PO' },
   velocidade: { nome: 'Velocidade', tipo: 'pocao'  , preco: '750 PO' },
-  heroismo: { nome: 'Heroismo', tipo: 'pocao'  , preco: '750 PO' },
+  heroismo: {
+    nome: 'Heroismo', tipo: 'pocao'  , preco: '750 PO',
+    // +2 moral em ataque, salvacao e pericias.
+    propriedades: { ataque: { moral: 2 }, pericias: { todas: { moral: 2 } }, salvacoes: { todas: 2 } },
+  },
   lamina_afiada: { nome: 'Lâmina afiada', tipo: 'oleo' , preco: '750 PO' },
   circulo_magico_contra_tendencia: { nome: 'Círculo mágico contra (tendência)', tipo: 'pocao' , preco: '750 PO' },
   roupa_encantada_1: { nome: 'Roupa encantada +1', tipo: 'oleo' , preco: '750 PO' },
