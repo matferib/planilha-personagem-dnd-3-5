@@ -201,7 +201,7 @@ var tabelas_geracao = {
     ordem_magias: {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
-      2: [ 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
+      2: [ 'arma_espiritual', 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
       3: [ 'dissipar_magia', 'purgar_invisibilidade', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
       4: [ 'poder_divino', 'envenenamento', 'inseto_gigante', 'imunidade_a_magia' ],
     },
