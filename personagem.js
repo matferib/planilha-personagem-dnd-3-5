@@ -416,7 +416,8 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
       return true;
     }
     // Talento tem complemento, mas personagem nao.
-    if (talento_personagem.complemento == null || talento_personagem.complemento == '') {
+    if ((talento_personagem.complemento == null || talento_personagem.complemento == '') ||
+        (complemento == null || complemento == '')) {
       return false;
     }
     // Complemento igual.
@@ -534,6 +535,8 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
     }
   }
   for (var i = 0; requisitos.talentos && i < requisitos.talentos.length; ++i) {
+    // Neste caso, o complemento ainda nao foi preenchido.
+    if ('complemento' in tabelas_talentos[requisitos.talentos[i]] && complemento == null) continue;
     if (!PersonagemPossuiTalento(requisitos.talentos[i], complemento)) {
       return (prefixo_erro + Traduz('talento') + ' ' + Traduz(tabelas_talentos[requisitos.talentos[i]].nome) + ' ' +
              (complemento ? complemento : ''));
