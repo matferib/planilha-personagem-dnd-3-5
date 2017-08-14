@@ -4734,6 +4734,7 @@ var gPersonagem = {
   bba_cac_acuidade: 1,  // inclui tamanho e destreza.
   bba_distancia: 1,  // inclui tamanho e destreza.
   agarrar: 1,
+  outros_bonus_ataque: new Bonus(),
   numero_ataques: 1,
   // talentos
   talentos: {
@@ -4895,6 +4896,7 @@ function PersonagemLimpaGeral() {
   gPersonagem.armaduras.length = 0;
   gPersonagem.ca.bonus.Limpa();
   gPersonagem.iniciativa.Limpa();
+  gPersonagem.outros_bonus_ataque.Limpa();
   gPersonagem.atributos.pontos.gastos.disponiveis = 0;
   gPersonagem.atributos.pontos.gastos.length = 0;
   for (var atributo in tabelas_atributos) {
@@ -5077,7 +5079,8 @@ function _TalentoIgual(talento_personagem, nome_talento, complemento) {
       return true;
     }
     // Talento tem complemento, mas personagem nao.
-    if (talento_personagem.complemento == null || talento_personagem.complemento == '') {
+    if ((talento_personagem.complemento == null || talento_personagem.complemento == '') ||
+        (complemento == null || complemento == '')) {
       return false;
     }
     // Complemento igual.
@@ -5195,6 +5198,8 @@ function PersonagemVerificaPrerequisitosTalento(chave_talento, complemento) {
     }
   }
   for (var i = 0; requisitos.talentos && i < requisitos.talentos.length; ++i) {
+    // Neste caso, o complemento ainda nao foi preenchido.
+    if ('complemento' in tabelas_talentos[requisitos.talentos[i]] && complemento == null) continue;
     if (!PersonagemPossuiTalento(requisitos.talentos[i], complemento)) {
       return (prefixo_erro + Traduz('talento') + ' ' + Traduz(tabelas_talentos[requisitos.talentos[i]].nome) + ' ' +
              (complemento ? complemento : ''));
@@ -5313,6 +5318,14 @@ var tabelas_raca = {
       familiaridade_arma: { machado_de_guerra_anao: true, urgrosh_anao: true },
       outras_salvacoes: { veneno: { base: ['fortitude'], bonus: 2 },
                           magias: { base: ['fortitude', 'reflexo', 'vontade' ], bonus: 2, } },
+  },
+  gnoll: {
+      nome: 'Gnoll',
+      origem: { livro: 'Monster Manual', pagina: '' },
+      movimento: { terrestre: 6 },
+      atributos: { forca: 4, constituicao: 2, inteligencia: -2, carisma: -2 }, tamanho: 'medio',
+      ajuste_nivel: 1, armadura_natural: 1, bba: 1, salvacoes: { fortitude: 3 },
+      // dados de vida racial: 2d8: TODO
   },
   goblin: {
       nome: 'Goblin',
@@ -6479,13 +6492,11 @@ Separar Aprimorado¹ Ataque Poderoso +4 de bônus nas tentativas de Separar e n�
 Arquearia Montada¹ Combate Montado Sofre metade das penalidades nos ataques à distância realizados sobre montarias
 Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas causam dano dobrado
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
-Bloqueio Ambidestro¹ Combater com Duas Armas A arma da mão inábil concede +1 de bônus de escudo na CA
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
 Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
-Sorrateiro - +2 nos testes de Esconder-se e Furtividade
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
 Tiro em Movimento¹ Des 13, Esquiva, Mobilidade, Tiro Certeiro, bônus base de ataque +4 Pode se deslocar antes e depois de um ataque à distância
 Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de ataque +11 Ignorar qualquer cobertura ou camuflagem (exceto total) para ataques à distância
@@ -6557,6 +6568,13 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   auto_suficiente: {
       nome: 'Auto-Suficiente',
       bonus_pericias: { cura: 2, sobrevivencia: 2 }
+  },
+  bloqueio_ambidestro: {
+    nome: 'Bloqueio Ambidestro',
+    guerreiro: true,
+    requisitos: { talentos: [ 'combater_duas_armas'], atributos: { destreza: 15 } },
+    bonus_ca: { escudo: 1 },
+    descricao: 'A arma da mão inábil concede +1 de bônus de escudo na CA. Em defesa total vira +2.',
   },
   combate_montado: {
       nome: 'Combate Montado',
@@ -6632,7 +6650,8 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     guerreiro: true,
     complemento: 'arma',
     requisitos: { proficiencia_arma: true, talentos: [ 'foco_em_arma'], nivel: { guerreiro: 4 }},
-    descrição: '+2 de bônus no dano com a arma escolhida.', },
+    descricao: '+2 de bônus no dano com a arma escolhida.',
+  },
   // TODO implementar/mostrar esse bonus de alguma forma.
   esquiva: {
     nome: 'Esquiva',
@@ -6805,6 +6824,11 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       requisitos: { bba: 1 },
       guerreiro: true,
       descricao: 'Saca uma arma branca como ação livre.',
+  },
+  sorrateiro: {
+    nome: 'Sorrateiro',
+    bonus_pericias: { esconderse: 2, furtividade: 2 },
+    descricao: '+2 nos testes de Esconder-se e Furtividade.'
   },
   tiro_certeiro: {
     nome: 'Tiro Certeiro',
@@ -7611,7 +7635,11 @@ var tabelas_pocoes = {
   presa_magica_maior_1: { nome: 'Presa mágica maior +1', tipo: 'pocao'  , preco: '750 PO' },
   arma_magica_maior: { nome: 'Arma mágica +1', tipo: 'oleo' , preco: '750 PO' },
   velocidade: { nome: 'Velocidade', tipo: 'pocao'  , preco: '750 PO' },
-  heroismo: { nome: 'Heroismo', tipo: 'pocao'  , preco: '750 PO' },
+  heroismo: {
+    nome: 'Heroismo', tipo: 'pocao'  , preco: '750 PO',
+    // +2 moral em ataque, salvacao e pericias.
+    propriedades: { ataque: { moral: 2 }, pericias: { todas: { moral: 2 } }, salvacoes: { todas: 2 } },
+  },
   lamina_afiada: { nome: 'Lâmina afiada', tipo: 'oleo' , preco: '750 PO' },
   circulo_magico_contra_tendencia: { nome: 'Círculo mágico contra (tendência)', tipo: 'pocao' , preco: '750 PO' },
   roupa_encantada_1: { nome: 'Roupa encantada +1', tipo: 'oleo' , preco: '750 PO' },
@@ -8509,6 +8537,9 @@ var tabelas_geracao = {
   // Peguei do livro do mestre.
   barbaro: {
     atributos: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
+    talentos: [
+      'ataque_poderoso', 'trespassar'
+    ],
     pericias: [],
     por_nivel: {
       1: { moedas: { ouro: 200 },
@@ -8702,7 +8733,7 @@ var tabelas_geracao = {
     ordem_magias: {
       0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
-      2: [ 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
+      2: [ 'arma_espiritual', 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
       3: [ 'dissipar_magia', 'purgar_invisibilidade', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
       4: [ 'poder_divino', 'envenenamento', 'inseto_gigante', 'imunidade_a_magia' ],
     },
@@ -9248,6 +9279,12 @@ var tabelas_geracao = {
     ],
     atributos: [ 'destreza', 'forca', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
     por_nivel: {
+      6: {
+        moedas: { ouro: 2800 },
+        armadura: { nome: 'couro_batido', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 1, obra_prima: true },
+                 { chave: 'arco_longo', obra_prima: true }, ],
+      },
       7: {
         moedas: { ouro: 1400 },
         armadura: { nome: 'couro_batido', bonus: 1 },
@@ -10352,6 +10389,8 @@ function _DependenciasItemOuFamiliar(chave_item, item_tabela) {
   for (var propriedade in item_tabela.propriedades) {
     if (propriedade == 'ca') {
       _DependenciasItemCa(chave_item, item_tabela);
+    } else if (propriedade == 'ataque') {
+      _DependenciasItemAtaque(chave_item, item_tabela);
     } else if (propriedade == 'pericias') {
       _DependenciasItemPericias(chave_item, item_tabela);
     } else if (propriedade == 'salvacoes') {
@@ -10367,6 +10406,15 @@ function _DependenciasItemOuFamiliar(chave_item, item_tabela) {
     }
   }
 }
+
+// Item que afeta os ataques.
+function _DependenciasItemAtaque(chave_item, item_tabela) {
+  for (var chave_bonus in item_tabela.propriedades.ataque) {
+    var valor = item_tabela.propriedades.ataque[chave_bonus];
+    gPersonagem.outros_bonus_ataque.Adiciona(chave_bonus, chave_item, valor);
+  }
+}
+
 
 // Item que afeta as salvacoes (resistencias).
 function _DependenciasItemSalvacoes(chave_item, item_tabela) {
@@ -10414,10 +10462,20 @@ function _DependenciasItemCa(chave_item, item_tabela) {
 
 // Item que afeta pericias.
 function _DependenciasItemPericias(chave_item, item_tabela) {
-  for (var chave_pericia in item_tabela.propriedades.pericias) {
-    for (var chave_bonus in item_tabela.propriedades.pericias[chave_pericia]) {
-      gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
-          chave_bonus, chave_item, item_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
+  var chaves_pericias = [];
+  if ('todas' in item_tabela.propriedades.pericias) {
+    for (var chave_pericia in tabelas_pericias) {
+      for (var chave_bonus in item_tabela.propriedades.pericias['todas']) {
+        gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
+            chave_bonus, chave_item, item_tabela.propriedades.pericias['todas'][chave_bonus]);
+      }
+    }
+  } else {
+    for (var chave_pericia in chaves_pericias) {
+      for (var chave_bonus in item_tabela.propriedades.pericias[chave_pericia]) {
+        gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
+            chave_bonus, chave_item, item_tabela.propriedades.pericias[chave_pericia][chave_bonus]);
+      }
     }
   }
 }
@@ -10615,20 +10673,23 @@ function _DependenciasBba() {
         tabelas_classes[gPersonagem.classes[i].classe].bba(gPersonagem.classes[i].nivel);
   }
 
+  var total_outros = gPersonagem.outros_bonus_ataque.Total();
+  gPersonagem.bba += tabelas_raca[gPersonagem.raca].bba || 0;
   gPersonagem.bba -= gPersonagem.niveis_negativos;
   gPersonagem.bba_cac =
       gPersonagem.bba + gPersonagem.atributos['forca'].modificador +
-      gPersonagem.tamanho.modificador_ataque_defesa;
+      gPersonagem.tamanho.modificador_ataque_defesa + total_outros;
   gPersonagem.bba_cac_acuidade =
       gPersonagem.bba + gPersonagem.atributos['destreza'].modificador +
-      gPersonagem.tamanho.modificador_ataque_defesa;
+      gPersonagem.tamanho.modificador_ataque_defesa + total_outros;
   // Por enquanto, nao encontrei nenhum caso que seja diferente de acuidade e distancia.
   gPersonagem.bba_distancia = gPersonagem.bba_cac_acuidade;
   gPersonagem.numero_ataques = (gPersonagem.bba == 0) ? 1 : Math.floor((gPersonagem.bba - 1) / 5) + 1;
   gPersonagem.agarrar =
       gPersonagem.bba +
       gPersonagem.atributos['forca'].modificador +
-      gPersonagem.tamanho.modificador_agarrar;
+      gPersonagem.tamanho.modificador_agarrar +
+      total_outros;
 }
 
 // Converte a proficiencia em armas do personagem.
