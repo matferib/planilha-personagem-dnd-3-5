@@ -8475,7 +8475,11 @@ function ListaDoArmazem(callback) {
       })
     });
   } else {
-    callback([], MapaParaLista(localStorage));
+    var lista = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      lista.push(localStorage.key(i));
+    }
+    callback([], lista);
   }
 }
 
