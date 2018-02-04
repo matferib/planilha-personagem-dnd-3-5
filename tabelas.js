@@ -1564,9 +1564,16 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   },
   trespassar: {
       nome: 'Trespassar',  // Cleave
-      descricao: 'Desfere um ataque corporal extra depois de imobilizar um oponente',
+      descricao: 'Desfere um ataque corporal extra depois de derrubar um oponente',
       requisitos: { talentos: [ 'ataque_poderoso' ] },
-      guerreiro: true, },
+      guerreiro: true,
+  },
+  trespassar_aprimorado: {
+      nome: 'Trespassar Aprimorado',  // Great Cleave
+      descricao: 'Igual a trespassar, sem limites de vezes',
+      requisitos: { bba: 4, talentos: [ 'trespassar' ] },
+      guerreiro: true,
+  },
   usar_armas_simples: {
       nome: 'Usar armas simples',
       descricao: 'Não sofre penalidades nos ataques com armas simples.', },
@@ -1652,10 +1659,9 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     descricao: 'Permite a criação de poções mágicas.',
     mago: 1,
   },
-  // Sucesso Decisivo Aprimorado¹² Usar a arma, bônus base de ataque +8 Dobra a margem de ameaça da arma
   sucesso_decisivo_aprimorado: {
     nome: 'Sucesso Decisivo Aprimorado',
-    requisitos: { proficiencia_arma: true },
+    requisitos: { bba: 8, proficiencia_arma: true },
     complemento: 'arma',
     descricao: 'Dobra margem de ameaça da arma.',
     guerreiro: true,
@@ -2269,7 +2275,12 @@ var tabelas_pocoes = {
     nome: 'Reduzir pessoa', tipo: 'pocao'  , preco: '250 PO',
     propriedades: { tamanho: -1, atributos: { forca: -2, destreza: 2} },
   },
-  ajuda: { nome: 'Ajuda', tipo: 'pocao'  , preco: '300 PO' },
+  ajuda: {
+    nome: 'Ajuda', tipo: 'pocao', preco: '300 PO',
+    // TODO bonus de salvacao contra medo.
+    // TODO 1d8+3 PV temporarios.
+    propriedades: { ataque: { moral: 1 } },
+  },
   pele_arvore_2: { nome: 'Pele de árvore +2', tipo: 'pocao'  , preco: '300 PO',
     propriedades: { ca: { armadura_natural: 2 } },
   },

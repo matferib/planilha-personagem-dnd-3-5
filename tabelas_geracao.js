@@ -6,9 +6,11 @@ var tabelas_geracao = {
   barbaro: {
     atributos: ['forca', 'destreza', 'constituicao', 'sabedoria', 'inteligencia', 'carisma' ],
     talentos: [
-      'ataque_poderoso', 'trespassar'
+      'esquiva', 'foco_em_arma', 'ataque_poderoso', 'trespassar'
     ],
-    pericias: [],
+    ordem_pericias: [
+      'escalar', 'saltar', 'ouvir', 'sobrevivencia',
+    ],
     por_nivel: {
       1: { moedas: { ouro: 200 },
            armadura: { nome: 'brunea', obra_prima: true },
