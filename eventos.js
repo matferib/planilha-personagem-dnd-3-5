@@ -114,6 +114,13 @@ function ClickExcluir() {
     Mensagem('Nome "--" não é válido.');
     return;
   }
+  var local = nome.startsWith('local_');
+  var sync = nome.startsWith('sync_');
+  if (local) {
+    nome = nome.substr(nome.indexOf('local_') + 6);
+  } else if (sync) {
+    nome = nome.substr(nome.indexOf('sync_') + 5);
+  }
   JanelaConfirmacao('Tem certeza que deseja excluir "' + nome + '"?',
     // Callback sim.
     function() {
