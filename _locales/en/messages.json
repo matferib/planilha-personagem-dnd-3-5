@@ -764,6 +764,9 @@
   "Trespassar": {
     "message": "Cleave"
   },
+  "Trespassar_Aprimorado": {
+    "message": "Great Cleave"
+  },
   "Usar_Armas_Simples": {
     "message": "Simple Weapon Proficiency"
   },
@@ -2169,7 +2172,10 @@
     "message": "+4 bonus on tests to resist non lethal damage while swimming, running, forced march, breathing, starvarion, cold, heat. Can sleep on light or medium armor without fatigue."
   },
   "Desfere_um_ataque_corporal_extra_depois_de_imobilizar_um_oponente": {
-    "message": "Extra attack after dropping opponent."
+    "message": "Extra attack after dropping opponent"
+  },
+  "Igual_a_trespassar__sem_limites_de_vezes": {
+    "message": "Like Cleave, except that there is no limit to the number of times you can use it per round"
   },
   "Nao_sofre_penalidades_nos_ataques_com_armas_simples_": {
     "message": "No penalty while using simple weapons."
