@@ -179,7 +179,6 @@ function _DependenciasItemCa(chave_item, item_tabela) {
 
 // Item que afeta pericias.
 function _DependenciasItemPericias(chave_item, item_tabela) {
-  var chaves_pericias = [];
   if ('todas' in item_tabela.propriedades.pericias) {
     for (var chave_pericia in tabelas_pericias) {
       for (var chave_bonus in item_tabela.propriedades.pericias['todas']) {
@@ -188,7 +187,7 @@ function _DependenciasItemPericias(chave_item, item_tabela) {
       }
     }
   } else {
-    for (var chave_pericia in chaves_pericias) {
+    for (var chave_pericia in item_tabela.propriedades.pericias) {
       for (var chave_bonus in item_tabela.propriedades.pericias[chave_pericia]) {
         gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona(
             chave_bonus, chave_item, item_tabela.propriedades.pericias[chave_pericia][chave_bonus]);

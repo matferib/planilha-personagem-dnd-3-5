@@ -60,6 +60,9 @@ function TemplateTeste(handler_teste, dom) {
       { entrada: { chave: 'espada_curta', bonus: 0, obra_prima: false }, nome_gerado: 'espada curta' },
       { entrada: { chave: 'sabre', bonus: 0, obra_prima: false }, nome_gerado: 'sabre' },
   ];
+  gPersonagem.escudos = [
+      { entrada: { chave: 'broquel' }, nome_gerado: 'Broquel' }
+  ];
 
   // div do teste. Cria de cara para os testes poderem acessar.
   var div_teste = CriaDiv(handler_teste.nome, 'div_teste');
@@ -491,7 +494,8 @@ function CarregaTestes() {
       _DependenciasPericias();
       if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 6) {
         this.resultado = false;
-        this.detalhes = 'Esperava +5 de bonus de competencia em esconderse com manto elfico.';
+        this.detalhes = 'Esperava +5 de bonus de competencia em esconderse com manto elfico, recebi: ' +
+            gPersonagem.pericias.lista.esconderse.bonus.Total();
         return;
       }
       this.resultado = true;
