@@ -153,7 +153,7 @@ var gPersonagem = {
   // Aponta para um dos escudos.
   escudo: null,
   // Cada entrada:
-  //      entrada: { chave, obra_prima, bonus }, nome_gerado, texto_nome.
+  //      entrada: { chave, obra_prima, bonus, em_uso }, nome_gerado, texto_nome.
   escudos: [],
   elmo: '',
   // TODO: passar pra dentro de itens?

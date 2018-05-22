@@ -61,7 +61,8 @@ function TemplateTeste(handler_teste, dom) {
       { entrada: { chave: 'sabre', bonus: 0, obra_prima: false }, nome_gerado: 'sabre' },
   ];
   gPersonagem.escudos = [
-      { entrada: { chave: 'broquel' }, nome_gerado: 'Broquel' }
+      { entrada: { chave: 'broquel' }, nome_gerado: 'Broquel' },
+      { entrada: { chave: 'leve_madeira' }, nome_gerado: 'Leve Madeira' },
   ];
 
   // div do teste. Cria de cara para os testes poderem acessar.
@@ -1127,10 +1128,12 @@ function CarregaTestes() {
       gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
       gPersonagem.atributos.forca.bonus.Adiciona('base', null, 8);
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
+      gPersonagem.escudos[1].entrada.em_uso = true;
       _DependenciasAtributos();
       _DependenciasTalentos();
       _DependenciasBba();
       _DependenciasProficienciaArmas();
+      _DependenciasClasseArmadura();
       _DependenciasArmas();
       gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'duas_maos', arma_primaria: 'besta leve', arma_secundaria: 'desarmado' }));
       gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'besta leve', arma_secundaria: 'desarmado' }));
@@ -1157,6 +1160,47 @@ function CarregaTestes() {
       var ataque_besta_pesada_arma_escudo = gPersonagem.estilos_luta[2].arma_primaria.bonus_por_categoria.distancia.ataque[0];
       if (ataque_besta_pesada_arma_escudo != -2) {
         this.detalhes = 'Esperava -2 de ataque para besta pesada com escudo.';
+        this.resultado = false;
+        return;
+      }
+
+      this.resultado = true;
+    },
+  }, body);
+
+  TemplateTeste({
+    nome: 'Bestas e Broquel',
+    Testa: function() {
+      gPersonagem.template = '',
+      gPersonagem.classes.push({ classe: 'guerreiro', nivel: 1 });
+      gPersonagem.atributos.forca.bonus.Adiciona('base', null, 8);
+      gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
+      gPersonagem.escudos[0].entrada.em_uso = true;
+      _DependenciasAtributos();
+      _DependenciasTalentos();
+      _DependenciasBba();
+      _DependenciasProficienciaArmas();
+      _DependenciasClasseArmadura();
+      _DependenciasArmas();
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'duas_maos', arma_primaria: 'besta leve', arma_secundaria: 'desarmado' }));
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'besta leve', arma_secundaria: 'desarmado' }));
+      gPersonagem.estilos_luta.push(_ConverteEstilo({ nome: 'arma_escudo', arma_primaria: 'besta pesada', arma_secundaria: 'desarmado' }));
+      _DependenciasEstilos();
+      var ataque_besta_leve = gPersonagem.estilos_luta[0].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_besta_leve != 2) {
+        this.detalhes = 'Esperava 2 de ataque para besta.';
+        this.resultado = false;
+        return;
+      }
+      var ataque_besta_leve_arma_escudo = gPersonagem.estilos_luta[1].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_besta_leve_arma_escudo != 2) {
+        this.detalhes = 'Esperava 2 de ataque para besta leve com escudo.';
+        this.resultado = false;
+        return;
+      }
+      var ataque_besta_pesada_arma_escudo = gPersonagem.estilos_luta[2].arma_primaria.bonus_por_categoria.distancia.ataque[0];
+      if (ataque_besta_pesada_arma_escudo != 2) {
+        this.detalhes = 'Esperava 2 de ataque para besta pesada com escudo.';
         this.resultado = false;
         return;
       }
@@ -1227,13 +1271,13 @@ function CarregaTestes() {
   // Parte assincrona do armazem.
   var nome_chave = 'nome de teste maluco que nunca devera ser usado';
   SalvaNoArmazem(nome_chave, 'valor de teste', function() {
-    ListaDoArmazem(function(lista_nomes) {
+    ListaDoArmazem(function(lista_nomes_sync, lista_nomes_local) {
       TemplateTeste({
         nome: 'Armazem',
         Testa: function() {
           this.resultado = false;
-          for (var i = 0; i < lista_nomes.length; ++i) {
-            if (lista_nomes[i] == nome_chave) {
+          for (var i = 0; i < lista_nomes_local.length; ++i) {
+            if (lista_nomes_local[i] == nome_chave) {
               this.resultado = true;
               break;
             }
