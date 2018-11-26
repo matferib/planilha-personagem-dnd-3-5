@@ -10973,6 +10973,10 @@ function _DependenciasPericias() {
 
   var max_pontos = gPersonagem.dados_vida.nivel_personagem + 3;
   gPersonagem.pericias.pontos_gastos = 0;
+  // Bonus de esconder.
+  var bonus_esconder_por_tamanho = {
+    minusculo: 16, diminuto: 12, miudo: 8, pequeno: 4, medio: 0, grande: -4, enorme: -8, imenso: -12, colossal: -16
+  };
   for (var chave_pericia in gPersonagem.pericias.lista) {
     var pericia = tabelas_pericias[chave_pericia];
     var pericia_personagem = gPersonagem.pericias.lista[chave_pericia];
@@ -11011,6 +11015,10 @@ function _DependenciasPericias() {
     if (gPersonagem.niveis_negativos > 0) {
       pericia_personagem.bonus.Adiciona(
           'niveis_negativos', '-', -gPersonagem.niveis_negativos);
+    }
+
+    if (chave_pericia == 'esconderse') {
+      gPersonagem.pericias.lista[chave_pericia].bonus.Adiciona('tamanho', '-', bonus_esconder_por_tamanho[gPersonagem.tamanho.categoria]);
     }
 
     pericia_personagem.total =
