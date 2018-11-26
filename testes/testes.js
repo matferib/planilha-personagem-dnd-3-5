@@ -488,18 +488,37 @@ function CarregaTestes() {
   TemplateTeste({
     nome: 'Pericias',
     Testa: function() {
+      gPersonagem.raca = 'gnomo';
+      gPersonagem.tamanho.categoria = tabelas_raca[gPersonagem.raca].tamanho;
       gPersonagem.atributos.destreza.bonus.Adiciona('base', null, 12);
       _ConvertePericias();
       _DependenciasAtributos();
       _DependenciasItemOuFamiliar('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
+      _DependenciasTamanho();
       _DependenciasPericias();
-      if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 6) {
+      if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 10) {
         this.resultado = false;
-        this.detalhes = 'Esperava +5 de bonus de competencia em esconderse com manto elfico, recebi: ' +
+        this.detalhes = 'Esperava +10 de bonus de competencia, +1 de habilidade e +4 de tamanho em esconderse com manto elfico para gnomo, recebi: ' +
             gPersonagem.pericias.lista.esconderse.bonus.Total();
         return;
       }
       this.resultado = true;
+
+      gPersonagem.raca = 'humano';
+      gPersonagem.tamanho.categoria = tabelas_raca[gPersonagem.raca].tamanho;
+      _ConvertePericias();
+      _DependenciasAtributos();
+      _DependenciasItemOuFamiliar('manto_elfico', tabelas_itens['capas'].tabela['manto_elfico']);
+      _DependenciasTamanho();
+      _DependenciasPericias();
+      if (gPersonagem.pericias.lista.esconderse.bonus.Total() != 6) {
+        this.resultado = false;
+        this.detalhes = 'Esperava +5 de bonus de competencia e +1 de habilidade com manto elfico para gnomo, recebi: ' +
+            gPersonagem.pericias.lista.esconderse.bonus.Total();
+        return;
+      }
+      this.resultado = true;
+
     }
   }, body);
 
