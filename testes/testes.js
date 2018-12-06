@@ -147,6 +147,44 @@ function CarregaTestes() {
   }, body);
 
   TemplateTeste({
+    nome: 'TestaClasseArmaduraSurpreso',
+    Testa: function() {
+      var bonus = new Bonus();
+      bonus.Adiciona('base', null, 10);
+      bonus.Adiciona('armadura', null, 8);
+      bonus.Adiciona('melhoria', null, 1);
+      bonus.Adiciona('atributo', 'destreza', 2);
+      bonus.Adiciona('escudo', null, 3);
+      bonus.Adiciona('escudo_melhoria', null, 1);
+      var array_exclusao = ArrayExclusaoSurpresa(bonus, /*possui_esquiva_sobrenatural=*/false, /*usar_escudo*/true);
+      if (bonus.Total(array_exclusao) != 23) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 23 de bonus, recebi: ' + bonus.Total(array_exclusao);
+        return;
+      }
+      array_exclusao = ArrayExclusaoSurpresa(bonus, /*possui_esquiva_sobrenatural=*/false, /*usar_escudo*/false);
+      if (bonus.Total(array_exclusao) != 19) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 19 de bonus, recebi: ' + bonus.Total(array_exclusao);
+        return;
+      }
+      array_exclusao = ArrayExclusaoSurpresa(bonus, /*possui_esquiva_sobrenatural=*/true, /*usar_escudo*/true);
+      if (bonus.Total(array_exclusao) != 25) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 25 de bonus, recebi: ' + bonus.Total(array_exclusao);
+        return;
+      }
+      array_exclusao = ArrayExclusaoSurpresa(bonus, /*possui_esquiva_sobrenatural=*/true, /*usar_escudo*/false);
+      if (bonus.Total(array_exclusao) != 21) {
+        this.resultado = false;
+        this.detalhes = 'Esperava 21 de bonus, recebi: ' + bonus.Total(array_exclusao);
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
+  TemplateTeste({
     nome: 'TestaMonge',
     Testa: function() {
       gPersonagem.classes.push({ classe: 'monge', nivel: 5 });

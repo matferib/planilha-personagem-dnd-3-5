@@ -478,15 +478,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   span_classe_armadura.appendChild(span_ca_toque);
   // CA surpreso.
   var span_ca_surpreso = CriaSpan();
-  array_exclusao = [];
-  if (gPersonagem.ca.bonus.Le('atributo', 'destreza') > 0 &&
-      !PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural')) {
-    array_exclusao.push('atributo');
-  }
-  if (!usar_escudo) {
-    array_exclusao.push('escudo');
-    array_exclusao.push('escudo_melhoria');
-  }
+  array_exclusao = ArrayExclusaoSurpresa(gPersonagem.ca.bonus, PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural'), usar_escudo);
   ImprimeNaoSinalizado(
       10 + gPersonagem.ca.bonus.Total(array_exclusao),
       span_ca_surpreso);
