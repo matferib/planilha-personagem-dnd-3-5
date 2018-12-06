@@ -479,7 +479,7 @@ function _AtualizaClasseArmaduraEstilo(nome_estilo, span_classe_armadura) {
   // CA surpreso.
   var span_ca_surpreso = CriaSpan();
   array_exclusao = [];
-  if (gPersonagem.ca.bonus.Le('atributo') > 0 &&
+  if (gPersonagem.ca.bonus.Le('atributo', 'destreza') > 0 &&
       !PersonagemPossuiHabilidadeEspecial('esquiva_sobrenatural')) {
     array_exclusao.push('atributo');
   }
