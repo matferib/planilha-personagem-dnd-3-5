@@ -1744,7 +1744,7 @@ var tabelas_pericias = {
       sem_treinamento: false, habilidade: 'destreza', penalidade_armadura: 1 },
   adestrar_animais: {
       nome: 'Adestrar Animais',
-      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ],
+      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu'],
       sem_treinamento: false, habilidade: 'carisma' },
   arte_da_fuga: {
       nome: 'Arte da Fuga',
@@ -1764,7 +1764,7 @@ var tabelas_pericias = {
       sem_treinamento: true,  habilidade: 'carisma' },
   cavalgar: {
       nome: 'Cavalgar',
-      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ],
+      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu' ],
       sem_treinamento: true,  habilidade: 'destreza' },
   concentracao: {
       nome: 'Concentração',
@@ -1832,7 +1832,7 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   escalar: {
       nome: 'Escalar',
-      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu'],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   esconderse: {
       nome: 'Esconder-se',
@@ -1860,11 +1860,11 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'carisma' },
   natacao: {
       nome: 'Natação',
-      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata' ],
+      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu', ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 2 },
   observar: {
       nome: 'Observar',
-      classes: [  'druida', 'monge', 'ranger', 'ladino', 'aristocrata' ],
+      classes: [  'druida', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu' ],
       sem_treinamento: true, habilidade: 'sabedoria' },
   obter_informacao: {
       nome: 'Obter Informação',
@@ -1873,7 +1873,7 @@ var tabelas_pericias = {
   oficios: {
       nome: 'Ofícios (outros)',
       classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
-                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', 'plebeu', ],
       sem_treinamento: true, habilidade: 'inteligencia'
   },
   oficios_alquimia: {
@@ -1912,7 +1912,7 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   ouvir: {
       nome: 'Ouvir',
-      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', 'aristocrata' ],
+      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu' ],
        sem_treinamento: true, habilidade: 'sabedoria' },
   prestidigitacao: {
       nome: 'Prestidigitação',
@@ -1925,11 +1925,11 @@ var tabelas_pericias = {
   profissao: {
       nome: 'Profissão',
       classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger',
-                  'ladino', 'feiticeiro', 'mago'],
+                  'ladino', 'feiticeiro', 'mago', 'plebeu'],
       habilidade: 'sabedoria' },
   saltar: {
       nome: 'Saltar',
-      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu', ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   sentir_motivacao: {
       nome: 'Sentir Motivação',
@@ -1941,7 +1941,7 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'sabedoria' },
   usar_cordas: {
       nome: 'Usar Cordas',
-      classes: [  'ranger', 'ladino', ],
+      classes: [  'ranger', 'ladino', 'plebeu' ],
       sem_treinamento: true, habilidade: 'destreza' },
   usar_instrumento_magico: {
       nome: 'Usar Instrumento Mágico',
