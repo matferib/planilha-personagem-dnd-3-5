@@ -866,77 +866,85 @@ var tabelas_geracao = {
       },
     },
   },
-  // Segundo o livro do mestre, capitulo Aventuras, PdM com Tesouro, a tabela
-  // 4-23 assume o triplo de tesouro para PdM. Isso porque estes tesouros serão
-  // usados contra os PJs. Nao faz sentido usar esses valores para plebeus,
-  // então vou usar 1/3 do valor da tabela.
   plebeu: {
     atributos: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
+    // Baseado nas sugestoes do livro do mestre (Classes de PdM) e interesses
+    // meus: talentos nao focados em combate.
     talentos: [
-      'tolerancia', 'foco_em_pericia', 'rastrear'
+      'foco_em_pericia', 'rastrear', 'auto_suficiente', 'sorrateiro', 'vitalidade'
     ],
     ordem_pericias: [
-      'cavalgar', 'escalar', 'oficios', 'adestrar_animais', 'saltar', 'profissao', 'observar', 'nadar', 'usar_cordas'
+      'cavalgar', 'adestrar_animais', 'oficios', 'profissao', 'observar', 'escalar', 'saltar', 'ouvir', 'nadar', 'usar_cordas'
     ],
-    1: {
-      moedas: { ouro: 300 },
-    },
-    2: {
-      moedas: { ouro: 700 },
-    },
-    3: {
-      moedas: { ouro: 800 },
-    },
-    4: {
-      moedas: { ouro: 1100 },
-    },
-    5: {
-      moedas: { ouro: 1400 },
-    },
-    6: {
-      moedas: { ouro: 1900 },
-    },
-    7: {
-      moedas: { ouro: 2700 },
-    },
-    8: {
-      moedas: { ouro: 3100 },
-    },
-    9: {
-      moedas: { ouro: 4000 },
-    },
-    10: {
-      moedas: { ouro: 5300 },
-    },
-    11: {
-      moedas: { ouro: 7000 },
-    },
-    12: {
-      moedas: { ouro: 9000 },
-    },
-    13: {
-      moedas: { ouro: 12000 },
-    },
-    14: {
-      moedas: { ouro: 15000 },
-    },
-    15: {
-      moedas: { ouro: 20000 },
-    },
-    16: {
-      moedas: { ouro: 29000 },
-    },
-    17: {
-      moedas: { ouro: 33000 },
-    },
-    18: {
-      moedas: { ouro: 43000 },
-    },
-    19: {
-      moedas: { ouro: 56000 },
-    },
-    20: {
-      moedas: { ouro: 75000 },
+    // Segundo o livro do mestre, capitulo Aventuras, PdM com Tesouro, a tabela
+    // 4-23 assume o triplo de tesouro para PdM. Isso porque estes tesouros serão
+    // usados contra os PJs. Nao faz sentido usar esses valores para plebeus,
+    // melhor usar a tabela de media de tesouros e dividir por 2 (nivel desafio
+    // eh nivel -1). Aqui esta com 1/3 do valor da tabela de personagens.
+    por_nivel: {
+      1: {
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
+                 { chave: 'clava', bonus: 0, obra_prima: false }, ],
+
+        moedas: { ouro: 300 },
+      },
+      2: {
+        moedas: { ouro: 700 },
+      },
+      3: {
+        moedas: { ouro: 800 },
+      },
+      4: {
+        moedas: { ouro: 1100 },
+      },
+      5: {
+        moedas: { ouro: 1400 },
+      },
+      6: {
+        moedas: { ouro: 1900 },
+      },
+      7: {
+        moedas: { ouro: 2700 },
+      },
+      8: {
+        moedas: { ouro: 3100 },
+      },
+      9: {
+        moedas: { ouro: 4000 },
+      },
+      10: {
+        moedas: { ouro: 5300 },
+      },
+      11: {
+        moedas: { ouro: 7000 },
+      },
+      12: {
+        moedas: { ouro: 9000 },
+      },
+      13: {
+        moedas: { ouro: 12000 },
+      },
+      14: {
+        moedas: { ouro: 15000 },
+      },
+      15: {
+        moedas: { ouro: 20000 },
+      },
+      16: {
+        moedas: { ouro: 29000 },
+      },
+      17: {
+        moedas: { ouro: 33000 },
+      },
+      18: {
+        moedas: { ouro: 43000 },
+      },
+      19: {
+        moedas: { ouro: 56000 },
+      },
+      20: {
+        moedas: { ouro: 75000 },
+      },
     },
   },
   // esse aqui varia de acordo com as escolhas da area de expertise.
