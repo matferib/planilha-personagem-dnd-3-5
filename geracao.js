@@ -85,6 +85,11 @@ function _GeraEquipamentos(tabela_geracao_classe_por_nivel) {
   for (var chave_moeda in tabela_geracao_classe_por_nivel.moedas) {
     gPersonagem.moedas[chave_moeda] = tabela_geracao_classe_por_nivel.moedas[chave_moeda];
   }
+  if ('pocoes' in tabela_geracao_classe_por_nivel) {
+    for (var i = 0; i < tabela_geracao_classe_por_nivel.pocoes.length; ++i) {
+      gPersonagem.pocoes.push({chave: tabela_geracao_classe_por_nivel.pocoes[i]});
+    }
+  }
 }
 
 function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
@@ -93,7 +98,7 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
   if (tabela.armadura != null) {
     var entrada_armadura = {
       entrada: {
-        chave: tabela.armadura.nome,
+        chave: tabela.armadura.nome || "nenhuma",
         obra_prima: tabela.armadura.obra_prima || false,
         bonus: tabela.armadura.bonus || 0,
         em_uso: true,
@@ -106,7 +111,7 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
   if (tabela.escudo != null) {
     var entrada_escudo = {
       entrada: {
-        chave: tabela.escudo.nome,
+        chave: tabela.escudo.nome || "nenhum",
         obra_prima: tabela.escudo.obra_prima || false,
         bonus: tabela.escudo.bonus || 0,
         em_uso: true,
@@ -125,9 +130,9 @@ function _GeraArmas(tabela_geracao_classe_por_nivel) {
   for (var i = 0; i < tabela_geracao_classe_por_nivel.armas.length; ++i) {
     var arma_entrada = {
         entrada: {
-            chave: tabela_geracao_classe_por_nivel.armas[i].chave,
-            bonus: tabela_geracao_classe_por_nivel.armas[i].bonus,
-            obra_prima: tabela_geracao_classe_por_nivel.armas[i].obra_prima
+            chave: tabela_geracao_classe_por_nivel.armas[i].chave || "desarmado",
+            bonus: tabela_geracao_classe_por_nivel.armas[i].bonus || 0,
+            obra_prima: tabela_geracao_classe_por_nivel.armas[i].obra_prima || false
         }
     };
     gPersonagem.armas.push(arma_entrada);
