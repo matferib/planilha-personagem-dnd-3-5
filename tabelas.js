@@ -245,7 +245,7 @@ var tabelas_classes = {
   },
   guerreiro: {
     nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
-    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns', 'usar_escudo', 'usar_escudo_corpo', 'usar_armadura_leve', 'usar_armadura_media', 'usar_armadura_pesada' ],
   },
   feiticeiro: {
     nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba:
@@ -378,7 +378,7 @@ var tabelas_classes = {
   },
   combatente: {
     nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte,
-    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns', 'usar_escudo', 'usar_escudo_corpo', 'usar_armadura_leve', 'usar_armadura_media', 'usar_armadura_pesada' ],
   },
   // Prestigio.
   dragao_purpura: {
@@ -1744,7 +1744,7 @@ var tabelas_pericias = {
       sem_treinamento: false, habilidade: 'destreza', penalidade_armadura: 1 },
   adestrar_animais: {
       nome: 'Adestrar Animais',
-      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu'],
+      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu', 'combatente'],
       sem_treinamento: false, habilidade: 'carisma' },
   arte_da_fuga: {
       nome: 'Arte da Fuga',
@@ -1764,7 +1764,7 @@ var tabelas_pericias = {
       sem_treinamento: true,  habilidade: 'carisma' },
   cavalgar: {
       nome: 'Cavalgar',
-      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu' ],
+      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu', 'combatente', ],
       sem_treinamento: true,  habilidade: 'destreza' },
   concentracao: {
       nome: 'Concentração',
@@ -1832,7 +1832,7 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   escalar: {
       nome: 'Escalar',
-      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu'],
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu', 'combatente'],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   esconderse: {
       nome: 'Esconder-se',
@@ -1856,11 +1856,11 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   intimidacao: {
       nome: 'Intimidação',
-      classes: [  'barbaro', 'guerreiro', 'ladino', 'aristocrata' ],
+      classes: [  'barbaro', 'guerreiro', 'ladino', 'aristocrata', 'combatente' ],
       sem_treinamento: true, habilidade: 'carisma' },
   natacao: {
       nome: 'Natação',
-      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu', ],
+      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu', 'combatente' ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 2 },
   observar: {
       nome: 'Observar',
@@ -1929,7 +1929,7 @@ var tabelas_pericias = {
       habilidade: 'sabedoria' },
   saltar: {
       nome: 'Saltar',
-      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu', ],
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu', 'combatente', ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   sentir_motivacao: {
       nome: 'Sentir Motivação',

@@ -871,7 +871,7 @@ var tabelas_geracao = {
     // Baseado nas sugestoes do livro do mestre (Classes de PdM) e interesses
     // meus: talentos nao focados em combate.
     talentos: [
-      'foco_em_pericia', 'rastrear', 'auto_suficiente', 'sorrateiro', 'vitalidade'
+      'foco_em_pericia', 'auto_suficiente', 'sorrateiro', 'vitalidade', 'rastrear'
     ],
     ordem_pericias: [
       'cavalgar', 'adestrar_animais', 'oficios', 'profissao', 'observar', 'escalar', 'saltar', 'ouvir', 'nadar', 'usar_cordas'
@@ -879,71 +879,74 @@ var tabelas_geracao = {
     // Segundo o livro do mestre, capitulo Aventuras, PdM com Tesouro, a tabela
     // 4-23 assume o triplo de tesouro para PdM. Isso porque estes tesouros serão
     // usados contra os PJs. Nao faz sentido usar esses valores para plebeus,
-    // melhor usar a tabela de media de tesouros e dividir por 2 (nivel desafio
-    // eh nivel -1). Aqui esta com 1/3 do valor da tabela de personagens.
+    // melhor usar a tabela de media de tesouros de monstros e dividir por 2 (nivel desafio
+    // eh nivel -1).
     por_nivel: {
       1: {
-        armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: false },
                  { chave: 'clava', bonus: 0, obra_prima: false }, ],
-
-        moedas: { ouro: 300 },
+        moedas: { ouro: 150 },
       },
       2: {
-        moedas: { ouro: 700 },
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: false },
+                 { chave: 'clava', bonus: 0, obra_prima: false }, ],
+        moedas: { ouro: 300 },
       },
       3: {
-        moedas: { ouro: 800 },
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
+                 { chave: 'clava', bonus: 0, obra_prima: false }, ],
+        moedas: { ouro: 150 },
       },
       4: {
-        moedas: { ouro: 1100 },
+        moedas: { ouro: 600 },
       },
       5: {
-        moedas: { ouro: 1400 },
+        moedas: { ouro: 800 },
       },
       6: {
-        moedas: { ouro: 1900 },
+        moedas: { ouro: 1000 },
       },
       7: {
-        moedas: { ouro: 2700 },
+        moedas: { ouro: 1300 },
       },
       8: {
-        moedas: { ouro: 3100 },
+        moedas: { ouro: 1700 },
       },
       9: {
-        moedas: { ouro: 4000 },
+        moedas: { ouro: 2250 },
       },
       10: {
-        moedas: { ouro: 5300 },
+        moedas: { ouro: 2900 },
       },
       11: {
-        moedas: { ouro: 7000 },
+        moedas: { ouro: 3750 },
       },
       12: {
-        moedas: { ouro: 9000 },
+        moedas: { ouro: 4900 },
       },
       13: {
-        moedas: { ouro: 12000 },
+        moedas: { ouro: 6500 },
       },
       14: {
-        moedas: { ouro: 15000 },
+        moedas: { ouro: 8500 },
       },
       15: {
-        moedas: { ouro: 20000 },
+        moedas: { ouro: 11000 },
       },
       16: {
-        moedas: { ouro: 29000 },
+        moedas: { ouro: 14000 },
       },
       17: {
-        moedas: { ouro: 33000 },
+        moedas: { ouro: 18000 },
       },
       18: {
-        moedas: { ouro: 43000 },
+        moedas: { ouro: 23500 },
       },
       19: {
-        moedas: { ouro: 56000 },
+        moedas: { ouro: 30500 },
       },
       20: {
-        moedas: { ouro: 75000 },
+        moedas: { ouro: 40000 },
       },
     },
   },
@@ -1015,67 +1018,78 @@ var tabelas_geracao = {
   },
   combatente: {
     atributos: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
-    // Tesouro de NPC tabela 4-23, usando um nivel a menos (Nivel de Desafio).
+    talentos: [
+      'vitalidade', 'iniciativa_aprimorada', 'sucesso_decisivo_aprimorado', 'foco_em_arma'
+    ],
+    // Tesouro de monstro -1 nivel (ver plebeu). A diferença é usar as coisas para combate.
     por_nivel: {
       1: {
-        moedas: { ouro: 450 },
+        armas: [ { chave: 'espada_curta', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+        armadura: { nome: 'camisao_cota_de_malha'},
+        escudo: { nome: 'leve_madeira' },
+        moedas: { ouro: 2 },
       },
       2: {
-        moedas: { ouro: 900 },
+        armas: [ { chave: 'espada_longa', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+        armadura: { nome: 'peitoral_de_aco'},
+        escudo: { nome: 'pesado_aco' },
+        moedas: { ouro: 30 },
       },
       3: {
-        moedas: { ouro: 2000 },
+        moedas: { ouro: 450 },
       },
       4: {
-        moedas: { ouro: 2500 },
+        moedas: { ouro: 600 },
       },
       5: {
-        moedas: { ouro: 3300 },
+        moedas: { ouro: 800 },
       },
       6: {
-        moedas: { ouro: 4300 },
+        moedas: { ouro: 1000 },
       },
       7: {
-        moedas: { ouro: 5600 },
+        moedas: { ouro: 1300 },
       },
       8: {
-        moedas: { ouro: 7200 },
+        moedas: { ouro: 1700 },
       },
       9: {
-        moedas: { ouro: 9400 },
+        moedas: { ouro: 2250 },
       },
       10: {
-        moedas: { ouro: 12000 },
+        moedas: { ouro: 2900 },
       },
       11: {
-        moedas: { ouro: 16000 },
+        moedas: { ouro: 3750 },
       },
       12: {
-        moedas: { ouro: 21000 },
+        moedas: { ouro: 4900 },
       },
       13: {
-        moedas: { ouro: 27000 },
+        moedas: { ouro: 6500 },
       },
       14: {
-        moedas: { ouro: 35000 },
+        moedas: { ouro: 8500 },
       },
       15: {
-        moedas: { ouro: 45000 },
+        moedas: { ouro: 11000 },
       },
       16: {
-        moedas: { ouro: 59000 },
+        moedas: { ouro: 14000 },
       },
       17: {
-        moedas: { ouro: 77000 },
+        moedas: { ouro: 18000 },
       },
       18: {
-        moedas: { ouro: 100000 },
+        moedas: { ouro: 23500 },
       },
       19: {
-        moedas: { ouro: 130000 },
+        moedas: { ouro: 30500 },
       },
       20: {
-        moedas: { ouro: 170000 },
+        moedas: { ouro: 40000 },
       },
     },
   },
