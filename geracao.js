@@ -98,7 +98,7 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
   if (tabela.armadura != null) {
     var entrada_armadura = {
       entrada: {
-        chave: tabela.armadura.nome || "nenhuma",
+        chave: tabela.armadura.chave || "nenhuma",
         obra_prima: tabela.armadura.obra_prima || false,
         bonus: tabela.armadura.bonus || 0,
         em_uso: true,
@@ -111,7 +111,7 @@ function _GeraArmaduras(tabela_geracao_classe_por_nivel) {
   if (tabela.escudo != null) {
     var entrada_escudo = {
       entrada: {
-        chave: tabela.escudo.nome || "nenhum",
+        chave: tabela.escudo.chave || "nenhum",
         obra_prima: tabela.escudo.obra_prima || false,
         bonus: tabela.escudo.bonus || 0,
         em_uso: true,
