@@ -5544,7 +5544,7 @@ var tabelas_classes = {
   },
   guerreiro: {
     nome: 'Guerreiro', dados_vida: 10, pontos_pericia: 2, bba: bba_forte,
-    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns', 'usar_escudo', 'usar_escudo_corpo', 'usar_armadura_leve', 'usar_armadura_media', 'usar_armadura_pesada' ],
   },
   feiticeiro: {
     nome: 'Feiticeiro', dados_vida: 4, pontos_pericia: 2, bba:
@@ -5677,7 +5677,7 @@ var tabelas_classes = {
   },
   combatente: {
     nome: 'Combatente', mestre: true, dados_vida: 8, pontos_pericia: 2, bba: bba_forte,
-    talentos: [ 'usar_armas_simples',  'usar_armas_comuns' ],
+    talentos: [ 'usar_armas_simples',  'usar_armas_comuns', 'usar_escudo', 'usar_escudo_corpo', 'usar_armadura_leve', 'usar_armadura_media', 'usar_armadura_pesada' ],
   },
   // Prestigio.
   dragao_purpura: {
@@ -7043,7 +7043,7 @@ var tabelas_pericias = {
       sem_treinamento: false, habilidade: 'destreza', penalidade_armadura: 1 },
   adestrar_animais: {
       nome: 'Adestrar Animais',
-      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ],
+      classes: [ 'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu', 'combatente'],
       sem_treinamento: false, habilidade: 'carisma' },
   arte_da_fuga: {
       nome: 'Arte da Fuga',
@@ -7063,7 +7063,7 @@ var tabelas_pericias = {
       sem_treinamento: true,  habilidade: 'carisma' },
   cavalgar: {
       nome: 'Cavalgar',
-      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata' ],
+      classes: [  'barbaro', 'druida', 'guerreiro', 'paladino', 'ranger', 'aristocrata', 'plebeu', 'combatente', ],
       sem_treinamento: true,  habilidade: 'destreza' },
   concentracao: {
       nome: 'Concentração',
@@ -7131,7 +7131,7 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'destreza', penalidade_armadura: 1 },
   escalar: {
       nome: 'Escalar',
-      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu', 'combatente'],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   esconderse: {
       nome: 'Esconder-se',
@@ -7155,15 +7155,15 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   intimidacao: {
       nome: 'Intimidação',
-      classes: [  'barbaro', 'guerreiro', 'ladino', 'aristocrata' ],
+      classes: [  'barbaro', 'guerreiro', 'ladino', 'aristocrata', 'combatente' ],
       sem_treinamento: true, habilidade: 'carisma' },
   natacao: {
       nome: 'Natação',
-      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata' ],
+      classes: [  'barbaro', 'bardo', 'druida', 'guerreiro', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu', 'combatente' ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 2 },
   observar: {
       nome: 'Observar',
-      classes: [  'druida', 'monge', 'ranger', 'ladino', 'aristocrata' ],
+      classes: [  'druida', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu' ],
       sem_treinamento: true, habilidade: 'sabedoria' },
   obter_informacao: {
       nome: 'Obter Informação',
@@ -7172,7 +7172,7 @@ var tabelas_pericias = {
   oficios: {
       nome: 'Ofícios (outros)',
       classes: [  'barbaro', 'bardo', 'clerigo', 'druida', 'guerreiro', 'monge',
-                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', ],
+                  'paladino', 'ranger', 'ladino', 'feiticeiro', 'mago', 'plebeu', ],
       sem_treinamento: true, habilidade: 'inteligencia'
   },
   oficios_alquimia: {
@@ -7211,7 +7211,7 @@ var tabelas_pericias = {
       habilidade: 'inteligencia' },
   ouvir: {
       nome: 'Ouvir',
-      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', 'aristocrata' ],
+      classes: [  'barbaro', 'bardo', 'druida', 'monge', 'ranger', 'ladino', 'aristocrata', 'plebeu' ],
        sem_treinamento: true, habilidade: 'sabedoria' },
   prestidigitacao: {
       nome: 'Prestidigitação',
@@ -7224,11 +7224,11 @@ var tabelas_pericias = {
   profissao: {
       nome: 'Profissão',
       classes: [  'bardo', 'clerigo', 'druida', 'monge', 'paladino', 'ranger',
-                  'ladino', 'feiticeiro', 'mago'],
+                  'ladino', 'feiticeiro', 'mago', 'plebeu'],
       habilidade: 'sabedoria' },
   saltar: {
       nome: 'Saltar',
-      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', ],
+      classes: [  'barbaro', 'bardo', 'guerreiro', 'monge', 'ranger', 'ladino', 'plebeu', 'combatente', ],
       sem_treinamento: true, habilidade: 'forca', penalidade_armadura: 1 },
   sentir_motivacao: {
       nome: 'Sentir Motivação',
@@ -7240,7 +7240,7 @@ var tabelas_pericias = {
       sem_treinamento: true, habilidade: 'sabedoria' },
   usar_cordas: {
       nome: 'Usar Cordas',
-      classes: [  'ranger', 'ladino', ],
+      classes: [  'ranger', 'ladino', 'plebeu' ],
       sem_treinamento: true, habilidade: 'destreza' },
   usar_instrumento_magico: {
       nome: 'Usar Instrumento Mágico',
@@ -9426,65 +9426,86 @@ var tabelas_geracao = {
   },
   plebeu: {
     atributos: [ 'forca', 'constituicao', 'sabedoria', 'destreza', 'inteligencia', 'carisma' ],
-    1: {
-      moedas: { ouro: 450 },
-    },
-    2: {
-      moedas: { ouro: 900 },
-    },
-    3: {
-      moedas: { ouro: 2000 },
-    },
-    4: {
-      moedas: { ouro: 2500 },
-    },
-    5: {
-      moedas: { ouro: 3300 },
-    },
-    6: {
-      moedas: { ouro: 4300 },
-    },
-    7: {
-      moedas: { ouro: 5600 },
-    },
-    8: {
-      moedas: { ouro: 7200 },
-    },
-    9: {
-      moedas: { ouro: 9400 },
-    },
-    10: {
-      moedas: { ouro: 12000 },
-    },
-    11: {
-      moedas: { ouro: 16000 },
-    },
-    12: {
-      moedas: { ouro: 21000 },
-    },
-    13: {
-      moedas: { ouro: 27000 },
-    },
-    14: {
-      moedas: { ouro: 35000 },
-    },
-    15: {
-      moedas: { ouro: 45000 },
-    },
-    16: {
-      moedas: { ouro: 59000 },
-    },
-    17: {
-      moedas: { ouro: 77000 },
-    },
-    18: {
-      moedas: { ouro: 100000 },
-    },
-    19: {
-      moedas: { ouro: 130000 },
-    },
-    20: {
-      moedas: { ouro: 170000 },
+    // Baseado nas sugestoes do livro do mestre (Classes de PdM) e interesses
+    // meus: talentos nao focados em combate.
+    talentos: [
+      'foco_em_pericia', 'auto_suficiente', 'sorrateiro', 'vitalidade', 'rastrear'
+    ],
+    ordem_pericias: [
+      'cavalgar', 'adestrar_animais', 'oficios', 'profissao', 'observar', 'escalar', 'saltar', 'ouvir', 'nadar', 'usar_cordas'
+    ],
+    // Segundo o livro do mestre, capitulo Aventuras, PdM com Tesouro, a tabela
+    // 4-23 assume o triplo de tesouro para PdM. Isso porque estes tesouros serão
+    // usados contra os PJs. Nao faz sentido usar esses valores para plebeus,
+    // melhor usar a tabela de media de tesouros de monstros e dividir por 2 (nivel desafio
+    // eh nivel -1).
+    por_nivel: {
+      1: {
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: false },
+                 { chave: 'clava', bonus: 0, obra_prima: false }, ],
+        moedas: { ouro: 150 },
+      },
+      2: {
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: false },
+                 { chave: 'clava', bonus: 0, obra_prima: false }, ],
+        moedas: { ouro: 300 },
+      },
+      3: {
+        armas: [ { chave: 'adaga', bonus: 0, obra_prima: true },
+                 { chave: 'clava', bonus: 0, obra_prima: false }, ],
+        moedas: { ouro: 150 },
+      },
+      4: {
+        moedas: { ouro: 600 },
+      },
+      5: {
+        moedas: { ouro: 800 },
+      },
+      6: {
+        moedas: { ouro: 1000 },
+      },
+      7: {
+        moedas: { ouro: 1300 },
+      },
+      8: {
+        moedas: { ouro: 1700 },
+      },
+      9: {
+        moedas: { ouro: 2250 },
+      },
+      10: {
+        moedas: { ouro: 2900 },
+      },
+      11: {
+        moedas: { ouro: 3750 },
+      },
+      12: {
+        moedas: { ouro: 4900 },
+      },
+      13: {
+        moedas: { ouro: 6500 },
+      },
+      14: {
+        moedas: { ouro: 8500 },
+      },
+      15: {
+        moedas: { ouro: 11000 },
+      },
+      16: {
+        moedas: { ouro: 14000 },
+      },
+      17: {
+        moedas: { ouro: 18000 },
+      },
+      18: {
+        moedas: { ouro: 23500 },
+      },
+      19: {
+        moedas: { ouro: 30500 },
+      },
+      20: {
+        moedas: { ouro: 40000 },
+      },
     },
   },
   // esse aqui varia de acordo com as escolhas da area de expertise.
@@ -9555,67 +9576,78 @@ var tabelas_geracao = {
   },
   combatente: {
     atributos: [  'forca', 'constituicao', 'destreza', 'sabedoria', 'inteligencia', 'carisma' ],
-    // Tesouro de NPC tabela 4-23, usando um nivel a menos (Nivel de Desafio).
+    talentos: [
+      'vitalidade', 'iniciativa_aprimorada', 'sucesso_decisivo_aprimorado', 'foco_em_arma'
+    ],
+    // Tesouro de monstro -1 nivel (ver plebeu). A diferença é usar as coisas para combate.
     por_nivel: {
       1: {
-        moedas: { ouro: 450 },
+        armas: [ { chave: 'espada_curta', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+        armadura: { nome: 'camisao_cota_de_malha'},
+        escudo: { nome: 'leve_madeira' },
+        moedas: { ouro: 2 },
       },
       2: {
-        moedas: { ouro: 900 },
+        armas: [ { chave: 'espada_longa', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+        armadura: { nome: 'peitoral_de_aco'},
+        escudo: { nome: 'pesado_aco' },
+        moedas: { ouro: 30 },
       },
       3: {
-        moedas: { ouro: 2000 },
+        moedas: { ouro: 450 },
       },
       4: {
-        moedas: { ouro: 2500 },
+        moedas: { ouro: 600 },
       },
       5: {
-        moedas: { ouro: 3300 },
+        moedas: { ouro: 800 },
       },
       6: {
-        moedas: { ouro: 4300 },
+        moedas: { ouro: 1000 },
       },
       7: {
-        moedas: { ouro: 5600 },
+        moedas: { ouro: 1300 },
       },
       8: {
-        moedas: { ouro: 7200 },
+        moedas: { ouro: 1700 },
       },
       9: {
-        moedas: { ouro: 9400 },
+        moedas: { ouro: 2250 },
       },
       10: {
-        moedas: { ouro: 12000 },
+        moedas: { ouro: 2900 },
       },
       11: {
-        moedas: { ouro: 16000 },
+        moedas: { ouro: 3750 },
       },
       12: {
-        moedas: { ouro: 21000 },
+        moedas: { ouro: 4900 },
       },
       13: {
-        moedas: { ouro: 27000 },
+        moedas: { ouro: 6500 },
       },
       14: {
-        moedas: { ouro: 35000 },
+        moedas: { ouro: 8500 },
       },
       15: {
-        moedas: { ouro: 45000 },
+        moedas: { ouro: 11000 },
       },
       16: {
-        moedas: { ouro: 59000 },
+        moedas: { ouro: 14000 },
       },
       17: {
-        moedas: { ouro: 77000 },
+        moedas: { ouro: 18000 },
       },
       18: {
-        moedas: { ouro: 100000 },
+        moedas: { ouro: 23500 },
       },
       19: {
-        moedas: { ouro: 130000 },
+        moedas: { ouro: 30500 },
       },
       20: {
-        moedas: { ouro: 170000 },
+        moedas: { ouro: 40000 },
       },
     },
   },
