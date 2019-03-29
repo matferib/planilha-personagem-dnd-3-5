@@ -132,7 +132,10 @@
 		"message": "Potions:"
 	},
 	"span_capas": {
-		"message": "Capes:"
+		"message": "Cloaks:"
+	},
+	"span_chapeus": {
+		"message": "Hats:"
 	},
 	"span_outros_equipamentos": {
 		"message": "Other Equipment:"
@@ -1873,6 +1876,15 @@
   },
   "Manto_da_resistencia__3": {
     "message": "Cloak of Resistance +3"
+  },
+  "Tiara_do_Intelecto__2": {
+    "message": "Headband of Intelect +2"
+  },
+  "Tiara_do_Intelecto__4": {
+    "message": "Headband of Intelect +4"
+  },
+  "Tiara_do_Intelecto__6": {
+    "message": "Headband of Intelect +6"
   },
   "Capa_do_saltimbanco": {
     "message": "Cape of the Mountebank"
