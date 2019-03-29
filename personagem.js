@@ -164,6 +164,7 @@ var gPersonagem = {
   bracaduras: [],
   capas: [],
   pocoes: [],
+  chapeus: [],
 
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',

@@ -167,6 +167,7 @@ function _CarregaHandlers() {
     "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', },
     "botao-adicionar-bota": { callback:  function() { ClickAdicionarItem('botas'); }, evento: 'click', },
     "botao-adicionar-bracadura": { callback:  function() { ClickAdicionarItem('bracaduras'); }, evento: 'click', },
+    "botao-adicionar-chapeu": { callback:  function() { ClickAdicionarItem('chapeus'); }, evento: 'click', },
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
