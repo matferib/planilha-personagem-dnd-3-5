@@ -2164,6 +2164,21 @@ var tabelas_amuletos = {
     propriedades: { atributos: { sabedoria: 6 } } },
 };
 
+var tabelas_chapeus = {
+  intelecto_2: {
+    nome: 'Tiara do Intelecto +2', preco: '4000 PO',
+    propriedades: { atributos: { inteligencia: 2 } }
+  },
+  intelecto_4: {
+    nome: 'Tiara do Intelecto +4', preco: '16000 PO',
+    propriedades: { atributos: { inteligencia: 4 } }
+  },
+  intelecto_6: {
+    nome: 'Tiara do Intelecto +6', preco: '36000 PO',
+    propriedades: { atributos: { inteligencia: 6 } }
+  },
+};
+
 var tabelas_bracaduras = {
   armadura_1: {
     nome: 'Braçadeira da Armadura +1', preco: '1000 PO',
@@ -2431,6 +2446,7 @@ var tabelas_itens = {
   bracaduras: { nome: 'Braçadeiras', tabela: tabelas_bracaduras, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
   capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
+  chapeus: { nome: 'Chapéus', tabela: tabelas_chapeus, maximo: 1 },
 };
 
 // Materiais especiais.
