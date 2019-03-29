@@ -190,7 +190,7 @@ function GeraPersonagem(modo, submodo) {
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
   _GeraArmas(tabela_geracao_classe_por_nivel);
-  var tipos_items = [ 'aneis', 'amuletos', 'capas', 'bracaduras' ];
+  var tipos_items = [ 'aneis', 'amuletos', 'capas', 'bracaduras', 'chapeus' ];
   for (var i = 0; i < tipos_items.length; ++i ) {
     _GeraItens(tipos_items[i], tabela_geracao_classe_por_nivel);
   }
