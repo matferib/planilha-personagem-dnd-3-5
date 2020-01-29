@@ -146,6 +146,35 @@ var tabelas_lista_feiticos = {
       'transferencia_poder_divino': { nome: 'Transferência de Poder Divino', descricao: 'Transfere magias para alvo.' },
       'nuvem_profana': { nome: 'Nuvem Profana', descricao: 'Causa dano e adoece criaturas bondosas.', dominios: ['mal'] },  // unholy blight
     },
+    5: {
+      'arma_rompimento': { nome: 'Arma do Rompimento', descricao: 'Arma corpo a corpo que destroi mortos-vivos.' },  // desrupting weapon
+      'cancelar_encantamento': { nome: 'Cancelar Encantamento', descricao: 'Liberta os alvos de encantamentos, alterações, maldições e petrificação.' },  // break enchantment
+      'coluna_chamas': { nome: 'Coluna de Chamas', descricao: 'Destroi inimigos através de fogo divino (1d6/nível).' },  // flame strike
+      'comando_maior': { nome: 'Comando Maior', descricao: 'Como comando, mas afeta 1 alvo/nível.' },  // command, greater
+      'comunhao': { nome: 'Comunhão', descricao: 'Divindade responde uma pergunta/nível.' },  // commune
+      'conspurcar': { nome: 'Conspurcar', descricao: 'Profana um local.' },  // unhallow
+      'curar_ferimentos_leves_massa': { nome: 'Curar Ferimentos Leves em Massa', descricao: 'Cura 1d8+1 nível de diversas criaturas.' },  // cure light wounds, mass
+      'dissipar_caos': { nome: 'Dissipar o Caos', descricao: '+4 CA contra ataques de criaturas caóticas, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel chaos.
+      'dissipar_ordem': { nome: 'Dissipar a Ordem', descricao: '+4 CA contra ataques de criaturas ordeiras, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel law.
+      'dissipar_bem': { nome: 'Dissipar o Bem', descricao: '+4 CA contra ataques de criaturas boas, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel good.
+      'dissipar_mal': { nome: 'Dissipar o Mal', descricao: '+4 CA contra ataques de criaturas más, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel evil.
+      'forca_justos': { nome: 'Força dos Justos', descricao: 'Aumenta tamanho (+4 força, +2 constituição) e dá bônus de combate (+2 melhoria CA, redução de dano 3/[bem,mal] ate 11 nível, 6 até 14, 9 acima disso).' },  // righteous might.
+      'infligir_ferimentos_leves_massa': { nome: 'Infligir Ferimentos Leves em Massa', descricao: 'Causa 1d8+l/nível de dano contra diversas criaturas.' },  // inflict light wounds mass
+      'invocar_crituras_v': { nome: 'Invocar Criaturas V', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },  // summon monster V
+      'marca_justica': { nome: 'Marca da Justiça', descricao: 'Designa ação que causará uma maldição sobre o alvo.' },  // mark of justice
+      'matar': { nome: 'Matar', descricao: 'Ataque de toque que mata um alvo.' },  // slay living
+      'muralha_pedra': { nome: 'Muralha de Pedra', descricao: 'Cria uma barreira de pedra que pode ser moldada' },  // wall of stone
+      'penitencia': { nome: 'Penitência', descricao: 'Remove a culpa dos pecados do alvo.' },  // atonement
+      'praga_insetos': { nome: 'Praga de Insetos', descricao: 'Enxame de insetos ataca criaturas.' },  // insect plague
+      'resistencia_magia': { nome: 'Resistência a Magia', descricao: 'O alvo recebe 12+l/nível de RM.' },  // spell resistance.
+      'reviver_mortos': { nome: 'Reviver os mortos', descricao: 'Restaura a vida de um alvo que morreu a menos de 1 dia/nível.' },  // raise dead
+      'santificar': { nome: 'Santificar', descricao: 'Santifica um local.' },  // hallow
+      'simbolo_dor': { nome: 'Símbolo da Dor', descricao: 'Runa ativada causa dor às criaturas próximas.' },  // symbol of pain
+      'simbolo_sono': { nome: 'Símbolo do Sono', descricao: 'Runa ativada coloca as criaturas próximas para dormir.' },  // symbol of sleep
+      'viagem_planar': { nome: 'Viagem Planar', descricao: 'Até oito alvos viajam para outro plano.' },  // planar shift
+      'videncia': { nome: 'Vidência', descricao: 'Espiona alguém à distância' },  // scrying
+      'visao_verdade': { nome: 'Visão da Verdade', descricao: 'Mostra todas as coisas em sua forma verdadeira.' },  // true seeing
+    },
   },
   mago: {
     0: {
@@ -233,8 +262,22 @@ var tabelas_lista_feiticos = {
       },
     },
     4: {
+      'drenar_temporario': {
+        nome: 'Drenar Temporário', descricao: 'Alvo perde 1d4 níveis.', escola: 'necromancia'
+      },
+      'grito': {
+        nome: 'Grito', descricao: 'Causa surdez e 5d6 de dano sônico.', escola: 'evocacao'
+      },
       'pele_rochosa': {
         nome: 'Pele Rochosa', descricao: 'Resistência de 10 dano/adamante até 10/nível, max 150.', escola: 'abjuracao',
+      },
+      'tempestade_glacial': {
+        nome: 'Tempestade Glacial', descricao: 'Granizo causa 5d6 de dano em um cilindro de 12 m.', escola: 'evocacao'
+      },
+    },
+    5: {
+      'enfraquecer_intelecto': {
+        nome: 'Enfraquecer o Intelecto', descricao: 'Inteligência e Carisma do alvo caem para 1.', escola: 'encantamento'
       },
     },
   },

@@ -1194,7 +1194,6 @@ Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas c
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
-Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
@@ -1359,6 +1358,11 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     descricao: '+1 de bônus de esquiva na CA contra um adversário à sua escolha.',
     bonus_ca: { esquiva: 1, },
     guerreiro: true,
+  },
+  expulsao_aprimorada: {
+    nome: 'Expulsão Aprimorada',
+    requisitos: {}, //Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
+    descricao: '+1 nível efetivo para testes de expulsão',
   },
   especializacao_arma_maior: {
     nome: 'Especialização em Arma Maior',
@@ -2065,6 +2069,50 @@ var tabelas_aneis = {
   armazenar_magias_maior: { nome: 'Armazenar magias (maior)', preco: '200000 PO', },
 };
 
+var tabelas_luvas = {
+  luvas_apanhar_flechas: {
+    nome: 'Luvas de Apanhar Flechas',
+    preco: '4000 PO',
+    // Pode usar o talento apanhar objetos.
+  },
+  luvas_armazenamento: {
+    nome: 'Luvas de Armazenamento',
+    preco: '10000 PO'
+    // Armazena/recupera objeto de ate 10 kg como acao livre.
+  },
+  luvas_destreza_2: {
+    nome: 'Luvas da Destreza +2',
+    preco: '4000 PO',
+    propriedades: { atributos: { destreza: 2 } },
+  },
+  luvas_destreza_4: {
+    nome: 'Luvas da Destreza +4',
+    preco: '16000 PO',
+    propriedades: { atributos: { destreza: 4 } },
+  },
+  luvas_destreza_6: {
+    nome: 'Luvas da Destreza + 6',
+    preco: '36000 PO',
+    propriedades: { atributos: { destreza: 6 } },
+  },
+  luvas_nadar_escalar: {
+    nome: 'Luvas de Nadar e Escalar',
+    preco: '6250 PO',
+    propriedades: { pericias: { natacao: { competencia: 5 }, escalar: { competencia: 5 } } }
+  },
+  manoplas_ferrugem: {
+    nome: 'Manoplas da Ferrugem',
+    preco: '11500 PO',
+		descricao: '1/dia toque enferrujante. Protege contra ferrugem.',
+  },
+  manoplas_poder_ogro: {
+    nome: 'Manoplas do Poder do Ogro +2',
+    descricao: '+2 melhoria em força.',
+    preco: '4000 PO',
+    propriedades: { atributos: { forca: 2 } },
+  },
+};
+
 var tabelas_amuletos = {
   armadura_natural_1: {
     nome: 'Armadura Natural +1', preco: '2000 PO',
@@ -2447,6 +2495,7 @@ var tabelas_itens = {
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
   capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
   chapeus: { nome: 'Chapéus', tabela: tabelas_chapeus, maximo: 1 },
+  luvas: { nome: 'Luvas', tabela: tabelas_luvas, maximo: 1 },
 };
 
 // Materiais especiais.

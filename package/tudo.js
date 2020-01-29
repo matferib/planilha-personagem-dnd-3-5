@@ -1858,8 +1858,10 @@ function _CarregaHandlers() {
     "botao-adicionar-amuleto": { callback:  function() { ClickAdicionarItem('amuletos'); }, evento: 'click', },
     "botao-adicionar-bota": { callback:  function() { ClickAdicionarItem('botas'); }, evento: 'click', },
     "botao-adicionar-bracadura": { callback:  function() { ClickAdicionarItem('bracaduras'); }, evento: 'click', },
+    "botao-adicionar-chapeu": { callback:  function() { ClickAdicionarItem('chapeus'); }, evento: 'click', },
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
+    "botao-adicionar-luvas": { callback:  function() { ClickAdicionarItem('luvas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
     "botao-ferir-1": { callback: function() { ChangeAjustarFerimentos(1); }, evento: 'click', },
     "botao-ferir-3": { callback: function() { ChangeAjustarFerimentos(3); }, evento: 'click', },
@@ -2348,7 +2350,7 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.alinhamento = gEntradas.alinhamento;
   gPersonagem.divindade = gEntradas.divindade;
   gEntradas.classes.forEach(function(classe_entrada) {
-    gPersonagem.classes.push({ classe: classe_entrada.classe, nivel: classe_entrada.nivel });
+    gPersonagem.classes.push({ classe: classe_entrada.classe, nivel: classe_entrada.nivel || 0 });
   });
   gPersonagem.dominios = PersonagemNivelClasse('clerigo') > 0 && gEntradas.dominios && gEntradas.dominios.slice(0) || [];
   _ConverteFamiliar();
@@ -3087,6 +3089,7 @@ var gEntradas = {
   braceletes: [],
   pocoes: [],
   capas: [],
+  chapeus: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [], outros: [] },
@@ -4354,7 +4357,7 @@ function GeraPersonagem(modo, submodo) {
   _GeraEquipamentos(tabela_geracao_classe_por_nivel);
   _GeraArmaduras(tabela_geracao_classe_por_nivel);
   _GeraArmas(tabela_geracao_classe_por_nivel);
-  var tipos_items = [ 'aneis', 'amuletos', 'capas', 'bracaduras' ];
+  var tipos_items = [ 'aneis', 'amuletos', 'capas', 'bracaduras', 'chapeus' ];
   for (var i = 0; i < tipos_items.length; ++i ) {
     _GeraItens(tipos_items[i], tabela_geracao_classe_por_nivel);
   }
@@ -4831,6 +4834,8 @@ var gPersonagem = {
   bracaduras: [],
   capas: [],
   pocoes: [],
+  chapeus: [],
+  luvas: [],
 
   // Valor pode ser qualquer coisa.
   outros_equipamentos: '',
@@ -6498,7 +6503,6 @@ Investida Implacável¹ Combate Montado, Investida Montada Investidas montadas c
 Pisotear¹ Combate Montado A vítima não pode evitar um atropelamento montada
 Contramágica Aprimorada - Contramágica com magias da mesma escola
 Ataque Giratório¹ Des 13, Especialização em Combate, Esquiva, Mobilidade, Ataque em Movimento, bônus base de ataque +4 Realiza um ataque corporal contra cada oponente dentro do alcance
-Expulsão Aprimorada Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
 Potencializar Invocação Foco em Magia (conjuração) As criaturas invocadas recebem +4 For e +4 Cons
 Rapidez de Recarga¹ Usar Arma Simples (besta) Recarrega bestas mais rapidamente
 Tiro Longo¹ Tiro Certeiro Aumenta o incremento de distância em 50% ou 100%
@@ -6663,6 +6667,11 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
     descricao: '+1 de bônus de esquiva na CA contra um adversário à sua escolha.',
     bonus_ca: { esquiva: 1, },
     guerreiro: true,
+  },
+  expulsao_aprimorada: {
+    nome: 'Expulsão Aprimorada',
+    requisitos: {}, //Habilidade de expulsar ou fascinar criaturas +1 nível efetivo para testes de expulsão
+    descricao: '+1 nível efetivo para testes de expulsão',
   },
   especializacao_arma_maior: {
     nome: 'Especialização em Arma Maior',
@@ -7369,6 +7378,50 @@ var tabelas_aneis = {
   armazenar_magias_maior: { nome: 'Armazenar magias (maior)', preco: '200000 PO', },
 };
 
+var tabelas_luvas = {
+  luvas_apanhar_flechas: {
+    nome: 'Luvas de Apanhar Flechas',
+    preco: '4000 PO',
+    // Pode usar o talento apanhar objetos.
+  },
+  luvas_armazenamento: {
+    nome: 'Luvas de Armazenamento',
+    preco: '10000 PO'
+    // Armazena/recupera objeto de ate 10 kg como acao livre.
+  },
+  luvas_destreza_2: {
+    nome: 'Luvas da Destreza +2',
+    preco: '4000 PO',
+    propriedades: { atributos: { destreza: 2 } },
+  },
+  luvas_destreza_4: {
+    nome: 'Luvas da Destreza +4',
+    preco: '16000 PO',
+    propriedades: { atributos: { destreza: 4 } },
+  },
+  luvas_destreza_6: {
+    nome: 'Luvas da Destreza + 6',
+    preco: '36000 PO',
+    propriedades: { atributos: { destreza: 6 } },
+  },
+  luvas_nadar_escalar: {
+    nome: 'Luvas de Nadar e Escalar',
+    preco: '6250 PO',
+    propriedades: { pericias: { natacao: { competencia: 5 }, escalar: { competencia: 5 } } }
+  },
+  manoplas_ferrugem: {
+    nome: 'Manoplas da Ferrugem',
+    preco: '11500 PO',
+		descricao: '1/dia toque enferrujante. Protege contra ferrugem.',
+  },
+  manoplas_poder_ogro: {
+    nome: 'Manoplas do Poder do Ogro +2',
+    descricao: '+2 melhoria em força.',
+    preco: '4000 PO',
+    propriedades: { atributos: { forca: 2 } },
+  },
+};
+
 var tabelas_amuletos = {
   armadura_natural_1: {
     nome: 'Armadura Natural +1', preco: '2000 PO',
@@ -7466,6 +7519,21 @@ var tabelas_amuletos = {
     // Aumento sabedoria do usuario (bonus melhoria).
     nome: 'Periapto da Sabedoria +6', preco: '36000 PO',
     propriedades: { atributos: { sabedoria: 6 } } },
+};
+
+var tabelas_chapeus = {
+  intelecto_2: {
+    nome: 'Tiara do Intelecto +2', preco: '4000 PO',
+    propriedades: { atributos: { inteligencia: 2 } }
+  },
+  intelecto_4: {
+    nome: 'Tiara do Intelecto +4', preco: '16000 PO',
+    propriedades: { atributos: { inteligencia: 4 } }
+  },
+  intelecto_6: {
+    nome: 'Tiara do Intelecto +6', preco: '36000 PO',
+    propriedades: { atributos: { inteligencia: 6 } }
+  },
 };
 
 var tabelas_bracaduras = {
@@ -7735,6 +7803,8 @@ var tabelas_itens = {
   bracaduras: { nome: 'Braçadeiras', tabela: tabelas_bracaduras, maximo: 1 },
   pocoes: { nome: 'Poções', tabela: tabelas_pocoes, maximo: 0, },
   capas: { nome: 'Capas', tabela: tabelas_capas, maximo: 1 },
+  chapeus: { nome: 'Chapéus', tabela: tabelas_chapeus, maximo: 1 },
+  luvas: { nome: 'Luvas', tabela: tabelas_luvas, maximo: 1 },
 };
 
 // Materiais especiais.
@@ -8728,6 +8798,7 @@ var tabelas_geracao = {
     ordem_magias: {
       0: [ 'pasmar', 'som_fantasma', 'luz', 'ler_magia', 'cancao_de_ninar' ],
       1: [ 'sono', 'encantar_pessoa', 'curar_ferimentos_leves', 'causar_medo' ],
+      2: [ 'poeira_ofuscante', 'agilidade_gato', 'curar_ferimentos_moderados', 'invisibilidade', 'sugestao', 'imobilizar_pessoa', 'reflexos' ],
     },
     por_nivel: {
       1: { moedas: { ouro: 0 },
@@ -8750,6 +8821,12 @@ var tabelas_geracao = {
            armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
                     { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
       },
+      5: { moedas: { ouro: 1400 },
+           armadura: { chave: 'couro_batido', obra_prima: true },
+           armas: [ { chave: 'sabre', bonus: 0, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+           amuletos: [ { chave: 'armadura_natural_1', em_uso: true } ],
+      },
     },
   },
   clerigo: {
@@ -8769,6 +8846,11 @@ var tabelas_geracao = {
       2: [ 'arma_espiritual', 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
       3: [ 'dissipar_magia', 'purgar_invisibilidade', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
       4: [ 'poder_divino', 'envenenamento', 'inseto_gigante', 'imunidade_a_magia' ],
+      5: [ 'arma_rompimento', 'cancelar_encantamento', 'coluna_chamas', 'comando_maior', 'matar', 'praga_insetos', 'resistencia_magia', 'viagem_planar', 'visao_verdade' ],
+      6: [ '' ],
+      7: [ '' ],
+      8: [ '' ],
+      9: [ '' ],
     },
     por_nivel: {
       1: { moedas: { ouro: 300 },
@@ -8834,15 +8916,34 @@ var tabelas_geracao = {
                     { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
            aneis: [ { chave: 'protecao_1', em_uso: true } ],
       },
+      12: { moedas: { ouro: 14000 },
+           armadura: { chave: 'armadura_de_batalha', bonus: 1 },
+           escudo: { chave: 'pesado_aco', bonus: 1 },
+           armas: [ { chave: 'maca_estrela', bonus: 1, obra_prima: true },
+                    { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+           aneis: [ { chave: 'protecao_1', em_uso: true } ],
+           amuletos: [ { chave: 'armadura_natural_1', em_uso: false },
+                       { chave: 'periapto_sabedoria_6', em_uso: true } ],
+      },
+      16: { moedas: { ouro: 41000 },
+            armadura: { chave: 'armadura_de_batalha', bonus: 2 },
+            escudo: { chave: 'pesado_aco', bonus: 2 },
+            armas: [ { chave: 'maca_estrela', bonus: 1, obra_prima: true },
+                     { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
+            aneis: [ { chave: 'protecao_1', em_uso: true } ],
+            amuletos: [ { chave: 'armadura_natural_1', em_uso: false },
+                        { chave: 'periapto_sabedoria_4', em_uso: true } ],
+            luvas: [ { chave: 'luvas_destreza_2', em_uso: true } ],
+      },
       17: { moedas: { ouro: 44000 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
             escudo: { chave: 'pesado_aco', bonus: 2 },
             armas: [ { chave: 'maca_estrela', bonus: 1, obra_prima: true },
                      { chave: 'besta_leve', bonus: 0, obra_prima: false }, ],
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
-            amuletos: [ { chave: 'armadura_natural_1', em_uso: true } ],
-            // luvas +2
-            // periapt sabedoria +6
+            amuletos: [ { chave: 'armadura_natural_1', em_uso: false },
+                        { chave: 'periapto_sabedoria_6', em_uso: true } ],
+            luvas: [ { chave: 'luvas_destreza_2', em_uso: true } ],
       },
       18: { moedas: { ouro: 74000 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
@@ -8852,7 +8953,7 @@ var tabelas_geracao = {
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
             amuletos: [ { chave: 'armadura_natural_1', em_uso: false },
                         { chave: 'periapto_sabedoria_6', em_uso: true } ],
-            // luvas destreza +2
+            luvas: [ { chave: 'luvas_destreza_2', em_uso: true } ],
       },
       19: { moedas: { ouro: 114000 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
@@ -8862,7 +8963,7 @@ var tabelas_geracao = {
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
             amuletos: [ { chave: 'armadura_natural_1', em_uso: false },
                         { chave: 'periapto_sabedoria_6', em_uso: true } ],
-            // luvas destreza +2
+            luvas: [ { chave: 'luvas_destreza_2', em_uso: true } ],
       },
       20: { moedas: { ouro: 164000 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
@@ -8872,7 +8973,7 @@ var tabelas_geracao = {
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
             amuletos: [ { chave: 'armadura_natural_1', em_uso: false },
                         { chave: 'periapto_sabedoria_6', em_uso: true } ],
-            // luvas destreza +2
+            luvas: [ { chave: 'luvas_destreza_2', em_uso: true } ],
       },
     },
   },
@@ -8917,42 +9018,49 @@ var tabelas_geracao = {
     talentos: [ 'ataque_poderoso', 'trespassar', 'esquiva', 'usar_arma_exotica', 'sucesso_decisivo_aprimorado', 'iniciativa_aprimorada' ],
     por_nivel: {
       1: { moedas: { ouro: 350 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'cota_de_talas', },
            armas: [ { chave: 'espada_bastarda', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: false }, ],
            aneis: [],
       },
       2: { moedas: { ouro: 750 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'meia_armadura', },
            armas: [ { chave: 'espada_bastarda', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
       3: { moedas: { ouro: 350 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'armadura_de_batalha', },
            armas: [ { chave: 'espada_bastarda', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
       4: { moedas: { ouro: 1150 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'armadura_de_batalha', },
            armas: [ { chave: 'espada_bastarda', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
       5: { moedas: { ouro: 2150 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'armadura_de_batalha', },
            armas: [ { chave: 'espada_bastarda', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
       6: { moedas: { ouro: 2300 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'armadura_de_batalha', bonus: 1 },
            armas: [ { chave: 'espada_bastarda', bonus: 0, obra_prima: true },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
       7: { moedas: { ouro: 2900 },
+           escudo: { chave: 'pesado_aco', },
            armadura: { chave: 'armadura_de_batalha', bonus: 1 },
            armas: [ { chave: 'espada_bastarda', bonus: 1, obra_prima: false },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
@@ -8960,44 +9068,51 @@ var tabelas_geracao = {
       },
       8: { moedas: { ouro: 4900 },
            armadura: { chave: 'armadura_de_batalha', bonus: 1 },
+           escudo: { chave: 'pesado_aco', bonus: 1 },
            armas: [ { chave: 'espada_bastarda', bonus: 1, obra_prima: false },
                     { chave: 'arco_longo_composto', bonus: 0, obra_prima: true }, ],
            aneis: [],
       },
       9: { moedas: { ouro: 4500 },
            armadura: { chave: 'armadura_de_batalha', bonus: 1 },
+           escudo: { chave: 'pesado_aco', bonus: 1 },
            armas: [ { chave: 'espada_bastarda', bonus: 1, obra_prima: false },
                     { chave: 'arco_longo_composto', bonus: 1, obra_prima: false }, ],
            aneis: [],
       },
       10: { moedas: { ouro: 5500 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
+            escudo: { chave: 'pesado_aco', bonus: 1 },
             armas: [ { chave: 'espada_bastarda', bonus: 1, obra_prima: false },
                      { chave: 'arco_longo_composto', bonus: 1, obra_prima: false }, ],
             aneis: [],
       },
       11: { moedas: { ouro: 8500 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
+            escudo: { chave: 'pesado_aco', bonus: 1 },
             armas: [ { chave: 'espada_bastarda', bonus: 1, obra_prima: false },
                      { chave: 'arco_longo_composto', bonus: 1, obra_prima: false }, ],
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
       },
       12: { moedas: { ouro: 9500 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
+            escudo: { chave: 'pesado_aco', bonus: 1 },
             armas: [ { chave: 'espada_bastarda', bonus: 2, obra_prima: false },
                      { chave: 'arco_longo_composto', bonus: 1, obra_prima: false }, ],
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
       },
       13: { moedas: { ouro: 18500 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
+            escudo: { chave: 'pesado_aco', bonus: 1 },
             armas: [ { chave: 'espada_bastarda', bonus: 2, obra_prima: false },
                      { chave: 'arco_longo_composto', bonus: 1, obra_prima: false }, ],
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
       },
       14: { moedas: { ouro: 20500 },
             armadura: { chave: 'armadura_de_batalha', bonus: 2 },
-            armas: [ { chave: 'espada_bastarda', bonus: 2, obra_prima: false },
-                     { chave: 'arco_longo_composto', bonus: 1, obra_prima: false }, ],
+            escudo: { chave: 'pesado_aco', bonus: 2 },
+            armas: [ { chave: 'espada_bastarda', bonus: 2 },
+                     { chave: 'arco_longo_composto', bonus: 1 }, ],
             aneis: [ { chave: 'protecao_1', em_uso: true } ],
             amuletos: [ { chave: 'armadura_natural_2', em_uso: true } ],
       },
@@ -9063,13 +9178,15 @@ var tabelas_geracao = {
     },
     por_nivel: {
       4: {
-        moedas: { ouro: 950 },
+        // Tabela do DMG ta errada, faltou 1000.
+        moedas: { ouro: 1950 },
         armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
                  { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
         bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
       },
       5: {
-        moedas: { ouro: 2000 },
+        // Tabela do DMG ta errada. Pra bater com o valor certo faltou 1000.
+        moedas: { ouro: 3000 },
         armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
                  { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
         bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
@@ -9195,7 +9312,12 @@ var tabelas_geracao = {
       2: [ 'invisibilidade', 'vitalidade_ilusoria', 'invocar_enxames', 'queimadura_aganazzar', 'resistir_elementos', 'suportar_elementos',
            'toque_do_carnical', 'patas_de_aranha' ],
       3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
-      4: [ 'pele_rochosa', ]
+      4: [ 'pele_rochosa', 'drenar_temporario', 'tempestade_glacial', 'grito' ],
+      5: [ 'enfraquecer_intelecto' ],
+      6: [],
+      7: [],
+      8: [],
+      9: [],
     },
     por_nivel: {
       1: {
@@ -9214,13 +9336,15 @@ var tabelas_geracao = {
                  { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
       },
       4: {
-        moedas: { ouro: 950 },
+        // A tabela me parece errada, eh 1950 na verdade (se comparar com a tabela NPC gear value)
+        moedas: { ouro: 1950 },
         armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
                  { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
         bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
       },
       5: {
-        moedas: { ouro: 2000 },
+        // Mesma coisa aqui.
+        moedas: { ouro: 3000 },
         armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
                  { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
         bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
@@ -9252,6 +9376,42 @@ var tabelas_geracao = {
         amuletos: [ 'armadura_natural_1' ],
         aneis: [ { chave: 'protecao_1', em_uso: true }, ],
         bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      17: {
+        moedas: { ouro: 26000 },
+        armas: [ { chave: 'bordao', bonus: 1 },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ { chave: 'armadura_natural_2', em_uso: true } ],
+        aneis: [ { chave: 'protecao_2', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_5', em_uso: true }, ],
+        chapeus: [ { chave: 'intelecto_6', em_uso: true } ],
+      },
+      18: {
+        moedas: { ouro: 45000 },
+        armas: [ { chave: 'bordao', bonus: 1 },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ { chave: 'armadura_natural_2', em_uso: true } ],
+        aneis: [ { chave: 'protecao_2', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_6', em_uso: true }, ],
+        chapeus: [ { chave: 'intelecto_6', em_uso: true } ],
+      },
+      19: {
+        moedas: { ouro: 85000 },
+        armas: [ { chave: 'bordao', bonus: 1 },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ { chave: 'armadura_natural_2', em_uso: true } ],
+        aneis: [ { chave: 'protecao_2', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_6', em_uso: true }, ],
+        chapeus: [ { chave: 'intelecto_6', em_uso: true } ],
+      },
+      20: {
+        moedas: { ouro: 135000 },
+        armas: [ { chave: 'bordao', bonus: 1 },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ { chave: 'armadura_natural_2', em_uso: true } ],
+        aneis: [ { chave: 'protecao_2', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_6', em_uso: true }, ],
+        chapeus: [ { chave: 'intelecto_6', em_uso: true } ],
       },
     },
   },
@@ -9302,6 +9462,59 @@ var tabelas_geracao = {
   },
   paladino: {
     atributos: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
+    talentos: [
+      'expulsao_adicional', 'sucesso_decisivo_aprimorado', 'vontade_ferro', 'reflexos_rapidos',
+      'combate_montado', 'investida_montada', 'foco_em_arma'
+    ],
+    ordem_pericias: [
+      'concentracao', 'cura', 'cavalgar', 'escalar', 'saltar', 'ouvir', 'sobrevivencia',
+    ],
+    ordem_magias: {
+      1: [ 'bencao', 'protecao_contra_caos_mal_bem_ordem' ],
+      2: [ 'forca_touro', 'retardar_envenenamento'],
+      3: [ 'curar_ferimentos_moderados', 'dissipar_magia'],
+    },
+    por_nivel: {
+      9: {
+        moedas: { ouro: 3700 },
+        armadura: { chave: 'armadura_de_batalha', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 1, obra_prima: true },
+                 { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: true }, ],
+        escudo: { chave: 'pesado_aco', bonus: 1, },
+        aneis: [{ chave: 'protecao_1' }],
+      },
+      10: {
+        moedas: { ouro: 5700 },
+        armadura: { chave: 'armadura_de_batalha', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 1, obra_prima: true },
+                 { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: true }, ],
+        escudo: { chave: 'pesado_aco', bonus: 1, },
+        aneis: [{ chave: 'protecao_1' }],
+        amuletos: [{ chave: 'saude_2', em_uso: true }],
+      },
+      11: {
+        moedas: { ouro: 5500 },
+        armadura: { chave: 'armadura_de_batalha', bonus: 1 },
+        armas: [ { chave: 'espada_longa', bonus: 2, obra_prima: true },
+                 { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: true }, ],
+        escudo: { chave: 'pesado_aco', bonus: 1, },
+        aneis: [{ chave: 'protecao_1' }],
+        amuletos: [{ chave: 'saude_2', em_uso: true }],
+      },
+      12: {
+        moedas: { ouro: 100 },
+        armas: [ { chave: 'espada_longa', bonus: 2, obra_prima: true },
+                 { chave: 'arco_longo_composto_2', bonus: 0, obra_prima: true }, ],
+        armadura: { chave: 'armadura_de_batalha', bonus: 2 },
+        escudo: { chave: 'pesado_aco', bonus: 1, },
+        capas: [{ chave: 'manto_carisma_2', em_uso: true }],
+        aneis: [{ chave: 'protecao_1', em_uso: true }],
+        amuletos: [{ chave: 'saude_2', em_uso: true }],
+        pocoes: [
+          'curar_ferimentos_serios', 'curar_ferimentos_serios', 'forca_touro', 'levitacao', 'escudo_da_fe_3'
+        ],
+      },
+    },
   },
   ranger: {
     ordem_pericias: [
@@ -9820,6 +10033,35 @@ var tabelas_lista_feiticos = {
       'transferencia_poder_divino': { nome: 'Transferência de Poder Divino', descricao: 'Transfere magias para alvo.' },
       'nuvem_profana': { nome: 'Nuvem Profana', descricao: 'Causa dano e adoece criaturas bondosas.', dominios: ['mal'] },  // unholy blight
     },
+    5: {
+      'arma_rompimento': { nome: 'Arma do Rompimento', descricao: 'Arma corpo a corpo que destroi mortos-vivos.' },  // desrupting weapon
+      'cancelar_encantamento': { nome: 'Cancelar Encantamento', descricao: 'Liberta os alvos de encantamentos, alterações, maldições e petrificação.' },  // break enchantment
+      'coluna_chamas': { nome: 'Coluna de Chamas', descricao: 'Destroi inimigos através de fogo divino (1d6/nível).' },  // flame strike
+      'comando_maior': { nome: 'Comando Maior', descricao: 'Como comando, mas afeta 1 alvo/nível.' },  // command, greater
+      'comunhao': { nome: 'Comunhão', descricao: 'Divindade responde uma pergunta/nível.' },  // commune
+      'conspurcar': { nome: 'Conspurcar', descricao: 'Profana um local.' },  // unhallow
+      'curar_ferimentos_leves_massa': { nome: 'Curar Ferimentos Leves em Massa', descricao: 'Cura 1d8+1 nível de diversas criaturas.' },  // cure light wounds, mass
+      'dissipar_caos': { nome: 'Dissipar o Caos', descricao: '+4 CA contra ataques de criaturas caóticas, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel chaos.
+      'dissipar_ordem': { nome: 'Dissipar a Ordem', descricao: '+4 CA contra ataques de criaturas ordeiras, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel law.
+      'dissipar_bem': { nome: 'Dissipar o Bem', descricao: '+4 CA contra ataques de criaturas boas, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel good.
+      'dissipar_mal': { nome: 'Dissipar o Mal', descricao: '+4 CA contra ataques de criaturas más, pode usar a energia para dissipar um encantamento ou enviar uma criatura de volta para seu plano.' },  // dispel evil.
+      'forca_justos': { nome: 'Força dos Justos', descricao: 'Aumenta tamanho (+4 força, +2 constituição) e dá bônus de combate (+2 melhoria CA, redução de dano 3/[bem,mal] ate 11 nível, 6 até 14, 9 acima disso).' },  // righteous might.
+      'infligir_ferimentos_leves_massa': { nome: 'Infligir Ferimentos Leves em Massa', descricao: 'Causa 1d8+l/nível de dano contra diversas criaturas.' },  // inflict light wounds mass
+      'invocar_crituras_v': { nome: 'Invocar Criaturas V', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },  // summon monster V
+      'marca_justica': { nome: 'Marca da Justiça', descricao: 'Designa ação que causará uma maldição sobre o alvo.' },  // mark of justice
+      'matar': { nome: 'Matar', descricao: 'Ataque de toque que mata um alvo.' },  // slay living
+      'muralha_pedra': { nome: 'Muralha de Pedra', descricao: 'Cria uma barreira de pedra que pode ser moldada' },  // wall of stone
+      'penitencia': { nome: 'Penitência', descricao: 'Remove a culpa dos pecados do alvo.' },  // atonement
+      'praga_insetos': { nome: 'Praga de Insetos', descricao: 'Enxame de insetos ataca criaturas.' },  // insect plague
+      'resistencia_magia': { nome: 'Resistência a Magia', descricao: 'O alvo recebe 12+l/nível de RM.' },  // spell resistance.
+      'reviver_mortos': { nome: 'Reviver os mortos', descricao: 'Restaura a vida de um alvo que morreu a menos de 1 dia/nível.' },  // raise dead
+      'santificar': { nome: 'Santificar', descricao: 'Santifica um local.' },  // hallow
+      'simbolo_dor': { nome: 'Símbolo da Dor', descricao: 'Runa ativada causa dor às criaturas próximas.' },  // symbol of pain
+      'simbolo_sono': { nome: 'Símbolo do Sono', descricao: 'Runa ativada coloca as criaturas próximas para dormir.' },  // symbol of sleep
+      'viagem_planar': { nome: 'Viagem Planar', descricao: 'Até oito alvos viajam para outro plano.' },  // planar shift
+      'videncia': { nome: 'Vidência', descricao: 'Espiona alguém à distância' },  // scrying
+      'visao_verdade': { nome: 'Visão da Verdade', descricao: 'Mostra todas as coisas em sua forma verdadeira.' },  // true seeing
+    },
   },
   mago: {
     0: {
@@ -9907,8 +10149,22 @@ var tabelas_lista_feiticos = {
       },
     },
     4: {
+      'drenar_temporario': {
+        nome: 'Drenar Temporário', descricao: 'Alvo perde 1d4 níveis.', escola: 'necromancia'
+      },
+      'grito': {
+        nome: 'Grito', descricao: 'Causa surdez e 5d6 de dano sônico.', escola: 'evocacao'
+      },
       'pele_rochosa': {
         nome: 'Pele Rochosa', descricao: 'Resistência de 10 dano/adamante até 10/nível, max 150.', escola: 'abjuracao',
+      },
+      'tempestade_glacial': {
+        nome: 'Tempestade Glacial', descricao: 'Granizo causa 5d6 de dano em um cilindro de 12 m.', escola: 'evocacao'
+      },
+    },
+    5: {
+      'enfraquecer_intelecto': {
+        nome: 'Enfraquecer o Intelecto', descricao: 'Inteligência e Carisma do alvo caem para 1.', escola: 'encantamento'
       },
     },
   },
@@ -11614,6 +11870,7 @@ var gEntradas = {
   braceletes: [],
   pocoes: [],
   capas: [],
+  chapeus: [],
   outros_equipamentos: '',
   // talentos. Cada chave possui { chave, complemento }, se houver.
   talentos: { gerais: [], guerreiro: [], mago: [], monge: [], ranger: [], outros: [] },
