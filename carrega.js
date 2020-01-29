@@ -170,6 +170,7 @@ function _CarregaHandlers() {
     "botao-adicionar-chapeu": { callback:  function() { ClickAdicionarItem('chapeus'); }, evento: 'click', },
     "botao-adicionar-pocao": { callback:  function() { ClickAdicionarItem('pocoes'); }, evento: 'click', },
     "botao-adicionar-capa": { callback:  function() { ClickAdicionarItem('capas'); }, evento: 'click', },
+    "botao-adicionar-luvas": { callback:  function() { ClickAdicionarItem('luvas'); }, evento: 'click', },
     "json-personagem": { callback: function() { var dom = Dom("json-personagem"); dom.focus(); dom.select(); }, evento: 'click', },
     "botao-ferir-1": { callback: function() { ChangeAjustarFerimentos(1); }, evento: 'click', },
     "botao-ferir-3": { callback: function() { ChangeAjustarFerimentos(3); }, evento: 'click', },
