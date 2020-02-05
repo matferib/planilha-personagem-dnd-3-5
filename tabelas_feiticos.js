@@ -176,84 +176,83 @@ var tabelas_lista_feiticos = {
       'visao_verdade': { nome: 'Visão da Verdade', descricao: 'Mostra todas as coisas em sua forma verdadeira.' },  // true seeing
     },
     6: {
-        'aliado_extra_planar': { nome: 'Aliado Extra-Planar', descricao: 'Como aliado extra-planar menor, mas até 12 DV.' },
-        'anima_objetos': { nome: 'Animar Objetos', descricao: 'Objetos atacam seus inimigos.' },
-        'banimento': { nome: 'Banimento', descricao: 'Expulsa 2 DV/nível de criaturas de extra-planares.' },
-        'banquente_herois': { nome: 'Banquete de Heróis', descricao: 'Produz comida para 1 criatura/nível e concede bônus de combate.' },
-        'barreira_laminas': { nome: 'Barreira de Lâminas', descricao: 'Muralha de lâminas causa 1d6 de dano/nível.' },
-        'caminhar_no_vento': { nome: 'Caminhar no Vento', descricao: 'Você e seus aliados se transformam em vapores e viajam rápido.' },
-        'criar_mortos_vivos': { nome: 'Criar Mortos-Vivos', descricao: 'Cria carniçais, lívidos, múmias ou mohrgs.' },
-        'cupula_protecao_contra_vida': { nome: 'Cúpula de Proteção Contra a Vida', descricao: 'Cúpula de 3 m isola criaturas vivas.' },
-        'cura_completa': { nome: 'Cura Completa', descricao: 'Cura 10 pontos de vida/nível, todas as doenças e problemas mentais.' },
-        'curar_ferimentos_moderados_massa': { nome: 'Curar Ferimentos Moderados em Massa', descricao: 'Cura 2d8+l/nível PV de diversas criaturas.' },
-        'destruir_mortos_vivos': { nome: 'Destruir Mortos-Vivos', descricao: 'Destrói 1d4 DV/nível de mortos-vivos (max. 20d4).' },
-        'dissipar_magia_maior': { nome: 'Dissipar Magia Maior', descricao: 'Como dissipar magia, mas com +20 no teste.' },
-        'doenca_plena': { nome: 'Doença Plena', descricao: 'Causa 10 pontos de dano/nível no alvo.' },
-        'encontrar_caminho': { nome: 'Encontrar o Caminho', descricao: 'Mostra o caminho mais direto até um local. ' },
-        'esplendor_aguia_massa': { nome: 'Esplendor da Águia em Massa', descricao: 'Como esplendor da águia, mas afeta 1 alvo/nível.' },
-        'forca_touro_massa': { nome: 'Força do Touro em Massa', descricao: 'Como força do touro, mas afeta 1 alvo/nível infligir.' },
-        'ferimentos_moderados_massa': { nome: 'Ferimentos Moderados em Massa', descricao: 'Causa 2d8+l/nível de dano contra diversas criaturas.' },
-        'invocar_criaturas_vi': { nome: 'Invocar Criaturas VI', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador. ' },
-        'palavra_recordacao': { nome: 'Palavra de Recordação', descricao: 'Teletransporta o conjurador de volta a um local determinado.' },
-        'proibicao': { nome: 'Proibição', descricao: 'Bloqueia viagem planar, causa dano a criaturas de tendência diferente.' },
-        'sabedoria_coruja_massa': { nome: 'Sabedoria da Coruja em Massa', descricao: 'Como sabedoria da coruja, mas afeta 1 alvo/nível.' },
-        'simbolo_persuacao': { nome: 'Símbolo da Persuasão', descricao: 'Runa ativada enfeitiça as criaturas próximas.' },
-        'simbolo_protecao_maior': { nome: 'Símbolo de Proteção Maior', descricao: 'Como símbolo de proteção, mas até 10d8 de dano ou magia de 6º nível.' },
-        'simbolo_medo': { nome: 'Símbolo do Medo', descricao: 'Runa ativada causa medo as criaturas próximas.' },
-        'tarefa_missao': { nome: 'Tarefa/Missão', descricao: 'Como missão menor, mas afeta qualquer criatura.' },
-        'vigor_urso_massa': { nome: 'Vigor do Urso em Massa', descricao: 'Como vigor do urso, mas afeta 1 alvo/nível.' },
+        'aliado_extra_planar': { nome: 'Aliado Extra-Planar', descricao: 'Como aliado extra-planar menor, mas até 12 DV.' },  // planar ally
+        'anima_objetos': { nome: 'Animar Objetos', descricao: 'Objetos atacam seus inimigos.' },  // animate objects
+        'banimento': { nome: 'Banimento', descricao: 'Expulsa 2 DV/nível de criaturas de extra-planares.' },  // banishment
+        'banquente_herois': { nome: 'Banquete de Heróis', descricao: 'Produz comida para 1 criatura/nível e concede bônus de combate.' },  // heroes' feast
+        'barreira_laminas': { nome: 'Barreira de Lâminas', descricao: 'Muralha de lâminas causa 1d6 de dano/nível.' },  // blade barrier
+        'caminhar_no_vento': { nome: 'Caminhar no Vento', descricao: 'Você e seus aliados se transformam em vapores e viajam rápido.' },  // wind walk
+        'criar_mortos_vivos': { nome: 'Criar Mortos-Vivos', descricao: 'Cria carniçais, lívidos, múmias ou mohrgs.' },  // create undead
+        'cupula_protecao_contra_vida': { nome: 'Cúpula de Proteção Contra a Vida', descricao: 'Cúpula de 3 m isola criaturas vivas.' },  // antilife shell
+        'cura_completa': { nome: 'Cura Completa', descricao: 'Cura 10 pontos de vida/nível, todas as doenças e problemas mentais.' },  // heal
+        'curar_ferimentos_moderados_massa': { nome: 'Curar Ferimentos Moderados em Massa', descricao: 'Cura 2d8+l/nível PV de diversas criaturas.' },  // cure moderate wounds, mass
+        'destruir_mortos_vivos': { nome: 'Destruir Mortos-Vivos', descricao: 'Destrói 1d4 DV/nível de mortos-vivos (max. 20d4).' },  // undeath to death
+        'dissipar_magia_maior': { nome: 'Dissipar Magia Maior', descricao: 'Como dissipar magia, mas com +20 no teste.' },  // dispel magic, greater
+        'doenca_plena': { nome: 'Doença Plena', descricao: 'Causa 10 pontos de dano/nível no alvo.' },  // harm
+        'encontrar_caminho': { nome: 'Encontrar o Caminho', descricao: 'Mostra o caminho mais direto até um local. ' },  // find the path
+        'esplendor_aguia_massa': { nome: 'Esplendor da Águia em Massa', descricao: 'Como esplendor da águia, mas afeta 1 alvo/nível.' },  // eagle's splendor, mass
+        'forca_touro_massa': { nome: 'Força do Touro em Massa', descricao: 'Como força do touro, mas afeta 1 alvo/nível infligir.' },  // bull strength, mass
+        'invocar_criaturas_vi': { nome: 'Invocar Criaturas VI', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador. ' },  // summon monster vi
+        'palavra_recordacao': { nome: 'Palavra de Recordação', descricao: 'Teletransporta o conjurador de volta a um local determinado.' },  // word of recall
+        'proibicao': { nome: 'Proibição', descricao: 'Bloqueia viagem planar, causa dano a criaturas de tendência diferente.' },  // forbiddance
+        'sabedoria_coruja_massa': { nome: 'Sabedoria da Coruja em Massa', descricao: 'Como sabedoria da coruja, mas afeta 1 alvo/nível.' },  // owls wisdom, mass
+        'simbolo_persuacao': { nome: 'Símbolo da Persuasão', descricao: 'Runa ativada enfeitiça as criaturas próximas.' },  // symbol of persuation
+        'simbolo_protecao_maior': { nome: 'Símbolo de Proteção Maior', descricao: 'Como símbolo de proteção, mas até 10d8 de dano ou magia de 6º nível.' },  // glyph of warding, greater
+        'simbolo_medo': { nome: 'Símbolo do Medo', descricao: 'Runa ativada causa medo as criaturas próximas.' },  // symbol of fear
+        'tarefa_missao': { nome: 'Tarefa/Missão', descricao: 'Como missão menor, mas afeta qualquer criatura.' },  // geas/quest
+        'vigor_urso_massa': { nome: 'Vigor do Urso em Massa', descricao: 'Como vigor do urso, mas afeta 1 alvo/nível.' },  // bear's endurance, mass
     },
     7: {
-        'blasfemia': { nome: 'Blasfêmia', descricao: 'Mata, paralisa, enfraquece ou deixa pasmo alvos Bons ou Neutros.' },
-        'controlar_clima': { nome: 'Controlar o Clima', descricao: 'Muda o clima na área local.' },
-        'curar_ferimentos_graves_massa': { nome: 'Curar Ferimentos Graves em Massa', descricao: 'Cura 3d8+l/nível PV de diversas criaturas.' },
-        'destruicao': { nome: 'Destruição', descricao: 'Mata alvo e destrói os restos.' },
-        'ditado': { nome: 'Ditado', descricao: 'Mata, paralisa, deixa lento ou ensurdece alvos Neutros ou Caóticos.' },
-        'infligir_ferimentos_graves_massa': { nome: 'Infligir Ferimentos Graves em Massa', descricao: 'Causa 3d8+l/nível de dano contra diversas criaturas.' },
-        'invocar_criaturas_vii': { nome: 'Invocar Criaturas VII', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },
-        'palavra_caos': { nome: 'Palavra do Caos', descricao: 'Mata, deixa confuso, atordoa ou ensurdece alvos neutros ou Leais.' },
-        'palavra_sagrada': { nome: 'Palavra Sagrada', descricao: 'Mata, paralisa, cega ou ensurdece alvos Neutros ou Maus.' },
-        'passeio_etereo': { nome: 'Passeio Etéreo', descricao: 'Você fica etéreo durante 1 rodada/nível.' },
-        'refugio': { nome: 'Refugio', descricao: 'Altera um item para que transporte seu usuário até você.' },
-        'regeneracao': { nome: 'Regeneração', descricao: 'Membros decepados do alvo crescem novamente, cura 4d8 de dano +l/nível (max. +35).' },
-        'repulsao': { nome: 'Repulsão', descricao: 'Criaturas não podem se aproximar do conjurador.' },
-        'ressureicao': { nome: 'Ressurreição', descricao: 'Restaura completamente um alvo morto.' },
-        'restauracao_maior': { nome: 'Restauração Maior', descricao: 'Como restauração, mas restaura todos os níveis a valores de habilidades.' },
-        'simbolo_fraqueza': { nome: 'Símbolo da Fraqueza', descricao: 'Runa ativada enfraquece as criaturas próximas.' },
-        'simbolo_atordoamento': { nome: 'Símbolo do Atordoamento', descricao: 'Runa ativada atordoa as criaturas próximas.' },
-        'videncia_maior': { nome: 'Vidência Maior', descricao: 'Como vidência, só que mais rápido e com duração maior.' },
+        'blasfemia': { nome: 'Blasfêmia', descricao: 'Mata, paralisa, enfraquece ou deixa pasmo alvos Bons ou Neutros.' },  // blasphemy
+        'controlar_clima': { nome: 'Controlar o Clima', descricao: 'Muda o clima na área local.' },  // control weather
+        'curar_ferimentos_graves_massa': { nome: 'Curar Ferimentos Graves em Massa', descricao: 'Cura 3d8+l/nível PV de diversas criaturas.' },  // cure serious wounds
+        'destruicao': { nome: 'Destruição', descricao: 'Mata alvo e destrói os restos.' },  // destruction
+        'ditado': { nome: 'Ditado', descricao: 'Mata, paralisa, deixa lento ou ensurdece alvos Neutros ou Caóticos.' },  // dictum
+        'infligir_ferimentos_graves_massa': { nome: 'Infligir Ferimentos Graves em Massa', descricao: 'Causa 3d8+l/nível de dano contra diversas criaturas.' },  // inflict serious wounds, mass
+        'invocar_criaturas_vii': { nome: 'Invocar Criaturas VII', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },  // summon monster vii
+        'palavra_caos': { nome: 'Palavra do Caos', descricao: 'Mata, deixa confuso, atordoa ou ensurdece alvos neutros ou Leais.' },  // word of chaos
+        'palavra_sagrada': { nome: 'Palavra Sagrada', descricao: 'Mata, paralisa, cega ou ensurdece alvos Neutros ou Maus.' },  // holy word
+        'passeio_etereo': { nome: 'Passeio Etéreo', descricao: 'Você fica etéreo durante 1 rodada/nível.' },  // ethereal jaunt
+        'refugio': { nome: 'Refugio', descricao: 'Altera um item para que transporte seu usuário até você.' },  // refuge
+        'regeneracao': { nome: 'Regeneração', descricao: 'Membros decepados do alvo crescem novamente, cura 4d8 de dano +l/nível (max. +35).' },  // regenerate
+        'repulsao': { nome: 'Repulsão', descricao: 'Criaturas não podem se aproximar do conjurador.' },  // repulsion
+        'ressureicao': { nome: 'Ressurreição', descricao: 'Restaura completamente um alvo morto.' },  // resurection
+        'restauracao_maior': { nome: 'Restauração Maior', descricao: 'Como restauração, mas restaura todos os níveis a valores de habilidades.' },  // restoration, greater
+        'simbolo_fraqueza': { nome: 'Símbolo da Fraqueza', descricao: 'Runa ativada enfraquece as criaturas próximas.' },  // symbol of weakness
+        'simbolo_atordoamento': { nome: 'Símbolo do Atordoamento', descricao: 'Runa ativada atordoa as criaturas próximas.' },  // symbol of stunning
+        'videncia_maior': { nome: 'Vidência Maior', descricao: 'Como vidência, só que mais rápido e com duração maior.' },  // scrying, greater
     },
     8: {
-        'aliado_extra_planar_maior': { nome: 'Aliado Extra-Planar Maior', descricao: 'Como aliado extra-planar menor, mas até 18 DV.' },
-        'aura_profana': { nome: 'Aura Profana', descricao: '+4 na CA, +4 resistência e RM 25 contra magias bondosas.' },
-        'aura_sagrada': { nome: 'Aura Sagrada', descricao: '+4 na CA, +4 resistência e RM 25 contra magias malignas.' },
-        'campo_antimagia': { nome: 'Campo Antimagia', descricao: 'Anula magia em uma área de 3 m.' },
-        'criar_mortos_vivos_maior': { nome: 'Criar Mortos-Vivos Maior', descricao: 'Cria sombras, aparações, espectros ou devoradores.' },
-        'curar_ferimentos_criticos_massa': { nome: 'Curar Ferimentos Críticos em Massa', descricao: 'Cura 4d8+l/nível PV de diversas criaturas.' },
-        'discernir_localizacao': { nome: 'Discernir Localização', descricao: 'Descobre o local exato de criatura ou objeto.' },
-        'escudo_ordem': { nome: 'Escudo da Ordem', descricao: '+4 na CA, +4 resistência e RM 25 contra magias caóticas.' },
-        'imunidade-magia_maior': { nome: 'Imunidade à Magia Maior', descricao: 'Como imunidade à magia, mas afeta magias de até 8° nível.' },
-        'infligir_ferimentos_criticos_massa': { nome: 'Infligir Ferimentos Críticos em Massa', descricao: 'Causa 4d8+l/nível de dano contra diversas criaturas.' },
-        'invocar_criaturas_viii': { nome: 'Invocar Criaturas VIII', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },
-        'manto_caos': { nome: 'Manto do Caos', descricao: '+4 na CA, +4 resistência e RM 25 contra magias Leais.' },
-        'simbolo_insanidade': { nome: 'Símbolo da Insanidade', descricao: 'Runa ativada enlouquece as criaturas próximas.' },
-        'simbolo_morte': { nome: 'Símbolo da Morte', descricao: 'Runa ativada mata as criaturas próximas.' },
-        'tempestade_fogo': { nome: 'Tempestade de Fogo', descricao: 'Causa 1d6 de dano de fogo/nível.' },
-        'terremoto': { nome: 'Terremoto', descricao: 'Tremor intenso em 1,5 m/nível de raio.' },
-        'tranca_dimensional': { nome: 'Tranca Dimensional', descricao: 'Bloqueia teletransporte e viagem planar durante 1 dia/nível.' },
+        'aliado_extra_planar_maior': { nome: 'Aliado Extra-Planar Maior', descricao: 'Como aliado extra-planar menor, mas até 18 DV.' },  // planar ally, greater
+        'aura_profana': { nome: 'Aura Profana', descricao: '+4 na CA, +4 resistência e RM 25 contra magias bondosas.' },  // unholy aura
+        'aura_sagrada': { nome: 'Aura Sagrada', descricao: '+4 na CA, +4 resistência e RM 25 contra magias malignas.' },  // holy aura
+        'campo_antimagia': { nome: 'Campo Antimagia', descricao: 'Anula magia em uma área de 3 m.' },  // antimagic field
+        'criar_mortos_vivos_maior': { nome: 'Criar Mortos-Vivos Maior', descricao: 'Cria sombras, aparações, espectros ou devoradores.' },  // create greater undead
+        'curar_ferimentos_criticos_massa': { nome: 'Curar Ferimentos Críticos em Massa', descricao: 'Cura 4d8+l/nível PV de diversas criaturas.' },  // cure critical wounds, mass
+        'discernir_localizacao': { nome: 'Discernir Localização', descricao: 'Descobre o local exato de criatura ou objeto.' },  // discern location
+        'escudo_ordem': { nome: 'Escudo da Ordem', descricao: '+4 na CA, +4 resistência e RM 25 contra magias caóticas.' },  // shield of law
+        'imunidade-magia_maior': { nome: 'Imunidade à Magia Maior', descricao: 'Como imunidade à magia, mas afeta magias de até 8° nível.' },  // spell immunity, greater
+        'infligir_ferimentos_criticos_massa': { nome: 'Infligir Ferimentos Críticos em Massa', descricao: 'Causa 4d8+l/nível de dano contra diversas criaturas.' },  // inflict critical wounds, mass
+        'invocar_criaturas_viii': { nome: 'Invocar Criaturas VIII', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },  // summon monster viii
+        'manto_caos': { nome: 'Manto do Caos', descricao: '+4 na CA, +4 resistência e RM 25 contra magias Leais.' },  // cloak of chaos
+        'simbolo_insanidade': { nome: 'Símbolo da Insanidade', descricao: 'Runa ativada enlouquece as criaturas próximas.' },  // symbol of insanity
+        'simbolo_morte': { nome: 'Símbolo da Morte', descricao: 'Runa ativada mata as criaturas próximas.' },  // symbol of death
+        'tempestade_fogo': { nome: 'Tempestade de Fogo', descricao: 'Causa 1d6 de dano de fogo/nível.' },  // fire storm
+        'terremoto': { nome: 'Terremoto', descricao: 'Tremor intenso em 1,5 m/nível de raio.' },  // earthquake
+        'tranca_dimensional': { nome: 'Tranca Dimensional', descricao: 'Bloqueia teletransporte e viagem planar durante 1 dia/nível.' },  // dimensional lock
     },
     9: {
-        'cura_completa_massa': { nome: 'Cura Completa em Massa', descricao: 'Como cura completa, mas para vários alvas.' },
-        'drenar_energia': { nome: 'Drenar Energia', descricao: 'O alvo sofre 2d4 níveis negativos.' },
-        'forma_eterea': { nome: 'Forma Etérea', descricao: 'Viaje para o Plano Etéreo com companheiros.' },
-        'implosao': { nome: 'Implosão', descricao: 'Mata 1 criatura/rodada.' },
-        'invocar_criaturas_ix': { nome: 'Invocar Criaturas IX', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },
-        'milagre': { nome: 'Milagre', descricao: 'Pede a intervenção de uma divindade.' },
-        'portal': { nome: 'Portal', descricao: 'Conecta dois planos para viagens ou invocações.' },
-        'prender_alma': { nome: 'Prender a Alma', descricao: 'Prende uma alma recentemente falecida para impedir a ressurreição.' },
-        'projecao_astral': { nome: 'Projeção Astral', descricao: 'Projeta você e seus companheiros para o Plano Astral.' },
-        'ressureicao_verdadeira': { nome: 'Ressurreição Verdadeira', descricao: 'Como ressurreição, mas não é necessário o corpo.' },
-        'tempestade_vinganca': { nome: 'Tempestade da Vingança', descricao: 'Tempestade de ácido, granizo e pedras.' },
+        'cura_completa_massa': { nome: 'Cura Completa em Massa', descricao: 'Como cura completa, mas para vários alvas.' },  // heal, mass
+        'drenar_energia': { nome: 'Drenar Energia', descricao: 'O alvo sofre 2d4 níveis negativos.' },  // energy drain
+        'forma_eterea': { nome: 'Forma Etérea', descricao: 'Viaje para o Plano Etéreo com companheiros.' },  // etherealness
+        'implosao': { nome: 'Implosão', descricao: 'Mata 1 criatura/rodada.' },  // implosion
+        'invocar_criaturas_ix': { nome: 'Invocar Criaturas IX', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },  // summon monster ix
+        'milagre': { nome: 'Milagre', descricao: 'Pede a intervenção de uma divindade.' },  // miracle
+        'portal': { nome: 'Portal', descricao: 'Conecta dois planos para viagens ou invocações.' },  // gate
+        'prender_alma': { nome: 'Prender a Alma', descricao: 'Prende uma alma recentemente falecida para impedir a ressurreição.' },  // soul bind
+        'projecao_astral': { nome: 'Projeção Astral', descricao: 'Projeta você e seus companheiros para o Plano Astral.' },  // astral projection
+        'ressureicao_verdadeira': { nome: 'Ressurreição Verdadeira', descricao: 'Como ressurreição, mas não é necessário o corpo.' },  // true resurection
+        'tempestade_vinganca': { nome: 'Tempestade da Vingança', descricao: 'Tempestade de ácido, granizo e pedras.' },  // storm of vengeance
     },
   },
   mago: {
