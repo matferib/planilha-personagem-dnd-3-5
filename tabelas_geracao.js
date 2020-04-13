@@ -165,7 +165,7 @@ var tabelas_geracao = {
     ordem_magias: {
       0: [ 'pasmar', 'som_fantasma', 'luz', 'ler_magia', 'cancao_de_ninar' ],
       1: [ 'sono', 'encantar_pessoa', 'curar_ferimentos_leves', 'causar_medo' ],
-      2: [ 'poeira_ofuscante', 'agilidade_gato', 'curar_ferimentos_moderados', 'invisibilidade', 'sugestao', 'imobilizar_pessoa', 'reflexos' ],
+      2: [ 'heroismo', 'poeira_ofuscante', 'agilidade_gato', 'curar_ferimentos_moderados', 'invisibilidade', 'sugestao', 'imobilizar_pessoa', 'reflexos' ],
     },
     por_nivel: {
       1: { moedas: { ouro: 0 },
@@ -826,6 +826,34 @@ var tabelas_geracao = {
   },
   monge: {
     atributos: [ 'sabedoria', 'forca', 'destreza', 'constituicao', 'inteligencia', 'carisma' ],
+    talentos: [
+      'ataque_desarmado_aprimorado', 'ataque_atordoante', 'desviar_objetos', 'reflexos_em_combate',
+    ],
+    ordem_pericias: [
+      'observar', 'ouvir', 'equilibrio', 'escalar', 'esconderse', 'saltar', 'acrobacias'
+    ],
+    por_nivel: {
+      1: {
+        moedas: { ouro: 550 },
+        armas: [ { chave: 'kama', bonus: 0, obra_prima: true},
+                 { chave: 'funda', bonus: 0, obra_prima: false }, ],
+      },
+      2: {
+        moedas: { ouro: 1650 },
+        armas: [ { chave: 'kama', bonus: 0, obra_prima: true},
+                 { chave: 'funda', bonus: 0, obra_prima: false }, ],
+      },
+      3: {
+        moedas: { ouro: 0 },
+        armas: [ { chave: 'kama', bonus: 1, obra_prima: true},
+                 { chave: 'funda', bonus: 0, obra_prima: true}, ],
+      },
+      4: {
+        moedas: { ouro: 650 },
+        armas: [ { chave: 'kama', bonus: 1, obra_prima: true},
+                 { chave: 'funda', bonus: 0, obra_prima: true}, ],
+      },
+    },
   },
   paladino: {
     atributos: [ 'carisma', 'forca', 'sabedoria', 'constituicao', 'inteligencia', 'destreza' ],
