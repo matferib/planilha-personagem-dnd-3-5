@@ -1,3 +1,4 @@
+Colocar nomes em ingles dos feiticos de clerigo na tabela.
 Colocar luvas nas traducoes.
 MAx bonus de destreza de armaduras.
 Fazer o bonus de salvacao de items com tipo de bonus.
