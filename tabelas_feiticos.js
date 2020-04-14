@@ -90,7 +90,7 @@ var tabelas_lista_feiticos = {
     3: {
       'caminhar_na_agua': { nome: 'Caminhar na Água', descricao: 'O alvo caminha sobre a água como se ela fosse sólida.'},
       'cegueira_surdez': { nome: 'Cegueira/Surdez', descricao: 'Torna o alvo cego ou surdo.' },
-      'chama_continua': { nome: 'Chama ContinuaM', descricao: 'Cria fogo ilusório.', material: true },
+      'chama_continua': { nome: 'Chama ContinuaM', descricao: 'Cria fogo ilusório.', material: true },  // continual flame
       'circulo_magico_contra': { nome: 'Circulo Mágico Contra o Caos/Mal/Bem/Ordem', descricao: 'Como as magias de proteção, mas com 3 m de raio e 10 min/nível.' },
       'criar_alimentos': { nome: 'Criar Alimentos', descricao: 'Alimenta três humanos (ou um cavalo) /nível.' },
       'criar_mortos_vivos_menor': { nome: 'Criar Mortos-Vivos Menor', descricao: 'Cria zumbis e esqueletos.', material: true },
@@ -231,7 +231,7 @@ var tabelas_lista_feiticos = {
         'curar_ferimentos_criticos_massa': { nome: 'Curar Ferimentos Críticos em Massa', descricao: 'Cura 4d8+l/nível PV de diversas criaturas.' },  // cure critical wounds, mass
         'discernir_localizacao': { nome: 'Discernir Localização', descricao: 'Descobre o local exato de criatura ou objeto.' },  // discern location
         'escudo_ordem': { nome: 'Escudo da Ordem', descricao: '+4 na CA, +4 resistência e RM 25 contra magias caóticas.' },  // shield of law
-        'imunidade-magia_maior': { nome: 'Imunidade à Magia Maior', descricao: 'Como imunidade à magia, mas afeta magias de até 8° nível.' },  // spell immunity, greater
+        'imunidade_magia_maior': { nome: 'Imunidade à Magia Maior', descricao: 'Como imunidade à magia, mas afeta magias de até 8° nível.' },  // spell immunity, greater
         'infligir_ferimentos_criticos_massa': { nome: 'Infligir Ferimentos Críticos em Massa', descricao: 'Causa 4d8+l/nível de dano contra diversas criaturas.' },  // inflict critical wounds, mass
         'invocar_criaturas_viii': { nome: 'Invocar Criaturas VIII', descricao: 'Invoca um ser extra-planar para auxiliar o conjurador.' },  // summon monster viii
         'manto_caos': { nome: 'Manto do Caos', descricao: '+4 na CA, +4 resistência e RM 25 contra magias Leais.' },  // cloak of chaos

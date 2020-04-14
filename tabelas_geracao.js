@@ -208,7 +208,7 @@ var tabelas_geracao = {
       'preparar_pocao', 'magia_combate', 'escrever_pergaminho', 'reflexos_rapidos', 'foco_em_arma',
     ],
     ordem_magias: {
-      0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', ],
+      0: [ 'luz', 'resistencia', 'orientacao', 'ler_magias', 'consertar', 'virtude' ],
       1: [ 'compreender_idiomas', 'escudo_da_fe', 'invocar_criaturas_i', 'santuario', 'auxilio_divino' ],
       2: [ 'arma_espiritual', 'ajuda', 'forca_do_touro', 'forca_do_touro', 'curar_ferimentos_moderados', 'imobilizar_pessoa', 'explosao_sonora' ],
       3: [ 'dissipar_magia', 'purgar_invisibilidade', 'circulo_magico_contra', 'protecao_contra_elementos', 'luz_cegante' ],
@@ -377,6 +377,18 @@ var tabelas_geracao = {
            armas: [ { chave: 'cimitarra', bonus: 0, obra_prima: true },
                     { chave: 'funda', bonus: 0, obra_prima: true}, ],
       },
+    },
+    ordem_magias: {
+      // Essas magias sao para necromantes.
+      0: [ 'criar_agua', 'curar_ferimentos_minimos', 'detectar_magia', 'luz', 'virtude'],
+      1: [ 'curar_ferimentos_leves', 'pedra_encantada' ],
+      2: [ 'esfera_flamejante', 'pele_arvore', ],
+      3: [ ''],
+      5: [ '' ],
+      6: [ '' ],
+      7: [ '' ],
+      8: [ '' ],
+      9: [ '' ]
     },
   },
   guerreiro: {
