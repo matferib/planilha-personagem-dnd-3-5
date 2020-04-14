@@ -1314,6 +1314,7 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
       bonus_pericias: { operar_mecanismos: 2, abrir_fechaduras: 2 } },
   desarme_aprimorado: {
       nome: 'Desarme Aprimorado',
+      requisitos: { atributos: { inteligencia: 13 } }, talentos: [ 'especializacao_em_combate' ],
       guerreiro: true,
       monge: 6,
       descricao: '+4 de bônus nas tentativas de desarme e não provoca ataques de oportunidade.',
