@@ -381,8 +381,8 @@ var tabelas_geracao = {
     ordem_magias: {
       // Essas magias sao para necromantes.
       0: [ 'criar_agua', 'curar_ferimentos_minimos', 'detectar_magia', 'luz', 'virtude'],
-      1: [ 'curar_ferimentos_leves', 'pedra_encantada' ],
-      2: [ 'esfera_flamejante', 'pele_arvore', ],
+      1: [ 'curar_ferimentos_leves', 'pedra_encantada', 'criar_chamas', 'invocar_aliado_da_natureza_i' ],
+      2: [ 'esfera_flamejante', 'pele_arvore', 'agilidade_do_gato', 'pele_de_arvore', 'lamina_flamejante'],
       3: [ ''],
       5: [ '' ],
       6: [ '' ],
