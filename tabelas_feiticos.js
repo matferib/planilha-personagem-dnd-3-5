@@ -363,6 +363,85 @@ var tabelas_lista_feiticos = {
   bardo: {
   },
   druida: {
+    0: {
+      'brilho': { nome: 'Brilho', descricao: 'Ofusca uma criatura (-1 nas jogadas de ataque).', escola: 'evocação', },
+      'consertar': { nome: 'consertar', descricao: 'Faz pequenos reparos em um objeto.', escola: 'transmutacao' },
+      'criar_agua': { nome: 'Criar Água', descricao: 'Cria 8 litros/nível de água pura.', escola: 'conjuracao' },
+      'curar_ferimentos_minimos': { nome: 'Curar Ferimentos Mínimos', descricao: 'Cura 1 ponto de dano.', escola: 'conjuracao' },
+      'detectar_magia': { nome: 'Detectar Magia', descricao: 'Detecta magias e itens mágicos a menos de 18 m.', escola: 'adivinhacao' },
+      'detectar_venenos': { nome: 'Detectar Venenos', descricao: 'Detecta veneno em uma criatura ou objeto.', escola: 'adivinhacao' },
+      'intuir_direcao': { nome: 'Intuir Direção', descricao: 'Você sabe onde fica o Norte.', escola: 'adivinhacao' },
+      'ler_magias': { nome: 'Ler Magias', descricao: 'Decifra pergaminhos ou grimórios.', escola: 'adivinhacao' },
+      'luz': { nome: 'Luz', descricao: 'Um objeto brilha como uma tocha.', escola: 'evocacao' },
+      'orientacao': { nome: 'orientacao', descricao: '+1 para uma jogada ou teste.', escola: 'adivinhacao' },
+      'purificar_alimentos': { nome: 'purificar alimentos', descricao: 'Purifica um cubo de 30 cm/nível de comida ou água.', escola: 'transmutacao' },
+      'resistencia': { nome: 'resistencia', descricao: 'O alvo recebe +1 para testes de resistência.', escola: 'abjuracao' },
+      'virtude': { nome: 'virtude', descricao: 'O alvo ganha 1 PV temporário', escola: 'transmutacao' },
+    },
+    1: {
+      'acalmar_animais': { nome: 'Acalmar Animais', descricao: 'Acalma (2d4 + nível) DV de animais.', escola: 'encantamento' },
+      'arma_abencoada': { nome: 'Arma Abençoada', descricao: 'Clava ou bordão se torna uma arma +1 (1d10 de dano) durante 1 min/nível.', escola: 'transmutacao' },
+      'bom_fruto': { nome: 'Bom Fruto', descricao: '2d4 frutos curam 1 PV cada (máx. 8 PV/24 horas).', escola: 'transmutacao' },
+      'constricao': { nome: 'Constrição', descricao: 'Plantas enredam todos em um círculo de 12 m de raio.', escola: 'transmutacao' },
+      'criar_chamas': { nome: 'Criar Chamas', descricao: '1d6 de dano +l/nível, toque ou à distância.', escola: 'evocacao' },
+      'curar_ferimentos_leves': { nome: 'Curar Ferimentos Leves', descricao: 'Cura 1d8 +l/nível de dano (máx. +5).', escola: 'conjuracao' },
+      'detectar_animais_ou_plantas': { nome: 'Detectar Animais ou Plantas', descricao: 'Detecta espécies de animais ou plantas.', escola: 'adivinhacao' },
+      'detectar_armadilhas': { nome: 'Detectar Armadilhas', descricao: 'Revela armadilhas naturais ou primitivas.', escola: 'adivinhacao' },
+      'enfeiticar_animal': { nome: 'Enfeitiçar Animal', descricao: 'Toma um animal seu aliado.', escola: 'encantamento' },
+      'falar_com_animais': { nome: 'Falar com Animais', descricao: 'O conjurador pode se comunicar com animais.', escola: 'adivinhacao' },
+      'fogo_das_fadas': { nome: 'Fogo das Fadas', descricao: 'Luz destaca alvos, cancelando nublar, camuflagem, etc.', escola: 'evocacao' },
+      'invisibilidade_contra_animais': { nome: 'Invisibilidade Contra Animais', descricao: 'Os animais não podem perceber um alvo/nível.', escola: 'abjuracao' },
+      'invocar_aliado_da_natureza_i': { nome: 'Invocar Aliado da Natureza I', descricao: 'Invoca animais para auxiliar o conjurador.', escola: 'conjuracao' },
+      'nevoa_obscurescente': { nome: 'Névoa Obscurescente', descricao: 'Névoa espessa envolve o conjurador.', escola: 'conjuracao' },  // obscuring mist
+      'passos_longos': { nome: 'Passos Longos', descricao: 'Aumenta seu deslocamento', escola: 'transmutacao' },  // longstrider
+      'passos_sem_pegadas': { nome: 'Passos sem Pegadas', descricao: 'Um alvo/nível não deixa rastros.', escola: 'transmutacao' },
+      'pedra_encantada': { nome: 'Pedra Encantada', descricao: 'Três pedras recebem +1 para ataque e causam 1d6+1 de dano.', escola: 'transmutacao' },  // magic stone
+      'presa_magica': { nome: 'Presa Mágica', descricao: 'Uma arma natural do alvo recebe +1 de bônus para ataques e dano.', escola: 'transmutacao' },
+      'salto': { nome: 'Salto', descricao: 'Alvo recebe bônus nos testes de Saltar.', escola: 'transmutacao' },
+      'suportar_elementos': { nome: 'Suportar Elementos', descricao: 'Mantém uma criatura confortável dentro de ambientes áridos.', escola: 'abjuracao' },  // endure elements
+    },
+    2: {
+      'agilidade_do_gato': { nome: 'Agilidade do Gato', descricao: 'O alvo recebe +4 Des durante 1 min/nível.', escola: 'transmutacao' },
+      'amolecer_terra_e_pedra': { nome: 'Amolecer Terra e Pedra', descricao: 'Transforma pedra em argila ou terra em areia ou lama.', escola: 'transmutacao' },  // soften earth and stone
+      'armadilha_de_fogo': { nome: 'Armadilha de FogoM', descricao: 'Objeto causa 1d4 de dano +l/nível quando aberto.', escola: 'abjuracao' },
+      'esfera_flamejante': { nome: 'Esfera Flamejante', descricao: 'Esfera de fogo móvel que causa 2d6 de dano, dura 1 rodada/nível.', escola: 'evocacao' },
+      'esfriar_metal': { nome: 'Esfriar Metal', descricao: 'Metal gelado fere quem o toca.', escola: 'transmutacao' },
+      'esquentar_metal': { nome: 'Esquentar Metal', descricao: 'Metal aquecido causa dano a quem o toca.', escola: 'transmutacao' },
+      'forca_do_touro': { nome: 'Força do Touro', descricao: 'O alvo ganha +4 For por 1 min/nível.', escola: 'transmutacao' },
+      'forma_de_arvore': { nome: 'Forma de Árvore', descricao: 'Você se parece exatamente com uma árvore durante 1 hora/nível.', escola: 'transmutacao' },  // tree shapre
+      'imobilizar_animal': { nome: 'Imobilizar Animal', descricao: 'Paralisa um animal, 1 rodada/nível.', escola: 'encantamento' },
+      'invocar_aliado_da_natureza_ii': { nome: 'Invocar Aliado da Natureza II', descricao: 'Invoca animais para auxiliar o conjurador.', escola: 'conjuracao' },
+      'invocar_enxames': { nome: 'Invocar Enxames', descricao: 'Invoca enxame de morcegos, ratos ou aranhas.', escola: 'conjuracao' },
+      'lamina_flamejante': { nome: 'Lâmina Flamejante', descricao: 'Ataque de toque causa 1d8 de dano +1/dois níveis.', escola: 'evocacao' },
+      'lufada_de_vento': { nome: 'Lufada de Vento', descricao: 'Afasta ou derruba criaturas Pequenas.', escola: 'evocacao' },  // gust of wind
+      'mensageiro_animal': { nome: 'Mensageiro Animal', descricao: 'Envia um animal Miúdo para um local específico.', escola: 'encantamento' },  // animal messenger
+      'moldar_madeira': { nome: 'Moldar Madeira', descricao: 'Molda objetos de madeira para lhe servirem.', escola: 'transmutacao' },  // wood shape
+      'nevoa': { nome: 'Névoa', descricao: 'Névoa obscurece a visão.', escola: '' },
+      'patas_de_aranha': { nome: 'Patas de Aranha', descricao: 'Concede habilidade para andar em parede e tetos.', escola: 'transmutacao' },  // spider climb
+      'pele_de_arvore': { nome: 'Pele de Árvore', descricao: 'Concede +2 ou mais de bônus de melhoria na armadura natural.', escola: 'transmutacao' },
+      'reduzir_animal': { nome: 'Reduzir Animal', descricao: 'Encolhe um animal voluntariamente.', escola: 'transmutacao' },  // reduce animal
+      'resistencia_a_elementos': { nome: 'Resistência a Elementos', descricao: 'Ignora 10 ou mais pontos de dano/ataque de um tipo de energia.', escola: 'abjuracao' },  // resist energy
+      'restauracao_menor': { nome: 'Restauração Menor', descricao: 'Dissipa penalidades mágicas de habilidade ou recupera 1d4 de dano de habilidade.', escola: 'conjuracao' },  // restoration, lesser
+      'retardar_envenenamento': { nome: 'Retardar Envenenamento', descricao: 'Impede que veneno cause dano ao alvo durante 1 hora/nível.', escola: 'conjuracao' },  // delay poison
+      'sabedoria_da_coruja': { nome: 'Sabedoria da Coruja', descricao: 'O alvo ganha +4 Sab por 1 min/nível.', escola: 'transmutacao' },  // owls wisdom
+      'torcer_madeira': { nome: 'Torcer Madeira', descricao: 'Retorce madeira (placas, cabos, portas).', escola: 'transmutacao' },  // warp wood
+      'transe_animal': { nome: 'Transe Animal', descricao: 'Fascina 2d6 DV de animais', escola: 'encantamento' },  // animal trance
+      'vigor_do_urso': { nome: 'Vigor do Urso', descricao: 'O alvo ganha +4 Con por 1 min/nível.', escola: 'transmutacao' },  // bear's endurance
+    },
+    3: {
+    },
+    4: {
+    },
+    5: {
+    },
+    6: {
+    },
+    7: {
+    },
+    8: {
+    },
+    9: {
+    },
   },
   feiticeiro: {
   },
