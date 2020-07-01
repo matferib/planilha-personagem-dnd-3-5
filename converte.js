@@ -73,12 +73,13 @@ function _ConverteDadosVida() {
 
 function _ConverteFamiliar() {
   var familiar = (gPersonagem.familiar != null)
-      ? gPersonagem.familiar : { pontos_vida: { base: 0, bonus: new Bonus(), temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 } };
+      ? gPersonagem.familiar
+    : { em_uso: false, chave: '', pontos_vida: { base: 0, bonus: new Bonus(), temporarios: 0, ferimentos: 0, ferimentos_nao_letais: 0 } };
   if (gEntradas.familiar == null) {
     gPersonagem.familiar = familiar;
     return;
   }
-  familiar.em_uso = gEntradas.familiar.em_uso;
+  familiar.em_uso = gEntradas.familiar.em_uso && (PersonagemNivelClasse('feiticeiro') > 0 || PersonagemTemNivelMago());
   familiar.chave = gEntradas.familiar.chave || '';
   // Para familiar a base eh computada de acordo com os PV do personagem.
   familiar.pontos_vida.temporarios = gEntradas.familiar.temporarios || 0;

@@ -215,6 +215,7 @@ function _LeFamiliar() {
   var dom_em_uso = Dom('familiar-em-uso');
   var dom_familiar = Dom('select-familiar');
   if (dom_familiar.style.display == 'none') {
+    gEntradas.familiar.em_uso = false;
     return;
   }
   gEntradas.familiar.em_uso = dom_em_uso.checked;
