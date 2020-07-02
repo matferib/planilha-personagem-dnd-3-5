@@ -55,7 +55,7 @@ function CriaDomFeiticoConhecido(chave_classe, nivel, indice) {
 function CriaDomSlotsNivel(chave_classe, nivel, slots) {
   var precisa_conhecer = tabelas_feiticos[chave_classe].precisa_conhecer;
   var div_nivel = CriaDiv();
-  div_nivel.appendChild(CriaSpan('Nível ' + nivel + ' (CD '));
+  div_nivel.appendChild(CriaSpan(Traduz('Nível') + ' ' + nivel + ' (' + Traduz('CD') + ' '));
   div_nivel.appendChild(CriaSpan(slots.cd, 'span-cd-' + chave_classe + '-' + nivel));
   div_nivel.appendChild(CriaSpan('):'));
   div_nivel.appendChild(CriaBr());

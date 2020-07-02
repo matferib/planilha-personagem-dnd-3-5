@@ -134,6 +134,9 @@
 	"span_capas": {
 		"message": "Cloaks:"
 	},
+	"span_luvas": {
+		"message": "Gloves:"
+	},
 	"span_chapeus": {
 		"message": "Hats:"
 	},
@@ -184,6 +187,12 @@
 	},
 	"botao_gerar_resumo": {
 		"message": "Generate Summary"
+	},
+	"botao_gerar_personagem": {
+		"message": "Generate average"
+	},
+	"botao_gerar_personagem_elite": {
+		"message": "Generate elite"
 	},
 	"option_lb": {
 		"message": "LG"
@@ -310,6 +319,9 @@
 	},
 	"Nivel": {
 		"message": "Level"
+	},
+	"CD": {
+		"message": "DC"
 	},
 	"Nivel_de_Conjurador": {
 		"message": "Caster Level"
@@ -709,6 +721,9 @@
   },
   "Lutar_as_Cegas": {
     "message": "Blind-Fight"
+  },
+  "Bloqueio_Ambidestro": {
+    "message": "Two-Weapon Defense"
   },
   "Magia_Natural": {
     "message": "Natural Spell"
@@ -1876,6 +1891,30 @@
   },
   "Manto_da_resistencia__3": {
     "message": "Cloak of Resistance +3"
+  },
+  "Luvas_de_Apanhar_Flechas": {
+    "message": "Gloves of Arrow Snatching"
+  },
+  "Luvas_de_Armazenamento": {
+    "message": "Gloves of Storing"
+  },
+  "Luvas_da_Destreza__2": {
+    "message": "Gloves of Dexterity +2"
+  },
+  "Luvas_da_Destreza__4": {
+    "message": "Gloves of Dexterity +4"
+  },
+  "Luvas_da_Destreza__6": {
+    "message": "Gloves of Dexterity +6"
+  },
+  "Luvas_de_Nadar_e_Escalar": {
+    "message": "Gloves of Swimming and Climbing"
+  },
+  "Manoplas_da_Ferrugem": {
+    "message": "Gauntlet of Rust"
+  },
+  "Manoplas_do_Poder_do_Ogro__2": {
+    "message": "Gauntlet of Ogre Power"
   },
   "Tiara_do_Intelecto__2": {
     "message": "Headband of Intelect +2"

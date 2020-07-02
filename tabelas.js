@@ -2092,7 +2092,7 @@ var tabelas_luvas = {
     propriedades: { atributos: { destreza: 4 } },
   },
   luvas_destreza_6: {
-    nome: 'Luvas da Destreza + 6',
+    nome: 'Luvas da Destreza +6',
     preco: '36000 PO',
     propriedades: { atributos: { destreza: 6 } },
   },
