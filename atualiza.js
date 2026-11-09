@@ -76,6 +76,11 @@ function _AtualizaNomeRacaAlinhamentoXp() {
   Dom('nome').value = gPersonagem.nome;
   document.title = gPersonagem.nome.length > 0 ? gPersonagem.nome : 'anonimo';
   SelecionaValor(gPersonagem.raca, Dom('raca'));
+  if (gPersonagem.raca == 'outra_raca') {
+    Dom('outra-raca').style.display = 'inline';
+  } else {
+    Dom('outra-raca').style.display = 'none';
+  }
   SelecionaValor(gPersonagem.template, Dom('template'));
   SelecionaValor(gPersonagem.alinhamento, Dom('alinhamento'));
   Dom('pontos-experiencia').value = gPersonagem.experiencia;
