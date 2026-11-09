@@ -599,6 +599,11 @@ function _AtualizaNomeRacaAlinhamentoXp() {
   Dom('nome').value = gPersonagem.nome;
   document.title = gPersonagem.nome.length > 0 ? gPersonagem.nome : 'anonimo';
   SelecionaValor(gPersonagem.raca, Dom('raca'));
+  if (gPersonagem.raca == 'outra_raca') {
+    Dom('outra-raca').style.display = 'inline';
+  } else {
+    Dom('outra-raca').style.display = 'none';
+  }
   SelecionaValor(gPersonagem.template, Dom('template'));
   SelecionaValor(gPersonagem.alinhamento, Dom('alinhamento'));
   Dom('pontos-experiencia').value = gPersonagem.experiencia;
@@ -749,7 +754,7 @@ function _AtualizaDominios() {
       var trad = Traduz(chave_trad);
       if (trad != chave_trad) {
         TituloSimples(trad, dom);
-      } else {
+      } else if (i >= 0 && i < gPersonagem.dominios.length && gPersonagem.dominios[i] in tabelas_dominios) {
         TituloSimples(
             tabelas_dominios[gPersonagem.dominios[i]].descricao ? tabelas_dominios[gPersonagem.dominios[i]].descricao : '',
             dom);
@@ -2344,6 +2349,9 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.modo_visao = gEntradas.modo_visao;
   gPersonagem.nome = gEntradas.nome;
   gPersonagem.raca = gEntradas.raca;
+  if (!(gEntradas.raca in tabelas_raca)) {
+    gPersonagem.raca = 'outra_raca';
+  }
   gPersonagem.template = gEntradas.template || '';
   _ConverteTamanho();
 
@@ -2394,8 +2402,10 @@ function ConverteEntradasParaPersonagem() {
 function _ConverteTamanho() {
   if (gEntradas.tamanho != null) {
     gPersonagem.tamanho.categoria = gEntradas.tamanho;
-  } else {
+  } else if (gEntradas.raca in tabelas_raca && 'tamanho' in tabelas_raca[gEntradas.raca]) {
     gPersonagem.tamanho.categoria = tabelas_raca[gEntradas.raca].tamanho;
+  } else {
+    gPersonagem.tamanho.categoria = 'medio';
   }
 }
 
@@ -3041,6 +3051,7 @@ var gEntradas = {
   // geral
   nome: '',
   raca: 'humano',
+  raca_nao_tabelada: '',
   template: '',
   tamanho: 'medio',  // É possivel ter tamanhos fora do padrao através de magias.
   alinhamento: 'LB',
@@ -3133,6 +3144,11 @@ function LeEntradas() {
   gEntradas.nome = Dom('nome').value;
   // raca
   gEntradas.raca = ValorSelecionado(Dom('raca'));
+  if (gEntradas.raca == 'outra_raca') {
+    gEntradas.raca_nao_tabelada = Dom('outra-raca');
+  } else {
+    gEntradas.raca_nao_tabelada = '';
+  }
   // template
   gEntradas.template = ValorSelecionado(Dom('template'));
   // tamanho
@@ -5442,6 +5458,14 @@ var tabelas_raca = {
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
       outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
   },
+  gnomo_floresta: {
+      nome: 'Gnomo da Floresta',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 4 },
+      atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
+      familiaridade_arma: { martelo_gnomo_com_gancho: true },
+      outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
+  },
   meioelfo: {
       nome: 'Meio-Elfo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
@@ -5462,6 +5486,12 @@ var tabelas_raca = {
       movimento: { terrestre: 6 },
       atributos: { forca: 4, inteligencia: -2, sabedoria: -2, carisma: -2 }, tamanho: 'medio',
       // visao no escuro 60 pes (12 quadrados).
+  },
+  outra_raca: {
+      nome: 'Outra',
+      origem: { livro: '', pagina: '' },
+      movimento: { terrestre: 6 },
+      atributos: {},
   },
 };
 
@@ -12022,6 +12052,7 @@ var gEntradas = {
   // geral
   nome: '',
   raca: 'humano',
+  raca_nao_tabelada: '',
   template: '',
   tamanho: 'medio',  // É possivel ter tamanhos fora do padrao através de magias.
   alinhamento: 'LB',
@@ -12114,6 +12145,11 @@ function LeEntradas() {
   gEntradas.nome = Dom('nome').value;
   // raca
   gEntradas.raca = ValorSelecionado(Dom('raca'));
+  if (gEntradas.raca == 'outra_raca') {
+    gEntradas.raca_nao_tabelada = Dom('outra-raca');
+  } else {
+    gEntradas.raca_nao_tabelada = '';
+  }
   // template
   gEntradas.template = ValorSelecionado(Dom('template'));
   // tamanho
