@@ -152,6 +152,12 @@ var tabelas_raca = {
       atributos: { forca: 4, inteligencia: -2, sabedoria: -2, carisma: -2 }, tamanho: 'medio',
       // visao no escuro 60 pes (12 quadrados).
   },
+  outra_raca: {
+      nome: 'Outra',
+      origem: { livro: '', pagina: '' },
+      movimento: { terrestre: 6 },
+      atributos: {},
+  },
 };
 
 var tabelas_template = {
