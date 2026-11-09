@@ -131,6 +131,14 @@ var tabelas_raca = {
       familiaridade_arma: { martelo_gnomo_com_gancho: true },
       outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
   },
+  gnomo_floresta: {
+      nome: 'Gnomo da Floresta',
+      origem: { livro: 'Livro do Jogador', pagina: '' },
+      movimento: { terrestre: 4 },
+      atributos: { forca: -2, constituicao: +2 }, tamanho: 'pequeno',
+      familiaridade_arma: { martelo_gnomo_com_gancho: true },
+      outras_salvacoes: { ilusões: { base: ['fortitude', 'reflexo', 'vontade'], bonus: 2 } },
+  },
   meioelfo: {
       nome: 'Meio-Elfo',
       origem: { livro: 'Livro do Jogador', pagina: '' },
