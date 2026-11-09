@@ -231,7 +231,7 @@ function _AtualizaDominios() {
       var trad = Traduz(chave_trad);
       if (trad != chave_trad) {
         TituloSimples(trad, dom);
-      } else {
+      } else if (i >= 0 && i < gPersonagem.dominios.length && gPersonagem.dominios[i] in tabelas_dominios) {
         TituloSimples(
             tabelas_dominios[gPersonagem.dominios[i]].descricao ? tabelas_dominios[gPersonagem.dominios[i]].descricao : '',
             dom);
