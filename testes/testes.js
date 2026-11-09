@@ -147,6 +147,37 @@ function CarregaTestes() {
   }, body);
 
   TemplateTeste({
+    nome: 'TestaTamanho',
+    Testa: function() {
+      gEntradas.raca = 'invalido';
+      _ConverteTamanho();
+      if (gPersonagem.tamanho.categoria != 'medio') {
+        this.resultado = false;
+        this.detalhes = 'Esperava medio de tamanho, recebi: ' + gPersonagem.tamanho.categoria;
+        return;
+      }
+      gEntradas.raca = 'gnomo';
+      gEntradas.tamanho = null;
+      _ConverteTamanho();
+      if (gPersonagem.tamanho.categoria != 'pequeno') {
+        this.resultado = false;
+        this.detalhes = 'Esperava pequeno de tamanho de gnomo, recebi: ' + gPersonagem.tamanho.categoria;
+        return;
+      }
+      gEntradas.raca = 'orc';
+      gEntradas.tamanho = null;
+      _ConverteTamanho();
+      if (gPersonagem.tamanho.categoria != 'medio') {
+        this.resultado = false;
+        this.detalhes = 'Esperava medio de tamanho de orc, recebi: ' + gPersonagem.tamanho.categoria;
+        return;
+      }
+      this.resultado = true;
+    },
+  }, body);
+
+
+  TemplateTeste({
     nome: 'TestaClasseArmaduraSurpreso',
     Testa: function() {
       var bonus = new Bonus();
