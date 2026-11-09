@@ -10,6 +10,7 @@ var gEntradas = {
   // geral
   nome: '',
   raca: 'humano',
+  raca_nao_tabelada: '',
   template: '',
   tamanho: 'medio',  // É possivel ter tamanhos fora do padrao através de magias.
   alinhamento: 'LB',
@@ -102,6 +103,11 @@ function LeEntradas() {
   gEntradas.nome = Dom('nome').value;
   // raca
   gEntradas.raca = ValorSelecionado(Dom('raca'));
+  if (gEntradas.raca == 'outra_raca') {
+    gEntradas.raca_nao_tabelada = Dom('outra-raca');
+  } else {
+    gEntradas.raca_nao_tabelada = '';
+  }
   // template
   gEntradas.template = ValorSelecionado(Dom('template'));
   // tamanho
