@@ -9,6 +9,9 @@ function ConverteEntradasParaPersonagem() {
   gPersonagem.modo_visao = gEntradas.modo_visao;
   gPersonagem.nome = gEntradas.nome;
   gPersonagem.raca = gEntradas.raca;
+  if (!(gEntradas.raca in tabelas_raca)) {
+    gPersonagem.raca = 'outra_raca';
+  }
   gPersonagem.template = gEntradas.template || '';
   _ConverteTamanho();
 
@@ -59,8 +62,10 @@ function ConverteEntradasParaPersonagem() {
 function _ConverteTamanho() {
   if (gEntradas.tamanho != null) {
     gPersonagem.tamanho.categoria = gEntradas.tamanho;
-  } else {
+  } else if (gEntradas.raca in tabelas_raca && 'tamanho' in tabelas_raca[gEntradas.raca]) {
     gPersonagem.tamanho.categoria = tabelas_raca[gEntradas.raca].tamanho;
+  } else {
+    gPersonagem.tamanho.categoria = 'medio';
   }
 }
 
