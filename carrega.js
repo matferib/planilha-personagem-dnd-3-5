@@ -28,10 +28,11 @@ function CarregamentoInicial() {
   if (document.URL.indexOf('testes.html') != -1) {
     return;
   }
-  var indice_igual = document.URL.indexOf('=');
-  if (indice_igual != -1) {
+  const url = new URL(document.URL);
+  if (url.searchParams.has('pc'))  {
+    const entrada = url.searchParams.get('pc');
     // carrega pelos parametros. Caso contrario, usara a entrada padrao.
-    var json_entradas = decodeURIComponent(document.URL.slice(indice_igual + 1));
+    var json_entradas = decodeURIComponent(entrada);
     gEntradas = JSON.parse(json_entradas);
     CorrigePericias();
   }
