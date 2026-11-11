@@ -225,7 +225,7 @@ function _AtualizaDominios() {
     Dom('span-dominios').style.display = 'inline';
     for (var i = 0; i < 2; ++i) {
       var dom = Dom('dominio-' + i);
-      SelecionaValor(gPersonagem.dominios[i], dom);
+      SelecionaValor(i < gPersonagem.dominios.length ? gPersonagem.dominios[i] : 'outro', dom);
       // Hack de traducao de dominio. Os textos sao muito grandes para usar como chave.
       var chave_trad = 'desc-dom-' + gPersonagem.dominios[i];
       var trad = Traduz(chave_trad);
