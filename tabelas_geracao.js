@@ -836,6 +836,48 @@ var tabelas_geracao = {
       },
     },
   },
+  mago_ilusionista: {
+    atributos: [ 'inteligencia', 'destreza', 'constituicao', 'sabedoria', 'forca', 'carisma' ],
+    ordem_pericias: [
+      'concentracao', 'cura', 'diplomacia', 'conhecimento_arcano', 'ouvir', 'identificar_magia', 'observar', 'oficios'],
+    talentos: [
+      'oficios', 'escrever_pergaminho', 'preparar_pocao', 'foco_em_magia', 'foco_em_magia_maior', 'fortitude_maior',
+    ],
+    ordem_magias: {
+      0: [ 'detectar_magia', 'ler_magias', 'raio_de_gelo', 'romper_morto_vivo', 'som_fantasma'],
+      1: [ 'armadura_arcana', 'maos_flamejantes', 'misseis_magicos', 'area_escorregadia', 'raio_enfraquecimento', 'toque_macabro', ],
+      2: [ 'invisibilidade', 'invocar_enxames', 'queimadura_aganazzar', 'resistir_elementos', 'suportar_elementos',
+           'toque_do_carnical', 'patas_de_aranha'],
+      3: [ 'relampago', 'toque_vampirico', 'velocidade', 'voo', 'dissipar_magia'],
+      4: [ 'rogar_maldicao', 'criar_mortos_vivos_menor', 'invocar_criaturas_iv', 'grito', 'pedra_rochosa'],
+      5: [ 'recipiente_arcano', 'cone_glacial', 'invocar_criaturas_v', 'onda_fadiga'],
+      6: [ 'circulo_morte', 'criar_mortos_vivos', 'ataque_visual' ],
+    },
+    por_nivel: {
+      7: {
+        moedas: { ouro: 3900 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      8: {
+        moedas: { ouro: 6100 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+      11: {
+        moedas: { ouro: 12700 },
+        armas: [ { chave: 'bordao', bonus: 0, obra_prima: false },
+                 { chave: 'besta_leve', bonus: 0, obra_prima: true }, ],
+        amuletos: [ { chave: 'armadura_natural_1', em_uso: true }, ],
+        aneis: [ { chave: 'protecao_1', em_uso: true }, ],
+        bracaduras: [ { chave: 'armadura_1', em_uso: true }, ],
+      },
+    },
+  },
   monge: {
     atributos: [ 'sabedoria', 'forca', 'destreza', 'constituicao', 'inteligencia', 'carisma' ],
     talentos: [
