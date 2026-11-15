@@ -548,6 +548,8 @@ function _CarregaPericias() {
   var span_pericias = Dom('span-lista-pericias');
   // Ordenacao.
   var divs_ordenados = [];
+  var pericias_originais = gEntradas.pericias;
+  gEntradas.pericias = [];
   for (var chave_pericia in tabelas_pericias) {
     var pericia = tabelas_pericias[chave_pericia];
     var habilidade = pericia.habilidade;
@@ -590,6 +592,12 @@ function _CarregaPericias() {
 
     // Adiciona as gEntradas
     gEntradas.pericias.push({ chave: chave_pericia, pontos: 0 });
+    // Passa os pontos que vieram da entrada inicial para as pericia criada.
+    for (var i = 0; i < pericias_originais.length; ++i) {
+      var pericia_original = pericias_originais[i];
+      if (pericia_original.chave != chave_pericia) continue;
+      gEntradas.pericias[gEntradas.pericias.length - 1].pontos = pericia_original.pontos;
+    }
     // Adiciona ao personagem.
     gPersonagem.pericias.lista[chave_pericia] = {
         graduacoes: 0, bonus: new Bonus(),
