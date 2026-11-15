@@ -79,6 +79,7 @@ var gEntradas = {
   // Nivel é o nível do feitiço, que pode ser diferente do nível do slot.
   // indice eh o ponteiro para o feitico nos conhecidos para o nível.
   // gasto indica se o feitico está gasto ou não.
+  // Caso a classe tenha feitico de dominio ou especializacao, a ultima entrada sera este feitico.
   slots_feiticos: {},
 
   notas: '',
