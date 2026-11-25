@@ -314,6 +314,15 @@ var tabelas_classes = {
       1: ['familiar'],
     },
   },
+  mago_encantador: {
+    nome: 'Mago Encantador', dados_vida: 4, pontos_pericia: 2, bba: bba_fraco,
+    nivel_conjurador: { modificador: 1.0, },
+    talentos: ['usar_armas_simples' ],
+    proficiencia_armas: [ 'clava', 'adaga', 'besta_pesada', 'besta_leve', 'bordao' ],
+    especiais: {
+      1: ['familiar'],
+    },
+  },
   monge: {
     nome: 'Monge', dados_vida: 8, pontos_pericia: 4, bba: bba_medio,
     proficiencia_armas: [ 'clava', 'besta_leve', 'besta_pesada', 'adaga', 'machadinha', 'azagaia',
@@ -628,6 +637,8 @@ var tabelas_salvacao = {
   mago_necromante: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
   mago_ilusionista: {
+    fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
+  mago_encantador: {
     fortitude: salvacao_fraca, reflexo: salvacao_fraca, vontade: salvacao_forte },
   monge: {
     fortitude: salvacao_forte, reflexo: salvacao_forte, vontade: salvacao_forte },
@@ -1491,7 +1502,7 @@ Tiro Preciso Aprimorado¹ Des 19, Tiro Certeiro, Tiro Preciso, bônus base de at
   dominar_magia: {
     nome: "Dominar Magia",
     descricao: "Capaz de preparar magias escolhidas (bônus inteligência) sem um grimório.",
-    requisito: { nivel: { mago: 1, mago_necromante: 1, mago_ilusionista: 1 } },
+    requisito: { nivel: { mago: 1, mago_necromante: 1, mago_ilusionista: 1, mago_encantador: 1 } },
     mago: 1,
   },
   // Habilidade Forma Selvagem Capaz de lançar magias na forma selvagem

@@ -524,6 +524,7 @@ var tabelas_lista_feiticos = {
 };
 tabelas_lista_feiticos['mago_necromante'] = tabelas_lista_feiticos['mago'];
 tabelas_lista_feiticos['mago_ilusionista'] = tabelas_lista_feiticos['mago'];
+tabelas_lista_feiticos['mago_encantador'] = tabelas_lista_feiticos['mago'];
 // Todos os feiticos ordenados por chave.
 var tabelas_lista_feiticos_completa = {};
 // Tabela de nome para chave_feitico.
@@ -715,6 +716,33 @@ var tabelas_feiticos = {
   mago_ilusionista: {
       atributo_chave: 'inteligencia',
       escola_especializada: 'ilusao',
+      num_escolas_proibidas: 2,
+      precisa_conhecer: false,
+      possui_nivel_zero: true,
+      por_nivel: {
+          1:  { por_dia: '31', },
+          2:  { por_dia: '42', },
+          3:  { por_dia: '421', },
+          4:  { por_dia: '432', },
+          5:  { por_dia: '4321', },
+          6:  { por_dia: '4332', },
+          7:  { por_dia: '44321', },
+          8:  { por_dia: '44332', },
+          9:  { por_dia: '444321', },
+          10: { por_dia: '444332', },
+          11: { por_dia: '4444321', },
+          12: { por_dia: '4444332', },
+          13: { por_dia: '44444321', },
+          14: { por_dia: '44444332', },
+          15: { por_dia: '444444321', },
+          16: { por_dia: '444444332', },
+          17: { por_dia: '4444444321', },
+          18: { por_dia: '4444444332', },
+          19: { por_dia: '4444444433', },
+          20: { por_dia: '4444444444', }, }, },
+  mago_encantador: {
+      atributo_chave: 'inteligencia',
+      escola_especializada: 'encantamento',
       num_escolas_proibidas: 2,
       precisa_conhecer: false,
       possui_nivel_zero: true,
