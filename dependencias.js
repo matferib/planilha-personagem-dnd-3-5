@@ -302,7 +302,7 @@ function _DependenciasTalentos() {
     gPersonagem.talentos['ranger'].length = 3;
   } else if (nivel_ranger >= 6) {
     gPersonagem.talentos['ranger'].length = 2;
-  } else if (nivel_ranger == 2) {
+  } else if (nivel_ranger >= 2) {
     gPersonagem.talentos['ranger'].length = 1;
   } else {
     gPersonagem.talentos['ranger'].length = 0;
